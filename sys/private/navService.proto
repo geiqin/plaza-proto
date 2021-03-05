@@ -1,0 +1,55 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+service NavService {
+    rpc Get (Nav) returns (NavResponse) {}
+    rpc Search (common.BaseWhere) returns (NavResponse) {}
+    rpc List (Nav) returns (NavResponse) {}
+    rpc Tree (Nav) returns (NavResponse) {}
+}
+
+// 导航
+message Nav {
+    int32 id =1;
+    string name	 =3;
+    string title =4;
+    string title_en	 =5;
+    string icon	 =6;
+    bool nocache =7;
+    string meta  =8;
+    int64 nav_id =9;
+    string redirect_url  =10;
+    string contain_routes =11;
+    int64 permission_id  =12;
+    bool hide_sidebar =13;
+    bool disabled =14;
+    string sorting =15;
+    string memo  =16;
+    string created_at =17;
+    string updated_at =18;
+    repeated Nav children = 19;
+    repeated int64 ids = 20;
+}
+
+
+message NavWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    int64 nav_id =6;
+    repeated int64 ids = 8;
+}
+
+//
+message NavResponse {
+    Nav entity = 1;
+    common.Pager pager =2;
+    repeated Nav items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}

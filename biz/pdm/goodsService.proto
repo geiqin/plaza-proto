@@ -1,0 +1,90 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+
+//美食商品扩展属性
+message FoodExtend {
+  int64	id	=1;
+  string	name	=2;
+  string	unit	=3;
+  string	item_sn	=4;
+}
+
+//普通商品扩展属性
+message GeneralExtend {
+  int64	id	=1;
+  string	name	=2;
+  string	unit	=3;
+  string	item_sn	=4;
+}
+
+//客房商品扩展属性
+message RoomExtend {
+  int64	id	=1;
+  string	name	=2;
+  string	unit	=3;
+  string	item_sn	=4;
+}
+
+//知识付费商品扩展属性
+message KnowledgeExtend {
+  int64  	id =1;
+  int64  	item_id =2;
+  string 	author =3;
+  int32  	media_type =4;
+  int64  	media_id =5;
+  string 	media_url =6;
+  int64  	try_media_id =7;
+  string 	try_media_url =8;
+  string 	image_text =9;
+  string 	try_image_text =10;
+  string 	download_hash =11;
+}
+
+//票劵商品扩展属性
+message TicketExtend {
+  int64  	id =1;
+  int64  	item_id  =2;
+  int64  	provider_id =3;
+  int32  	preferential_type =4;
+  float	preferential_money =5;
+  float	preferential_discount =6;
+  bool   	is_sync_wx =7;
+  string 	wx_title =8;
+  string 	wx_subtitle =9;
+  string 	wx_color =10;
+  int32  	status =11;
+  string 	valid_type =12;
+  int32  	valid_days =13;
+  string 	valid_start_at =14;
+  string 	valid_end_at =15;
+}
+
+//会员套餐商品扩展属性
+message VipExtend {
+  int64  	id          =1;
+  int64  	item_id      =2;
+  int32  	vip_level_id  =3;
+  string 	keep_type    =4;
+  int32  	keep_value   =5;
+  bool   	is_team      =6;
+  int32  	limit_number =7;
+}
+
+//充值套餐商品扩展属性
+message RechargeExtend {
+  int64   id        =1;
+  int64   item_id    =2;
+  string  channel   =3;
+  int32   condition =4;
+  float give_money =5;
+  int32   give_score =6;
+}
+
+//虚拟商品扩展属性
+message VirtualExtend {
+  int64	id	=1;
+  string	name	=2;
+  string	unit	=3;
+  string	item_sn	=4;
+}

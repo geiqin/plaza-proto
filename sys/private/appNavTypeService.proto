@@ -1,0 +1,44 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+import "appNavService.proto";
+
+service AppNavTypeService {
+    rpc Create (AppNavType) returns (AppNavTypeResponse) {}
+    rpc Update (AppNavType) returns (AppNavTypeResponse) {}
+    rpc Delete (AppNavTypeWhere) returns (AppNavTypeResponse) {}
+    rpc Get (AppNavType) returns (AppNavTypeResponse) {}
+    rpc List (AppNavTypeWhere) returns (AppNavTypeResponse) {}
+    rpc Search (AppNavTypeWhere) returns (AppNavTypeResponse) {}
+    rpc ChangeSort (AppNavType) returns (AppNavTypeResponse) {}
+    rpc Tree (AppNavTypeWhere) returns (AppNavTypeResponse) {}
+}
+
+message AppNavTypeWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    int32 id = 4;
+    repeated int32 ids = 5;
+    int32 application_id = 6;
+}
+
+// 应用信息
+message AppNavType {
+    int32	id = 1;
+    string name = 2;
+    string memo = 3;
+    int32 sorting = 4;
+    repeated AppNav navs = 5;
+    string created_at = 6;
+    string updated_at = 7;
+}
+
+message AppNavTypeResponse {
+    AppNavType entity = 1;
+    common.Pager pager = 2;
+    repeated AppNavType items = 3;
+    common.Error error = 4;
+    common.Info info = 5;
+}

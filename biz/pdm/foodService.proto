@@ -1,0 +1,35 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "itemService.proto";
+
+//美食商品
+service FoodService {
+    rpc Create (Item) returns (FoodResponse) {}
+    rpc Update (Item) returns (FoodResponse) {}
+    rpc Delete (Item) returns (FoodResponse) {}
+    rpc Get (Item) returns (FoodResponse) {}
+    rpc Display (Item) returns (FoodResponse) {}
+    rpc Search (FoodRequest) returns (ItemResponse) {}
+    rpc FrontSearch (FoodRequest) returns (ItemResponse) {}
+}
+
+message FoodRequest{
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //base params
+    int64 id = 4;
+    string name =5;
+}
+
+message FoodResponse {
+    Item entity = 1;
+    common.Pager pager =2;
+    repeated Item items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}
+
+

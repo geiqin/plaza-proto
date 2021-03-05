@@ -1,0 +1,22 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+//购物商城设置
+service ShoppingSettingService {
+    rpc Set (ShoppingSetting) returns (ShoppingResponse) {}
+    rpc Get (common.Empty) returns (ShoppingResponse) {}
+}
+
+// 购物商城参数
+message ShoppingSetting {
+    bool open_stock_func =1;
+}
+
+//
+message ShoppingResponse {
+    ShoppingSetting entity = 1;
+    common.Error error = 4;
+    common.Info info =5;
+}

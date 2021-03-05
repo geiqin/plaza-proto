@@ -1,0 +1,199 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "itemGalleryService.proto";
+import "itemPriceService.proto";
+import "itemRightService.proto";
+import "tagService.proto";
+import "brandService.proto";
+import "skuService.proto";
+import "catService.proto";
+import "specService.proto";
+import "itemPresaleService.proto";
+import "goodsService.proto";
+import "itemCounterService.proto";
+
+//我的商品
+service MyItemService {
+    // 查询商品
+    rpc Search (ItemWhere) returns (ItemResponse) {}
+    // 获取商品信息
+    rpc Get (ItemWhere) returns (ItemResponse) {}
+    // 增加商品销量
+    rpc AddSoldNum (ItemWhere) returns (ItemResponse) {}
+}
+
+//商品
+service ItemService {
+    //创建商品
+    rpc Create (Item) returns (ItemResponse) {}
+    //修改商品
+    rpc Update (Item) returns (ItemResponse) {}
+    //删除商品
+    rpc Delete (ItemWhere) returns (ItemResponse) {}
+    //商品加锁
+    rpc Lock (ItemWhere) returns (ItemResponse) {}
+    //商品解锁
+    rpc Unlock (ItemWhere) returns (ItemResponse) {}
+    //商品上架
+    rpc Listing (ItemWhere) returns (ItemResponse) {}
+    //商品下架
+    rpc Delisting (ItemWhere) returns (ItemResponse) {}
+    //恢复商品
+    rpc Recovery (ItemWhere) returns (ItemResponse) {}
+    //永久删除商品
+    rpc Destroy (ItemWhere) returns (ItemResponse) {}
+    //商品基本信息
+    rpc Get (Item) returns (ItemResponse) {}
+    //商品基本信息列表(SRV专用)
+    rpc GoodsList (GoodsWhere) returns (ItemResponse) {}
+    //商品详细信息（后台专用）
+    rpc Detail (Item) returns (ItemResponse) {}
+    //商品显示详情（前端专用）
+    rpc Display (Item) returns (ItemResponse) {}
+    //商品规格详情
+    rpc SkuDetail (Item) returns (ItemResponse) {}
+    //商品列表（来源基本信息）
+    rpc List (Item) returns (ItemResponse) {}
+    //查询商品
+    rpc Search (ItemWhere) returns (ItemResponse) {}
+    //查询已删除商品
+    rpc SearchDeleted (ItemWhere) returns (ItemResponse) {}
+    // 批量删除商品
+    rpc DeleteByIds (ItemWhere) returns (ItemResponse) {}
+    // 商品排序
+    rpc Sort(ItemWhere) returns (ItemResponse) {}
+}
+
+message Item {
+    int64 id =1;
+    string name =2;
+    string unit =3;
+    string item_sn =4;
+    int32 brand_id =5;
+    int64 taxonomy_id =6;
+    string type =7;
+    int32 buy_quota =8;
+    int32 quantity =9;
+    bool is_sku =10;
+    bool is_virtual =11;
+    bool is_right =12;
+    bool is_presale =13;
+    bool listed =14;
+    bool locked =15;
+    bool hide_stock =16;
+    bool join_vip_discount =17;
+    bool join_distribution =18;
+    string out_item_no =19;
+    int32 min_buy =20;
+    int64 thumb_id =21;
+    string thumb_url =22;
+    int64 video_id =23;
+    string video_url =24;
+    int32 template_id =25;
+    string content =26;
+    string memo =27;
+    string barcode =28;
+    float weight =29;
+    float price =30;
+    float origin_price =31;
+    float cost_price =32;
+    float min_price =33;
+    float max_price =34;
+    int32 sorting =35;
+    string auto_list_on_at =36;
+    string auto_list_off_at =37;
+    string listed_at =38;
+    string created_at =39;
+    string updated_at =40;
+    //------end attrs---------
+    FoodExtend food =41;
+    GeneralExtend general =42;
+    KnowledgeExtend knowledge =43;
+    RechargeExtend recharge =44;
+    RoomExtend room =45;
+    TicketExtend ticket =46;
+    VipExtend vip =47;
+    VirtualExtend virtual =48;
+    //------end extends ------
+    Brand brand =50;
+    ItemPresale presale = 51;
+    ItemCounter counter = 52;
+    repeated  Sku skus  =53;
+    repeated  ItemGallery galleries  =54;
+    repeated  ItemPrice prices  =55;
+    repeated  ItemRight rights  =56;
+    repeated  Spec specs  =57; //(详情显示专用)
+    // @inject_tag: gorm:"many2many:item_cats;association_autoupdate:false"
+    repeated Cat cats =58;
+    // @inject_tag: gorm:"many2many:item_tags;"
+    repeated Tag tags =59;
+    // @inject_tag: gorm:"-"
+    ItemAdditional additional =60; //商品附加信息(显示专用)
+    // @inject_tag: gorm:"-"
+    Sku goods_sku  =61; //(特殊专用)
+    // @inject_tag: gorm:"-"
+    int64 goods_sku_id =62; //(特殊专用)
+    // @inject_tag: gorm:"-"
+    repeated  int64 ids  =63;
+}
+
+//商品附加信息（显示专用）
+message ItemAdditional{
+    bool is_buy = 1; // 商品是否可购买
+    bool is_member = 2; // 当前用户是否为会员
+    bool only_member_buy =3; //只允许会员购买
+    float current_member_price = 4; // 当前会员价
+}
+
+message GoodsWhere {
+    // @inject_tag: gorm:"-"
+    repeated int64 item_ids = 1;
+    // @inject_tag: gorm:"-"
+    repeated int64 sku_ids = 2;
+}
+
+message ItemWhere {
+    int32 paged =1;
+    int32 page_size =2;
+    string	sorting	=3;
+    string	keywords =4;
+    string	name =5;
+    string	item_sn	=6;
+    int32	brand_id =7;
+    int32	tag_id	=8;
+    int32	cat_id	=9;
+    int64	taxonomy_id	=10;
+    float	min_price =11;
+    float	max_price =12;
+    string type =13;
+    string	status	=14;
+    int64	coupon_id	=15;
+    bool valid = 16;// 是否有效商品
+    string invite = 17;// 加密后的邀请码
+    int64	id	= 18;
+    // @inject_tag: gorm:"-"
+    repeated int64 ids = 19;
+    int64 sku_id = 20; //单一规格商品输入参数（在获取规格商品时使用）
+    string cat_slug = 21;
+    bool is_sku = 22;
+    int32 sort = 23;
+    int32	num	=24;
+}
+
+message MemberGoods {
+    int64 item_id = 1;
+    int64 sku_id = 2;
+    float min_member_price = 3;
+    float max_member_price = 4;
+    float discount = 5;
+}
+
+message ItemResponse {
+    Item entity = 1;
+    common.Pager pager =2;
+    repeated Item items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}

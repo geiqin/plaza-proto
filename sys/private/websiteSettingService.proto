@@ -1,0 +1,40 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+//网站参数设置
+service WebsiteSettingService {
+    rpc Set (WebsiteSetting) returns (WebsiteSettingResponse) {}
+    rpc Get (common.Empty) returns (WebsiteSettingResponse) {}
+}
+
+// 网站设置
+message WebsiteSetting {
+    string title =1;
+    string site_url =2;
+    int64  logo_id =3;
+    string logo_url =4;
+    string keywords =5;
+    string description =6;
+    string hotline =7;
+    string company_name =8;
+    int64  area_id =9;
+    string address =10;
+    string lng =11;
+    string lat =12;
+    string email =13;
+    string qq =14;
+    string icp =15;
+    string police_icp =16;
+    string copyright =17;
+    string contact_man =18;
+    string contact_tel =19;
+}
+
+//
+message WebsiteSettingResponse {
+    WebsiteSetting entity = 1;
+    common.Error error = 4;
+    common.Info info =5;
+}
