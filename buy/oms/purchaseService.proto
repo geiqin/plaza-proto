@@ -22,6 +22,7 @@ message PurchaseRequest {
   int32 num =4; //数量(直接购买)
   repeated PurchaseItem goods_list =5;//选中的商品清单
   int64 address_id =6; //收货地址ID
+  bool close_address =14; //关闭收货地址（主要用在实物商品无需物流，比如食堂点餐）
   string message =7; //买家留言(50字以内)
   int32 pay_method =8; //选中的支付方式
   string source =9; //下单来源（选项）

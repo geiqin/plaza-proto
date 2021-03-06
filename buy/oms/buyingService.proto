@@ -9,7 +9,6 @@ import "orderPromotionService.proto";
 import "couponTicketInfoService.proto";
 import "shipmentService.proto";
 import "integralService.proto";
-import "orderFoodService.proto";
 
 service BuyingService {
     //计算优惠
@@ -53,8 +52,6 @@ message Buying {
     OrderShipment shipment = 24; // 配送信息
     // @inject_tag: gorm:"-"
     Integral integral = 26; // 积分信息
-    // @inject_tag: gorm:"-"
-    OrderFood food = 27; // 餐饮商品信息
 }
 
 //购买清单明细
@@ -92,8 +89,6 @@ message BuyingRequest{
     OrderShipment shipment = 10; // 配送信息
     // @inject_tag: gorm:"-"
     Integral integral = 11; // 积分信息
-    // @inject_tag: gorm:"-"
-    OrderFood food = 12; // 餐饮商品信息
 }
 
 message BuyingResponse {

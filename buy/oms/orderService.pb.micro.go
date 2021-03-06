@@ -43,10 +43,6 @@ func NewMyOrderServiceEndpoints() []*api.Endpoint {
 // Client API for MyOrderService service
 
 type MyOrderService interface {
-	//确认订单
-	Confirm(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*BuyingResponse, error)
-	//提交订单
-	Submit(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//删除订单
 	Delete(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//撤销订单
@@ -71,26 +67,6 @@ func NewMyOrderService(name string, c client.Client) MyOrderService {
 		c:    c,
 		name: name,
 	}
-}
-
-func (c *myOrderService) Confirm(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*BuyingResponse, error) {
-	req := c.c.NewRequest(c.name, "MyOrderService.Confirm", in)
-	out := new(BuyingResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *myOrderService) Submit(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "MyOrderService.Submit", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *myOrderService) Delete(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
@@ -156,10 +132,6 @@ func (c *myOrderService) Search(ctx context.Context, in *OrderWhere, opts ...cli
 // Server API for MyOrderService service
 
 type MyOrderServiceHandler interface {
-	//确认订单
-	Confirm(context.Context, *BuyingRequest, *BuyingResponse) error
-	//提交订单
-	Submit(context.Context, *BuyingRequest, *OrderResponse) error
 	//删除订单
 	Delete(context.Context, *Order, *OrderResponse) error
 	//撤销订单
@@ -176,8 +148,6 @@ type MyOrderServiceHandler interface {
 
 func RegisterMyOrderServiceHandler(s server.Server, hdlr MyOrderServiceHandler, opts ...server.HandlerOption) error {
 	type myOrderService interface {
-		Confirm(ctx context.Context, in *BuyingRequest, out *BuyingResponse) error
-		Submit(ctx context.Context, in *BuyingRequest, out *OrderResponse) error
 		Delete(ctx context.Context, in *Order, out *OrderResponse) error
 		Cancel(ctx context.Context, in *Order, out *OrderResponse) error
 		Receipt(ctx context.Context, in *Order, out *OrderResponse) error
@@ -194,14 +164,6 @@ func RegisterMyOrderServiceHandler(s server.Server, hdlr MyOrderServiceHandler, 
 
 type myOrderServiceHandler struct {
 	MyOrderServiceHandler
-}
-
-func (h *myOrderServiceHandler) Confirm(ctx context.Context, in *BuyingRequest, out *BuyingResponse) error {
-	return h.MyOrderServiceHandler.Confirm(ctx, in, out)
-}
-
-func (h *myOrderServiceHandler) Submit(ctx context.Context, in *BuyingRequest, out *OrderResponse) error {
-	return h.MyOrderServiceHandler.Submit(ctx, in, out)
 }
 
 func (h *myOrderServiceHandler) Delete(ctx context.Context, in *Order, out *OrderResponse) error {

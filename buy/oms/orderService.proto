@@ -7,13 +7,8 @@ import "orderDetailService.proto";
 import "orderAddressService.proto";
 import "shipmentService.proto";
 import "orderCouponService.proto";
-import "orderFoodService.proto";
 
 service MyOrderService {
-    //确认订单
-    rpc Confirm (BuyingRequest) returns (BuyingResponse) {}
-    //提交订单
-    rpc Submit (BuyingRequest) returns (OrderResponse) {}
     //删除订单
     rpc Delete (Order) returns (OrderResponse) {}
     //撤销订单
@@ -89,8 +84,8 @@ message Order {
     float discount_amount =15;
     bool paid =16;
     bool refunded  =17;
-    bool can_delivery =18;
-    bool can_cod =19;
+    bool is_shipment =18;
+    bool is_cod =19;
     bool invoiced =20;
     bool modified =21;
     bool safeguarded =22;
@@ -117,17 +112,15 @@ message Order {
     string created_at =44;
     string updated_at =45;
     string platform_source =46;
-    OrderAddress address =54;
-    repeated OrderDetail details = 55;
+    string shipment_method = 47;
+    float point_exchange_money = 48;
+    int32 used_points = 49;
+    bool is_distribution = 50;
+    bool is_confirmed = 51; // 商家是否已接单(商家已确认订单)
+    OrderAddress address =52;
+    repeated OrderDetail details = 53;
     // @inject_tag: gorm:"-"
-    Customer customer = 56;
-    string shipment_method = 57;
-    float cash_exchange_money = 58;
-    int32 cash_exchange_points = 59;
-    bool is_distribution = 60;
-    bool is_confirmed = 61; // 商家是否已接单
-    // @inject_tag: gorm:"-"
-    OrderFood food = 62;
+    Customer customer = 54;
 }
 
 message Customer {
@@ -135,8 +128,8 @@ message Customer {
     string customer_sn =2;
     string name =3;
     string display_name =4;
-    string realname =5;
-    string idcard =6;
+    string real_name =5;
+    string id_card =6;
     int32 gender =7;
     string mobile =8;
     string email =9;
@@ -152,8 +145,8 @@ message OrderWhere {
     string order_sn = 5;
     string order_type = 6;
     string pay_type = 7;
-    bool can_delivery = 8;
-    bool can_cod = 9;
+    bool is_shipment = 8;
+    bool is_cod = 9;
     int64 customer_id = 10;
     float payment = 11;
     bool is_free = 12;
