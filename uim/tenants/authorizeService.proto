@@ -1,0 +1,17 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+import "storeService.proto";
+
+service AuthorizeService {
+    //店铺授权
+    rpc Auth (StoreSecret) returns (common.TokenResponse) {}
+    //切换店铺
+    rpc Switch (Store) returns (common.TokenResponse) {}
+    //获取当前店铺(简单信息)
+    rpc Info (common.Empty) returns (StoreResponse) {}
+    //获取当前店铺(详细信息)
+    rpc Detail (common.Empty) returns (StoreResponse) {}
+}
+
