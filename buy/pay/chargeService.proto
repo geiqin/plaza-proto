@@ -8,6 +8,8 @@ import "common/base.proto";
 service ChargeService {
     //删除支付凭证
     rpc Delete (Charge) returns (ChargeResponse) {}
+    //支付凭证对账（向第三方发起对账）
+    rpc Reconciliation (Charge) returns (ChargeResponse) {}
     //获得支付凭证
     rpc Get (Charge) returns (ChargeResponse) {}
     //查询支付凭证
@@ -22,7 +24,7 @@ message Charge{
     bool paid = 4;
     bool refunded = 5;
     bool reversed = 6;
-    int64 paygate_id = 7;
+    int64 pay_gateway_id = 7;
     string open_id = 8;
     string target_user_type = 9;
     int64 target_user_id = 10;

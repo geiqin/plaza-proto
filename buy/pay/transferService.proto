@@ -26,7 +26,7 @@ service TransferService {
 message Transfer{
     int64 id = 1;
     string transfer_sn = 2;
-    int64 paygate_id = 3;
+    int64 pay_gateway_id = 3;
     string type = 4;
     string channel = 5; //wx_wallet
     string recipient = 6;

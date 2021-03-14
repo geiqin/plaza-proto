@@ -8,9 +8,9 @@ import "common/base.proto";
 //退款服务
 service RefundService {
     //创建退款
-    rpc Create (Refund) returns (RefundResponse) {}
-    //修改退款
-    rpc Update (Refund) returns (RefundResponse) {}
+    rpc Create (RefundRequest) returns (RefundResponse) {}
+    //退款对账（向第三方发起对账）
+    rpc Reconciliation (Refund) returns (RefundResponse) {}
     //删除退款
     rpc Delete (Refund) returns (RefundResponse) {}
     //获得退款信息
@@ -42,9 +42,19 @@ message Refund{
     string finished_at = 21;
     string created_at = 22;
     string updated_at = 23;
-
 }
 
+message RefundRequest{
+    int64 safeguard_id = 1;
+    string safeguard_sn = 2;
+    float refund_fee = 3;
+    string currency = 4;
+    int64 order_id = 5;
+    string refund_desc = 6;
+    string metadata = 7;
+    string target_user_type = 8;
+    int64 target_user_id = 9;
+}
 
 //
 message RefundResponse {

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package services;
+option go_package =".;services";
+import "common/base.proto";
+import "alipay.proto";
+
+//支付宝支付
+service AlipayService {
+    //手机网站支付接口2.0（手机网站支付）
+    rpc WapPay (PaymentRequest) returns (AlipayResponse) {}
+    //统一收单下单并支付页面接口（电脑网站支付）
+    rpc PagePay (PaymentRequest) returns (AlipayResponse) {}
+    //APP支付接口2.0（APP支付）
+    rpc AppPay (PaymentRequest) returns (AlipayResponse) {}
+}
+
+//支付宝参数
+message AlipayParam{
+    string time_stamp =2;
+    string nonce_str =3;
+    string package =4;
+    string sign_type =5;
+    string pay_sign =6;
+}
+
+message AlipayResponse {
+    AlipayParam entity = 1;
+    common.Error error = 4;
+    common.Info info =5;
+}
