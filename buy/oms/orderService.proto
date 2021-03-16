@@ -71,7 +71,8 @@ message Order {
     int64  id =1;
     string order_sn  =2;
     string order_type   =3;
-    int64 customer_id  =4;
+    string channel    =4;
+    int64 customer_id  =5;
     int32 total_num =6;
     float total_weight =7;
     string currency =8;

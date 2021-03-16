@@ -2,56 +2,93 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 import "common/base.proto";
+import "goodsInfoService.proto";
+import "orderService.proto";
 
 //下单操作
 service PurchaseService {
-  //填写订单
-  rpc Write (PurchaseRequest) returns (PurchaseResponse) {}
-  //提交订单
-  rpc Submit (PurchaseRequest) returns (PurchaseResponse) {}
-  //充值下单
-  rpc Recharge (RechargeRequest) returns (PurchaseResponse) {}
-}
-
-
-//下单请求参数
-message PurchaseRequest {
-  int32 mode =1; //模式：1:直接下单,2：购物车下单
-  int64 item_id = 2; //商品ID(直接购买)
-  int64 sku_id = 3; //货品ID(直接购买)
-  int32 num =4; //数量(直接购买)
-  repeated PurchaseItem goods_list =5;//选中的商品清单
-  int64 address_id =6; //收货地址ID
-  bool close_address =14; //关闭收货地址（主要用在实物商品无需物流，比如食堂点餐）
-  string message =7; //买家留言(50字以内)
-  int32 pay_method =8; //选中的支付方式
-  string source =9; //下单来源（选项）
-  int64 use_ticket_id =10; //选中的优惠劵凭证ID
-  int32 use_points =11; //使用的积分数
-  int64 vip_card_id =12; //选中的会员卡
-  int64 customer_id =13; //客户ID（代客下单）
-}
-
-//下单商品项
-message PurchaseItem {
-  int64 item_id =1;
-  int64 sku_id =2;
-  int32 num =3;
-  string cart_row_id = 4;
+    //填写订单
+    rpc Write (PurchaseRequest) returns (PurchaseResponse) {}
+    //提交订单
+    rpc Submit (PurchaseRequest) returns (OrderResponse) {}
+    //充值下单
+    rpc Recharge (RechargeRequest) returns (OrderResponse) {}
 }
 
 //充值下单请求参数
 message RechargeRequest {
-  string channel = 1; //充值通道: vip_capital余额充值, phone_fee话费充值, deposit交保证金
-  float money =2; //充值金额
-  string content =3; //内容：比如话费充值，这里就是手机号
+    string channel = 1; //充值通道: vip_capital余额充值, phone_fee话费充值, deposit交保证金
+    float money = 2; //充值金额
+    string content = 3; //内容：比如话费充值，这里就是手机号
 }
 
+//下单请求参数
+message PurchaseRequest {
+    string type = 1; //订单类型（默认为普通订单）
+    int64 address_id = 2; //收货地址ID
+    string message = 3; //买家留言(50字以内)
+    int32 pay_method = 4; //选中的支付方式
+    string source = 5; //下单来源
+    int64 ticket_id = 6; //选中的优惠劵凭证ID
+    int32 points = 7; //使用的积分数
+    int64 vip_card_id = 8; //选中的会员卡
+    int64 customer_id = 9; //客户ID（代客下单）
+    repeated PurchaseItem goods_list = 10;//选中的商品清单
+    map<string,string> metas = 11; //订单扩展信息
+}
+
+//下单商品项
+message PurchaseItem {
+    int64 item_id = 1;
+    int64 sku_id = 2;
+    int32 num = 3;
+    string cart_row_id = 4;
+}
+
+//付款清单（开具账单）
+message Billing {
+    int32 count = 1;
+    float total = 2;
+    float total_weight = 3;
+    float discount = 4;
+    float freight = 5;
+    float amount = 6;
+    int64 address_id = 7;
+    int64 customer_id = 8;
+    string message = 9; //买家留言(50字以内)
+    string source = 10; //下单来源
+    int64 ticket_id = 11; //正在使用的优惠劵ID
+    repeated int64 ticket_ids = 12; //可使用的优惠劵ID集合
+    repeated BillItem items = 13;//选中的商品清单
+}
+
+//账单条目
+message BillItem {
+    int64 item_id =1;
+    int64 sku_id =2;
+    int32 num =3;
+    float price =4;
+    float origin_price =5;
+    float sub_total =6;
+    bool is_gift =7;
+    int64 promotion_id =8;
+    float member_price =9;// 会员价
+    float limit_discount_price =10;// 限时折扣价
+    int32 limit_discount_num =11;// 享受限时折扣的商品数量
+    int32 exchange_num =12;// 兑换券兑换商品的数量
+    GoodsInfo goods =13;
+    string cart_row_id = 14;
+}
+
+message Shopping{
+    PurchaseRequest request = 1;
+    Billing billing = 2;
+}
 
 message PurchaseResponse {
-  //Order entity = 1;
-  //map<string,string> params   =2;
-  //repeated PayMethod methods =3;
-  common.Error error = 4;
-  common.Info info =5;
+    Shopping entity = 1;
+    //map<string,string> params   = 2;
+    //repeated PayMethod methods = 3;
+    common.Error error = 4;
+    common.Info info = 5;
 }
