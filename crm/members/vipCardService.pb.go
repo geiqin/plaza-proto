@@ -31,22 +31,22 @@ type VipCard struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	CardId       int32  `protobuf:"varint,2,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
-	CustomerId   int64  `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	Number       string `protobuf:"bytes,4,opt,name=number,proto3" json:"number,omitempty"`
-	UserId       int64  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OpenDate     string `protobuf:"bytes,6,opt,name=open_date,json=openDate,proto3" json:"open_date,omitempty"`
-	ValidateDate string `protobuf:"bytes,7,opt,name=validate_date,json=validateDate,proto3" json:"validate_date,omitempty"`
-	DisplayName  string `protobuf:"bytes,8,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Issuer       string `protobuf:"bytes,9,opt,name=issuer,proto3" json:"issuer,omitempty"`
-	Status       int32  `protobuf:"varint,10,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt    string `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt    string `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	DeletedAt    string `protobuf:"bytes,13,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
-	Card         *Card  `protobuf:"bytes,14,opt,name=card,proto3" json:"card,omitempty"`
+	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	CardId       int32  `protobuf:"varint,2,opt,name=card_id,json=cardId,proto3" json:"card_id"`
+	CustomerId   int64  `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Number       string `protobuf:"bytes,4,opt,name=number,proto3" json:"number"`
+	UserId       int64  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	OpenDate     string `protobuf:"bytes,6,opt,name=open_date,json=openDate,proto3" json:"open_date"`
+	ValidateDate string `protobuf:"bytes,7,opt,name=validate_date,json=validateDate,proto3" json:"validate_date"`
+	DisplayName  string `protobuf:"bytes,8,opt,name=display_name,json=displayName,proto3" json:"display_name"`
+	Issuer       string `protobuf:"bytes,9,opt,name=issuer,proto3" json:"issuer"`
+	Status       int32  `protobuf:"varint,10,opt,name=status,proto3" json:"status"`
+	CreatedAt    string `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt    string `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	DeletedAt    string `protobuf:"bytes,13,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at"`
+	Card         *Card  `protobuf:"bytes,14,opt,name=card,proto3" json:"card"`
 	// @inject_tag: `gorm:"-"`
-	Ids []int64 `protobuf:"varint,15,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Ids []int64 `protobuf:"varint,15,rep,packed,name=ids,proto3" json:"ids" gorm:"-"`
 }
 
 func (x *VipCard) Reset() {
@@ -192,14 +192,14 @@ type VipCardWhere struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//以下为自定义参数
-	Number     string `protobuf:"bytes,4,opt,name=number,proto3" json:"number,omitempty"`
-	CustomerId int64  `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	CardId     int32  `protobuf:"varint,6,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
-	Status     int32  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
+	Number     string `protobuf:"bytes,4,opt,name=number,proto3" json:"number"`
+	CustomerId int64  `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	CardId     int32  `protobuf:"varint,6,opt,name=card_id,json=cardId,proto3" json:"card_id"`
+	Status     int32  `protobuf:"varint,7,opt,name=status,proto3" json:"status"`
 }
 
 func (x *VipCardWhere) Reset() {
@@ -289,11 +289,11 @@ type VipCardResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *VipCard      `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*VipCard    `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *VipCard      `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*VipCard    `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *VipCardResponse) Reset() {

@@ -51,8 +51,6 @@ type CustomerService interface {
 	UpdateCompany(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//从粉丝添加用户
 	CreateByFan(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
-	//客户注册
-	Register(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//修改客户
 	Update(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//删除客户
@@ -121,16 +119,6 @@ func (c *customerService) UpdateCompany(ctx context.Context, in *Customer, opts 
 
 func (c *customerService) CreateByFan(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.CreateByFan", in)
-	out := new(CustomerResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *customerService) Register(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
-	req := c.c.NewRequest(c.name, "CustomerService.Register", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -260,8 +248,6 @@ type CustomerServiceHandler interface {
 	UpdateCompany(context.Context, *Customer, *CustomerResponse) error
 	//从粉丝添加用户
 	CreateByFan(context.Context, *Customer, *CustomerResponse) error
-	//客户注册
-	Register(context.Context, *Customer, *CustomerResponse) error
 	//修改客户
 	Update(context.Context, *Customer, *CustomerResponse) error
 	//删除客户
@@ -292,7 +278,6 @@ func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler
 		CreateCompany(ctx context.Context, in *Customer, out *CustomerResponse) error
 		UpdateCompany(ctx context.Context, in *Customer, out *CustomerResponse) error
 		CreateByFan(ctx context.Context, in *Customer, out *CustomerResponse) error
-		Register(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Update(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Delete(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Lock(ctx context.Context, in *Customer, out *CustomerResponse) error
@@ -330,10 +315,6 @@ func (h *customerServiceHandler) UpdateCompany(ctx context.Context, in *Customer
 
 func (h *customerServiceHandler) CreateByFan(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.CreateByFan(ctx, in, out)
-}
-
-func (h *customerServiceHandler) Register(ctx context.Context, in *Customer, out *CustomerResponse) error {
-	return h.CustomerServiceHandler.Register(ctx, in, out)
 }
 
 func (h *customerServiceHandler) Update(ctx context.Context, in *Customer, out *CustomerResponse) error {
@@ -378,65 +359,4 @@ func (h *customerServiceHandler) SetCards(ctx context.Context, in *Customer, out
 
 func (h *customerServiceHandler) UpdateMobile(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.UpdateMobile(ctx, in, out)
-}
-
-// Api Endpoints for MyCustomerService service
-
-func NewMyCustomerServiceEndpoints() []*api.Endpoint {
-	return []*api.Endpoint{}
-}
-
-// Client API for MyCustomerService service
-
-type MyCustomerService interface {
-	// 修改密码
-	ChangePwd(ctx context.Context, in *CustomerWhere, opts ...client.CallOption) (*CustomerResponse, error)
-}
-
-type myCustomerService struct {
-	c    client.Client
-	name string
-}
-
-func NewMyCustomerService(name string, c client.Client) MyCustomerService {
-	return &myCustomerService{
-		c:    c,
-		name: name,
-	}
-}
-
-func (c *myCustomerService) ChangePwd(ctx context.Context, in *CustomerWhere, opts ...client.CallOption) (*CustomerResponse, error) {
-	req := c.c.NewRequest(c.name, "MyCustomerService.ChangePwd", in)
-	out := new(CustomerResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for MyCustomerService service
-
-type MyCustomerServiceHandler interface {
-	// 修改密码
-	ChangePwd(context.Context, *CustomerWhere, *CustomerResponse) error
-}
-
-func RegisterMyCustomerServiceHandler(s server.Server, hdlr MyCustomerServiceHandler, opts ...server.HandlerOption) error {
-	type myCustomerService interface {
-		ChangePwd(ctx context.Context, in *CustomerWhere, out *CustomerResponse) error
-	}
-	type MyCustomerService struct {
-		myCustomerService
-	}
-	h := &myCustomerServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&MyCustomerService{h}, opts...))
-}
-
-type myCustomerServiceHandler struct {
-	MyCustomerServiceHandler
-}
-
-func (h *myCustomerServiceHandler) ChangePwd(ctx context.Context, in *CustomerWhere, out *CustomerResponse) error {
-	return h.MyCustomerServiceHandler.ChangePwd(ctx, in, out)
 }

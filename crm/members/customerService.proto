@@ -16,8 +16,6 @@ service CustomerService {
     rpc UpdateCompany (Customer) returns (CustomerResponse) {}
     //从粉丝添加用户
     rpc CreateByFan (Customer) returns (CustomerResponse) {}
-    //客户注册
-    rpc Register (Customer) returns (CustomerResponse) {}
     //修改客户
     rpc Update (Customer) returns (CustomerResponse) {}
     //删除客户
@@ -40,11 +38,6 @@ service CustomerService {
     rpc SetCards (Customer) returns (CustomerResponse) {}
     //修改客户手机号
     rpc UpdateMobile (Customer) returns (CustomerResponse) {}
-}
-
-service MyCustomerService {
-    // 修改密码
-    rpc ChangePwd (CustomerWhere) returns (CustomerResponse) {}
 }
 
 message Customer {
@@ -80,7 +73,7 @@ message Customer {
     string memo =30;
     string contacts = 31;
     string level_expired_at =32;
-    string level_enabled =33; //等级可用：根据过期时间自动设置该值
+    bool level_alive =33; //等级可用：根据过期时间自动设置该值
     string created_at =34;
     string updated_at =35;
     string deleted_at =36;
@@ -114,9 +107,6 @@ message CustomerWhere {
     string keywords =16;
     int32 type = 17;
     int64 customer_id = 18;
-    string old_pwd = 19;
-    string new_pwd = 20;
-    string confirm_pwd = 21;
 }
 
 //
