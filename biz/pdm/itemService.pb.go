@@ -31,55 +31,55 @@ type Item struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name             string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Unit             string  `protobuf:"bytes,3,opt,name=unit,proto3" json:"unit,omitempty"`
-	ItemSn           string  `protobuf:"bytes,4,opt,name=item_sn,json=itemSn,proto3" json:"item_sn,omitempty"`
-	BrandId          int32   `protobuf:"varint,5,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
-	TaxonomyId       int64   `protobuf:"varint,6,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id,omitempty"`
-	Type             string  `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
-	BuyQuota         int32   `protobuf:"varint,8,opt,name=buy_quota,json=buyQuota,proto3" json:"buy_quota,omitempty"`
-	Quantity         int32   `protobuf:"varint,9,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	IsSku            bool    `protobuf:"varint,10,opt,name=is_sku,json=isSku,proto3" json:"is_sku,omitempty"`
-	IsVirtual        bool    `protobuf:"varint,11,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual,omitempty"`
-	IsRight          bool    `protobuf:"varint,12,opt,name=is_right,json=isRight,proto3" json:"is_right,omitempty"`
-	IsPresale        bool    `protobuf:"varint,13,opt,name=is_presale,json=isPresale,proto3" json:"is_presale,omitempty"`
-	Listed           bool    `protobuf:"varint,14,opt,name=listed,proto3" json:"listed,omitempty"`
-	Locked           bool    `protobuf:"varint,15,opt,name=locked,proto3" json:"locked,omitempty"`
-	HideStock        bool    `protobuf:"varint,16,opt,name=hide_stock,json=hideStock,proto3" json:"hide_stock,omitempty"`
-	JoinVipDiscount  bool    `protobuf:"varint,17,opt,name=join_vip_discount,json=joinVipDiscount,proto3" json:"join_vip_discount,omitempty"`
-	JoinDistribution bool    `protobuf:"varint,18,opt,name=join_distribution,json=joinDistribution,proto3" json:"join_distribution,omitempty"`
-	OutItemNo        string  `protobuf:"bytes,19,opt,name=out_item_no,json=outItemNo,proto3" json:"out_item_no,omitempty"`
-	MinBuy           int32   `protobuf:"varint,20,opt,name=min_buy,json=minBuy,proto3" json:"min_buy,omitempty"`
-	ThumbId          int64   `protobuf:"varint,21,opt,name=thumb_id,json=thumbId,proto3" json:"thumb_id,omitempty"`
-	ThumbUrl         string  `protobuf:"bytes,22,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url,omitempty"`
-	VideoId          int64   `protobuf:"varint,23,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
-	VideoUrl         string  `protobuf:"bytes,24,opt,name=video_url,json=videoUrl,proto3" json:"video_url,omitempty"`
-	TemplateId       int32   `protobuf:"varint,25,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
-	Content          string  `protobuf:"bytes,26,opt,name=content,proto3" json:"content,omitempty"`
-	Memo             string  `protobuf:"bytes,27,opt,name=memo,proto3" json:"memo,omitempty"`
-	Barcode          string  `protobuf:"bytes,28,opt,name=barcode,proto3" json:"barcode,omitempty"`
-	Weight           float32 `protobuf:"fixed32,29,opt,name=weight,proto3" json:"weight,omitempty"`
-	Price            float32 `protobuf:"fixed32,30,opt,name=price,proto3" json:"price,omitempty"`
-	OriginPrice      float32 `protobuf:"fixed32,31,opt,name=origin_price,json=originPrice,proto3" json:"origin_price,omitempty"`
-	CostPrice        float32 `protobuf:"fixed32,32,opt,name=cost_price,json=costPrice,proto3" json:"cost_price,omitempty"`
-	MinPrice         float32 `protobuf:"fixed32,33,opt,name=min_price,json=minPrice,proto3" json:"min_price,omitempty"`
-	MaxPrice         float32 `protobuf:"fixed32,34,opt,name=max_price,json=maxPrice,proto3" json:"max_price,omitempty"`
-	Sorting          int32   `protobuf:"varint,35,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	AutoListOnAt     string  `protobuf:"bytes,36,opt,name=auto_list_on_at,json=autoListOnAt,proto3" json:"auto_list_on_at,omitempty"`
-	AutoListOffAt    string  `protobuf:"bytes,37,opt,name=auto_list_off_at,json=autoListOffAt,proto3" json:"auto_list_off_at,omitempty"`
-	ListedAt         string  `protobuf:"bytes,38,opt,name=listed_at,json=listedAt,proto3" json:"listed_at,omitempty"`
-	CreatedAt        string  `protobuf:"bytes,39,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt        string  `protobuf:"bytes,40,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id               int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name             string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	Unit             string  `protobuf:"bytes,3,opt,name=unit,proto3" json:"unit"`
+	ItemSn           string  `protobuf:"bytes,4,opt,name=item_sn,json=itemSn,proto3" json:"item_sn"`
+	BrandId          int32   `protobuf:"varint,5,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`
+	TaxonomyId       int64   `protobuf:"varint,6,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id"`
+	Type             string  `protobuf:"bytes,7,opt,name=type,proto3" json:"type"`
+	BuyQuota         int32   `protobuf:"varint,8,opt,name=buy_quota,json=buyQuota,proto3" json:"buy_quota"`
+	Quantity         int32   `protobuf:"varint,9,opt,name=quantity,proto3" json:"quantity"`
+	IsSku            bool    `protobuf:"varint,10,opt,name=is_sku,json=isSku,proto3" json:"is_sku"`
+	IsVirtual        bool    `protobuf:"varint,11,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`
+	IsRight          bool    `protobuf:"varint,12,opt,name=is_right,json=isRight,proto3" json:"is_right"`
+	IsPresale        bool    `protobuf:"varint,13,opt,name=is_presale,json=isPresale,proto3" json:"is_presale"`
+	Listed           bool    `protobuf:"varint,14,opt,name=listed,proto3" json:"listed"`
+	Locked           bool    `protobuf:"varint,15,opt,name=locked,proto3" json:"locked"`
+	HideStock        bool    `protobuf:"varint,16,opt,name=hide_stock,json=hideStock,proto3" json:"hide_stock"`
+	JoinVipDiscount  bool    `protobuf:"varint,17,opt,name=join_vip_discount,json=joinVipDiscount,proto3" json:"join_vip_discount"`
+	JoinDistribution bool    `protobuf:"varint,18,opt,name=join_distribution,json=joinDistribution,proto3" json:"join_distribution"`
+	OutItemNo        string  `protobuf:"bytes,19,opt,name=out_item_no,json=outItemNo,proto3" json:"out_item_no"`
+	MinBuy           int32   `protobuf:"varint,20,opt,name=min_buy,json=minBuy,proto3" json:"min_buy"`
+	ThumbId          int64   `protobuf:"varint,21,opt,name=thumb_id,json=thumbId,proto3" json:"thumb_id"`
+	ThumbUrl         string  `protobuf:"bytes,22,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url"`
+	VideoId          int64   `protobuf:"varint,23,opt,name=video_id,json=videoId,proto3" json:"video_id"`
+	VideoUrl         string  `protobuf:"bytes,24,opt,name=video_url,json=videoUrl,proto3" json:"video_url"`
+	TemplateId       int32   `protobuf:"varint,25,opt,name=template_id,json=templateId,proto3" json:"template_id"`
+	Content          string  `protobuf:"bytes,26,opt,name=content,proto3" json:"content"`
+	Memo             string  `protobuf:"bytes,27,opt,name=memo,proto3" json:"memo"`
+	Barcode          string  `protobuf:"bytes,28,opt,name=barcode,proto3" json:"barcode"`
+	Weight           float32 `protobuf:"fixed32,29,opt,name=weight,proto3" json:"weight"`
+	Price            float32 `protobuf:"fixed32,30,opt,name=price,proto3" json:"price"`
+	OriginPrice      float32 `protobuf:"fixed32,31,opt,name=origin_price,json=originPrice,proto3" json:"origin_price"`
+	CostPrice        float32 `protobuf:"fixed32,32,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`
+	MinPrice         float32 `protobuf:"fixed32,33,opt,name=min_price,json=minPrice,proto3" json:"min_price"`
+	MaxPrice         float32 `protobuf:"fixed32,34,opt,name=max_price,json=maxPrice,proto3" json:"max_price"`
+	Sorting          int32   `protobuf:"varint,35,opt,name=sorting,proto3" json:"sorting"`
+	AutoListOnAt     string  `protobuf:"bytes,36,opt,name=auto_list_on_at,json=autoListOnAt,proto3" json:"auto_list_on_at"`
+	AutoListOffAt    string  `protobuf:"bytes,37,opt,name=auto_list_off_at,json=autoListOffAt,proto3" json:"auto_list_off_at"`
+	ListedAt         string  `protobuf:"bytes,38,opt,name=listed_at,json=listedAt,proto3" json:"listed_at"`
+	CreatedAt        string  `protobuf:"bytes,39,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt        string  `protobuf:"bytes,40,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	//------end attrs---------
 	Food      *FoodExtend      `protobuf:"bytes,41,opt,name=food,proto3" json:"food,omitempty"`
-	General   *GeneralExtend   `protobuf:"bytes,42,opt,name=general,proto3" json:"general,omitempty"`
+	General   *GeneralExtend   `protobuf:"bytes,42,opt,name=general,proto3" json:"general,omitempty" gorm:"-"`
 	Knowledge *KnowledgeExtend `protobuf:"bytes,43,opt,name=knowledge,proto3" json:"knowledge,omitempty"`
 	Recharge  *RechargeExtend  `protobuf:"bytes,44,opt,name=recharge,proto3" json:"recharge,omitempty"`
 	Room      *RoomExtend      `protobuf:"bytes,45,opt,name=room,proto3" json:"room,omitempty"`
 	Ticket    *TicketExtend    `protobuf:"bytes,46,opt,name=ticket,proto3" json:"ticket,omitempty"`
 	Vip       *VipExtend       `protobuf:"bytes,47,opt,name=vip,proto3" json:"vip,omitempty"`
-	Virtual   *VirtualExtend   `protobuf:"bytes,48,opt,name=virtual,proto3" json:"virtual,omitempty"`
+	Virtual   *VirtualExtend   `protobuf:"bytes,48,opt,name=virtual,proto3" json:"virtual,omitempty" gorm:"-"`
 	//------end extends ------
 	Brand     *Brand         `protobuf:"bytes,50,opt,name=brand,proto3" json:"brand,omitempty"`
 	Presale   *ItemPresale   `protobuf:"bytes,51,opt,name=presale,proto3" json:"presale,omitempty"`
@@ -88,19 +88,19 @@ type Item struct {
 	Galleries []*ItemGallery `protobuf:"bytes,54,rep,name=galleries,proto3" json:"galleries,omitempty"`
 	Prices    []*ItemPrice   `protobuf:"bytes,55,rep,name=prices,proto3" json:"prices,omitempty"`
 	Rights    []*ItemRight   `protobuf:"bytes,56,rep,name=rights,proto3" json:"rights,omitempty"`
-	Specs     []*Spec        `protobuf:"bytes,57,rep,name=specs,proto3" json:"specs,omitempty"` //(详情显示专用)
+	Specs     []*Spec        `protobuf:"bytes,57,rep,name=specs,proto3" json:"specs,omitempty"  gorm:"-"` //(详情显示专用)
 	// @inject_tag: gorm:"many2many:item_cats;association_autoupdate:false"
-	Cats []*Cat `protobuf:"bytes,58,rep,name=cats,proto3" json:"cats,omitempty"`
+	Cats []*Cat `protobuf:"bytes,58,rep,name=cats,proto3" json:"cats,omitempty" gorm:"many2many:item_cats;association_autoupdate:false"`
 	// @inject_tag: gorm:"many2many:item_tags;"
-	Tags []*Tag `protobuf:"bytes,59,rep,name=tags,proto3" json:"tags,omitempty"`
+	Tags []*Tag `protobuf:"bytes,59,rep,name=tags,proto3" json:"tags,omitempty" gorm:"many2many:item_tags;"`
 	// @inject_tag: gorm:"-"
-	Additional *ItemAdditional `protobuf:"bytes,60,opt,name=additional,proto3" json:"additional,omitempty"` //商品附加信息(显示专用)
+	Additional *ItemAdditional `protobuf:"bytes,60,opt,name=additional,proto3" json:"additional,omitempty" gorm:"-"` //商品附加信息(显示专用)
 	// @inject_tag: gorm:"-"
-	GoodsSku *Sku `protobuf:"bytes,61,opt,name=goods_sku,json=goodsSku,proto3" json:"goods_sku,omitempty"` //(特殊专用)
+	GoodsSku *Sku `protobuf:"bytes,61,opt,name=goods_sku,json=goodsSku,proto3" json:"goods_sku,omitempty" gorm:"-"` //(特殊专用)
 	// @inject_tag: gorm:"-"
-	GoodsSkuId int64 `protobuf:"varint,62,opt,name=goods_sku_id,json=goodsSkuId,proto3" json:"goods_sku_id,omitempty"` //(特殊专用)
+	GoodsSkuId int64 `protobuf:"varint,62,opt,name=goods_sku_id,json=goodsSkuId,proto3" json:"goods_sku_id,omitempty"  gorm:"-"` //(特殊专用)
 	// @inject_tag: gorm:"-"
-	Ids []int64 `protobuf:"varint,63,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Ids []int64 `protobuf:"varint,63,rep,packed,name=ids,proto3" json:"ids,omitempty" gorm:"-"`
 }
 
 func (x *Item) Reset() {
@@ -575,10 +575,10 @@ type ItemAdditional struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	IsBuy              bool    `protobuf:"varint,1,opt,name=is_buy,json=isBuy,proto3" json:"is_buy,omitempty"`                                           // 商品是否可购买
-	IsMember           bool    `protobuf:"varint,2,opt,name=is_member,json=isMember,proto3" json:"is_member,omitempty"`                                  // 当前用户是否为会员
-	OnlyMemberBuy      bool    `protobuf:"varint,3,opt,name=only_member_buy,json=onlyMemberBuy,proto3" json:"only_member_buy,omitempty"`                 //只允许会员购买
-	CurrentMemberPrice float32 `protobuf:"fixed32,4,opt,name=current_member_price,json=currentMemberPrice,proto3" json:"current_member_price,omitempty"` // 当前会员价
+	IsBuy              bool    `protobuf:"varint,1,opt,name=is_buy,json=isBuy,proto3" json:"is_buy"`                                           // 商品是否可购买
+	IsMember           bool    `protobuf:"varint,2,opt,name=is_member,json=isMember,proto3" json:"is_member"`                                  // 当前用户是否为会员
+	OnlyMemberBuy      bool    `protobuf:"varint,3,opt,name=only_member_buy,json=onlyMemberBuy,proto3" json:"only_member_buy"`                 //只允许会员购买
+	CurrentMemberPrice float32 `protobuf:"fixed32,4,opt,name=current_member_price,json=currentMemberPrice,proto3" json:"current_member_price"` // 当前会员价
 }
 
 func (x *ItemAdditional) Reset() {
@@ -647,9 +647,9 @@ type GoodsWhere struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: gorm:"-"
-	ItemIds []int64 `protobuf:"varint,1,rep,packed,name=item_ids,json=itemIds,proto3" json:"item_ids,omitempty"`
+	ItemIds []int64 `protobuf:"varint,1,rep,packed,name=item_ids,json=itemIds,proto3" json:"item_ids"`
 	// @inject_tag: gorm:"-"
-	SkuIds []int64 `protobuf:"varint,2,rep,packed,name=sku_ids,json=skuIds,proto3" json:"sku_ids,omitempty"`
+	SkuIds []int64 `protobuf:"varint,2,rep,packed,name=sku_ids,json=skuIds,proto3" json:"sku_ids"`
 }
 
 func (x *GoodsWhere) Reset() {
@@ -703,31 +703,31 @@ type ItemWhere struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged      int32   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize   int32   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting    string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	Keywords   string  `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Name       string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	ItemSn     string  `protobuf:"bytes,6,opt,name=item_sn,json=itemSn,proto3" json:"item_sn,omitempty"`
-	BrandId    int32   `protobuf:"varint,7,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
-	TagId      int32   `protobuf:"varint,8,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
-	CatId      int32   `protobuf:"varint,9,opt,name=cat_id,json=catId,proto3" json:"cat_id,omitempty"`
-	TaxonomyId int64   `protobuf:"varint,10,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id,omitempty"`
-	MinPrice   float32 `protobuf:"fixed32,11,opt,name=min_price,json=minPrice,proto3" json:"min_price,omitempty"`
-	MaxPrice   float32 `protobuf:"fixed32,12,opt,name=max_price,json=maxPrice,proto3" json:"max_price,omitempty"`
-	Type       string  `protobuf:"bytes,13,opt,name=type,proto3" json:"type,omitempty"`
-	Status     string  `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
-	CouponId   int64   `protobuf:"varint,15,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id,omitempty"`
-	Valid      bool    `protobuf:"varint,16,opt,name=valid,proto3" json:"valid,omitempty"`  // 是否有效商品
-	Invite     string  `protobuf:"bytes,17,opt,name=invite,proto3" json:"invite,omitempty"` // 加密后的邀请码
-	Id         int64   `protobuf:"varint,18,opt,name=id,proto3" json:"id,omitempty"`
+	Paged      int32   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize   int32   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting    string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Keywords   string  `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
+	Name       string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
+	ItemSn     string  `protobuf:"bytes,6,opt,name=item_sn,json=itemSn,proto3" json:"item_sn"`
+	BrandId    int32   `protobuf:"varint,7,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`
+	TagId      int32   `protobuf:"varint,8,opt,name=tag_id,json=tagId,proto3" json:"tag_id"`
+	CatId      int32   `protobuf:"varint,9,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
+	TaxonomyId int64   `protobuf:"varint,10,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id"`
+	MinPrice   float32 `protobuf:"fixed32,11,opt,name=min_price,json=minPrice,proto3" json:"min_price"`
+	MaxPrice   float32 `protobuf:"fixed32,12,opt,name=max_price,json=maxPrice,proto3" json:"max_price"`
+	Type       string  `protobuf:"bytes,13,opt,name=type,proto3" json:"type"`
+	Status     string  `protobuf:"bytes,14,opt,name=status,proto3" json:"status"`
+	CouponId   int64   `protobuf:"varint,15,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`
+	Valid      bool    `protobuf:"varint,16,opt,name=valid,proto3" json:"valid"`  // 是否有效商品
+	Invite     string  `protobuf:"bytes,17,opt,name=invite,proto3" json:"invite"` // 加密后的邀请码
+	Id         int64   `protobuf:"varint,18,opt,name=id,proto3" json:"id"`
 	// @inject_tag: gorm:"-"
-	Ids     []int64 `protobuf:"varint,19,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	SkuId   int64   `protobuf:"varint,20,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"` //单一规格商品输入参数（在获取规格商品时使用）
-	CatSlug string  `protobuf:"bytes,21,opt,name=cat_slug,json=catSlug,proto3" json:"cat_slug,omitempty"`
-	IsSku   bool    `protobuf:"varint,22,opt,name=is_sku,json=isSku,proto3" json:"is_sku,omitempty"`
-	Sort    int32   `protobuf:"varint,23,opt,name=sort,proto3" json:"sort,omitempty"`
-	Num     int32   `protobuf:"varint,24,opt,name=num,proto3" json:"num,omitempty"`
+	Ids     []int64 `protobuf:"varint,19,rep,packed,name=ids,proto3" json:"ids"`
+	SkuId   int64   `protobuf:"varint,20,opt,name=sku_id,json=skuId,proto3" json:"sku_id"` //单一规格商品输入参数（在获取规格商品时使用）
+	CatSlug string  `protobuf:"bytes,21,opt,name=cat_slug,json=catSlug,proto3" json:"cat_slug"`
+	IsSku   bool    `protobuf:"varint,22,opt,name=is_sku,json=isSku,proto3" json:"is_sku"`
+	Sort    int32   `protobuf:"varint,23,opt,name=sort,proto3" json:"sort"`
+	Num     int32   `protobuf:"varint,24,opt,name=num,proto3" json:"num"`
 }
 
 func (x *ItemWhere) Reset() {
@@ -935,11 +935,11 @@ type MemberGoods struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ItemId         int64   `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	SkuId          int64   `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	MinMemberPrice float32 `protobuf:"fixed32,3,opt,name=min_member_price,json=minMemberPrice,proto3" json:"min_member_price,omitempty"`
-	MaxMemberPrice float32 `protobuf:"fixed32,4,opt,name=max_member_price,json=maxMemberPrice,proto3" json:"max_member_price,omitempty"`
-	Discount       float32 `protobuf:"fixed32,5,opt,name=discount,proto3" json:"discount,omitempty"`
+	ItemId         int64   `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id"`
+	SkuId          int64   `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	MinMemberPrice float32 `protobuf:"fixed32,3,opt,name=min_member_price,json=minMemberPrice,proto3" json:"min_member_price"`
+	MaxMemberPrice float32 `protobuf:"fixed32,4,opt,name=max_member_price,json=maxMemberPrice,proto3" json:"max_member_price"`
+	Discount       float32 `protobuf:"fixed32,5,opt,name=discount,proto3" json:"discount"`
 }
 
 func (x *MemberGoods) Reset() {
@@ -1014,11 +1014,11 @@ type ItemResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Item         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Item       `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Item         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Item       `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *ItemResponse) Reset() {

@@ -5,25 +5,19 @@ option go_package = ".;services";
 //美食商品扩展属性
 message FoodExtend {
   int64	id	=1;
-  string	name	=2;
-  string	unit	=3;
-  string	item_sn	=4;
+  int64 item_id =2;
 }
 
 //普通商品扩展属性
 message GeneralExtend {
   int64	id	=1;
-  string	name	=2;
-  string	unit	=3;
-  string	item_sn	=4;
+  int64 item_id =2;
 }
 
 //客房商品扩展属性
 message RoomExtend {
   int64	id	=1;
-  string	name	=2;
-  string	unit	=3;
-  string	item_sn	=4;
+  int64 item_id =2;
 }
 
 //知识付费商品扩展属性
@@ -84,7 +78,5 @@ message RechargeExtend {
 //虚拟商品扩展属性
 message VirtualExtend {
   int64	id	=1;
-  string	name	=2;
-  string	unit	=3;
-  string	item_sn	=4;
+  int64 item_id =2;
 }

@@ -52,7 +52,7 @@ type Sku struct {
 	CreatedAt   string  `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt   string  `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// @inject_tag: gorm:"many2many:spec_item_indices;"
-	SpecValues []*SpecValue `protobuf:"bytes,21,rep,name=spec_values,json=specValues,proto3" json:"spec_values,omitempty"`
+	SpecValues []*SpecValue `protobuf:"bytes,21,rep,name=spec_values,json=specValues,proto3" json:"spec_values,omitempty" gorm:"many2many:spec_item_indices;"`
 }
 
 func (x *Sku) Reset() {

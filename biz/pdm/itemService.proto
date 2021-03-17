@@ -109,12 +109,14 @@ message Item {
     string updated_at =40;
     //------end attrs---------
     FoodExtend food =41;
+    // @inject_tag: gorm:"-"
     GeneralExtend general =42;
     KnowledgeExtend knowledge =43;
     RechargeExtend recharge =44;
     RoomExtend room =45;
     TicketExtend ticket =46;
     VipExtend vip =47;
+    // @inject_tag: gorm:"-"
     VirtualExtend virtual =48;
     //------end extends ------
     Brand brand =50;
@@ -124,6 +126,7 @@ message Item {
     repeated  ItemGallery galleries  =54;
     repeated  ItemPrice prices  =55;
     repeated  ItemRight rights  =56;
+    // @inject_tag: gorm:"-"
     repeated  Spec specs  =57; //(详情显示专用)
     // @inject_tag: gorm:"many2many:item_cats;association_autoupdate:false"
     repeated Cat cats =58;

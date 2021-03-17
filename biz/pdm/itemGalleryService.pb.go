@@ -42,7 +42,7 @@ type ItemGallery struct {
 	CreatedAt string `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt string `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// @inject_tag: gorm:"-"
-	Ids []int64 `protobuf:"varint,11,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Ids []int64 `protobuf:"varint,11,rep,packed,name=ids,proto3" json:"ids,omitempty"  gorm:"-"`
 }
 
 func (x *ItemGallery) Reset() {
