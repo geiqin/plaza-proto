@@ -94,22 +94,23 @@ message CustomerRequest {
     int32 page_size = 2;
     string sorting = 3;
     //以下为自定义参数
-    string name = 4;
-    string display_name =5;
-    string real_name =6;
-    int32 gender =7;
-    string mobile =8;
-    string email =9;
-    int32 level_id =10;
-    int32 card_id =11;
-    int32 tag_id =12;
-    int32 reg_source =13;
-    int64 area_id =14;
-    string status =15;
-    string keywords =16;
-    int32 type = 17;
-    int64 customer_id = 18;
-    repeated int64 ids = 19;
+    int64 id = 4;
+    string name = 5;
+    string display_name =6;
+    string real_name =7;
+    int32 gender =8;
+    string mobile =9;
+    string email =10;
+    int32 level_id =11;
+    int32 card_id =12;
+    int32 tag_id =13;
+    int32 reg_source =14;
+    int64 area_id =15;
+    string status =16;
+    string keywords =17;
+    int32 type = 18;
+    int64 customer_id = 19;
+    repeated int64 ids = 20;
 }
 
 //
