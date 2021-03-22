@@ -19,25 +19,29 @@ service CustomerService {
     //修改客户
     rpc Update (Customer) returns (CustomerResponse) {}
     //删除客户
-    rpc Delete (Customer) returns (CustomerResponse) {}
+    rpc Delete (CustomerRequest) returns (CustomerResponse) {}
     //锁定客户
-    rpc Lock (Customer) returns (CustomerResponse) {}
+    rpc Lock (CustomerRequest) returns (CustomerResponse) {}
     //解锁客户
-    rpc Unlock (Customer) returns (CustomerResponse) {}
+    rpc Unlock (CustomerRequest) returns (CustomerResponse) {}
     //获得客户
     rpc Get (Customer) returns (CustomerResponse) {}
     //获得客户详情
     rpc Detail (Customer) returns (CustomerResponse) {}
     //根据ids获得客户
-    rpc List (Customer) returns (CustomerResponse) {}
+    rpc List (CustomerRequest) returns (CustomerResponse) {}
     //查询客户
-    rpc Search (CustomerWhere) returns (CustomerResponse) {}
+    rpc Search (CustomerRequest) returns (CustomerResponse) {}
     //设置会员标签
     rpc SetTags (Customer) returns (CustomerResponse) {}
     //设置会员卡
     rpc SetCards (Customer) returns (CustomerResponse) {}
     //修改客户手机号
     rpc UpdateMobile (Customer) returns (CustomerResponse) {}
+    //获取已绑定手机用户
+    rpc GetByMobile (Customer) returns (CustomerResponse) {}
+    //获取已绑定邮箱用户
+    rpc GetByEmail (Customer) returns (CustomerResponse) {}
 }
 
 message Customer {
@@ -67,7 +71,7 @@ message Customer {
     bool bound_mobile =24;
     bool bound_email =25;
     int64 area_id =26;
-    int32 reg_source =27;
+    string source =27;
     int32 type = 28;
     string birthday =29;
     string memo =30;
@@ -82,12 +86,10 @@ message Customer {
     repeated Tag tags = 38;
     repeated VipCard vip_cards =39;
     repeated Address addresses = 40;
-    // @inject_tag: gorm:"-"
-    repeated int64 ids = 41;
 }
 
 //客户查询参数
-message CustomerWhere {
+message CustomerRequest {
     int32 paged = 1;
     int32 page_size = 2;
     string sorting = 3;
@@ -107,6 +109,7 @@ message CustomerWhere {
     string keywords =16;
     int32 type = 17;
     int64 customer_id = 18;
+    repeated int64 ids = 19;
 }
 
 //

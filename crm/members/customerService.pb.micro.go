@@ -54,25 +54,29 @@ type CustomerService interface {
 	//修改客户
 	Update(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//删除客户
-	Delete(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	Delete(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
 	//锁定客户
-	Lock(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	Lock(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
 	//解锁客户
-	Unlock(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	Unlock(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
 	//获得客户
 	Get(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//获得客户详情
 	Detail(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//根据ids获得客户
-	List(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	List(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
 	//查询客户
-	Search(ctx context.Context, in *CustomerWhere, opts ...client.CallOption) (*CustomerResponse, error)
+	Search(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
 	//设置会员标签
 	SetTags(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//设置会员卡
 	SetCards(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//修改客户手机号
 	UpdateMobile(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//获取已绑定手机用户
+	GetByMobile(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//获取已绑定邮箱用户
+	GetByEmail(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 }
 
 type customerService struct {
@@ -137,7 +141,7 @@ func (c *customerService) Update(ctx context.Context, in *Customer, opts ...clie
 	return out, nil
 }
 
-func (c *customerService) Delete(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) Delete(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Delete", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -147,7 +151,7 @@ func (c *customerService) Delete(ctx context.Context, in *Customer, opts ...clie
 	return out, nil
 }
 
-func (c *customerService) Lock(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) Lock(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Lock", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -157,7 +161,7 @@ func (c *customerService) Lock(ctx context.Context, in *Customer, opts ...client
 	return out, nil
 }
 
-func (c *customerService) Unlock(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) Unlock(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Unlock", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -187,7 +191,7 @@ func (c *customerService) Detail(ctx context.Context, in *Customer, opts ...clie
 	return out, nil
 }
 
-func (c *customerService) List(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) List(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.List", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -197,7 +201,7 @@ func (c *customerService) List(ctx context.Context, in *Customer, opts ...client
 	return out, nil
 }
 
-func (c *customerService) Search(ctx context.Context, in *CustomerWhere, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) Search(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Search", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -237,6 +241,26 @@ func (c *customerService) UpdateMobile(ctx context.Context, in *Customer, opts .
 	return out, nil
 }
 
+func (c *customerService) GetByMobile(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.GetByMobile", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) GetByEmail(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.GetByEmail", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for CustomerService service
 
 type CustomerServiceHandler interface {
@@ -251,25 +275,29 @@ type CustomerServiceHandler interface {
 	//修改客户
 	Update(context.Context, *Customer, *CustomerResponse) error
 	//删除客户
-	Delete(context.Context, *Customer, *CustomerResponse) error
+	Delete(context.Context, *CustomerRequest, *CustomerResponse) error
 	//锁定客户
-	Lock(context.Context, *Customer, *CustomerResponse) error
+	Lock(context.Context, *CustomerRequest, *CustomerResponse) error
 	//解锁客户
-	Unlock(context.Context, *Customer, *CustomerResponse) error
+	Unlock(context.Context, *CustomerRequest, *CustomerResponse) error
 	//获得客户
 	Get(context.Context, *Customer, *CustomerResponse) error
 	//获得客户详情
 	Detail(context.Context, *Customer, *CustomerResponse) error
 	//根据ids获得客户
-	List(context.Context, *Customer, *CustomerResponse) error
+	List(context.Context, *CustomerRequest, *CustomerResponse) error
 	//查询客户
-	Search(context.Context, *CustomerWhere, *CustomerResponse) error
+	Search(context.Context, *CustomerRequest, *CustomerResponse) error
 	//设置会员标签
 	SetTags(context.Context, *Customer, *CustomerResponse) error
 	//设置会员卡
 	SetCards(context.Context, *Customer, *CustomerResponse) error
 	//修改客户手机号
 	UpdateMobile(context.Context, *Customer, *CustomerResponse) error
+	//获取已绑定手机用户
+	GetByMobile(context.Context, *Customer, *CustomerResponse) error
+	//获取已绑定邮箱用户
+	GetByEmail(context.Context, *Customer, *CustomerResponse) error
 }
 
 func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler, opts ...server.HandlerOption) error {
@@ -279,16 +307,18 @@ func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler
 		UpdateCompany(ctx context.Context, in *Customer, out *CustomerResponse) error
 		CreateByFan(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Update(ctx context.Context, in *Customer, out *CustomerResponse) error
-		Delete(ctx context.Context, in *Customer, out *CustomerResponse) error
-		Lock(ctx context.Context, in *Customer, out *CustomerResponse) error
-		Unlock(ctx context.Context, in *Customer, out *CustomerResponse) error
+		Delete(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
+		Lock(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
+		Unlock(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
 		Get(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Detail(ctx context.Context, in *Customer, out *CustomerResponse) error
-		List(ctx context.Context, in *Customer, out *CustomerResponse) error
-		Search(ctx context.Context, in *CustomerWhere, out *CustomerResponse) error
+		List(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
+		Search(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
 		SetTags(ctx context.Context, in *Customer, out *CustomerResponse) error
 		SetCards(ctx context.Context, in *Customer, out *CustomerResponse) error
 		UpdateMobile(ctx context.Context, in *Customer, out *CustomerResponse) error
+		GetByMobile(ctx context.Context, in *Customer, out *CustomerResponse) error
+		GetByEmail(ctx context.Context, in *Customer, out *CustomerResponse) error
 	}
 	type CustomerService struct {
 		customerService
@@ -321,15 +351,15 @@ func (h *customerServiceHandler) Update(ctx context.Context, in *Customer, out *
 	return h.CustomerServiceHandler.Update(ctx, in, out)
 }
 
-func (h *customerServiceHandler) Delete(ctx context.Context, in *Customer, out *CustomerResponse) error {
+func (h *customerServiceHandler) Delete(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *customerServiceHandler) Lock(ctx context.Context, in *Customer, out *CustomerResponse) error {
+func (h *customerServiceHandler) Lock(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Lock(ctx, in, out)
 }
 
-func (h *customerServiceHandler) Unlock(ctx context.Context, in *Customer, out *CustomerResponse) error {
+func (h *customerServiceHandler) Unlock(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Unlock(ctx, in, out)
 }
 
@@ -341,11 +371,11 @@ func (h *customerServiceHandler) Detail(ctx context.Context, in *Customer, out *
 	return h.CustomerServiceHandler.Detail(ctx, in, out)
 }
 
-func (h *customerServiceHandler) List(ctx context.Context, in *Customer, out *CustomerResponse) error {
+func (h *customerServiceHandler) List(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.List(ctx, in, out)
 }
 
-func (h *customerServiceHandler) Search(ctx context.Context, in *CustomerWhere, out *CustomerResponse) error {
+func (h *customerServiceHandler) Search(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Search(ctx, in, out)
 }
 
@@ -359,4 +389,12 @@ func (h *customerServiceHandler) SetCards(ctx context.Context, in *Customer, out
 
 func (h *customerServiceHandler) UpdateMobile(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.UpdateMobile(ctx, in, out)
+}
+
+func (h *customerServiceHandler) GetByMobile(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.GetByMobile(ctx, in, out)
+}
+
+func (h *customerServiceHandler) GetByEmail(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.GetByEmail(ctx, in, out)
 }
