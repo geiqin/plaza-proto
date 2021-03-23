@@ -1,0 +1,81 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+import "catService.proto";
+
+service FileService {
+    rpc Update (FileRequest) returns (FileResponse) {}
+    rpc Delete (FileRequest) returns (FileResponse) {}
+    rpc Get (FileRequest) returns (FileResponse) {}
+    rpc List (FileRequest) returns (FileResponse) {}
+    rpc Search (FileRequest) returns (FileResponse) {}
+    rpc SetCat (FileRequest) returns (FileResponse) {}
+}
+//我的文件
+service MyFileService {
+    rpc Update (FileRequest) returns (FileResponse) {}
+    rpc Delete (FileRequest) returns (FileResponse) {}
+    rpc Get (FileRequest) returns (FileResponse) {}
+    rpc Search (FileRequest) returns (FileResponse) {}
+}
+
+//文件信息
+message File {
+    int64 id =1;
+    string title =2;
+    string type	 =3;
+    string source	 =4;
+    bool is_private	 =5;
+    int32 cat_id =6;
+    string file_name =7;
+    string raw_name =8;
+    string hash =9;
+    string path	 =10;
+    string url	 =11;
+    string mime_type =12;
+    float size	 =13;
+    int32 width	 =14;
+    int32 height =15;
+    int32 length	 =16;
+    int32 pixel =17;
+    string memo	 =18;
+    string taxonomy	 =19;
+    int64 user_id	=20;
+    int64 customer_id	=21;
+    int32 sorting =22;
+    string created_at =23;
+    string updated_at =24;
+    Cat cat =25;
+}
+
+// 修改文件请求信息
+message FileRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //file params
+    int64 id =4;
+    string title =5;
+    int32 cat_id =6;
+    string type =7;
+    string mime_type =8;
+    string file_name =9;
+    string raw_name =10;
+    string hash =11;
+    string taxonomy	 =12;
+    bool is_private	 =13;
+    int64 customer_id	 =14;
+    int64 user_id	 =15;
+    string memo	 =16;
+    repeated int64 ids =17;
+}
+
+//
+message FileResponse {
+    File entity = 1;
+    common.Pager pager =2;
+    repeated File items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}
