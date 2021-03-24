@@ -3,18 +3,12 @@ package services;
 option go_package =".;services";
 import "common/base.proto";
 
-//发送服务
-service SendService {
-    //发送验证码
-    rpc VerifyCode (SendRequest) returns (MessageResponse) {}
-    //发送营销短信
-    rpc SendMarket (SendRequest) returns (MessageResponse) {}
-}
-
-//短信消息
+//营销、通知等短信（非验证码）
 service MessageService {
     rpc Get (Message) returns (MessageResponse) {}
-    rpc Search (common.BaseWhere) returns (MessageResponse) {}
+    rpc Search (MessageRequest) returns (MessageResponse) {}
+    //发送短信
+    rpc Send (MessageRequest) returns (MessageResponse) {}
 }
 
 message Message {
@@ -38,7 +32,7 @@ message Message {
     string	updated_at	=17;
 }
 
-message SendRequest {
+message MessageRequest {
     int64	id	=1;
     string	type	=2;
     string	mobile	=3;

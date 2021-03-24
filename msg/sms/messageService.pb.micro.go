@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/microkit/protobuf/common"
+	_ "github.com/geiqin/microkit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -34,86 +34,6 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// Api Endpoints for SendService service
-
-func NewSendServiceEndpoints() []*api.Endpoint {
-	return []*api.Endpoint{}
-}
-
-// Client API for SendService service
-
-type SendService interface {
-	//发送验证码
-	VerifyCode(ctx context.Context, in *SendRequest, opts ...client.CallOption) (*MessageResponse, error)
-	//发送营销短信
-	SendMarket(ctx context.Context, in *SendRequest, opts ...client.CallOption) (*MessageResponse, error)
-}
-
-type sendService struct {
-	c    client.Client
-	name string
-}
-
-func NewSendService(name string, c client.Client) SendService {
-	return &sendService{
-		c:    c,
-		name: name,
-	}
-}
-
-func (c *sendService) VerifyCode(ctx context.Context, in *SendRequest, opts ...client.CallOption) (*MessageResponse, error) {
-	req := c.c.NewRequest(c.name, "SendService.VerifyCode", in)
-	out := new(MessageResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sendService) SendMarket(ctx context.Context, in *SendRequest, opts ...client.CallOption) (*MessageResponse, error) {
-	req := c.c.NewRequest(c.name, "SendService.SendMarket", in)
-	out := new(MessageResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for SendService service
-
-type SendServiceHandler interface {
-	//发送验证码
-	VerifyCode(context.Context, *SendRequest, *MessageResponse) error
-	//发送营销短信
-	SendMarket(context.Context, *SendRequest, *MessageResponse) error
-}
-
-func RegisterSendServiceHandler(s server.Server, hdlr SendServiceHandler, opts ...server.HandlerOption) error {
-	type sendService interface {
-		VerifyCode(ctx context.Context, in *SendRequest, out *MessageResponse) error
-		SendMarket(ctx context.Context, in *SendRequest, out *MessageResponse) error
-	}
-	type SendService struct {
-		sendService
-	}
-	h := &sendServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&SendService{h}, opts...))
-}
-
-type sendServiceHandler struct {
-	SendServiceHandler
-}
-
-func (h *sendServiceHandler) VerifyCode(ctx context.Context, in *SendRequest, out *MessageResponse) error {
-	return h.SendServiceHandler.VerifyCode(ctx, in, out)
-}
-
-func (h *sendServiceHandler) SendMarket(ctx context.Context, in *SendRequest, out *MessageResponse) error {
-	return h.SendServiceHandler.SendMarket(ctx, in, out)
-}
-
 // Api Endpoints for MessageService service
 
 func NewMessageServiceEndpoints() []*api.Endpoint {
@@ -124,7 +44,9 @@ func NewMessageServiceEndpoints() []*api.Endpoint {
 
 type MessageService interface {
 	Get(ctx context.Context, in *Message, opts ...client.CallOption) (*MessageResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*MessageResponse, error)
+	Search(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
+	//发送短信
+	Send(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
 }
 
 type messageService struct {
@@ -149,8 +71,18 @@ func (c *messageService) Get(ctx context.Context, in *Message, opts ...client.Ca
 	return out, nil
 }
 
-func (c *messageService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*MessageResponse, error) {
+func (c *messageService) Search(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error) {
 	req := c.c.NewRequest(c.name, "MessageService.Search", in)
+	out := new(MessageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageService) Send(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error) {
+	req := c.c.NewRequest(c.name, "MessageService.Send", in)
 	out := new(MessageResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -163,13 +95,16 @@ func (c *messageService) Search(ctx context.Context, in *common.BaseWhere, opts 
 
 type MessageServiceHandler interface {
 	Get(context.Context, *Message, *MessageResponse) error
-	Search(context.Context, *common.BaseWhere, *MessageResponse) error
+	Search(context.Context, *MessageRequest, *MessageResponse) error
+	//发送短信
+	Send(context.Context, *MessageRequest, *MessageResponse) error
 }
 
 func RegisterMessageServiceHandler(s server.Server, hdlr MessageServiceHandler, opts ...server.HandlerOption) error {
 	type messageService interface {
 		Get(ctx context.Context, in *Message, out *MessageResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *MessageResponse) error
+		Search(ctx context.Context, in *MessageRequest, out *MessageResponse) error
+		Send(ctx context.Context, in *MessageRequest, out *MessageResponse) error
 	}
 	type MessageService struct {
 		messageService
@@ -186,6 +121,10 @@ func (h *messageServiceHandler) Get(ctx context.Context, in *Message, out *Messa
 	return h.MessageServiceHandler.Get(ctx, in, out)
 }
 
-func (h *messageServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *MessageResponse) error {
+func (h *messageServiceHandler) Search(ctx context.Context, in *MessageRequest, out *MessageResponse) error {
 	return h.MessageServiceHandler.Search(ctx, in, out)
+}
+
+func (h *messageServiceHandler) Send(ctx context.Context, in *MessageRequest, out *MessageResponse) error {
+	return h.MessageServiceHandler.Send(ctx, in, out)
 }
