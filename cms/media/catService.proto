@@ -10,7 +10,7 @@ service CatService {
     rpc Get (Cat) returns (CatResponse) {}
     rpc List (Cat) returns (CatResponse) {}
     rpc Tree (Cat) returns (CatResponse) {}
-    rpc Search (common.BaseWhere) returns (CatResponse) {}
+    rpc Search (CatRequest) returns (CatResponse) {}
 
 }
 
@@ -20,12 +20,28 @@ message Cat {
     string name =2;
     string type =3;
     string taxonomy =4;
-    int32 total_num	=5;
-    float total_size =6;
-    int32 cat_id=7; //父亲节点
-    int64 user_id =8;
-    repeated Cat children =9;
-    repeated int32 ids =10;
+    string path =5;
+    int32 depth =6;
+    int32 total_num	=7;
+    float total_size =8;
+    int32 cat_id=9; //父亲节点
+    int64 user_id =10;
+    repeated Cat children =11;
+    //gorm:"-"
+    repeated int32 ids =12;
+}
+
+message CatRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //file params
+    int64 id =4;
+    string name =5;
+    string type =6;
+    string taxonomy	 =7;
+    repeated string types =8;
+    repeated int64 ids =9;
 }
 
 //

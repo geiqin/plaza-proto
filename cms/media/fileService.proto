@@ -31,22 +31,25 @@ message File {
     string file_name =7;
     string raw_name =8;
     string hash =9;
-    string path	 =10;
-    string url	 =11;
-    string mime_type =12;
-    float size	 =13;
-    int32 width	 =14;
-    int32 height =15;
-    int32 length	 =16;
-    int32 pixel =17;
-    string memo	 =18;
-    string taxonomy	 =19;
-    int64 user_id	=20;
-    int64 customer_id	=21;
-    int32 sorting =22;
-    string created_at =23;
-    string updated_at =24;
-    Cat cat =25;
+    string persistent_id =10;
+    string path	 =11;
+    string url	 =12;
+    string mime_type =13;
+    float size	 =14;
+    int32 width	 =15;
+    int32 height =16;
+    int32 length	 =17;
+    int32 pixel =18;
+    int64 cover_id =19;
+    string cover_url =20;
+    string memo	 =21;
+    string taxonomy	 =22;
+    int64 user_id	=23;
+    int64 customer_id	=24;
+    int32 sorting =25;
+    string created_at =26;
+    string updated_at =27;
+    Cat cat =28;
 }
 
 // 修改文件请求信息
@@ -63,12 +66,16 @@ message FileRequest {
     string file_name =9;
     string raw_name =10;
     string hash =11;
-    string taxonomy	 =12;
-    bool is_private	 =13;
-    int64 customer_id	 =14;
-    int64 user_id	 =15;
-    string memo	 =16;
-    repeated int64 ids =17;
+    string persistent_id =12;
+    string taxonomy	 =13;
+    bool is_private	 =14;
+    int64 customer_id	 =15;
+    int64 user_id	 =16;
+    string memo	 =17;
+    int64 cover_id =18;
+    string cover_url =19;
+    repeated string types =20;
+    repeated int64 ids =21;
 }
 
 //

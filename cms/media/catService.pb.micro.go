@@ -4,8 +4,8 @@
 package services
 
 import (
-	common "github.com/geiqin/microkit/protobuf/common"
 	fmt "fmt"
+	_ "github.com/geiqin/microkit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -49,7 +49,7 @@ type CatService interface {
 	Get(ctx context.Context, in *Cat, opts ...client.CallOption) (*CatResponse, error)
 	List(ctx context.Context, in *Cat, opts ...client.CallOption) (*CatResponse, error)
 	Tree(ctx context.Context, in *Cat, opts ...client.CallOption) (*CatResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*CatResponse, error)
+	Search(ctx context.Context, in *CatRequest, opts ...client.CallOption) (*CatResponse, error)
 }
 
 type catService struct {
@@ -124,7 +124,7 @@ func (c *catService) Tree(ctx context.Context, in *Cat, opts ...client.CallOptio
 	return out, nil
 }
 
-func (c *catService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*CatResponse, error) {
+func (c *catService) Search(ctx context.Context, in *CatRequest, opts ...client.CallOption) (*CatResponse, error) {
 	req := c.c.NewRequest(c.name, "CatService.Search", in)
 	out := new(CatResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -143,7 +143,7 @@ type CatServiceHandler interface {
 	Get(context.Context, *Cat, *CatResponse) error
 	List(context.Context, *Cat, *CatResponse) error
 	Tree(context.Context, *Cat, *CatResponse) error
-	Search(context.Context, *common.BaseWhere, *CatResponse) error
+	Search(context.Context, *CatRequest, *CatResponse) error
 }
 
 func RegisterCatServiceHandler(s server.Server, hdlr CatServiceHandler, opts ...server.HandlerOption) error {
@@ -154,7 +154,7 @@ func RegisterCatServiceHandler(s server.Server, hdlr CatServiceHandler, opts ...
 		Get(ctx context.Context, in *Cat, out *CatResponse) error
 		List(ctx context.Context, in *Cat, out *CatResponse) error
 		Tree(ctx context.Context, in *Cat, out *CatResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *CatResponse) error
+		Search(ctx context.Context, in *CatRequest, out *CatResponse) error
 	}
 	type CatService struct {
 		catService
@@ -191,6 +191,6 @@ func (h *catServiceHandler) Tree(ctx context.Context, in *Cat, out *CatResponse)
 	return h.CatServiceHandler.Tree(ctx, in, out)
 }
 
-func (h *catServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *CatResponse) error {
+func (h *catServiceHandler) Search(ctx context.Context, in *CatRequest, out *CatResponse) error {
 	return h.CatServiceHandler.Search(ctx, in, out)
 }
