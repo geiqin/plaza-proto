@@ -15,7 +15,7 @@ service CustomerService {
     //手动修改单位用户
     rpc UpdateCompany (Customer) returns (CustomerResponse) {}
     //从粉丝添加用户
-    rpc CreateByFan (Customer) returns (CustomerResponse) {}
+    rpc CreateByFan (CustomerRequest) returns (CustomerResponse) {}
     //修改客户
     rpc Update (Customer) returns (CustomerResponse) {}
     //删除客户
@@ -36,11 +36,11 @@ service CustomerService {
     rpc SetTags (Customer) returns (CustomerResponse) {}
     //设置会员卡
     rpc SetCards (Customer) returns (CustomerResponse) {}
-    //获取已绑定手机用户
+    //获取已绑定手机用户(SRV专用)
     rpc GetByMobile (CustomerRequest) returns (CustomerResponse) {}
-    //获取已绑定邮箱用户
+    //获取已绑定邮箱用户(SRV专用)
     rpc GetByEmail (CustomerRequest) returns (CustomerResponse) {}
-    //获取已绑定微信用户
+    //获取已绑定微信用户(SRV专用)
     rpc GetByWx (CustomerRequest) returns (CustomerResponse) {}
 }
 
@@ -105,8 +105,13 @@ message CustomerRequest {
     int64 customer_id = 17;
     string mobile =18;
     string email =19;
-    string wx_open_id =20;
-    repeated int64 ids = 21;
+    bool bound_mobile =20;
+    bool bound_email =21;
+    bool bound_wx =22;
+    int64 recommender_id =23;
+    string refer_url =24;
+    string wx_open_id =25;
+    repeated int64 ids = 26;
 }
 
 //

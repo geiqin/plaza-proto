@@ -50,7 +50,7 @@ type CustomerService interface {
 	//手动修改单位用户
 	UpdateCompany(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//从粉丝添加用户
-	CreateByFan(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	CreateByFan(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
 	//修改客户
 	Update(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//删除客户
@@ -121,7 +121,7 @@ func (c *customerService) UpdateCompany(ctx context.Context, in *Customer, opts 
 	return out, nil
 }
 
-func (c *customerService) CreateByFan(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) CreateByFan(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.CreateByFan", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -271,7 +271,7 @@ type CustomerServiceHandler interface {
 	//手动修改单位用户
 	UpdateCompany(context.Context, *Customer, *CustomerResponse) error
 	//从粉丝添加用户
-	CreateByFan(context.Context, *Customer, *CustomerResponse) error
+	CreateByFan(context.Context, *CustomerRequest, *CustomerResponse) error
 	//修改客户
 	Update(context.Context, *Customer, *CustomerResponse) error
 	//删除客户
@@ -305,7 +305,7 @@ func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler
 		Create(ctx context.Context, in *Customer, out *CustomerResponse) error
 		CreateCompany(ctx context.Context, in *Customer, out *CustomerResponse) error
 		UpdateCompany(ctx context.Context, in *Customer, out *CustomerResponse) error
-		CreateByFan(ctx context.Context, in *Customer, out *CustomerResponse) error
+		CreateByFan(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
 		Update(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Delete(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
 		Lock(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
@@ -343,7 +343,7 @@ func (h *customerServiceHandler) UpdateCompany(ctx context.Context, in *Customer
 	return h.CustomerServiceHandler.UpdateCompany(ctx, in, out)
 }
 
-func (h *customerServiceHandler) CreateByFan(ctx context.Context, in *Customer, out *CustomerResponse) error {
+func (h *customerServiceHandler) CreateByFan(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.CreateByFan(ctx, in, out)
 }
 
