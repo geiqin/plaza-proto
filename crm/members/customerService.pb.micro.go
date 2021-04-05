@@ -71,11 +71,11 @@ type CustomerService interface {
 	SetTags(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//设置会员卡
 	SetCards(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
-	//获取已绑定手机用户
+	//获取已绑定手机用户(SRV专用)
 	GetByMobile(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
-	//获取已绑定邮箱用户
+	//获取已绑定邮箱用户(SRV专用)
 	GetByEmail(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
-	//获取已绑定微信用户
+	//获取已绑定微信用户(SRV专用)
 	GetByWx(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
 }
 
@@ -292,11 +292,11 @@ type CustomerServiceHandler interface {
 	SetTags(context.Context, *Customer, *CustomerResponse) error
 	//设置会员卡
 	SetCards(context.Context, *Customer, *CustomerResponse) error
-	//获取已绑定手机用户
+	//获取已绑定手机用户(SRV专用)
 	GetByMobile(context.Context, *CustomerRequest, *CustomerResponse) error
-	//获取已绑定邮箱用户
+	//获取已绑定邮箱用户(SRV专用)
 	GetByEmail(context.Context, *CustomerRequest, *CustomerResponse) error
-	//获取已绑定微信用户
+	//获取已绑定微信用户(SRV专用)
 	GetByWx(context.Context, *CustomerRequest, *CustomerResponse) error
 }
 

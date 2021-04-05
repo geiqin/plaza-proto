@@ -109,9 +109,11 @@ message CustomerRequest {
     bool bound_email =21;
     bool bound_wx =22;
     int64 recommender_id =23;
-    string refer_url =24;
-    string wx_open_id =25;
-    repeated int64 ids = 26;
+    int64 avatar_id =24;
+    string avatar_url =25;
+    string refer_url =26;
+    string wx_open_id =27;
+    repeated int64 ids = 28;
 }
 
 //
