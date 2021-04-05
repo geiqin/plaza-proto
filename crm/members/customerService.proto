@@ -36,56 +36,51 @@ service CustomerService {
     rpc SetTags (Customer) returns (CustomerResponse) {}
     //设置会员卡
     rpc SetCards (Customer) returns (CustomerResponse) {}
-    //修改客户手机号
-    rpc UpdateMobile (Customer) returns (CustomerResponse) {}
     //获取已绑定手机用户
-    rpc GetByMobile (Customer) returns (CustomerResponse) {}
+    rpc GetByMobile (CustomerRequest) returns (CustomerResponse) {}
     //获取已绑定邮箱用户
-    rpc GetByEmail (Customer) returns (CustomerResponse) {}
+    rpc GetByEmail (CustomerRequest) returns (CustomerResponse) {}
+    //获取已绑定微信用户
+    rpc GetByWx (CustomerRequest) returns (CustomerResponse) {}
 }
 
 message Customer {
     int64 id =1;
-    string customer_sn =2;
+    int32 type = 2;
     string name =3;
-    string display_name =4;
-    string real_name =5;
-    string id_card =6;
-    int32 gender =7;
-    string mobile =8;
-    string email =9;
-    int64 avatar_id =10;
-    string avatar_url =11;
-    int32 level_id =12;
-    float capital =13;
-    int32 growth_value =14;
-    int32 integral =15;
-    int32 traded_num =16;
-    float traded_money =17;
-    int32 review_num =18;
-    int32 favorite_num =19;
-    int64 recommender_id =20;
-    string refer_url =21;
-    bool locked =22;
-    bool trusted =23;
-    bool bound_mobile =24;
-    bool bound_email =25;
-    int64 area_id =26;
+    int32 gender =4;
+    int64 avatar_id =5;
+    string avatar_url =6;
+    int32 level_id =7;
+    string level_expired_at =8;
+    bool level_valid =9;
+    float capital =10;
+    int32 growth_value =11;
+    int32 integral =12;
+    int32 traded_num =13;
+    float traded_money =14;
+    int32 review_num =15;
+    int32 favorite_num =16;
+    int64 recommender_id =17;
+    string refer_url =18;
+    bool trusted =19;
+    bool bound_mobile =20;
+    bool bound_email =21;
+    bool bound_wx =22;
+    int64 area_id =23;
+    string birthday =24;
+    string contact_tel= 25;
+    string memo =26;
     string source =27;
-    int32 type = 28;
-    string birthday =29;
-    string memo =30;
-    string contacts = 31;
-    string level_expired_at =32;
-    bool level_alive =33; //等级可用：根据过期时间自动设置该值
-    string created_at =34;
-    string updated_at =35;
-    string deleted_at =36;
-    Level level =37;
+    int32 status =28;
+    string created_at =29;
+    string updated_at =30;
+    string deleted_at =31;
+    Level level =32;
     // @inject_tag: gorm:"many2many:customer_tags;"
-    repeated Tag tags = 38;
-    repeated VipCard vip_cards =39;
-    repeated Address addresses = 40;
+    repeated Tag tags = 33;
+    repeated VipCard vip_cards =34;
+    repeated Address addresses = 35;
 }
 
 //客户查询参数
@@ -95,22 +90,23 @@ message CustomerRequest {
     string sorting = 3;
     //以下为自定义参数
     int64 id = 4;
-    string name = 5;
-    string display_name =6;
-    string real_name =7;
-    int32 gender =8;
-    string mobile =9;
-    string email =10;
-    int32 level_id =11;
-    int32 card_id =12;
-    int32 tag_id =13;
-    int32 reg_source =14;
-    int64 area_id =15;
-    string status =16;
-    string keywords =17;
-    int32 type = 18;
-    int64 customer_id = 19;
-    repeated int64 ids = 20;
+    int32 type = 5;
+    string name = 6;
+    int32 gender =7;
+    string contact_tel =8;
+    string real_name =9;
+    int32 level_id =10;
+    int32 card_id =11;
+    int32 tag_id =12;
+    string source =13;
+    int64 area_id =14;
+    string status =15;
+    string keywords =16;
+    int64 customer_id = 17;
+    string mobile =18;
+    string email =19;
+    string wx_open_id =20;
+    repeated int64 ids = 21;
 }
 
 //

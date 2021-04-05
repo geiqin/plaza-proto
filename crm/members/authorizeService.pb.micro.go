@@ -45,14 +45,10 @@ func NewAuthorizeServiceEndpoints() []*api.Endpoint {
 type AuthorizeService interface {
 	//客户注册
 	Register(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
-	//客户登录
+	//账号登录
 	Login(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*common.TokenResponse, error)
-	//有无密码设置
-	HasPwd(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error)
-	// 创建密码(未设置密码前可用)
-	CreatePwd(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error)
-	// 修改密码
-	ModifyPwd(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error)
+	//短信登录
+	SmsLogin(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*common.TokenResponse, error)
 	//获得当前客户
 	Info(ctx context.Context, in *common.Empty, opts ...client.CallOption) (*CustomerResponse, error)
 	//安全退出
@@ -91,29 +87,9 @@ func (c *authorizeService) Login(ctx context.Context, in *AuthorizeRequest, opts
 	return out, nil
 }
 
-func (c *authorizeService) HasPwd(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error) {
-	req := c.c.NewRequest(c.name, "AuthorizeService.HasPwd", in)
-	out := new(AuthorizeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authorizeService) CreatePwd(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error) {
-	req := c.c.NewRequest(c.name, "AuthorizeService.CreatePwd", in)
-	out := new(AuthorizeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authorizeService) ModifyPwd(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error) {
-	req := c.c.NewRequest(c.name, "AuthorizeService.ModifyPwd", in)
-	out := new(AuthorizeResponse)
+func (c *authorizeService) SmsLogin(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*common.TokenResponse, error) {
+	req := c.c.NewRequest(c.name, "AuthorizeService.SmsLogin", in)
+	out := new(common.TokenResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -146,14 +122,10 @@ func (c *authorizeService) Logout(ctx context.Context, in *common.Empty, opts ..
 type AuthorizeServiceHandler interface {
 	//客户注册
 	Register(context.Context, *Customer, *CustomerResponse) error
-	//客户登录
+	//账号登录
 	Login(context.Context, *AuthorizeRequest, *common.TokenResponse) error
-	//有无密码设置
-	HasPwd(context.Context, *AuthorizeRequest, *AuthorizeResponse) error
-	// 创建密码(未设置密码前可用)
-	CreatePwd(context.Context, *AuthorizeRequest, *AuthorizeResponse) error
-	// 修改密码
-	ModifyPwd(context.Context, *AuthorizeRequest, *AuthorizeResponse) error
+	//短信登录
+	SmsLogin(context.Context, *AuthorizeRequest, *common.TokenResponse) error
 	//获得当前客户
 	Info(context.Context, *common.Empty, *CustomerResponse) error
 	//安全退出
@@ -164,9 +136,7 @@ func RegisterAuthorizeServiceHandler(s server.Server, hdlr AuthorizeServiceHandl
 	type authorizeService interface {
 		Register(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Login(ctx context.Context, in *AuthorizeRequest, out *common.TokenResponse) error
-		HasPwd(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
-		CreatePwd(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
-		ModifyPwd(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
+		SmsLogin(ctx context.Context, in *AuthorizeRequest, out *common.TokenResponse) error
 		Info(ctx context.Context, in *common.Empty, out *CustomerResponse) error
 		Logout(ctx context.Context, in *common.Empty, out *AuthorizeResponse) error
 	}
@@ -189,16 +159,8 @@ func (h *authorizeServiceHandler) Login(ctx context.Context, in *AuthorizeReques
 	return h.AuthorizeServiceHandler.Login(ctx, in, out)
 }
 
-func (h *authorizeServiceHandler) HasPwd(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error {
-	return h.AuthorizeServiceHandler.HasPwd(ctx, in, out)
-}
-
-func (h *authorizeServiceHandler) CreatePwd(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error {
-	return h.AuthorizeServiceHandler.CreatePwd(ctx, in, out)
-}
-
-func (h *authorizeServiceHandler) ModifyPwd(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error {
-	return h.AuthorizeServiceHandler.ModifyPwd(ctx, in, out)
+func (h *authorizeServiceHandler) SmsLogin(ctx context.Context, in *AuthorizeRequest, out *common.TokenResponse) error {
+	return h.AuthorizeServiceHandler.SmsLogin(ctx, in, out)
 }
 
 func (h *authorizeServiceHandler) Info(ctx context.Context, in *common.Empty, out *CustomerResponse) error {

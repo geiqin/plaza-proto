@@ -8,8 +8,8 @@ service LevelService {
     rpc Update (Level) returns (LevelResponse) {}
     rpc Delete (Level) returns (LevelResponse) {}
     rpc Get (Level) returns (LevelResponse) {}
-    rpc Search (common.BaseWhere) returns (LevelResponse) {}
-    rpc List (common.BaseWhere) returns (LevelResponse) {}
+    rpc Search (LevelRequest) returns (LevelResponse) {}
+    rpc List (LevelRequest) returns (LevelResponse) {}
 }
 
 message Level {
@@ -35,11 +35,23 @@ message Level {
     string description =20;
     string created_at =21;
     string updated_at =22;
-    // @inject_tag: gorm:"-"
-    repeated int32 ids = 23;
+
 }
 
 
+//请求参数
+message LevelRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    //以下为自定义参数
+    int32 id =3;
+    string name = 4;
+    int32 type =5;
+    bool is_pay =6;
+    bool disabled =7;
+    bool locked =8;
+    repeated int32 ids = 9;
+}
 
 //
 message LevelResponse {

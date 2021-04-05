@@ -7,14 +7,10 @@ import "customerService.proto";
 service AuthorizeService {
     //客户注册
     rpc Register (Customer) returns (CustomerResponse) {}
-    //客户登录
+    //账号登录
     rpc Login (AuthorizeRequest) returns (common.TokenResponse) {}
-    //有无密码设置
-    rpc HasPwd (AuthorizeRequest) returns (AuthorizeResponse) {}
-    // 创建密码(未设置密码前可用)
-    rpc CreatePwd (AuthorizeRequest) returns (AuthorizeResponse) {}
-    // 修改密码
-    rpc ModifyPwd (AuthorizeRequest) returns (AuthorizeResponse) {}
+    //短信登录
+    rpc SmsLogin (AuthorizeRequest) returns (common.TokenResponse) {}
     //获得当前客户
     rpc Info (common.Empty) returns (CustomerResponse) {}
     //安全退出
@@ -23,13 +19,14 @@ service AuthorizeService {
 
 message AuthorizeRequest{
     int64 customer_id =1;
-    string name = 2;
+    string username = 2;
     string mobile =3;
     string email =4;
     string password =5;
     string old_pwd = 6;
     string new_pwd = 7;
     string confirm_pwd = 8;
+    string code = 9;
 }
 
 //

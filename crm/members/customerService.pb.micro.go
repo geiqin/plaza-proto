@@ -71,12 +71,12 @@ type CustomerService interface {
 	SetTags(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//设置会员卡
 	SetCards(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
-	//修改客户手机号
-	UpdateMobile(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//获取已绑定手机用户
-	GetByMobile(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	GetByMobile(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
 	//获取已绑定邮箱用户
-	GetByEmail(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	GetByEmail(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
+	//获取已绑定微信用户
+	GetByWx(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error)
 }
 
 type customerService struct {
@@ -231,17 +231,7 @@ func (c *customerService) SetCards(ctx context.Context, in *Customer, opts ...cl
 	return out, nil
 }
 
-func (c *customerService) UpdateMobile(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
-	req := c.c.NewRequest(c.name, "CustomerService.UpdateMobile", in)
-	out := new(CustomerResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *customerService) GetByMobile(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) GetByMobile(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.GetByMobile", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -251,8 +241,18 @@ func (c *customerService) GetByMobile(ctx context.Context, in *Customer, opts ..
 	return out, nil
 }
 
-func (c *customerService) GetByEmail(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) GetByEmail(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.GetByEmail", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) GetByWx(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.GetByWx", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -292,12 +292,12 @@ type CustomerServiceHandler interface {
 	SetTags(context.Context, *Customer, *CustomerResponse) error
 	//设置会员卡
 	SetCards(context.Context, *Customer, *CustomerResponse) error
-	//修改客户手机号
-	UpdateMobile(context.Context, *Customer, *CustomerResponse) error
 	//获取已绑定手机用户
-	GetByMobile(context.Context, *Customer, *CustomerResponse) error
+	GetByMobile(context.Context, *CustomerRequest, *CustomerResponse) error
 	//获取已绑定邮箱用户
-	GetByEmail(context.Context, *Customer, *CustomerResponse) error
+	GetByEmail(context.Context, *CustomerRequest, *CustomerResponse) error
+	//获取已绑定微信用户
+	GetByWx(context.Context, *CustomerRequest, *CustomerResponse) error
 }
 
 func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler, opts ...server.HandlerOption) error {
@@ -316,9 +316,9 @@ func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler
 		Search(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
 		SetTags(ctx context.Context, in *Customer, out *CustomerResponse) error
 		SetCards(ctx context.Context, in *Customer, out *CustomerResponse) error
-		UpdateMobile(ctx context.Context, in *Customer, out *CustomerResponse) error
-		GetByMobile(ctx context.Context, in *Customer, out *CustomerResponse) error
-		GetByEmail(ctx context.Context, in *Customer, out *CustomerResponse) error
+		GetByMobile(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
+		GetByEmail(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
+		GetByWx(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error
 	}
 	type CustomerService struct {
 		customerService
@@ -387,14 +387,14 @@ func (h *customerServiceHandler) SetCards(ctx context.Context, in *Customer, out
 	return h.CustomerServiceHandler.SetCards(ctx, in, out)
 }
 
-func (h *customerServiceHandler) UpdateMobile(ctx context.Context, in *Customer, out *CustomerResponse) error {
-	return h.CustomerServiceHandler.UpdateMobile(ctx, in, out)
-}
-
-func (h *customerServiceHandler) GetByMobile(ctx context.Context, in *Customer, out *CustomerResponse) error {
+func (h *customerServiceHandler) GetByMobile(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.GetByMobile(ctx, in, out)
 }
 
-func (h *customerServiceHandler) GetByEmail(ctx context.Context, in *Customer, out *CustomerResponse) error {
+func (h *customerServiceHandler) GetByEmail(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.GetByEmail(ctx, in, out)
+}
+
+func (h *customerServiceHandler) GetByWx(ctx context.Context, in *CustomerRequest, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.GetByWx(ctx, in, out)
 }

@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/microkit/protobuf/common"
+	_ "github.com/geiqin/microkit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -47,8 +47,8 @@ type LevelService interface {
 	Update(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	Delete(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	Get(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*LevelResponse, error)
-	List(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*LevelResponse, error)
+	Search(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error)
+	List(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error)
 }
 
 type levelService struct {
@@ -103,7 +103,7 @@ func (c *levelService) Get(ctx context.Context, in *Level, opts ...client.CallOp
 	return out, nil
 }
 
-func (c *levelService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*LevelResponse, error) {
+func (c *levelService) Search(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error) {
 	req := c.c.NewRequest(c.name, "LevelService.Search", in)
 	out := new(LevelResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -113,7 +113,7 @@ func (c *levelService) Search(ctx context.Context, in *common.BaseWhere, opts ..
 	return out, nil
 }
 
-func (c *levelService) List(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*LevelResponse, error) {
+func (c *levelService) List(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error) {
 	req := c.c.NewRequest(c.name, "LevelService.List", in)
 	out := new(LevelResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -130,8 +130,8 @@ type LevelServiceHandler interface {
 	Update(context.Context, *Level, *LevelResponse) error
 	Delete(context.Context, *Level, *LevelResponse) error
 	Get(context.Context, *Level, *LevelResponse) error
-	Search(context.Context, *common.BaseWhere, *LevelResponse) error
-	List(context.Context, *common.BaseWhere, *LevelResponse) error
+	Search(context.Context, *LevelRequest, *LevelResponse) error
+	List(context.Context, *LevelRequest, *LevelResponse) error
 }
 
 func RegisterLevelServiceHandler(s server.Server, hdlr LevelServiceHandler, opts ...server.HandlerOption) error {
@@ -140,8 +140,8 @@ func RegisterLevelServiceHandler(s server.Server, hdlr LevelServiceHandler, opts
 		Update(ctx context.Context, in *Level, out *LevelResponse) error
 		Delete(ctx context.Context, in *Level, out *LevelResponse) error
 		Get(ctx context.Context, in *Level, out *LevelResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *LevelResponse) error
-		List(ctx context.Context, in *common.BaseWhere, out *LevelResponse) error
+		Search(ctx context.Context, in *LevelRequest, out *LevelResponse) error
+		List(ctx context.Context, in *LevelRequest, out *LevelResponse) error
 	}
 	type LevelService struct {
 		levelService
@@ -170,10 +170,10 @@ func (h *levelServiceHandler) Get(ctx context.Context, in *Level, out *LevelResp
 	return h.LevelServiceHandler.Get(ctx, in, out)
 }
 
-func (h *levelServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *LevelResponse) error {
+func (h *levelServiceHandler) Search(ctx context.Context, in *LevelRequest, out *LevelResponse) error {
 	return h.LevelServiceHandler.Search(ctx, in, out)
 }
 
-func (h *levelServiceHandler) List(ctx context.Context, in *common.BaseWhere, out *LevelResponse) error {
+func (h *levelServiceHandler) List(ctx context.Context, in *LevelRequest, out *LevelResponse) error {
 	return h.LevelServiceHandler.List(ctx, in, out)
 }
