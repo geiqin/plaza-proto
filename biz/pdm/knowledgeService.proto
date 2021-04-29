@@ -4,13 +4,24 @@ option go_package = ".;services";
 import "common/base.proto";
 import "itemService.proto";
 
-//知识付费商品
-service KnowledgeService {
-    rpc Create (Item) returns (KnowledgeResponse) {}
-    rpc Update (Item) returns (KnowledgeResponse) {}
-    rpc Delete (Item) returns (KnowledgeResponse) {}
-    rpc Get (Item) returns (KnowledgeResponse) {}
-    rpc Display (Item) returns (KnowledgeResponse) {}
+//课程商品
+service CourseService {
+    rpc Create (Item) returns (ItemResponse) {}
+    rpc Update (Item) returns (ItemResponse) {}
+    rpc Delete (Item) returns (ItemResponse) {}
+    rpc Get (Item) returns (ItemResponse) {}
+    rpc Display (Item) returns (ItemResponse) {}
+    rpc Search (KnowledgeRequest) returns (ItemResponse) {}
+    rpc FrontSearch (KnowledgeRequest) returns (ItemResponse) {}
+}
+
+//专栏商品
+service ColumnService {
+    rpc Create (Item) returns (ItemResponse) {}
+    rpc Update (Item) returns (ItemResponse) {}
+    rpc Delete (Item) returns (ItemResponse) {}
+    rpc Get (Item) returns (ItemResponse) {}
+    rpc Display (Item) returns (ItemResponse) {}
     rpc Search (KnowledgeRequest) returns (ItemResponse) {}
     rpc FrontSearch (KnowledgeRequest) returns (ItemResponse) {}
 }
@@ -28,15 +39,9 @@ message KnowledgeRequest{
     int32	cat_id	=9;
     string media_type =10;
     string author =11;
-
-}
-
-message KnowledgeResponse {
-    Item entity = 1;
-    common.Pager pager =2;
-    repeated Item items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    int64 course_id =12;
+    int64 column_id =13;
+    int32 sale_mode =14;
 }
 
 

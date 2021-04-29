@@ -2,26 +2,9 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 
-//美食商品扩展属性
-message FoodExtend {
-  int64	id	=1;
-  int64 item_id =2;
-}
 
-//普通商品扩展属性
-message GeneralExtend {
-  int64	id	=1;
-  int64 item_id =2;
-}
-
-//客房商品扩展属性
-message RoomExtend {
-  int64	id	=1;
-  int64 item_id =2;
-}
-
-//知识付费商品扩展属性
-message KnowledgeExtend {
+//课程商品（知识付费）
+message CourseExtend {
   int64  	id =1;
   int64  	item_id =2;
   string 	author =3;
@@ -32,8 +15,21 @@ message KnowledgeExtend {
   string 	try_media_url =8;
   string 	image_text =9;
   string 	try_image_text =10;
-  string 	download_hash =11;
+  int32 	sale_mode =11;
+  string 	download_hash =12;
 }
+
+//专栏商品（知识付费）
+message ColumnExtend {
+  int64	id	=1;
+  int64 item_id =2;
+  string 	author =3;
+  int64	column_extend_id	=4;
+  int32	course_count	=5;
+  repeated CourseExtend courses =6;
+  repeated ColumnExtend children =7;
+}
+
 
 //票劵商品扩展属性
 message TicketExtend {
@@ -75,8 +71,14 @@ message RechargeExtend {
   int32   give_score =6;
 }
 
-//虚拟商品扩展属性
-message VirtualExtend {
+//美食商品扩展属性
+message FoodExtend {
+  int64	id	=1;
+  int64 item_id =2;
+}
+
+//客房商品扩展属性
+message RoomExtend {
   int64	id	=1;
   int64 item_id =2;
 }

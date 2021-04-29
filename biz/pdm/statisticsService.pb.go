@@ -31,16 +31,16 @@ type StatsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Top      int32  `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
-	Type     string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Days     int32  `protobuf:"varint,5,opt,name=days,proto3" json:"days,omitempty"`
-	ItemId   int64  `protobuf:"varint,6,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	StartAt  string `protobuf:"bytes,7,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
-	EndAt    string `protobuf:"bytes,8,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Top      int32  `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
+	Type     string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`
+	Days     int32  `protobuf:"varint,5,opt,name=days,proto3" json:"days"`
+	ItemId   int64  `protobuf:"varint,6,opt,name=item_id,json=itemId,proto3" json:"item_id"`
+	StartAt  string `protobuf:"bytes,7,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt    string `protobuf:"bytes,8,opt,name=end_at,json=endAt,proto3" json:"end_at"`
 	// @inject_tag: gorm:"-"
-	ItemIds []int64 `protobuf:"varint,9,rep,packed,name=item_ids,json=itemIds,proto3" json:"item_ids,omitempty"`
+	ItemIds []int64 `protobuf:"varint,9,rep,packed,name=item_ids,json=itemIds,proto3" json:"item_ids"`
 }
 
 func (x *StatsRequest) Reset() {

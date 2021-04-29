@@ -11,59 +11,49 @@ import "skuService.proto";
 import "catService.proto";
 import "specService.proto";
 import "itemPresaleService.proto";
-import "goodsService.proto";
+import "extendsService.proto";
 import "itemCounterService.proto";
 
 //我的商品
 service MyItemService {
     // 查询商品
-    rpc Search (ItemWhere) returns (ItemResponse) {}
+    rpc Search (ItemRequest) returns (ItemResponse) {}
     // 获取商品信息
-    rpc Get (ItemWhere) returns (ItemResponse) {}
+    rpc Get (ItemRequest) returns (ItemResponse) {}
     // 增加商品销量
-    rpc AddSoldNum (ItemWhere) returns (ItemResponse) {}
+    rpc AddSoldNum (ItemRequest) returns (ItemResponse) {}
 }
 
 //商品
 service ItemService {
-    //创建商品
-    rpc Create (Item) returns (ItemResponse) {}
-    //修改商品
-    rpc Update (Item) returns (ItemResponse) {}
     //删除商品
-    rpc Delete (ItemWhere) returns (ItemResponse) {}
+    rpc Delete (ItemRequest) returns (ItemResponse) {}
     //商品加锁
-    rpc Lock (ItemWhere) returns (ItemResponse) {}
+    rpc Lock (ItemRequest) returns (ItemResponse) {}
     //商品解锁
-    rpc Unlock (ItemWhere) returns (ItemResponse) {}
+    rpc Unlock (ItemRequest) returns (ItemResponse) {}
     //商品上架
-    rpc Listing (ItemWhere) returns (ItemResponse) {}
+    rpc Listing (ItemRequest) returns (ItemResponse) {}
     //商品下架
-    rpc Delisting (ItemWhere) returns (ItemResponse) {}
+    rpc Delisting (ItemRequest) returns (ItemResponse) {}
     //恢复商品
-    rpc Recovery (ItemWhere) returns (ItemResponse) {}
+    rpc Recovery (ItemRequest) returns (ItemResponse) {}
     //永久删除商品
-    rpc Destroy (ItemWhere) returns (ItemResponse) {}
+    rpc Destroy (ItemRequest) returns (ItemResponse) {}
     //商品基本信息
-    rpc Get (Item) returns (ItemResponse) {}
+    rpc Get (ItemRequest) returns (ItemResponse) {}
     //商品基本信息列表(SRV专用)
-    rpc GoodsList (GoodsWhere) returns (ItemResponse) {}
-    //商品详细信息（后台专用）
-    rpc Detail (Item) returns (ItemResponse) {}
-    //商品显示详情（前端专用）
-    rpc Display (Item) returns (ItemResponse) {}
-    //商品规格详情
-    rpc SkuDetail (Item) returns (ItemResponse) {}
+    rpc GoodsList (GoodsRequest) returns (ItemResponse) {}
     //商品列表（来源基本信息）
-    rpc List (Item) returns (ItemResponse) {}
+    rpc List (ItemRequest) returns (ItemResponse) {}
     //查询商品
-    rpc Search (ItemWhere) returns (ItemResponse) {}
+    rpc Search (ItemRequest) returns (ItemResponse) {}
     //查询已删除商品
-    rpc SearchDeleted (ItemWhere) returns (ItemResponse) {}
+    rpc SearchDeleted (ItemRequest) returns (ItemResponse) {}
     // 批量删除商品
-    rpc DeleteByIds (ItemWhere) returns (ItemResponse) {}
+    rpc DeleteByIds (ItemRequest) returns (ItemResponse) {}
     // 商品排序
-    rpc Sort(ItemWhere) returns (ItemResponse) {}
+    rpc Sort(ItemRequest) returns (ItemResponse) {}
 }
 
 message Item {
@@ -108,38 +98,33 @@ message Item {
     string created_at =39;
     string updated_at =40;
     //------end attrs---------
-    FoodExtend food =41;
-    // @inject_tag: gorm:"-"
-    GeneralExtend general =42;
-    KnowledgeExtend knowledge =43;
-    RechargeExtend recharge =44;
-    RoomExtend room =45;
-    TicketExtend ticket =46;
-    VipExtend vip =47;
-    // @inject_tag: gorm:"-"
-    VirtualExtend virtual =48;
-    //------end extends ------
-    Brand brand =50;
-    ItemPresale presale = 51;
-    ItemCounter counter = 52;
-    repeated  Sku skus  =53;
-    repeated  ItemGallery galleries  =54;
-    repeated  ItemPrice prices  =55;
-    repeated  ItemRight rights  =56;
-    // @inject_tag: gorm:"-"
-    repeated  Spec specs  =57; //(详情显示专用)
+    Brand brand =41;
+    ItemPresale presale = 42;
+    ItemCounter counter = 43;
+    repeated  Sku skus  =44;
+    repeated  ItemGallery galleries  =45;
+    repeated  ItemPrice prices  =46;
+    repeated  ItemRight rights  =47;
     // @inject_tag: gorm:"many2many:item_cats;association_autoupdate:false"
-    repeated Cat cats =58;
+    repeated Cat cats =48;
     // @inject_tag: gorm:"many2many:item_tags;"
-    repeated Tag tags =59;
+    repeated Tag tags =49;
     // @inject_tag: gorm:"-"
-    ItemAdditional additional =60; //商品附加信息(显示专用)
+    repeated  Spec specs  =50; //(详情显示专用)
     // @inject_tag: gorm:"-"
-    Sku goods_sku  =61; //(特殊专用)
+    ItemAdditional additional =51; //商品附加信息(显示专用)
     // @inject_tag: gorm:"-"
-    int64 goods_sku_id =62; //(特殊专用)
+    Sku goods_sku  =52; //(特殊专用)
     // @inject_tag: gorm:"-"
-    repeated  int64 ids  =63;
+    int64 goods_sku_id =53; //(特殊专用)
+    //------extends ------
+    RechargeExtend recharge =56;
+    VipExtend vip =57;
+    CourseExtend course =58;
+    ColumnExtend column =59;
+    FoodExtend food =60;
+    RoomExtend room =61;
+    TicketExtend ticket =62;
 }
 
 //商品附加信息（显示专用）
@@ -150,14 +135,14 @@ message ItemAdditional{
     float current_member_price = 4; // 当前会员价
 }
 
-message GoodsWhere {
+message GoodsRequest {
     // @inject_tag: gorm:"-"
     repeated int64 item_ids = 1;
     // @inject_tag: gorm:"-"
     repeated int64 sku_ids = 2;
 }
 
-message ItemWhere {
+message ItemRequest {
     int32 paged =1;
     int32 page_size =2;
     string	sorting	=3;
@@ -176,13 +161,14 @@ message ItemWhere {
     bool valid = 16;// 是否有效商品
     string invite = 17;// 加密后的邀请码
     int64	id	= 18;
-    // @inject_tag: gorm:"-"
-    repeated int64 ids = 19;
+    int64 goods_sku_id =19; //(特殊专用)
     int64 sku_id = 20; //单一规格商品输入参数（在获取规格商品时使用）
     string cat_slug = 21;
     bool is_sku = 22;
     int32 sort = 23;
     int32	num	=24;
+    // @inject_tag: gorm:"-"
+    repeated int64 ids = 25;
 }
 
 message MemberGoods {

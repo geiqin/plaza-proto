@@ -31,12 +31,12 @@ type FoodRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Top      int32 `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
+	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Top      int32 `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
 	//base params
-	Id   int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Id   int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
 }
 
 func (x *FoodRequest) Reset() {
@@ -111,11 +111,11 @@ type FoodResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Item         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Item       `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Item         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Item       `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *FoodResponse) Reset() {

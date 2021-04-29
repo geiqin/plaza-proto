@@ -31,13 +31,13 @@ type ItemCounter struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ItemId       int64 `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	InitSoldNum  int32 `protobuf:"varint,3,opt,name=init_sold_num,json=initSoldNum,proto3" json:"init_sold_num,omitempty"`
-	ReviewNum    int32 `protobuf:"varint,4,opt,name=review_num,json=reviewNum,proto3" json:"review_num,omitempty"`
-	ViewCount    int32 `protobuf:"varint,5,opt,name=view_count,json=viewCount,proto3" json:"view_count,omitempty"`
-	BuyCount     int32 `protobuf:"varint,6,opt,name=buy_count,json=buyCount,proto3" json:"buy_count,omitempty"`
-	WeekBuyCount int32 `protobuf:"varint,7,opt,name=week_buy_count,json=weekBuyCount,proto3" json:"week_buy_count,omitempty"`
+	Id           int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	ItemId       int64 `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id"`
+	InitSoldNum  int32 `protobuf:"varint,3,opt,name=init_sold_num,json=initSoldNum,proto3" json:"init_sold_num"`
+	ReviewNum    int32 `protobuf:"varint,4,opt,name=review_num,json=reviewNum,proto3" json:"review_num"`
+	ViewCount    int32 `protobuf:"varint,5,opt,name=view_count,json=viewCount,proto3" json:"view_count"`
+	BuyCount     int32 `protobuf:"varint,6,opt,name=buy_count,json=buyCount,proto3" json:"buy_count"`
+	WeekBuyCount int32 `protobuf:"varint,7,opt,name=week_buy_count,json=weekBuyCount,proto3" json:"week_buy_count"`
 }
 
 func (x *ItemCounter) Reset() {
@@ -126,11 +126,11 @@ type ItemCounterResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *ItemCounter   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*ItemCounter `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error  `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info   `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *ItemCounter   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*ItemCounter `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error  `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info   `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *ItemCounterResponse) Reset() {

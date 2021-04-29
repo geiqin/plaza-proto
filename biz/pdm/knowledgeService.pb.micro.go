@@ -34,88 +34,38 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// Api Endpoints for KnowledgeService service
+// Api Endpoints for CourseService service
 
-func NewKnowledgeServiceEndpoints() []*api.Endpoint {
+func NewCourseServiceEndpoints() []*api.Endpoint {
 	return []*api.Endpoint{}
 }
 
-// Client API for KnowledgeService service
+// Client API for CourseService service
 
-type KnowledgeService interface {
-	Create(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error)
-	Update(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error)
-	Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error)
-	Get(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error)
-	Display(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error)
+type CourseService interface {
+	Create(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Update(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Display(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Search(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error)
 	FrontSearch(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error)
 }
 
-type knowledgeService struct {
+type courseService struct {
 	c    client.Client
 	name string
 }
 
-func NewKnowledgeService(name string, c client.Client) KnowledgeService {
-	return &knowledgeService{
+func NewCourseService(name string, c client.Client) CourseService {
+	return &courseService{
 		c:    c,
 		name: name,
 	}
 }
 
-func (c *knowledgeService) Create(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error) {
-	req := c.c.NewRequest(c.name, "KnowledgeService.Create", in)
-	out := new(KnowledgeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *knowledgeService) Update(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error) {
-	req := c.c.NewRequest(c.name, "KnowledgeService.Update", in)
-	out := new(KnowledgeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *knowledgeService) Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error) {
-	req := c.c.NewRequest(c.name, "KnowledgeService.Delete", in)
-	out := new(KnowledgeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *knowledgeService) Get(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error) {
-	req := c.c.NewRequest(c.name, "KnowledgeService.Get", in)
-	out := new(KnowledgeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *knowledgeService) Display(ctx context.Context, in *Item, opts ...client.CallOption) (*KnowledgeResponse, error) {
-	req := c.c.NewRequest(c.name, "KnowledgeService.Display", in)
-	out := new(KnowledgeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *knowledgeService) Search(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error) {
-	req := c.c.NewRequest(c.name, "KnowledgeService.Search", in)
+func (c *courseService) Create(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "CourseService.Create", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -124,8 +74,8 @@ func (c *knowledgeService) Search(ctx context.Context, in *KnowledgeRequest, opt
 	return out, nil
 }
 
-func (c *knowledgeService) FrontSearch(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error) {
-	req := c.c.NewRequest(c.name, "KnowledgeService.FrontSearch", in)
+func (c *courseService) Update(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "CourseService.Update", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -134,63 +84,274 @@ func (c *knowledgeService) FrontSearch(ctx context.Context, in *KnowledgeRequest
 	return out, nil
 }
 
-// Server API for KnowledgeService service
+func (c *courseService) Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "CourseService.Delete", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
 
-type KnowledgeServiceHandler interface {
-	Create(context.Context, *Item, *KnowledgeResponse) error
-	Update(context.Context, *Item, *KnowledgeResponse) error
-	Delete(context.Context, *Item, *KnowledgeResponse) error
-	Get(context.Context, *Item, *KnowledgeResponse) error
-	Display(context.Context, *Item, *KnowledgeResponse) error
+func (c *courseService) Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "CourseService.Get", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *courseService) Display(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "CourseService.Display", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *courseService) Search(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "CourseService.Search", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *courseService) FrontSearch(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "CourseService.FrontSearch", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for CourseService service
+
+type CourseServiceHandler interface {
+	Create(context.Context, *Item, *ItemResponse) error
+	Update(context.Context, *Item, *ItemResponse) error
+	Delete(context.Context, *Item, *ItemResponse) error
+	Get(context.Context, *Item, *ItemResponse) error
+	Display(context.Context, *Item, *ItemResponse) error
 	Search(context.Context, *KnowledgeRequest, *ItemResponse) error
 	FrontSearch(context.Context, *KnowledgeRequest, *ItemResponse) error
 }
 
-func RegisterKnowledgeServiceHandler(s server.Server, hdlr KnowledgeServiceHandler, opts ...server.HandlerOption) error {
-	type knowledgeService interface {
-		Create(ctx context.Context, in *Item, out *KnowledgeResponse) error
-		Update(ctx context.Context, in *Item, out *KnowledgeResponse) error
-		Delete(ctx context.Context, in *Item, out *KnowledgeResponse) error
-		Get(ctx context.Context, in *Item, out *KnowledgeResponse) error
-		Display(ctx context.Context, in *Item, out *KnowledgeResponse) error
+func RegisterCourseServiceHandler(s server.Server, hdlr CourseServiceHandler, opts ...server.HandlerOption) error {
+	type courseService interface {
+		Create(ctx context.Context, in *Item, out *ItemResponse) error
+		Update(ctx context.Context, in *Item, out *ItemResponse) error
+		Delete(ctx context.Context, in *Item, out *ItemResponse) error
+		Get(ctx context.Context, in *Item, out *ItemResponse) error
+		Display(ctx context.Context, in *Item, out *ItemResponse) error
 		Search(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error
 		FrontSearch(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error
 	}
-	type KnowledgeService struct {
-		knowledgeService
+	type CourseService struct {
+		courseService
 	}
-	h := &knowledgeServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&KnowledgeService{h}, opts...))
+	h := &courseServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&CourseService{h}, opts...))
 }
 
-type knowledgeServiceHandler struct {
-	KnowledgeServiceHandler
+type courseServiceHandler struct {
+	CourseServiceHandler
 }
 
-func (h *knowledgeServiceHandler) Create(ctx context.Context, in *Item, out *KnowledgeResponse) error {
-	return h.KnowledgeServiceHandler.Create(ctx, in, out)
+func (h *courseServiceHandler) Create(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.CourseServiceHandler.Create(ctx, in, out)
 }
 
-func (h *knowledgeServiceHandler) Update(ctx context.Context, in *Item, out *KnowledgeResponse) error {
-	return h.KnowledgeServiceHandler.Update(ctx, in, out)
+func (h *courseServiceHandler) Update(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.CourseServiceHandler.Update(ctx, in, out)
 }
 
-func (h *knowledgeServiceHandler) Delete(ctx context.Context, in *Item, out *KnowledgeResponse) error {
-	return h.KnowledgeServiceHandler.Delete(ctx, in, out)
+func (h *courseServiceHandler) Delete(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.CourseServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *knowledgeServiceHandler) Get(ctx context.Context, in *Item, out *KnowledgeResponse) error {
-	return h.KnowledgeServiceHandler.Get(ctx, in, out)
+func (h *courseServiceHandler) Get(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.CourseServiceHandler.Get(ctx, in, out)
 }
 
-func (h *knowledgeServiceHandler) Display(ctx context.Context, in *Item, out *KnowledgeResponse) error {
-	return h.KnowledgeServiceHandler.Display(ctx, in, out)
+func (h *courseServiceHandler) Display(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.CourseServiceHandler.Display(ctx, in, out)
 }
 
-func (h *knowledgeServiceHandler) Search(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error {
-	return h.KnowledgeServiceHandler.Search(ctx, in, out)
+func (h *courseServiceHandler) Search(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error {
+	return h.CourseServiceHandler.Search(ctx, in, out)
 }
 
-func (h *knowledgeServiceHandler) FrontSearch(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error {
-	return h.KnowledgeServiceHandler.FrontSearch(ctx, in, out)
+func (h *courseServiceHandler) FrontSearch(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error {
+	return h.CourseServiceHandler.FrontSearch(ctx, in, out)
+}
+
+// Api Endpoints for ColumnService service
+
+func NewColumnServiceEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
+
+// Client API for ColumnService service
+
+type ColumnService interface {
+	Create(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Update(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Display(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Search(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error)
+	FrontSearch(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error)
+}
+
+type columnService struct {
+	c    client.Client
+	name string
+}
+
+func NewColumnService(name string, c client.Client) ColumnService {
+	return &columnService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *columnService) Create(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ColumnService.Create", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *columnService) Update(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ColumnService.Update", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *columnService) Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ColumnService.Delete", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *columnService) Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ColumnService.Get", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *columnService) Display(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ColumnService.Display", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *columnService) Search(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ColumnService.Search", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *columnService) FrontSearch(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ColumnService.FrontSearch", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for ColumnService service
+
+type ColumnServiceHandler interface {
+	Create(context.Context, *Item, *ItemResponse) error
+	Update(context.Context, *Item, *ItemResponse) error
+	Delete(context.Context, *Item, *ItemResponse) error
+	Get(context.Context, *Item, *ItemResponse) error
+	Display(context.Context, *Item, *ItemResponse) error
+	Search(context.Context, *KnowledgeRequest, *ItemResponse) error
+	FrontSearch(context.Context, *KnowledgeRequest, *ItemResponse) error
+}
+
+func RegisterColumnServiceHandler(s server.Server, hdlr ColumnServiceHandler, opts ...server.HandlerOption) error {
+	type columnService interface {
+		Create(ctx context.Context, in *Item, out *ItemResponse) error
+		Update(ctx context.Context, in *Item, out *ItemResponse) error
+		Delete(ctx context.Context, in *Item, out *ItemResponse) error
+		Get(ctx context.Context, in *Item, out *ItemResponse) error
+		Display(ctx context.Context, in *Item, out *ItemResponse) error
+		Search(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error
+		FrontSearch(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error
+	}
+	type ColumnService struct {
+		columnService
+	}
+	h := &columnServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&ColumnService{h}, opts...))
+}
+
+type columnServiceHandler struct {
+	ColumnServiceHandler
+}
+
+func (h *columnServiceHandler) Create(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.ColumnServiceHandler.Create(ctx, in, out)
+}
+
+func (h *columnServiceHandler) Update(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.ColumnServiceHandler.Update(ctx, in, out)
+}
+
+func (h *columnServiceHandler) Delete(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.ColumnServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *columnServiceHandler) Get(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.ColumnServiceHandler.Get(ctx, in, out)
+}
+
+func (h *columnServiceHandler) Display(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.ColumnServiceHandler.Display(ctx, in, out)
+}
+
+func (h *columnServiceHandler) Search(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error {
+	return h.ColumnServiceHandler.Search(ctx, in, out)
+}
+
+func (h *columnServiceHandler) FrontSearch(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error {
+	return h.ColumnServiceHandler.FrontSearch(ctx, in, out)
 }
