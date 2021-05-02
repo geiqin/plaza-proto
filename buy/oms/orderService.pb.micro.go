@@ -199,8 +199,6 @@ func NewOrderServiceEndpoints() []*api.Endpoint {
 // Client API for OrderService service
 
 type OrderService interface {
-	//创建订单（管理员后台下单）
-	Create(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*BuyingResponse, error)
 	//审核订单
 	Check(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//修改价格
@@ -252,16 +250,6 @@ func NewOrderService(name string, c client.Client) OrderService {
 		c:    c,
 		name: name,
 	}
-}
-
-func (c *orderService) Create(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*BuyingResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.Create", in)
-	out := new(BuyingResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *orderService) Check(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
@@ -457,8 +445,6 @@ func (c *orderService) Settlement(ctx context.Context, in *OrderWhere, opts ...c
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
-	//创建订单（管理员后台下单）
-	Create(context.Context, *BuyingRequest, *BuyingResponse) error
 	//审核订单
 	Check(context.Context, *Order, *OrderResponse) error
 	//修改价格
@@ -502,7 +488,6 @@ type OrderServiceHandler interface {
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
 	type orderService interface {
-		Create(ctx context.Context, in *BuyingRequest, out *BuyingResponse) error
 		Check(ctx context.Context, in *Order, out *OrderResponse) error
 		ModifyPrice(ctx context.Context, in *Order, out *OrderResponse) error
 		ModifyAddress(ctx context.Context, in *Order, out *OrderResponse) error
@@ -532,10 +517,6 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 
 type orderServiceHandler struct {
 	OrderServiceHandler
-}
-
-func (h *orderServiceHandler) Create(ctx context.Context, in *BuyingRequest, out *BuyingResponse) error {
-	return h.OrderServiceHandler.Create(ctx, in, out)
 }
 
 func (h *orderServiceHandler) Check(ctx context.Context, in *Order, out *OrderResponse) error {

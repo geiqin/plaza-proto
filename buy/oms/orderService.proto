@@ -24,8 +24,6 @@ service MyOrderService {
 }
 
 service OrderService {
-    //创建订单（管理员后台下单）
-    rpc Create (BuyingRequest) returns (BuyingResponse) {}
     //审核订单
     rpc Check (Order) returns (OrderResponse) {}
     //修改价格
