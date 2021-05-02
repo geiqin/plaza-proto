@@ -26,6 +26,7 @@ message ColumnExtend {
   string 	author =3;
   int64	column_extend_id	=4;
   int32	course_count	=5;
+  // @inject_tag: gorm:"many2many:column_course_extends;"
   repeated CourseExtend courses =6;
   repeated ColumnExtend children =7;
 }

@@ -172,7 +172,7 @@ type ColumnExtend struct {
 	Author         string          `protobuf:"bytes,3,opt,name=author,proto3" json:"author"`
 	ColumnExtendId int64           `protobuf:"varint,4,opt,name=column_extend_id,json=columnExtendId,proto3" json:"column_extend_id"`
 	CourseCount    int32           `protobuf:"varint,5,opt,name=course_count,json=courseCount,proto3" json:"course_count"`
-	Courses        []*CourseExtend `protobuf:"bytes,6,rep,name=courses,proto3" json:"courses"`
+	Courses        []*CourseExtend `protobuf:"bytes,6,rep,name=courses,proto3" gorm:"many2many:column_course_extends;" json:"courses"`
 	Children       []*ColumnExtend `protobuf:"bytes,7,rep,name=children,proto3" json:"children"`
 }
 
