@@ -4,7 +4,7 @@ package services;
 option go_package =".;services";
 import "common/base.proto";
 
-//对账
+//对账(仅限服务调用)
 service CheckService {
     //支付对账
     rpc Charge (CheckRequest) returns (CheckResponse) {}

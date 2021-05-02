@@ -16,6 +16,9 @@ message PaymentRequest{
     string body = 7;
     string extra = 8;
     string channel = 9;
+    string target_user_type =10;
+    int64 target_user_id = 11;
+    bool lived =12;
 }
 
 
