@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2e6f871c-f909-492b-bebb-0c87e2f5de8f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/biz/pdm/itemCounterService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/itemCounterService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/pdm/itemGalleryService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/itemGalleryService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/pdm/itemGalleryService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/itemGalleryService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/pdm/itemSaleStatsService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/itemSaleStatsService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/pdm/itemService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/itemService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/pdm/reviewService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/reviewService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/pdm/reviewService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/reviewService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/pdm/skuSaleStatsService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/skuSaleStatsService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/pdm/skuService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/skuService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/pdm/specService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/pdm/specService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/wms/checkService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/wms/checkService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/wms/checkService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/wms/checkService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/wms/stockDetailService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/wms/stockDetailService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/wms/supplierContactService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/wms/supplierContactService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/oms/deliveryService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/oms/deliveryService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/oms/orderAddressService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/oms/orderAddressService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/oms/orderUnhandledStatsService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/oms/orderUnhandledStatsService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/oms/orderUnhandledStatsService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/oms/orderUnhandledStatsService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/oms/paymentService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/oms/paymentService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/oms/purchaseService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/oms/purchaseService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/pay/checkService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/pay/checkService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/pay/refundService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/pay/refundService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/pay/transferService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/pay/transferService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/tms/buyingService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/tms/buyingService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/tms/deliveryService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/tms/deliveryService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/tms/fypConfigService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/tms/fypConfigService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buy/tms/shipperService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/buy/tms/shipperService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/content/advertPositionService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/cms/content/advertPositionService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/content/advertService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/cms/content/advertService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/content/sheetService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/cms/content/sheetService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/content/sheetWriterService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/cms/content/sheetWriterService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/media/catService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/cms/media/catService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/media/downloadService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/cms/media/downloadService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/media/tagService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/cms/media/tagService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/fans/authService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/fans/authService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/fans/fanShareService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/fans/fanShareService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/fans/fanTrackService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/fans/fanTrackService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/members/benefitService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/members/benefitService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/members/capitalRecordService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/members/capitalRecordService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/members/cardBenefitService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/members/cardBenefitService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/members/creditRecordService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/members/creditRecordService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/members/creditService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/members/creditService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/members/tagService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/members/tagService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/points/buyingService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/points/buyingService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/points/integralRecordService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/crm/points/integralRecordService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/common/dictService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/common/dictService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/common/taxonomyService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/common/taxonomyService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/private/appNavPersonalService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/private/appNavPersonalService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/private/appNavService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/private/appNavService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/private/loginLogService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/private/loginLogService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/private/navService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/private/navService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/private/payGatewayService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/private/payGatewayService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/private/shoppingSettingService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/private/shoppingSettingService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/private/shoppingSettingService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/private/shoppingSettingService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/private/websiteSettingService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/private/websiteSettingService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sys/private/websiteSettingService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/sys/private/websiteSettingService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uim/manager/userService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/uim/manager/userService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uim/tenants/applicationService.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/uim/tenants/applicationService.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uim/tenants/authorizeService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/uim/tenants/authorizeService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uim/tenants/managementService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/uim/tenants/managementService.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uim/tenants/storeService.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/uim/tenants/storeService.pb.micro.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" path="D:\Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1v9QCBXI7ZMgmw7pbvXHhIMg17f" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="468" y="144" width="600" height="594" key="find.popup" timestamp="1625971820874">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="468" y="144" width="600" height="594" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1625971820874" />
+  </component>
+</project>
