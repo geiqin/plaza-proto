@@ -20,6 +20,8 @@ service ColumnService {
     rpc Create (Item) returns (ItemResponse) {}
     rpc Update (Item) returns (ItemResponse) {}
     rpc Delete (Item) returns (ItemResponse) {}
+    rpc AddList (KnowledgeRequest) returns (ItemResponse) {}
+    rpc RemoveList (KnowledgeRequest) returns (ItemResponse) {}
     rpc Get (Item) returns (ItemResponse) {}
     rpc Display (Item) returns (ItemResponse) {}
     rpc Search (KnowledgeRequest) returns (ItemResponse) {}
@@ -37,11 +39,17 @@ message KnowledgeRequest{
     int32	brand_id =7;
     int32	tag_id	=8;
     int32	cat_id	=9;
-    string media_type =10;
+    int32 media_type =10;
     string author =11;
     int64 course_id =12;
     int64 column_id =13;
     int32 sale_mode =14;
+    int32 stage_id =15;
+    int32 subject_id =16;
+    int32 grade_id =17;
+    int32 textbook_id =18;
+    int32 book_type =19;
+    repeated int64 course_ids =20;
 }
 
 

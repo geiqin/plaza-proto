@@ -40,7 +40,7 @@ type ItemPrice struct {
 	Price       float32 `protobuf:"fixed32,7,opt,name=price,proto3" json:"price"`
 	Discount    float32 `protobuf:"fixed32,8,opt,name=discount,proto3" json:"discount"`
 	// @inject_tag: gorm:"-"
-	Sku *Sku `protobuf:"bytes,9,opt,name=sku,proto3" json:"sku"  gorm:"-"`
+	Sku *Sku `protobuf:"bytes,9,opt,name=sku,proto3" json:"sku" gorm:"-"`
 }
 
 func (x *ItemPrice) Reset() {

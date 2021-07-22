@@ -109,7 +109,7 @@ message Item {
     repeated Cat cats =48;
     // @inject_tag: gorm:"many2many:item_tags;"
     repeated Tag tags =49;
-    // @inject_tag: gorm:"-"
+    // @inject_tag: gorm:"many2many:spec_item_indices;"
     repeated  Spec specs  =50; //(详情显示专用)
     // @inject_tag: gorm:"-"
     ItemAdditional additional =51; //商品附加信息(显示专用)

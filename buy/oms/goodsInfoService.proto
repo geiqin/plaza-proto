@@ -25,4 +25,7 @@ message GoodsInfo {
 	int32 min_buy = 20;
 	int32 buy_quota = 21;
 	bool is_sku = 22;
+	bool is_virtual = 23;
+	bool is_right = 24;
+	bool is_presale = 25;
 }

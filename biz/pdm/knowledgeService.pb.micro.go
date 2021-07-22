@@ -207,6 +207,8 @@ type ColumnService interface {
 	Create(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Update(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	AddList(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error)
+	RemoveList(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error)
 	Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Display(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Search(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error)
@@ -247,6 +249,26 @@ func (c *columnService) Update(ctx context.Context, in *Item, opts ...client.Cal
 
 func (c *columnService) Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ColumnService.Delete", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *columnService) AddList(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ColumnService.AddList", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *columnService) RemoveList(ctx context.Context, in *KnowledgeRequest, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ColumnService.RemoveList", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -301,6 +323,8 @@ type ColumnServiceHandler interface {
 	Create(context.Context, *Item, *ItemResponse) error
 	Update(context.Context, *Item, *ItemResponse) error
 	Delete(context.Context, *Item, *ItemResponse) error
+	AddList(context.Context, *KnowledgeRequest, *ItemResponse) error
+	RemoveList(context.Context, *KnowledgeRequest, *ItemResponse) error
 	Get(context.Context, *Item, *ItemResponse) error
 	Display(context.Context, *Item, *ItemResponse) error
 	Search(context.Context, *KnowledgeRequest, *ItemResponse) error
@@ -312,6 +336,8 @@ func RegisterColumnServiceHandler(s server.Server, hdlr ColumnServiceHandler, op
 		Create(ctx context.Context, in *Item, out *ItemResponse) error
 		Update(ctx context.Context, in *Item, out *ItemResponse) error
 		Delete(ctx context.Context, in *Item, out *ItemResponse) error
+		AddList(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error
+		RemoveList(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error
 		Get(ctx context.Context, in *Item, out *ItemResponse) error
 		Display(ctx context.Context, in *Item, out *ItemResponse) error
 		Search(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error
@@ -338,6 +364,14 @@ func (h *columnServiceHandler) Update(ctx context.Context, in *Item, out *ItemRe
 
 func (h *columnServiceHandler) Delete(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ColumnServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *columnServiceHandler) AddList(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error {
+	return h.ColumnServiceHandler.AddList(ctx, in, out)
+}
+
+func (h *columnServiceHandler) RemoveList(ctx context.Context, in *KnowledgeRequest, out *ItemResponse) error {
+	return h.ColumnServiceHandler.RemoveList(ctx, in, out)
 }
 
 func (h *columnServiceHandler) Get(ctx context.Context, in *Item, out *ItemResponse) error {

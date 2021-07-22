@@ -44,7 +44,7 @@ func NewPaymentServiceEndpoints() []*api.Endpoint {
 
 type PaymentService interface {
 	//选择支付方式
-	Choose(ctx context.Context, in *PayRequest, opts ...client.CallOption) (*PayResponse, error)
+	Choose(ctx context.Context, in *PayRequest, opts ...client.CallOption) (*PayMethodResponse, error)
 	//余额支付
 	Balance(ctx context.Context, in *PayRequest, opts ...client.CallOption) (*PayResponse, error)
 	//信用支付
@@ -71,9 +71,9 @@ func NewPaymentService(name string, c client.Client) PaymentService {
 	}
 }
 
-func (c *paymentService) Choose(ctx context.Context, in *PayRequest, opts ...client.CallOption) (*PayResponse, error) {
+func (c *paymentService) Choose(ctx context.Context, in *PayRequest, opts ...client.CallOption) (*PayMethodResponse, error) {
 	req := c.c.NewRequest(c.name, "PaymentService.Choose", in)
-	out := new(PayResponse)
+	out := new(PayMethodResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -145,7 +145,7 @@ func (c *paymentService) AliApp(ctx context.Context, in *PayRequest, opts ...cli
 
 type PaymentServiceHandler interface {
 	//选择支付方式
-	Choose(context.Context, *PayRequest, *PayResponse) error
+	Choose(context.Context, *PayRequest, *PayMethodResponse) error
 	//余额支付
 	Balance(context.Context, *PayRequest, *PayResponse) error
 	//信用支付
@@ -162,7 +162,7 @@ type PaymentServiceHandler interface {
 
 func RegisterPaymentServiceHandler(s server.Server, hdlr PaymentServiceHandler, opts ...server.HandlerOption) error {
 	type paymentService interface {
-		Choose(ctx context.Context, in *PayRequest, out *PayResponse) error
+		Choose(ctx context.Context, in *PayRequest, out *PayMethodResponse) error
 		Balance(ctx context.Context, in *PayRequest, out *PayResponse) error
 		Credit(ctx context.Context, in *PayRequest, out *PayResponse) error
 		WxApp(ctx context.Context, in *PayRequest, out *PayResponse) error
@@ -181,7 +181,7 @@ type paymentServiceHandler struct {
 	PaymentServiceHandler
 }
 
-func (h *paymentServiceHandler) Choose(ctx context.Context, in *PayRequest, out *PayResponse) error {
+func (h *paymentServiceHandler) Choose(ctx context.Context, in *PayRequest, out *PayMethodResponse) error {
 	return h.PaymentServiceHandler.Choose(ctx, in, out)
 }
 

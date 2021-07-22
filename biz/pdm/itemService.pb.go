@@ -83,8 +83,8 @@ type Item struct {
 	Cats []*Cat `protobuf:"bytes,48,rep,name=cats,proto3" gorm:"many2many:item_cats;association_autoupdate:false" json:"cats,omitempty"`
 	// @inject_tag: gorm:"many2many:item_tags;"
 	Tags []*Tag `protobuf:"bytes,49,rep,name=tags,proto3" gorm:"many2many:item_tags;" json:"tags,omitempty"`
-	// @inject_tag: gorm:"-"
-	Specs []*Spec `protobuf:"bytes,50,rep,name=specs,proto3" gorm:"-" json:"specs,omitempty"` //(详情显示专用)
+	// @inject_tag: gorm:"many2many:spec_item_indices;"
+	Specs []*Spec `protobuf:"bytes,50,rep,name=specs,proto3"  gorm:"many2many:spec_item_indices;" json:"specs,omitempty"` //(详情显示专用)
 	// @inject_tag: gorm:"-"
 	Additional *ItemAdditional `protobuf:"bytes,51,opt,name=additional,proto3" gorm:"-" json:"additional,omitempty"` //商品附加信息(显示专用)
 	// @inject_tag: gorm:"-"

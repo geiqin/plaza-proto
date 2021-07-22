@@ -7,7 +7,7 @@ import "orderService.proto";
 //订单支付
 service PaymentService {
   //选择支付方式
-  rpc Choose (PayRequest) returns (PayResponse) {}
+  rpc Choose (PayRequest) returns (PayMethodResponse) {}
   //余额支付
   rpc Balance (PayRequest) returns (PayResponse) {}
   //信用支付
@@ -37,11 +37,18 @@ message PayMethod {
   string route =7;
 }
 
+message PayMethodResponse {
+  Order entity = 1;
+  map<string,string> params   =2;
+  repeated PayMethod items =3;
+  common.Error error = 4;
+  common.Info info =5;
+}
+
 
 message PayResponse {
   Order entity = 1;
   map<string,string> params   =2;
-  repeated PayMethod methods =3;
   common.Error error = 4;
   common.Info info =5;
 }

@@ -17,6 +17,7 @@ message CourseExtend {
   string 	try_image_text =10;
   int32 	sale_mode =11;
   string 	download_hash =12;
+  int32 	textbook_id =13;
 }
 
 //专栏商品（知识付费）
