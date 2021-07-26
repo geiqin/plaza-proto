@@ -1,0 +1,15 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+
+message DetailKnowledge {
+    int64 id = 1;
+    int64 order_detail_id = 2;
+    string item_type = 3;
+    string media_type = 4;
+    int64 course_id = 5;
+    int64 column_id = 6;
+    int32 textbook_id = 7;
+    string created_at  = 8;
+    string updated_at  = 9;
+}

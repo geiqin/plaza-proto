@@ -1,6 +1,7 @@
 syntax = "proto3";
 package services;
 option go_package = ".;services";
+import "detailKnowledgeService.proto";
 
 message OrderDetail {
     int64 id = 1;
@@ -37,4 +38,5 @@ message OrderDetail {
     string sku_spec_desc = 32;
     string created_at  = 33;
     string updated_at  = 34;
+    DetailKnowledge knowledge =35;
 }
