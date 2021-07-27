@@ -2,6 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 import "detailKnowledgeService.proto";
+import "common/base.proto";
 
 message OrderDetail {
     int64 id = 1;
@@ -39,4 +40,23 @@ message OrderDetail {
     string created_at  = 33;
     string updated_at  = 34;
     DetailKnowledge knowledge =35;
+}
+
+message OrderDetailRequest {
+    int64 order_id = 1;
+    string order_type = 2;
+}
+
+message OrderDetailResponse {
+    OrderDetail entity = 1;
+    common.Pager pager =2;
+    repeated OrderDetail items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}
+
+
+service OrderDetailService {
+    //订单明细列表
+    rpc List (OrderDetailRequest) returns (OrderDetailResponse) {}
 }
