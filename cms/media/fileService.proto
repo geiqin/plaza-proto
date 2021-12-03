@@ -11,6 +11,7 @@ service FileService {
     rpc List (FileRequest) returns (FileResponse) {}
     rpc Search (FileRequest) returns (FileResponse) {}
     rpc SetCat (FileRequest) returns (FileResponse) {}
+    rpc CodeList (FileRequest) returns (FileResponse) {}
 }
 //我的文件
 service MyFileService {
@@ -38,7 +39,7 @@ message File {
     float size	 =14;
     int32 width	 =15;
     int32 height =16;
-    int32 length	 =17;
+    int64 length	 =17;
     int32 pixel =18;
     int64 cover_id =19;
     string cover_url =20;
@@ -47,9 +48,10 @@ message File {
     int64 user_id	=23;
     int64 customer_id	=24;
     int32 sorting =25;
-    string created_at =26;
-    string updated_at =27;
-    Cat cat =28;
+    string code =26;
+    string created_at =27;
+    string updated_at =28;
+    Cat cat =29;
 }
 
 // 修改文件请求信息
@@ -74,8 +76,11 @@ message FileRequest {
     string memo	 =17;
     int64 cover_id =18;
     string cover_url =19;
-    repeated string types =20;
-    repeated int64 ids =21;
+    string code =20;
+    string cat_slug =21;
+    repeated string types =22;
+    repeated string codes =23;
+    repeated int64 ids =24;
 }
 
 //
@@ -85,4 +90,5 @@ message FileResponse {
     repeated File items = 3;
     common.Error error = 4;
     common.Info info =5;
+    map<string,string> params =6;
 }

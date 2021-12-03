@@ -2,7 +2,6 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 import "common/base.proto";
-import "buyingService.proto";
 import "orderDetailService.proto";
 import "orderAddressService.proto";
 import "shipmentService.proto";
@@ -20,7 +19,7 @@ service MyOrderService {
     //获取订单信息(详细信息)
     rpc Display (Order) returns (OrderResponse) {}
     //查询订单
-    rpc Search (OrderWhere) returns (OrderResponse) {}
+    rpc Search (OrderRequest) returns (OrderResponse) {}
 }
 
 service OrderService {
@@ -37,9 +36,9 @@ service OrderService {
     //获取订单信息(详细信息)
     rpc Display (Order) returns (OrderResponse) {}
     //查询订单
-    rpc Search (OrderWhere) returns (OrderResponse) {}
+    rpc Search (OrderRequest) returns (OrderResponse) {}
     //按条件获取订单列表
-    rpc List (OrderWhere) returns (OrderResponse) {}
+    rpc List (OrderRequest) returns (OrderResponse) {}
     //订单备注
     rpc Remarks (Order) returns (OrderResponse) {}
     // 订单发货(快递发货)
@@ -47,7 +46,7 @@ service OrderService {
     // 订单发货(同城配送)
     rpc DeliveryShip (ShipmentRequest) returns (ShipmentResponse) {}
     // 验证提货码(上门自提)
-    rpc CodeVerify (OrderWhere) returns (OrderResponse) {}
+    rpc CodeVerify (OrderRequest) returns (OrderResponse) {}
     // 订单发货(上门自提)
     rpc FetchShip (ShipmentRequest) returns (ShipmentResponse) {}
     //订单补发货
@@ -57,52 +56,52 @@ service OrderService {
     // 获取订单赠送\使用的优惠券列表
     rpc OrderCouponList (OrderCoupon) returns (OrderCouponResponse) {}
     // 获取订单数量
-    rpc Count (OrderWhere) returns (OrderResponse) {}
+    rpc Count (OrderRequest) returns (OrderResponse) {}
     // 接单|拒绝接单
     rpc Confirm(Order) returns (OrderResponse) {}
     // 结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
     // 适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
-    rpc Settlement (OrderWhere) returns (OrderResponse) {}
+    rpc Settlement (OrderRequest) returns (OrderResponse) {}
 }
 
 message Order {
     int64  id =1;
     string order_sn  =2;
-    string order_type   =3;
-    string channel    =4;
-    int64 customer_id  =5;
-    int32 total_num =6;
-    float total_weight =7;
-    string currency =8;
-    float amount =9;
-    float before_amount =10;
-    float actual_amount =11;
-    float amount_paid =12;
-    float amount_refunded =13;
-    float express_amount  =14;
-    float discount_amount =15;
-    bool paid =16;
-    bool refunded  =17;
-    bool is_shipment =18;
-    bool is_cod =19;
-    bool invoiced =20;
-    bool modified =21;
-    bool safeguarded =22;
-    bool returnable =23;
-    string subject =24;
-    string body =25;
-    string pay_type =26;
-    int64 branch_id =27;
-    string client_ip =28;
-    int32 flag =29;
-    string memo =30;
-    string buyer_memo =31;
-    int32 cancel_id =32;
-    string cancel_reason =33;
-    string status =34;
-    string pay_status =35;
-    string refund_status =36;
-    string expire_at =38;
+    int32 order_type   =3;
+    int32 serial =4;
+    string channel    =5;
+    int64 customer_id  =6;
+    int32 total_num =7;
+    float total_weight =8;
+    string currency =9;
+    float amount =10;
+    float before_amount =11;
+    float actual_amount =12;
+    float amount_paid =13;
+    float amount_refunded =14;
+    float express_amount  =15;
+    float discount_amount =16;
+    bool paid =17;
+    bool refunded  =18;
+    bool is_shipment =19;
+    bool is_cod =20;
+    bool invoiced =21;
+    bool modified =22;
+    bool safeguarded =23;
+    bool returnable =24;
+    string subject =25;
+    string body =26;
+    int32 pay_type =27;
+    int64 branch_id =28;
+    string client_ip =29;
+    int32 flag =30;
+    string memo =31;
+    string buyer_memo =32;
+    int32 cancel_id =33;
+    string cancel_reason =34;
+    int32 status =35;
+    int32 pay_status =36;
+    string expire_at =37;
     string paid_at =39;
     string shipped_at =40;
     string signed_at =41;
@@ -115,11 +114,19 @@ message Order {
     float point_exchange_money = 48;
     int32 used_points = 49;
     bool is_distribution = 50;
-    bool is_confirmed = 51; // 商家是否已接单(商家已确认订单)
-    OrderAddress address =52;
-    repeated OrderDetail details = 53;
+    bool is_confirmed = 51;
+    int64 ext11 =52;
+    int32 ext21 =53;
+    int32 ext22 =54;
+    string ext31 =55;
+    string ext32 =56;
+    string ext33 =57;
+    OrderAddress address =58;
+    repeated OrderDetail details = 59;
     // @inject_tag: gorm:"-"
-    Customer customer = 54;
+    Customer customer = 60;
+    // @inject_tag: gorm:"-"
+    map<string,string> metas =61;
 }
 
 message Customer {
@@ -136,40 +143,43 @@ message Customer {
     string avatar_url =11;
 }
 
-message OrderWhere {
+message OrderRequest {
     int32 paged =1;
     int32 page_size =2;
-    string	sorting	=3;
-    string	keywords =4;
-    string order_sn = 5;
-    string order_type = 6;
-    string pay_type = 7;
-    bool is_shipment = 8;
-    bool is_cod = 9;
-    int64 customer_id = 10;
-    float payment = 11;
-    bool is_free = 12;
-    string status = 13;
-    string pay_status = 14;
-    string refund_status = 15;
-    string deliver_status = 16;
-    int32 branch_id = 17;
-    int32 flag = 18;
-    bool safeguarded = 19;
-    string start_at = 20;
-    string end_at = 21;
-    bool paid = 22;
+    //----------
+    int64 id = 3;
+    string order_sn = 4;
+    int32 order_type = 5;
+    int32 pay_type = 6;
+    bool is_shipment = 7;
+    bool is_cod = 8;
+    int64 customer_id = 9;
+    float payment = 10;
+    bool is_free = 11;
+    int32 status = 12;
+    int32 pay_status = 13;
+    string deliver_status = 14;
+    int32 branch_id = 15;
+    int32 flag = 16;
+    bool safeguarded = 17;
+    string start_at = 18;
+    string end_at = 19;
+    bool paid = 20;
+    string shipment_method = 21;
+    string fetch_status = 22;// 自提状态: waiting待自提, finished已自提
+    bool is_distribution = 23;
+    int64 ext11 =24;
+    int32 ext21 =25;
+    int32 ext22 =26;
+    string ext31 =27;
+    string ext32 =28;
+    string ext33 =29;
+    map<string,string> metas =30;
+    string	sorting	=31;
+    string	keywords =32;
+    string code = 33;
     // @inject_tag: gorm:"-"
-    repeated int64 ids = 23;
-    string shipment_method = 24;
-    string code = 25;
-    string fetch_status = 26;// 自提状态: waiting待自提, finished已自提
-    bool is_distribution = 27;
-    int32 receive_status = 28; // 接单状态: 0-全部,1-已接单,2-未接单
-    int64 id = 29;
-    int64 table_id = 62; // 桌台ID
-    string table_name = 63; // 桌台名称
-    string mobile = 64; // 用户手机号
+    repeated int64 ids = 34;
 }
 
 message OrderResponse {

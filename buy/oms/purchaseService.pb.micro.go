@@ -48,7 +48,7 @@ type PurchaseService interface {
 	//提交订单
 	Submit(ctx context.Context, in *PurchaseRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//充值下单
-	Recharge(ctx context.Context, in *RechargeRequest, opts ...client.CallOption) (*OrderResponse, error)
+	Recharge(ctx context.Context, in *PurchaseRequest, opts ...client.CallOption) (*OrderResponse, error)
 }
 
 type purchaseService struct {
@@ -83,7 +83,7 @@ func (c *purchaseService) Submit(ctx context.Context, in *PurchaseRequest, opts 
 	return out, nil
 }
 
-func (c *purchaseService) Recharge(ctx context.Context, in *RechargeRequest, opts ...client.CallOption) (*OrderResponse, error) {
+func (c *purchaseService) Recharge(ctx context.Context, in *PurchaseRequest, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseService.Recharge", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -101,14 +101,14 @@ type PurchaseServiceHandler interface {
 	//提交订单
 	Submit(context.Context, *PurchaseRequest, *OrderResponse) error
 	//充值下单
-	Recharge(context.Context, *RechargeRequest, *OrderResponse) error
+	Recharge(context.Context, *PurchaseRequest, *OrderResponse) error
 }
 
 func RegisterPurchaseServiceHandler(s server.Server, hdlr PurchaseServiceHandler, opts ...server.HandlerOption) error {
 	type purchaseService interface {
 		Write(ctx context.Context, in *PurchaseRequest, out *PurchaseResponse) error
 		Submit(ctx context.Context, in *PurchaseRequest, out *OrderResponse) error
-		Recharge(ctx context.Context, in *RechargeRequest, out *OrderResponse) error
+		Recharge(ctx context.Context, in *PurchaseRequest, out *OrderResponse) error
 	}
 	type PurchaseService struct {
 		purchaseService
@@ -129,6 +129,6 @@ func (h *purchaseServiceHandler) Submit(ctx context.Context, in *PurchaseRequest
 	return h.PurchaseServiceHandler.Submit(ctx, in, out)
 }
 
-func (h *purchaseServiceHandler) Recharge(ctx context.Context, in *RechargeRequest, out *OrderResponse) error {
+func (h *purchaseServiceHandler) Recharge(ctx context.Context, in *PurchaseRequest, out *OrderResponse) error {
 	return h.PurchaseServiceHandler.Recharge(ctx, in, out)
 }

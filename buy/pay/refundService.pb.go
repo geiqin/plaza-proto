@@ -32,27 +32,27 @@ type Refund struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                  int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	RefundSn            string  `protobuf:"bytes,2,opt,name=refund_sn,json=refundSn,proto3" json:"refund_sn,omitempty"`
-	TotalFee            float32 `protobuf:"fixed32,3,opt,name=total_fee,json=totalFee,proto3" json:"total_fee,omitempty"`
-	RefundFee           float32 `protobuf:"fixed32,4,opt,name=refund_fee,json=refundFee,proto3" json:"refund_fee,omitempty"`
-	Currency            string  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	ChargeId            int64   `protobuf:"varint,8,opt,name=charge_id,json=chargeId,proto3" json:"charge_id,omitempty"`
-	ChargeSn            string  `protobuf:"bytes,9,opt,name=charge_sn,json=chargeSn,proto3" json:"charge_sn,omitempty"`
-	ChargeTransactionNo string  `protobuf:"bytes,10,opt,name=charge_transaction_no,json=chargeTransactionNo,proto3" json:"charge_transaction_no,omitempty"`
-	TargetUserType      string  `protobuf:"bytes,11,opt,name=target_user_type,json=targetUserType,proto3" json:"target_user_type,omitempty"`
-	TargetUserId        int64   `protobuf:"varint,12,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
-	RefundDesc          string  `protobuf:"bytes,13,opt,name=refund_desc,json=refundDesc,proto3" json:"refund_desc,omitempty"`
-	RefundSource        string  `protobuf:"bytes,14,opt,name=refund_source,json=refundSource,proto3" json:"refund_source,omitempty"`
-	Metadata            string  `protobuf:"bytes,15,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	ReturnExtra         string  `protobuf:"bytes,16,opt,name=return_extra,json=returnExtra,proto3" json:"return_extra,omitempty"`
-	TransactionNo       string  `protobuf:"bytes,17,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no,omitempty"`
-	SafeguardId         int64   `protobuf:"varint,18,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id,omitempty"`
-	SafeguardSn         string  `protobuf:"bytes,19,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn,omitempty"`
-	Status              string  `protobuf:"bytes,20,opt,name=status,proto3" json:"status,omitempty"`
-	FinishedAt          string  `protobuf:"bytes,21,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
-	CreatedAt           string  `protobuf:"bytes,22,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt           string  `protobuf:"bytes,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id                  int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	RefundSn            string  `protobuf:"bytes,2,opt,name=refund_sn,json=refundSn,proto3" json:"refund_sn"`
+	TotalFee            float32 `protobuf:"fixed32,3,opt,name=total_fee,json=totalFee,proto3" json:"total_fee"`
+	RefundFee           float32 `protobuf:"fixed32,4,opt,name=refund_fee,json=refundFee,proto3" json:"refund_fee"`
+	Currency            string  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency"`
+	ChargeId            int64   `protobuf:"varint,8,opt,name=charge_id,json=chargeId,proto3" json:"charge_id"`
+	ChargeSn            string  `protobuf:"bytes,9,opt,name=charge_sn,json=chargeSn,proto3" json:"charge_sn"`
+	ChargeTransactionNo string  `protobuf:"bytes,10,opt,name=charge_transaction_no,json=chargeTransactionNo,proto3" json:"charge_transaction_no"`
+	TargetUserType      string  `protobuf:"bytes,11,opt,name=target_user_type,json=targetUserType,proto3" json:"target_user_type"`
+	TargetUserId        int64   `protobuf:"varint,12,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id"`
+	RefundDesc          string  `protobuf:"bytes,13,opt,name=refund_desc,json=refundDesc,proto3" json:"refund_desc"`
+	RefundSource        string  `protobuf:"bytes,14,opt,name=refund_source,json=refundSource,proto3" json:"refund_source"`
+	Metadata            string  `protobuf:"bytes,15,opt,name=metadata,proto3" json:"metadata"`
+	ReturnExtra         string  `protobuf:"bytes,16,opt,name=return_extra,json=returnExtra,proto3" json:"return_extra"`
+	TransactionNo       string  `protobuf:"bytes,17,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no"`
+	SafeguardId         int64   `protobuf:"varint,18,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id"`
+	SafeguardSn         string  `protobuf:"bytes,19,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn"`
+	Status              int32   `protobuf:"varint,20,opt,name=status,proto3" json:"status"`
+	FinishedAt          string  `protobuf:"bytes,21,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at"`
+	CreatedAt           string  `protobuf:"bytes,22,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt           string  `protobuf:"bytes,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *Refund) Reset() {
@@ -206,11 +206,11 @@ func (x *Refund) GetSafeguardSn() string {
 	return ""
 }
 
-func (x *Refund) GetStatus() string {
+func (x *Refund) GetStatus() int32 {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return 0
 }
 
 func (x *Refund) GetFinishedAt() string {
@@ -239,15 +239,15 @@ type RefundRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SafeguardId    int64   `protobuf:"varint,1,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id,omitempty"`
-	SafeguardSn    string  `protobuf:"bytes,2,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn,omitempty"`
-	RefundFee      float32 `protobuf:"fixed32,3,opt,name=refund_fee,json=refundFee,proto3" json:"refund_fee,omitempty"`
-	Currency       string  `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	OrderId        int64   `protobuf:"varint,5,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	RefundDesc     string  `protobuf:"bytes,6,opt,name=refund_desc,json=refundDesc,proto3" json:"refund_desc,omitempty"`
-	Metadata       string  `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	TargetUserType string  `protobuf:"bytes,8,opt,name=target_user_type,json=targetUserType,proto3" json:"target_user_type,omitempty"`
-	TargetUserId   int64   `protobuf:"varint,9,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
+	SafeguardId    int64   `protobuf:"varint,1,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id"`
+	SafeguardSn    string  `protobuf:"bytes,2,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn"`
+	RefundFee      float32 `protobuf:"fixed32,3,opt,name=refund_fee,json=refundFee,proto3" json:"refund_fee"`
+	Currency       string  `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency"`
+	OrderId        int64   `protobuf:"varint,5,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	RefundDesc     string  `protobuf:"bytes,6,opt,name=refund_desc,json=refundDesc,proto3" json:"refund_desc"`
+	Metadata       string  `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata"`
+	TargetUserType string  `protobuf:"bytes,8,opt,name=target_user_type,json=targetUserType,proto3" json:"target_user_type"`
+	TargetUserId   int64   `protobuf:"varint,9,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id"`
 }
 
 func (x *RefundRequest) Reset() {
@@ -351,11 +351,11 @@ type RefundResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Refund       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Refund     `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Refund       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Refund     `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *RefundResponse) Reset() {
@@ -468,7 +468,7 @@ var file_refundService_proto_rawDesc = []byte{
 	0x21, 0x0a, 0x0c, 0x73, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x5f, 0x73, 0x6e, 0x18,
 	0x13, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x73, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64,
 	0x53, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x14, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x69,
+	0x28, 0x05, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x69,
 	0x6e, 0x69, 0x73, 0x68, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x15, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x0a, 0x66, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x16, 0x20, 0x01, 0x28, 0x09, 0x52,

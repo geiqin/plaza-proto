@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package services;
+option go_package =".;services";
+import "common/base.proto";
+import "dictService.proto";
+
+service DictTypeService {
+    rpc Create (DictType) returns (DictTypeResponse) {}
+    rpc Update (DictType) returns (DictTypeResponse) {}
+    rpc Delete (DictTypeRequest) returns (DictTypeResponse) {}
+    rpc Get (DictTypeRequest) returns (DictTypeResponse) {}
+    rpc Search (DictTypeRequest) returns (DictTypeResponse) {}
+    rpc List (DictTypeRequest) returns (DictTypeResponse) {}
+    rpc Dictionary (DictTypeRequest) returns (DictTypeResponse) {}
+    rpc SetStatus (DictTypeRequest) returns (DictTypeResponse) {}
+}
+
+message DictTypeRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 id = 3;
+    repeated int32 ids = 4;
+    string keywords = 5;
+    repeated string types = 6;
+    int32 status = 7;
+    string name =8;
+    int32 level = 9;
+}
+
+//字段类型
+message DictType {
+    int32 id =1;
+    string name	=2;
+    string title=3;
+    int32 level = 4;
+    string memo = 5;
+    int32 status = 6;
+    string created_at = 7;
+    string updated_at = 8;
+    repeated Dict dicts=9;
+}
+
+message DictTypeResponse {
+    DictType entity = 1;
+    common.Pager pager =2;
+    repeated DictType items = 3;
+    common.Error error = 5;
+    common.Info info =6;
+}

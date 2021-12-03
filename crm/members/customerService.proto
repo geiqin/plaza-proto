@@ -6,16 +6,25 @@ import "vipCardService.proto";
 import "tagService.proto";
 import "levelService.proto";
 import "addressService.proto";
+import "fanService.proto";
+
 
 service CustomerService {
-    //手动添加用户
+    //通过账号注册用户
+    rpc Register (Customer) returns (CustomerResponse) {}
+    //从粉丝添加用户
+    rpc RegisterByFan (Fan) returns (CustomerResponse) {}
+    //通过手机注册用户
+    rpc RegisterByMobile (CustomerRequest) returns (CustomerResponse) {}
+    //通过邮箱注册用户
+    rpc RegisterByEmail (CustomerRequest) returns (CustomerResponse) {}
+
     rpc Create (Customer) returns (CustomerResponse) {}
     //手动添加单位用户
     rpc CreateCompany (Customer) returns (CustomerResponse) {}
     //手动修改单位用户
     rpc UpdateCompany (Customer) returns (CustomerResponse) {}
-    //从粉丝添加用户
-    rpc CreateByFan (CustomerRequest) returns (CustomerResponse) {}
+
     //修改客户
     rpc Update (Customer) returns (CustomerResponse) {}
     //删除客户
@@ -40,9 +49,8 @@ service CustomerService {
     rpc GetByMobile (CustomerRequest) returns (CustomerResponse) {}
     //获取已绑定邮箱用户(SRV专用)
     rpc GetByEmail (CustomerRequest) returns (CustomerResponse) {}
-    //获取已绑定微信用户(SRV专用)
-    rpc GetByWx (CustomerRequest) returns (CustomerResponse) {}
 }
+
 
 message Customer {
     int64 id =1;
@@ -55,14 +63,14 @@ message Customer {
     string level_expired_at =8;
     bool level_valid =9;
     float capital =10;
-    int32 growth_value =11;
-    int32 integral =12;
-    int32 traded_num =13;
-    float traded_money =14;
-    int32 review_num =15;
-    int32 favorite_num =16;
-    int64 recommender_id =17;
-    string refer_url =18;
+    float deposit =11;
+    int32 growth_value =12;
+    int32 integral =13;
+    int32 traded_num =14;
+    float traded_money =15;
+    int32 review_num =16;
+    int32 favorite_num =17;
+    int64 recommender_id =18;
     bool trusted =19;
     bool bound_mobile =20;
     bool bound_email =21;
@@ -71,16 +79,17 @@ message Customer {
     string birthday =24;
     string contact_tel= 25;
     string memo =26;
-    string source =27;
-    int32 status =28;
-    string created_at =29;
-    string updated_at =30;
-    string deleted_at =31;
-    Level level =32;
+    int32 source =27;
+    int64 by_fan_id = 28;
+    int32 status =29;
+    string created_at =30;
+    string updated_at =31;
+    string deleted_at =32;
+    Level level =33;
     // @inject_tag: gorm:"many2many:customer_tags;"
-    repeated Tag tags = 33;
-    repeated VipCard vip_cards =34;
-    repeated Address addresses = 35;
+    repeated Tag tags = 34;
+    repeated VipCard vip_cards =35;
+    repeated Address addresses = 36;
 }
 
 //客户查询参数
@@ -98,7 +107,7 @@ message CustomerRequest {
     int32 level_id =10;
     int32 card_id =11;
     int32 tag_id =12;
-    string source =13;
+    int32 source =13;
     int64 area_id =14;
     string status =15;
     string keywords =16;

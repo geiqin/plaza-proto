@@ -5,7 +5,7 @@ option go_package = ".;services";
 message GoodsInfo {
 	int64	item_id	=1;
 	string	item_sn	=2;
-	string	type	=3;
+	int32 	type	=3;
 	string	name	=4;
 	string	unit	=5;
 	int32	brand_id	=6;
@@ -28,4 +28,15 @@ message GoodsInfo {
 	bool is_virtual = 23;
 	bool is_right = 24;
 	bool is_presale = 25;
+	int32 vip_level_id =26;
+	int32 vip_keep_type =27;
+	int32 vip_keep_value =28;
+	int32 child_count =29;
+	int64 ext11 =30;
+	int32 ext21 =31;
+	int32 ext22 =32;
+	string ext31 =33;
+	string ext32 =34;
+	string ext33 =35;
+	map<string,string> metas =36;
 }

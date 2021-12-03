@@ -39,7 +39,7 @@ type VipRecordWhere struct {
 	OrderId    int64   `protobuf:"varint,6,opt,name=order_id,json=orderId,proto3" json:"order_id"`
 	OrderSn    string  `protobuf:"bytes,7,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
 	Id         int64   `protobuf:"varint,8,opt,name=id,proto3" json:"id"`
-	Ids        []int64 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids"`
+	Ids        []int64 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids" `
 }
 
 func (x *VipRecordWhere) Reset() {

@@ -31,13 +31,13 @@ type AppNavDesktopWhere struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged         int32   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize      int32   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords      string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Id            int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Ids           []int64 `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	ApplicationId int32   `protobuf:"varint,6,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	AppNavId      int32   `protobuf:"varint,7,opt,name=app_nav_id,json=appNavId,proto3" json:"app_nav_id,omitempty"`
+	Paged         int32   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize      int32   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords      string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
+	Id            int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Ids           []int64 `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids"`
+	ApplicationId int32   `protobuf:"varint,6,opt,name=application_id,json=applicationId,proto3" json:"application_id"`
+	AppNavId      int32   `protobuf:"varint,7,opt,name=app_nav_id,json=appNavId,proto3" json:"app_nav_id"`
 }
 
 func (x *AppNavDesktopWhere) Reset() {
@@ -126,13 +126,13 @@ type AppNavDesktop struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ApplicationId int32   `protobuf:"varint,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	AppNavId      int32   `protobuf:"varint,3,opt,name=app_nav_id,json=appNavId,proto3" json:"app_nav_id,omitempty"`
-	Sorting       int32   `protobuf:"varint,4,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	CreatedAt     string  `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string  `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Nav           *AppNav `protobuf:"bytes,7,opt,name=nav,proto3" json:"nav,omitempty"`
+	Id            int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	ApplicationId int32   `protobuf:"varint,2,opt,name=application_id,json=applicationId,proto3" json:"application_id"`
+	AppNavId      int32   `protobuf:"varint,3,opt,name=app_nav_id,json=appNavId,proto3" json:"app_nav_id"`
+	Sorting       int32   `protobuf:"varint,4,opt,name=sorting,proto3" json:"sorting"`
+	CreatedAt     string  `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     string  `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Nav           *AppNav `protobuf:"bytes,7,opt,name=nav,proto3" json:"nav"`
 }
 
 func (x *AppNavDesktop) Reset() {
@@ -221,11 +221,11 @@ type AppNavDesktopResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *AppNavDesktop   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*AppNavDesktop `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *AppNavDesktop   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*AppNavDesktop `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *AppNavDesktopResponse) Reset() {

@@ -6,7 +6,7 @@ import "orderService.proto";
 
 service ExportService {
     // 导出订单
-    rpc OrderExport(OrderWhere) returns (ExportResponse) {}
+    rpc OrderExport(OrderRequest) returns (ExportResponse) {}
 }
 
 message Export {

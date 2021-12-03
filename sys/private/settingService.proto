@@ -5,27 +5,29 @@ import "common/base.proto";
 
 service SettingService {
     rpc Get (Setting) returns (SettingResponse) {}
-    rpc Search (common.BaseWhere) returns (SettingResponse) {}
+    rpc Search (SettingRequest) returns (SettingResponse) {}
     rpc List (Setting) returns (SettingResponse) {}
     rpc Tree (Setting) returns (SettingResponse) {}
 }
 
-// 导航
+// 设置
 message Setting {
     int32 id =1;
     string name	 =3;
-    string title =4;
+    string type =4;
+    map<string,string> content = 5;
 }
 
 
-message SettingWhere {
+message SettingRequest {
     int32 paged = 1;
     int32 page_size = 2;
     string sorting = 3;
     //base params
     int64 id = 4;
     string name = 5;
-    int64 setting_id =6;
+    string type =6;
+    map<string,string> content = 7;
     repeated int64 ids = 8;
 }
 

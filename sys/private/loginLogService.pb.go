@@ -32,16 +32,16 @@ type LoginLog struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	AccessKey  string `protobuf:"bytes,2,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
-	Mode       string `protobuf:"bytes,3,opt,name=mode,proto3" json:"mode,omitempty"`
-	CustomerId int64  `protobuf:"varint,4,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	UserId     int64  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Browser    string `protobuf:"bytes,6,opt,name=browser,proto3" json:"browser,omitempty"`
-	Version    string `protobuf:"bytes,7,opt,name=version,proto3" json:"version,omitempty"`
-	Ip         string `protobuf:"bytes,8,opt,name=ip,proto3" json:"ip,omitempty"`
-	CreatedAt  string `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt  string `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id         int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	AccessKey  string `protobuf:"bytes,2,opt,name=access_key,json=accessKey,proto3" json:"access_key"`
+	Mode       string `protobuf:"bytes,3,opt,name=mode,proto3" json:"mode"`
+	CustomerId int64  `protobuf:"varint,4,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	UserId     int64  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	Browser    string `protobuf:"bytes,6,opt,name=browser,proto3" json:"browser"`
+	Version    string `protobuf:"bytes,7,opt,name=version,proto3" json:"version"`
+	Ip         string `protobuf:"bytes,8,opt,name=ip,proto3" json:"ip"`
+	CreatedAt  string `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt  string `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *LoginLog) Reset() {
@@ -151,13 +151,13 @@ type LoginLogWhere struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//base params
-	Id   int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	Ids  []int64 `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id   int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Name string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
+	Ids  []int64 `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *LoginLogWhere) Reset() {
@@ -240,11 +240,11 @@ type LoginLogResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *LoginLog     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*LoginLog   `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *LoginLog     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*LoginLog   `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *LoginLogResponse) Reset() {

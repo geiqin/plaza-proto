@@ -44,7 +44,7 @@ func NewExportServiceEndpoints() []*api.Endpoint {
 
 type ExportService interface {
 	// 导出订单
-	OrderExport(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*ExportResponse, error)
+	OrderExport(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*ExportResponse, error)
 }
 
 type exportService struct {
@@ -59,7 +59,7 @@ func NewExportService(name string, c client.Client) ExportService {
 	}
 }
 
-func (c *exportService) OrderExport(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*ExportResponse, error) {
+func (c *exportService) OrderExport(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*ExportResponse, error) {
 	req := c.c.NewRequest(c.name, "ExportService.OrderExport", in)
 	out := new(ExportResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -73,12 +73,12 @@ func (c *exportService) OrderExport(ctx context.Context, in *OrderWhere, opts ..
 
 type ExportServiceHandler interface {
 	// 导出订单
-	OrderExport(context.Context, *OrderWhere, *ExportResponse) error
+	OrderExport(context.Context, *OrderRequest, *ExportResponse) error
 }
 
 func RegisterExportServiceHandler(s server.Server, hdlr ExportServiceHandler, opts ...server.HandlerOption) error {
 	type exportService interface {
-		OrderExport(ctx context.Context, in *OrderWhere, out *ExportResponse) error
+		OrderExport(ctx context.Context, in *OrderRequest, out *ExportResponse) error
 	}
 	type ExportService struct {
 		exportService
@@ -91,6 +91,6 @@ type exportServiceHandler struct {
 	ExportServiceHandler
 }
 
-func (h *exportServiceHandler) OrderExport(ctx context.Context, in *OrderWhere, out *ExportResponse) error {
+func (h *exportServiceHandler) OrderExport(ctx context.Context, in *OrderRequest, out *ExportResponse) error {
 	return h.ExportServiceHandler.OrderExport(ctx, in, out)
 }

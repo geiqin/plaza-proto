@@ -7,8 +7,9 @@ message ArticleGallery {
     int64 article_id = 2;
     int64 media_id = 3;
     string media_url = 4;
-    int32 sorting = 5;
-    bool defaulted = 6;
-    string created_at = 7;
-    string updated_at = 8;
+    string media_type = 5;
+    int32 sorting = 6;
+    bool defaulted = 7;
+    string created_at = 8;
+    string updated_at = 9;
 }

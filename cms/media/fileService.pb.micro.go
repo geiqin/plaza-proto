@@ -49,6 +49,7 @@ type FileService interface {
 	List(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error)
 	Search(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error)
 	SetCat(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error)
+	CodeList(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error)
 }
 
 type fileService struct {
@@ -123,6 +124,16 @@ func (c *fileService) SetCat(ctx context.Context, in *FileRequest, opts ...clien
 	return out, nil
 }
 
+func (c *fileService) CodeList(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error) {
+	req := c.c.NewRequest(c.name, "FileService.CodeList", in)
+	out := new(FileResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for FileService service
 
 type FileServiceHandler interface {
@@ -132,6 +143,7 @@ type FileServiceHandler interface {
 	List(context.Context, *FileRequest, *FileResponse) error
 	Search(context.Context, *FileRequest, *FileResponse) error
 	SetCat(context.Context, *FileRequest, *FileResponse) error
+	CodeList(context.Context, *FileRequest, *FileResponse) error
 }
 
 func RegisterFileServiceHandler(s server.Server, hdlr FileServiceHandler, opts ...server.HandlerOption) error {
@@ -142,6 +154,7 @@ func RegisterFileServiceHandler(s server.Server, hdlr FileServiceHandler, opts .
 		List(ctx context.Context, in *FileRequest, out *FileResponse) error
 		Search(ctx context.Context, in *FileRequest, out *FileResponse) error
 		SetCat(ctx context.Context, in *FileRequest, out *FileResponse) error
+		CodeList(ctx context.Context, in *FileRequest, out *FileResponse) error
 	}
 	type FileService struct {
 		fileService
@@ -176,6 +189,10 @@ func (h *fileServiceHandler) Search(ctx context.Context, in *FileRequest, out *F
 
 func (h *fileServiceHandler) SetCat(ctx context.Context, in *FileRequest, out *FileResponse) error {
 	return h.FileServiceHandler.SetCat(ctx, in, out)
+}
+
+func (h *fileServiceHandler) CodeList(ctx context.Context, in *FileRequest, out *FileResponse) error {
+	return h.FileServiceHandler.CodeList(ctx, in, out)
 }
 
 // Api Endpoints for MyFileService service

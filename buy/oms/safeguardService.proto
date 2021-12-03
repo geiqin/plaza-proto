@@ -50,7 +50,7 @@ service SafeguardService {
 message Safeguard {
     int64 id = 1;
     int64 order_id = 2;
-    string type = 3;
+    int32 type = 3;
     string safeguard_sn = 4;
     int64 customer_id = 5;
     int64 exchange_delivery_id = 6;
@@ -60,15 +60,15 @@ message Safeguard {
     string mobile = 10;
     bool refunded = 11;
     float refund_fee = 12;
-    string refund_method = 13;
-    string check_status = 142;
-    string status = 15;
+    int32 refund_method = 13;
+    int32 check_status = 142;
+    int32 status = 15;
     string reason = 16;
     string description = 17;
     int64 op_id = 18;
     string op_name = 19;
     string memo = 20;
-    string goods_status = 21;
+    int32 goods_status = 21;
     string refunded_at = 22;
     string metadata = 23;
     string checked_at = 24;
@@ -141,13 +141,13 @@ message SafeguardWhere {
     repeated int64 ids = 5;
     int64 order_id = 6;
     int64 customer_id = 7;
-    string type = 8;
+    int32 type = 8;
     string keywords_type = 9;
     string keywords = 10;
     int64 order_detail_id = 11;
     // @inject_tag: gorm:"-"
     repeated int64 order_detail_ids = 12;
-    string status = 13;
+    int32 status = 13;
     string safeguard_sn = 14;
 }
 

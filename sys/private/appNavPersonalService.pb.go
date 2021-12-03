@@ -31,14 +31,14 @@ type AppNavPersonal struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	StoreId   int64   `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
-	UserId    int64   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	AppNavId  int32   `protobuf:"varint,4,opt,name=app_nav_id,json=appNavId,proto3" json:"app_nav_id,omitempty"`
-	Sorting   int32   `protobuf:"varint,5,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	CreatedAt string  `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt string  `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Nav       *AppNav `protobuf:"bytes,8,opt,name=nav,proto3" json:"nav,omitempty"`
+	Id        int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	StoreId   int64   `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id"`
+	UserId    int64   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	AppNavId  int32   `protobuf:"varint,4,opt,name=app_nav_id,json=appNavId,proto3" json:"app_nav_id"`
+	Sorting   int32   `protobuf:"varint,5,opt,name=sorting,proto3" json:"sorting"`
+	CreatedAt string  `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt string  `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Nav       *AppNav `protobuf:"bytes,8,opt,name=nav,proto3" json:"nav"`
 }
 
 func (x *AppNavPersonal) Reset() {
@@ -134,15 +134,15 @@ type AppNavPersonalWhere struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged     int32   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int32   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords  string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Ids       []int64 `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	StoreId   int64   `protobuf:"varint,6,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
-	UserId    int64   `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	AppNavId  int32   `protobuf:"varint,8,opt,name=app_nav_id,json=appNavId,proto3" json:"app_nav_id,omitempty"`
-	AppNavIds []int32 `protobuf:"varint,9,rep,packed,name=app_nav_ids,json=appNavIds,proto3" json:"app_nav_ids,omitempty"`
+	Paged     int32   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize  int32   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords  string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
+	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Ids       []int64 `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids"`
+	StoreId   int64   `protobuf:"varint,6,opt,name=store_id,json=storeId,proto3" json:"store_id"`
+	UserId    int64   `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	AppNavId  int32   `protobuf:"varint,8,opt,name=app_nav_id,json=appNavId,proto3" json:"app_nav_id"`
+	AppNavIds []int32 `protobuf:"varint,9,rep,packed,name=app_nav_ids,json=appNavIds,proto3" json:"app_nav_ids"`
 }
 
 func (x *AppNavPersonalWhere) Reset() {
@@ -245,11 +245,11 @@ type AppNavPersonalResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *AppNavPersonal   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*AppNavPersonal `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *AppNavPersonal   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*AppNavPersonal `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *AppNavPersonalResponse) Reset() {

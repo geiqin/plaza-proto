@@ -18,8 +18,9 @@ message PayGateway {
     string	channel	=2;
     string	mode	=3;
     string	configs	=4;
-    int64	user_id	=5;
-    bool	disabled	=6;
+    int32 version =5;
+    string	private_key	=6;
+    bool	disabled	=7;
 }
 
 

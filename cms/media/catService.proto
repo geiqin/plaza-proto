@@ -18,17 +18,17 @@ service CatService {
 message Cat {
     int32 id =1;
     string name =2;
-    string type =3;
-    string taxonomy =4;
-    string path =5;
-    int32 depth =6;
-    int32 total_num	=7;
-    float total_size =8;
-    int32 cat_id=9; //父亲节点
-    int64 user_id =10;
-    repeated Cat children =11;
-    //gorm:"-"
-    repeated int32 ids =12;
+    string slug =3;
+    string type =4;
+    string taxonomy =5;
+    string path =6;
+    int32 depth =7;
+    int32 total_num	=8;
+    float total_size =9;
+    int32 cat_id=10;
+    int64 user_id =11;
+    repeated Cat children =12;
+
 }
 
 message CatRequest {
@@ -38,10 +38,12 @@ message CatRequest {
     //file params
     int64 id =4;
     string name =5;
-    string type =6;
-    string taxonomy	 =7;
-    repeated string types =8;
-    repeated int64 ids =9;
+    string slug =6;
+    string type =7;
+    string taxonomy	 =8;
+    int32 cat_id=9;
+    repeated string types =10;
+    repeated int64 ids =11;
 }
 
 //

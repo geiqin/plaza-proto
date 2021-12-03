@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -43,10 +43,9 @@ func NewFeedbackServiceEndpoints() []*api.Endpoint {
 // Client API for FeedbackService service
 
 type FeedbackService interface {
-	Get(ctx context.Context, in *Feedback, opts ...client.CallOption) (*FeedbackResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*FeedbackResponse, error)
-	List(ctx context.Context, in *Feedback, opts ...client.CallOption) (*FeedbackResponse, error)
-	Tree(ctx context.Context, in *Feedback, opts ...client.CallOption) (*FeedbackResponse, error)
+	Search(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error)
+	List(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error)
+	Get(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error)
 }
 
 type feedbackService struct {
@@ -61,17 +60,7 @@ func NewFeedbackService(name string, c client.Client) FeedbackService {
 	}
 }
 
-func (c *feedbackService) Get(ctx context.Context, in *Feedback, opts ...client.CallOption) (*FeedbackResponse, error) {
-	req := c.c.NewRequest(c.name, "FeedbackService.Get", in)
-	out := new(FeedbackResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *feedbackService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*FeedbackResponse, error) {
+func (c *feedbackService) Search(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error) {
 	req := c.c.NewRequest(c.name, "FeedbackService.Search", in)
 	out := new(FeedbackResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -81,7 +70,7 @@ func (c *feedbackService) Search(ctx context.Context, in *common.BaseWhere, opts
 	return out, nil
 }
 
-func (c *feedbackService) List(ctx context.Context, in *Feedback, opts ...client.CallOption) (*FeedbackResponse, error) {
+func (c *feedbackService) List(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error) {
 	req := c.c.NewRequest(c.name, "FeedbackService.List", in)
 	out := new(FeedbackResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -91,8 +80,8 @@ func (c *feedbackService) List(ctx context.Context, in *Feedback, opts ...client
 	return out, nil
 }
 
-func (c *feedbackService) Tree(ctx context.Context, in *Feedback, opts ...client.CallOption) (*FeedbackResponse, error) {
-	req := c.c.NewRequest(c.name, "FeedbackService.Tree", in)
+func (c *feedbackService) Get(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error) {
+	req := c.c.NewRequest(c.name, "FeedbackService.Get", in)
 	out := new(FeedbackResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -104,18 +93,16 @@ func (c *feedbackService) Tree(ctx context.Context, in *Feedback, opts ...client
 // Server API for FeedbackService service
 
 type FeedbackServiceHandler interface {
-	Get(context.Context, *Feedback, *FeedbackResponse) error
-	Search(context.Context, *common.BaseWhere, *FeedbackResponse) error
-	List(context.Context, *Feedback, *FeedbackResponse) error
-	Tree(context.Context, *Feedback, *FeedbackResponse) error
+	Search(context.Context, *FeedbackWhere, *FeedbackResponse) error
+	List(context.Context, *FeedbackWhere, *FeedbackResponse) error
+	Get(context.Context, *FeedbackWhere, *FeedbackResponse) error
 }
 
 func RegisterFeedbackServiceHandler(s server.Server, hdlr FeedbackServiceHandler, opts ...server.HandlerOption) error {
 	type feedbackService interface {
-		Get(ctx context.Context, in *Feedback, out *FeedbackResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *FeedbackResponse) error
-		List(ctx context.Context, in *Feedback, out *FeedbackResponse) error
-		Tree(ctx context.Context, in *Feedback, out *FeedbackResponse) error
+		Search(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error
+		List(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error
+		Get(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error
 	}
 	type FeedbackService struct {
 		feedbackService
@@ -128,18 +115,124 @@ type feedbackServiceHandler struct {
 	FeedbackServiceHandler
 }
 
-func (h *feedbackServiceHandler) Get(ctx context.Context, in *Feedback, out *FeedbackResponse) error {
-	return h.FeedbackServiceHandler.Get(ctx, in, out)
-}
-
-func (h *feedbackServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *FeedbackResponse) error {
+func (h *feedbackServiceHandler) Search(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error {
 	return h.FeedbackServiceHandler.Search(ctx, in, out)
 }
 
-func (h *feedbackServiceHandler) List(ctx context.Context, in *Feedback, out *FeedbackResponse) error {
+func (h *feedbackServiceHandler) List(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error {
 	return h.FeedbackServiceHandler.List(ctx, in, out)
 }
 
-func (h *feedbackServiceHandler) Tree(ctx context.Context, in *Feedback, out *FeedbackResponse) error {
-	return h.FeedbackServiceHandler.Tree(ctx, in, out)
+func (h *feedbackServiceHandler) Get(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error {
+	return h.FeedbackServiceHandler.Get(ctx, in, out)
+}
+
+// Api Endpoints for FrontFeedbackService service
+
+func NewFrontFeedbackServiceEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
+
+// Client API for FrontFeedbackService service
+
+type FrontFeedbackService interface {
+	Search(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error)
+	List(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error)
+	Get(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error)
+	Submit(ctx context.Context, in *Feedback, opts ...client.CallOption) (*FeedbackResponse, error)
+}
+
+type frontFeedbackService struct {
+	c    client.Client
+	name string
+}
+
+func NewFrontFeedbackService(name string, c client.Client) FrontFeedbackService {
+	return &frontFeedbackService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *frontFeedbackService) Search(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontFeedbackService.Search", in)
+	out := new(FeedbackResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontFeedbackService) List(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontFeedbackService.List", in)
+	out := new(FeedbackResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontFeedbackService) Get(ctx context.Context, in *FeedbackWhere, opts ...client.CallOption) (*FeedbackResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontFeedbackService.Get", in)
+	out := new(FeedbackResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontFeedbackService) Submit(ctx context.Context, in *Feedback, opts ...client.CallOption) (*FeedbackResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontFeedbackService.Submit", in)
+	out := new(FeedbackResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for FrontFeedbackService service
+
+type FrontFeedbackServiceHandler interface {
+	Search(context.Context, *FeedbackWhere, *FeedbackResponse) error
+	List(context.Context, *FeedbackWhere, *FeedbackResponse) error
+	Get(context.Context, *FeedbackWhere, *FeedbackResponse) error
+	Submit(context.Context, *Feedback, *FeedbackResponse) error
+}
+
+func RegisterFrontFeedbackServiceHandler(s server.Server, hdlr FrontFeedbackServiceHandler, opts ...server.HandlerOption) error {
+	type frontFeedbackService interface {
+		Search(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error
+		List(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error
+		Get(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error
+		Submit(ctx context.Context, in *Feedback, out *FeedbackResponse) error
+	}
+	type FrontFeedbackService struct {
+		frontFeedbackService
+	}
+	h := &frontFeedbackServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&FrontFeedbackService{h}, opts...))
+}
+
+type frontFeedbackServiceHandler struct {
+	FrontFeedbackServiceHandler
+}
+
+func (h *frontFeedbackServiceHandler) Search(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error {
+	return h.FrontFeedbackServiceHandler.Search(ctx, in, out)
+}
+
+func (h *frontFeedbackServiceHandler) List(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error {
+	return h.FrontFeedbackServiceHandler.List(ctx, in, out)
+}
+
+func (h *frontFeedbackServiceHandler) Get(ctx context.Context, in *FeedbackWhere, out *FeedbackResponse) error {
+	return h.FrontFeedbackServiceHandler.Get(ctx, in, out)
+}
+
+func (h *frontFeedbackServiceHandler) Submit(ctx context.Context, in *Feedback, out *FeedbackResponse) error {
+	return h.FrontFeedbackServiceHandler.Submit(ctx, in, out)
 }

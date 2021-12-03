@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -44,7 +44,7 @@ func NewSettingServiceEndpoints() []*api.Endpoint {
 
 type SettingService interface {
 	Get(ctx context.Context, in *Setting, opts ...client.CallOption) (*SettingResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*SettingResponse, error)
+	Search(ctx context.Context, in *SettingRequest, opts ...client.CallOption) (*SettingResponse, error)
 	List(ctx context.Context, in *Setting, opts ...client.CallOption) (*SettingResponse, error)
 	Tree(ctx context.Context, in *Setting, opts ...client.CallOption) (*SettingResponse, error)
 }
@@ -71,7 +71,7 @@ func (c *settingService) Get(ctx context.Context, in *Setting, opts ...client.Ca
 	return out, nil
 }
 
-func (c *settingService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*SettingResponse, error) {
+func (c *settingService) Search(ctx context.Context, in *SettingRequest, opts ...client.CallOption) (*SettingResponse, error) {
 	req := c.c.NewRequest(c.name, "SettingService.Search", in)
 	out := new(SettingResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -105,7 +105,7 @@ func (c *settingService) Tree(ctx context.Context, in *Setting, opts ...client.C
 
 type SettingServiceHandler interface {
 	Get(context.Context, *Setting, *SettingResponse) error
-	Search(context.Context, *common.BaseWhere, *SettingResponse) error
+	Search(context.Context, *SettingRequest, *SettingResponse) error
 	List(context.Context, *Setting, *SettingResponse) error
 	Tree(context.Context, *Setting, *SettingResponse) error
 }
@@ -113,7 +113,7 @@ type SettingServiceHandler interface {
 func RegisterSettingServiceHandler(s server.Server, hdlr SettingServiceHandler, opts ...server.HandlerOption) error {
 	type settingService interface {
 		Get(ctx context.Context, in *Setting, out *SettingResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *SettingResponse) error
+		Search(ctx context.Context, in *SettingRequest, out *SettingResponse) error
 		List(ctx context.Context, in *Setting, out *SettingResponse) error
 		Tree(ctx context.Context, in *Setting, out *SettingResponse) error
 	}
@@ -132,7 +132,7 @@ func (h *settingServiceHandler) Get(ctx context.Context, in *Setting, out *Setti
 	return h.SettingServiceHandler.Get(ctx, in, out)
 }
 
-func (h *settingServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *SettingResponse) error {
+func (h *settingServiceHandler) Search(ctx context.Context, in *SettingRequest, out *SettingResponse) error {
 	return h.SettingServiceHandler.Search(ctx, in, out)
 }
 

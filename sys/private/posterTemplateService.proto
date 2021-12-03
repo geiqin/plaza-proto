@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package services;
+option go_package =".;services";
+import "common/base.proto";
+import "posterPositionService.proto";
+
+service PosterTemplateService {
+    rpc Create (PosterTemplate) returns (PosterTemplateResponse) {}
+    rpc Update (PosterTemplate) returns (PosterTemplateResponse) {}
+    rpc Delete (PosterTemplate) returns (PosterTemplateResponse) {}
+    rpc Get (PosterTemplate) returns (PosterTemplateResponse) {}
+    rpc Search (PosterTemplateRequest) returns (PosterTemplateResponse) {}
+}
+
+//海报信息
+message PosterTemplate {
+    int32 id =1;
+    string title =3;
+    int32 poster_type	=4;
+    int32 width	=5;
+    int32 height	=6;
+    string memo	=7;
+    string created_at = 8;
+    string updated_at = 9;
+    repeated PosterPosition positions =10;
+}
+
+
+message PosterTemplateRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int64 id = 3;
+    string title = 4;
+    int32 poster_type = 5;
+    string memo = 6;
+}
+
+
+//
+message PosterTemplateResponse {
+    PosterTemplate entity = 1;
+    common.Pager pager =2;
+    repeated PosterTemplate items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}

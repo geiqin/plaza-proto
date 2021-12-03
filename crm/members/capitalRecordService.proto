@@ -2,23 +2,17 @@ syntax = "proto3";
 package services;
 option go_package =".;services";
 import "common/base.proto";
-
-service MyCapitalRecordService {
-  //获得我的余额记录信息
-  rpc Get (CapitalRecord) returns (CapitalRecordResponse) {}
-  //查询我的余额记录信息
-  rpc Search (CapitalRecordWhere) returns (CapitalRecordResponse) {}
-}
+import "customerService.proto";
 
 service CapitalRecordService {
   //增加余额（增加）
   rpc Income (CapitalRecord) returns (CapitalRecordResponse) {}
-  //消费余额(支出)
+  //扣除余额(支出)
   rpc Expend (CapitalRecord) returns (CapitalRecordResponse) {}
   //获得余额记录信息
   rpc Get (CapitalRecord) returns (CapitalRecordResponse) {}
   //查询余额记录信息
-  rpc Search (CapitalRecordWhere) returns (CapitalRecordResponse) {}
+  rpc Search (CapitalRecordRequest) returns (CapitalRecordResponse) {}
 }
 
 message CapitalRecord {
@@ -27,30 +21,33 @@ message CapitalRecord {
   string direction =3;
   float amount =4;
   float balance =5;
-  int32 type =6;
+  int32 source =6;
   int64 order_id =7;
   string order_sn =8;
   string memo =9;
   string created_at =10;
   string updated_at =11;
-  string display_name =12;//昵称
-  string mobile =13; //手机号
-
+  Customer customer =12;
 }
 
 
 //查询参数
-message CapitalRecordWhere {
+message CapitalRecordRequest {
   int32 paged = 1;
   int32 page_size = 2;
   //以下为自定义参数
   int64 customer_id =3;
-  string mobile =4;
-  string order_sn =5;
-  string start_date = 6;
-  string end_date = 7;
-  int32 type =8;
+  int32 direction =4;
+  float amount =5;
+  float balance =6;
+  int32 source =7;
+  int64 order_id =8;
+  string order_sn =9;
+  string memo =10;
+  string start_date = 11;
+  string end_date = 12;
 }
+
 
 
 //

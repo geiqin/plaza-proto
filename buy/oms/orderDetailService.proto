@@ -1,7 +1,6 @@
 syntax = "proto3";
 package services;
 option go_package = ".;services";
-import "detailKnowledgeService.proto";
 import "common/base.proto";
 
 message OrderDetail {
@@ -9,7 +8,7 @@ message OrderDetail {
     int64 order_id = 2;
     int64 item_id = 3;
     string item_sn = 4;
-    string item_type = 5;
+    int32 item_type = 5;
     int64 sku_id = 6;
     string sku_sn = 7;
     int64 thumb_id = 8;
@@ -33,13 +32,24 @@ message OrderDetail {
     bool is_virtual = 26;
     bool is_right = 27;
     bool is_presale = 28;
-    string ship_status = 29;
-    string refund_status = 30;
+    int32 ship_status = 29;
+    int32 refund_status = 30;
     int64  present_id = 31;
     string sku_spec_desc = 32;
-    string created_at  = 33;
-    string updated_at  = 34;
-    DetailKnowledge knowledge =35;
+    int32 vip_level_id =33;
+    int32 vip_keep_type =34;
+    int32 vip_keep_value =35;
+    int32 child_count =36;
+    int64 ext11 =37;
+    int32 ext21 =38;
+    int32 ext22 =39;
+    string ext31 =40;
+    string ext32 =41;
+    string ext33 =42;
+    string created_at  = 43;
+    string updated_at  = 44;
+    // @inject_tag: gorm:"-"
+    map<string,string> metas =45;
 }
 
 message OrderDetailRequest {

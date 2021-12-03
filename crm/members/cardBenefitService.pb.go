@@ -39,7 +39,7 @@ type CardBenefit struct {
 	UpdatedAt string   `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	Benefit   *Benefit `protobuf:"bytes,7,opt,name=benefit,proto3" json:"benefit"`
 	// @inject_tag: gorm:"-"
-	Ids []int32 `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids" gorm:"-"`
+	Ids []int32 `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids"  gorm:"-"`
 }
 
 func (x *CardBenefit) Reset() {

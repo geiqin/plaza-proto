@@ -1,0 +1,38 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+
+//商品关系
+service ItemRelationService {
+    rpc Add  (ItemRelationRequest) returns (ItemRelationResponse) {}
+    rpc Remove  (ItemRelationRequest) returns (ItemRelationResponse) {}
+}
+
+
+message ItemRelation{
+    int64 id = 1;
+    int64 item_id =2;
+    int64 child_item_id =3;
+}
+
+message ItemRelationRequest{
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //base params
+    int64 id = 4;
+    int64 item_id =5;
+    int64 child_item_id =6;
+    repeated int64 ids =7;
+}
+
+
+message ItemRelationResponse {
+    ItemRelation entity = 1;
+    common.Pager pager =2;
+    repeated ItemRelation items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}
+

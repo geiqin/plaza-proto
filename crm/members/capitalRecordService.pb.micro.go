@@ -34,86 +34,6 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// Api Endpoints for MyCapitalRecordService service
-
-func NewMyCapitalRecordServiceEndpoints() []*api.Endpoint {
-	return []*api.Endpoint{}
-}
-
-// Client API for MyCapitalRecordService service
-
-type MyCapitalRecordService interface {
-	//获得我的余额记录信息
-	Get(ctx context.Context, in *CapitalRecord, opts ...client.CallOption) (*CapitalRecordResponse, error)
-	//查询我的余额记录信息
-	Search(ctx context.Context, in *CapitalRecordWhere, opts ...client.CallOption) (*CapitalRecordResponse, error)
-}
-
-type myCapitalRecordService struct {
-	c    client.Client
-	name string
-}
-
-func NewMyCapitalRecordService(name string, c client.Client) MyCapitalRecordService {
-	return &myCapitalRecordService{
-		c:    c,
-		name: name,
-	}
-}
-
-func (c *myCapitalRecordService) Get(ctx context.Context, in *CapitalRecord, opts ...client.CallOption) (*CapitalRecordResponse, error) {
-	req := c.c.NewRequest(c.name, "MyCapitalRecordService.Get", in)
-	out := new(CapitalRecordResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *myCapitalRecordService) Search(ctx context.Context, in *CapitalRecordWhere, opts ...client.CallOption) (*CapitalRecordResponse, error) {
-	req := c.c.NewRequest(c.name, "MyCapitalRecordService.Search", in)
-	out := new(CapitalRecordResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for MyCapitalRecordService service
-
-type MyCapitalRecordServiceHandler interface {
-	//获得我的余额记录信息
-	Get(context.Context, *CapitalRecord, *CapitalRecordResponse) error
-	//查询我的余额记录信息
-	Search(context.Context, *CapitalRecordWhere, *CapitalRecordResponse) error
-}
-
-func RegisterMyCapitalRecordServiceHandler(s server.Server, hdlr MyCapitalRecordServiceHandler, opts ...server.HandlerOption) error {
-	type myCapitalRecordService interface {
-		Get(ctx context.Context, in *CapitalRecord, out *CapitalRecordResponse) error
-		Search(ctx context.Context, in *CapitalRecordWhere, out *CapitalRecordResponse) error
-	}
-	type MyCapitalRecordService struct {
-		myCapitalRecordService
-	}
-	h := &myCapitalRecordServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&MyCapitalRecordService{h}, opts...))
-}
-
-type myCapitalRecordServiceHandler struct {
-	MyCapitalRecordServiceHandler
-}
-
-func (h *myCapitalRecordServiceHandler) Get(ctx context.Context, in *CapitalRecord, out *CapitalRecordResponse) error {
-	return h.MyCapitalRecordServiceHandler.Get(ctx, in, out)
-}
-
-func (h *myCapitalRecordServiceHandler) Search(ctx context.Context, in *CapitalRecordWhere, out *CapitalRecordResponse) error {
-	return h.MyCapitalRecordServiceHandler.Search(ctx, in, out)
-}
-
 // Api Endpoints for CapitalRecordService service
 
 func NewCapitalRecordServiceEndpoints() []*api.Endpoint {
@@ -125,12 +45,12 @@ func NewCapitalRecordServiceEndpoints() []*api.Endpoint {
 type CapitalRecordService interface {
 	//增加余额（增加）
 	Income(ctx context.Context, in *CapitalRecord, opts ...client.CallOption) (*CapitalRecordResponse, error)
-	//消费余额(支出)
+	//扣除余额(支出)
 	Expend(ctx context.Context, in *CapitalRecord, opts ...client.CallOption) (*CapitalRecordResponse, error)
 	//获得余额记录信息
 	Get(ctx context.Context, in *CapitalRecord, opts ...client.CallOption) (*CapitalRecordResponse, error)
 	//查询余额记录信息
-	Search(ctx context.Context, in *CapitalRecordWhere, opts ...client.CallOption) (*CapitalRecordResponse, error)
+	Search(ctx context.Context, in *CapitalRecordRequest, opts ...client.CallOption) (*CapitalRecordResponse, error)
 }
 
 type capitalRecordService struct {
@@ -175,7 +95,7 @@ func (c *capitalRecordService) Get(ctx context.Context, in *CapitalRecord, opts 
 	return out, nil
 }
 
-func (c *capitalRecordService) Search(ctx context.Context, in *CapitalRecordWhere, opts ...client.CallOption) (*CapitalRecordResponse, error) {
+func (c *capitalRecordService) Search(ctx context.Context, in *CapitalRecordRequest, opts ...client.CallOption) (*CapitalRecordResponse, error) {
 	req := c.c.NewRequest(c.name, "CapitalRecordService.Search", in)
 	out := new(CapitalRecordResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -190,12 +110,12 @@ func (c *capitalRecordService) Search(ctx context.Context, in *CapitalRecordWher
 type CapitalRecordServiceHandler interface {
 	//增加余额（增加）
 	Income(context.Context, *CapitalRecord, *CapitalRecordResponse) error
-	//消费余额(支出)
+	//扣除余额(支出)
 	Expend(context.Context, *CapitalRecord, *CapitalRecordResponse) error
 	//获得余额记录信息
 	Get(context.Context, *CapitalRecord, *CapitalRecordResponse) error
 	//查询余额记录信息
-	Search(context.Context, *CapitalRecordWhere, *CapitalRecordResponse) error
+	Search(context.Context, *CapitalRecordRequest, *CapitalRecordResponse) error
 }
 
 func RegisterCapitalRecordServiceHandler(s server.Server, hdlr CapitalRecordServiceHandler, opts ...server.HandlerOption) error {
@@ -203,7 +123,7 @@ func RegisterCapitalRecordServiceHandler(s server.Server, hdlr CapitalRecordServ
 		Income(ctx context.Context, in *CapitalRecord, out *CapitalRecordResponse) error
 		Expend(ctx context.Context, in *CapitalRecord, out *CapitalRecordResponse) error
 		Get(ctx context.Context, in *CapitalRecord, out *CapitalRecordResponse) error
-		Search(ctx context.Context, in *CapitalRecordWhere, out *CapitalRecordResponse) error
+		Search(ctx context.Context, in *CapitalRecordRequest, out *CapitalRecordResponse) error
 	}
 	type CapitalRecordService struct {
 		capitalRecordService
@@ -228,6 +148,6 @@ func (h *capitalRecordServiceHandler) Get(ctx context.Context, in *CapitalRecord
 	return h.CapitalRecordServiceHandler.Get(ctx, in, out)
 }
 
-func (h *capitalRecordServiceHandler) Search(ctx context.Context, in *CapitalRecordWhere, out *CapitalRecordResponse) error {
+func (h *capitalRecordServiceHandler) Search(ctx context.Context, in *CapitalRecordRequest, out *CapitalRecordResponse) error {
 	return h.CapitalRecordServiceHandler.Search(ctx, in, out)
 }

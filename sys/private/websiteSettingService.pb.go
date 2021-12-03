@@ -32,25 +32,25 @@ type WebsiteSetting struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Title       string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
-	SiteUrl     string `protobuf:"bytes,2,opt,name=site_url,json=siteUrl,proto3" json:"site_url,omitempty"`
-	LogoId      int64  `protobuf:"varint,3,opt,name=logo_id,json=logoId,proto3" json:"logo_id,omitempty"`
-	LogoUrl     string `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
-	Keywords    string `protobuf:"bytes,5,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	Hotline     string `protobuf:"bytes,7,opt,name=hotline,proto3" json:"hotline,omitempty"`
-	CompanyName string `protobuf:"bytes,8,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
-	AreaId      int64  `protobuf:"varint,9,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
-	Address     string `protobuf:"bytes,10,opt,name=address,proto3" json:"address,omitempty"`
-	Lng         string `protobuf:"bytes,11,opt,name=lng,proto3" json:"lng,omitempty"`
-	Lat         string `protobuf:"bytes,12,opt,name=lat,proto3" json:"lat,omitempty"`
-	Email       string `protobuf:"bytes,13,opt,name=email,proto3" json:"email,omitempty"`
-	Qq          string `protobuf:"bytes,14,opt,name=qq,proto3" json:"qq,omitempty"`
-	Icp         string `protobuf:"bytes,15,opt,name=icp,proto3" json:"icp,omitempty"`
-	PoliceIcp   string `protobuf:"bytes,16,opt,name=police_icp,json=policeIcp,proto3" json:"police_icp,omitempty"`
-	Copyright   string `protobuf:"bytes,17,opt,name=copyright,proto3" json:"copyright,omitempty"`
-	ContactMan  string `protobuf:"bytes,18,opt,name=contact_man,json=contactMan,proto3" json:"contact_man,omitempty"`
-	ContactTel  string `protobuf:"bytes,19,opt,name=contact_tel,json=contactTel,proto3" json:"contact_tel,omitempty"`
+	Title       string `protobuf:"bytes,1,opt,name=title,proto3" json:"title"`
+	SiteUrl     string `protobuf:"bytes,2,opt,name=site_url,json=siteUrl,proto3" json:"site_url"`
+	LogoId      int64  `protobuf:"varint,3,opt,name=logo_id,json=logoId,proto3" json:"logo_id"`
+	LogoUrl     string `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url"`
+	Keywords    string `protobuf:"bytes,5,opt,name=keywords,proto3" json:"keywords"`
+	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description"`
+	Hotline     string `protobuf:"bytes,7,opt,name=hotline,proto3" json:"hotline"`
+	CompanyName string `protobuf:"bytes,8,opt,name=company_name,json=companyName,proto3" json:"company_name"`
+	AreaId      int64  `protobuf:"varint,9,opt,name=area_id,json=areaId,proto3" json:"area_id"`
+	Address     string `protobuf:"bytes,10,opt,name=address,proto3" json:"address"`
+	Lng         string `protobuf:"bytes,11,opt,name=lng,proto3" json:"lng"`
+	Lat         string `protobuf:"bytes,12,opt,name=lat,proto3" json:"lat"`
+	Email       string `protobuf:"bytes,13,opt,name=email,proto3" json:"email"`
+	Qq          string `protobuf:"bytes,14,opt,name=qq,proto3" json:"qq"`
+	Icp         string `protobuf:"bytes,15,opt,name=icp,proto3" json:"icp"`
+	PoliceIcp   string `protobuf:"bytes,16,opt,name=police_icp,json=policeIcp,proto3" json:"police_icp"`
+	Copyright   string `protobuf:"bytes,17,opt,name=copyright,proto3" json:"copyright"`
+	ContactMan  string `protobuf:"bytes,18,opt,name=contact_man,json=contactMan,proto3" json:"contact_man"`
+	ContactTel  string `protobuf:"bytes,19,opt,name=contact_tel,json=contactTel,proto3" json:"contact_tel"`
 }
 
 func (x *WebsiteSetting) Reset() {
@@ -224,9 +224,9 @@ type WebsiteSettingResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *WebsiteSetting `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Error  *common.Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *WebsiteSetting `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Error  *common.Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *WebsiteSettingResponse) Reset() {

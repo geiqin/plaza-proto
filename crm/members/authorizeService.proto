@@ -5,34 +5,47 @@ import "common/base.proto";
 import "customerService.proto";
 
 service AuthorizeService {
-    //客户注册
-    rpc Register (Customer) returns (CustomerResponse) {}
-    //账号登录
-    rpc Login (AuthorizeRequest) returns (common.TokenResponse) {}
-    //短信登录
-    rpc SmsLogin (AuthorizeRequest) returns (common.TokenResponse) {}
     //获得当前客户
-    rpc Info (common.Empty) returns (CustomerResponse) {}
-    //安全退出
-    rpc Logout (common.Empty) returns (AuthorizeResponse) {}
+    rpc Info (AuthorizeRequest) returns (CustomerResponse) {}
+    //绑定微信通过小程序
+    rpc BindWxByMini (AuthorizeRequest) returns (AuthorizeResponse) {}
+    //绑定微信通过APP
+    rpc BindWxByApp (AuthorizeRequest) returns (AuthorizeResponse) {}
+    //绑定手机号
+    rpc BindMobile (AuthorizeRequest) returns (AuthorizeResponse) {}
+    //绑定邮箱账号
+    rpc BindEmail (AuthorizeRequest) returns (AuthorizeResponse) {}
+}
+
+
+message Authorize{
+    int64 id =1;
+    int64 customer_id =2;
+    string username = 3;
+    string password =4;
+    string email = 5;
+    string mobile = 6;
 }
 
 message AuthorizeRequest{
     int64 customer_id =1;
-    string username = 2;
+    string name = 2;
     string mobile =3;
     string email =4;
     string password =5;
-    string old_pwd = 6;
-    string new_pwd = 7;
-    string confirm_pwd = 8;
+    string old_password = 6;
+    string new_password = 7;
+    string confirm_password = 8;
     string code = 9;
+    string encrypted_data = 10;
+    string iv = 11;
 }
 
-//
 message AuthorizeResponse {
-    common.Token entity = 1;
+    Authorize entity = 1;
     common.Pager pager =2;
+    repeated Authorize items = 3;
     common.Error error = 4;
     common.Info info =5;
+    map<string,string> params =6;
 }

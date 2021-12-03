@@ -50,7 +50,7 @@ type Address struct {
 	CreatedAt    string `protobuf:"bytes,17,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
 	UpdatedAt    string `protobuf:"bytes,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	// @inject_tag: gorm:"-"
-	Area *Area `protobuf:"bytes,19,opt,name=area,proto3" json:"area" gorm:"-"`
+	Area *Area `protobuf:"bytes,19,opt,name=area,proto3" json:"area"  gorm:"-"`
 }
 
 func (x *Address) Reset() {

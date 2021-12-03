@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -44,9 +44,13 @@ func NewNavServiceEndpoints() []*api.Endpoint {
 
 type NavService interface {
 	Get(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*NavResponse, error)
-	List(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error)
-	Tree(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error)
+	Create(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error)
+	Update(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error)
+	UpdateHidden(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error)
+	Delete(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error)
+	Search(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error)
+	List(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error)
+	Tree(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error)
 }
 
 type navService struct {
@@ -71,7 +75,47 @@ func (c *navService) Get(ctx context.Context, in *Nav, opts ...client.CallOption
 	return out, nil
 }
 
-func (c *navService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*NavResponse, error) {
+func (c *navService) Create(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error) {
+	req := c.c.NewRequest(c.name, "NavService.Create", in)
+	out := new(NavResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *navService) Update(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error) {
+	req := c.c.NewRequest(c.name, "NavService.Update", in)
+	out := new(NavResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *navService) UpdateHidden(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error) {
+	req := c.c.NewRequest(c.name, "NavService.UpdateHidden", in)
+	out := new(NavResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *navService) Delete(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error) {
+	req := c.c.NewRequest(c.name, "NavService.Delete", in)
+	out := new(NavResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *navService) Search(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error) {
 	req := c.c.NewRequest(c.name, "NavService.Search", in)
 	out := new(NavResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -81,7 +125,7 @@ func (c *navService) Search(ctx context.Context, in *common.BaseWhere, opts ...c
 	return out, nil
 }
 
-func (c *navService) List(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error) {
+func (c *navService) List(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error) {
 	req := c.c.NewRequest(c.name, "NavService.List", in)
 	out := new(NavResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -91,7 +135,7 @@ func (c *navService) List(ctx context.Context, in *Nav, opts ...client.CallOptio
 	return out, nil
 }
 
-func (c *navService) Tree(ctx context.Context, in *Nav, opts ...client.CallOption) (*NavResponse, error) {
+func (c *navService) Tree(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error) {
 	req := c.c.NewRequest(c.name, "NavService.Tree", in)
 	out := new(NavResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -105,17 +149,25 @@ func (c *navService) Tree(ctx context.Context, in *Nav, opts ...client.CallOptio
 
 type NavServiceHandler interface {
 	Get(context.Context, *Nav, *NavResponse) error
-	Search(context.Context, *common.BaseWhere, *NavResponse) error
-	List(context.Context, *Nav, *NavResponse) error
-	Tree(context.Context, *Nav, *NavResponse) error
+	Create(context.Context, *Nav, *NavResponse) error
+	Update(context.Context, *Nav, *NavResponse) error
+	UpdateHidden(context.Context, *Nav, *NavResponse) error
+	Delete(context.Context, *Nav, *NavResponse) error
+	Search(context.Context, *NavRequest, *NavResponse) error
+	List(context.Context, *NavRequest, *NavResponse) error
+	Tree(context.Context, *NavRequest, *NavResponse) error
 }
 
 func RegisterNavServiceHandler(s server.Server, hdlr NavServiceHandler, opts ...server.HandlerOption) error {
 	type navService interface {
 		Get(ctx context.Context, in *Nav, out *NavResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *NavResponse) error
-		List(ctx context.Context, in *Nav, out *NavResponse) error
-		Tree(ctx context.Context, in *Nav, out *NavResponse) error
+		Create(ctx context.Context, in *Nav, out *NavResponse) error
+		Update(ctx context.Context, in *Nav, out *NavResponse) error
+		UpdateHidden(ctx context.Context, in *Nav, out *NavResponse) error
+		Delete(ctx context.Context, in *Nav, out *NavResponse) error
+		Search(ctx context.Context, in *NavRequest, out *NavResponse) error
+		List(ctx context.Context, in *NavRequest, out *NavResponse) error
+		Tree(ctx context.Context, in *NavRequest, out *NavResponse) error
 	}
 	type NavService struct {
 		navService
@@ -132,14 +184,30 @@ func (h *navServiceHandler) Get(ctx context.Context, in *Nav, out *NavResponse) 
 	return h.NavServiceHandler.Get(ctx, in, out)
 }
 
-func (h *navServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *NavResponse) error {
+func (h *navServiceHandler) Create(ctx context.Context, in *Nav, out *NavResponse) error {
+	return h.NavServiceHandler.Create(ctx, in, out)
+}
+
+func (h *navServiceHandler) Update(ctx context.Context, in *Nav, out *NavResponse) error {
+	return h.NavServiceHandler.Update(ctx, in, out)
+}
+
+func (h *navServiceHandler) UpdateHidden(ctx context.Context, in *Nav, out *NavResponse) error {
+	return h.NavServiceHandler.UpdateHidden(ctx, in, out)
+}
+
+func (h *navServiceHandler) Delete(ctx context.Context, in *Nav, out *NavResponse) error {
+	return h.NavServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *navServiceHandler) Search(ctx context.Context, in *NavRequest, out *NavResponse) error {
 	return h.NavServiceHandler.Search(ctx, in, out)
 }
 
-func (h *navServiceHandler) List(ctx context.Context, in *Nav, out *NavResponse) error {
+func (h *navServiceHandler) List(ctx context.Context, in *NavRequest, out *NavResponse) error {
 	return h.NavServiceHandler.List(ctx, in, out)
 }
 
-func (h *navServiceHandler) Tree(ctx context.Context, in *Nav, out *NavResponse) error {
+func (h *navServiceHandler) Tree(ctx context.Context, in *NavRequest, out *NavResponse) error {
 	return h.NavServiceHandler.Tree(ctx, in, out)
 }

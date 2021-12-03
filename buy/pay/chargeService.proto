@@ -28,7 +28,7 @@ message Charge{
     string open_id = 8;
     string target_user_type = 9;
     int64 target_user_id = 10;
-    string type = 11;
+    int32 order_type = 11;
     int64 order_id = 12;
     string order_sn = 13;
     float amount = 14;
@@ -46,7 +46,7 @@ message Charge{
     string client_ip = 26;
     string memo = 27;
     string metadata = 28;
-    string status = 29;
+    int32 status = 29;
     string paid_at = 30;
     string expired_at = 31;
     string created_at = 32;

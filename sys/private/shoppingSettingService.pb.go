@@ -32,7 +32,7 @@ type ShoppingSetting struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OpenStockFunc bool `protobuf:"varint,1,opt,name=open_stock_func,json=openStockFunc,proto3" json:"open_stock_func,omitempty"`
+	OpenStockFunc bool `protobuf:"varint,1,opt,name=open_stock_func,json=openStockFunc,proto3" json:"open_stock_func"`
 }
 
 func (x *ShoppingSetting) Reset() {
@@ -80,9 +80,9 @@ type ShoppingResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *ShoppingSetting `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Error  *common.Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *ShoppingSetting `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Error  *common.Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *ShoppingResponse) Reset() {

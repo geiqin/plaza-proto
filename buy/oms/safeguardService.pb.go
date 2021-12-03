@@ -33,7 +33,7 @@ type Safeguard struct {
 
 	Id                 int64              `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
 	OrderId            int64              `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	Type               string             `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
+	Type               int32              `protobuf:"varint,3,opt,name=type,proto3" json:"type"`
 	SafeguardSn        string             `protobuf:"bytes,4,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn"`
 	CustomerId         int64              `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
 	ExchangeDeliveryId int64              `protobuf:"varint,6,opt,name=exchange_delivery_id,json=exchangeDeliveryId,proto3" json:"exchange_delivery_id"`
@@ -43,15 +43,15 @@ type Safeguard struct {
 	Mobile             string             `protobuf:"bytes,10,opt,name=mobile,proto3" json:"mobile"`
 	Refunded           bool               `protobuf:"varint,11,opt,name=refunded,proto3" json:"refunded"`
 	RefundFee          float32            `protobuf:"fixed32,12,opt,name=refund_fee,json=refundFee,proto3" json:"refund_fee"`
-	RefundMethod       string             `protobuf:"bytes,13,opt,name=refund_method,json=refundMethod,proto3" json:"refund_method"`
-	CheckStatus        string             `protobuf:"bytes,142,opt,name=check_status,json=checkStatus,proto3" json:"check_status"`
-	Status             string             `protobuf:"bytes,15,opt,name=status,proto3" json:"status"`
+	RefundMethod       int32              `protobuf:"varint,13,opt,name=refund_method,json=refundMethod,proto3" json:"refund_method"`
+	CheckStatus        int32              `protobuf:"varint,142,opt,name=check_status,json=checkStatus,proto3" json:"check_status"`
+	Status             int32              `protobuf:"varint,15,opt,name=status,proto3" json:"status"`
 	Reason             string             `protobuf:"bytes,16,opt,name=reason,proto3" json:"reason"`
 	Description        string             `protobuf:"bytes,17,opt,name=description,proto3" json:"description"`
 	OpId               int64              `protobuf:"varint,18,opt,name=op_id,json=opId,proto3" json:"op_id"`
 	OpName             string             `protobuf:"bytes,19,opt,name=op_name,json=opName,proto3" json:"op_name"`
 	Memo               string             `protobuf:"bytes,20,opt,name=memo,proto3" json:"memo"`
-	GoodsStatus        string             `protobuf:"bytes,21,opt,name=goods_status,json=goodsStatus,proto3" json:"goods_status"`
+	GoodsStatus        int32              `protobuf:"varint,21,opt,name=goods_status,json=goodsStatus,proto3" json:"goods_status"`
 	RefundedAt         string             `protobuf:"bytes,22,opt,name=refunded_at,json=refundedAt,proto3" json:"refunded_at"`
 	Metadata           string             `protobuf:"bytes,23,opt,name=metadata,proto3" json:"metadata"`
 	CheckedAt          string             `protobuf:"bytes,24,opt,name=checked_at,json=checkedAt,proto3" json:"checked_at"`
@@ -60,9 +60,9 @@ type Safeguard struct {
 	Details            []*SafeguardDetail `protobuf:"bytes,27,rep,name=details,proto3" json:"details"`
 	Images             []*SafeguardImage  `protobuf:"bytes,28,rep,name=images,proto3" json:"images"`
 	// @inject_tag: gorm:"-"
-	Address *SafeguardAddress `protobuf:"bytes,29,opt,name=address,proto3" json:"address" gorm:"-"` // 维权收货人地址
+	Address *SafeguardAddress `protobuf:"bytes,29,opt,name=address,proto3"  gorm:"-" json:"address"` // 维权收货人地址
 	// @inject_tag: gorm:"-"
-	ReturnExpress *SafeguardReturnExpress `protobuf:"bytes,30,opt,name=return_express,json=returnExpress,proto3" json:"return_express" gorm:"-"` // 买家退货填写的退货物流信息
+	ReturnExpress *SafeguardReturnExpress `protobuf:"bytes,30,opt,name=return_express,json=returnExpress,proto3"  gorm:"-" json:"return_express"` // 买家退货填写的退货物流信息
 	Order         *Order                  `protobuf:"bytes,31,opt,name=order,proto3" json:"order"`
 	ReturnPoints  int32                   `protobuf:"varint,32,opt,name=return_points,json=returnPoints,proto3" json:"return_points"`
 	DeductPoints  int32                   `protobuf:"varint,33,opt,name=deduct_points,json=deductPoints,proto3" json:"deduct_points"`
@@ -116,11 +116,11 @@ func (x *Safeguard) GetOrderId() int64 {
 	return 0
 }
 
-func (x *Safeguard) GetType() string {
+func (x *Safeguard) GetType() int32 {
 	if x != nil {
 		return x.Type
 	}
-	return ""
+	return 0
 }
 
 func (x *Safeguard) GetSafeguardSn() string {
@@ -186,25 +186,25 @@ func (x *Safeguard) GetRefundFee() float32 {
 	return 0
 }
 
-func (x *Safeguard) GetRefundMethod() string {
+func (x *Safeguard) GetRefundMethod() int32 {
 	if x != nil {
 		return x.RefundMethod
 	}
-	return ""
+	return 0
 }
 
-func (x *Safeguard) GetCheckStatus() string {
+func (x *Safeguard) GetCheckStatus() int32 {
 	if x != nil {
 		return x.CheckStatus
 	}
-	return ""
+	return 0
 }
 
-func (x *Safeguard) GetStatus() string {
+func (x *Safeguard) GetStatus() int32 {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return 0
 }
 
 func (x *Safeguard) GetReason() string {
@@ -242,11 +242,11 @@ func (x *Safeguard) GetMemo() string {
 	return ""
 }
 
-func (x *Safeguard) GetGoodsStatus() string {
+func (x *Safeguard) GetGoodsStatus() int32 {
 	if x != nil {
 		return x.GoodsStatus
 	}
-	return ""
+	return 0
 }
 
 func (x *Safeguard) GetRefundedAt() string {
@@ -359,7 +359,7 @@ type SafeguardDetail struct {
 	SkuId         int64 `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
 	Num           int32 `protobuf:"varint,6,opt,name=num,proto3" json:"num"`
 	// @inject_tag: gorm:"-"
-	Detail *OrderDetail `protobuf:"bytes,7,opt,name=detail,proto3" json:"detail" gorm:"-"`
+	Detail *OrderDetail `protobuf:"bytes,7,opt,name=detail,proto3"  gorm:"-" json:"detail"`
 }
 
 func (x *SafeguardDetail) Reset() {
@@ -525,7 +525,7 @@ type SafeguardAddress struct {
 	Addr   string `protobuf:"bytes,3,opt,name=addr,proto3" json:"addr"`
 	Mobile string `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile"`
 	// @inject_tag: gorm:"-"
-	Area *AreaInfo `protobuf:"bytes,5,opt,name=area,proto3" json:"area" gorm:"-"`
+	Area *AreaInfo `protobuf:"bytes,5,opt,name=area,proto3" json:"area"`
 }
 
 func (x *SafeguardAddress) Reset() {
@@ -606,7 +606,7 @@ type SafeguardReturnExpress struct {
 	ExpressCode string `protobuf:"bytes,3,opt,name=express_code,json=expressCode,proto3" json:"express_code"`
 	Mobile      string `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile"`
 	// @inject_tag: gorm:"-"
-	Images []*SafeguardImage `protobuf:"bytes,5,rep,name=images,proto3" json:"images" gorm:"-"`
+	Images []*SafeguardImage `protobuf:"bytes,5,rep,name=images,proto3" json:"images"`
 }
 
 func (x *SafeguardReturnExpress) Reset() {
@@ -682,9 +682,9 @@ type SafeguardMetadata struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: gorm:"-"
-	Address *SafeguardAddress `protobuf:"bytes,1,opt,name=address,proto3" json:"address" gorm:"-"`
+	Address *SafeguardAddress `protobuf:"bytes,1,opt,name=address,proto3" json:"address"`
 	// @inject_tag: gorm:"-"
-	ReturnExpress *SafeguardReturnExpress `protobuf:"bytes,2,opt,name=return_express,json=returnExpress,proto3" json:"return_express" gorm:"-"`
+	ReturnExpress *SafeguardReturnExpress `protobuf:"bytes,2,opt,name=return_express,json=returnExpress,proto3" json:"return_express"`
 }
 
 func (x *SafeguardMetadata) Reset() {
@@ -743,16 +743,16 @@ type SafeguardWhere struct {
 	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	Id       int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
 	// @inject_tag: gorm:"-"
-	Ids           []int64 `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids" gorm:"-"`
+	Ids           []int64 `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids"`
 	OrderId       int64   `protobuf:"varint,6,opt,name=order_id,json=orderId,proto3" json:"order_id"`
 	CustomerId    int64   `protobuf:"varint,7,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	Type          string  `protobuf:"bytes,8,opt,name=type,proto3" json:"type"`
+	Type          int32   `protobuf:"varint,8,opt,name=type,proto3" json:"type"`
 	KeywordsType  string  `protobuf:"bytes,9,opt,name=keywords_type,json=keywordsType,proto3" json:"keywords_type"`
 	Keywords      string  `protobuf:"bytes,10,opt,name=keywords,proto3" json:"keywords"`
 	OrderDetailId int64   `protobuf:"varint,11,opt,name=order_detail_id,json=orderDetailId,proto3" json:"order_detail_id"`
 	// @inject_tag: gorm:"-"
-	OrderDetailIds []int64 `protobuf:"varint,12,rep,packed,name=order_detail_ids,json=orderDetailIds,proto3" json:"order_detail_ids" gorm:"-"`
-	Status         string  `protobuf:"bytes,13,opt,name=status,proto3" json:"status"`
+	OrderDetailIds []int64 `protobuf:"varint,12,rep,packed,name=order_detail_ids,json=orderDetailIds,proto3" json:"order_detail_ids"`
+	Status         int32   `protobuf:"varint,13,opt,name=status,proto3" json:"status"`
 	SafeguardSn    string  `protobuf:"bytes,14,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn"`
 }
 
@@ -837,11 +837,11 @@ func (x *SafeguardWhere) GetCustomerId() int64 {
 	return 0
 }
 
-func (x *SafeguardWhere) GetType() string {
+func (x *SafeguardWhere) GetType() int32 {
 	if x != nil {
 		return x.Type
 	}
-	return ""
+	return 0
 }
 
 func (x *SafeguardWhere) GetKeywordsType() string {
@@ -872,11 +872,11 @@ func (x *SafeguardWhere) GetOrderDetailIds() []int64 {
 	return nil
 }
 
-func (x *SafeguardWhere) GetStatus() string {
+func (x *SafeguardWhere) GetStatus() int32 {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return 0
 }
 
 func (x *SafeguardWhere) GetSafeguardSn() string {
@@ -899,9 +899,9 @@ type SafeguardType struct {
 	MaxRefundPrice float32 `protobuf:"fixed32,6,opt,name=max_refund_price,json=maxRefundPrice,proto3" json:"max_refund_price"` // 最大退款金额
 	ExpressFee     float32 `protobuf:"fixed32,7,opt,name=express_fee,json=expressFee,proto3" json:"express_fee"`               // 运费
 	// @inject_tag: gorm:"-"
-	Address *SafeguardAddress `protobuf:"bytes,8,opt,name=address,proto3" json:"address" gorm:"-"` // 维权收货人地址
+	Address *SafeguardAddress `protobuf:"bytes,8,opt,name=address,proto3" json:"address"` // 维权收货人地址
 	// @inject_tag: gorm:"-"
-	Details []*OrderDetail `protobuf:"bytes,9,rep,name=details,proto3" json:"details" gorm:"-"`
+	Details []*OrderDetail `protobuf:"bytes,9,rep,name=details,proto3" json:"details"`
 }
 
 func (x *SafeguardType) Reset() {
@@ -1172,7 +1172,7 @@ var file_safeguardService_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65,
 	0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65,
 	0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x73, 0x61, 0x66, 0x65, 0x67,
+	0x05, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x73, 0x61, 0x66, 0x65, 0x67,
 	0x75, 0x61, 0x72, 0x64, 0x5f, 0x73, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x73,
 	0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x53, 0x6e, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x75,
 	0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52,
@@ -1192,11 +1192,11 @@ var file_safeguardService_proto_rawDesc = []byte{
 	0x66, 0x75, 0x6e, 0x64, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x72, 0x65, 0x66, 0x75, 0x6e, 0x64,
 	0x5f, 0x66, 0x65, 0x65, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x02, 0x52, 0x09, 0x72, 0x65, 0x66, 0x75,
 	0x6e, 0x64, 0x46, 0x65, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x72, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x5f,
-	0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x72, 0x65,
+	0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0c, 0x72, 0x65,
 	0x66, 0x75, 0x6e, 0x64, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x22, 0x0a, 0x0c, 0x63, 0x68,
 	0x65, 0x63, 0x6b, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x8e, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x0b, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16,
-	0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x05, 0x52, 0x0b, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16,
+	0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06,
 	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e,
 	0x18, 0x10, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x12, 0x20,
 	0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x11, 0x20,
@@ -1206,7 +1206,7 @@ var file_safeguardService_proto_rawDesc = []byte{
 	0x18, 0x13, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6f, 0x70, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x12,
 	0x0a, 0x04, 0x6d, 0x65, 0x6d, 0x6f, 0x18, 0x14, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6d, 0x65,
 	0x6d, 0x6f, 0x12, 0x21, 0x0a, 0x0c, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x5f, 0x73, 0x74, 0x61, 0x74,
-	0x75, 0x73, 0x18, 0x15, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x53,
+	0x75, 0x73, 0x18, 0x15, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x53,
 	0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x72, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x65,
 	0x64, 0x5f, 0x61, 0x74, 0x18, 0x16, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x72, 0x65, 0x66, 0x75,
 	0x6e, 0x64, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61,
@@ -1308,7 +1308,7 @@ var file_safeguardService_proto_rawDesc = []byte{
 	0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x75, 0x73,
 	0x74, 0x6f, 0x6d, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a,
 	0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79,
-	0x70, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x23,
+	0x70, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x23,
 	0x0a, 0x0d, 0x6b, 0x65, 0x79, 0x77, 0x6f, 0x72, 0x64, 0x73, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18,
 	0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x6b, 0x65, 0x79, 0x77, 0x6f, 0x72, 0x64, 0x73, 0x54,
 	0x79, 0x70, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6b, 0x65, 0x79, 0x77, 0x6f, 0x72, 0x64, 0x73, 0x18,
@@ -1319,7 +1319,7 @@ var file_safeguardService_proto_rawDesc = []byte{
 	0x5f, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x0c, 0x20, 0x03, 0x28,
 	0x03, 0x52, 0x0e, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x49, 0x64,
 	0x73, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x0d, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x73, 0x61, 0x66,
+	0x05, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x73, 0x61, 0x66,
 	0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x5f, 0x73, 0x6e, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x0b, 0x73, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x53, 0x6e, 0x22, 0xd4, 0x02, 0x0a,
 	0x0d, 0x53, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x54, 0x79, 0x70, 0x65, 0x12, 0x19,
