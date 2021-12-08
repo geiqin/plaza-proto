@@ -23,7 +23,7 @@ message Sku {
     int32	sold_num	=11;
     int32	init_sold_num	=12;
     int32	frozen_num	=13;
-    bool	listed	=14;
+    int32	status	=14;
     string	out_sku_no	=15;
     string  spec_desc = 16;
     bool	defaulted	=17;

@@ -14,12 +14,11 @@ message ItemGallery {
     string	belong	=4;
     int64	media_id	=5;
     string	media_url	=6;
-    int32 sorting =7;
-    bool defaulted	=8;
-    string created_at	=9;
-    string updated_at	=10;
-    // @inject_tag: gorm:"-"
-    repeated  int64 ids  =11;
+    string	media_type	=7;
+    int32 sorting =8;
+    bool defaulted	=9;
+    string created_at	=10;
+    string updated_at	=11;
 }
 
 message ItemGalleryResponse {
