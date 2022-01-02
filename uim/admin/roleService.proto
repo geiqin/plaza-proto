@@ -1,0 +1,44 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+service RoleService {
+    rpc Create (Role) returns (RoleResponse) {}
+    rpc Update (Role) returns (RoleResponse) {}
+    rpc Delete (Role) returns (RoleResponse) {}
+    rpc Get (Role) returns (RoleResponse) {}
+    rpc Search (RoleRequest) returns (RoleResponse) {}
+}
+
+// 用户信息
+message Role {
+    int32 id = 1;
+    string name = 2;
+    string display_name = 3;
+    bool is_admin =4;
+    string memo = 5;
+    string created_at = 6;
+    string updated_at = 7;
+}
+
+message RoleRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    //base params
+    int32 id = 4;
+    string name = 5;
+    string display_name =6;
+    bool is_admin = 7;
+    repeated int64 ids = 8;
+}
+
+
+message RoleResponse {
+    Role entity = 1;
+    common.Pager pager =2;
+    repeated Role items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}

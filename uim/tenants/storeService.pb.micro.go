@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -54,17 +54,17 @@ type StoreService interface {
 	//设置店铺地址
 	SetAddress(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//删除店铺
-	Delete(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	Delete(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error)
 	//升级店铺数据库
-	Upgrade(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	Upgrade(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺信息
 	Get(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//锁定店铺
-	Lock(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//解锁店铺
-	Unlock(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//设置状态
+	UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//查询店铺
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*StoreResponse, error)
+	Search(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error)
+	//获取店铺列表
+	List(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error)
 }
 
 type storeService struct {
@@ -129,7 +129,7 @@ func (c *storeService) SetAddress(ctx context.Context, in *Store, opts ...client
 	return out, nil
 }
 
-func (c *storeService) Delete(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+func (c *storeService) Delete(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.Delete", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -139,7 +139,7 @@ func (c *storeService) Delete(ctx context.Context, in *Store, opts ...client.Cal
 	return out, nil
 }
 
-func (c *storeService) Upgrade(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+func (c *storeService) Upgrade(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.Upgrade", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -159,8 +159,8 @@ func (c *storeService) Get(ctx context.Context, in *Store, opts ...client.CallOp
 	return out, nil
 }
 
-func (c *storeService) Lock(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.Lock", in)
+func (c *storeService) UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.UpdateStatus", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -169,18 +169,18 @@ func (c *storeService) Lock(ctx context.Context, in *Store, opts ...client.CallO
 	return out, nil
 }
 
-func (c *storeService) Unlock(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.Unlock", in)
-	out := new(StoreResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *storeService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*StoreResponse, error) {
+func (c *storeService) Search(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.Search", in)
+	out := new(StoreResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *storeService) List(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.List", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -203,17 +203,17 @@ type StoreServiceHandler interface {
 	//设置店铺地址
 	SetAddress(context.Context, *Store, *StoreResponse) error
 	//删除店铺
-	Delete(context.Context, *Store, *StoreResponse) error
+	Delete(context.Context, *StoreWhere, *StoreResponse) error
 	//升级店铺数据库
-	Upgrade(context.Context, *Store, *StoreResponse) error
+	Upgrade(context.Context, *StoreWhere, *StoreResponse) error
 	//获取店铺信息
 	Get(context.Context, *Store, *StoreResponse) error
-	//锁定店铺
-	Lock(context.Context, *Store, *StoreResponse) error
-	//解锁店铺
-	Unlock(context.Context, *Store, *StoreResponse) error
+	//设置状态
+	UpdateStatus(context.Context, *Store, *StoreResponse) error
 	//查询店铺
-	Search(context.Context, *common.BaseWhere, *StoreResponse) error
+	Search(context.Context, *StoreWhere, *StoreResponse) error
+	//获取店铺列表
+	List(context.Context, *StoreWhere, *StoreResponse) error
 }
 
 func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts ...server.HandlerOption) error {
@@ -223,12 +223,12 @@ func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts
 		UpdateLogo(ctx context.Context, in *Store, out *StoreResponse) error
 		UpdateName(ctx context.Context, in *Store, out *StoreResponse) error
 		SetAddress(ctx context.Context, in *Store, out *StoreResponse) error
-		Delete(ctx context.Context, in *Store, out *StoreResponse) error
-		Upgrade(ctx context.Context, in *Store, out *StoreResponse) error
+		Delete(ctx context.Context, in *StoreWhere, out *StoreResponse) error
+		Upgrade(ctx context.Context, in *StoreWhere, out *StoreResponse) error
 		Get(ctx context.Context, in *Store, out *StoreResponse) error
-		Lock(ctx context.Context, in *Store, out *StoreResponse) error
-		Unlock(ctx context.Context, in *Store, out *StoreResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *StoreResponse) error
+		UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error
+		Search(ctx context.Context, in *StoreWhere, out *StoreResponse) error
+		List(ctx context.Context, in *StoreWhere, out *StoreResponse) error
 	}
 	type StoreService struct {
 		storeService
@@ -261,11 +261,11 @@ func (h *storeServiceHandler) SetAddress(ctx context.Context, in *Store, out *St
 	return h.StoreServiceHandler.SetAddress(ctx, in, out)
 }
 
-func (h *storeServiceHandler) Delete(ctx context.Context, in *Store, out *StoreResponse) error {
+func (h *storeServiceHandler) Delete(ctx context.Context, in *StoreWhere, out *StoreResponse) error {
 	return h.StoreServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *storeServiceHandler) Upgrade(ctx context.Context, in *Store, out *StoreResponse) error {
+func (h *storeServiceHandler) Upgrade(ctx context.Context, in *StoreWhere, out *StoreResponse) error {
 	return h.StoreServiceHandler.Upgrade(ctx, in, out)
 }
 
@@ -273,14 +273,14 @@ func (h *storeServiceHandler) Get(ctx context.Context, in *Store, out *StoreResp
 	return h.StoreServiceHandler.Get(ctx, in, out)
 }
 
-func (h *storeServiceHandler) Lock(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.Lock(ctx, in, out)
+func (h *storeServiceHandler) UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.UpdateStatus(ctx, in, out)
 }
 
-func (h *storeServiceHandler) Unlock(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.Unlock(ctx, in, out)
-}
-
-func (h *storeServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *StoreResponse) error {
+func (h *storeServiceHandler) Search(ctx context.Context, in *StoreWhere, out *StoreResponse) error {
 	return h.StoreServiceHandler.Search(ctx, in, out)
+}
+
+func (h *storeServiceHandler) List(ctx context.Context, in *StoreWhere, out *StoreResponse) error {
+	return h.StoreServiceHandler.List(ctx, in, out)
 }

@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -43,10 +43,14 @@ func NewDictServiceEndpoints() []*api.Endpoint {
 // Client API for DictService service
 
 type DictService interface {
-	Get(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*DictResponse, error)
-	Tree(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error)
-	List(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error)
+	Create(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error)
+	Update(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error)
+	Delete(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
+	Get(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
+	Search(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
+	List(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
+	SetSort(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
+	SetStatus(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
 }
 
 type dictService struct {
@@ -61,7 +65,37 @@ func NewDictService(name string, c client.Client) DictService {
 	}
 }
 
-func (c *dictService) Get(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error) {
+func (c *dictService) Create(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error) {
+	req := c.c.NewRequest(c.name, "DictService.Create", in)
+	out := new(DictResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictService) Update(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error) {
+	req := c.c.NewRequest(c.name, "DictService.Update", in)
+	out := new(DictResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictService) Delete(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error) {
+	req := c.c.NewRequest(c.name, "DictService.Delete", in)
+	out := new(DictResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictService) Get(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error) {
 	req := c.c.NewRequest(c.name, "DictService.Get", in)
 	out := new(DictResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -71,7 +105,7 @@ func (c *dictService) Get(ctx context.Context, in *Dict, opts ...client.CallOpti
 	return out, nil
 }
 
-func (c *dictService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*DictResponse, error) {
+func (c *dictService) Search(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error) {
 	req := c.c.NewRequest(c.name, "DictService.Search", in)
 	out := new(DictResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -81,8 +115,8 @@ func (c *dictService) Search(ctx context.Context, in *common.BaseWhere, opts ...
 	return out, nil
 }
 
-func (c *dictService) Tree(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error) {
-	req := c.c.NewRequest(c.name, "DictService.Tree", in)
+func (c *dictService) List(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error) {
+	req := c.c.NewRequest(c.name, "DictService.List", in)
 	out := new(DictResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -91,8 +125,18 @@ func (c *dictService) Tree(ctx context.Context, in *Dict, opts ...client.CallOpt
 	return out, nil
 }
 
-func (c *dictService) List(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error) {
-	req := c.c.NewRequest(c.name, "DictService.List", in)
+func (c *dictService) SetSort(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error) {
+	req := c.c.NewRequest(c.name, "DictService.SetSort", in)
+	out := new(DictResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictService) SetStatus(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error) {
+	req := c.c.NewRequest(c.name, "DictService.SetStatus", in)
 	out := new(DictResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -104,18 +148,26 @@ func (c *dictService) List(ctx context.Context, in *Dict, opts ...client.CallOpt
 // Server API for DictService service
 
 type DictServiceHandler interface {
-	Get(context.Context, *Dict, *DictResponse) error
-	Search(context.Context, *common.BaseWhere, *DictResponse) error
-	Tree(context.Context, *Dict, *DictResponse) error
-	List(context.Context, *Dict, *DictResponse) error
+	Create(context.Context, *Dict, *DictResponse) error
+	Update(context.Context, *Dict, *DictResponse) error
+	Delete(context.Context, *DictRequest, *DictResponse) error
+	Get(context.Context, *DictRequest, *DictResponse) error
+	Search(context.Context, *DictRequest, *DictResponse) error
+	List(context.Context, *DictRequest, *DictResponse) error
+	SetSort(context.Context, *DictRequest, *DictResponse) error
+	SetStatus(context.Context, *DictRequest, *DictResponse) error
 }
 
 func RegisterDictServiceHandler(s server.Server, hdlr DictServiceHandler, opts ...server.HandlerOption) error {
 	type dictService interface {
-		Get(ctx context.Context, in *Dict, out *DictResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *DictResponse) error
-		Tree(ctx context.Context, in *Dict, out *DictResponse) error
-		List(ctx context.Context, in *Dict, out *DictResponse) error
+		Create(ctx context.Context, in *Dict, out *DictResponse) error
+		Update(ctx context.Context, in *Dict, out *DictResponse) error
+		Delete(ctx context.Context, in *DictRequest, out *DictResponse) error
+		Get(ctx context.Context, in *DictRequest, out *DictResponse) error
+		Search(ctx context.Context, in *DictRequest, out *DictResponse) error
+		List(ctx context.Context, in *DictRequest, out *DictResponse) error
+		SetSort(ctx context.Context, in *DictRequest, out *DictResponse) error
+		SetStatus(ctx context.Context, in *DictRequest, out *DictResponse) error
 	}
 	type DictService struct {
 		dictService
@@ -128,18 +180,34 @@ type dictServiceHandler struct {
 	DictServiceHandler
 }
 
-func (h *dictServiceHandler) Get(ctx context.Context, in *Dict, out *DictResponse) error {
+func (h *dictServiceHandler) Create(ctx context.Context, in *Dict, out *DictResponse) error {
+	return h.DictServiceHandler.Create(ctx, in, out)
+}
+
+func (h *dictServiceHandler) Update(ctx context.Context, in *Dict, out *DictResponse) error {
+	return h.DictServiceHandler.Update(ctx, in, out)
+}
+
+func (h *dictServiceHandler) Delete(ctx context.Context, in *DictRequest, out *DictResponse) error {
+	return h.DictServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *dictServiceHandler) Get(ctx context.Context, in *DictRequest, out *DictResponse) error {
 	return h.DictServiceHandler.Get(ctx, in, out)
 }
 
-func (h *dictServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *DictResponse) error {
+func (h *dictServiceHandler) Search(ctx context.Context, in *DictRequest, out *DictResponse) error {
 	return h.DictServiceHandler.Search(ctx, in, out)
 }
 
-func (h *dictServiceHandler) Tree(ctx context.Context, in *Dict, out *DictResponse) error {
-	return h.DictServiceHandler.Tree(ctx, in, out)
+func (h *dictServiceHandler) List(ctx context.Context, in *DictRequest, out *DictResponse) error {
+	return h.DictServiceHandler.List(ctx, in, out)
 }
 
-func (h *dictServiceHandler) List(ctx context.Context, in *Dict, out *DictResponse) error {
-	return h.DictServiceHandler.List(ctx, in, out)
+func (h *dictServiceHandler) SetSort(ctx context.Context, in *DictRequest, out *DictResponse) error {
+	return h.DictServiceHandler.SetSort(ctx, in, out)
+}
+
+func (h *dictServiceHandler) SetStatus(ctx context.Context, in *DictRequest, out *DictResponse) error {
+	return h.DictServiceHandler.SetStatus(ctx, in, out)
 }

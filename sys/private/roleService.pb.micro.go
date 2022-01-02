@@ -4,8 +4,8 @@
 package services
 
 import (
-	common "github.com/geiqin/micro-kit/protobuf/common"
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -47,7 +47,7 @@ type RoleService interface {
 	Update(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
 	Delete(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
 	Get(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*RoleResponse, error)
+	Search(ctx context.Context, in *RoleRequest, opts ...client.CallOption) (*RoleResponse, error)
 }
 
 type roleService struct {
@@ -102,7 +102,7 @@ func (c *roleService) Get(ctx context.Context, in *Role, opts ...client.CallOpti
 	return out, nil
 }
 
-func (c *roleService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*RoleResponse, error) {
+func (c *roleService) Search(ctx context.Context, in *RoleRequest, opts ...client.CallOption) (*RoleResponse, error) {
 	req := c.c.NewRequest(c.name, "RoleService.Search", in)
 	out := new(RoleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -119,7 +119,7 @@ type RoleServiceHandler interface {
 	Update(context.Context, *Role, *RoleResponse) error
 	Delete(context.Context, *Role, *RoleResponse) error
 	Get(context.Context, *Role, *RoleResponse) error
-	Search(context.Context, *common.BaseWhere, *RoleResponse) error
+	Search(context.Context, *RoleRequest, *RoleResponse) error
 }
 
 func RegisterRoleServiceHandler(s server.Server, hdlr RoleServiceHandler, opts ...server.HandlerOption) error {
@@ -128,7 +128,7 @@ func RegisterRoleServiceHandler(s server.Server, hdlr RoleServiceHandler, opts .
 		Update(ctx context.Context, in *Role, out *RoleResponse) error
 		Delete(ctx context.Context, in *Role, out *RoleResponse) error
 		Get(ctx context.Context, in *Role, out *RoleResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *RoleResponse) error
+		Search(ctx context.Context, in *RoleRequest, out *RoleResponse) error
 	}
 	type RoleService struct {
 		roleService
@@ -157,6 +157,6 @@ func (h *roleServiceHandler) Get(ctx context.Context, in *Role, out *RoleRespons
 	return h.RoleServiceHandler.Get(ctx, in, out)
 }
 
-func (h *roleServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *RoleResponse) error {
+func (h *roleServiceHandler) Search(ctx context.Context, in *RoleRequest, out *RoleResponse) error {
 	return h.RoleServiceHandler.Search(ctx, in, out)
 }

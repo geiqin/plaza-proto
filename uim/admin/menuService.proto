@@ -4,10 +4,13 @@ option go_package =".;services";
 import "common/base.proto";
 
 service MenuService {
+    rpc Create (Menu) returns (MenuResponse) {}
+    rpc Update (Menu) returns (MenuResponse) {}
+    rpc Delete (Menu) returns (MenuResponse) {}
     rpc Get (Menu) returns (MenuResponse) {}
-    rpc Search (common.BaseWhere) returns (MenuResponse) {}
-    rpc List (Menu) returns (MenuResponse) {}
-    rpc Tree (Menu) returns (MenuResponse) {}
+    rpc Search (MenuRequest) returns (MenuResponse) {}
+    rpc List (MenuRequest) returns (MenuResponse) {}
+    rpc Tree (MenuRequest) returns (MenuResponse) {}
 }
 
 // 字典信息
@@ -17,24 +20,24 @@ message Menu {
     string title =4;
     string title_en	 =5;
     string icon	 =6;
-    bool nocache =7;
-    string meta  =8;
-    int64 menu_id =9;
-    string redirect_url  =10;
-    string contain_routes =11;
-    int64 permission_id  =12;
-    bool hide_sidebar =13;
+    int32 type =7;
+    int32 menu_id =8;
+    string redirect_url  =9;
+    string path =10;
+    string component  =11;
+    bool nocache =12;
+    bool hidden =13;
     bool disabled =14;
     string sorting =15;
-    string memo  =16;
-    string created_at =17;
-    string updated_at =18;
-    repeated Menu children = 19;
-    repeated int64 ids = 20;
+    string meta  =16;
+    string memo  =17;
+    string created_at =18;
+    string updated_at =19;
+    repeated Menu children = 20;
 }
 
 
-message MenuWhere {
+message MenuRequest {
     int32 paged = 1;
     int32 page_size = 2;
     string sorting = 3;

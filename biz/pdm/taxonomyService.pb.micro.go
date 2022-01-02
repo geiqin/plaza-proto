@@ -43,6 +43,9 @@ func NewTaxonomyServiceEndpoints() []*api.Endpoint {
 // Client API for TaxonomyService service
 
 type TaxonomyService interface {
+	Create(ctx context.Context, in *Taxonomy, opts ...client.CallOption) (*TaxonomyResponse, error)
+	Update(ctx context.Context, in *Taxonomy, opts ...client.CallOption) (*TaxonomyResponse, error)
+	Delete(ctx context.Context, in *Taxonomy, opts ...client.CallOption) (*TaxonomyResponse, error)
 	Get(ctx context.Context, in *Taxonomy, opts ...client.CallOption) (*TaxonomyResponse, error)
 	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*TaxonomyResponse, error)
 	Tree(ctx context.Context, in *Taxonomy, opts ...client.CallOption) (*TaxonomyResponse, error)
@@ -59,6 +62,36 @@ func NewTaxonomyService(name string, c client.Client) TaxonomyService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *taxonomyService) Create(ctx context.Context, in *Taxonomy, opts ...client.CallOption) (*TaxonomyResponse, error) {
+	req := c.c.NewRequest(c.name, "TaxonomyService.Create", in)
+	out := new(TaxonomyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taxonomyService) Update(ctx context.Context, in *Taxonomy, opts ...client.CallOption) (*TaxonomyResponse, error) {
+	req := c.c.NewRequest(c.name, "TaxonomyService.Update", in)
+	out := new(TaxonomyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taxonomyService) Delete(ctx context.Context, in *Taxonomy, opts ...client.CallOption) (*TaxonomyResponse, error) {
+	req := c.c.NewRequest(c.name, "TaxonomyService.Delete", in)
+	out := new(TaxonomyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *taxonomyService) Get(ctx context.Context, in *Taxonomy, opts ...client.CallOption) (*TaxonomyResponse, error) {
@@ -104,6 +137,9 @@ func (c *taxonomyService) List(ctx context.Context, in *Taxonomy, opts ...client
 // Server API for TaxonomyService service
 
 type TaxonomyServiceHandler interface {
+	Create(context.Context, *Taxonomy, *TaxonomyResponse) error
+	Update(context.Context, *Taxonomy, *TaxonomyResponse) error
+	Delete(context.Context, *Taxonomy, *TaxonomyResponse) error
 	Get(context.Context, *Taxonomy, *TaxonomyResponse) error
 	Search(context.Context, *common.BaseWhere, *TaxonomyResponse) error
 	Tree(context.Context, *Taxonomy, *TaxonomyResponse) error
@@ -112,6 +148,9 @@ type TaxonomyServiceHandler interface {
 
 func RegisterTaxonomyServiceHandler(s server.Server, hdlr TaxonomyServiceHandler, opts ...server.HandlerOption) error {
 	type taxonomyService interface {
+		Create(ctx context.Context, in *Taxonomy, out *TaxonomyResponse) error
+		Update(ctx context.Context, in *Taxonomy, out *TaxonomyResponse) error
+		Delete(ctx context.Context, in *Taxonomy, out *TaxonomyResponse) error
 		Get(ctx context.Context, in *Taxonomy, out *TaxonomyResponse) error
 		Search(ctx context.Context, in *common.BaseWhere, out *TaxonomyResponse) error
 		Tree(ctx context.Context, in *Taxonomy, out *TaxonomyResponse) error
@@ -126,6 +165,18 @@ func RegisterTaxonomyServiceHandler(s server.Server, hdlr TaxonomyServiceHandler
 
 type taxonomyServiceHandler struct {
 	TaxonomyServiceHandler
+}
+
+func (h *taxonomyServiceHandler) Create(ctx context.Context, in *Taxonomy, out *TaxonomyResponse) error {
+	return h.TaxonomyServiceHandler.Create(ctx, in, out)
+}
+
+func (h *taxonomyServiceHandler) Update(ctx context.Context, in *Taxonomy, out *TaxonomyResponse) error {
+	return h.TaxonomyServiceHandler.Update(ctx, in, out)
+}
+
+func (h *taxonomyServiceHandler) Delete(ctx context.Context, in *Taxonomy, out *TaxonomyResponse) error {
+	return h.TaxonomyServiceHandler.Delete(ctx, in, out)
 }
 
 func (h *taxonomyServiceHandler) Get(ctx context.Context, in *Taxonomy, out *TaxonomyResponse) error {

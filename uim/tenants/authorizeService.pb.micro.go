@@ -4,7 +4,6 @@
 package services
 
 import (
-	common "github.com/geiqin/micro-kit/protobuf/common"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
@@ -43,14 +42,10 @@ func NewAuthorizeServiceEndpoints() []*api.Endpoint {
 // Client API for AuthorizeService service
 
 type AuthorizeService interface {
-	//店铺授权
-	Auth(ctx context.Context, in *StoreSecret, opts ...client.CallOption) (*common.TokenResponse, error)
-	//切换店铺
-	Switch(ctx context.Context, in *Store, opts ...client.CallOption) (*common.TokenResponse, error)
 	//获取当前店铺(简单信息)
-	Info(ctx context.Context, in *common.Empty, opts ...client.CallOption) (*StoreResponse, error)
+	Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*StoreResponse, error)
 	//获取当前店铺(详细信息)
-	Detail(ctx context.Context, in *common.Empty, opts ...client.CallOption) (*StoreResponse, error)
+	Detail(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*StoreResponse, error)
 }
 
 type authorizeService struct {
@@ -65,27 +60,7 @@ func NewAuthorizeService(name string, c client.Client) AuthorizeService {
 	}
 }
 
-func (c *authorizeService) Auth(ctx context.Context, in *StoreSecret, opts ...client.CallOption) (*common.TokenResponse, error) {
-	req := c.c.NewRequest(c.name, "AuthorizeService.Auth", in)
-	out := new(common.TokenResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authorizeService) Switch(ctx context.Context, in *Store, opts ...client.CallOption) (*common.TokenResponse, error) {
-	req := c.c.NewRequest(c.name, "AuthorizeService.Switch", in)
-	out := new(common.TokenResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authorizeService) Info(ctx context.Context, in *common.Empty, opts ...client.CallOption) (*StoreResponse, error) {
+func (c *authorizeService) Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "AuthorizeService.Info", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -95,7 +70,7 @@ func (c *authorizeService) Info(ctx context.Context, in *common.Empty, opts ...c
 	return out, nil
 }
 
-func (c *authorizeService) Detail(ctx context.Context, in *common.Empty, opts ...client.CallOption) (*StoreResponse, error) {
+func (c *authorizeService) Detail(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "AuthorizeService.Detail", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -108,22 +83,16 @@ func (c *authorizeService) Detail(ctx context.Context, in *common.Empty, opts ..
 // Server API for AuthorizeService service
 
 type AuthorizeServiceHandler interface {
-	//店铺授权
-	Auth(context.Context, *StoreSecret, *common.TokenResponse) error
-	//切换店铺
-	Switch(context.Context, *Store, *common.TokenResponse) error
 	//获取当前店铺(简单信息)
-	Info(context.Context, *common.Empty, *StoreResponse) error
+	Info(context.Context, *AuthorizeRequest, *StoreResponse) error
 	//获取当前店铺(详细信息)
-	Detail(context.Context, *common.Empty, *StoreResponse) error
+	Detail(context.Context, *AuthorizeRequest, *StoreResponse) error
 }
 
 func RegisterAuthorizeServiceHandler(s server.Server, hdlr AuthorizeServiceHandler, opts ...server.HandlerOption) error {
 	type authorizeService interface {
-		Auth(ctx context.Context, in *StoreSecret, out *common.TokenResponse) error
-		Switch(ctx context.Context, in *Store, out *common.TokenResponse) error
-		Info(ctx context.Context, in *common.Empty, out *StoreResponse) error
-		Detail(ctx context.Context, in *common.Empty, out *StoreResponse) error
+		Info(ctx context.Context, in *AuthorizeRequest, out *StoreResponse) error
+		Detail(ctx context.Context, in *AuthorizeRequest, out *StoreResponse) error
 	}
 	type AuthorizeService struct {
 		authorizeService
@@ -136,18 +105,10 @@ type authorizeServiceHandler struct {
 	AuthorizeServiceHandler
 }
 
-func (h *authorizeServiceHandler) Auth(ctx context.Context, in *StoreSecret, out *common.TokenResponse) error {
-	return h.AuthorizeServiceHandler.Auth(ctx, in, out)
-}
-
-func (h *authorizeServiceHandler) Switch(ctx context.Context, in *Store, out *common.TokenResponse) error {
-	return h.AuthorizeServiceHandler.Switch(ctx, in, out)
-}
-
-func (h *authorizeServiceHandler) Info(ctx context.Context, in *common.Empty, out *StoreResponse) error {
+func (h *authorizeServiceHandler) Info(ctx context.Context, in *AuthorizeRequest, out *StoreResponse) error {
 	return h.AuthorizeServiceHandler.Info(ctx, in, out)
 }
 
-func (h *authorizeServiceHandler) Detail(ctx context.Context, in *common.Empty, out *StoreResponse) error {
+func (h *authorizeServiceHandler) Detail(ctx context.Context, in *AuthorizeRequest, out *StoreResponse) error {
 	return h.AuthorizeServiceHandler.Detail(ctx, in, out)
 }

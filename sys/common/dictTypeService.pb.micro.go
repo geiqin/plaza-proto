@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -43,9 +43,14 @@ func NewDictTypeServiceEndpoints() []*api.Endpoint {
 // Client API for DictTypeService service
 
 type DictTypeService interface {
-	Get(ctx context.Context, in *DictType, opts ...client.CallOption) (*DictTypeResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*DictTypeResponse, error)
+	Create(ctx context.Context, in *DictType, opts ...client.CallOption) (*DictTypeResponse, error)
+	Update(ctx context.Context, in *DictType, opts ...client.CallOption) (*DictTypeResponse, error)
+	Delete(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
+	Get(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
+	Search(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
 	List(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
+	Dictionary(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
+	SetStatus(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
 }
 
 type dictTypeService struct {
@@ -60,7 +65,37 @@ func NewDictTypeService(name string, c client.Client) DictTypeService {
 	}
 }
 
-func (c *dictTypeService) Get(ctx context.Context, in *DictType, opts ...client.CallOption) (*DictTypeResponse, error) {
+func (c *dictTypeService) Create(ctx context.Context, in *DictType, opts ...client.CallOption) (*DictTypeResponse, error) {
+	req := c.c.NewRequest(c.name, "DictTypeService.Create", in)
+	out := new(DictTypeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictTypeService) Update(ctx context.Context, in *DictType, opts ...client.CallOption) (*DictTypeResponse, error) {
+	req := c.c.NewRequest(c.name, "DictTypeService.Update", in)
+	out := new(DictTypeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictTypeService) Delete(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error) {
+	req := c.c.NewRequest(c.name, "DictTypeService.Delete", in)
+	out := new(DictTypeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictTypeService) Get(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error) {
 	req := c.c.NewRequest(c.name, "DictTypeService.Get", in)
 	out := new(DictTypeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -70,7 +105,7 @@ func (c *dictTypeService) Get(ctx context.Context, in *DictType, opts ...client.
 	return out, nil
 }
 
-func (c *dictTypeService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*DictTypeResponse, error) {
+func (c *dictTypeService) Search(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error) {
 	req := c.c.NewRequest(c.name, "DictTypeService.Search", in)
 	out := new(DictTypeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -90,19 +125,49 @@ func (c *dictTypeService) List(ctx context.Context, in *DictTypeRequest, opts ..
 	return out, nil
 }
 
+func (c *dictTypeService) Dictionary(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error) {
+	req := c.c.NewRequest(c.name, "DictTypeService.Dictionary", in)
+	out := new(DictTypeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictTypeService) SetStatus(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error) {
+	req := c.c.NewRequest(c.name, "DictTypeService.SetStatus", in)
+	out := new(DictTypeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DictTypeService service
 
 type DictTypeServiceHandler interface {
-	Get(context.Context, *DictType, *DictTypeResponse) error
-	Search(context.Context, *common.BaseWhere, *DictTypeResponse) error
+	Create(context.Context, *DictType, *DictTypeResponse) error
+	Update(context.Context, *DictType, *DictTypeResponse) error
+	Delete(context.Context, *DictTypeRequest, *DictTypeResponse) error
+	Get(context.Context, *DictTypeRequest, *DictTypeResponse) error
+	Search(context.Context, *DictTypeRequest, *DictTypeResponse) error
 	List(context.Context, *DictTypeRequest, *DictTypeResponse) error
+	Dictionary(context.Context, *DictTypeRequest, *DictTypeResponse) error
+	SetStatus(context.Context, *DictTypeRequest, *DictTypeResponse) error
 }
 
 func RegisterDictTypeServiceHandler(s server.Server, hdlr DictTypeServiceHandler, opts ...server.HandlerOption) error {
 	type dictTypeService interface {
-		Get(ctx context.Context, in *DictType, out *DictTypeResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *DictTypeResponse) error
+		Create(ctx context.Context, in *DictType, out *DictTypeResponse) error
+		Update(ctx context.Context, in *DictType, out *DictTypeResponse) error
+		Delete(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
+		Get(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
+		Search(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
 		List(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
+		Dictionary(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
+		SetStatus(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
 	}
 	type DictTypeService struct {
 		dictTypeService
@@ -115,14 +180,34 @@ type dictTypeServiceHandler struct {
 	DictTypeServiceHandler
 }
 
-func (h *dictTypeServiceHandler) Get(ctx context.Context, in *DictType, out *DictTypeResponse) error {
+func (h *dictTypeServiceHandler) Create(ctx context.Context, in *DictType, out *DictTypeResponse) error {
+	return h.DictTypeServiceHandler.Create(ctx, in, out)
+}
+
+func (h *dictTypeServiceHandler) Update(ctx context.Context, in *DictType, out *DictTypeResponse) error {
+	return h.DictTypeServiceHandler.Update(ctx, in, out)
+}
+
+func (h *dictTypeServiceHandler) Delete(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error {
+	return h.DictTypeServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *dictTypeServiceHandler) Get(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error {
 	return h.DictTypeServiceHandler.Get(ctx, in, out)
 }
 
-func (h *dictTypeServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *DictTypeResponse) error {
+func (h *dictTypeServiceHandler) Search(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error {
 	return h.DictTypeServiceHandler.Search(ctx, in, out)
 }
 
 func (h *dictTypeServiceHandler) List(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error {
 	return h.DictTypeServiceHandler.List(ctx, in, out)
+}
+
+func (h *dictTypeServiceHandler) Dictionary(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error {
+	return h.DictTypeServiceHandler.Dictionary(ctx, in, out)
+}
+
+func (h *dictTypeServiceHandler) SetStatus(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error {
+	return h.DictTypeServiceHandler.SetStatus(ctx, in, out)
 }

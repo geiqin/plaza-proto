@@ -3,6 +3,7 @@ package services;
 option go_package =".;services";
 import "common/base.proto";
 import "applicationService.proto";
+import "companyService.proto";
 
 service StoreService {
     //创建店铺
@@ -16,17 +17,26 @@ service StoreService {
     //设置店铺地址
     rpc SetAddress (Store) returns (StoreResponse) {}
     //删除店铺
-    rpc Delete (Store) returns (StoreResponse) {}
+    rpc Delete (StoreWhere) returns (StoreResponse) {}
     //升级店铺数据库
-    rpc Upgrade (Store) returns (StoreResponse) {}
+    rpc Upgrade (StoreWhere) returns (StoreResponse) {}
     //获取店铺信息
     rpc Get (Store) returns (StoreResponse) {}
-    //锁定店铺
-    rpc Lock (Store) returns (StoreResponse) {}
-    //解锁店铺
-    rpc Unlock (Store) returns (StoreResponse) {}
+    //设置状态
+    rpc UpdateStatus (Store) returns (StoreResponse) {}
     //查询店铺
-    rpc Search (common.BaseWhere) returns (StoreResponse) {}
+    rpc Search (StoreWhere) returns (StoreResponse) {}
+    //获取店铺列表
+    rpc List (StoreWhere) returns (StoreResponse) {}
+}
+
+message StoreWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    string keywords = 4;
+    int64 id = 5;
+    repeated int64 ids = 6;
 }
 
 message Store {
@@ -43,15 +53,17 @@ message Store {
     string	lng	=12;
     string	lat	=13;
     string	custom_domain	=14;
-    string	status	=15;
+    int32	status	=15;
     bool	enabled	=16;
     bool	trusted	=17;
-    string	started_at	=18;
-    string	expired_at	=19;
-    string	created_at	=20;
-    string	updated_at	=21;
-    Application application =22;
-    repeated int64 ids = 23;
+    int64 company_id = 18;
+    string	started_at	=19;
+    string	expired_at	=20;
+    string	created_at	=21;
+    string	updated_at	=22;
+    Application application =23;
+    Company company = 24;
+    string	title	=25;
 }
 
 message StoreSecret{

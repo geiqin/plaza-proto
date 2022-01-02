@@ -5,6 +5,9 @@ option go_package =".;services";
 import "common/base.proto";
 
 service TaxonomyService {
+    rpc Create (Taxonomy) returns (TaxonomyResponse) {}
+    rpc Update (Taxonomy) returns (TaxonomyResponse) {}
+    rpc Delete (Taxonomy) returns (TaxonomyResponse) {}
     rpc Get (Taxonomy) returns (TaxonomyResponse) {}
     rpc Search (common.BaseWhere) returns (TaxonomyResponse) {}
     rpc Tree (Taxonomy) returns (TaxonomyResponse) {}

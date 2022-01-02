@@ -4,8 +4,8 @@
 package services
 
 import (
-	common "github.com/geiqin/micro-kit/protobuf/common"
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -43,8 +43,12 @@ func NewApplicationServiceEndpoints() []*api.Endpoint {
 // Client API for ApplicationService service
 
 type ApplicationService interface {
+	Create(ctx context.Context, in *Application, opts ...client.CallOption) (*ApplicationResponse, error)
+	Update(ctx context.Context, in *Application, opts ...client.CallOption) (*ApplicationResponse, error)
+	Delete(ctx context.Context, in *ApplicationWhere, opts ...client.CallOption) (*ApplicationResponse, error)
 	Get(ctx context.Context, in *Application, opts ...client.CallOption) (*ApplicationResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*ApplicationResponse, error)
+	Search(ctx context.Context, in *ApplicationWhere, opts ...client.CallOption) (*ApplicationResponse, error)
+	List(ctx context.Context, in *ApplicationWhere, opts ...client.CallOption) (*ApplicationResponse, error)
 }
 
 type applicationService struct {
@@ -59,6 +63,36 @@ func NewApplicationService(name string, c client.Client) ApplicationService {
 	}
 }
 
+func (c *applicationService) Create(ctx context.Context, in *Application, opts ...client.CallOption) (*ApplicationResponse, error) {
+	req := c.c.NewRequest(c.name, "ApplicationService.Create", in)
+	out := new(ApplicationResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *applicationService) Update(ctx context.Context, in *Application, opts ...client.CallOption) (*ApplicationResponse, error) {
+	req := c.c.NewRequest(c.name, "ApplicationService.Update", in)
+	out := new(ApplicationResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *applicationService) Delete(ctx context.Context, in *ApplicationWhere, opts ...client.CallOption) (*ApplicationResponse, error) {
+	req := c.c.NewRequest(c.name, "ApplicationService.Delete", in)
+	out := new(ApplicationResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *applicationService) Get(ctx context.Context, in *Application, opts ...client.CallOption) (*ApplicationResponse, error) {
 	req := c.c.NewRequest(c.name, "ApplicationService.Get", in)
 	out := new(ApplicationResponse)
@@ -69,8 +103,18 @@ func (c *applicationService) Get(ctx context.Context, in *Application, opts ...c
 	return out, nil
 }
 
-func (c *applicationService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*ApplicationResponse, error) {
+func (c *applicationService) Search(ctx context.Context, in *ApplicationWhere, opts ...client.CallOption) (*ApplicationResponse, error) {
 	req := c.c.NewRequest(c.name, "ApplicationService.Search", in)
+	out := new(ApplicationResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *applicationService) List(ctx context.Context, in *ApplicationWhere, opts ...client.CallOption) (*ApplicationResponse, error) {
+	req := c.c.NewRequest(c.name, "ApplicationService.List", in)
 	out := new(ApplicationResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -82,14 +126,22 @@ func (c *applicationService) Search(ctx context.Context, in *common.BaseWhere, o
 // Server API for ApplicationService service
 
 type ApplicationServiceHandler interface {
+	Create(context.Context, *Application, *ApplicationResponse) error
+	Update(context.Context, *Application, *ApplicationResponse) error
+	Delete(context.Context, *ApplicationWhere, *ApplicationResponse) error
 	Get(context.Context, *Application, *ApplicationResponse) error
-	Search(context.Context, *common.BaseWhere, *ApplicationResponse) error
+	Search(context.Context, *ApplicationWhere, *ApplicationResponse) error
+	List(context.Context, *ApplicationWhere, *ApplicationResponse) error
 }
 
 func RegisterApplicationServiceHandler(s server.Server, hdlr ApplicationServiceHandler, opts ...server.HandlerOption) error {
 	type applicationService interface {
+		Create(ctx context.Context, in *Application, out *ApplicationResponse) error
+		Update(ctx context.Context, in *Application, out *ApplicationResponse) error
+		Delete(ctx context.Context, in *ApplicationWhere, out *ApplicationResponse) error
 		Get(ctx context.Context, in *Application, out *ApplicationResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *ApplicationResponse) error
+		Search(ctx context.Context, in *ApplicationWhere, out *ApplicationResponse) error
+		List(ctx context.Context, in *ApplicationWhere, out *ApplicationResponse) error
 	}
 	type ApplicationService struct {
 		applicationService
@@ -102,10 +154,26 @@ type applicationServiceHandler struct {
 	ApplicationServiceHandler
 }
 
+func (h *applicationServiceHandler) Create(ctx context.Context, in *Application, out *ApplicationResponse) error {
+	return h.ApplicationServiceHandler.Create(ctx, in, out)
+}
+
+func (h *applicationServiceHandler) Update(ctx context.Context, in *Application, out *ApplicationResponse) error {
+	return h.ApplicationServiceHandler.Update(ctx, in, out)
+}
+
+func (h *applicationServiceHandler) Delete(ctx context.Context, in *ApplicationWhere, out *ApplicationResponse) error {
+	return h.ApplicationServiceHandler.Delete(ctx, in, out)
+}
+
 func (h *applicationServiceHandler) Get(ctx context.Context, in *Application, out *ApplicationResponse) error {
 	return h.ApplicationServiceHandler.Get(ctx, in, out)
 }
 
-func (h *applicationServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *ApplicationResponse) error {
+func (h *applicationServiceHandler) Search(ctx context.Context, in *ApplicationWhere, out *ApplicationResponse) error {
 	return h.ApplicationServiceHandler.Search(ctx, in, out)
+}
+
+func (h *applicationServiceHandler) List(ctx context.Context, in *ApplicationWhere, out *ApplicationResponse) error {
+	return h.ApplicationServiceHandler.List(ctx, in, out)
 }
