@@ -48,6 +48,12 @@ type ManagerService interface {
 	Get(ctx context.Context, in *ManagerRequest, opts ...client.CallOption) (*ManagerResponse, error)
 	Delete(ctx context.Context, in *ManagerRequest, opts ...client.CallOption) (*ManagerResponse, error)
 	Search(ctx context.Context, in *ManagerRequest, opts ...client.CallOption) (*ManagerResponse, error)
+	//根据账户和密码获得用户（SRV专用）
+	GetByUsernameAndPwd(ctx context.Context, in *ManagerRequest, opts ...client.CallOption) (*ManagerResponse, error)
+	//根据绑定手机号获得用户（SRV专用）
+	GetByMobile(ctx context.Context, in *ManagerRequest, opts ...client.CallOption) (*ManagerResponse, error)
+	//根据绑定邮箱获得用户（SRV专用）
+	GetByEmail(ctx context.Context, in *ManagerRequest, opts ...client.CallOption) (*ManagerResponse, error)
 }
 
 type managerService struct {
@@ -112,6 +118,36 @@ func (c *managerService) Search(ctx context.Context, in *ManagerRequest, opts ..
 	return out, nil
 }
 
+func (c *managerService) GetByUsernameAndPwd(ctx context.Context, in *ManagerRequest, opts ...client.CallOption) (*ManagerResponse, error) {
+	req := c.c.NewRequest(c.name, "ManagerService.GetByUsernameAndPwd", in)
+	out := new(ManagerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *managerService) GetByMobile(ctx context.Context, in *ManagerRequest, opts ...client.CallOption) (*ManagerResponse, error) {
+	req := c.c.NewRequest(c.name, "ManagerService.GetByMobile", in)
+	out := new(ManagerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *managerService) GetByEmail(ctx context.Context, in *ManagerRequest, opts ...client.CallOption) (*ManagerResponse, error) {
+	req := c.c.NewRequest(c.name, "ManagerService.GetByEmail", in)
+	out := new(ManagerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ManagerService service
 
 type ManagerServiceHandler interface {
@@ -120,6 +156,12 @@ type ManagerServiceHandler interface {
 	Get(context.Context, *ManagerRequest, *ManagerResponse) error
 	Delete(context.Context, *ManagerRequest, *ManagerResponse) error
 	Search(context.Context, *ManagerRequest, *ManagerResponse) error
+	//根据账户和密码获得用户（SRV专用）
+	GetByUsernameAndPwd(context.Context, *ManagerRequest, *ManagerResponse) error
+	//根据绑定手机号获得用户（SRV专用）
+	GetByMobile(context.Context, *ManagerRequest, *ManagerResponse) error
+	//根据绑定邮箱获得用户（SRV专用）
+	GetByEmail(context.Context, *ManagerRequest, *ManagerResponse) error
 }
 
 func RegisterManagerServiceHandler(s server.Server, hdlr ManagerServiceHandler, opts ...server.HandlerOption) error {
@@ -129,6 +171,9 @@ func RegisterManagerServiceHandler(s server.Server, hdlr ManagerServiceHandler, 
 		Get(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error
 		Delete(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error
 		Search(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error
+		GetByUsernameAndPwd(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error
+		GetByMobile(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error
+		GetByEmail(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error
 	}
 	type ManagerService struct {
 		managerService
@@ -159,4 +204,16 @@ func (h *managerServiceHandler) Delete(ctx context.Context, in *ManagerRequest, 
 
 func (h *managerServiceHandler) Search(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error {
 	return h.ManagerServiceHandler.Search(ctx, in, out)
+}
+
+func (h *managerServiceHandler) GetByUsernameAndPwd(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error {
+	return h.ManagerServiceHandler.GetByUsernameAndPwd(ctx, in, out)
+}
+
+func (h *managerServiceHandler) GetByMobile(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error {
+	return h.ManagerServiceHandler.GetByMobile(ctx, in, out)
+}
+
+func (h *managerServiceHandler) GetByEmail(ctx context.Context, in *ManagerRequest, out *ManagerResponse) error {
+	return h.ManagerServiceHandler.GetByEmail(ctx, in, out)
 }

@@ -12,23 +12,30 @@ service UserService {
     rpc Get (UserRequest) returns (UserResponse) {}
     rpc Delete (UserRequest) returns (UserResponse) {}
     rpc Search (UserRequest) returns (UserResponse) {}
+    //根据账户和密码获得用户（SRV专用）
+    rpc GetByUsernameAndPwd(UserRequest) returns (UserResponse) {}
+    //根据绑定手机号获得用户（SRV专用）
+    rpc GetByMobile (UserRequest) returns (UserResponse) {}
+    //根据绑定邮箱获得用户（SRV专用）
+    rpc GetByEmail (UserRequest) returns (UserResponse) {}
+    //根据绑定管理员ID获得用户（SRV专用）
+    rpc GetByManagerId(UserRequest) returns (UserResponse) {}
 }
 
 // 用户信息
 message User {
     int64  id = 1;
     string name = 2;
-    string display_name = 3;
-    int64 avatar_id = 4;
-    string avatar_url = 5;
-    int32 source_type = 7;
-    int64 source_manager_id =8;
-    int32 gender = 9;
-    int32 status = 10;
-    string memo = 11;
-    string created_at =12;
-    string updated_at = 13;
-    repeated Role roles =14;
+    int64 avatar_id = 3;
+    string avatar_url = 4;
+    int32 source_type = 5;
+    int64 source_manager_id =6;
+    int32 gender = 7;
+    int32 status = 8;
+    string memo = 9;
+    string created_at =10;
+    string updated_at = 11;
+    repeated Role roles =12;
 }
 
 
@@ -40,23 +47,29 @@ message UserRequest {
     //----
     int64  id = 4;
     string name = 5;
-    string display_name = 6;
+    string username = 6;
     int64 avatar_id = 7;
     string avatar_url = 8;
     string email = 9;
     string mobile =10;
     int32 gender = 11;
     int32 status =12;
-    string password = 13;
-    repeated int64 ids =14;
+    int64 source_manager_id =13;
+    string password = 14;
+    repeated int64 ids =15;
+}
+
+
+message UserData {
+    User entity = 1;
+    common.Pager pager =2;
+    repeated User items = 3;
+    common.Info info =4;
 }
 
 
 message UserResponse {
-    User entity = 1;
-    common.Pager pager =2;
-    repeated User items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    UserData data = 1;
+    common.Error error = 2;
 }
 

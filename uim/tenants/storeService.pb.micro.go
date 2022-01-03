@@ -59,6 +59,8 @@ type StoreService interface {
 	Upgrade(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺信息
 	Get(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//根据名称获取店铺信息
+	GetByName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//设置状态
 	UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//查询店铺
@@ -159,6 +161,16 @@ func (c *storeService) Get(ctx context.Context, in *Store, opts ...client.CallOp
 	return out, nil
 }
 
+func (c *storeService) GetByName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.GetByName", in)
+	out := new(StoreResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *storeService) UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.UpdateStatus", in)
 	out := new(StoreResponse)
@@ -208,6 +220,8 @@ type StoreServiceHandler interface {
 	Upgrade(context.Context, *StoreWhere, *StoreResponse) error
 	//获取店铺信息
 	Get(context.Context, *Store, *StoreResponse) error
+	//根据名称获取店铺信息
+	GetByName(context.Context, *Store, *StoreResponse) error
 	//设置状态
 	UpdateStatus(context.Context, *Store, *StoreResponse) error
 	//查询店铺
@@ -226,6 +240,7 @@ func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts
 		Delete(ctx context.Context, in *StoreWhere, out *StoreResponse) error
 		Upgrade(ctx context.Context, in *StoreWhere, out *StoreResponse) error
 		Get(ctx context.Context, in *Store, out *StoreResponse) error
+		GetByName(ctx context.Context, in *Store, out *StoreResponse) error
 		UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error
 		Search(ctx context.Context, in *StoreWhere, out *StoreResponse) error
 		List(ctx context.Context, in *StoreWhere, out *StoreResponse) error
@@ -271,6 +286,10 @@ func (h *storeServiceHandler) Upgrade(ctx context.Context, in *StoreWhere, out *
 
 func (h *storeServiceHandler) Get(ctx context.Context, in *Store, out *StoreResponse) error {
 	return h.StoreServiceHandler.Get(ctx, in, out)
+}
+
+func (h *storeServiceHandler) GetByName(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.GetByName(ctx, in, out)
 }
 
 func (h *storeServiceHandler) UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error {
