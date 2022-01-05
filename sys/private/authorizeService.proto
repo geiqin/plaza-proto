@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package services;
+option go_package =".;services";
+import "userService.proto";
+
+//授权管理
+service AuthorizeService {
+    rpc Info (AuthorizeRequest) returns (UserResponse) {}
+    rpc ModifyMobile (User) returns (UserResponse) {}
+    rpc ModifyAvatar (User) returns (UserResponse) {}
+    rpc ModifyPwd (AuthorizeRequest) returns (UserResponse) {}
+}
+
+//授权请求信息
+message AuthorizeRequest {
+    int64  id = 1;
+    string name = 2;
+    string username = 3;
+    string password = 4;
+    string old_password = 5;
+    string email = 6;
+    string mobile =7;
+}
