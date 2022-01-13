@@ -1,0 +1,53 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+//部门
+service DeptService {
+    rpc Create (Dept) returns (DeptResponse) {}
+    rpc Update (Dept) returns (DeptResponse) {}
+    rpc Delete (Dept) returns (DeptResponse) {}
+    rpc Get (Dept) returns (DeptResponse) {}
+    rpc List (DeptRequest) returns (DeptResponse) {}
+    rpc Search (DeptRequest) returns (DeptResponse) {}
+}
+
+
+message Dept {
+    int32	id	=1;
+    string	code	=2;
+    string	name	=3;
+    int32	dept_id	=4;
+    int32	type	=5;
+    repeated Dept	children	=6;
+    string	created_at	=7;
+    string	updated_at	=8;
+}
+
+
+message DeptRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //my self
+    int32	id	=4;
+    string	code	=5;
+    string	name	=6;
+    int32	type	=7;
+    int32	dept_id	=8;
+    repeated  int32	 ids	=9;
+}
+
+message DeptData{
+    Dept entity = 1;
+    common.Pager pager =2;
+    repeated Dept items = 3;
+    map<string,string> params = 4;
+    common.Info info =5;
+}
+
+message DeptResponse {
+    common.Error error = 1;
+    DeptData data =2;
+}

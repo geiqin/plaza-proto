@@ -3,7 +3,8 @@ package services;
 option go_package =".;services";
 import "common/base.proto";
 import "roleService.proto";
-
+import "deptService.proto";
+import "postService.proto";
 
 service UserService {
     rpc Create (UserRequest) returns (UserResponse) {}
@@ -25,18 +26,21 @@ service UserService {
 // 用户信息
 message User {
     int64  id = 1;
-    string name = 2;
-    int64 avatar_id = 3;
-    string avatar_url = 4;
-    int32 gender = 5;
-    int32 source_type = 6;
-    int64 source_manager_id =7;
-    int64 employee_id =8;
-    int32 status = 9;
-    string memo = 10;
-    string created_at =11;
-    string updated_at = 12;
-    repeated Role roles =13;
+    int32 type = 2;
+    string name = 3;
+    int64 avatar_id = 4;
+    string avatar_url = 5;
+    int32 gender = 6;
+    int32 dept_id =7;
+    int32 post_id =8;
+    int64 source_manager_id =9;
+    int32 status = 10;
+    string memo = 11;
+    string created_at =12;
+    string updated_at = 13;
+    Dept dept =14;
+    Post post =15;
+    repeated Role roles =16;
 }
 
 
@@ -55,9 +59,11 @@ message UserRequest {
     string mobile =10;
     int32 gender = 11;
     int32 status =12;
-    int64 source_manager_id =13;
-    string password = 14;
-    repeated int64 ids =15;
+    int32 dept_id = 13;
+    int32 post_id = 14;
+    int64 source_manager_id =15;
+    string password = 16;
+    repeated int64 ids =17;
 }
 
 
