@@ -33,9 +33,9 @@ message Nav {
     int32 status =16;
     string created_at =17;
     string updated_at =18;
-    // @inject_tag: gorm:"-"
     map<string,string> metas  =19;
-    repeated Nav children = 20;
+    Nav parent = 20;
+    repeated Nav children = 21;
 }
 
 

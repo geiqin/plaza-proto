@@ -27,21 +27,22 @@ service UserService {
 message User {
     int64  id = 1;
     int32 type = 2;
-    string name = 3;
-    string real_name = 4;
-    int64 avatar_id = 5;
-    string avatar_url = 6;
-    int32 gender = 7;
-    int32 dept_id =8;
-    int32 post_id =9;
-    int64 source_manager_id =10;
-    int32 status = 11;
-    string memo = 12;
-    string created_at =13;
-    string updated_at = 14;
-    Dept dept =15;
-    Post post =16;
-    repeated Role roles =17;
+    string username = 3;
+    string display_name = 4;
+    string real_name = 5;
+    int64 avatar_id = 6;
+    string avatar_url = 7;
+    int32 gender = 8;
+    int32 dept_id =9;
+    int32 post_id =10;
+    int64 source_manager_id =11;
+    int32 status = 12;
+    string memo = 13;
+    string created_at =14;
+    string updated_at = 15;
+    Dept dept =16;
+    Post post =17;
+    repeated Role roles =18;
 }
 
 
@@ -52,19 +53,23 @@ message UserRequest {
     string sorting =3;
     //----
     int64  id = 4;
-    string name = 5;
+    int32 type = 5;
     string username = 6;
-    int64 avatar_id = 7;
-    string avatar_url = 8;
-    string email = 9;
-    string mobile =10;
-    int32 gender = 11;
-    int32 status =12;
-    int32 dept_id = 13;
-    int32 post_id = 14;
-    int64 source_manager_id =15;
-    string password = 16;
-    repeated int64 ids =17;
+    string display_name = 7;
+    string real_name = 8;
+    int32 gender = 9;
+    int32 dept_id = 10;
+    int32 post_id = 11;
+    int64 avatar_id = 12;
+    string avatar_url = 13;
+    int32 status =14;
+    string email = 15;
+    string mobile =16;
+    string password = 17;
+    int64 source_manager_id =18;
+    repeated Role roles =19;
+    repeated int32 role_ids =20;
+    repeated int64 ids =21;
 }
 
 

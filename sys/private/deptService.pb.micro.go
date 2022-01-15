@@ -47,6 +47,7 @@ type DeptService interface {
 	Update(ctx context.Context, in *Dept, opts ...client.CallOption) (*DeptResponse, error)
 	Delete(ctx context.Context, in *Dept, opts ...client.CallOption) (*DeptResponse, error)
 	Get(ctx context.Context, in *Dept, opts ...client.CallOption) (*DeptResponse, error)
+	Tree(ctx context.Context, in *DeptRequest, opts ...client.CallOption) (*DeptResponse, error)
 	List(ctx context.Context, in *DeptRequest, opts ...client.CallOption) (*DeptResponse, error)
 	Search(ctx context.Context, in *DeptRequest, opts ...client.CallOption) (*DeptResponse, error)
 }
@@ -103,6 +104,16 @@ func (c *deptService) Get(ctx context.Context, in *Dept, opts ...client.CallOpti
 	return out, nil
 }
 
+func (c *deptService) Tree(ctx context.Context, in *DeptRequest, opts ...client.CallOption) (*DeptResponse, error) {
+	req := c.c.NewRequest(c.name, "DeptService.Tree", in)
+	out := new(DeptResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *deptService) List(ctx context.Context, in *DeptRequest, opts ...client.CallOption) (*DeptResponse, error) {
 	req := c.c.NewRequest(c.name, "DeptService.List", in)
 	out := new(DeptResponse)
@@ -130,6 +141,7 @@ type DeptServiceHandler interface {
 	Update(context.Context, *Dept, *DeptResponse) error
 	Delete(context.Context, *Dept, *DeptResponse) error
 	Get(context.Context, *Dept, *DeptResponse) error
+	Tree(context.Context, *DeptRequest, *DeptResponse) error
 	List(context.Context, *DeptRequest, *DeptResponse) error
 	Search(context.Context, *DeptRequest, *DeptResponse) error
 }
@@ -140,6 +152,7 @@ func RegisterDeptServiceHandler(s server.Server, hdlr DeptServiceHandler, opts .
 		Update(ctx context.Context, in *Dept, out *DeptResponse) error
 		Delete(ctx context.Context, in *Dept, out *DeptResponse) error
 		Get(ctx context.Context, in *Dept, out *DeptResponse) error
+		Tree(ctx context.Context, in *DeptRequest, out *DeptResponse) error
 		List(ctx context.Context, in *DeptRequest, out *DeptResponse) error
 		Search(ctx context.Context, in *DeptRequest, out *DeptResponse) error
 	}
@@ -168,6 +181,10 @@ func (h *deptServiceHandler) Delete(ctx context.Context, in *Dept, out *DeptResp
 
 func (h *deptServiceHandler) Get(ctx context.Context, in *Dept, out *DeptResponse) error {
 	return h.DeptServiceHandler.Get(ctx, in, out)
+}
+
+func (h *deptServiceHandler) Tree(ctx context.Context, in *DeptRequest, out *DeptResponse) error {
+	return h.DeptServiceHandler.Tree(ctx, in, out)
 }
 
 func (h *deptServiceHandler) List(ctx context.Context, in *DeptRequest, out *DeptResponse) error {

@@ -9,6 +9,7 @@ service DeptService {
     rpc Update (Dept) returns (DeptResponse) {}
     rpc Delete (Dept) returns (DeptResponse) {}
     rpc Get (Dept) returns (DeptResponse) {}
+    rpc Tree (DeptRequest) returns (DeptResponse) {}
     rpc List (DeptRequest) returns (DeptResponse) {}
     rpc Search (DeptRequest) returns (DeptResponse) {}
 }
@@ -20,9 +21,11 @@ message Dept {
     string	name	=3;
     int32	dept_id	=4;
     int32	type	=5;
-    repeated Dept	children	=6;
+    int32	sort	=6;
     string	created_at	=7;
     string	updated_at	=8;
+    Dept	parent	=9;
+    repeated Dept	children	=10;
 }
 
 
