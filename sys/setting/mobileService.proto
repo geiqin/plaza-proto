@@ -1,0 +1,32 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+//移动APP设置
+service MobileService {
+    rpc Set (Mobile) returns (MobileResponse) {}
+    rpc Get (common.Empty) returns (MobileResponse) {}
+}
+
+// APP设置
+message Mobile {
+    string  name =1;
+    string  package_name =2;
+    string  sign =3;
+    string  app_id =4;
+    string  app_secret =5;
+    bool  show_cover_ad =6;
+    bool show_other_ad =7;
+    bool open_wx_pay =8;
+    bool open_ali_pay =9;
+    string push_app_key =10;
+    string push_master_secret =11;
+}
+
+//
+message MobileResponse {
+    Mobile entity = 1;
+    common.Error error = 4;
+    common.Info info =5;
+}
