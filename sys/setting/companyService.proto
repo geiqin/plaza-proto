@@ -2,7 +2,7 @@ syntax = "proto3";
 package services;
 option go_package =".;services";
 import "common/base.proto";
-import "companyCatService.proto";
+import "catService.proto";
 
 service CompanyService {
     rpc Create (Company) returns (CompanyResponse) {}
@@ -18,7 +18,7 @@ message Company {
     string name	 =3;
     string short_name =4;
     string pinyin	 =5;
-    int32 company_cat_id	 =6;
+    int32 cat_id	 =6;
     string legal_man =7;
     float  registered_capital =8;
     string registered_date  =9;
@@ -39,7 +39,7 @@ message Company {
     string created_at =24;
     string updated_at =25;
     map<string,string> metas  =26;
-    CompanyCat cat = 27;
+    Cat cat = 27;
 }
 
 
@@ -55,7 +55,7 @@ message CompanyRequest {
     int64 area_id =8;
     int32 invoice_type =9;
     int32 nature  =10;
-    int32 company_cat_id =11;
+    int32 cat_id =11;
     repeated int64 ids = 12;
 }
 
