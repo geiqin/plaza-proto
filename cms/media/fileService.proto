@@ -44,10 +44,10 @@ message File {
     int64 cover_id =19;
     string cover_url =20;
     string memo	 =21;
-    string taxonomy	 =22;
+    string flag	 =22;
     int64 user_id	=23;
     int64 customer_id	=24;
-    int32 sorting =25;
+    int32 sort =25;
     string code =26;
     string created_at =27;
     string updated_at =28;
@@ -69,7 +69,7 @@ message FileRequest {
     string raw_name =10;
     string hash =11;
     string persistent_id =12;
-    string taxonomy	 =13;
+    string flag	 =13;
     bool is_private	 =14;
     int64 customer_id	 =15;
     int64 user_id	 =16;
