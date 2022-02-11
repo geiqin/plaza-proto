@@ -20,7 +20,7 @@ message Dept {
     string	code	=2;
     string	name	=3;
     int32	dept_id	=4;
-    int32	type	=5;
+    string	type	=5;
     int32	sort	=6;
     string	created_at	=7;
     string	updated_at	=8;
@@ -37,7 +37,7 @@ message DeptRequest {
     int32	id	=4;
     string	code	=5;
     string	name	=6;
-    int32	type	=7;
+    string	type	=7;
     int32	dept_id	=8;
     repeated  int32	 ids	=9;
 }

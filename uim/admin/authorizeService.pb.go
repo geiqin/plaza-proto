@@ -31,13 +31,13 @@ type AuthorizeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Username    string `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	Password    string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	OldPassword string `protobuf:"bytes,5,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
-	Email       string `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile      string `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	Username    string `protobuf:"bytes,3,opt,name=username,proto3" json:"username"`
+	Password    string `protobuf:"bytes,4,opt,name=password,proto3" json:"password"`
+	OldPassword string `protobuf:"bytes,5,opt,name=old_password,json=oldPassword,proto3" json:"old_password"`
+	Email       string `protobuf:"bytes,6,opt,name=email,proto3" json:"email"`
+	Mobile      string `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile"`
 }
 
 func (x *AuthorizeRequest) Reset() {

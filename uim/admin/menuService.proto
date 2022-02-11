@@ -20,7 +20,7 @@ message Menu {
     string title =4;
     string title_en	 =5;
     string icon	 =6;
-    int32 type =7;
+    string type =7;
     int32 menu_id =8;
     string redirect_url  =9;
     string path =10;
@@ -28,7 +28,7 @@ message Menu {
     bool nocache =12;
     bool hidden =13;
     bool disabled =14;
-    string sorting =15;
+    int32 sort =15;
     string meta  =16;
     string memo  =17;
     string created_at =18;

@@ -32,17 +32,17 @@ type Mobile struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name             string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	PackageName      string `protobuf:"bytes,2,opt,name=package_name,json=packageName,proto3" json:"package_name,omitempty"`
-	Sign             string `protobuf:"bytes,3,opt,name=sign,proto3" json:"sign,omitempty"`
-	AppId            string `protobuf:"bytes,4,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
-	AppSecret        string `protobuf:"bytes,5,opt,name=app_secret,json=appSecret,proto3" json:"app_secret,omitempty"`
-	ShowCoverAd      bool   `protobuf:"varint,6,opt,name=show_cover_ad,json=showCoverAd,proto3" json:"show_cover_ad,omitempty"`
-	ShowOtherAd      bool   `protobuf:"varint,7,opt,name=show_other_ad,json=showOtherAd,proto3" json:"show_other_ad,omitempty"`
-	OpenWxPay        bool   `protobuf:"varint,8,opt,name=open_wx_pay,json=openWxPay,proto3" json:"open_wx_pay,omitempty"`
-	OpenAliPay       bool   `protobuf:"varint,9,opt,name=open_ali_pay,json=openAliPay,proto3" json:"open_ali_pay,omitempty"`
-	PushAppKey       string `protobuf:"bytes,10,opt,name=push_app_key,json=pushAppKey,proto3" json:"push_app_key,omitempty"`
-	PushMasterSecret string `protobuf:"bytes,11,opt,name=push_master_secret,json=pushMasterSecret,proto3" json:"push_master_secret,omitempty"`
+	Name             string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	PackageName      string `protobuf:"bytes,2,opt,name=package_name,json=packageName,proto3" json:"package_name"`
+	Sign             string `protobuf:"bytes,3,opt,name=sign,proto3" json:"sign"`
+	AppId            string `protobuf:"bytes,4,opt,name=app_id,json=appId,proto3" json:"app_id"`
+	AppSecret        string `protobuf:"bytes,5,opt,name=app_secret,json=appSecret,proto3" json:"app_secret"`
+	ShowCoverAd      bool   `protobuf:"varint,6,opt,name=show_cover_ad,json=showCoverAd,proto3" json:"show_cover_ad"`
+	ShowOtherAd      bool   `protobuf:"varint,7,opt,name=show_other_ad,json=showOtherAd,proto3" json:"show_other_ad"`
+	OpenWxPay        bool   `protobuf:"varint,8,opt,name=open_wx_pay,json=openWxPay,proto3" json:"open_wx_pay"`
+	OpenAliPay       bool   `protobuf:"varint,9,opt,name=open_ali_pay,json=openAliPay,proto3" json:"open_ali_pay"`
+	PushAppKey       string `protobuf:"bytes,10,opt,name=push_app_key,json=pushAppKey,proto3" json:"push_app_key"`
+	PushMasterSecret string `protobuf:"bytes,11,opt,name=push_master_secret,json=pushMasterSecret,proto3" json:"push_master_secret"`
 }
 
 func (x *Mobile) Reset() {
@@ -160,9 +160,9 @@ type MobileResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Mobile       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Mobile       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *MobileResponse) Reset() {

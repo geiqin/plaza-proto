@@ -27,7 +27,7 @@ message Download {
     int32 size	 =10;
     string memo	 =11;
     int64 user_id	=12;
-    int32 status	=13;
+    string status	=13;
     string built_at =14;
     string created_at =15;
     string updated_at =16;

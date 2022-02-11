@@ -49,13 +49,13 @@ message Store {
     int64	creator_id	=6;
     int32	application_id	=7;
     string	version	=8;
-    int64	industry	=9;
+    string	industry	=9;
     int64	area_id	=10;
     string	address	=11;
     string	lng	=12;
     string	lat	=13;
     string	custom_domain	=14;
-    int32	status	=15;
+    string	status	=15;
     bool	enabled	=16;
     bool	trusted	=17;
     int64 company_id = 18;

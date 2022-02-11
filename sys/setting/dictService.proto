@@ -19,26 +19,25 @@ message DictRequest {
     int32 paged = 1;
     int32 page_size = 2;
     int64 id = 3;
-    repeated int64 ids = 4;
-    string keywords = 5;
-    int32 dict_type_id = 6;
-    int32 status = 7;
-    repeated Dict items = 8;
+    string keywords = 4;
+    int32 dict_type_id = 5;
+    string status = 6;
+    repeated Dict items = 7;
+    repeated int64 ids =8;
 }
 
 // 字典信息
 message Dict {
     int64 id =1;
     int32 dict_type_id =2;
-    int32 value =3;
-    string string_value =4;
-    string text	=5; //键名
-    string term	=6; //分组
-    string memo	=7; //备注
-    int32 sorting	=8; //排序
-    int32 status = 9;
-    string created_at = 10;
-    string updated_at = 11;
+    string value =3;
+    string text	=4;
+    string term	=5;
+    string memo	=6;
+    int32 sort	=7;
+    string status = 8;
+    string created_at = 9;
+    string updated_at = 10;
 }
 
 //

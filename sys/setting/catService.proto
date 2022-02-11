@@ -20,7 +20,7 @@ message Cat {
     string code =4;
     string path =5;
     string memo  =6;
-    int32 cat_id =8;
+    int32 parent_id =8;
     string created_at =9;
     string updated_at =10;
     Cat parent = 11;
@@ -36,7 +36,7 @@ message CatRequest {
     int32 id = 4;
     string name = 5;
     string code = 6;
-    int32 cat_id = 7;
+    int32 parent_id = 7;
     repeated int64 ids = 11;
 }
 

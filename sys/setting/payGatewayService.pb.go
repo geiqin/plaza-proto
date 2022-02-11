@@ -31,13 +31,13 @@ type PayGateway struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Channel    string `protobuf:"bytes,2,opt,name=channel,proto3" json:"channel,omitempty"`
-	Mode       string `protobuf:"bytes,3,opt,name=mode,proto3" json:"mode,omitempty"`
-	Configs    string `protobuf:"bytes,4,opt,name=configs,proto3" json:"configs,omitempty"`
-	Version    int32  `protobuf:"varint,5,opt,name=version,proto3" json:"version,omitempty"`
-	PrivateKey string `protobuf:"bytes,6,opt,name=private_key,json=privateKey,proto3" json:"private_key,omitempty"`
-	Disabled   bool   `protobuf:"varint,7,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	Id         int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Channel    string `protobuf:"bytes,2,opt,name=channel,proto3" json:"channel"`
+	Mode       string `protobuf:"bytes,3,opt,name=mode,proto3" json:"mode"`
+	Configs    string `protobuf:"bytes,4,opt,name=configs,proto3" json:"configs"`
+	Version    int32  `protobuf:"varint,5,opt,name=version,proto3" json:"version"`
+	PrivateKey string `protobuf:"bytes,6,opt,name=private_key,json=privateKey,proto3" json:"private_key"`
+	Disabled   bool   `protobuf:"varint,7,opt,name=disabled,proto3" json:"disabled"`
 }
 
 func (x *PayGateway) Reset() {
@@ -127,11 +127,11 @@ type PayGatewayResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *PayGateway   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*PayGateway `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *PayGateway   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*PayGateway `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *PayGatewayResponse) Reset() {

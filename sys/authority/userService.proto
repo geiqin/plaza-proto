@@ -26,17 +26,17 @@ service UserService {
 // 用户信息
 message User {
     int64  id = 1;
-    int32 type = 2;
+    string type = 2;
     string username = 3;
     string display_name = 4;
     string real_name = 5;
     int64 avatar_id = 6;
     string avatar_url = 7;
-    int32 gender = 8;
+    string gender = 8;
     int32 dept_id =9;
     int32 post_id =10;
     int64 source_manager_id =11;
-    int32 status = 12;
+    string status = 12;
     string memo = 13;
     string created_at =14;
     string updated_at = 15;
@@ -53,16 +53,16 @@ message UserRequest {
     string sorting =3;
     //----
     int64  id = 4;
-    int32 type = 5;
+    string type = 5;
     string username = 6;
     string display_name = 7;
     string real_name = 8;
-    int32 gender = 9;
+    string gender = 9;
     int32 dept_id = 10;
     int32 post_id = 11;
     int64 avatar_id = 12;
     string avatar_url = 13;
-    int32 status =14;
+    string status =14;
     string email = 15;
     string mobile =16;
     string password = 17;

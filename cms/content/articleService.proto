@@ -42,10 +42,10 @@ service FrontPageService {
 //文章信息
 message Article {
     int64 id =1;
-    string title	 =2;
-    string name	 =3;
-    int32 type	=4;
-    int32 mime_type	=5;
+    string title =2;
+    string name =3;
+    string type	=4;
+    string mime_type =5;
     string content	 =6;
     string excerpt	=7;
     string keywords	=8;
@@ -57,7 +57,7 @@ message Article {
     int32 comment_count	=14;
     int32 view_count	=15;
     bool is_system	 =16;
-    int32 sorting	=17;
+    int32 sort =17;
     int64 user_id	=18;
     int64 area_id	=19;
     int64 ext11 =20;
@@ -66,21 +66,16 @@ message Article {
     string ext31 =23;
     string ext32 =24;
     string ext33 =25;
-    int32 status	=26;
+    string status	=26;
     string published_at =27;
     string created_at =28;
     string updated_at =29;
-    // @inject_tag: gorm:"-"
     map<string,string> metas =30;
-    // @inject_tag: gorm:"many2many:article_cats;"
     repeated Cat cats = 31;
-    // @inject_tag: gorm:"many2many:article_tags;"
     repeated Tag tags = 32;
     repeated ArticleGallery galleries = 33;
-    // @inject_tag: gorm:"-"
-    Article pre_article = 34; // 上一篇文章
-    // @inject_tag: gorm:"-"
-    Article next_article = 35; // 下一篇文章
+    Article pre_article = 34;
+    Article next_article = 35;
 }
 
 //文章查询参数
@@ -91,18 +86,15 @@ message ArticleRequest {
 
     int64 id = 4;
     string title = 5;
-    int32 type	=6;
-    int32 mine_type	=7;
+    string type	=6;
+    string mine_type	=7;
     int32 cat_id = 8;
     string cat_slug	 = 9;
-    // @inject_tag: gorm:"-"
     repeated string names = 10;
     bool is_include = 11;// 是否包含上一篇、下一篇文章
-    int32 status = 12;
+    string status = 12;
     bool is_client = 13; // 是否客户端展示
-    // @inject_tag: gorm:"-"
     repeated CatSlugs cat_slugs = 14;
-    // @inject_tag: gorm:"-"
     repeated int32 ids = 15;
 }
 
@@ -110,7 +102,6 @@ message CatSlugs {
     int32 cat_id = 1;
     string cat_slug	 = 2;
     int32 top = 3;
-    // @inject_tag: gorm:"-"
     repeated Article items = 4;
 }
 

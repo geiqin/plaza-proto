@@ -20,10 +20,10 @@ message DictTypeRequest {
     int32 paged = 1;
     int32 page_size = 2;
     int32 id = 3;
-    repeated int32 ids = 4;
-    string keywords = 5;
+    string keywords = 4;
+    string status = 5;
     repeated string types = 6;
-    int32 status = 7;
+    repeated int32 ids = 7;
 }
 
 //字段类型
@@ -31,9 +31,9 @@ message DictType {
     int32 id =1;
     string name	=2;
     string title=3;
-    string kind = 4;
+    int32 level = 4;
     string memo = 5;
-    int32 status = 6;
+    string status = 6;
     string created_at = 7;
     string updated_at = 8;
     repeated Dict dicts=9;
