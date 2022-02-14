@@ -1,0 +1,52 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+service FlowProcessService {
+    rpc Create (FlowProcess) returns (FlowProcessResponse) {}
+    rpc Update (FlowProcess) returns (FlowProcessResponse) {}
+    rpc Delete (FlowProcess) returns (FlowProcessResponse) {}
+    rpc Get (FlowProcess) returns (FlowProcessResponse) {}
+    rpc Search (FlowProcessRequest) returns (FlowProcessResponse) {}
+}
+
+
+message FlowProcess {
+    int64	id	=1;
+    string	name	=2;
+    int64	example_id	=3;
+    int64	node_id	=4;
+    int64	auditor_id	=5;
+    string	auditor_name	=6;
+    string	content	=7;
+    int32	status	=8;
+    string	created_at	=9;
+    string	updated_at	=10;
+}
+
+
+message FlowProcessRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //my self
+    int32	id	=4;
+    string	name	=5;
+    int32	example_id	=6;
+    int32	status	=7;
+    string	owner_type	=8;
+}
+
+message FlowProcessData{
+    FlowProcess entity = 1;
+    common.Pager pager =2;
+    repeated FlowProcess items = 3;
+    map<string,string> params = 4;
+    common.Info info =5;
+}
+
+message FlowProcessResponse {
+    common.Error error = 1;
+    FlowProcessData data =2;
+}
