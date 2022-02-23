@@ -4,14 +4,16 @@ option go_package =".;services";
 import "common/base.proto";
 import "flowService.proto";
 import "flowProcessService.proto";
+import "flowNodeService.proto";
 
 //流程实例
 service ExampleService {
     rpc Create (Example) returns (ExampleResponse) {}
-    rpc Update (Example) returns (ExampleResponse) {}
     rpc Delete (Example) returns (ExampleResponse) {}
     rpc Get (Example) returns (ExampleResponse) {}
     rpc Search (ExampleRequest) returns (ExampleResponse) {}
+    rpc Submit (Example) returns (ExampleResponse) {}
+    rpc MySearch (ExampleRequest) returns (ExampleResponse) {}
 }
 
 
@@ -21,15 +23,20 @@ message Example {
     int64	business_id	=3;
     string	business_type	=4;
     int64	flow_id	=5;
-    int64	current_node_id	=6;
-    string	memo	=7;
-    int32	status	=8;
-    int64	user_id	=9;
-    string  hand_time = 10;
-    string	created_at	=11;
-    string	updated_at	=12;
-    Flow flow =13;
-    repeated FlowProcess processes=14;
+    int64	node_id	=6;
+    int64   next_node_id = 7;
+    string  approval_id = 8;
+    string  approval_name = 9;
+    string	memo	=10;
+    string	status	=11;
+    int64	user_id	=12;
+    string  user_name = 13;
+    string  hand_time = 14;
+    string	created_at	=15;
+    string	updated_at	=16;
+    Flow flow =17;
+    repeated FlowProcess processes=18;
+    FlowNode flow_node = 19;
 }
 
 
@@ -41,8 +48,9 @@ message ExampleRequest {
     int32	id	=4;
     string	title	=5;
     int32	user_id	=6;
-    int32	status	=7;
+    string	status	=7;
     string	owner_type	=8;
+    string  approval_id = 9;
 }
 
 message ExampleData{

@@ -35,7 +35,9 @@ message FlowRequest {
     int32	id	=4;
     string	name	=5;
     int32	 form_id	=6;
-    repeated  int32	 ids	=7;
+    string slug = 7;
+    repeated  int32	 ids	=8;
+
 }
 
 message FlowData{

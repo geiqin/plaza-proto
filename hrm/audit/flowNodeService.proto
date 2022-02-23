@@ -11,6 +11,7 @@ service FlowNodeService {
     rpc Get (FlowNode) returns (FlowNodeResponse) {}
     rpc List (FlowNodeRequest) returns (FlowNodeResponse) {}
     rpc Search (FlowNodeRequest) returns (FlowNodeResponse) {}
+    rpc StartNode (FlowNodeRequest) returns (FlowNodeResponse) {}
 }
 
 
@@ -22,6 +23,8 @@ message FlowNode {
     string  rule    = 5;
     string	created_at	=6;
     string	updated_at	=7;
+    repeated FlowNode prev_node = 8;
+    repeated FlowNode next_node = 9;
 }
 
 
@@ -32,8 +35,10 @@ message FlowNodeRequest {
     //my self
     int32	id	=4;
     string	name	=5;
-    int32	Flow_form_id	=6;
-    repeated  int32	 ids	=7;
+    int32	Flow_id	=6;
+    int64	prev_node_id	=7;
+    int64	next_node_id	=8;
+    repeated  int32	 ids	=9;
 }
 
 message FlowNodeData{

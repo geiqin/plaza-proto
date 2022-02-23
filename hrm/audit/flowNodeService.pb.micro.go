@@ -49,6 +49,7 @@ type FlowNodeService interface {
 	Get(ctx context.Context, in *FlowNode, opts ...client.CallOption) (*FlowNodeResponse, error)
 	List(ctx context.Context, in *FlowNodeRequest, opts ...client.CallOption) (*FlowNodeResponse, error)
 	Search(ctx context.Context, in *FlowNodeRequest, opts ...client.CallOption) (*FlowNodeResponse, error)
+	StartNode(ctx context.Context, in *FlowNodeRequest, opts ...client.CallOption) (*FlowNodeResponse, error)
 }
 
 type flowNodeService struct {
@@ -123,6 +124,16 @@ func (c *flowNodeService) Search(ctx context.Context, in *FlowNodeRequest, opts 
 	return out, nil
 }
 
+func (c *flowNodeService) StartNode(ctx context.Context, in *FlowNodeRequest, opts ...client.CallOption) (*FlowNodeResponse, error) {
+	req := c.c.NewRequest(c.name, "FlowNodeService.StartNode", in)
+	out := new(FlowNodeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for FlowNodeService service
 
 type FlowNodeServiceHandler interface {
@@ -132,6 +143,7 @@ type FlowNodeServiceHandler interface {
 	Get(context.Context, *FlowNode, *FlowNodeResponse) error
 	List(context.Context, *FlowNodeRequest, *FlowNodeResponse) error
 	Search(context.Context, *FlowNodeRequest, *FlowNodeResponse) error
+	StartNode(context.Context, *FlowNodeRequest, *FlowNodeResponse) error
 }
 
 func RegisterFlowNodeServiceHandler(s server.Server, hdlr FlowNodeServiceHandler, opts ...server.HandlerOption) error {
@@ -142,6 +154,7 @@ func RegisterFlowNodeServiceHandler(s server.Server, hdlr FlowNodeServiceHandler
 		Get(ctx context.Context, in *FlowNode, out *FlowNodeResponse) error
 		List(ctx context.Context, in *FlowNodeRequest, out *FlowNodeResponse) error
 		Search(ctx context.Context, in *FlowNodeRequest, out *FlowNodeResponse) error
+		StartNode(ctx context.Context, in *FlowNodeRequest, out *FlowNodeResponse) error
 	}
 	type FlowNodeService struct {
 		flowNodeService
@@ -176,4 +189,8 @@ func (h *flowNodeServiceHandler) List(ctx context.Context, in *FlowNodeRequest, 
 
 func (h *flowNodeServiceHandler) Search(ctx context.Context, in *FlowNodeRequest, out *FlowNodeResponse) error {
 	return h.FlowNodeServiceHandler.Search(ctx, in, out)
+}
+
+func (h *flowNodeServiceHandler) StartNode(ctx context.Context, in *FlowNodeRequest, out *FlowNodeResponse) error {
+	return h.FlowNodeServiceHandler.StartNode(ctx, in, out)
 }

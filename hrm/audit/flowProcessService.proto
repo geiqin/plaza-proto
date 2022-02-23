@@ -17,12 +17,16 @@ message FlowProcess {
     string	name	=2;
     int64	example_id	=3;
     int64	node_id	=4;
-    int64	auditor_id	=5;
-    string	auditor_name	=6;
-    string	content	=7;
-    int32	status	=8;
-    string	created_at	=9;
-    string	updated_at	=10;
+    int64	user_id	=5;
+    string	user_name = 6;
+    int64   next_node_id = 7;
+    string  next_user_id = 8;
+    string  next_user_name = 9;
+    string	status	=10;
+    int32   is_agree = 11;
+    string	content	= 12;
+    string	created_at	=13;
+    string	updated_at	=14;
 }
 
 

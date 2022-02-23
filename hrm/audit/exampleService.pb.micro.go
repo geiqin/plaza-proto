@@ -4,8 +4,8 @@
 package services
 
 import (
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -44,10 +44,11 @@ func NewExampleServiceEndpoints() []*api.Endpoint {
 
 type ExampleService interface {
 	Create(ctx context.Context, in *Example, opts ...client.CallOption) (*ExampleResponse, error)
-	Update(ctx context.Context, in *Example, opts ...client.CallOption) (*ExampleResponse, error)
 	Delete(ctx context.Context, in *Example, opts ...client.CallOption) (*ExampleResponse, error)
 	Get(ctx context.Context, in *Example, opts ...client.CallOption) (*ExampleResponse, error)
 	Search(ctx context.Context, in *ExampleRequest, opts ...client.CallOption) (*ExampleResponse, error)
+	Submit(ctx context.Context, in *Example, opts ...client.CallOption) (*ExampleResponse, error)
+	MySearch(ctx context.Context, in *ExampleRequest, opts ...client.CallOption) (*ExampleResponse, error)
 }
 
 type exampleService struct {
@@ -64,16 +65,6 @@ func NewExampleService(name string, c client.Client) ExampleService {
 
 func (c *exampleService) Create(ctx context.Context, in *Example, opts ...client.CallOption) (*ExampleResponse, error) {
 	req := c.c.NewRequest(c.name, "ExampleService.Create", in)
-	out := new(ExampleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *exampleService) Update(ctx context.Context, in *Example, opts ...client.CallOption) (*ExampleResponse, error) {
-	req := c.c.NewRequest(c.name, "ExampleService.Update", in)
 	out := new(ExampleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -112,23 +103,45 @@ func (c *exampleService) Search(ctx context.Context, in *ExampleRequest, opts ..
 	return out, nil
 }
 
+func (c *exampleService) Submit(ctx context.Context, in *Example, opts ...client.CallOption) (*ExampleResponse, error) {
+	req := c.c.NewRequest(c.name, "ExampleService.Submit", in)
+	out := new(ExampleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *exampleService) MySearch(ctx context.Context, in *ExampleRequest, opts ...client.CallOption) (*ExampleResponse, error) {
+	req := c.c.NewRequest(c.name, "ExampleService.MySearch", in)
+	out := new(ExampleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ExampleService service
 
 type ExampleServiceHandler interface {
 	Create(context.Context, *Example, *ExampleResponse) error
-	Update(context.Context, *Example, *ExampleResponse) error
 	Delete(context.Context, *Example, *ExampleResponse) error
 	Get(context.Context, *Example, *ExampleResponse) error
 	Search(context.Context, *ExampleRequest, *ExampleResponse) error
+	Submit(context.Context, *Example, *ExampleResponse) error
+	MySearch(context.Context, *ExampleRequest, *ExampleResponse) error
 }
 
 func RegisterExampleServiceHandler(s server.Server, hdlr ExampleServiceHandler, opts ...server.HandlerOption) error {
 	type exampleService interface {
 		Create(ctx context.Context, in *Example, out *ExampleResponse) error
-		Update(ctx context.Context, in *Example, out *ExampleResponse) error
 		Delete(ctx context.Context, in *Example, out *ExampleResponse) error
 		Get(ctx context.Context, in *Example, out *ExampleResponse) error
 		Search(ctx context.Context, in *ExampleRequest, out *ExampleResponse) error
+		Submit(ctx context.Context, in *Example, out *ExampleResponse) error
+		MySearch(ctx context.Context, in *ExampleRequest, out *ExampleResponse) error
 	}
 	type ExampleService struct {
 		exampleService
@@ -145,10 +158,6 @@ func (h *exampleServiceHandler) Create(ctx context.Context, in *Example, out *Ex
 	return h.ExampleServiceHandler.Create(ctx, in, out)
 }
 
-func (h *exampleServiceHandler) Update(ctx context.Context, in *Example, out *ExampleResponse) error {
-	return h.ExampleServiceHandler.Update(ctx, in, out)
-}
-
 func (h *exampleServiceHandler) Delete(ctx context.Context, in *Example, out *ExampleResponse) error {
 	return h.ExampleServiceHandler.Delete(ctx, in, out)
 }
@@ -159,4 +168,12 @@ func (h *exampleServiceHandler) Get(ctx context.Context, in *Example, out *Examp
 
 func (h *exampleServiceHandler) Search(ctx context.Context, in *ExampleRequest, out *ExampleResponse) error {
 	return h.ExampleServiceHandler.Search(ctx, in, out)
+}
+
+func (h *exampleServiceHandler) Submit(ctx context.Context, in *Example, out *ExampleResponse) error {
+	return h.ExampleServiceHandler.Submit(ctx, in, out)
+}
+
+func (h *exampleServiceHandler) MySearch(ctx context.Context, in *ExampleRequest, out *ExampleResponse) error {
+	return h.ExampleServiceHandler.MySearch(ctx, in, out)
 }
