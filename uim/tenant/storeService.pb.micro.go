@@ -51,22 +51,20 @@ type StoreService interface {
 	UpdateLogo(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//修改店铺名称
 	UpdateName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//设置状态
+	UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//设置店铺地址
 	SetAddress(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//删除店铺
-	Delete(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error)
-	//升级店铺数据库
-	Upgrade(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error)
+	Delete(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺信息
 	Get(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//根据名称获取店铺信息
 	GetByName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//设置状态
-	UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//查询店铺
-	Search(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error)
+	Search(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺列表
-	List(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error)
+	List(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 }
 
 type storeService struct {
@@ -121,6 +119,16 @@ func (c *storeService) UpdateName(ctx context.Context, in *Store, opts ...client
 	return out, nil
 }
 
+func (c *storeService) UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.UpdateStatus", in)
+	out := new(StoreResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *storeService) SetAddress(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.SetAddress", in)
 	out := new(StoreResponse)
@@ -131,18 +139,8 @@ func (c *storeService) SetAddress(ctx context.Context, in *Store, opts ...client
 	return out, nil
 }
 
-func (c *storeService) Delete(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error) {
+func (c *storeService) Delete(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.Delete", in)
-	out := new(StoreResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *storeService) Upgrade(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.Upgrade", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -171,17 +169,7 @@ func (c *storeService) GetByName(ctx context.Context, in *Store, opts ...client.
 	return out, nil
 }
 
-func (c *storeService) UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.UpdateStatus", in)
-	out := new(StoreResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *storeService) Search(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error) {
+func (c *storeService) Search(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.Search", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -191,7 +179,7 @@ func (c *storeService) Search(ctx context.Context, in *StoreWhere, opts ...clien
 	return out, nil
 }
 
-func (c *storeService) List(ctx context.Context, in *StoreWhere, opts ...client.CallOption) (*StoreResponse, error) {
+func (c *storeService) List(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.List", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -212,22 +200,20 @@ type StoreServiceHandler interface {
 	UpdateLogo(context.Context, *Store, *StoreResponse) error
 	//修改店铺名称
 	UpdateName(context.Context, *Store, *StoreResponse) error
+	//设置状态
+	UpdateStatus(context.Context, *Store, *StoreResponse) error
 	//设置店铺地址
 	SetAddress(context.Context, *Store, *StoreResponse) error
 	//删除店铺
-	Delete(context.Context, *StoreWhere, *StoreResponse) error
-	//升级店铺数据库
-	Upgrade(context.Context, *StoreWhere, *StoreResponse) error
+	Delete(context.Context, *StoreRequest, *StoreResponse) error
 	//获取店铺信息
 	Get(context.Context, *Store, *StoreResponse) error
 	//根据名称获取店铺信息
 	GetByName(context.Context, *Store, *StoreResponse) error
-	//设置状态
-	UpdateStatus(context.Context, *Store, *StoreResponse) error
 	//查询店铺
-	Search(context.Context, *StoreWhere, *StoreResponse) error
+	Search(context.Context, *StoreRequest, *StoreResponse) error
 	//获取店铺列表
-	List(context.Context, *StoreWhere, *StoreResponse) error
+	List(context.Context, *StoreRequest, *StoreResponse) error
 }
 
 func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts ...server.HandlerOption) error {
@@ -236,14 +222,13 @@ func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts
 		Update(ctx context.Context, in *Store, out *StoreResponse) error
 		UpdateLogo(ctx context.Context, in *Store, out *StoreResponse) error
 		UpdateName(ctx context.Context, in *Store, out *StoreResponse) error
+		UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error
 		SetAddress(ctx context.Context, in *Store, out *StoreResponse) error
-		Delete(ctx context.Context, in *StoreWhere, out *StoreResponse) error
-		Upgrade(ctx context.Context, in *StoreWhere, out *StoreResponse) error
+		Delete(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 		Get(ctx context.Context, in *Store, out *StoreResponse) error
 		GetByName(ctx context.Context, in *Store, out *StoreResponse) error
-		UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error
-		Search(ctx context.Context, in *StoreWhere, out *StoreResponse) error
-		List(ctx context.Context, in *StoreWhere, out *StoreResponse) error
+		Search(ctx context.Context, in *StoreRequest, out *StoreResponse) error
+		List(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 	}
 	type StoreService struct {
 		storeService
@@ -272,16 +257,16 @@ func (h *storeServiceHandler) UpdateName(ctx context.Context, in *Store, out *St
 	return h.StoreServiceHandler.UpdateName(ctx, in, out)
 }
 
+func (h *storeServiceHandler) UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.UpdateStatus(ctx, in, out)
+}
+
 func (h *storeServiceHandler) SetAddress(ctx context.Context, in *Store, out *StoreResponse) error {
 	return h.StoreServiceHandler.SetAddress(ctx, in, out)
 }
 
-func (h *storeServiceHandler) Delete(ctx context.Context, in *StoreWhere, out *StoreResponse) error {
+func (h *storeServiceHandler) Delete(ctx context.Context, in *StoreRequest, out *StoreResponse) error {
 	return h.StoreServiceHandler.Delete(ctx, in, out)
-}
-
-func (h *storeServiceHandler) Upgrade(ctx context.Context, in *StoreWhere, out *StoreResponse) error {
-	return h.StoreServiceHandler.Upgrade(ctx, in, out)
 }
 
 func (h *storeServiceHandler) Get(ctx context.Context, in *Store, out *StoreResponse) error {
@@ -292,14 +277,10 @@ func (h *storeServiceHandler) GetByName(ctx context.Context, in *Store, out *Sto
 	return h.StoreServiceHandler.GetByName(ctx, in, out)
 }
 
-func (h *storeServiceHandler) UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.UpdateStatus(ctx, in, out)
-}
-
-func (h *storeServiceHandler) Search(ctx context.Context, in *StoreWhere, out *StoreResponse) error {
+func (h *storeServiceHandler) Search(ctx context.Context, in *StoreRequest, out *StoreResponse) error {
 	return h.StoreServiceHandler.Search(ctx, in, out)
 }
 
-func (h *storeServiceHandler) List(ctx context.Context, in *StoreWhere, out *StoreResponse) error {
+func (h *storeServiceHandler) List(ctx context.Context, in *StoreRequest, out *StoreResponse) error {
 	return h.StoreServiceHandler.List(ctx, in, out)
 }

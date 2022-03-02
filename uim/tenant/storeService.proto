@@ -2,8 +2,7 @@ syntax = "proto3";
 package services;
 option go_package =".;services";
 import "common/base.proto";
-import "applicationService.proto";
-import "companyService.proto";
+import "versionService.proto";
 
 service StoreService {
     //创建店铺
@@ -14,67 +13,67 @@ service StoreService {
     rpc UpdateLogo (Store) returns (StoreResponse) {}
     //修改店铺名称
     rpc UpdateName (Store) returns (StoreResponse) {}
+    //设置状态
+    rpc UpdateStatus (Store) returns (StoreResponse) {}
     //设置店铺地址
     rpc SetAddress (Store) returns (StoreResponse) {}
     //删除店铺
-    rpc Delete (StoreWhere) returns (StoreResponse) {}
-    //升级店铺数据库
-    rpc Upgrade (StoreWhere) returns (StoreResponse) {}
+    rpc Delete (StoreRequest) returns (StoreResponse) {}
+
     //获取店铺信息
     rpc Get (Store) returns (StoreResponse) {}
     //根据名称获取店铺信息
     rpc GetByName (Store) returns (StoreResponse) {}
-    //设置状态
-    rpc UpdateStatus (Store) returns (StoreResponse) {}
     //查询店铺
-    rpc Search (StoreWhere) returns (StoreResponse) {}
+    rpc Search (StoreRequest) returns (StoreResponse) {}
     //获取店铺列表
-    rpc List (StoreWhere) returns (StoreResponse) {}
-}
-
-message StoreWhere {
-    int32 paged = 1;
-    int32 page_size = 2;
-    string sorting = 3;
-    string keywords = 4;
-    int64 id = 5;
-    repeated int64 ids = 6;
+    rpc List (StoreRequest) returns (StoreResponse) {}
 }
 
 message Store {
     int64	id	=1;
     string	name	=2;
-    int64	logo_id	=3;
-    string	logo_url	=4;
-    int64	creator_id	=6;
-    int32	application_id	=7;
-    string	version	=8;
+    string	title	=3;
+    int64	logo_id	=4;
+    string	logo_url	=5;
+    int32	version_id	=6;
+    int64	company_id	=7;
+    string 	company_name	=8;
     string	industry	=9;
     int64	area_id	=10;
     string	address	=11;
     string	lng	=12;
     string	lat	=13;
     string	custom_domain	=14;
-    string	status	=15;
-    bool	enabled	=16;
-    bool	trusted	=17;
-    int64 company_id = 18;
-    string	started_at	=19;
-    string	expired_at	=20;
-    string	created_at	=21;
-    string	updated_at	=22;
-    Application application =23;
-    Company company = 24;
-    string	title	=25;
+    bool	trusted	=15;
+    string	status	=16;
+    int64	creator_id	=17;
+    string	expired_at	=18;
+    string	created_at	=19;
+    string	updated_at	=20;
+    Version version =21;
 }
 
-message StoreSecret{
-    string	store_key	=1;
-    string	store_secret	=2;
+message StoreRequest{
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+
+    int64 id = 4;
+    string	name	=5;
+    string	store_key	=6;
+    string	store_secret	=7;
+    string industry = 8;
+    string status = 9;
+    string	start_date	=10;
+    string	end_date	=11;
+    string keywords = 12;
+    int64	creator_id	=13;
+    int32	application_id =14;
+    int64	area_id	=15;
+    repeated int64 ids = 16;
 }
 
-
-//
 message StoreData {
     Store entity = 1;
     common.Pager pager =2;
@@ -82,8 +81,6 @@ message StoreData {
     common.Info info =4;
 }
 
-
-//
 message StoreResponse {
     StoreData data = 1;
     common.Error error = 2;

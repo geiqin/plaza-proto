@@ -30,7 +30,7 @@ type AuthorizeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	StoreId string `protobuf:"bytes,1,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	StoreId string `protobuf:"bytes,1,opt,name=store_id,json=storeId,proto3" json:"store_id"`
 }
 
 func (x *AuthorizeRequest) Reset() {

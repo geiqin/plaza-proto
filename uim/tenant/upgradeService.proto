@@ -1,0 +1,33 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+//升级数据库
+service UpgradeService {
+    //升级店铺
+    rpc Store (UpgradeRequest) returns (UpgradeResponse) {}
+    //升级平台库
+    rpc Master (UpgradeRequest) returns (UpgradeResponse) {}
+    //重置数据
+    rpc Reset (UpgradeRequest) returns (UpgradeResponse) {}
+}
+
+message UpgradeRequest{
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    int64 store_id = 4;
+    string type = 5;
+    bool overwrite = 6;
+    repeated int64 ids = 7;
+}
+
+message UpgradeData {
+    common.Info info =1;
+}
+
+message UpgradeResponse {
+    UpgradeData data = 1;
+    common.Error error = 2;
+}
