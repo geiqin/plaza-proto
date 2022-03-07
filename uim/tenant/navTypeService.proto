@@ -41,9 +41,10 @@ message NavTypeRequest {
     string title = 6;
     string status = 7;
     int32 version_id =8;
-    string tag =9;
-    int32 ver =10;
-    repeated int64 ids = 11;
+    int64 store_id =9;
+    string tag =10;
+    int32 ver =11;
+    repeated int64 ids = 12;
 }
 
 message NavTypeData {
