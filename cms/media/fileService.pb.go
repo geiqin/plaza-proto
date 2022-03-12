@@ -32,35 +32,35 @@ type File struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Title        string  `protobuf:"bytes,2,opt,name=title,proto3" json:"title"`
-	Type         string  `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
-	Source       string  `protobuf:"bytes,4,opt,name=source,proto3" json:"source"`
-	IsPrivate    bool    `protobuf:"varint,5,opt,name=is_private,json=isPrivate,proto3" json:"is_private"`
-	CatId        int32   `protobuf:"varint,6,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
-	FileName     string  `protobuf:"bytes,7,opt,name=file_name,json=fileName,proto3" json:"file_name"`
-	RawName      string  `protobuf:"bytes,8,opt,name=raw_name,json=rawName,proto3" json:"raw_name"`
-	Hash         string  `protobuf:"bytes,9,opt,name=hash,proto3" json:"hash"`
-	PersistentId string  `protobuf:"bytes,10,opt,name=persistent_id,json=persistentId,proto3" json:"persistent_id"`
-	Path         string  `protobuf:"bytes,11,opt,name=path,proto3" json:"path"`
-	Url          string  `protobuf:"bytes,12,opt,name=url,proto3" json:"url"`
-	MimeType     string  `protobuf:"bytes,13,opt,name=mime_type,json=mimeType,proto3" json:"mime_type"`
-	Size         float32 `protobuf:"fixed32,14,opt,name=size,proto3" json:"size"`
-	Width        int32   `protobuf:"varint,15,opt,name=width,proto3" json:"width"`
-	Height       int32   `protobuf:"varint,16,opt,name=height,proto3" json:"height"`
-	Length       int64   `protobuf:"varint,17,opt,name=length,proto3" json:"length"`
-	Pixel        int32   `protobuf:"varint,18,opt,name=pixel,proto3" json:"pixel"`
-	CoverId      int64   `protobuf:"varint,19,opt,name=cover_id,json=coverId,proto3" json:"cover_id"`
-	CoverUrl     string  `protobuf:"bytes,20,opt,name=cover_url,json=coverUrl,proto3" json:"cover_url"`
-	Memo         string  `protobuf:"bytes,21,opt,name=memo,proto3" json:"memo"`
-	Flag         string  `protobuf:"bytes,22,opt,name=flag,proto3" json:"flag"`
-	UserId       int64   `protobuf:"varint,23,opt,name=user_id,json=userId,proto3" json:"user_id"`
-	CustomerId   int64   `protobuf:"varint,24,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	Sort         int32   `protobuf:"varint,25,opt,name=sort,proto3" json:"sort"`
-	Code         string  `protobuf:"bytes,26,opt,name=code,proto3" json:"code"`
-	CreatedAt    string  `protobuf:"bytes,27,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt    string  `protobuf:"bytes,28,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Cat          *Cat    `protobuf:"bytes,29,opt,name=cat,proto3" json:"cat"`
+	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Title        string `protobuf:"bytes,2,opt,name=title,proto3" json:"title"`
+	Type         string `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
+	Source       string `protobuf:"bytes,4,opt,name=source,proto3" json:"source"`
+	IsPrivate    bool   `protobuf:"varint,5,opt,name=is_private,json=isPrivate,proto3" json:"is_private"`
+	CatId        int32  `protobuf:"varint,6,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
+	FileName     string `protobuf:"bytes,7,opt,name=file_name,json=fileName,proto3" json:"file_name"`
+	RawName      string `protobuf:"bytes,8,opt,name=raw_name,json=rawName,proto3" json:"raw_name"`
+	Hash         string `protobuf:"bytes,9,opt,name=hash,proto3" json:"hash"`
+	PersistentId string `protobuf:"bytes,10,opt,name=persistent_id,json=persistentId,proto3" json:"persistent_id"`
+	Path         string `protobuf:"bytes,11,opt,name=path,proto3" json:"path"`
+	Url          string `protobuf:"bytes,12,opt,name=url,proto3" json:"url"`
+	MimeType     string `protobuf:"bytes,13,opt,name=mime_type,json=mimeType,proto3" json:"mime_type"`
+	Size         int64  `protobuf:"varint,14,opt,name=size,proto3" json:"size"`
+	Width        int32  `protobuf:"varint,15,opt,name=width,proto3" json:"width"`
+	Height       int32  `protobuf:"varint,16,opt,name=height,proto3" json:"height"`
+	Length       int64  `protobuf:"varint,17,opt,name=length,proto3" json:"length"`
+	Pixel        int32  `protobuf:"varint,18,opt,name=pixel,proto3" json:"pixel"`
+	CoverId      int64  `protobuf:"varint,19,opt,name=cover_id,json=coverId,proto3" json:"cover_id"`
+	CoverUrl     string `protobuf:"bytes,20,opt,name=cover_url,json=coverUrl,proto3" json:"cover_url"`
+	Memo         string `protobuf:"bytes,21,opt,name=memo,proto3" json:"memo"`
+	Flag         string `protobuf:"bytes,22,opt,name=flag,proto3" json:"flag"`
+	UserId       int64  `protobuf:"varint,23,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	CustomerId   int64  `protobuf:"varint,24,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Sort         int32  `protobuf:"varint,25,opt,name=sort,proto3" json:"sort"`
+	Code         string `protobuf:"bytes,26,opt,name=code,proto3" json:"code"`
+	CreatedAt    string `protobuf:"bytes,27,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt    string `protobuf:"bytes,28,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Cat          *Cat   `protobuf:"bytes,29,opt,name=cat,proto3" json:"cat"`
 }
 
 func (x *File) Reset() {
@@ -186,7 +186,7 @@ func (x *File) GetMimeType() string {
 	return ""
 }
 
-func (x *File) GetSize() float32 {
+func (x *File) GetSize() int64 {
 	if x != nil {
 		return x.Size
 	}
@@ -647,7 +647,7 @@ var file_fileService_proto_rawDesc = []byte{
 	0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x12, 0x1b, 0x0a, 0x09, 0x6d, 0x69,
 	0x6d, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6d,
 	0x69, 0x6d, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x18,
-	0x0e, 0x20, 0x01, 0x28, 0x02, 0x52, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x77,
+	0x0e, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x77,
 	0x69, 0x64, 0x74, 0x68, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x77, 0x69, 0x64, 0x74,
 	0x68, 0x12, 0x16, 0x0a, 0x06, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x10, 0x20, 0x01, 0x28,
 	0x05, 0x52, 0x06, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x6c, 0x65, 0x6e,
