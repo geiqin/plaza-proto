@@ -50,6 +50,8 @@ type FileService interface {
 	Search(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error)
 	SetCat(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error)
 	CodeList(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error)
+	//服务调用（拉取并确认）
+	PullList(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error)
 }
 
 type fileService struct {
@@ -134,6 +136,16 @@ func (c *fileService) CodeList(ctx context.Context, in *FileRequest, opts ...cli
 	return out, nil
 }
 
+func (c *fileService) PullList(ctx context.Context, in *FileRequest, opts ...client.CallOption) (*FileResponse, error) {
+	req := c.c.NewRequest(c.name, "FileService.PullList", in)
+	out := new(FileResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for FileService service
 
 type FileServiceHandler interface {
@@ -144,6 +156,8 @@ type FileServiceHandler interface {
 	Search(context.Context, *FileRequest, *FileResponse) error
 	SetCat(context.Context, *FileRequest, *FileResponse) error
 	CodeList(context.Context, *FileRequest, *FileResponse) error
+	//服务调用（拉取并确认）
+	PullList(context.Context, *FileRequest, *FileResponse) error
 }
 
 func RegisterFileServiceHandler(s server.Server, hdlr FileServiceHandler, opts ...server.HandlerOption) error {
@@ -155,6 +169,7 @@ func RegisterFileServiceHandler(s server.Server, hdlr FileServiceHandler, opts .
 		Search(ctx context.Context, in *FileRequest, out *FileResponse) error
 		SetCat(ctx context.Context, in *FileRequest, out *FileResponse) error
 		CodeList(ctx context.Context, in *FileRequest, out *FileResponse) error
+		PullList(ctx context.Context, in *FileRequest, out *FileResponse) error
 	}
 	type FileService struct {
 		fileService
@@ -193,6 +208,10 @@ func (h *fileServiceHandler) SetCat(ctx context.Context, in *FileRequest, out *F
 
 func (h *fileServiceHandler) CodeList(ctx context.Context, in *FileRequest, out *FileResponse) error {
 	return h.FileServiceHandler.CodeList(ctx, in, out)
+}
+
+func (h *fileServiceHandler) PullList(ctx context.Context, in *FileRequest, out *FileResponse) error {
+	return h.FileServiceHandler.PullList(ctx, in, out)
 }
 
 // Api Endpoints for MyFileService service

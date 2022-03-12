@@ -12,6 +12,8 @@ service FileService {
     rpc Search (FileRequest) returns (FileResponse) {}
     rpc SetCat (FileRequest) returns (FileResponse) {}
     rpc CodeList (FileRequest) returns (FileResponse) {}
+    //服务调用（拉取并确认）
+    rpc PullList (FileRequest) returns (FileResponse) {}
 }
 //我的文件
 service MyFileService {
@@ -24,34 +26,36 @@ service MyFileService {
 //文件信息
 message File {
     int64 id =1;
-    string title =2;
-    string type	 =3;
-    string source	 =4;
-    bool is_private	 =5;
-    int32 cat_id =6;
-    string file_name =7;
-    string raw_name =8;
-    string hash =9;
-    string persistent_id =10;
-    string path	 =11;
-    string url	 =12;
-    string mime_type =13;
-    int64 size	 =14;
-    int32 width	 =15;
-    int32 height =16;
-    int64 length	 =17;
-    int32 pixel =18;
-    int64 cover_id =19;
-    string cover_url =20;
-    string memo	 =21;
-    string flag	 =22;
-    int64 user_id	=23;
-    int64 customer_id	=24;
-    int32 sort =25;
-    string code =26;
-    string created_at =27;
-    string updated_at =28;
-    Cat cat =29;
+    string hash =2;
+    string code =3;
+    string title =4;
+    string type	 =5;
+    bool is_private	 =6;
+    string source	 =7;
+    string persistent_id =8;
+    int32 cat_id =9;
+    string file_name =10;
+    string raw_name =11;
+    string path	 =12;
+    string url	 =13;
+    string mime_type =14;
+    int64 size	 =15;
+    int32 width	 =16;
+    int32 height =17;
+    int64 length	 =18;
+    int32 pixel =19;
+    int64 cover_id =20;
+    string cover_url =21;
+    string memo	 =22;
+    string flag	 =23;
+    string creator_type	=24;
+    int64 creator_id	=25;
+    string creator_name	=26;
+    bool confirmed	=27;
+    int32 sort =28;
+    string created_at =29;
+    string updated_at =30;
+    Cat cat =31;
 }
 
 // 修改文件请求信息
@@ -71,8 +75,8 @@ message FileRequest {
     string persistent_id =12;
     string flag	 =13;
     bool is_private	 =14;
-    int64 customer_id	 =15;
-    int64 user_id	 =16;
+    string creator_type	 =15;
+    int64 creator_id	 =16;
     string memo	 =17;
     int64 cover_id =18;
     string cover_url =19;
