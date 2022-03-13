@@ -17,15 +17,17 @@ service DeptService {
 
 message Dept {
     int32	id	=1;
-    string	code	=2;
-    string	name	=3;
-    int32	dept_id	=4;
-    string	type	=5;
-    int32	sort	=6;
-    string	created_at	=7;
-    string	updated_at	=8;
-    Dept	parent	=9;
-    repeated Dept	children	=10;
+    string	name	=2;
+    int32	parent_id	=3;
+    string	path	=4;
+    int32	sort	=5;
+    string  leader = 6;
+    string  phone = 7;
+    string  email = 8;
+    string  status = 9;
+    string	created_at	=10;
+    string	updated_at	=11;
+    repeated Dept children	=12;
 }
 
 
@@ -35,11 +37,10 @@ message DeptRequest {
     int32 top = 3;
     //my self
     int32	id	=4;
-    string	code	=5;
-    string	name	=6;
-    string	type	=7;
-    int32	dept_id	=8;
-    repeated  int32	 ids	=9;
+    string	name	=5;
+    int32	parent_id	=6;
+    string  status = 7;
+    repeated  int32	 ids	=8;
 }
 
 message DeptData{
