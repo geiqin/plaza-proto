@@ -46,6 +46,8 @@ type VersionService interface {
 	Create(ctx context.Context, in *Version, opts ...client.CallOption) (*VersionResponse, error)
 	Update(ctx context.Context, in *Version, opts ...client.CallOption) (*VersionResponse, error)
 	Delete(ctx context.Context, in *Version, opts ...client.CallOption) (*VersionResponse, error)
+	AddItem(ctx context.Context, in *VersionRequest, opts ...client.CallOption) (*VersionResponse, error)
+	RemoveItem(ctx context.Context, in *VersionRequest, opts ...client.CallOption) (*VersionResponse, error)
 	Get(ctx context.Context, in *Version, opts ...client.CallOption) (*VersionResponse, error)
 	Search(ctx context.Context, in *VersionRequest, opts ...client.CallOption) (*VersionResponse, error)
 	List(ctx context.Context, in *VersionRequest, opts ...client.CallOption) (*VersionResponse, error)
@@ -93,6 +95,26 @@ func (c *versionService) Delete(ctx context.Context, in *Version, opts ...client
 	return out, nil
 }
 
+func (c *versionService) AddItem(ctx context.Context, in *VersionRequest, opts ...client.CallOption) (*VersionResponse, error) {
+	req := c.c.NewRequest(c.name, "VersionService.AddItem", in)
+	out := new(VersionResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *versionService) RemoveItem(ctx context.Context, in *VersionRequest, opts ...client.CallOption) (*VersionResponse, error) {
+	req := c.c.NewRequest(c.name, "VersionService.RemoveItem", in)
+	out := new(VersionResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *versionService) Get(ctx context.Context, in *Version, opts ...client.CallOption) (*VersionResponse, error) {
 	req := c.c.NewRequest(c.name, "VersionService.Get", in)
 	out := new(VersionResponse)
@@ -129,6 +151,8 @@ type VersionServiceHandler interface {
 	Create(context.Context, *Version, *VersionResponse) error
 	Update(context.Context, *Version, *VersionResponse) error
 	Delete(context.Context, *Version, *VersionResponse) error
+	AddItem(context.Context, *VersionRequest, *VersionResponse) error
+	RemoveItem(context.Context, *VersionRequest, *VersionResponse) error
 	Get(context.Context, *Version, *VersionResponse) error
 	Search(context.Context, *VersionRequest, *VersionResponse) error
 	List(context.Context, *VersionRequest, *VersionResponse) error
@@ -139,6 +163,8 @@ func RegisterVersionServiceHandler(s server.Server, hdlr VersionServiceHandler, 
 		Create(ctx context.Context, in *Version, out *VersionResponse) error
 		Update(ctx context.Context, in *Version, out *VersionResponse) error
 		Delete(ctx context.Context, in *Version, out *VersionResponse) error
+		AddItem(ctx context.Context, in *VersionRequest, out *VersionResponse) error
+		RemoveItem(ctx context.Context, in *VersionRequest, out *VersionResponse) error
 		Get(ctx context.Context, in *Version, out *VersionResponse) error
 		Search(ctx context.Context, in *VersionRequest, out *VersionResponse) error
 		List(ctx context.Context, in *VersionRequest, out *VersionResponse) error
@@ -164,6 +190,14 @@ func (h *versionServiceHandler) Update(ctx context.Context, in *Version, out *Ve
 
 func (h *versionServiceHandler) Delete(ctx context.Context, in *Version, out *VersionResponse) error {
 	return h.VersionServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *versionServiceHandler) AddItem(ctx context.Context, in *VersionRequest, out *VersionResponse) error {
+	return h.VersionServiceHandler.AddItem(ctx, in, out)
+}
+
+func (h *versionServiceHandler) RemoveItem(ctx context.Context, in *VersionRequest, out *VersionResponse) error {
+	return h.VersionServiceHandler.RemoveItem(ctx, in, out)
 }
 
 func (h *versionServiceHandler) Get(ctx context.Context, in *Version, out *VersionResponse) error {

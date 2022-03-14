@@ -8,6 +8,8 @@ service VersionService {
     rpc Create (Version) returns (VersionResponse) {}
     rpc Update (Version) returns (VersionResponse) {}
     rpc Delete (Version) returns (VersionResponse) {}
+    rpc AddItem (VersionRequest) returns (VersionResponse) {}
+    rpc RemoveItem (VersionRequest) returns (VersionResponse) {}
     rpc Get (Version) returns (VersionResponse) {}
     rpc Search (VersionRequest) returns (VersionResponse) {}
     rpc List (VersionRequest) returns (VersionResponse) {}
@@ -26,7 +28,7 @@ message Version {
     string	status =11;
     string	created_at =12;
     string	updated_at =13;
-    Module  modules =14;
+    repeated Module modules =14;
 }
 
 message VersionRequest {
@@ -38,7 +40,9 @@ message VersionRequest {
     string name = 6;
     string type = 7;
     string status = 8;
-    repeated int32 ids = 9;
+    int32 module_id = 9;
+    repeated int32 ids = 10;
+    repeated int32 module_ids = 11;
 }
 
 message VersionData {

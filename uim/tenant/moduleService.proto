@@ -15,16 +15,17 @@ service ModuleService {
 message Module {
     int32	id = 1;
     string name = 2;
-    string type = 3;
-    int64 icon_id = 4;
-    string icon_url =5;
-    bool required = 6;
-    string func_list = 7;
-    string memo	= 8;
-    int32 sort = 9;
-    string status	= 10;
-    string created_at	= 11;
-    string updated_at	= 12;
+    string title = 3;
+    string type = 4;
+    int64 icon_id = 5;
+    string icon_url =6;
+    bool required = 7;
+    string dependents = 8;
+    string memo	= 9;
+    int32 sort = 10;
+    string status	= 11;
+    string created_at	= 12;
+    string updated_at	= 13;
 }
 
 
@@ -35,9 +36,10 @@ message ModuleRequest {
     string keywords = 4;
     int32 id = 5;
     string name = 6;
-    string type = 7;
-    string status = 8;
-    repeated int64 ids = 9;
+    string title =7;
+    string type = 8;
+    string status = 9;
+    repeated int64 ids = 10;
 }
 
 message ModuleData {
