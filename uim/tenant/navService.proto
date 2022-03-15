@@ -30,7 +30,7 @@ message Nav {
     bool nocache =13;
     bool hidden =14;
     string permission =15;
-    int32 method  =16;
+    string method  =16;
     int32 sort  =17;
     string memo  =18;
     string status =19;
