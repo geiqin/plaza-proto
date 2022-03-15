@@ -29,14 +29,16 @@ message Nav {
     string component  =12;
     bool nocache =13;
     bool hidden =14;
-    int32 sort  =15;
-    string memo  =16;
-    string status =17;
-    string created_at =18;
-    string updated_at =19;
-    map<string,string> metas  =20;
-    Nav parent = 21;
-    repeated Nav children = 22;
+    string permission =15;
+    int32 method  =16;
+    int32 sort  =17;
+    string memo  =18;
+    string status =19;
+    string created_at =20;
+    string updated_at =21;
+    map<string,string> metas  =22;
+    Nav parent = 23;
+    repeated Nav children = 24;
 }
 
 
