@@ -5,6 +5,7 @@ package services
 
 import (
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -42,7 +43,9 @@ func NewAuthorizeServiceEndpoints() []*api.Endpoint {
 // Client API for AuthorizeService service
 
 type AuthorizeService interface {
-	Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*UserResponse, error)
+	Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error)
+	UserInfo(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error)
+	PermissionInfo(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error)
 	ModifyMobile(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
 	ModifyAvatar(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
 	ModifyPwd(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*UserResponse, error)
@@ -60,9 +63,29 @@ func NewAuthorizeService(name string, c client.Client) AuthorizeService {
 	}
 }
 
-func (c *authorizeService) Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*UserResponse, error) {
+func (c *authorizeService) Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error) {
 	req := c.c.NewRequest(c.name, "AuthorizeService.Info", in)
-	out := new(UserResponse)
+	out := new(AuthorizeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authorizeService) UserInfo(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error) {
+	req := c.c.NewRequest(c.name, "AuthorizeService.UserInfo", in)
+	out := new(AuthorizeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authorizeService) PermissionInfo(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error) {
+	req := c.c.NewRequest(c.name, "AuthorizeService.PermissionInfo", in)
+	out := new(AuthorizeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -103,7 +126,9 @@ func (c *authorizeService) ModifyPwd(ctx context.Context, in *AuthorizeRequest, 
 // Server API for AuthorizeService service
 
 type AuthorizeServiceHandler interface {
-	Info(context.Context, *AuthorizeRequest, *UserResponse) error
+	Info(context.Context, *AuthorizeRequest, *AuthorizeResponse) error
+	UserInfo(context.Context, *AuthorizeRequest, *AuthorizeResponse) error
+	PermissionInfo(context.Context, *AuthorizeRequest, *AuthorizeResponse) error
 	ModifyMobile(context.Context, *User, *UserResponse) error
 	ModifyAvatar(context.Context, *User, *UserResponse) error
 	ModifyPwd(context.Context, *AuthorizeRequest, *UserResponse) error
@@ -111,7 +136,9 @@ type AuthorizeServiceHandler interface {
 
 func RegisterAuthorizeServiceHandler(s server.Server, hdlr AuthorizeServiceHandler, opts ...server.HandlerOption) error {
 	type authorizeService interface {
-		Info(ctx context.Context, in *AuthorizeRequest, out *UserResponse) error
+		Info(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
+		UserInfo(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
+		PermissionInfo(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
 		ModifyMobile(ctx context.Context, in *User, out *UserResponse) error
 		ModifyAvatar(ctx context.Context, in *User, out *UserResponse) error
 		ModifyPwd(ctx context.Context, in *AuthorizeRequest, out *UserResponse) error
@@ -127,8 +154,16 @@ type authorizeServiceHandler struct {
 	AuthorizeServiceHandler
 }
 
-func (h *authorizeServiceHandler) Info(ctx context.Context, in *AuthorizeRequest, out *UserResponse) error {
+func (h *authorizeServiceHandler) Info(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error {
 	return h.AuthorizeServiceHandler.Info(ctx, in, out)
+}
+
+func (h *authorizeServiceHandler) UserInfo(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error {
+	return h.AuthorizeServiceHandler.UserInfo(ctx, in, out)
+}
+
+func (h *authorizeServiceHandler) PermissionInfo(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error {
+	return h.AuthorizeServiceHandler.PermissionInfo(ctx, in, out)
 }
 
 func (h *authorizeServiceHandler) ModifyMobile(ctx context.Context, in *User, out *UserResponse) error {

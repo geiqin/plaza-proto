@@ -44,14 +44,15 @@ message Store {
     string	address	=11;
     string	lng	=12;
     string	lat	=13;
-    string	custom_domain	=14;
-    bool	trusted	=15;
-    string	status	=16;
-    int64	creator_id	=17;
-    string	expired_at	=18;
-    string	created_at	=19;
-    string	updated_at	=20;
-    Version version =21;
+    string	region	=14;
+    string	custom_domain	=15;
+    bool	trusted	=16;
+    string	status	=17;
+    int64	creator_id	=18;
+    string	expired_at	=19;
+    string	created_at	=20;
+    string	updated_at	=21;
+    Version version =22;
 }
 
 message StoreRequest{
@@ -68,10 +69,11 @@ message StoreRequest{
     string	start_date	=10;
     string	end_date	=11;
     string keywords = 12;
-    int64	creator_id	=13;
-    int32	application_id =14;
-    int64	area_id	=15;
-    repeated int64 ids = 16;
+    string region = 13;
+    int64	creator_id	=14;
+    int32	application_id =15;
+    int64	area_id	=16;
+    repeated int64 ids = 17;
 }
 
 message StoreData {

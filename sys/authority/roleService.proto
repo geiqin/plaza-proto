@@ -21,6 +21,7 @@ message Role {
     string created_at = 5;
     string updated_at = 6;
     repeated Nav navs = 7;
+    repeated int32 nav_ids = 8;
 }
 
 message RoleRequest {
