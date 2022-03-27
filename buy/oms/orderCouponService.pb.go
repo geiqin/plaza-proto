@@ -33,7 +33,7 @@ type OrderCoupon struct {
 
 	Id          int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
 	OrderId     int64   `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	CustomerId  int64   `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId    int64   `protobuf:"varint,3,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	CouponId    int64   `protobuf:"varint,4,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`
 	CouponNum   int32   `protobuf:"varint,5,opt,name=coupon_num,json=couponNum,proto3" json:"coupon_num"`
 	Method      string  `protobuf:"bytes,6,opt,name=Method,proto3" json:"Method"`
@@ -88,9 +88,9 @@ func (x *OrderCoupon) GetOrderId() int64 {
 	return 0
 }
 
-func (x *OrderCoupon) GetCustomerId() int64 {
+func (x *OrderCoupon) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }

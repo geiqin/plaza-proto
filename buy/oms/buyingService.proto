@@ -26,7 +26,7 @@ message Buying {
     float freight = 6;
     float amount = 7;
     int64 address_id = 8;
-    int64 customer_id = 9;
+    int64 member_id = 9;
     int64 use_ticket_id = 10; //正在使用的优惠劵ID
     string message = 11; //买家留言(50字以内)
     // @inject_tag: gorm:"-"
@@ -75,7 +75,7 @@ message BuyingItem {
 
 //购买清单请求(订单下单使用)
 message BuyingRequest{
-    int64 customer_id =1; //后台下单专用
+    int64 member_id =1; //后台下单专用
     int32 source =2; //请求来源 1是直接购买，2是 购物车下单，3，确认订单重复计算
     int64 address_id =3; //收货地址
     string message =4; //买家留言(50字以内)

@@ -121,13 +121,13 @@ func (x *OrderUnhandledStats) GetUpdatedAt() string {
 	return ""
 }
 
-type CustomerOrderUnhandledStats struct {
+type MemberOrderUnhandledStats struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Id           int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CustomerId   int64  `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId     int64  `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	UnpayNum     int32  `protobuf:"varint,3,opt,name=unpay_num,json=unpayNum,proto3" json:"unpay_num"`
 	UnshippedNum int32  `protobuf:"varint,4,opt,name=unshipped_num,json=unshippedNum,proto3" json:"unshipped_num"`
 	ShippedNum   int32  `protobuf:"varint,5,opt,name=shipped_num,json=shippedNum,proto3" json:"shipped_num"`
@@ -136,8 +136,8 @@ type CustomerOrderUnhandledStats struct {
 	UpdatedAt    string `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
-func (x *CustomerOrderUnhandledStats) Reset() {
-	*x = CustomerOrderUnhandledStats{}
+func (x *MemberOrderUnhandledStats) Reset() {
+	*x = MemberOrderUnhandledStats{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_orderUnhandledStatsService_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -145,13 +145,13 @@ func (x *CustomerOrderUnhandledStats) Reset() {
 	}
 }
 
-func (x *CustomerOrderUnhandledStats) String() string {
+func (x *MemberOrderUnhandledStats) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CustomerOrderUnhandledStats) ProtoMessage() {}
+func (*MemberOrderUnhandledStats) ProtoMessage() {}
 
-func (x *CustomerOrderUnhandledStats) ProtoReflect() protoreflect.Message {
+func (x *MemberOrderUnhandledStats) ProtoReflect() protoreflect.Message {
 	mi := &file_orderUnhandledStatsService_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -163,61 +163,61 @@ func (x *CustomerOrderUnhandledStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CustomerOrderUnhandledStats.ProtoReflect.Descriptor instead.
-func (*CustomerOrderUnhandledStats) Descriptor() ([]byte, []int) {
+// Deprecated: Use MemberOrderUnhandledStats.ProtoReflect.Descriptor instead.
+func (*MemberOrderUnhandledStats) Descriptor() ([]byte, []int) {
 	return file_orderUnhandledStatsService_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CustomerOrderUnhandledStats) GetId() int32 {
+func (x *MemberOrderUnhandledStats) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *CustomerOrderUnhandledStats) GetCustomerId() int64 {
+func (x *MemberOrderUnhandledStats) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
 
-func (x *CustomerOrderUnhandledStats) GetUnpayNum() int32 {
+func (x *MemberOrderUnhandledStats) GetUnpayNum() int32 {
 	if x != nil {
 		return x.UnpayNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderUnhandledStats) GetUnshippedNum() int32 {
+func (x *MemberOrderUnhandledStats) GetUnshippedNum() int32 {
 	if x != nil {
 		return x.UnshippedNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderUnhandledStats) GetShippedNum() int32 {
+func (x *MemberOrderUnhandledStats) GetShippedNum() int32 {
 	if x != nil {
 		return x.ShippedNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderUnhandledStats) GetRefundNum() int32 {
+func (x *MemberOrderUnhandledStats) GetRefundNum() int32 {
 	if x != nil {
 		return x.RefundNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderUnhandledStats) GetCreatedAt() string {
+func (x *MemberOrderUnhandledStats) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return ""
 }
 
-func (x *CustomerOrderUnhandledStats) GetUpdatedAt() string {
+func (x *MemberOrderUnhandledStats) GetUpdatedAt() string {
 	if x != nil {
 		return x.UpdatedAt
 	}
@@ -303,20 +303,20 @@ func (x *OrderHandledStatsResponse) GetInfo() *common.Info {
 	return nil
 }
 
-type CustomerOrderHandledStatsResponse struct {
+type MemberOrderHandledStatsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *CustomerOrderUnhandledStats   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager                  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*CustomerOrderUnhandledStats `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error  *common.Error                  `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info   *common.Info                   `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity *MemberOrderUnhandledStats   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager                `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*MemberOrderUnhandledStats `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error                `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info                 `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
-func (x *CustomerOrderHandledStatsResponse) Reset() {
-	*x = CustomerOrderHandledStatsResponse{}
+func (x *MemberOrderHandledStatsResponse) Reset() {
+	*x = MemberOrderHandledStatsResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_orderUnhandledStatsService_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -324,13 +324,13 @@ func (x *CustomerOrderHandledStatsResponse) Reset() {
 	}
 }
 
-func (x *CustomerOrderHandledStatsResponse) String() string {
+func (x *MemberOrderHandledStatsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CustomerOrderHandledStatsResponse) ProtoMessage() {}
+func (*MemberOrderHandledStatsResponse) ProtoMessage() {}
 
-func (x *CustomerOrderHandledStatsResponse) ProtoReflect() protoreflect.Message {
+func (x *MemberOrderHandledStatsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_orderUnhandledStatsService_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -342,40 +342,40 @@ func (x *CustomerOrderHandledStatsResponse) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CustomerOrderHandledStatsResponse.ProtoReflect.Descriptor instead.
-func (*CustomerOrderHandledStatsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use MemberOrderHandledStatsResponse.ProtoReflect.Descriptor instead.
+func (*MemberOrderHandledStatsResponse) Descriptor() ([]byte, []int) {
 	return file_orderUnhandledStatsService_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CustomerOrderHandledStatsResponse) GetEntity() *CustomerOrderUnhandledStats {
+func (x *MemberOrderHandledStatsResponse) GetEntity() *MemberOrderUnhandledStats {
 	if x != nil {
 		return x.Entity
 	}
 	return nil
 }
 
-func (x *CustomerOrderHandledStatsResponse) GetPager() *common.Pager {
+func (x *MemberOrderHandledStatsResponse) GetPager() *common.Pager {
 	if x != nil {
 		return x.Pager
 	}
 	return nil
 }
 
-func (x *CustomerOrderHandledStatsResponse) GetItems() []*CustomerOrderUnhandledStats {
+func (x *MemberOrderHandledStatsResponse) GetItems() []*MemberOrderUnhandledStats {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-func (x *CustomerOrderHandledStatsResponse) GetError() *common.Error {
+func (x *MemberOrderHandledStatsResponse) GetError() *common.Error {
 	if x != nil {
 		return x.Error
 	}
 	return nil
 }
 
-func (x *CustomerOrderHandledStatsResponse) GetInfo() *common.Info {
+func (x *MemberOrderHandledStatsResponse) GetInfo() *common.Info {
 	if x != nil {
 		return x.Info
 	}
@@ -471,13 +471,13 @@ func file_orderUnhandledStatsService_proto_rawDescGZIP() []byte {
 
 var file_orderUnhandledStatsService_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_orderUnhandledStatsService_proto_goTypes = []interface{}{
-	(*OrderUnhandledStats)(nil),               // 0: services.OrderUnhandledStats
-	(*CustomerOrderUnhandledStats)(nil),       // 1: services.CustomerOrderUnhandledStats
-	(*OrderHandledStatsResponse)(nil),         // 2: services.OrderHandledStatsResponse
-	(*CustomerOrderHandledStatsResponse)(nil), // 3: services.CustomerOrderHandledStatsResponse
-	(*common.Pager)(nil),                      // 4: common.Pager
-	(*common.Error)(nil),                      // 5: common.Error
-	(*common.Info)(nil),                       // 6: common.Info
+	(*OrderUnhandledStats)(nil),             // 0: services.OrderUnhandledStats
+	(*MemberOrderUnhandledStats)(nil),       // 1: services.MemberOrderUnhandledStats
+	(*OrderHandledStatsResponse)(nil),       // 2: services.OrderHandledStatsResponse
+	(*MemberOrderHandledStatsResponse)(nil), // 3: services.MemberOrderHandledStatsResponse
+	(*common.Pager)(nil),                    // 4: common.Pager
+	(*common.Error)(nil),                    // 5: common.Error
+	(*common.Info)(nil),                     // 6: common.Info
 }
 var file_orderUnhandledStatsService_proto_depIdxs = []int32{
 	0,  // 0: services.OrderHandledStatsResponse.entity:type_name -> services.OrderUnhandledStats
@@ -485,11 +485,11 @@ var file_orderUnhandledStatsService_proto_depIdxs = []int32{
 	0,  // 2: services.OrderHandledStatsResponse.items:type_name -> services.OrderUnhandledStats
 	5,  // 3: services.OrderHandledStatsResponse.error:type_name -> common.Error
 	6,  // 4: services.OrderHandledStatsResponse.info:type_name -> common.Info
-	1,  // 5: services.CustomerOrderHandledStatsResponse.entity:type_name -> services.CustomerOrderUnhandledStats
-	4,  // 6: services.CustomerOrderHandledStatsResponse.pager:type_name -> common.Pager
-	1,  // 7: services.CustomerOrderHandledStatsResponse.items:type_name -> services.CustomerOrderUnhandledStats
-	5,  // 8: services.CustomerOrderHandledStatsResponse.error:type_name -> common.Error
-	6,  // 9: services.CustomerOrderHandledStatsResponse.info:type_name -> common.Info
+	1,  // 5: services.MemberOrderHandledStatsResponse.entity:type_name -> services.MemberOrderUnhandledStats
+	4,  // 6: services.MemberOrderHandledStatsResponse.pager:type_name -> common.Pager
+	1,  // 7: services.MemberOrderHandledStatsResponse.items:type_name -> services.MemberOrderUnhandledStats
+	5,  // 8: services.MemberOrderHandledStatsResponse.error:type_name -> common.Error
+	6,  // 9: services.MemberOrderHandledStatsResponse.info:type_name -> common.Info
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -516,7 +516,7 @@ func file_orderUnhandledStatsService_proto_init() {
 			}
 		}
 		file_orderUnhandledStatsService_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CustomerOrderUnhandledStats); i {
+			switch v := v.(*MemberOrderUnhandledStats); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -540,7 +540,7 @@ func file_orderUnhandledStatsService_proto_init() {
 			}
 		}
 		file_orderUnhandledStatsService_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CustomerOrderHandledStatsResponse); i {
+			switch v := v.(*MemberOrderHandledStatsResponse); i {
 			case 0:
 				return &v.state
 			case 1:

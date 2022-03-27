@@ -70,7 +70,7 @@ message Order {
     int32 order_type   =3;
     int32 serial =4;
     string channel    =5;
-    int64 customer_id  =6;
+    int64 member_id  =6;
     int32 total_num =7;
     float total_weight =8;
     string currency =9;
@@ -124,14 +124,14 @@ message Order {
     OrderAddress address =58;
     repeated OrderDetail details = 59;
     // @inject_tag: gorm:"-"
-    Customer customer = 60;
+    Member member = 60;
     // @inject_tag: gorm:"-"
     map<string,string> metas =61;
 }
 
-message Customer {
+message Member {
     int64 id =1;
-    string customer_sn =2;
+    string member_sn =2;
     string name =3;
     string display_name =4;
     string real_name =5;
@@ -153,7 +153,7 @@ message OrderRequest {
     int32 pay_type = 6;
     bool is_shipment = 7;
     bool is_cod = 8;
-    int64 customer_id = 9;
+    int64 member_id = 9;
     float payment = 10;
     bool is_free = 11;
     int32 status = 12;

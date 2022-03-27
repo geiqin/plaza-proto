@@ -13,9 +13,9 @@ message OrderUnhandledStats {
     string updated_at  = 7;
 }
 
-message CustomerOrderUnhandledStats {
+message MemberOrderUnhandledStats {
     int32 id  = 1;
-    int64 customer_id = 2;
+    int64 member_id = 2;
     int32 unpay_num = 3;
     int32 unshipped_num = 4;
     int32 shipped_num = 5;
@@ -32,10 +32,10 @@ message OrderHandledStatsResponse {
     common.Info info = 5;
 }
 
-message CustomerOrderHandledStatsResponse {
-    CustomerOrderUnhandledStats entity = 1;
+message MemberOrderHandledStatsResponse {
+    MemberOrderUnhandledStats entity = 1;
     common.Pager pager = 2;
-    repeated CustomerOrderUnhandledStats items = 3;
+    repeated MemberOrderUnhandledStats items = 3;
     common.Error error = 4;
     common.Info info = 5;
 }

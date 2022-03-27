@@ -36,7 +36,7 @@ type Order struct {
 	OrderType          int32          `protobuf:"varint,3,opt,name=order_type,json=orderType,proto3" json:"order_type"`
 	Serial             int32          `protobuf:"varint,4,opt,name=serial,proto3" json:"serial"`
 	Channel            string         `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel"`
-	CustomerId         int64          `protobuf:"varint,6,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId           int64          `protobuf:"varint,6,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	TotalNum           int32          `protobuf:"varint,7,opt,name=total_num,json=totalNum,proto3" json:"total_num"`
 	TotalWeight        float32        `protobuf:"fixed32,8,opt,name=total_weight,json=totalWeight,proto3" json:"total_weight"`
 	Currency           string         `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency"`
@@ -90,7 +90,7 @@ type Order struct {
 	Address            *OrderAddress  `protobuf:"bytes,58,opt,name=address,proto3" json:"address"`
 	Details            []*OrderDetail `protobuf:"bytes,59,rep,name=details,proto3" json:"details"`
 	// @inject_tag: gorm:"-"
-	Customer *Customer `protobuf:"bytes,60,opt,name=customer,proto3" gorm:"-" json:"customer"`
+	Member *Member `protobuf:"bytes,60,opt,name=member,proto3" gorm:"-" json:"member"`
 	// @inject_tag: gorm:"-"
 	Metas map[string]string `protobuf:"bytes,61,rep,name=metas,proto3" gorm:"-" json:"metas" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
@@ -162,9 +162,9 @@ func (x *Order) GetChannel() string {
 	return ""
 }
 
-func (x *Order) GetCustomerId() int64 {
+func (x *Order) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
@@ -533,9 +533,9 @@ func (x *Order) GetDetails() []*OrderDetail {
 	return nil
 }
 
-func (x *Order) GetCustomer() *Customer {
+func (x *Order) GetMember() *Member {
 	if x != nil {
-		return x.Customer
+		return x.Member
 	}
 	return nil
 }
@@ -547,13 +547,13 @@ func (x *Order) GetMetas() map[string]string {
 	return nil
 }
 
-type Customer struct {
+type Member struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CustomerSn  string `protobuf:"bytes,2,opt,name=customer_sn,json=customerSn,proto3" json:"customer_sn"`
+	MemberSn    string `protobuf:"bytes,2,opt,name=member_sn,json=memberSn,proto3" json:"member_sn"`
 	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
 	DisplayName string `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name"`
 	RealName    string `protobuf:"bytes,5,opt,name=real_name,json=realName,proto3" json:"real_name"`
@@ -565,8 +565,8 @@ type Customer struct {
 	AvatarUrl   string `protobuf:"bytes,11,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
 }
 
-func (x *Customer) Reset() {
-	*x = Customer{}
+func (x *Member) Reset() {
+	*x = Member{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_orderService_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -574,13 +574,13 @@ func (x *Customer) Reset() {
 	}
 }
 
-func (x *Customer) String() string {
+func (x *Member) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Customer) ProtoMessage() {}
+func (*Member) ProtoMessage() {}
 
-func (x *Customer) ProtoReflect() protoreflect.Message {
+func (x *Member) ProtoReflect() protoreflect.Message {
 	mi := &file_orderService_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -592,82 +592,82 @@ func (x *Customer) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Customer.ProtoReflect.Descriptor instead.
-func (*Customer) Descriptor() ([]byte, []int) {
+// Deprecated: Use Member.ProtoReflect.Descriptor instead.
+func (*Member) Descriptor() ([]byte, []int) {
 	return file_orderService_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Customer) GetId() int64 {
+func (x *Member) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *Customer) GetCustomerSn() string {
+func (x *Member) GetMemberSn() string {
 	if x != nil {
-		return x.CustomerSn
+		return x.MemberSn
 	}
 	return ""
 }
 
-func (x *Customer) GetName() string {
+func (x *Member) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *Customer) GetDisplayName() string {
+func (x *Member) GetDisplayName() string {
 	if x != nil {
 		return x.DisplayName
 	}
 	return ""
 }
 
-func (x *Customer) GetRealName() string {
+func (x *Member) GetRealName() string {
 	if x != nil {
 		return x.RealName
 	}
 	return ""
 }
 
-func (x *Customer) GetIdCard() string {
+func (x *Member) GetIdCard() string {
 	if x != nil {
 		return x.IdCard
 	}
 	return ""
 }
 
-func (x *Customer) GetGender() int32 {
+func (x *Member) GetGender() int32 {
 	if x != nil {
 		return x.Gender
 	}
 	return 0
 }
 
-func (x *Customer) GetMobile() string {
+func (x *Member) GetMobile() string {
 	if x != nil {
 		return x.Mobile
 	}
 	return ""
 }
 
-func (x *Customer) GetEmail() string {
+func (x *Member) GetEmail() string {
 	if x != nil {
 		return x.Email
 	}
 	return ""
 }
 
-func (x *Customer) GetAvatarId() int64 {
+func (x *Member) GetAvatarId() int64 {
 	if x != nil {
 		return x.AvatarId
 	}
 	return 0
 }
 
-func (x *Customer) GetAvatarUrl() string {
+func (x *Member) GetAvatarUrl() string {
 	if x != nil {
 		return x.AvatarUrl
 	}
@@ -688,7 +688,7 @@ type OrderRequest struct {
 	PayType        int32             `protobuf:"varint,6,opt,name=pay_type,json=payType,proto3" json:"pay_type"`
 	IsShipment     bool              `protobuf:"varint,7,opt,name=is_shipment,json=isShipment,proto3" json:"is_shipment"`
 	IsCod          bool              `protobuf:"varint,8,opt,name=is_cod,json=isCod,proto3" json:"is_cod"`
-	CustomerId     int64             `protobuf:"varint,9,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId       int64             `protobuf:"varint,9,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	Payment        float32           `protobuf:"fixed32,10,opt,name=payment,proto3" json:"payment"`
 	IsFree         bool              `protobuf:"varint,11,opt,name=is_free,json=isFree,proto3" json:"is_free"`
 	Status         int32             `protobuf:"varint,12,opt,name=status,proto3" json:"status"`
@@ -805,9 +805,9 @@ func (x *OrderRequest) GetIsCod() bool {
 	return false
 }
 
-func (x *OrderRequest) GetCustomerId() int64 {
+func (x *OrderRequest) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
@@ -1409,7 +1409,7 @@ func file_orderService_proto_rawDescGZIP() []byte {
 var file_orderService_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_orderService_proto_goTypes = []interface{}{
 	(*Order)(nil),               // 0: services.Order
-	(*Customer)(nil),            // 1: services.Customer
+	(*Member)(nil),              // 1: services.Member
 	(*OrderRequest)(nil),        // 2: services.OrderRequest
 	(*OrderResponse)(nil),       // 3: services.OrderResponse
 	nil,                         // 4: services.Order.MetasEntry
@@ -1427,7 +1427,7 @@ var file_orderService_proto_goTypes = []interface{}{
 var file_orderService_proto_depIdxs = []int32{
 	6,  // 0: services.Order.address:type_name -> services.OrderAddress
 	7,  // 1: services.Order.details:type_name -> services.OrderDetail
-	1,  // 2: services.Order.customer:type_name -> services.Customer
+	1,  // 2: services.Order.member:type_name -> services.Member
 	4,  // 3: services.Order.metas:type_name -> services.Order.MetasEntry
 	5,  // 4: services.OrderRequest.metas:type_name -> services.OrderRequest.MetasEntry
 	0,  // 5: services.OrderResponse.entity:type_name -> services.Order
@@ -1515,7 +1515,7 @@ func file_orderService_proto_init() {
 			}
 		}
 		file_orderService_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Customer); i {
+			switch v := v.(*Member); i {
 			case 0:
 				return &v.state
 			case 1:

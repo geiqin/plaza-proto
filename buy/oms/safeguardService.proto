@@ -52,7 +52,7 @@ message Safeguard {
     int64 order_id = 2;
     int32 type = 3;
     string safeguard_sn = 4;
-    int64 customer_id = 5;
+    int64 member_id = 5;
     int64 exchange_delivery_id = 6;
     string express_name = 7;
     string express_no = 8;
@@ -140,7 +140,7 @@ message SafeguardWhere {
     // @inject_tag: gorm:"-"
     repeated int64 ids = 5;
     int64 order_id = 6;
-    int64 customer_id = 7;
+    int64 member_id = 7;
     int32 type = 8;
     string keywords_type = 9;
     string keywords = 10;

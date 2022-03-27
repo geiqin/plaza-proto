@@ -35,12 +35,12 @@ type StatsRequest struct {
 	Days        int32  `protobuf:"varint,2,opt,name=days,proto3" json:"days"`
 	Paged       int32  `protobuf:"varint,3,opt,name=paged,proto3" json:"paged"`
 	PageSize    int32  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	CustomerId  int64  `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId    int64  `protobuf:"varint,5,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	StartAt     string `protobuf:"bytes,6,opt,name=start_at,json=startAt,proto3" json:"start_at"`
 	EndAt       string `protobuf:"bytes,7,opt,name=end_at,json=endAt,proto3" json:"end_at"`
 	StatisticAt string `protobuf:"bytes,8,opt,name=statistic_at,json=statisticAt,proto3" json:"statistic_at"`
 	// @inject_tag: gorm:"-"
-	CustomerIds []int64 `protobuf:"varint,9,rep,packed,name=customer_ids,json=customerIds,proto3" json:"customer_ids" gorm:"-"`
+	MemberIds []int64 `protobuf:"varint,9,rep,packed,name=member_ids,json=memberIds,proto3" json:"member_ids" gorm:"-"`
 }
 
 func (x *StatsRequest) Reset() {
@@ -103,9 +103,9 @@ func (x *StatsRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *StatsRequest) GetCustomerId() int64 {
+func (x *StatsRequest) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
@@ -131,9 +131,9 @@ func (x *StatsRequest) GetStatisticAt() string {
 	return ""
 }
 
-func (x *StatsRequest) GetCustomerIds() []int64 {
+func (x *StatsRequest) GetMemberIds() []int64 {
 	if x != nil {
-		return x.CustomerIds
+		return x.MemberIds
 	}
 	return nil
 }
@@ -232,14 +232,14 @@ func file_statisticsService_proto_rawDescGZIP() []byte {
 
 var file_statisticsService_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_statisticsService_proto_goTypes = []interface{}{
-	(*StatsRequest)(nil),                      // 0: services.StatsRequest
-	(*common.Empty)(nil),                      // 1: common.Empty
-	(*CustomerOrderHandledStatsResponse)(nil), // 2: services.CustomerOrderHandledStatsResponse
-	(*OrderDayStatsResponse)(nil),             // 3: services.OrderDayStatsResponse
-	(*OrderStatsResponse)(nil),                // 4: services.OrderStatsResponse
-	(*OrderHandledStatsResponse)(nil),         // 5: services.OrderHandledStatsResponse
-	(*CustomerGoodsResponse)(nil),             // 6: services.CustomerGoodsResponse
-	(*CustomerOrderStatsResponse)(nil),        // 7: services.CustomerOrderStatsResponse
+	(*StatsRequest)(nil),                    // 0: services.StatsRequest
+	(*common.Empty)(nil),                    // 1: common.Empty
+	(*MemberOrderHandledStatsResponse)(nil), // 2: services.MemberOrderHandledStatsResponse
+	(*OrderDayStatsResponse)(nil),           // 3: services.OrderDayStatsResponse
+	(*OrderStatsResponse)(nil),              // 4: services.OrderStatsResponse
+	(*OrderHandledStatsResponse)(nil),       // 5: services.OrderHandledStatsResponse
+	(*MemberGoodsResponse)(nil),             // 6: services.MemberGoodsResponse
+	(*MemberOrderStatsResponse)(nil),        // 7: services.MemberOrderStatsResponse
 }
 var file_statisticsService_proto_depIdxs = []int32{
 	0,  // 0: services.MyStatisticsService.Unhandled:input_type -> services.StatsRequest
@@ -248,19 +248,19 @@ var file_statisticsService_proto_depIdxs = []int32{
 	0,  // 3: services.StatisticsService.TodayTotal:input_type -> services.StatsRequest
 	0,  // 4: services.StatisticsService.OrderDays:input_type -> services.StatsRequest
 	0,  // 5: services.StatisticsService.Unhandled:input_type -> services.StatsRequest
-	0,  // 6: services.StatisticsService.CustomerGoods:input_type -> services.StatsRequest
-	0,  // 7: services.StatisticsService.CustomerOrder:input_type -> services.StatsRequest
-	0,  // 8: services.StatisticsService.CustomerUnhandled:input_type -> services.StatsRequest
+	0,  // 6: services.StatisticsService.MemberGoods:input_type -> services.StatsRequest
+	0,  // 7: services.StatisticsService.MemberOrder:input_type -> services.StatsRequest
+	0,  // 8: services.StatisticsService.MemberUnhandled:input_type -> services.StatsRequest
 	1,  // 9: services.StatisticsService.Reset:input_type -> common.Empty
-	2,  // 10: services.MyStatisticsService.Unhandled:output_type -> services.CustomerOrderHandledStatsResponse
+	2,  // 10: services.MyStatisticsService.Unhandled:output_type -> services.MemberOrderHandledStatsResponse
 	3,  // 11: services.StatisticsService.OrderDaily:output_type -> services.OrderDayStatsResponse
 	4,  // 12: services.StatisticsService.OrderTotal:output_type -> services.OrderStatsResponse
 	3,  // 13: services.StatisticsService.TodayTotal:output_type -> services.OrderDayStatsResponse
 	3,  // 14: services.StatisticsService.OrderDays:output_type -> services.OrderDayStatsResponse
 	5,  // 15: services.StatisticsService.Unhandled:output_type -> services.OrderHandledStatsResponse
-	6,  // 16: services.StatisticsService.CustomerGoods:output_type -> services.CustomerGoodsResponse
-	7,  // 17: services.StatisticsService.CustomerOrder:output_type -> services.CustomerOrderStatsResponse
-	2,  // 18: services.StatisticsService.CustomerUnhandled:output_type -> services.CustomerOrderHandledStatsResponse
+	6,  // 16: services.StatisticsService.MemberGoods:output_type -> services.MemberGoodsResponse
+	7,  // 17: services.StatisticsService.MemberOrder:output_type -> services.MemberOrderStatsResponse
+	2,  // 18: services.StatisticsService.MemberUnhandled:output_type -> services.MemberOrderHandledStatsResponse
 	4,  // 19: services.StatisticsService.Reset:output_type -> services.OrderStatsResponse
 	10, // [10:20] is the sub-list for method output_type
 	0,  // [0:10] is the sub-list for method input_type

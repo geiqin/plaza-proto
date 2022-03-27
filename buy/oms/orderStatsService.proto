@@ -14,9 +14,9 @@ message OrderStats {
     int32 buyer_num  = 7;
     int32 goods_num  = 8;
     int32 refund_num  = 9;
-    int32 new_customer_num  = 10;
-    int32 old_customer_num  = 11;
-    float customer_unit_price = 12;
+    int32 new_member_num  = 10;
+    int32 old_member_num  = 11;
+    float member_unit_price = 12;
     float income_amount = 13;
     float cost_amount = 14;
     float profit = 15;
@@ -37,9 +37,9 @@ message OrderDayStats {
     int32 buyer_num  = 7;
     int32 goods_num  = 8;
     int32 refund_num  = 9;
-    int32 new_customer_num  = 10;
-    int32 old_customer_num  = 11;
-    float customer_unit_price = 12;
+    int32 new_member_num  = 10;
+    int32 old_member_num  = 11;
+    float member_unit_price = 12;
     float income_amount = 13;
     float cost_amount = 14;
     float profit = 15;
@@ -49,9 +49,9 @@ message OrderDayStats {
     string updated_at  = 20;
 }
 
-message CustomerOrderStats {
+message MemberOrderStats {
     int32 id  = 1;
-    int64 customer_id = 2;
+    int64 member_id = 2;
     int32 order_num  = 12;
     float pay_amount  = 3;
     float coupon_amount  = 4;
@@ -64,9 +64,9 @@ message CustomerOrderStats {
     string updated_at  = 11;
 }
 
-message CustomerOrderDayStats {
+message MemberOrderDayStats {
     int32 id  = 1;
-    int64 customer_id = 2;
+    int64 member_id = 2;
     float pay_amount  = 3;
     float coupon_amount  = 4;
     float refund_amount  = 5;
@@ -79,7 +79,7 @@ message CustomerOrderDayStats {
     string updated_at  = 11;
 }
 
-message CustomerGoods {
+message MemberGoods {
     int64 item_id = 1;
     string thumb_url = 2;
     int64 sku_id = 3;
@@ -109,26 +109,26 @@ message OrderDayStatsResponse {
     common.Info info =5;
 }
 
-message CustomerOrderStatsResponse {
-    CustomerOrderStats entity = 1;
+message MemberOrderStatsResponse {
+    MemberOrderStats entity = 1;
     common.Pager pager =2;
-    repeated CustomerOrderStats items = 3;
+    repeated MemberOrderStats items = 3;
     common.Error error = 4;
     common.Info info =5;
 }
 
-message CustomerOrderDayStatsResponse {
-    CustomerOrderDayStats entity = 1;
+message MemberOrderDayStatsResponse {
+    MemberOrderDayStats entity = 1;
     common.Pager pager =2;
-    repeated CustomerOrderDayStats items = 3;
+    repeated MemberOrderDayStats items = 3;
     common.Error error = 4;
     common.Info info =5;
 }
 
-message CustomerGoodsResponse {
-    CustomerGoods entity = 1;
+message MemberGoodsResponse {
+    MemberGoods entity = 1;
     common.Pager pager =2;
-    repeated CustomerGoods items = 3;
+    repeated MemberGoods items = 3;
     common.Error error = 4;
     common.Info info =5;
 }

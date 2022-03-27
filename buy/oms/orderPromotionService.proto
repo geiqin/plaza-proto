@@ -14,7 +14,7 @@ service OrderPromotionService {
 
 message OrderPromotionParams {
     int64 id = 1;
-    int64 customer_id = 2;
+    int64 member_id = 2;
     int64 promotion_id = 3;
     int64 order_id = 4;
     string promotion_type = 5;
@@ -27,7 +27,7 @@ message OrderPromotionParams {
 
 message OrderPromotion {
     int64 id = 1;
-    int64 customer_id = 2;
+    int64 member_id = 2;
     int64 order_id = 3;
     int64 promotion_id = 4;
     string promotion_type = 5;

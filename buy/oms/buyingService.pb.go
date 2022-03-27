@@ -41,7 +41,7 @@ type Buying struct {
 	Freight     float32 `protobuf:"fixed32,6,opt,name=freight,proto3" json:"freight"`
 	Amount      float32 `protobuf:"fixed32,7,opt,name=amount,proto3" json:"amount"`
 	AddressId   int64   `protobuf:"varint,8,opt,name=address_id,json=addressId,proto3" json:"address_id"`
-	CustomerId  int64   `protobuf:"varint,9,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId    int64   `protobuf:"varint,9,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	UseTicketId int64   `protobuf:"varint,10,opt,name=use_ticket_id,json=useTicketId,proto3" json:"use_ticket_id"` //正在使用的优惠劵ID
 	Message     string  `protobuf:"bytes,11,opt,name=message,proto3" json:"message"`                               //买家留言(50字以内)
 	// @inject_tag: gorm:"-"
@@ -164,9 +164,9 @@ func (x *Buying) GetAddressId() int64 {
 	return 0
 }
 
-func (x *Buying) GetCustomerId() int64 {
+func (x *Buying) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
@@ -442,7 +442,7 @@ type BuyingRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CustomerId     int64  `protobuf:"varint,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`            //后台下单专用
+	MemberId       int64  `protobuf:"varint,1,opt,name=member_id,json=memberId,proto3" json:"member_id"`                  //后台下单专用
 	Source         int32  `protobuf:"varint,2,opt,name=source,proto3" json:"source"`                                      //请求来源 1是直接购买，2是 购物车下单，3，确认订单重复计算
 	AddressId      int64  `protobuf:"varint,3,opt,name=address_id,json=addressId,proto3" json:"address_id"`               //收货地址
 	Message        string `protobuf:"bytes,4,opt,name=message,proto3" json:"message"`                                     //买家留言(50字以内)
@@ -490,9 +490,9 @@ func (*BuyingRequest) Descriptor() ([]byte, []int) {
 	return file_buyingService_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *BuyingRequest) GetCustomerId() int64 {
+func (x *BuyingRequest) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }

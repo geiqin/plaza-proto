@@ -7,7 +7,7 @@ import "orderUnhandledStatsService.proto";
 
 service MyStatisticsService {
     //获取用户未处理订单数量
-    rpc Unhandled (StatsRequest) returns (CustomerOrderHandledStatsResponse) {}
+    rpc Unhandled (StatsRequest) returns (MemberOrderHandledStatsResponse) {}
 }
 
 service StatisticsService {
@@ -22,11 +22,11 @@ service StatisticsService {
     //获取店铺未处理订单数量
     rpc Unhandled (StatsRequest) returns (OrderHandledStatsResponse) {}
     //查询用户购买的商品
-    rpc CustomerGoods (StatsRequest) returns (CustomerGoodsResponse) {}
+    rpc MemberGoods (StatsRequest) returns (MemberGoodsResponse) {}
     //获取用户订单统计数据
-    rpc CustomerOrder (StatsRequest) returns (CustomerOrderStatsResponse) {}
+    rpc MemberOrder (StatsRequest) returns (MemberOrderStatsResponse) {}
     //获取用户未处理订单数量
-    rpc CustomerUnhandled (StatsRequest) returns (CustomerOrderHandledStatsResponse) {}
+    rpc MemberUnhandled (StatsRequest) returns (MemberOrderHandledStatsResponse) {}
     //重置统计
     rpc Reset (common.Empty) returns (OrderStatsResponse) {}
 }
@@ -36,10 +36,10 @@ message StatsRequest {
     int32 days = 2;
     int32 paged = 3;
     int32 page_size = 4;
-    int64 customer_id = 5;
+    int64 member_id = 5;
     string start_at = 6;
     string end_at = 7;
     string statistic_at = 8;
     // @inject_tag: gorm:"-"
-    repeated int64 customer_ids = 9;
+    repeated int64 member_ids = 9;
 }

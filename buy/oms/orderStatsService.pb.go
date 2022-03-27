@@ -31,26 +31,26 @@ type OrderStats struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int32   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	PayAmount         float32 `protobuf:"fixed32,2,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount"`
-	CouponAmount      float32 `protobuf:"fixed32,3,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount"`
-	ExpressAmount     float32 `protobuf:"fixed32,4,opt,name=express_amount,json=expressAmount,proto3" json:"express_amount"`
-	RefundAmount      float32 `protobuf:"fixed32,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount"`
-	OrderNum          int32   `protobuf:"varint,16,opt,name=order_num,json=orderNum,proto3" json:"order_num"`
-	PayNum            int32   `protobuf:"varint,6,opt,name=pay_num,json=payNum,proto3" json:"pay_num"`
-	BuyerNum          int32   `protobuf:"varint,7,opt,name=buyer_num,json=buyerNum,proto3" json:"buyer_num"`
-	GoodsNum          int32   `protobuf:"varint,8,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num"`
-	RefundNum         int32   `protobuf:"varint,9,opt,name=refund_num,json=refundNum,proto3" json:"refund_num"`
-	NewCustomerNum    int32   `protobuf:"varint,10,opt,name=new_customer_num,json=newCustomerNum,proto3" json:"new_customer_num"`
-	OldCustomerNum    int32   `protobuf:"varint,11,opt,name=old_customer_num,json=oldCustomerNum,proto3" json:"old_customer_num"`
-	CustomerUnitPrice float32 `protobuf:"fixed32,12,opt,name=customer_unit_price,json=customerUnitPrice,proto3" json:"customer_unit_price"`
-	IncomeAmount      float32 `protobuf:"fixed32,13,opt,name=income_amount,json=incomeAmount,proto3" json:"income_amount"`
-	CostAmount        float32 `protobuf:"fixed32,14,opt,name=cost_amount,json=costAmount,proto3" json:"cost_amount"`
-	Profit            float32 `protobuf:"fixed32,15,opt,name=profit,proto3" json:"profit"`
-	ProfitRate        float32 `protobuf:"fixed32,17,opt,name=profit_rate,json=profitRate,proto3" json:"profit_rate"`
-	LastStatsAt       string  `protobuf:"bytes,18,opt,name=last_stats_at,json=lastStatsAt,proto3" json:"last_stats_at"`
-	CreatedAt         string  `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt         string  `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id              int32   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	PayAmount       float32 `protobuf:"fixed32,2,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount"`
+	CouponAmount    float32 `protobuf:"fixed32,3,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount"`
+	ExpressAmount   float32 `protobuf:"fixed32,4,opt,name=express_amount,json=expressAmount,proto3" json:"express_amount"`
+	RefundAmount    float32 `protobuf:"fixed32,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount"`
+	OrderNum        int32   `protobuf:"varint,16,opt,name=order_num,json=orderNum,proto3" json:"order_num"`
+	PayNum          int32   `protobuf:"varint,6,opt,name=pay_num,json=payNum,proto3" json:"pay_num"`
+	BuyerNum        int32   `protobuf:"varint,7,opt,name=buyer_num,json=buyerNum,proto3" json:"buyer_num"`
+	GoodsNum        int32   `protobuf:"varint,8,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num"`
+	RefundNum       int32   `protobuf:"varint,9,opt,name=refund_num,json=refundNum,proto3" json:"refund_num"`
+	NewMemberNum    int32   `protobuf:"varint,10,opt,name=new_member_num,json=newMemberNum,proto3" json:"new_member_num"`
+	OldMemberNum    int32   `protobuf:"varint,11,opt,name=old_member_num,json=oldMemberNum,proto3" json:"old_member_num"`
+	MemberUnitPrice float32 `protobuf:"fixed32,12,opt,name=member_unit_price,json=memberUnitPrice,proto3" json:"member_unit_price"`
+	IncomeAmount    float32 `protobuf:"fixed32,13,opt,name=income_amount,json=incomeAmount,proto3" json:"income_amount"`
+	CostAmount      float32 `protobuf:"fixed32,14,opt,name=cost_amount,json=costAmount,proto3" json:"cost_amount"`
+	Profit          float32 `protobuf:"fixed32,15,opt,name=profit,proto3" json:"profit"`
+	ProfitRate      float32 `protobuf:"fixed32,17,opt,name=profit_rate,json=profitRate,proto3" json:"profit_rate"`
+	LastStatsAt     string  `protobuf:"bytes,18,opt,name=last_stats_at,json=lastStatsAt,proto3" json:"last_stats_at"`
+	CreatedAt       string  `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt       string  `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *OrderStats) Reset() {
@@ -155,23 +155,23 @@ func (x *OrderStats) GetRefundNum() int32 {
 	return 0
 }
 
-func (x *OrderStats) GetNewCustomerNum() int32 {
+func (x *OrderStats) GetNewMemberNum() int32 {
 	if x != nil {
-		return x.NewCustomerNum
+		return x.NewMemberNum
 	}
 	return 0
 }
 
-func (x *OrderStats) GetOldCustomerNum() int32 {
+func (x *OrderStats) GetOldMemberNum() int32 {
 	if x != nil {
-		return x.OldCustomerNum
+		return x.OldMemberNum
 	}
 	return 0
 }
 
-func (x *OrderStats) GetCustomerUnitPrice() float32 {
+func (x *OrderStats) GetMemberUnitPrice() float32 {
 	if x != nil {
-		return x.CustomerUnitPrice
+		return x.MemberUnitPrice
 	}
 	return 0
 }
@@ -230,26 +230,26 @@ type OrderDayStats struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int32   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	PayAmount         float32 `protobuf:"fixed32,2,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount"`
-	CouponAmount      float32 `protobuf:"fixed32,3,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount"`
-	ExpressAmount     float32 `protobuf:"fixed32,4,opt,name=express_amount,json=expressAmount,proto3" json:"express_amount"`
-	RefundAmount      float32 `protobuf:"fixed32,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount"`
-	OrderNum          int32   `protobuf:"varint,16,opt,name=order_num,json=orderNum,proto3" json:"order_num"`
-	PayNum            int32   `protobuf:"varint,6,opt,name=pay_num,json=payNum,proto3" json:"pay_num"`
-	BuyerNum          int32   `protobuf:"varint,7,opt,name=buyer_num,json=buyerNum,proto3" json:"buyer_num"`
-	GoodsNum          int32   `protobuf:"varint,8,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num"`
-	RefundNum         int32   `protobuf:"varint,9,opt,name=refund_num,json=refundNum,proto3" json:"refund_num"`
-	NewCustomerNum    int32   `protobuf:"varint,10,opt,name=new_customer_num,json=newCustomerNum,proto3" json:"new_customer_num"`
-	OldCustomerNum    int32   `protobuf:"varint,11,opt,name=old_customer_num,json=oldCustomerNum,proto3" json:"old_customer_num"`
-	CustomerUnitPrice float32 `protobuf:"fixed32,12,opt,name=customer_unit_price,json=customerUnitPrice,proto3" json:"customer_unit_price"`
-	IncomeAmount      float32 `protobuf:"fixed32,13,opt,name=income_amount,json=incomeAmount,proto3" json:"income_amount"`
-	CostAmount        float32 `protobuf:"fixed32,14,opt,name=cost_amount,json=costAmount,proto3" json:"cost_amount"`
-	Profit            float32 `protobuf:"fixed32,15,opt,name=profit,proto3" json:"profit"`
-	ProfitRate        float32 `protobuf:"fixed32,17,opt,name=profit_rate,json=profitRate,proto3" json:"profit_rate"`
-	StatisticAt       string  `protobuf:"bytes,18,opt,name=statistic_at,json=statisticAt,proto3" json:"statistic_at"`
-	CreatedAt         string  `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt         string  `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id              int32   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	PayAmount       float32 `protobuf:"fixed32,2,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount"`
+	CouponAmount    float32 `protobuf:"fixed32,3,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount"`
+	ExpressAmount   float32 `protobuf:"fixed32,4,opt,name=express_amount,json=expressAmount,proto3" json:"express_amount"`
+	RefundAmount    float32 `protobuf:"fixed32,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount"`
+	OrderNum        int32   `protobuf:"varint,16,opt,name=order_num,json=orderNum,proto3" json:"order_num"`
+	PayNum          int32   `protobuf:"varint,6,opt,name=pay_num,json=payNum,proto3" json:"pay_num"`
+	BuyerNum        int32   `protobuf:"varint,7,opt,name=buyer_num,json=buyerNum,proto3" json:"buyer_num"`
+	GoodsNum        int32   `protobuf:"varint,8,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num"`
+	RefundNum       int32   `protobuf:"varint,9,opt,name=refund_num,json=refundNum,proto3" json:"refund_num"`
+	NewMemberNum    int32   `protobuf:"varint,10,opt,name=new_member_num,json=newMemberNum,proto3" json:"new_member_num"`
+	OldMemberNum    int32   `protobuf:"varint,11,opt,name=old_member_num,json=oldMemberNum,proto3" json:"old_member_num"`
+	MemberUnitPrice float32 `protobuf:"fixed32,12,opt,name=member_unit_price,json=memberUnitPrice,proto3" json:"member_unit_price"`
+	IncomeAmount    float32 `protobuf:"fixed32,13,opt,name=income_amount,json=incomeAmount,proto3" json:"income_amount"`
+	CostAmount      float32 `protobuf:"fixed32,14,opt,name=cost_amount,json=costAmount,proto3" json:"cost_amount"`
+	Profit          float32 `protobuf:"fixed32,15,opt,name=profit,proto3" json:"profit"`
+	ProfitRate      float32 `protobuf:"fixed32,17,opt,name=profit_rate,json=profitRate,proto3" json:"profit_rate"`
+	StatisticAt     string  `protobuf:"bytes,18,opt,name=statistic_at,json=statisticAt,proto3" json:"statistic_at"`
+	CreatedAt       string  `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt       string  `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *OrderDayStats) Reset() {
@@ -354,23 +354,23 @@ func (x *OrderDayStats) GetRefundNum() int32 {
 	return 0
 }
 
-func (x *OrderDayStats) GetNewCustomerNum() int32 {
+func (x *OrderDayStats) GetNewMemberNum() int32 {
 	if x != nil {
-		return x.NewCustomerNum
+		return x.NewMemberNum
 	}
 	return 0
 }
 
-func (x *OrderDayStats) GetOldCustomerNum() int32 {
+func (x *OrderDayStats) GetOldMemberNum() int32 {
 	if x != nil {
-		return x.OldCustomerNum
+		return x.OldMemberNum
 	}
 	return 0
 }
 
-func (x *OrderDayStats) GetCustomerUnitPrice() float32 {
+func (x *OrderDayStats) GetMemberUnitPrice() float32 {
 	if x != nil {
-		return x.CustomerUnitPrice
+		return x.MemberUnitPrice
 	}
 	return 0
 }
@@ -424,13 +424,13 @@ func (x *OrderDayStats) GetUpdatedAt() string {
 	return ""
 }
 
-type CustomerOrderStats struct {
+type MemberOrderStats struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Id           int32   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CustomerId   int64   `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId     int64   `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	OrderNum     int32   `protobuf:"varint,12,opt,name=order_num,json=orderNum,proto3" json:"order_num"`
 	PayAmount    float32 `protobuf:"fixed32,3,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount"`
 	CouponAmount float32 `protobuf:"fixed32,4,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount"`
@@ -443,8 +443,8 @@ type CustomerOrderStats struct {
 	UpdatedAt    string  `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
-func (x *CustomerOrderStats) Reset() {
-	*x = CustomerOrderStats{}
+func (x *MemberOrderStats) Reset() {
+	*x = MemberOrderStats{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_orderStatsService_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -452,13 +452,13 @@ func (x *CustomerOrderStats) Reset() {
 	}
 }
 
-func (x *CustomerOrderStats) String() string {
+func (x *MemberOrderStats) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CustomerOrderStats) ProtoMessage() {}
+func (*MemberOrderStats) ProtoMessage() {}
 
-func (x *CustomerOrderStats) ProtoReflect() protoreflect.Message {
+func (x *MemberOrderStats) ProtoReflect() protoreflect.Message {
 	mi := &file_orderStatsService_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -470,102 +470,102 @@ func (x *CustomerOrderStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CustomerOrderStats.ProtoReflect.Descriptor instead.
-func (*CustomerOrderStats) Descriptor() ([]byte, []int) {
+// Deprecated: Use MemberOrderStats.ProtoReflect.Descriptor instead.
+func (*MemberOrderStats) Descriptor() ([]byte, []int) {
 	return file_orderStatsService_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *CustomerOrderStats) GetId() int32 {
+func (x *MemberOrderStats) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *CustomerOrderStats) GetCustomerId() int64 {
+func (x *MemberOrderStats) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
 
-func (x *CustomerOrderStats) GetOrderNum() int32 {
+func (x *MemberOrderStats) GetOrderNum() int32 {
 	if x != nil {
 		return x.OrderNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderStats) GetPayAmount() float32 {
+func (x *MemberOrderStats) GetPayAmount() float32 {
 	if x != nil {
 		return x.PayAmount
 	}
 	return 0
 }
 
-func (x *CustomerOrderStats) GetCouponAmount() float32 {
+func (x *MemberOrderStats) GetCouponAmount() float32 {
 	if x != nil {
 		return x.CouponAmount
 	}
 	return 0
 }
 
-func (x *CustomerOrderStats) GetRefundAmount() float32 {
+func (x *MemberOrderStats) GetRefundAmount() float32 {
 	if x != nil {
 		return x.RefundAmount
 	}
 	return 0
 }
 
-func (x *CustomerOrderStats) GetPayNum() int32 {
+func (x *MemberOrderStats) GetPayNum() int32 {
 	if x != nil {
 		return x.PayNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderStats) GetGoodsNum() int32 {
+func (x *MemberOrderStats) GetGoodsNum() int32 {
 	if x != nil {
 		return x.GoodsNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderStats) GetRefundNum() int32 {
+func (x *MemberOrderStats) GetRefundNum() int32 {
 	if x != nil {
 		return x.RefundNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderStats) GetLastStatsAt() string {
+func (x *MemberOrderStats) GetLastStatsAt() string {
 	if x != nil {
 		return x.LastStatsAt
 	}
 	return ""
 }
 
-func (x *CustomerOrderStats) GetCreatedAt() string {
+func (x *MemberOrderStats) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return ""
 }
 
-func (x *CustomerOrderStats) GetUpdatedAt() string {
+func (x *MemberOrderStats) GetUpdatedAt() string {
 	if x != nil {
 		return x.UpdatedAt
 	}
 	return ""
 }
 
-type CustomerOrderDayStats struct {
+type MemberOrderDayStats struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Id           int32   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CustomerId   int64   `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId     int64   `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	PayAmount    float32 `protobuf:"fixed32,3,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount"`
 	CouponAmount float32 `protobuf:"fixed32,4,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount"`
 	RefundAmount float32 `protobuf:"fixed32,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount"`
@@ -578,8 +578,8 @@ type CustomerOrderDayStats struct {
 	UpdatedAt    string  `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
-func (x *CustomerOrderDayStats) Reset() {
-	*x = CustomerOrderDayStats{}
+func (x *MemberOrderDayStats) Reset() {
+	*x = MemberOrderDayStats{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_orderStatsService_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -587,13 +587,13 @@ func (x *CustomerOrderDayStats) Reset() {
 	}
 }
 
-func (x *CustomerOrderDayStats) String() string {
+func (x *MemberOrderDayStats) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CustomerOrderDayStats) ProtoMessage() {}
+func (*MemberOrderDayStats) ProtoMessage() {}
 
-func (x *CustomerOrderDayStats) ProtoReflect() protoreflect.Message {
+func (x *MemberOrderDayStats) ProtoReflect() protoreflect.Message {
 	mi := &file_orderStatsService_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -605,96 +605,96 @@ func (x *CustomerOrderDayStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CustomerOrderDayStats.ProtoReflect.Descriptor instead.
-func (*CustomerOrderDayStats) Descriptor() ([]byte, []int) {
+// Deprecated: Use MemberOrderDayStats.ProtoReflect.Descriptor instead.
+func (*MemberOrderDayStats) Descriptor() ([]byte, []int) {
 	return file_orderStatsService_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CustomerOrderDayStats) GetId() int32 {
+func (x *MemberOrderDayStats) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *CustomerOrderDayStats) GetCustomerId() int64 {
+func (x *MemberOrderDayStats) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
 
-func (x *CustomerOrderDayStats) GetPayAmount() float32 {
+func (x *MemberOrderDayStats) GetPayAmount() float32 {
 	if x != nil {
 		return x.PayAmount
 	}
 	return 0
 }
 
-func (x *CustomerOrderDayStats) GetCouponAmount() float32 {
+func (x *MemberOrderDayStats) GetCouponAmount() float32 {
 	if x != nil {
 		return x.CouponAmount
 	}
 	return 0
 }
 
-func (x *CustomerOrderDayStats) GetRefundAmount() float32 {
+func (x *MemberOrderDayStats) GetRefundAmount() float32 {
 	if x != nil {
 		return x.RefundAmount
 	}
 	return 0
 }
 
-func (x *CustomerOrderDayStats) GetOrderNum() int32 {
+func (x *MemberOrderDayStats) GetOrderNum() int32 {
 	if x != nil {
 		return x.OrderNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderDayStats) GetPayNum() int32 {
+func (x *MemberOrderDayStats) GetPayNum() int32 {
 	if x != nil {
 		return x.PayNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderDayStats) GetGoodsNum() int32 {
+func (x *MemberOrderDayStats) GetGoodsNum() int32 {
 	if x != nil {
 		return x.GoodsNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderDayStats) GetRefundNum() int32 {
+func (x *MemberOrderDayStats) GetRefundNum() int32 {
 	if x != nil {
 		return x.RefundNum
 	}
 	return 0
 }
 
-func (x *CustomerOrderDayStats) GetStatisticAt() string {
+func (x *MemberOrderDayStats) GetStatisticAt() string {
 	if x != nil {
 		return x.StatisticAt
 	}
 	return ""
 }
 
-func (x *CustomerOrderDayStats) GetCreatedAt() string {
+func (x *MemberOrderDayStats) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return ""
 }
 
-func (x *CustomerOrderDayStats) GetUpdatedAt() string {
+func (x *MemberOrderDayStats) GetUpdatedAt() string {
 	if x != nil {
 		return x.UpdatedAt
 	}
 	return ""
 }
 
-type CustomerGoods struct {
+type MemberGoods struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -712,8 +712,8 @@ type CustomerGoods struct {
 	OriginPrice float32 `protobuf:"fixed32,11,opt,name=origin_price,json=originPrice,proto3" json:"origin_price"`
 }
 
-func (x *CustomerGoods) Reset() {
-	*x = CustomerGoods{}
+func (x *MemberGoods) Reset() {
+	*x = MemberGoods{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_orderStatsService_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -721,13 +721,13 @@ func (x *CustomerGoods) Reset() {
 	}
 }
 
-func (x *CustomerGoods) String() string {
+func (x *MemberGoods) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CustomerGoods) ProtoMessage() {}
+func (*MemberGoods) ProtoMessage() {}
 
-func (x *CustomerGoods) ProtoReflect() protoreflect.Message {
+func (x *MemberGoods) ProtoReflect() protoreflect.Message {
 	mi := &file_orderStatsService_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -739,82 +739,82 @@ func (x *CustomerGoods) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CustomerGoods.ProtoReflect.Descriptor instead.
-func (*CustomerGoods) Descriptor() ([]byte, []int) {
+// Deprecated: Use MemberGoods.ProtoReflect.Descriptor instead.
+func (*MemberGoods) Descriptor() ([]byte, []int) {
 	return file_orderStatsService_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *CustomerGoods) GetItemId() int64 {
+func (x *MemberGoods) GetItemId() int64 {
 	if x != nil {
 		return x.ItemId
 	}
 	return 0
 }
 
-func (x *CustomerGoods) GetThumbUrl() string {
+func (x *MemberGoods) GetThumbUrl() string {
 	if x != nil {
 		return x.ThumbUrl
 	}
 	return ""
 }
 
-func (x *CustomerGoods) GetSkuId() int64 {
+func (x *MemberGoods) GetSkuId() int64 {
 	if x != nil {
 		return x.SkuId
 	}
 	return 0
 }
 
-func (x *CustomerGoods) GetItemSn() string {
+func (x *MemberGoods) GetItemSn() string {
 	if x != nil {
 		return x.ItemSn
 	}
 	return ""
 }
 
-func (x *CustomerGoods) GetSkuSn() string {
+func (x *MemberGoods) GetSkuSn() string {
 	if x != nil {
 		return x.SkuSn
 	}
 	return ""
 }
 
-func (x *CustomerGoods) GetModelType() string {
+func (x *MemberGoods) GetModelType() string {
 	if x != nil {
 		return x.ModelType
 	}
 	return ""
 }
 
-func (x *CustomerGoods) GetName() string {
+func (x *MemberGoods) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *CustomerGoods) GetNum() int32 {
+func (x *MemberGoods) GetNum() int32 {
 	if x != nil {
 		return x.Num
 	}
 	return 0
 }
 
-func (x *CustomerGoods) GetPrice() float32 {
+func (x *MemberGoods) GetPrice() float32 {
 	if x != nil {
 		return x.Price
 	}
 	return 0
 }
 
-func (x *CustomerGoods) GetTotalPrice() float32 {
+func (x *MemberGoods) GetTotalPrice() float32 {
 	if x != nil {
 		return x.TotalPrice
 	}
 	return 0
 }
 
-func (x *CustomerGoods) GetOriginPrice() float32 {
+func (x *MemberGoods) GetOriginPrice() float32 {
 	if x != nil {
 		return x.OriginPrice
 	}
@@ -979,20 +979,20 @@ func (x *OrderDayStatsResponse) GetInfo() *common.Info {
 	return nil
 }
 
-type CustomerOrderStatsResponse struct {
+type MemberOrderStatsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *CustomerOrderStats   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*CustomerOrderStats `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error  *common.Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info   *common.Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity *MemberOrderStats   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager       `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*MemberOrderStats `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error       `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info        `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
-func (x *CustomerOrderStatsResponse) Reset() {
-	*x = CustomerOrderStatsResponse{}
+func (x *MemberOrderStatsResponse) Reset() {
+	*x = MemberOrderStatsResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_orderStatsService_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1000,13 +1000,13 @@ func (x *CustomerOrderStatsResponse) Reset() {
 	}
 }
 
-func (x *CustomerOrderStatsResponse) String() string {
+func (x *MemberOrderStatsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CustomerOrderStatsResponse) ProtoMessage() {}
+func (*MemberOrderStatsResponse) ProtoMessage() {}
 
-func (x *CustomerOrderStatsResponse) ProtoReflect() protoreflect.Message {
+func (x *MemberOrderStatsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_orderStatsService_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1018,60 +1018,60 @@ func (x *CustomerOrderStatsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CustomerOrderStatsResponse.ProtoReflect.Descriptor instead.
-func (*CustomerOrderStatsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use MemberOrderStatsResponse.ProtoReflect.Descriptor instead.
+func (*MemberOrderStatsResponse) Descriptor() ([]byte, []int) {
 	return file_orderStatsService_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *CustomerOrderStatsResponse) GetEntity() *CustomerOrderStats {
+func (x *MemberOrderStatsResponse) GetEntity() *MemberOrderStats {
 	if x != nil {
 		return x.Entity
 	}
 	return nil
 }
 
-func (x *CustomerOrderStatsResponse) GetPager() *common.Pager {
+func (x *MemberOrderStatsResponse) GetPager() *common.Pager {
 	if x != nil {
 		return x.Pager
 	}
 	return nil
 }
 
-func (x *CustomerOrderStatsResponse) GetItems() []*CustomerOrderStats {
+func (x *MemberOrderStatsResponse) GetItems() []*MemberOrderStats {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-func (x *CustomerOrderStatsResponse) GetError() *common.Error {
+func (x *MemberOrderStatsResponse) GetError() *common.Error {
 	if x != nil {
 		return x.Error
 	}
 	return nil
 }
 
-func (x *CustomerOrderStatsResponse) GetInfo() *common.Info {
+func (x *MemberOrderStatsResponse) GetInfo() *common.Info {
 	if x != nil {
 		return x.Info
 	}
 	return nil
 }
 
-type CustomerOrderDayStatsResponse struct {
+type MemberOrderDayStatsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *CustomerOrderDayStats   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager            `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*CustomerOrderDayStats `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error  *common.Error            `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info   *common.Info             `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity *MemberOrderDayStats   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager          `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*MemberOrderDayStats `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error          `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info           `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
-func (x *CustomerOrderDayStatsResponse) Reset() {
-	*x = CustomerOrderDayStatsResponse{}
+func (x *MemberOrderDayStatsResponse) Reset() {
+	*x = MemberOrderDayStatsResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_orderStatsService_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1079,13 +1079,13 @@ func (x *CustomerOrderDayStatsResponse) Reset() {
 	}
 }
 
-func (x *CustomerOrderDayStatsResponse) String() string {
+func (x *MemberOrderDayStatsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CustomerOrderDayStatsResponse) ProtoMessage() {}
+func (*MemberOrderDayStatsResponse) ProtoMessage() {}
 
-func (x *CustomerOrderDayStatsResponse) ProtoReflect() protoreflect.Message {
+func (x *MemberOrderDayStatsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_orderStatsService_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1097,60 +1097,60 @@ func (x *CustomerOrderDayStatsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CustomerOrderDayStatsResponse.ProtoReflect.Descriptor instead.
-func (*CustomerOrderDayStatsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use MemberOrderDayStatsResponse.ProtoReflect.Descriptor instead.
+func (*MemberOrderDayStatsResponse) Descriptor() ([]byte, []int) {
 	return file_orderStatsService_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *CustomerOrderDayStatsResponse) GetEntity() *CustomerOrderDayStats {
+func (x *MemberOrderDayStatsResponse) GetEntity() *MemberOrderDayStats {
 	if x != nil {
 		return x.Entity
 	}
 	return nil
 }
 
-func (x *CustomerOrderDayStatsResponse) GetPager() *common.Pager {
+func (x *MemberOrderDayStatsResponse) GetPager() *common.Pager {
 	if x != nil {
 		return x.Pager
 	}
 	return nil
 }
 
-func (x *CustomerOrderDayStatsResponse) GetItems() []*CustomerOrderDayStats {
+func (x *MemberOrderDayStatsResponse) GetItems() []*MemberOrderDayStats {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-func (x *CustomerOrderDayStatsResponse) GetError() *common.Error {
+func (x *MemberOrderDayStatsResponse) GetError() *common.Error {
 	if x != nil {
 		return x.Error
 	}
 	return nil
 }
 
-func (x *CustomerOrderDayStatsResponse) GetInfo() *common.Info {
+func (x *MemberOrderDayStatsResponse) GetInfo() *common.Info {
 	if x != nil {
 		return x.Info
 	}
 	return nil
 }
 
-type CustomerGoodsResponse struct {
+type MemberGoodsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *CustomerGoods   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*CustomerGoods `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error  *common.Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info   *common.Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity *MemberGoods   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*MemberGoods `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error  `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info   `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
-func (x *CustomerGoodsResponse) Reset() {
-	*x = CustomerGoodsResponse{}
+func (x *MemberGoodsResponse) Reset() {
+	*x = MemberGoodsResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_orderStatsService_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1158,13 +1158,13 @@ func (x *CustomerGoodsResponse) Reset() {
 	}
 }
 
-func (x *CustomerGoodsResponse) String() string {
+func (x *MemberGoodsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CustomerGoodsResponse) ProtoMessage() {}
+func (*MemberGoodsResponse) ProtoMessage() {}
 
-func (x *CustomerGoodsResponse) ProtoReflect() protoreflect.Message {
+func (x *MemberGoodsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_orderStatsService_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1176,40 +1176,40 @@ func (x *CustomerGoodsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CustomerGoodsResponse.ProtoReflect.Descriptor instead.
-func (*CustomerGoodsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use MemberGoodsResponse.ProtoReflect.Descriptor instead.
+func (*MemberGoodsResponse) Descriptor() ([]byte, []int) {
 	return file_orderStatsService_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *CustomerGoodsResponse) GetEntity() *CustomerGoods {
+func (x *MemberGoodsResponse) GetEntity() *MemberGoods {
 	if x != nil {
 		return x.Entity
 	}
 	return nil
 }
 
-func (x *CustomerGoodsResponse) GetPager() *common.Pager {
+func (x *MemberGoodsResponse) GetPager() *common.Pager {
 	if x != nil {
 		return x.Pager
 	}
 	return nil
 }
 
-func (x *CustomerGoodsResponse) GetItems() []*CustomerGoods {
+func (x *MemberGoodsResponse) GetItems() []*MemberGoods {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-func (x *CustomerGoodsResponse) GetError() *common.Error {
+func (x *MemberGoodsResponse) GetError() *common.Error {
 	if x != nil {
 		return x.Error
 	}
 	return nil
 }
 
-func (x *CustomerGoodsResponse) GetInfo() *common.Info {
+func (x *MemberGoodsResponse) GetInfo() *common.Info {
 	if x != nil {
 		return x.Info
 	}
@@ -1466,19 +1466,19 @@ func file_orderStatsService_proto_rawDescGZIP() []byte {
 
 var file_orderStatsService_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_orderStatsService_proto_goTypes = []interface{}{
-	(*OrderStats)(nil),                    // 0: services.OrderStats
-	(*OrderDayStats)(nil),                 // 1: services.OrderDayStats
-	(*CustomerOrderStats)(nil),            // 2: services.CustomerOrderStats
-	(*CustomerOrderDayStats)(nil),         // 3: services.CustomerOrderDayStats
-	(*CustomerGoods)(nil),                 // 4: services.CustomerGoods
-	(*OrderStatsResponse)(nil),            // 5: services.OrderStatsResponse
-	(*OrderDayStatsResponse)(nil),         // 6: services.OrderDayStatsResponse
-	(*CustomerOrderStatsResponse)(nil),    // 7: services.CustomerOrderStatsResponse
-	(*CustomerOrderDayStatsResponse)(nil), // 8: services.CustomerOrderDayStatsResponse
-	(*CustomerGoodsResponse)(nil),         // 9: services.CustomerGoodsResponse
-	(*common.Pager)(nil),                  // 10: common.Pager
-	(*common.Error)(nil),                  // 11: common.Error
-	(*common.Info)(nil),                   // 12: common.Info
+	(*OrderStats)(nil),                  // 0: services.OrderStats
+	(*OrderDayStats)(nil),               // 1: services.OrderDayStats
+	(*MemberOrderStats)(nil),            // 2: services.MemberOrderStats
+	(*MemberOrderDayStats)(nil),         // 3: services.MemberOrderDayStats
+	(*MemberGoods)(nil),                 // 4: services.MemberGoods
+	(*OrderStatsResponse)(nil),          // 5: services.OrderStatsResponse
+	(*OrderDayStatsResponse)(nil),       // 6: services.OrderDayStatsResponse
+	(*MemberOrderStatsResponse)(nil),    // 7: services.MemberOrderStatsResponse
+	(*MemberOrderDayStatsResponse)(nil), // 8: services.MemberOrderDayStatsResponse
+	(*MemberGoodsResponse)(nil),         // 9: services.MemberGoodsResponse
+	(*common.Pager)(nil),                // 10: common.Pager
+	(*common.Error)(nil),                // 11: common.Error
+	(*common.Info)(nil),                 // 12: common.Info
 }
 var file_orderStatsService_proto_depIdxs = []int32{
 	0,  // 0: services.OrderStatsResponse.entity:type_name -> services.OrderStats
@@ -1491,21 +1491,21 @@ var file_orderStatsService_proto_depIdxs = []int32{
 	1,  // 7: services.OrderDayStatsResponse.items:type_name -> services.OrderDayStats
 	11, // 8: services.OrderDayStatsResponse.error:type_name -> common.Error
 	12, // 9: services.OrderDayStatsResponse.info:type_name -> common.Info
-	2,  // 10: services.CustomerOrderStatsResponse.entity:type_name -> services.CustomerOrderStats
-	10, // 11: services.CustomerOrderStatsResponse.pager:type_name -> common.Pager
-	2,  // 12: services.CustomerOrderStatsResponse.items:type_name -> services.CustomerOrderStats
-	11, // 13: services.CustomerOrderStatsResponse.error:type_name -> common.Error
-	12, // 14: services.CustomerOrderStatsResponse.info:type_name -> common.Info
-	3,  // 15: services.CustomerOrderDayStatsResponse.entity:type_name -> services.CustomerOrderDayStats
-	10, // 16: services.CustomerOrderDayStatsResponse.pager:type_name -> common.Pager
-	3,  // 17: services.CustomerOrderDayStatsResponse.items:type_name -> services.CustomerOrderDayStats
-	11, // 18: services.CustomerOrderDayStatsResponse.error:type_name -> common.Error
-	12, // 19: services.CustomerOrderDayStatsResponse.info:type_name -> common.Info
-	4,  // 20: services.CustomerGoodsResponse.entity:type_name -> services.CustomerGoods
-	10, // 21: services.CustomerGoodsResponse.pager:type_name -> common.Pager
-	4,  // 22: services.CustomerGoodsResponse.items:type_name -> services.CustomerGoods
-	11, // 23: services.CustomerGoodsResponse.error:type_name -> common.Error
-	12, // 24: services.CustomerGoodsResponse.info:type_name -> common.Info
+	2,  // 10: services.MemberOrderStatsResponse.entity:type_name -> services.MemberOrderStats
+	10, // 11: services.MemberOrderStatsResponse.pager:type_name -> common.Pager
+	2,  // 12: services.MemberOrderStatsResponse.items:type_name -> services.MemberOrderStats
+	11, // 13: services.MemberOrderStatsResponse.error:type_name -> common.Error
+	12, // 14: services.MemberOrderStatsResponse.info:type_name -> common.Info
+	3,  // 15: services.MemberOrderDayStatsResponse.entity:type_name -> services.MemberOrderDayStats
+	10, // 16: services.MemberOrderDayStatsResponse.pager:type_name -> common.Pager
+	3,  // 17: services.MemberOrderDayStatsResponse.items:type_name -> services.MemberOrderDayStats
+	11, // 18: services.MemberOrderDayStatsResponse.error:type_name -> common.Error
+	12, // 19: services.MemberOrderDayStatsResponse.info:type_name -> common.Info
+	4,  // 20: services.MemberGoodsResponse.entity:type_name -> services.MemberGoods
+	10, // 21: services.MemberGoodsResponse.pager:type_name -> common.Pager
+	4,  // 22: services.MemberGoodsResponse.items:type_name -> services.MemberGoods
+	11, // 23: services.MemberGoodsResponse.error:type_name -> common.Error
+	12, // 24: services.MemberGoodsResponse.info:type_name -> common.Info
 	25, // [25:25] is the sub-list for method output_type
 	25, // [25:25] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
@@ -1544,7 +1544,7 @@ func file_orderStatsService_proto_init() {
 			}
 		}
 		file_orderStatsService_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CustomerOrderStats); i {
+			switch v := v.(*MemberOrderStats); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1556,7 +1556,7 @@ func file_orderStatsService_proto_init() {
 			}
 		}
 		file_orderStatsService_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CustomerOrderDayStats); i {
+			switch v := v.(*MemberOrderDayStats); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1568,7 +1568,7 @@ func file_orderStatsService_proto_init() {
 			}
 		}
 		file_orderStatsService_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CustomerGoods); i {
+			switch v := v.(*MemberGoods); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1604,7 +1604,7 @@ func file_orderStatsService_proto_init() {
 			}
 		}
 		file_orderStatsService_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CustomerOrderStatsResponse); i {
+			switch v := v.(*MemberOrderStatsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1616,7 +1616,7 @@ func file_orderStatsService_proto_init() {
 			}
 		}
 		file_orderStatsService_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CustomerOrderDayStatsResponse); i {
+			switch v := v.(*MemberOrderDayStatsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1628,7 +1628,7 @@ func file_orderStatsService_proto_init() {
 			}
 		}
 		file_orderStatsService_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CustomerGoodsResponse); i {
+			switch v := v.(*MemberGoodsResponse); i {
 			case 0:
 				return &v.state
 			case 1:

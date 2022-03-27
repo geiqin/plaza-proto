@@ -44,7 +44,7 @@ func NewMyStatisticsServiceEndpoints() []*api.Endpoint {
 
 type MyStatisticsService interface {
 	//获取用户未处理订单数量
-	Unhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*CustomerOrderHandledStatsResponse, error)
+	Unhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*MemberOrderHandledStatsResponse, error)
 }
 
 type myStatisticsService struct {
@@ -59,9 +59,9 @@ func NewMyStatisticsService(name string, c client.Client) MyStatisticsService {
 	}
 }
 
-func (c *myStatisticsService) Unhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*CustomerOrderHandledStatsResponse, error) {
+func (c *myStatisticsService) Unhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*MemberOrderHandledStatsResponse, error) {
 	req := c.c.NewRequest(c.name, "MyStatisticsService.Unhandled", in)
-	out := new(CustomerOrderHandledStatsResponse)
+	out := new(MemberOrderHandledStatsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -73,12 +73,12 @@ func (c *myStatisticsService) Unhandled(ctx context.Context, in *StatsRequest, o
 
 type MyStatisticsServiceHandler interface {
 	//获取用户未处理订单数量
-	Unhandled(context.Context, *StatsRequest, *CustomerOrderHandledStatsResponse) error
+	Unhandled(context.Context, *StatsRequest, *MemberOrderHandledStatsResponse) error
 }
 
 func RegisterMyStatisticsServiceHandler(s server.Server, hdlr MyStatisticsServiceHandler, opts ...server.HandlerOption) error {
 	type myStatisticsService interface {
-		Unhandled(ctx context.Context, in *StatsRequest, out *CustomerOrderHandledStatsResponse) error
+		Unhandled(ctx context.Context, in *StatsRequest, out *MemberOrderHandledStatsResponse) error
 	}
 	type MyStatisticsService struct {
 		myStatisticsService
@@ -91,7 +91,7 @@ type myStatisticsServiceHandler struct {
 	MyStatisticsServiceHandler
 }
 
-func (h *myStatisticsServiceHandler) Unhandled(ctx context.Context, in *StatsRequest, out *CustomerOrderHandledStatsResponse) error {
+func (h *myStatisticsServiceHandler) Unhandled(ctx context.Context, in *StatsRequest, out *MemberOrderHandledStatsResponse) error {
 	return h.MyStatisticsServiceHandler.Unhandled(ctx, in, out)
 }
 
@@ -115,11 +115,11 @@ type StatisticsService interface {
 	//获取店铺未处理订单数量
 	Unhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderHandledStatsResponse, error)
 	//查询用户购买的商品
-	CustomerGoods(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*CustomerGoodsResponse, error)
+	MemberGoods(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*MemberGoodsResponse, error)
 	//获取用户订单统计数据
-	CustomerOrder(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*CustomerOrderStatsResponse, error)
+	MemberOrder(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*MemberOrderStatsResponse, error)
 	//获取用户未处理订单数量
-	CustomerUnhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*CustomerOrderHandledStatsResponse, error)
+	MemberUnhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*MemberOrderHandledStatsResponse, error)
 	//重置统计
 	Reset(ctx context.Context, in *common.Empty, opts ...client.CallOption) (*OrderStatsResponse, error)
 }
@@ -186,9 +186,9 @@ func (c *statisticsService) Unhandled(ctx context.Context, in *StatsRequest, opt
 	return out, nil
 }
 
-func (c *statisticsService) CustomerGoods(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*CustomerGoodsResponse, error) {
-	req := c.c.NewRequest(c.name, "StatisticsService.CustomerGoods", in)
-	out := new(CustomerGoodsResponse)
+func (c *statisticsService) MemberGoods(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*MemberGoodsResponse, error) {
+	req := c.c.NewRequest(c.name, "StatisticsService.MemberGoods", in)
+	out := new(MemberGoodsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -196,9 +196,9 @@ func (c *statisticsService) CustomerGoods(ctx context.Context, in *StatsRequest,
 	return out, nil
 }
 
-func (c *statisticsService) CustomerOrder(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*CustomerOrderStatsResponse, error) {
-	req := c.c.NewRequest(c.name, "StatisticsService.CustomerOrder", in)
-	out := new(CustomerOrderStatsResponse)
+func (c *statisticsService) MemberOrder(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*MemberOrderStatsResponse, error) {
+	req := c.c.NewRequest(c.name, "StatisticsService.MemberOrder", in)
+	out := new(MemberOrderStatsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -206,9 +206,9 @@ func (c *statisticsService) CustomerOrder(ctx context.Context, in *StatsRequest,
 	return out, nil
 }
 
-func (c *statisticsService) CustomerUnhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*CustomerOrderHandledStatsResponse, error) {
-	req := c.c.NewRequest(c.name, "StatisticsService.CustomerUnhandled", in)
-	out := new(CustomerOrderHandledStatsResponse)
+func (c *statisticsService) MemberUnhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*MemberOrderHandledStatsResponse, error) {
+	req := c.c.NewRequest(c.name, "StatisticsService.MemberUnhandled", in)
+	out := new(MemberOrderHandledStatsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -240,11 +240,11 @@ type StatisticsServiceHandler interface {
 	//获取店铺未处理订单数量
 	Unhandled(context.Context, *StatsRequest, *OrderHandledStatsResponse) error
 	//查询用户购买的商品
-	CustomerGoods(context.Context, *StatsRequest, *CustomerGoodsResponse) error
+	MemberGoods(context.Context, *StatsRequest, *MemberGoodsResponse) error
 	//获取用户订单统计数据
-	CustomerOrder(context.Context, *StatsRequest, *CustomerOrderStatsResponse) error
+	MemberOrder(context.Context, *StatsRequest, *MemberOrderStatsResponse) error
 	//获取用户未处理订单数量
-	CustomerUnhandled(context.Context, *StatsRequest, *CustomerOrderHandledStatsResponse) error
+	MemberUnhandled(context.Context, *StatsRequest, *MemberOrderHandledStatsResponse) error
 	//重置统计
 	Reset(context.Context, *common.Empty, *OrderStatsResponse) error
 }
@@ -256,9 +256,9 @@ func RegisterStatisticsServiceHandler(s server.Server, hdlr StatisticsServiceHan
 		TodayTotal(ctx context.Context, in *StatsRequest, out *OrderDayStatsResponse) error
 		OrderDays(ctx context.Context, in *StatsRequest, out *OrderDayStatsResponse) error
 		Unhandled(ctx context.Context, in *StatsRequest, out *OrderHandledStatsResponse) error
-		CustomerGoods(ctx context.Context, in *StatsRequest, out *CustomerGoodsResponse) error
-		CustomerOrder(ctx context.Context, in *StatsRequest, out *CustomerOrderStatsResponse) error
-		CustomerUnhandled(ctx context.Context, in *StatsRequest, out *CustomerOrderHandledStatsResponse) error
+		MemberGoods(ctx context.Context, in *StatsRequest, out *MemberGoodsResponse) error
+		MemberOrder(ctx context.Context, in *StatsRequest, out *MemberOrderStatsResponse) error
+		MemberUnhandled(ctx context.Context, in *StatsRequest, out *MemberOrderHandledStatsResponse) error
 		Reset(ctx context.Context, in *common.Empty, out *OrderStatsResponse) error
 	}
 	type StatisticsService struct {
@@ -292,16 +292,16 @@ func (h *statisticsServiceHandler) Unhandled(ctx context.Context, in *StatsReque
 	return h.StatisticsServiceHandler.Unhandled(ctx, in, out)
 }
 
-func (h *statisticsServiceHandler) CustomerGoods(ctx context.Context, in *StatsRequest, out *CustomerGoodsResponse) error {
-	return h.StatisticsServiceHandler.CustomerGoods(ctx, in, out)
+func (h *statisticsServiceHandler) MemberGoods(ctx context.Context, in *StatsRequest, out *MemberGoodsResponse) error {
+	return h.StatisticsServiceHandler.MemberGoods(ctx, in, out)
 }
 
-func (h *statisticsServiceHandler) CustomerOrder(ctx context.Context, in *StatsRequest, out *CustomerOrderStatsResponse) error {
-	return h.StatisticsServiceHandler.CustomerOrder(ctx, in, out)
+func (h *statisticsServiceHandler) MemberOrder(ctx context.Context, in *StatsRequest, out *MemberOrderStatsResponse) error {
+	return h.StatisticsServiceHandler.MemberOrder(ctx, in, out)
 }
 
-func (h *statisticsServiceHandler) CustomerUnhandled(ctx context.Context, in *StatsRequest, out *CustomerOrderHandledStatsResponse) error {
-	return h.StatisticsServiceHandler.CustomerUnhandled(ctx, in, out)
+func (h *statisticsServiceHandler) MemberUnhandled(ctx context.Context, in *StatsRequest, out *MemberOrderHandledStatsResponse) error {
+	return h.StatisticsServiceHandler.MemberUnhandled(ctx, in, out)
 }
 
 func (h *statisticsServiceHandler) Reset(ctx context.Context, in *common.Empty, out *OrderStatsResponse) error {

@@ -32,26 +32,26 @@ type PurchaseRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type       int32             `protobuf:"varint,1,opt,name=type,proto3" json:"type"`                                //订单类型（默认为普通订单）
-	Serial     int32             `protobuf:"varint,2,opt,name=serial,proto3" json:"serial"`                            //订单类型序
-	AddressId  int64             `protobuf:"varint,3,opt,name=address_id,json=addressId,proto3" json:"address_id"`     //收货地址ID
-	Message    string            `protobuf:"bytes,4,opt,name=message,proto3" json:"message"`                           //买家留言(50字以内)
-	PayMethod  int32             `protobuf:"varint,5,opt,name=pay_method,json=payMethod,proto3" json:"pay_method"`     //选中的支付方式
-	Source     string            `protobuf:"bytes,6,opt,name=source,proto3" json:"source"`                             //下单来源
-	TicketId   int64             `protobuf:"varint,7,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id"`        //选中的优惠劵凭证ID
-	Points     int32             `protobuf:"varint,8,opt,name=points,proto3" json:"points"`                            //使用的积分数
-	VipCardId  int64             `protobuf:"varint,9,opt,name=vip_card_id,json=vipCardId,proto3" json:"vip_card_id"`   //选中的会员卡
-	CustomerId int64             `protobuf:"varint,10,opt,name=customer_id,json=customerId,proto3" json:"customer_id"` //客户ID（代客下单）
-	Ext11      int64             `protobuf:"varint,11,opt,name=ext11,proto3" json:"ext11"`
-	Ext21      int32             `protobuf:"varint,12,opt,name=ext21,proto3" json:"ext21"`
-	Ext22      int32             `protobuf:"varint,13,opt,name=ext22,proto3" json:"ext22"`
-	Ext31      string            `protobuf:"bytes,14,opt,name=ext31,proto3" json:"ext31"`
-	Ext32      string            `protobuf:"bytes,15,opt,name=ext32,proto3" json:"ext32"`
-	Ext33      string            `protobuf:"bytes,16,opt,name=ext33,proto3" json:"ext33"`
-	Money      float32           `protobuf:"fixed32,17,opt,name=money,proto3" json:"money"`                                                                                       //订单金额【充值订单】
-	Subject    string            `protobuf:"bytes,18,opt,name=subject,proto3" json:"subject"`                                                                                     //订单标题【充值订单】
-	Metas      map[string]string `protobuf:"bytes,19,rep,name=metas,proto3" json:"metas" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` //订单扩展信息
-	GoodsList  []*PurchaseItem   `protobuf:"bytes,20,rep,name=goods_list,json=goodsList,proto3" json:"goods_list"`                                                                //选中的商品清单
+	Type      int32             `protobuf:"varint,1,opt,name=type,proto3" json:"type"`                              //订单类型（默认为普通订单）
+	Serial    int32             `protobuf:"varint,2,opt,name=serial,proto3" json:"serial"`                          //订单类型序
+	AddressId int64             `protobuf:"varint,3,opt,name=address_id,json=addressId,proto3" json:"address_id"`   //收货地址ID
+	Message   string            `protobuf:"bytes,4,opt,name=message,proto3" json:"message"`                         //买家留言(50字以内)
+	PayMethod int32             `protobuf:"varint,5,opt,name=pay_method,json=payMethod,proto3" json:"pay_method"`   //选中的支付方式
+	Source    string            `protobuf:"bytes,6,opt,name=source,proto3" json:"source"`                           //下单来源
+	TicketId  int64             `protobuf:"varint,7,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id"`      //选中的优惠劵凭证ID
+	Points    int32             `protobuf:"varint,8,opt,name=points,proto3" json:"points"`                          //使用的积分数
+	VipCardId int64             `protobuf:"varint,9,opt,name=vip_card_id,json=vipCardId,proto3" json:"vip_card_id"` //选中的会员卡
+	MemberId  int64             `protobuf:"varint,10,opt,name=member_id,json=memberId,proto3" json:"member_id"`     //客户ID（代客下单）
+	Ext11     int64             `protobuf:"varint,11,opt,name=ext11,proto3" json:"ext11"`
+	Ext21     int32             `protobuf:"varint,12,opt,name=ext21,proto3" json:"ext21"`
+	Ext22     int32             `protobuf:"varint,13,opt,name=ext22,proto3" json:"ext22"`
+	Ext31     string            `protobuf:"bytes,14,opt,name=ext31,proto3" json:"ext31"`
+	Ext32     string            `protobuf:"bytes,15,opt,name=ext32,proto3" json:"ext32"`
+	Ext33     string            `protobuf:"bytes,16,opt,name=ext33,proto3" json:"ext33"`
+	Money     float32           `protobuf:"fixed32,17,opt,name=money,proto3" json:"money"`                                                                                       //订单金额【充值订单】
+	Subject   string            `protobuf:"bytes,18,opt,name=subject,proto3" json:"subject"`                                                                                     //订单标题【充值订单】
+	Metas     map[string]string `protobuf:"bytes,19,rep,name=metas,proto3" json:"metas" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` //订单扩展信息
+	GoodsList []*PurchaseItem   `protobuf:"bytes,20,rep,name=goods_list,json=goodsList,proto3" json:"goods_list"`                                                                //选中的商品清单
 }
 
 func (x *PurchaseRequest) Reset() {
@@ -149,9 +149,9 @@ func (x *PurchaseRequest) GetVipCardId() int64 {
 	return 0
 }
 
-func (x *PurchaseRequest) GetCustomerId() int64 {
+func (x *PurchaseRequest) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
@@ -311,7 +311,7 @@ type Billing struct {
 	Freight     float32     `protobuf:"fixed32,5,opt,name=freight,proto3" json:"freight"`
 	Amount      float32     `protobuf:"fixed32,6,opt,name=amount,proto3" json:"amount"`
 	AddressId   int64       `protobuf:"varint,7,opt,name=address_id,json=addressId,proto3" json:"address_id"`
-	CustomerId  int64       `protobuf:"varint,8,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId    int64       `protobuf:"varint,8,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	Message     string      `protobuf:"bytes,9,opt,name=message,proto3" json:"message"`                               //买家留言(50字以内)
 	Source      string      `protobuf:"bytes,10,opt,name=source,proto3" json:"source"`                                //下单来源
 	TicketId    int64       `protobuf:"varint,11,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id"`           //正在使用的优惠劵ID
@@ -400,9 +400,9 @@ func (x *Billing) GetAddressId() int64 {
 	return 0
 }
 
-func (x *Billing) GetCustomerId() int64 {
+func (x *Billing) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }

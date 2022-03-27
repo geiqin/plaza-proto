@@ -24,7 +24,7 @@ message Recharge {
     float amount = 7;
     string back_type = 8;
     string back_value = 9;
-    int64 customer_id = 10;
+    int64 member_id = 10;
     string meno = 11;
     string metadata = 12;
     string pay_status = 13;

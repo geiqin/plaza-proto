@@ -35,7 +35,7 @@ type Safeguard struct {
 	OrderId            int64              `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
 	Type               int32              `protobuf:"varint,3,opt,name=type,proto3" json:"type"`
 	SafeguardSn        string             `protobuf:"bytes,4,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn"`
-	CustomerId         int64              `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId           int64              `protobuf:"varint,5,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	ExchangeDeliveryId int64              `protobuf:"varint,6,opt,name=exchange_delivery_id,json=exchangeDeliveryId,proto3" json:"exchange_delivery_id"`
 	ExpressName        string             `protobuf:"bytes,7,opt,name=express_name,json=expressName,proto3" json:"express_name"`
 	ExpressNo          string             `protobuf:"bytes,8,opt,name=express_no,json=expressNo,proto3" json:"express_no"`
@@ -130,9 +130,9 @@ func (x *Safeguard) GetSafeguardSn() string {
 	return ""
 }
 
-func (x *Safeguard) GetCustomerId() int64 {
+func (x *Safeguard) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
@@ -745,7 +745,7 @@ type SafeguardWhere struct {
 	// @inject_tag: gorm:"-"
 	Ids           []int64 `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids"`
 	OrderId       int64   `protobuf:"varint,6,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	CustomerId    int64   `protobuf:"varint,7,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId      int64   `protobuf:"varint,7,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	Type          int32   `protobuf:"varint,8,opt,name=type,proto3" json:"type"`
 	KeywordsType  string  `protobuf:"bytes,9,opt,name=keywords_type,json=keywordsType,proto3" json:"keywords_type"`
 	Keywords      string  `protobuf:"bytes,10,opt,name=keywords,proto3" json:"keywords"`
@@ -830,9 +830,9 @@ func (x *SafeguardWhere) GetOrderId() int64 {
 	return 0
 }
 
-func (x *SafeguardWhere) GetCustomerId() int64 {
+func (x *SafeguardWhere) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }

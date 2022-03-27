@@ -26,7 +26,7 @@ message PurchaseRequest {
     int64 ticket_id = 7; //选中的优惠劵凭证ID
     int32 points = 8; //使用的积分数
     int64 vip_card_id = 9; //选中的会员卡
-    int64 customer_id = 10; //客户ID（代客下单）
+    int64 member_id = 10; //客户ID（代客下单）
     int64 ext11 =11;
     int32 ext21 =12;
     int32 ext22 =13;
@@ -56,7 +56,7 @@ message Billing {
     float freight = 5;
     float amount = 6;
     int64 address_id = 7;
-    int64 customer_id = 8;
+    int64 member_id = 8;
     string message = 9; //买家留言(50字以内)
     string source = 10; //下单来源
     int64 ticket_id = 11; //正在使用的优惠劵ID

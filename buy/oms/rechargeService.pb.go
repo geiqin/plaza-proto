@@ -40,7 +40,7 @@ type Recharge struct {
 	Amount     float32 `protobuf:"fixed32,7,opt,name=amount,proto3" json:"amount"`
 	BackType   string  `protobuf:"bytes,8,opt,name=back_type,json=backType,proto3" json:"back_type"`
 	BackValue  string  `protobuf:"bytes,9,opt,name=back_value,json=backValue,proto3" json:"back_value"`
-	CustomerId int64   `protobuf:"varint,10,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	MemberId   int64   `protobuf:"varint,10,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	Meno       string  `protobuf:"bytes,11,opt,name=meno,proto3" json:"meno"`
 	Metadata   string  `protobuf:"bytes,12,opt,name=metadata,proto3" json:"metadata"`
 	PayStatus  string  `protobuf:"bytes,13,opt,name=pay_status,json=payStatus,proto3" json:"pay_status"`
@@ -145,9 +145,9 @@ func (x *Recharge) GetBackValue() string {
 	return ""
 }
 
-func (x *Recharge) GetCustomerId() int64 {
+func (x *Recharge) GetMemberId() int64 {
 	if x != nil {
-		return x.CustomerId
+		return x.MemberId
 	}
 	return 0
 }
