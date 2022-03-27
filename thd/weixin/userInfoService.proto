@@ -21,7 +21,7 @@ message UserInfo {
     string source = 6;
     string nick_name = 7;
     string avatar_url = 8;
-    int32 gender = 9;
+    string gender = 9;
     string province = 10;
     string city = 11;
     string country = 12;
