@@ -1,0 +1,67 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+service RankService {
+    rpc Create (Rank) returns (RankResponse) {}
+    rpc Update (Rank) returns (RankResponse) {}
+    rpc Delete (Rank) returns (RankResponse) {}
+    rpc Get (Rank) returns (RankResponse) {}
+    rpc Search (RankRequest) returns (RankResponse) {}
+    rpc List (RankRequest) returns (RankResponse) {}
+}
+
+message Rank {
+    int32 id =1;
+    string name =2;
+    string type =3;
+    int32 min_points =4;
+    int32 max_points =5;
+    float discount =6;
+    float point_rate =7;
+    int32 next_rank_id =8;
+    int32 order_limit_type =9;
+    float order_limit_money =10;
+    int32 deposit_limit =11;
+    int32 growth_limit =12;
+    int32 point_expired_days =13;
+    int64 icon_id =14;
+    string icon_url =15;
+    string bg_color =16;
+    bool defaulted =17;
+    string description =18;
+    bool is_pay =19;
+    bool is_free_postage =20;
+    bool is_auto_upgrade =21;
+    string status =22;
+    string created_at =23;
+    string updated_at =24;
+}
+
+
+message RankRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    //以下为自定义参数
+    int32 id =3;
+    string name = 4;
+    string type =5;
+    bool is_pay =6;
+    string status =7;
+    bool is_free_postage =8;
+    repeated int32 ids = 9;
+}
+
+message RankData {
+    Rank entity = 1;
+    common.Pager pager =2;
+    repeated Rank items = 3;
+    common.Info info =4;
+}
+
+message RankResponse {
+    RankData data = 1;
+    common.Error error = 2;
+}
+

@@ -1,0 +1,56 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+import "memberService.proto";
+
+service AuthorizeService {
+    //获得当前客户
+    rpc Info (AuthorizeRequest) returns (MemberResponse) {}
+    //绑定手机
+    rpc BindMobile (AuthorizeRequest) returns (AuthorizeResponse) {}
+    //绑定邮箱
+    rpc BindEmail (AuthorizeRequest) returns (AuthorizeResponse) {}
+    //微信小程序邀请码
+    rpc BindWxByMini (AuthorizeRequest) returns (AuthorizeResponse) {}
+    //APP邀请二维码
+    rpc BindWxByApp (AuthorizeRequest) returns (AuthorizeResponse) {}
+}
+
+
+message Authorize{
+    int64 id =1;
+    int64 member_id =2;
+    string username = 3;
+    string password =4;
+    string email = 5;
+    string mobile = 6;
+}
+
+message AuthorizeRequest{
+    int64 member_id =1;
+    string name = 2;
+    string mobile =3;
+    string email =4;
+    string password =5;
+    string old_password = 6;
+    string new_password = 7;
+    string confirm_password = 8;
+    string code = 9;
+    string encrypted_data = 10;
+    string iv = 11;
+}
+
+message AuthorizeData {
+    Authorize entity = 1;
+    common.Pager pager =2;
+    repeated Authorize items = 3;
+    common.Info info =4;
+    map<string,string> params =5;
+}
+
+
+message AuthorizeResponse {
+    AuthorizeData data = 1;
+    common.Error error = 2;
+}

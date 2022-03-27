@@ -1,0 +1,47 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+service MemberIdentityService {
+    rpc Create (MemberIdentity) returns (MemberIdentityResponse) {}
+    rpc Get (MemberIdentity) returns (MemberIdentityResponse) {}
+    rpc Search (MemberIdentityRequest) returns (MemberIdentityResponse) {}
+}
+
+message MemberIdentity{
+    int64 id =1;
+    int64 member_id =2;
+    string real_name = 3;
+    string id_card =4;
+    string gender =5;
+    string birthday =6;
+    string address =7;
+    string nation =8;
+    string issuer =9;
+    bool forever =10;
+    string begin_date =11;
+    string end_date =12;
+    string status = 13;
+}
+
+message MemberIdentityRequest{
+    int32 paged = 1;
+    int32 page_size = 2;
+    int64 id =3;
+    int64 member_id =4;
+    int64 real_name =5;
+    string id_card = 6;
+    string nation =7;
+    string status = 8;
+}
+
+message MemberIdentityResponse {
+    MemberIdentity entity = 1;
+    common.Pager pager =2;
+    repeated MemberIdentity items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}
+
+

@@ -1,0 +1,66 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+
+service FanService {
+    rpc Update (Fan) returns (FanResponse) {}
+    rpc Delete (Fan) returns (FanResponse) {}
+    rpc Get (Fan) returns (FanResponse) {}
+    rpc Search (FanRequest) returns (FanResponse) {}
+}
+
+message Fan {
+    int64 id = 1;
+    string fan_sn = 2;
+    int64 member_id =3;
+    string open_id = 4;
+    string union_id = 5;
+    string source = 6;
+    string nick_name = 7;
+    string avatar_url = 8;
+    string gender = 9;
+    string province = 10;
+    string city = 11;
+    string country = 12;
+    string mobile = 13;
+    string email = 14;
+    string remark = 15;
+    int64 recommender_id = 16;
+    string status = 17;
+    string registered_at = 18;
+    string created_at = 19;
+    string updated_at = 20;
+}
+
+
+message FanRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    //以下为自定义参数
+    int64 id = 4;
+    string nick_name = 5;
+    string gender =6;
+    string mobile =7;
+    string source =8;
+    string status =9;
+    string open_id =10;
+    int64 member_id=11;
+    int64 recommender_id = 12;
+    string code =13;
+    repeated int64 ids = 14;
+}
+
+message FanData {
+    Fan entity = 1;
+    common.Pager pager =2;
+    repeated Fan items = 3;
+    common.Info info =4;
+}
+
+//
+message FanResponse {
+    FanData data = 1;
+    common.Error error = 2;
+}

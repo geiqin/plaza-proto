@@ -19,7 +19,7 @@ message QrcodeRequest {
     string encrypted_data =4;
     string iv =5;
     string scene =6;
-    int64 customer_id =7;
+    int64 member_id =7;
 }
 
 //微信数据
