@@ -3,31 +3,46 @@ package services;
 option go_package = ".;services";
 import "common/base.proto";
 
+
 service TagService {
-    rpc Create (Tag) returns (TagResponse) {}
-    rpc Update (Tag) returns (TagResponse) {}
-    rpc Delete (Tag) returns (TagResponse) {}
-    rpc Get (Tag) returns (TagResponse) {}
-    rpc List (common.BaseWhere) returns (TagResponse) {}
-    rpc Search (common.BaseWhere) returns (TagResponse) {}
+    rpc Create(Tag) returns (TagResponse);
+    rpc Update(Tag) returns (TagResponse);
+    rpc Delete (Tag) returns (TagResponse);
+    rpc Get (Tag) returns (TagResponse);
+    rpc List (TagRequest) returns (TagResponse);
+    rpc Search (TagRequest) returns (TagResponse);
 }
 
 message Tag {
-    int32	id	=1;
-    string	slug	=2;
-    string	name	=3;
-    string	type	=4;
-    int32	item_num	=5;
-    string	memo	=6;
-    int32	weight	=7;
-    string	created_at	=8;
-    string	updated_at	=9;
+    int32 id = 1;
+    string name = 2;
+    string title = 3;
+    string type = 4;
+    string memo = 5;
+    int32 sort = 6;
+    int32 spu_num = 7;
+    string created_at = 10;
+    string updated_at = 11;
+}
+
+message TagRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    int32 id = 4;
+    string name = 5;
+}
+
+message TagData {
+    Tag  entity = 1;
+    common.Pager pager = 2;
+    repeated Tag items = 3;
+    common.Info info = 4;
 }
 
 message TagResponse {
-    Tag entity = 1;
-    common.Pager pager =2;
-    repeated Tag items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    TagData data = 1;
+    common.Error error = 2;
 }
+
+

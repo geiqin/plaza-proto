@@ -31,41 +31,41 @@ type Member struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type          int32      `protobuf:"varint,2,opt,name=type,proto3" json:"type,omitempty"`
-	Name          string     `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Gender        string     `protobuf:"bytes,4,opt,name=gender,proto3" json:"gender,omitempty"`
-	AvatarId      int64      `protobuf:"varint,5,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id,omitempty"`
-	AvatarUrl     string     `protobuf:"bytes,6,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	RankId        int32      `protobuf:"varint,7,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
-	RankExpiredAt string     `protobuf:"bytes,8,opt,name=rank_expired_at,json=rankExpiredAt,proto3" json:"rank_expired_at,omitempty"`
-	RankValid     bool       `protobuf:"varint,9,opt,name=rank_valid,json=rankValid,proto3" json:"rank_valid,omitempty"`
-	Capital       float32    `protobuf:"fixed32,10,opt,name=capital,proto3" json:"capital,omitempty"`
-	Deposit       float32    `protobuf:"fixed32,11,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	PayPoints     int32      `protobuf:"varint,12,opt,name=pay_points,json=payPoints,proto3" json:"pay_points,omitempty"`
-	RankPoints    int32      `protobuf:"varint,13,opt,name=rank_points,json=rankPoints,proto3" json:"rank_points,omitempty"`
-	TradedNum     int32      `protobuf:"varint,14,opt,name=traded_num,json=tradedNum,proto3" json:"traded_num,omitempty"`
-	TradedMoney   float32    `protobuf:"fixed32,15,opt,name=traded_money,json=tradedMoney,proto3" json:"traded_money,omitempty"`
-	CommentNum    int32      `protobuf:"varint,16,opt,name=comment_num,json=commentNum,proto3" json:"comment_num,omitempty"`
-	CollectNum    int32      `protobuf:"varint,17,opt,name=collect_num,json=collectNum,proto3" json:"collect_num,omitempty"`
-	RecommenderId int64      `protobuf:"varint,18,opt,name=recommender_id,json=recommenderId,proto3" json:"recommender_id,omitempty"`
-	Trusted       bool       `protobuf:"varint,19,opt,name=trusted,proto3" json:"trusted,omitempty"`
-	BoundMobile   bool       `protobuf:"varint,20,opt,name=bound_mobile,json=boundMobile,proto3" json:"bound_mobile,omitempty"`
-	BoundEmail    bool       `protobuf:"varint,21,opt,name=bound_email,json=boundEmail,proto3" json:"bound_email,omitempty"`
-	BoundWx       bool       `protobuf:"varint,22,opt,name=bound_wx,json=boundWx,proto3" json:"bound_wx,omitempty"`
-	AreaId        int64      `protobuf:"varint,23,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
-	Birthday      string     `protobuf:"bytes,24,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	ContactTel    string     `protobuf:"bytes,25,opt,name=contact_tel,json=contactTel,proto3" json:"contact_tel,omitempty"`
-	Memo          string     `protobuf:"bytes,26,opt,name=memo,proto3" json:"memo,omitempty"`
-	Source        string     `protobuf:"bytes,27,opt,name=source,proto3" json:"source,omitempty"`
-	ByFanId       int64      `protobuf:"varint,28,opt,name=by_fan_id,json=byFanId,proto3" json:"by_fan_id,omitempty"`
-	Status        string     `protobuf:"bytes,29,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt     string     `protobuf:"bytes,30,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string     `protobuf:"bytes,31,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	DeletedAt     string     `protobuf:"bytes,32,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
-	Rank          *Rank      `protobuf:"bytes,33,opt,name=rank,proto3" json:"rank,omitempty"`
-	Tags          []*Tag     `protobuf:"bytes,34,rep,name=tags,proto3" json:"tags,omitempty"`
-	Addresses     []*Address `protobuf:"bytes,36,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	Id            int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Type          int32      `protobuf:"varint,2,opt,name=type,proto3" json:"type"`
+	Name          string     `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	Gender        string     `protobuf:"bytes,4,opt,name=gender,proto3" json:"gender"`
+	AvatarId      int64      `protobuf:"varint,5,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id"`
+	AvatarUrl     string     `protobuf:"bytes,6,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
+	RankId        int32      `protobuf:"varint,7,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
+	RankExpiredAt string     `protobuf:"bytes,8,opt,name=rank_expired_at,json=rankExpiredAt,proto3" json:"rank_expired_at"`
+	RankValid     bool       `protobuf:"varint,9,opt,name=rank_valid,json=rankValid,proto3" json:"rank_valid"`
+	Capital       float32    `protobuf:"fixed32,10,opt,name=capital,proto3" json:"capital"`
+	Deposit       float32    `protobuf:"fixed32,11,opt,name=deposit,proto3" json:"deposit"`
+	PayPoints     int32      `protobuf:"varint,12,opt,name=pay_points,json=payPoints,proto3" json:"pay_points"`
+	RankPoints    int32      `protobuf:"varint,13,opt,name=rank_points,json=rankPoints,proto3" json:"rank_points"`
+	TradedNum     int32      `protobuf:"varint,14,opt,name=traded_num,json=tradedNum,proto3" json:"traded_num"`
+	TradedMoney   float32    `protobuf:"fixed32,15,opt,name=traded_money,json=tradedMoney,proto3" json:"traded_money"`
+	CommentNum    int32      `protobuf:"varint,16,opt,name=comment_num,json=commentNum,proto3" json:"comment_num"`
+	CollectNum    int32      `protobuf:"varint,17,opt,name=collect_num,json=collectNum,proto3" json:"collect_num"`
+	RecommenderId int64      `protobuf:"varint,18,opt,name=recommender_id,json=recommenderId,proto3" json:"recommender_id"`
+	Trusted       bool       `protobuf:"varint,19,opt,name=trusted,proto3" json:"trusted"`
+	BoundMobile   bool       `protobuf:"varint,20,opt,name=bound_mobile,json=boundMobile,proto3" json:"bound_mobile"`
+	BoundEmail    bool       `protobuf:"varint,21,opt,name=bound_email,json=boundEmail,proto3" json:"bound_email"`
+	BoundWx       bool       `protobuf:"varint,22,opt,name=bound_wx,json=boundWx,proto3" json:"bound_wx"`
+	AreaId        int64      `protobuf:"varint,23,opt,name=area_id,json=areaId,proto3" json:"area_id"`
+	Birthday      string     `protobuf:"bytes,24,opt,name=birthday,proto3" json:"birthday"`
+	ContactTel    string     `protobuf:"bytes,25,opt,name=contact_tel,json=contactTel,proto3" json:"contact_tel"`
+	Memo          string     `protobuf:"bytes,26,opt,name=memo,proto3" json:"memo"`
+	Source        string     `protobuf:"bytes,27,opt,name=source,proto3" json:"source"`
+	ByFanId       int64      `protobuf:"varint,28,opt,name=by_fan_id,json=byFanId,proto3" json:"by_fan_id"`
+	Status        string     `protobuf:"bytes,29,opt,name=status,proto3" json:"status"`
+	CreatedAt     string     `protobuf:"bytes,30,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     string     `protobuf:"bytes,31,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	DeletedAt     string     `protobuf:"bytes,32,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at"`
+	Rank          *Rank      `protobuf:"bytes,33,opt,name=rank,proto3" json:"rank"`
+	Tags          []*Tag     `protobuf:"bytes,34,rep,name=tags,proto3" json:"tags"`
+	Addresses     []*Address `protobuf:"bytes,36,rep,name=addresses,proto3" json:"addresses"`
 }
 
 func (x *Member) Reset() {
@@ -351,35 +351,35 @@ type MemberRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//以下为自定义参数
-	Id            int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Type          int32   `protobuf:"varint,5,opt,name=type,proto3" json:"type,omitempty"`
-	Name          string  `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	Gender        string  `protobuf:"bytes,7,opt,name=gender,proto3" json:"gender,omitempty"`
-	ContactTel    string  `protobuf:"bytes,8,opt,name=contact_tel,json=contactTel,proto3" json:"contact_tel,omitempty"`
-	RealName      string  `protobuf:"bytes,9,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`
-	RankId        int32   `protobuf:"varint,10,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
-	CardId        int32   `protobuf:"varint,11,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
-	TagId         int32   `protobuf:"varint,12,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
-	Source        string  `protobuf:"bytes,13,opt,name=source,proto3" json:"source,omitempty"`
-	AreaId        int64   `protobuf:"varint,14,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
-	Status        string  `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"`
-	Keywords      string  `protobuf:"bytes,16,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	MemberId      int64   `protobuf:"varint,17,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Mobile        string  `protobuf:"bytes,18,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email         string  `protobuf:"bytes,19,opt,name=email,proto3" json:"email,omitempty"`
-	BoundMobile   bool    `protobuf:"varint,20,opt,name=bound_mobile,json=boundMobile,proto3" json:"bound_mobile,omitempty"`
-	BoundEmail    bool    `protobuf:"varint,21,opt,name=bound_email,json=boundEmail,proto3" json:"bound_email,omitempty"`
-	BoundWx       bool    `protobuf:"varint,22,opt,name=bound_wx,json=boundWx,proto3" json:"bound_wx,omitempty"`
-	RecommenderId int64   `protobuf:"varint,23,opt,name=recommender_id,json=recommenderId,proto3" json:"recommender_id,omitempty"`
-	AvatarId      int64   `protobuf:"varint,24,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id,omitempty"`
-	AvatarUrl     string  `protobuf:"bytes,25,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	ReferUrl      string  `protobuf:"bytes,26,opt,name=refer_url,json=referUrl,proto3" json:"refer_url,omitempty"`
-	WxOpenId      string  `protobuf:"bytes,27,opt,name=wx_open_id,json=wxOpenId,proto3" json:"wx_open_id,omitempty"`
-	Ids           []int64 `protobuf:"varint,28,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id            int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Type          int32   `protobuf:"varint,5,opt,name=type,proto3" json:"type"`
+	Name          string  `protobuf:"bytes,6,opt,name=name,proto3" json:"name"`
+	Gender        string  `protobuf:"bytes,7,opt,name=gender,proto3" json:"gender"`
+	ContactTel    string  `protobuf:"bytes,8,opt,name=contact_tel,json=contactTel,proto3" json:"contact_tel"`
+	RealName      string  `protobuf:"bytes,9,opt,name=real_name,json=realName,proto3" json:"real_name"`
+	RankId        int32   `protobuf:"varint,10,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
+	CardId        int32   `protobuf:"varint,11,opt,name=card_id,json=cardId,proto3" json:"card_id"`
+	TagId         int32   `protobuf:"varint,12,opt,name=tag_id,json=tagId,proto3" json:"tag_id"`
+	Source        string  `protobuf:"bytes,13,opt,name=source,proto3" json:"source"`
+	AreaId        int64   `protobuf:"varint,14,opt,name=area_id,json=areaId,proto3" json:"area_id"`
+	Status        string  `protobuf:"bytes,15,opt,name=status,proto3" json:"status"`
+	Keywords      string  `protobuf:"bytes,16,opt,name=keywords,proto3" json:"keywords"`
+	MemberId      int64   `protobuf:"varint,17,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Mobile        string  `protobuf:"bytes,18,opt,name=mobile,proto3" json:"mobile"`
+	Email         string  `protobuf:"bytes,19,opt,name=email,proto3" json:"email"`
+	BoundMobile   bool    `protobuf:"varint,20,opt,name=bound_mobile,json=boundMobile,proto3" json:"bound_mobile"`
+	BoundEmail    bool    `protobuf:"varint,21,opt,name=bound_email,json=boundEmail,proto3" json:"bound_email"`
+	BoundWx       bool    `protobuf:"varint,22,opt,name=bound_wx,json=boundWx,proto3" json:"bound_wx"`
+	RecommenderId int64   `protobuf:"varint,23,opt,name=recommender_id,json=recommenderId,proto3" json:"recommender_id"`
+	AvatarId      int64   `protobuf:"varint,24,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id"`
+	AvatarUrl     string  `protobuf:"bytes,25,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
+	ReferUrl      string  `protobuf:"bytes,26,opt,name=refer_url,json=referUrl,proto3" json:"refer_url"`
+	WxOpenId      string  `protobuf:"bytes,27,opt,name=wx_open_id,json=wxOpenId,proto3" json:"wx_open_id"`
+	Ids           []int64 `protobuf:"varint,28,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *MemberRequest) Reset() {
@@ -615,10 +615,10 @@ type MemberData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Member       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Member     `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Member       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Member     `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *MemberData) Reset() {
@@ -686,8 +686,8 @@ type MemberResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *MemberData   `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *MemberData   `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *MemberResponse) Reset() {

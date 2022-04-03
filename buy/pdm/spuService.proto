@@ -1,0 +1,120 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "spuDescService.proto";
+import "brandService.proto";
+import "termService.proto";
+import "tagService.proto";
+import "skuService.proto";
+import "spuGalleryService.proto";
+import "unitService.proto";
+
+
+service SpuService {
+    rpc Create(Spu) returns (SpuResponse);
+    rpc Update(Spu) returns (SpuResponse);
+    rpc Delete (Spu) returns (SpuResponse);
+    rpc Get (Spu) returns (SpuResponse);
+    rpc Search (SpuRequest) returns (SpuResponse);
+    //商品上下架
+    rpc Sale (SpuRequest) returns (SpuResponse) {}
+    //显示商品详情
+    rpc Display (SpuRequest) returns (SpuResponse) {}
+    //商品排序
+    rpc Sort(SpuRequest) returns (SpuResponse) {}
+}
+
+message Spu {
+    int64 id = 1;
+    string code = 2;
+    string title = 3;
+    string type = 4;
+    int32 unit_id = 5;
+    int32 category_id = 6;
+    string category_ids = 7;
+    int32 brand_id = 8;
+    int64 shop_id = 9;
+    int32 max_buy = 10;
+    int32 min_buy = 11;
+    int64 province_id = 12;
+    int64 city_id = 13;
+    bool is_spec = 14;
+    bool is_virtual = 15;
+    bool is_presale = 16;
+    bool is_member_right = 17;
+    bool is_member_price = 18;
+    bool is_hide_stock = 19;
+    bool is_listed = 20;
+    bool is_new = 21;
+    bool is_hot = 22;
+    bool is_recommend = 23;
+    bool is_special = 24;
+    int64 thumb_id = 25;
+    string thumb_url = 26;
+    int64 video_id = 27;
+    string video_url = 28;
+    int32 template_id = 29;
+    string keywords = 30;
+    string out_spu_no = 31;
+    float min_price = 32;
+    float max_price = 33;
+    int32 stocks = 34;
+    int32 collects = 35;
+    int32 evaluates = 36;
+    int32 shares = 37;
+    int32 clicks = 38;
+    int32 sales = 39;
+    int32 sale_initial = 40;
+    int32 sale_actual = 41;
+    int32 child_num = 42;
+    int32 sort = 43;
+    int64 master_sku_id = 44;
+    string memo = 45;
+    string status = 46;
+    string listed_at = 47;
+    string created_at = 48;
+    string updated_at = 49;
+    SpuDesc desc = 50;
+    Brand brand = 51;
+    Unit unit = 52;
+    Sku sku = 53;
+    Property  property_desc = 54;
+    Spec  spec_desc =55;
+    repeated Term terms = 56;
+    repeated Tag tags = 57;
+    repeated Sku skus = 58;
+    repeated SpuGallery galleries = 59;
+}
+
+message SpuRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    int64 id = 4;
+    string code = 5;
+    string title = 6;
+    string type = 7;
+    int64 sku_id = 8;
+    string sku_sn = 9;
+    int32 category_id = 10;
+    int32 brand_id = 11;
+    int64 shop_id = 12;
+    string status =13;
+    string start_date =14;
+    string end_date =15;
+}
+
+message SpuData {
+    Spu entity = 1;
+    common.Pager pager = 2;
+    repeated Spu items = 3;
+    common.Info info = 4;
+}
+
+message SpuResponse {
+    SpuData data = 1;
+    common.Error error = 2;
+}
+
+

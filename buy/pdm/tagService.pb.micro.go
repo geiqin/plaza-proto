@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -47,8 +47,8 @@ type TagService interface {
 	Update(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
 	Delete(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
 	Get(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
-	List(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*TagResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*TagResponse, error)
+	List(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error)
+	Search(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error)
 }
 
 type tagService struct {
@@ -103,7 +103,7 @@ func (c *tagService) Get(ctx context.Context, in *Tag, opts ...client.CallOption
 	return out, nil
 }
 
-func (c *tagService) List(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*TagResponse, error) {
+func (c *tagService) List(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error) {
 	req := c.c.NewRequest(c.name, "TagService.List", in)
 	out := new(TagResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -113,7 +113,7 @@ func (c *tagService) List(ctx context.Context, in *common.BaseWhere, opts ...cli
 	return out, nil
 }
 
-func (c *tagService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*TagResponse, error) {
+func (c *tagService) Search(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error) {
 	req := c.c.NewRequest(c.name, "TagService.Search", in)
 	out := new(TagResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -130,8 +130,8 @@ type TagServiceHandler interface {
 	Update(context.Context, *Tag, *TagResponse) error
 	Delete(context.Context, *Tag, *TagResponse) error
 	Get(context.Context, *Tag, *TagResponse) error
-	List(context.Context, *common.BaseWhere, *TagResponse) error
-	Search(context.Context, *common.BaseWhere, *TagResponse) error
+	List(context.Context, *TagRequest, *TagResponse) error
+	Search(context.Context, *TagRequest, *TagResponse) error
 }
 
 func RegisterTagServiceHandler(s server.Server, hdlr TagServiceHandler, opts ...server.HandlerOption) error {
@@ -140,8 +140,8 @@ func RegisterTagServiceHandler(s server.Server, hdlr TagServiceHandler, opts ...
 		Update(ctx context.Context, in *Tag, out *TagResponse) error
 		Delete(ctx context.Context, in *Tag, out *TagResponse) error
 		Get(ctx context.Context, in *Tag, out *TagResponse) error
-		List(ctx context.Context, in *common.BaseWhere, out *TagResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *TagResponse) error
+		List(ctx context.Context, in *TagRequest, out *TagResponse) error
+		Search(ctx context.Context, in *TagRequest, out *TagResponse) error
 	}
 	type TagService struct {
 		tagService
@@ -170,10 +170,10 @@ func (h *tagServiceHandler) Get(ctx context.Context, in *Tag, out *TagResponse) 
 	return h.TagServiceHandler.Get(ctx, in, out)
 }
 
-func (h *tagServiceHandler) List(ctx context.Context, in *common.BaseWhere, out *TagResponse) error {
+func (h *tagServiceHandler) List(ctx context.Context, in *TagRequest, out *TagResponse) error {
 	return h.TagServiceHandler.List(ctx, in, out)
 }
 
-func (h *tagServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *TagResponse) error {
+func (h *tagServiceHandler) Search(ctx context.Context, in *TagRequest, out *TagResponse) error {
 	return h.TagServiceHandler.Search(ctx, in, out)
 }

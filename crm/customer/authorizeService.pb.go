@@ -31,12 +31,12 @@ type Authorize struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id       int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	MemberId int64  `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Username string `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	Email    string `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile   string `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Id       int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	MemberId int64  `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Username string `protobuf:"bytes,3,opt,name=username,proto3" json:"username"`
+	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password"`
+	Email    string `protobuf:"bytes,5,opt,name=email,proto3" json:"email"`
+	Mobile   string `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile"`
 }
 
 func (x *Authorize) Reset() {
@@ -118,17 +118,17 @@ type AuthorizeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MemberId        int64  `protobuf:"varint,1,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Name            string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Mobile          string `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email           string `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
-	Password        string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
-	OldPassword     string `protobuf:"bytes,6,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
-	NewPassword     string `protobuf:"bytes,7,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
-	ConfirmPassword string `protobuf:"bytes,8,opt,name=confirm_password,json=confirmPassword,proto3" json:"confirm_password,omitempty"`
-	Code            string `protobuf:"bytes,9,opt,name=code,proto3" json:"code,omitempty"`
-	EncryptedData   string `protobuf:"bytes,10,opt,name=encrypted_data,json=encryptedData,proto3" json:"encrypted_data,omitempty"`
-	Iv              string `protobuf:"bytes,11,opt,name=iv,proto3" json:"iv,omitempty"`
+	MemberId        int64  `protobuf:"varint,1,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Name            string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	Mobile          string `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile"`
+	Email           string `protobuf:"bytes,4,opt,name=email,proto3" json:"email"`
+	Password        string `protobuf:"bytes,5,opt,name=password,proto3" json:"password"`
+	OldPassword     string `protobuf:"bytes,6,opt,name=old_password,json=oldPassword,proto3" json:"old_password"`
+	NewPassword     string `protobuf:"bytes,7,opt,name=new_password,json=newPassword,proto3" json:"new_password"`
+	ConfirmPassword string `protobuf:"bytes,8,opt,name=confirm_password,json=confirmPassword,proto3" json:"confirm_password"`
+	Code            string `protobuf:"bytes,9,opt,name=code,proto3" json:"code"`
+	EncryptedData   string `protobuf:"bytes,10,opt,name=encrypted_data,json=encryptedData,proto3" json:"encrypted_data"`
+	Iv              string `protobuf:"bytes,11,opt,name=iv,proto3" json:"iv"`
 }
 
 func (x *AuthorizeRequest) Reset() {
@@ -245,11 +245,11 @@ type AuthorizeData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Authorize        `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Authorize      `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
-	Params map[string]string `protobuf:"bytes,5,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Entity *Authorize        `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Authorize      `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Params map[string]string `protobuf:"bytes,5,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *AuthorizeData) Reset() {
@@ -324,8 +324,8 @@ type AuthorizeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *AuthorizeData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *AuthorizeData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *AuthorizeResponse) Reset() {

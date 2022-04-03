@@ -31,26 +31,26 @@ type Fan struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	FanSn         string `protobuf:"bytes,2,opt,name=fan_sn,json=fanSn,proto3" json:"fan_sn,omitempty"`
-	MemberId      int64  `protobuf:"varint,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	OpenId        string `protobuf:"bytes,4,opt,name=open_id,json=openId,proto3" json:"open_id,omitempty"`
-	UnionId       string `protobuf:"bytes,5,opt,name=union_id,json=unionId,proto3" json:"union_id,omitempty"`
-	Source        string `protobuf:"bytes,6,opt,name=source,proto3" json:"source,omitempty"`
-	NickName      string `protobuf:"bytes,7,opt,name=nick_name,json=nickName,proto3" json:"nick_name,omitempty"`
-	AvatarUrl     string `protobuf:"bytes,8,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Gender        string `protobuf:"bytes,9,opt,name=gender,proto3" json:"gender,omitempty"`
-	Province      string `protobuf:"bytes,10,opt,name=province,proto3" json:"province,omitempty"`
-	City          string `protobuf:"bytes,11,opt,name=city,proto3" json:"city,omitempty"`
-	Country       string `protobuf:"bytes,12,opt,name=country,proto3" json:"country,omitempty"`
-	Mobile        string `protobuf:"bytes,13,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email         string `protobuf:"bytes,14,opt,name=email,proto3" json:"email,omitempty"`
-	Remark        string `protobuf:"bytes,15,opt,name=remark,proto3" json:"remark,omitempty"`
-	RecommenderId int64  `protobuf:"varint,16,opt,name=recommender_id,json=recommenderId,proto3" json:"recommender_id,omitempty"`
-	Status        string `protobuf:"bytes,17,opt,name=status,proto3" json:"status,omitempty"`
-	RegisteredAt  string `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
-	CreatedAt     string `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id            int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	FanSn         string `protobuf:"bytes,2,opt,name=fan_sn,json=fanSn,proto3" json:"fan_sn"`
+	MemberId      int64  `protobuf:"varint,3,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	OpenId        string `protobuf:"bytes,4,opt,name=open_id,json=openId,proto3" json:"open_id"`
+	UnionId       string `protobuf:"bytes,5,opt,name=union_id,json=unionId,proto3" json:"union_id"`
+	Source        string `protobuf:"bytes,6,opt,name=source,proto3" json:"source"`
+	NickName      string `protobuf:"bytes,7,opt,name=nick_name,json=nickName,proto3" json:"nick_name"`
+	AvatarUrl     string `protobuf:"bytes,8,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
+	Gender        string `protobuf:"bytes,9,opt,name=gender,proto3" json:"gender"`
+	Province      string `protobuf:"bytes,10,opt,name=province,proto3" json:"province"`
+	City          string `protobuf:"bytes,11,opt,name=city,proto3" json:"city"`
+	Country       string `protobuf:"bytes,12,opt,name=country,proto3" json:"country"`
+	Mobile        string `protobuf:"bytes,13,opt,name=mobile,proto3" json:"mobile"`
+	Email         string `protobuf:"bytes,14,opt,name=email,proto3" json:"email"`
+	Remark        string `protobuf:"bytes,15,opt,name=remark,proto3" json:"remark"`
+	RecommenderId int64  `protobuf:"varint,16,opt,name=recommender_id,json=recommenderId,proto3" json:"recommender_id"`
+	Status        string `protobuf:"bytes,17,opt,name=status,proto3" json:"status"`
+	RegisteredAt  string `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at"`
+	CreatedAt     string `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     string `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *Fan) Reset() {
@@ -230,21 +230,21 @@ type FanRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//以下为自定义参数
-	Id            int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	NickName      string  `protobuf:"bytes,5,opt,name=nick_name,json=nickName,proto3" json:"nick_name,omitempty"`
-	Gender        string  `protobuf:"bytes,6,opt,name=gender,proto3" json:"gender,omitempty"`
-	Mobile        string  `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Source        string  `protobuf:"bytes,8,opt,name=source,proto3" json:"source,omitempty"`
-	Status        string  `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
-	OpenId        string  `protobuf:"bytes,10,opt,name=open_id,json=openId,proto3" json:"open_id,omitempty"`
-	MemberId      int64   `protobuf:"varint,11,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	RecommenderId int64   `protobuf:"varint,12,opt,name=recommender_id,json=recommenderId,proto3" json:"recommender_id,omitempty"`
-	Code          string  `protobuf:"bytes,13,opt,name=code,proto3" json:"code,omitempty"`
-	Ids           []int64 `protobuf:"varint,14,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id            int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	NickName      string  `protobuf:"bytes,5,opt,name=nick_name,json=nickName,proto3" json:"nick_name"`
+	Gender        string  `protobuf:"bytes,6,opt,name=gender,proto3" json:"gender"`
+	Mobile        string  `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile"`
+	Source        string  `protobuf:"bytes,8,opt,name=source,proto3" json:"source"`
+	Status        string  `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
+	OpenId        string  `protobuf:"bytes,10,opt,name=open_id,json=openId,proto3" json:"open_id"`
+	MemberId      int64   `protobuf:"varint,11,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	RecommenderId int64   `protobuf:"varint,12,opt,name=recommender_id,json=recommenderId,proto3" json:"recommender_id"`
+	Code          string  `protobuf:"bytes,13,opt,name=code,proto3" json:"code"`
+	Ids           []int64 `protobuf:"varint,14,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *FanRequest) Reset() {
@@ -382,10 +382,10 @@ type FanData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Fan          `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Fan        `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Fan          `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Fan        `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *FanData) Reset() {
@@ -454,8 +454,8 @@ type FanResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *FanData      `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *FanData      `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *FanResponse) Reset() {

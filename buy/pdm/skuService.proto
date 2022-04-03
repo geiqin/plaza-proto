@@ -2,50 +2,62 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 import "common/base.proto";
-import "specValueService.proto";
+import "spuGalleryService.proto";
+import "skuVipService.proto";
+import "skuCouponService.proto";
 
 service SkuService {
-    rpc BatchUpdateSpecDesc (Sku) returns (SkuResponse) {}
-    rpc List (Sku) returns (SkuResponse) {}
+    rpc Update(Sku) returns (SkuResponse);
+    rpc Get (Sku) returns (SkuResponse);
 }
 
 message Sku {
-    int64	id	=1;
-    int64	item_id	=2;
-    string	sku_sn	=3;
-    string	name	=4;
-    string	barcode	=5;
-    float	price	=6;
-    float	origin_price	=7;
-    float	cost_price	=8;
-    float	weight	=9;
-    int32	quantity	=10;
-    int32	sold_num	=11;
-    int32	init_sold_num	=12;
-    int32	frozen_num	=13;
-    int32	status	=14;
-    string	out_sku_no	=15;
-    string  spec_desc = 16;
-    bool	defaulted	=17;
-    int32	buy_quota	=18;
-    string	created_at	=19;
-    string	updated_at	=20;
-    // @inject_tag: gorm:"many2many:spec_item_indices;"
-    repeated SpecValue spec_values =21;
+    int64 id = 1;
+    int64 spu_id = 2;
+    string sku_sn = 3;
+    string title = 4;
+    float price = 5;
+    float market_price = 6;
+    float cost_price = 7;
+    float promotion_price = 8;
+    string barcode = 9;
+    float weight = 10;
+    int32 volume = 11;
+    int32 stock = 12;
+    int32 frozen_stock = 13;
+    string out_sku_no = 14;
+    bool defaulted = 15;
+    repeated int32 indexes = 16;
+    map<int32,string> own_desc = 17;
+    string status = 18;
+    string created_at = 19;
+    string updated_at = 20;
+    SkuVip vip = 21;
+    SkuCoupon coupon = 22;
+    repeated SpuGallery galleries = 23;
 }
 
-message SpecItemIndex{
-    int64	id	=1;
-    int64	item_id	=2;
-    int64	sku_id	=3;
-    int32	spec_id	=4;
-    int32	spec_value_id	=5;
+message SkuRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    int64 id = 4;
+    string sku_sn = 5;
+    int64 spu_id = 6;
+    string type = 7;
+    string out_sku_no = 8;
+    string status = 9;
+    repeated int64 ids = 10;
+}
+
+message SkuData {
+    Sku  entity = 1;
+    common.Pager pager = 2;
+    repeated Sku items = 3;
+    common.Info info = 4;
 }
 
 message SkuResponse {
-    Sku entity = 1;
-    common.Pager pager =2;
-    repeated Sku items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    SkuData data = 1;
+    common.Error error = 2;
 }

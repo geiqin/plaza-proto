@@ -31,19 +31,19 @@ type MemberIdentity struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	MemberId  int64  `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	RealName  string `protobuf:"bytes,3,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`
-	IdCard    string `protobuf:"bytes,4,opt,name=id_card,json=idCard,proto3" json:"id_card,omitempty"`
-	Gender    string `protobuf:"bytes,5,opt,name=gender,proto3" json:"gender,omitempty"`
-	Birthday  string `protobuf:"bytes,6,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	Address   string `protobuf:"bytes,7,opt,name=address,proto3" json:"address,omitempty"`
-	Nation    string `protobuf:"bytes,8,opt,name=nation,proto3" json:"nation,omitempty"`
-	Issuer    string `protobuf:"bytes,9,opt,name=issuer,proto3" json:"issuer,omitempty"`
-	Forever   bool   `protobuf:"varint,10,opt,name=forever,proto3" json:"forever,omitempty"`
-	BeginDate string `protobuf:"bytes,11,opt,name=begin_date,json=beginDate,proto3" json:"begin_date,omitempty"`
-	EndDate   string `protobuf:"bytes,12,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
-	Status    string `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	MemberId  int64  `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	RealName  string `protobuf:"bytes,3,opt,name=real_name,json=realName,proto3" json:"real_name"`
+	IdCard    string `protobuf:"bytes,4,opt,name=id_card,json=idCard,proto3" json:"id_card"`
+	Gender    string `protobuf:"bytes,5,opt,name=gender,proto3" json:"gender"`
+	Birthday  string `protobuf:"bytes,6,opt,name=birthday,proto3" json:"birthday"`
+	Address   string `protobuf:"bytes,7,opt,name=address,proto3" json:"address"`
+	Nation    string `protobuf:"bytes,8,opt,name=nation,proto3" json:"nation"`
+	Issuer    string `protobuf:"bytes,9,opt,name=issuer,proto3" json:"issuer"`
+	Forever   bool   `protobuf:"varint,10,opt,name=forever,proto3" json:"forever"`
+	BeginDate string `protobuf:"bytes,11,opt,name=begin_date,json=beginDate,proto3" json:"begin_date"`
+	EndDate   string `protobuf:"bytes,12,opt,name=end_date,json=endDate,proto3" json:"end_date"`
+	Status    string `protobuf:"bytes,13,opt,name=status,proto3" json:"status"`
 }
 
 func (x *MemberIdentity) Reset() {
@@ -174,14 +174,14 @@ type MemberIdentityRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Id       int64  `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
-	MemberId int64  `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	RealName int64  `protobuf:"varint,5,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`
-	IdCard   string `protobuf:"bytes,6,opt,name=id_card,json=idCard,proto3" json:"id_card,omitempty"`
-	Nation   string `protobuf:"bytes,7,opt,name=nation,proto3" json:"nation,omitempty"`
-	Status   string `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Id       int64  `protobuf:"varint,3,opt,name=id,proto3" json:"id"`
+	MemberId int64  `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	RealName int64  `protobuf:"varint,5,opt,name=real_name,json=realName,proto3" json:"real_name"`
+	IdCard   string `protobuf:"bytes,6,opt,name=id_card,json=idCard,proto3" json:"id_card"`
+	Nation   string `protobuf:"bytes,7,opt,name=nation,proto3" json:"nation"`
+	Status   string `protobuf:"bytes,8,opt,name=status,proto3" json:"status"`
 }
 
 func (x *MemberIdentityRequest) Reset() {
@@ -277,11 +277,11 @@ type MemberIdentityResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *MemberIdentity   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*MemberIdentity `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *MemberIdentity   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*MemberIdentity `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *MemberIdentityResponse) Reset() {

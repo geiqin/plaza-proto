@@ -1,0 +1,44 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+
+
+message SpuDesc {
+    string content = 4;
+    string packing_list = 5;
+    string after_service = 6;
+    string created_at = 7;
+    string updated_at = 8;
+}
+
+//通用属性数据描述
+message Property {
+    message group_info {
+        int32 group_id = 1;
+        string group_name = 2;
+        repeated param_info params = 3;
+    }
+    message param_info {
+        int32 param_id = 1;
+        string param_name = 2;
+        string param_value = 3;
+        string param_unit = 4;
+    }
+    repeated param_info base_params = 1;
+    repeated group_info group_params = 2;
+}
+
+//销售属性数据描述
+message Spec {
+    int32 spec_id = 1;
+    string spec_name =2;
+    message value_info {
+        int32 value_id = 1;
+        string value_text =2;
+        string value_alias =3;
+        int64 image_id =4;
+        string image_url =5;
+        bool enabled =6;
+    }
+    repeated value_info values = 4;
+}

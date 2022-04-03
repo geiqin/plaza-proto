@@ -1,0 +1,46 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "categoryService.proto";
+
+service AttrGroupService {
+    rpc Create(AttrGroup) returns (AttrGroupResponse);
+    rpc Update(AttrGroup) returns (AttrGroupResponse);
+    rpc Delete (AttrGroup) returns (AttrGroupResponse);
+    rpc Get (AttrGroup) returns (AttrGroupResponse);
+    rpc Search (AttrGroupRequest) returns (AttrGroupResponse);
+}
+
+message AttrGroup {
+    int32 id = 1;
+    string name = 2;
+    int32 category_id = 3;
+    int32 sort = 4;
+    int32 name_count = 5;
+    string status = 6;
+    string created_at = 7;
+    string updated_at = 8;
+    Category category = 9;
+}
+
+message AttrGroupRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 id = 3;
+    string name = 4;
+    int32 category_id = 5;
+}
+
+message AttrGroupData {
+    AttrGroup  entity = 1;
+    common.Pager pager = 2;
+    repeated AttrGroup items = 3;
+    common.Info info = 4;
+}
+
+message AttrGroupResponse {
+    AttrGroupData data = 1;
+    common.Error error = 2;
+}
+

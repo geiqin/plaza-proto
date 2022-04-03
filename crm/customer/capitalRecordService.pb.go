@@ -31,18 +31,18 @@ type CapitalRecord struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	MemberId  int64   `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Direction string  `protobuf:"bytes,3,opt,name=direction,proto3" json:"direction,omitempty"`
-	Amount    float32 `protobuf:"fixed32,4,opt,name=amount,proto3" json:"amount,omitempty"`
-	Balance   float32 `protobuf:"fixed32,5,opt,name=balance,proto3" json:"balance,omitempty"`
-	Source    int32   `protobuf:"varint,6,opt,name=source,proto3" json:"source,omitempty"`
-	OrderId   int64   `protobuf:"varint,7,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	OrderSn   string  `protobuf:"bytes,8,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
-	Memo      string  `protobuf:"bytes,9,opt,name=memo,proto3" json:"memo,omitempty"`
-	CreatedAt string  `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt string  `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Member    *Member `protobuf:"bytes,12,opt,name=member,proto3" json:"member,omitempty"`
+	Id        int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	MemberId  int64   `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Direction string  `protobuf:"bytes,3,opt,name=direction,proto3" json:"direction"`
+	Amount    float32 `protobuf:"fixed32,4,opt,name=amount,proto3" json:"amount"`
+	Balance   float32 `protobuf:"fixed32,5,opt,name=balance,proto3" json:"balance"`
+	Source    int32   `protobuf:"varint,6,opt,name=source,proto3" json:"source"`
+	OrderId   int64   `protobuf:"varint,7,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	OrderSn   string  `protobuf:"bytes,8,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
+	Memo      string  `protobuf:"bytes,9,opt,name=memo,proto3" json:"memo"`
+	CreatedAt string  `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt string  `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Member    *Member `protobuf:"bytes,12,opt,name=member,proto3" json:"member"`
 }
 
 func (x *CapitalRecord) Reset() {
@@ -167,19 +167,19 @@ type CapitalRecordRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
 	//以下为自定义参数
-	MemberId  int64   `protobuf:"varint,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Direction int32   `protobuf:"varint,4,opt,name=direction,proto3" json:"direction,omitempty"`
-	Amount    float32 `protobuf:"fixed32,5,opt,name=amount,proto3" json:"amount,omitempty"`
-	Balance   float32 `protobuf:"fixed32,6,opt,name=balance,proto3" json:"balance,omitempty"`
-	Source    int32   `protobuf:"varint,7,opt,name=source,proto3" json:"source,omitempty"`
-	OrderId   int64   `protobuf:"varint,8,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	OrderSn   string  `protobuf:"bytes,9,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
-	Memo      string  `protobuf:"bytes,10,opt,name=memo,proto3" json:"memo,omitempty"`
-	StartDate string  `protobuf:"bytes,11,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
-	EndDate   string  `protobuf:"bytes,12,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	MemberId  int64   `protobuf:"varint,3,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Direction int32   `protobuf:"varint,4,opt,name=direction,proto3" json:"direction"`
+	Amount    float32 `protobuf:"fixed32,5,opt,name=amount,proto3" json:"amount"`
+	Balance   float32 `protobuf:"fixed32,6,opt,name=balance,proto3" json:"balance"`
+	Source    int32   `protobuf:"varint,7,opt,name=source,proto3" json:"source"`
+	OrderId   int64   `protobuf:"varint,8,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	OrderSn   string  `protobuf:"bytes,9,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
+	Memo      string  `protobuf:"bytes,10,opt,name=memo,proto3" json:"memo"`
+	StartDate string  `protobuf:"bytes,11,opt,name=start_date,json=startDate,proto3" json:"start_date"`
+	EndDate   string  `protobuf:"bytes,12,opt,name=end_date,json=endDate,proto3" json:"end_date"`
 }
 
 func (x *CapitalRecordRequest) Reset() {
@@ -303,10 +303,10 @@ type CapitalRecordData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *CapitalRecord   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*CapitalRecord `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info     `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *CapitalRecord   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*CapitalRecord `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info     `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *CapitalRecordData) Reset() {
@@ -374,8 +374,8 @@ type CapitalRecordResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *CapitalRecordData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error      `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *CapitalRecordData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error      `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *CapitalRecordResponse) Reset() {

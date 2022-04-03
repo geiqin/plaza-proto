@@ -1,0 +1,15 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+
+message MemberRight {
+    int64	id =1;
+    string owner_type = 2;
+    int64 owner_id = 3;
+    int64	spu_id =4;
+    int64	sku_id =5;
+    string created_at = 6;
+    string updated_at = 7;
+}
+
+

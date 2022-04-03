@@ -1,0 +1,51 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+
+
+service TermService {
+    rpc Create(Term) returns (TermResponse);
+    rpc Update(Term) returns (TermResponse);
+    rpc Delete (Term) returns (TermResponse);
+    rpc Get (Term) returns (TermResponse);
+    rpc Tree (TermRequest) returns (TermResponse);
+    rpc Search (TermRequest) returns (TermResponse);
+}
+
+message Term {
+    int32 id = 1;
+    string name = 2;
+    string title = 3;
+    int32 parent_id = 4;
+    string path = 5;
+    int64 media_id = 6;
+    string media_url = 7;
+    string memo = 8;
+    int32 sort = 9;
+    string created_at = 10;
+    string updated_at = 11;
+    Term parent = 12;
+    repeated Term children = 13;
+}
+
+message TermRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    int32 id = 4;
+    string name = 5;
+}
+
+message TermData {
+    Term  entity = 1;
+    common.Pager pager = 2;
+    repeated Term items = 3;
+    common.Info info = 4;
+}
+
+message TermResponse {
+    TermData data = 1;
+    common.Error error = 2;
+}
+

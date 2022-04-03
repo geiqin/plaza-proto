@@ -1,0 +1,61 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "attrGroupService.proto";
+import "attrValueService.proto";
+
+service AttrParamService {
+    rpc Create(AttrParam) returns (AttrParamResponse);
+    rpc Update(AttrParam) returns (AttrParamResponse);
+    rpc Delete (AttrParam) returns (AttrParamResponse);
+    rpc Get (AttrParam) returns (AttrParamResponse);
+    rpc Search (AttrParamRequest) returns (AttrParamResponse);
+}
+
+message AttrParam {
+    int32 id = 1;
+    string name = 2;
+    int32 category_id = 3;
+    int32 group_id = 4;
+    bool is_allow_alias = 5;
+    bool is_special = 6;
+    bool is_color = 7;
+    bool is_numeric = 8;
+    bool is_enum = 9;
+    bool is_input = 10;
+    bool is_key = 11;
+    bool is_search = 12;
+    bool is_must = 13;
+    bool is_multi = 14;
+    string unit = 15;
+    int32 sort = 16;
+    string status = 17;
+    string created_at = 18;
+    string updated_at = 19;
+    AttrGroup group = 20;
+    repeated AttrValue values = 21;
+}
+
+message AttrParamRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    int32 id = 4;
+    string name = 5;
+    int32 category_id = 6;
+    int32 group_id = 7;
+}
+
+message AttrParamData {
+    AttrParam  entity = 1;
+    common.Pager pager = 2;
+    repeated AttrParam items = 3;
+    common.Info info = 4;
+}
+
+message AttrParamResponse {
+    AttrParamData data = 1;
+    common.Error error = 2;
+}
+

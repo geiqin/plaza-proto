@@ -31,13 +31,13 @@ type MemberBank struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	MemberId      int64  `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Cardholder    string `protobuf:"bytes,3,opt,name=cardholder,proto3" json:"cardholder,omitempty"`
-	CardNo        string `protobuf:"bytes,4,opt,name=card_no,json=cardNo,proto3" json:"card_no,omitempty"`
-	BankName      string `protobuf:"bytes,5,opt,name=bank_name,json=bankName,proto3" json:"bank_name,omitempty"`
-	ReserveMobile string `protobuf:"bytes,6,opt,name=reserve_mobile,json=reserveMobile,proto3" json:"reserve_mobile,omitempty"`
-	Status        string `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	Id            int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	MemberId      int64  `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Cardholder    string `protobuf:"bytes,3,opt,name=cardholder,proto3" json:"cardholder"`
+	CardNo        string `protobuf:"bytes,4,opt,name=card_no,json=cardNo,proto3" json:"card_no"`
+	BankName      string `protobuf:"bytes,5,opt,name=bank_name,json=bankName,proto3" json:"bank_name"`
+	ReserveMobile string `protobuf:"bytes,6,opt,name=reserve_mobile,json=reserveMobile,proto3" json:"reserve_mobile"`
+	Status        string `protobuf:"bytes,7,opt,name=status,proto3" json:"status"`
 }
 
 func (x *MemberBank) Reset() {
@@ -126,14 +126,14 @@ type MemberBankRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged      int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize   int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Id         int64  `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
-	MemberId   int64  `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Cardholder string `protobuf:"bytes,5,opt,name=cardholder,proto3" json:"cardholder,omitempty"`
-	CardNo     string `protobuf:"bytes,6,opt,name=card_no,json=cardNo,proto3" json:"card_no,omitempty"`
-	BankName   string `protobuf:"bytes,7,opt,name=bank_name,json=bankName,proto3" json:"bank_name,omitempty"`
-	Status     string `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
+	Paged      int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize   int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Id         int64  `protobuf:"varint,3,opt,name=id,proto3" json:"id"`
+	MemberId   int64  `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Cardholder string `protobuf:"bytes,5,opt,name=cardholder,proto3" json:"cardholder"`
+	CardNo     string `protobuf:"bytes,6,opt,name=card_no,json=cardNo,proto3" json:"card_no"`
+	BankName   string `protobuf:"bytes,7,opt,name=bank_name,json=bankName,proto3" json:"bank_name"`
+	Status     string `protobuf:"bytes,8,opt,name=status,proto3" json:"status"`
 }
 
 func (x *MemberBankRequest) Reset() {
@@ -229,10 +229,10 @@ type MemberBankData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *MemberBank   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*MemberBank `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *MemberBank   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*MemberBank `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *MemberBankData) Reset() {
@@ -300,8 +300,8 @@ type MemberBankResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *MemberBankData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *MemberBankData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *MemberBankResponse) Reset() {

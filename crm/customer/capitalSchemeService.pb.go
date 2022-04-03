@@ -31,18 +31,18 @@ type CapitalScheme struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id             int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name           string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	StartAt        string  `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
-	EndAt          string  `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
-	ConditionType  int32   `protobuf:"varint,5,opt,name=condition_type,json=conditionType,proto3" json:"condition_type,omitempty"`
-	ConditionValue float32 `protobuf:"fixed32,6,opt,name=condition_value,json=conditionValue,proto3" json:"condition_value,omitempty"`
-	GiveMoney      float32 `protobuf:"fixed32,7,opt,name=give_money,json=giveMoney,proto3" json:"give_money,omitempty"`
-	GiveScore      int32   `protobuf:"varint,8,opt,name=give_score,json=giveScore,proto3" json:"give_score,omitempty"`
-	Stock          int32   `protobuf:"varint,9,opt,name=stock,proto3" json:"stock,omitempty"`
-	Memo           string  `protobuf:"bytes,10,opt,name=memo,proto3" json:"memo,omitempty"`
-	CreatedAt      string  `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt      string  `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id             int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name           string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	StartAt        string  `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt          string  `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	ConditionType  int32   `protobuf:"varint,5,opt,name=condition_type,json=conditionType,proto3" json:"condition_type"`
+	ConditionValue float32 `protobuf:"fixed32,6,opt,name=condition_value,json=conditionValue,proto3" json:"condition_value"`
+	GiveMoney      float32 `protobuf:"fixed32,7,opt,name=give_money,json=giveMoney,proto3" json:"give_money"`
+	GiveScore      int32   `protobuf:"varint,8,opt,name=give_score,json=giveScore,proto3" json:"give_score"`
+	Stock          int32   `protobuf:"varint,9,opt,name=stock,proto3" json:"stock"`
+	Memo           string  `protobuf:"bytes,10,opt,name=memo,proto3" json:"memo"`
+	CreatedAt      string  `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt      string  `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *CapitalScheme) Reset() {
@@ -166,14 +166,14 @@ type CapitalSchemeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
 	//以下为自定义参数
-	StartAt       int64   `protobuf:"varint,3,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
-	EndAt         string  `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
-	ConditionType string  `protobuf:"bytes,5,opt,name=condition_type,json=conditionType,proto3" json:"condition_type,omitempty"`
-	Money         float32 `protobuf:"fixed32,6,opt,name=money,proto3" json:"money,omitempty"`
-	Name          string  `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
+	StartAt       int64   `protobuf:"varint,3,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt         string  `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	ConditionType string  `protobuf:"bytes,5,opt,name=condition_type,json=conditionType,proto3" json:"condition_type"`
+	Money         float32 `protobuf:"fixed32,6,opt,name=money,proto3" json:"money"`
+	Name          string  `protobuf:"bytes,8,opt,name=name,proto3" json:"name"`
 }
 
 func (x *CapitalSchemeRequest) Reset() {
@@ -262,10 +262,10 @@ type CapitalSchemeData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *CapitalScheme   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*CapitalScheme `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info     `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *CapitalScheme   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*CapitalScheme `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info     `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *CapitalSchemeData) Reset() {
@@ -333,8 +333,8 @@ type CapitalSchemeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *CapitalSchemeData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error      `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *CapitalSchemeData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error      `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *CapitalSchemeResponse) Reset() {

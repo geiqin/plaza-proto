@@ -1,0 +1,53 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+service BenefitService {
+    rpc Create (Benefit) returns (BenefitResponse) {}
+    rpc Update (Benefit) returns (BenefitResponse) {}
+    rpc Delete (Benefit) returns (BenefitResponse) {}
+    rpc Get (Benefit) returns (BenefitResponse) {}
+    rpc Search (BenefitRequest) returns (BenefitResponse) {}
+    rpc List (BenefitRequest) returns (BenefitResponse) {}
+}
+
+message Benefit {
+    int32 id =1;
+    string name =2;
+    string title =3;
+    string type =4;
+    string industry =5;
+    int64 icon_id =6;
+    string icon_url =7;
+    string method =8;
+    int32 price_value =9;
+    bool selected =10;
+    string memo =11;
+    string status =12;
+    string created_at =13;
+    string updated_at =14;
+}
+
+//查询参数
+message BenefitRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    //以下为自定义参数
+    string name = 3;
+    string title =4;
+    string type = 5;
+    string status = 6;
+}
+
+message BenefitData {
+    Benefit entity = 1;
+    common.Pager pager =2;
+    repeated Benefit items = 3;
+    common.Info info =4;
+}
+
+message BenefitResponse {
+    BenefitData data = 1;
+    common.Error error = 2;
+}

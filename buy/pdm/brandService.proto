@@ -3,34 +3,46 @@ package services;
 option go_package = ".;services";
 import "common/base.proto";
 
-service BrandService {
-    rpc Create (Brand) returns (BrandResponse) {}
-    rpc Update (Brand) returns (BrandResponse) {}
-    rpc Delete (Brand) returns (BrandResponse) {}
-    rpc Get (Brand) returns (BrandResponse) {}
-    rpc Search (common.BaseWhere) returns (BrandResponse) {}
-    rpc List (Brand) returns (BrandResponse) {}
-}
 
+service BrandService {
+    rpc Create(Brand) returns (BrandResponse);
+    rpc Update(Brand) returns (BrandResponse);
+    rpc Delete (Brand) returns (BrandResponse);
+    rpc Get (Brand) returns (BrandResponse);
+    rpc List (BrandRequest) returns (BrandResponse);
+    rpc Search (BrandRequest) returns (BrandResponse);
+}
 
 message Brand {
-    int32	id	=1;
-    string	name	=2;
-    string	website	=3;
-    int64	logo_id	=4;
-    string	logo_url	=5;
-    string	brand_type	=6;
-    int32	item_num	=7;
-    string	description	=8;
-    string	created_at	=9;
-    string	updated_at	=10;
+    int32 id = 1;
+    string name = 2;
+    int64 logo_id = 3;
+    string logo_url = 4;
+    string letter = 5;
+    string website = 6;
+    string desc = 7;
+    int32 sort = 8;
+    int32 spu_num = 9;
+    string created_at = 10;
+    string updated_at = 11;
 }
 
+message BrandRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    int32 id = 4;
+    string name = 5;
+}
+
+message BrandData {
+    Brand  entity = 1;
+    common.Pager pager = 2;
+    repeated Brand items = 3;
+    common.Info info = 4;
+}
 
 message BrandResponse {
-    Brand entity = 1;
-    common.Pager pager =2;
-    repeated Brand items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    BrandData data = 1;
+    common.Error error = 2;
 }

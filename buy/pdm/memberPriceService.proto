@@ -1,0 +1,37 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+
+
+service MemberPriceService {
+    rpc Set (MemberPrice) returns (MemberPriceResponse) {}
+    rpc Get (MemberPrice) returns (MemberPriceResponse) {}
+}
+
+message MemberPrice {
+    int64	id	=1;
+    string	owner_type	=2;
+    int64	owner_id	=3;
+    int64	spu_id	=4;
+    int64	sku_id	=5;
+    string	method	=6;
+    float	discount_rate	=7;
+    float	discount_price	=8;
+    string created_at = 9;
+    string updated_at = 10;
+}
+
+
+
+message MemberPriceData {
+    MemberPrice  entity = 1;
+    common.Pager pager = 2;
+    repeated MemberPrice items = 3;
+    common.Info info = 4;
+}
+
+message MemberPriceResponse {
+    MemberPriceData data = 1;
+    common.Error error = 2;
+}

@@ -2,6 +2,8 @@ syntax = "proto3";
 package services;
 option go_package =".;services";
 import "common/base.proto";
+import "benefitService.proto";
+import "rankPackageService.proto";
 
 service RankService {
     rpc Create (Rank) returns (RankResponse) {}
@@ -15,28 +17,28 @@ service RankService {
 message Rank {
     int32 id =1;
     string name =2;
-    string type =3;
-    int32 min_points =4;
-    int32 max_points =5;
-    float discount =6;
-    float point_rate =7;
-    int32 next_rank_id =8;
-    int32 order_limit_type =9;
-    float order_limit_money =10;
-    int32 deposit_limit =11;
-    int32 growth_limit =12;
-    int32 point_expired_days =13;
-    int64 icon_id =14;
-    string icon_url =15;
-    string bg_color =16;
-    bool defaulted =17;
-    string description =18;
-    bool is_pay =19;
-    bool is_free_postage =20;
-    bool is_auto_upgrade =21;
-    string status =22;
-    string created_at =23;
-    string updated_at =24;
+    string icon_id =3;
+    string icon_url =4;
+    string bg_mode =5;
+    string bg_color =6;
+    int64 bg_image_id =7;
+    string bg_image_url =8;
+    int32 growth =9;
+    string description =10;
+    string mode = 11;
+    bool is_free_postage =12;
+    bool is_member_discount =13;
+    bool is_member_price =14;
+    bool is_point_rate =15;
+    bool is_upgrade_package =16;
+    float discount_rate = 17;
+    float point_rate = 18;
+    bool is_auto_upgrade =19;
+    string status =20;
+    string created_at =21;
+    string updated_at =22;
+    RankPackage upgrade_package =23;
+    repeated Benefit benefits =24;
 }
 
 
@@ -46,11 +48,8 @@ message RankRequest {
     //以下为自定义参数
     int32 id =3;
     string name = 4;
-    string type =5;
-    bool is_pay =6;
-    string status =7;
-    bool is_free_postage =8;
-    repeated int32 ids = 9;
+    string mode =5;
+    string status =6;
 }
 
 message RankData {

@@ -31,13 +31,13 @@ type Invite struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id       int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	FanId    int64  `protobuf:"varint,2,opt,name=fan_id,json=fanId,proto3" json:"fan_id,omitempty"`
-	MemberId int64  `protobuf:"varint,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	LinkUrl  string `protobuf:"bytes,4,opt,name=link_url,json=linkUrl,proto3" json:"link_url,omitempty"`
-	Qrcode   string `protobuf:"bytes,5,opt,name=qrcode,proto3" json:"qrcode,omitempty"`
-	Size     int32  `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
-	Type     string `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
+	Id       int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	FanId    int64  `protobuf:"varint,2,opt,name=fan_id,json=fanId,proto3" json:"fan_id"`
+	MemberId int64  `protobuf:"varint,3,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	LinkUrl  string `protobuf:"bytes,4,opt,name=link_url,json=linkUrl,proto3" json:"link_url"`
+	Qrcode   string `protobuf:"bytes,5,opt,name=qrcode,proto3" json:"qrcode"`
+	Size     int32  `protobuf:"varint,6,opt,name=size,proto3" json:"size"`
+	Type     string `protobuf:"bytes,7,opt,name=type,proto3" json:"type"`
 }
 
 func (x *Invite) Reset() {
@@ -126,16 +126,16 @@ type InviteRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//以下为自定义参数
-	Id       int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	FanId    int64  `protobuf:"varint,5,opt,name=fan_id,json=fanId,proto3" json:"fan_id,omitempty"`
-	MemberId int64  `protobuf:"varint,6,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Code     string `protobuf:"bytes,7,opt,name=code,proto3" json:"code,omitempty"`
-	Type     string `protobuf:"bytes,8,opt,name=type,proto3" json:"type,omitempty"`
-	Mode     int32  `protobuf:"varint,9,opt,name=mode,proto3" json:"mode,omitempty"`
+	Id       int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	FanId    int64  `protobuf:"varint,5,opt,name=fan_id,json=fanId,proto3" json:"fan_id"`
+	MemberId int64  `protobuf:"varint,6,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Code     string `protobuf:"bytes,7,opt,name=code,proto3" json:"code"`
+	Type     string `protobuf:"bytes,8,opt,name=type,proto3" json:"type"`
+	Mode     int32  `protobuf:"varint,9,opt,name=mode,proto3" json:"mode"`
 }
 
 func (x *InviteRequest) Reset() {
@@ -238,11 +238,11 @@ type InviteData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Invite           `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Invite         `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
-	Params map[string]string `protobuf:"bytes,5,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Entity *Invite           `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Invite         `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Params map[string]string `protobuf:"bytes,5,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *InviteData) Reset() {
@@ -317,8 +317,8 @@ type InviteResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *InviteData   `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *InviteData   `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *InviteResponse) Reset() {

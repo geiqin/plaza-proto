@@ -31,22 +31,22 @@ type Credit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64           `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	MemberId      int64           `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Status        bool            `protobuf:"varint,3,opt,name=status,proto3" json:"status,omitempty"`
-	UpperLimit    float32         `protobuf:"fixed32,4,opt,name=upper_limit,json=upperLimit,proto3" json:"upper_limit,omitempty"`
-	Balance       float32         `protobuf:"fixed32,5,opt,name=balance,proto3" json:"balance,omitempty"`
-	CreatedAt     string          `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string          `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Member        *Member         `protobuf:"bytes,8,opt,name=member,proto3" json:"member,omitempty"`
-	Ids           []int64         `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Name          string          `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	DisplayName   string          `protobuf:"bytes,11,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Realname      string          `protobuf:"bytes,12,opt,name=realname,proto3" json:"realname,omitempty"`
-	Mobile        string          `protobuf:"bytes,13,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Contacts      string          `protobuf:"bytes,14,opt,name=contacts,proto3" json:"contacts,omitempty"`
-	Cid           int64           `protobuf:"varint,15,opt,name=cid,proto3" json:"cid,omitempty"`
-	CreditRecords []*CreditRecord `protobuf:"bytes,16,rep,name=credit_records,json=creditRecords,proto3" json:"credit_records,omitempty"`
+	Id            int64           `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	MemberId      int64           `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Status        bool            `protobuf:"varint,3,opt,name=status,proto3" json:"status"`
+	UpperLimit    float32         `protobuf:"fixed32,4,opt,name=upper_limit,json=upperLimit,proto3" json:"upper_limit"`
+	Balance       float32         `protobuf:"fixed32,5,opt,name=balance,proto3" json:"balance"`
+	CreatedAt     string          `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     string          `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Member        *Member         `protobuf:"bytes,8,opt,name=member,proto3" json:"member"`
+	Ids           []int64         `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids"`
+	Name          string          `protobuf:"bytes,10,opt,name=name,proto3" json:"name"`
+	DisplayName   string          `protobuf:"bytes,11,opt,name=display_name,json=displayName,proto3" json:"display_name"`
+	Realname      string          `protobuf:"bytes,12,opt,name=realname,proto3" json:"realname"`
+	Mobile        string          `protobuf:"bytes,13,opt,name=mobile,proto3" json:"mobile"`
+	Contacts      string          `protobuf:"bytes,14,opt,name=contacts,proto3" json:"contacts"`
+	Cid           int64           `protobuf:"varint,15,opt,name=cid,proto3" json:"cid"`
+	CreditRecords []*CreditRecord `protobuf:"bytes,16,rep,name=credit_records,json=creditRecords,proto3" json:"credit_records"`
 }
 
 func (x *Credit) Reset() {
@@ -199,14 +199,14 @@ type CreditWhere struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
 	//以下为自定义参数
-	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	DisplayName string `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Realname    string `protobuf:"bytes,5,opt,name=realname,proto3" json:"realname,omitempty"`
-	Mobile      string `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Type        int32  `protobuf:"varint,7,opt,name=type,proto3" json:"type,omitempty"`
+	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	DisplayName string `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name"`
+	Realname    string `protobuf:"bytes,5,opt,name=realname,proto3" json:"realname"`
+	Mobile      string `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile"`
+	Type        int32  `protobuf:"varint,7,opt,name=type,proto3" json:"type"`
 }
 
 func (x *CreditWhere) Reset() {
@@ -296,11 +296,11 @@ type CreditResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Credit       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Credit     `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Credit       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Credit     `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *CreditResponse) Reset() {
