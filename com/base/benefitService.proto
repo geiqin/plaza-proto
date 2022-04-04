@@ -38,6 +38,7 @@ message BenefitRequest {
     string title =4;
     string type = 5;
     string status = 6;
+    repeated int32 ids =7;
 }
 
 message BenefitData {
