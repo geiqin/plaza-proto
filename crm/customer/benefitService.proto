@@ -15,19 +15,20 @@ service BenefitService {
 
 message Benefit {
     int32 id =1;
-    string name =2;
-    string title =3;
-    string type =4;
-    string industry =5;
-    int64 icon_id =6;
-    string icon_url =7;
-    string method =8;
-    int32 price_value =9;
-    bool selected =10;
-    string memo =11;
-    string status =12;
-    string created_at =13;
-    string updated_at =14;
+    string code = 2;
+    string name =3;
+    string title =4;
+    string type =5;
+    string industry =6;
+    int64 icon_id =7;
+    string icon_url =8;
+    string method =9;
+    int32 price_value =10;
+    bool selected =11;
+    string memo =12;
+    string status =13;
+    string created_at =14;
+    string updated_at =15;
 }
 
 //查询参数
@@ -35,11 +36,13 @@ message BenefitRequest {
     int32 paged = 1;
     int32 page_size = 2;
     //以下为自定义参数
-    string name = 3;
-    string title =4;
-    string type = 5;
-    string status = 6;
-    repeated int32 ids =7;
+    string code = 3;
+    string name = 4;
+    string title =5;
+    string type = 6;
+    string status = 7;
+    repeated int32 ids =8;
+    repeated string codes =9;
 }
 
 message BenefitData {
