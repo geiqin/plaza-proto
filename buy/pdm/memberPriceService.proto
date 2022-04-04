@@ -13,16 +13,13 @@ message MemberPrice {
     int64	id	=1;
     string	owner_type	=2;
     int64	owner_id	=3;
-    int64	spu_id	=4;
-    int64	sku_id	=5;
-    string	method	=6;
-    float	discount_rate	=7;
-    float	discount_price	=8;
-    string created_at = 9;
-    string updated_at = 10;
+    int64	sku_id	=4;
+    string	method	=5;
+    float	discount_rate	=6;
+    float	discount_price	=7;
+    string created_at = 8;
+    string updated_at = 9;
 }
-
-
 
 message MemberPriceData {
     MemberPrice  entity = 1;
