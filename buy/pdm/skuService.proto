@@ -4,6 +4,7 @@ option go_package = ".;services";
 import "common/base.proto";
 import "spuDescService.proto";
 import "brandService.proto";
+import "categoryService.proto";
 import "termService.proto";
 import "tagService.proto";
 import "spuGalleryService.proto";
@@ -12,31 +13,42 @@ import "skuVipService.proto";
 import "skuCouponService.proto";
 import "skuPresaleService.proto";
 
+//操作编辑为主
 service SpuService {
-    rpc Create(Spu) returns (SkuResponse);
-    rpc Update(Spu) returns (SkuResponse);
-    rpc Delete (Spu) returns (SkuResponse);
-    rpc Get (Spu) returns (SkuResponse);
+    //创建商品
+    rpc Create(Spu) returns (SpuResponse);
+    //修改商品
+    rpc Update(Spu) returns (SpuResponse);
+    //删除商品
+    rpc Delete (Spu) returns (SpuResponse);
+    //获取商品（编辑显示）
+    rpc Get (Spu) returns (SpuResponse);
     //商品操作
-    rpc Action (SkuRequest) returns (SkuResponse);
+    rpc Action (SkuRequest) returns (SpuResponse);
     //商品上下架
-    rpc Sale (SkuRequest) returns (SkuResponse);
+    rpc Sale (SkuRequest) returns (SpuResponse);
     //商品排序
-    rpc Sort(SkuRequest) returns (SkuResponse);
+    rpc Sort(SkuRequest) returns (SpuResponse);
 }
 
+//货品查询（基于后台及服务）
 service SkuService {
-    rpc Create (Sku) returns (SkuResponse);
-    rpc Update (Sku) returns (SkuResponse);
-    rpc Delete (Sku) returns (SkuResponse);
+    //获取货品
     rpc Get (Sku) returns (SkuResponse);
+    //获取货品详情
+    rpc Detail (Sku) returns (SkuResponse);
+    //获取列表
     rpc List (SkuRequest) returns (SkuResponse);
-    //货品查询
+    //货品查询（基于SKU查询）
     rpc Search (SkuRequest) returns (SkuResponse);
-    //商品查询
-    rpc GoodsSearch (SkuRequest) returns (SkuResponse);
-    //商品详情显示
-    rpc Display (SkuRequest) returns (SkuResponse);
+}
+
+//商品信息（查询/显示）
+service ProductService {
+    //商品查询（基于SPU查询）
+    rpc Search (SkuRequest) returns (SpuResponse);
+    //商品详情显示（基于SPU信息）
+    rpc Display (SkuRequest) returns (SpuResponse);
 }
 
 message Sku {
@@ -65,24 +77,25 @@ message Sku {
     bool is_member_right = 23;
     bool is_member_price = 24;
     bool is_hide_stock = 25;
-    bool is_listed = 26;
     bool is_new = 27;
     bool is_hot = 28;
     bool is_recommend = 29;
     bool is_special = 30;
     bool is_master = 31;
-    string status = 32;
-    string listed_at = 33;
-    string created_at = 34;
-    string updated_at = 35;
-    repeated int32 indexes = 36;
-    map<int32,string> own_desc = 37;
-    Unit unit = 38;
-    Spu spu = 39;
-    SkuVip vip = 40;
-    SkuCoupon coupon = 41;
-    SkuPresale presale = 42;
-    repeated SpuGallery galleries = 43;
+    string indexes =32;
+    string status = 33;
+    string listed_at = 34;
+    string created_at = 35;
+    string updated_at = 36;
+    repeated int32 indexes_data = 37;
+    map<int32,string> own_desc_data = 38;
+    Unit unit = 39;
+    Spu spu = 40;
+    SkuVip vip = 41;
+    SkuCoupon coupon = 42;
+    SkuPresale presale = 43;
+    repeated SpuGallery galleries = 44;
+    repeated OwnProperty own_property =45;
 }
 
 message Spu {
@@ -117,19 +130,24 @@ message Spu {
     int32 sale_initial = 29;
     int32 sale_actual = 30;
     int32 child_num = 31;
-    int32 sort = 32;
-    string memo = 33;
-    string status = 34;
-    string created_at = 35;
-    string updated_at = 36;
-    SpuDesc desc = 37;
-    Brand brand = 38;
-    Property  property_desc = 39;
-    Spec  spec_desc =40;
-    repeated Term terms = 41;
-    repeated Tag tags = 42;
-    repeated Sku skus = 43;
-    repeated SpuGallery galleries = 44;
+    int64 master_sku_id = 32;
+    bool is_spec = 33;
+    int32 sort = 34;
+    string memo = 35;
+    string status = 36;
+    string created_at = 37;
+    string updated_at = 38;
+    SpuDesc desc = 39;
+    Brand brand = 40;
+    Category category = 41;
+    Sku sku = 42;
+    Unit unit = 43;
+    repeated Term terms = 44;
+    repeated Tag tags = 45;
+    repeated Sku skus = 46;
+    repeated SpuGallery galleries = 47;
+    GenericProperty generic_property = 48;
+    repeated SaleProperty sale_property =49;
 }
 
 message SkuRequest {
@@ -143,18 +161,23 @@ message SkuRequest {
     string title = 6;
     string type = 7;
     int32 category_id = 10;
-    int32 brand_id = 11;
-    int64 shop_id = 12;
-    string status =13;
-    string start_date =14;
-    string end_date =15;
-    repeated int64 spu_ids = 16;
-    repeated int64 sku_ids = 17;
+    int32 term_id = 11;
+    int32 brand_id = 12;
+    int64 shop_id = 13;
+    string status =14;
+    string start_date =15;
+    string end_date =16;
+    int32 param_id = 17;
+    string param_value = 18;
+    string tag_id = 19;
+    string tag_name = 20;
+    int32 listed_status =21;
+    repeated int64 spu_ids = 22;
+    repeated int64 sku_ids = 23;
 }
 
 message SkuData {
-    Spu spu = 1;
-    Sku sku = 2;
+    Sku entity = 2;
     common.Pager pager = 3;
     repeated Sku items = 4;
     common.Info info = 5;
@@ -165,4 +188,14 @@ message SkuResponse {
     common.Error error = 2;
 }
 
+message SpuResponse {
+    SpuData data = 1;
+    common.Error error = 2;
+}
 
+message SpuData {
+    Spu entity = 1;
+    common.Pager pager = 3;
+    repeated Spu items = 4;
+    common.Info info = 5;
+}

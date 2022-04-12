@@ -47,7 +47,9 @@ type AttrParamService interface {
 	Update(ctx context.Context, in *AttrParam, opts ...client.CallOption) (*AttrParamResponse, error)
 	Delete(ctx context.Context, in *AttrParam, opts ...client.CallOption) (*AttrParamResponse, error)
 	Get(ctx context.Context, in *AttrParam, opts ...client.CallOption) (*AttrParamResponse, error)
+	List(ctx context.Context, in *AttrParamRequest, opts ...client.CallOption) (*AttrParamResponse, error)
 	Search(ctx context.Context, in *AttrParamRequest, opts ...client.CallOption) (*AttrParamResponse, error)
+	AddValue(ctx context.Context, in *AttrParamRequest, opts ...client.CallOption) (*AttrParamResponse, error)
 }
 
 type attrParamService struct {
@@ -102,8 +104,28 @@ func (c *attrParamService) Get(ctx context.Context, in *AttrParam, opts ...clien
 	return out, nil
 }
 
+func (c *attrParamService) List(ctx context.Context, in *AttrParamRequest, opts ...client.CallOption) (*AttrParamResponse, error) {
+	req := c.c.NewRequest(c.name, "AttrParamService.List", in)
+	out := new(AttrParamResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *attrParamService) Search(ctx context.Context, in *AttrParamRequest, opts ...client.CallOption) (*AttrParamResponse, error) {
 	req := c.c.NewRequest(c.name, "AttrParamService.Search", in)
+	out := new(AttrParamResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attrParamService) AddValue(ctx context.Context, in *AttrParamRequest, opts ...client.CallOption) (*AttrParamResponse, error) {
+	req := c.c.NewRequest(c.name, "AttrParamService.AddValue", in)
 	out := new(AttrParamResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -119,7 +141,9 @@ type AttrParamServiceHandler interface {
 	Update(context.Context, *AttrParam, *AttrParamResponse) error
 	Delete(context.Context, *AttrParam, *AttrParamResponse) error
 	Get(context.Context, *AttrParam, *AttrParamResponse) error
+	List(context.Context, *AttrParamRequest, *AttrParamResponse) error
 	Search(context.Context, *AttrParamRequest, *AttrParamResponse) error
+	AddValue(context.Context, *AttrParamRequest, *AttrParamResponse) error
 }
 
 func RegisterAttrParamServiceHandler(s server.Server, hdlr AttrParamServiceHandler, opts ...server.HandlerOption) error {
@@ -128,7 +152,9 @@ func RegisterAttrParamServiceHandler(s server.Server, hdlr AttrParamServiceHandl
 		Update(ctx context.Context, in *AttrParam, out *AttrParamResponse) error
 		Delete(ctx context.Context, in *AttrParam, out *AttrParamResponse) error
 		Get(ctx context.Context, in *AttrParam, out *AttrParamResponse) error
+		List(ctx context.Context, in *AttrParamRequest, out *AttrParamResponse) error
 		Search(ctx context.Context, in *AttrParamRequest, out *AttrParamResponse) error
+		AddValue(ctx context.Context, in *AttrParamRequest, out *AttrParamResponse) error
 	}
 	type AttrParamService struct {
 		attrParamService
@@ -157,6 +183,14 @@ func (h *attrParamServiceHandler) Get(ctx context.Context, in *AttrParam, out *A
 	return h.AttrParamServiceHandler.Get(ctx, in, out)
 }
 
+func (h *attrParamServiceHandler) List(ctx context.Context, in *AttrParamRequest, out *AttrParamResponse) error {
+	return h.AttrParamServiceHandler.List(ctx, in, out)
+}
+
 func (h *attrParamServiceHandler) Search(ctx context.Context, in *AttrParamRequest, out *AttrParamResponse) error {
 	return h.AttrParamServiceHandler.Search(ctx, in, out)
+}
+
+func (h *attrParamServiceHandler) AddValue(ctx context.Context, in *AttrParamRequest, out *AttrParamResponse) error {
+	return h.AttrParamServiceHandler.AddValue(ctx, in, out)
 }

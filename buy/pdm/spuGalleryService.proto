@@ -9,15 +9,17 @@ message SpuGallery {
     int64 id = 1;
     int64 spu_id = 2;
     int64 sku_id = 3;
-    int64 media_id = 4;
-    string type = 5;
-    string url = 6;
-    string mime_type = 7;
-    int64 size = 8;
-    int32 sort = 9;
-    bool defaulted = 10;
-    string created_at = 11;
-    string updated_at = 12;
+    int32 param_id = 4;
+    string param_value = 5;
+    int64 media_id = 6;
+    string type = 7;
+    string url = 8;
+    string mime_type = 9;
+    int64 size = 10;
+    int32 sort = 11;
+    bool defaulted = 12;
+    string created_at = 13;
+    string updated_at = 14;
 }
 
 

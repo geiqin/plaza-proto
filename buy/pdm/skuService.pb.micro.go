@@ -43,16 +43,20 @@ func NewSpuServiceEndpoints() []*api.Endpoint {
 // Client API for SpuService service
 
 type SpuService interface {
-	Create(ctx context.Context, in *Spu, opts ...client.CallOption) (*SkuResponse, error)
-	Update(ctx context.Context, in *Spu, opts ...client.CallOption) (*SkuResponse, error)
-	Delete(ctx context.Context, in *Spu, opts ...client.CallOption) (*SkuResponse, error)
-	Get(ctx context.Context, in *Spu, opts ...client.CallOption) (*SkuResponse, error)
+	//创建商品
+	Create(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
+	//修改商品
+	Update(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
+	//删除商品
+	Delete(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
+	//获取商品（编辑显示）
+	Get(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
 	//商品操作
-	Action(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error)
+	Action(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//商品上下架
-	Sale(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error)
+	Sale(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//商品排序
-	Sort(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error)
+	Sort(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
 }
 
 type spuService struct {
@@ -67,9 +71,9 @@ func NewSpuService(name string, c client.Client) SpuService {
 	}
 }
 
-func (c *spuService) Create(ctx context.Context, in *Spu, opts ...client.CallOption) (*SkuResponse, error) {
+func (c *spuService) Create(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuService.Create", in)
-	out := new(SkuResponse)
+	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -77,9 +81,9 @@ func (c *spuService) Create(ctx context.Context, in *Spu, opts ...client.CallOpt
 	return out, nil
 }
 
-func (c *spuService) Update(ctx context.Context, in *Spu, opts ...client.CallOption) (*SkuResponse, error) {
+func (c *spuService) Update(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuService.Update", in)
-	out := new(SkuResponse)
+	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -87,9 +91,9 @@ func (c *spuService) Update(ctx context.Context, in *Spu, opts ...client.CallOpt
 	return out, nil
 }
 
-func (c *spuService) Delete(ctx context.Context, in *Spu, opts ...client.CallOption) (*SkuResponse, error) {
+func (c *spuService) Delete(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuService.Delete", in)
-	out := new(SkuResponse)
+	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,9 +101,9 @@ func (c *spuService) Delete(ctx context.Context, in *Spu, opts ...client.CallOpt
 	return out, nil
 }
 
-func (c *spuService) Get(ctx context.Context, in *Spu, opts ...client.CallOption) (*SkuResponse, error) {
+func (c *spuService) Get(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuService.Get", in)
-	out := new(SkuResponse)
+	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -107,9 +111,9 @@ func (c *spuService) Get(ctx context.Context, in *Spu, opts ...client.CallOption
 	return out, nil
 }
 
-func (c *spuService) Action(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error) {
+func (c *spuService) Action(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuService.Action", in)
-	out := new(SkuResponse)
+	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -117,9 +121,9 @@ func (c *spuService) Action(ctx context.Context, in *SkuRequest, opts ...client.
 	return out, nil
 }
 
-func (c *spuService) Sale(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error) {
+func (c *spuService) Sale(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuService.Sale", in)
-	out := new(SkuResponse)
+	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -127,9 +131,9 @@ func (c *spuService) Sale(ctx context.Context, in *SkuRequest, opts ...client.Ca
 	return out, nil
 }
 
-func (c *spuService) Sort(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error) {
+func (c *spuService) Sort(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuService.Sort", in)
-	out := new(SkuResponse)
+	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -140,27 +144,31 @@ func (c *spuService) Sort(ctx context.Context, in *SkuRequest, opts ...client.Ca
 // Server API for SpuService service
 
 type SpuServiceHandler interface {
-	Create(context.Context, *Spu, *SkuResponse) error
-	Update(context.Context, *Spu, *SkuResponse) error
-	Delete(context.Context, *Spu, *SkuResponse) error
-	Get(context.Context, *Spu, *SkuResponse) error
+	//创建商品
+	Create(context.Context, *Spu, *SpuResponse) error
+	//修改商品
+	Update(context.Context, *Spu, *SpuResponse) error
+	//删除商品
+	Delete(context.Context, *Spu, *SpuResponse) error
+	//获取商品（编辑显示）
+	Get(context.Context, *Spu, *SpuResponse) error
 	//商品操作
-	Action(context.Context, *SkuRequest, *SkuResponse) error
+	Action(context.Context, *SkuRequest, *SpuResponse) error
 	//商品上下架
-	Sale(context.Context, *SkuRequest, *SkuResponse) error
+	Sale(context.Context, *SkuRequest, *SpuResponse) error
 	//商品排序
-	Sort(context.Context, *SkuRequest, *SkuResponse) error
+	Sort(context.Context, *SkuRequest, *SpuResponse) error
 }
 
 func RegisterSpuServiceHandler(s server.Server, hdlr SpuServiceHandler, opts ...server.HandlerOption) error {
 	type spuService interface {
-		Create(ctx context.Context, in *Spu, out *SkuResponse) error
-		Update(ctx context.Context, in *Spu, out *SkuResponse) error
-		Delete(ctx context.Context, in *Spu, out *SkuResponse) error
-		Get(ctx context.Context, in *Spu, out *SkuResponse) error
-		Action(ctx context.Context, in *SkuRequest, out *SkuResponse) error
-		Sale(ctx context.Context, in *SkuRequest, out *SkuResponse) error
-		Sort(ctx context.Context, in *SkuRequest, out *SkuResponse) error
+		Create(ctx context.Context, in *Spu, out *SpuResponse) error
+		Update(ctx context.Context, in *Spu, out *SpuResponse) error
+		Delete(ctx context.Context, in *Spu, out *SpuResponse) error
+		Get(ctx context.Context, in *Spu, out *SpuResponse) error
+		Action(ctx context.Context, in *SkuRequest, out *SpuResponse) error
+		Sale(ctx context.Context, in *SkuRequest, out *SpuResponse) error
+		Sort(ctx context.Context, in *SkuRequest, out *SpuResponse) error
 	}
 	type SpuService struct {
 		spuService
@@ -173,31 +181,31 @@ type spuServiceHandler struct {
 	SpuServiceHandler
 }
 
-func (h *spuServiceHandler) Create(ctx context.Context, in *Spu, out *SkuResponse) error {
+func (h *spuServiceHandler) Create(ctx context.Context, in *Spu, out *SpuResponse) error {
 	return h.SpuServiceHandler.Create(ctx, in, out)
 }
 
-func (h *spuServiceHandler) Update(ctx context.Context, in *Spu, out *SkuResponse) error {
+func (h *spuServiceHandler) Update(ctx context.Context, in *Spu, out *SpuResponse) error {
 	return h.SpuServiceHandler.Update(ctx, in, out)
 }
 
-func (h *spuServiceHandler) Delete(ctx context.Context, in *Spu, out *SkuResponse) error {
+func (h *spuServiceHandler) Delete(ctx context.Context, in *Spu, out *SpuResponse) error {
 	return h.SpuServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *spuServiceHandler) Get(ctx context.Context, in *Spu, out *SkuResponse) error {
+func (h *spuServiceHandler) Get(ctx context.Context, in *Spu, out *SpuResponse) error {
 	return h.SpuServiceHandler.Get(ctx, in, out)
 }
 
-func (h *spuServiceHandler) Action(ctx context.Context, in *SkuRequest, out *SkuResponse) error {
+func (h *spuServiceHandler) Action(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
 	return h.SpuServiceHandler.Action(ctx, in, out)
 }
 
-func (h *spuServiceHandler) Sale(ctx context.Context, in *SkuRequest, out *SkuResponse) error {
+func (h *spuServiceHandler) Sale(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
 	return h.SpuServiceHandler.Sale(ctx, in, out)
 }
 
-func (h *spuServiceHandler) Sort(ctx context.Context, in *SkuRequest, out *SkuResponse) error {
+func (h *spuServiceHandler) Sort(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
 	return h.SpuServiceHandler.Sort(ctx, in, out)
 }
 
@@ -210,17 +218,14 @@ func NewSkuServiceEndpoints() []*api.Endpoint {
 // Client API for SkuService service
 
 type SkuService interface {
-	Create(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error)
-	Update(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error)
-	Delete(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error)
+	//获取货品
 	Get(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error)
+	//获取货品详情
+	Detail(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error)
+	//获取列表
 	List(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error)
-	//货品查询
+	//货品查询（基于SKU查询）
 	Search(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error)
-	//商品查询
-	GoodsSearch(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error)
-	//商品详情显示
-	Display(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error)
 }
 
 type skuService struct {
@@ -235,38 +240,18 @@ func NewSkuService(name string, c client.Client) SkuService {
 	}
 }
 
-func (c *skuService) Create(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error) {
-	req := c.c.NewRequest(c.name, "SkuService.Create", in)
-	out := new(SkuResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuService) Update(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error) {
-	req := c.c.NewRequest(c.name, "SkuService.Update", in)
-	out := new(SkuResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuService) Delete(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error) {
-	req := c.c.NewRequest(c.name, "SkuService.Delete", in)
-	out := new(SkuResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *skuService) Get(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error) {
 	req := c.c.NewRequest(c.name, "SkuService.Get", in)
+	out := new(SkuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *skuService) Detail(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error) {
+	req := c.c.NewRequest(c.name, "SkuService.Detail", in)
 	out := new(SkuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -295,52 +280,25 @@ func (c *skuService) Search(ctx context.Context, in *SkuRequest, opts ...client.
 	return out, nil
 }
 
-func (c *skuService) GoodsSearch(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error) {
-	req := c.c.NewRequest(c.name, "SkuService.GoodsSearch", in)
-	out := new(SkuResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuService) Display(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error) {
-	req := c.c.NewRequest(c.name, "SkuService.Display", in)
-	out := new(SkuResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for SkuService service
 
 type SkuServiceHandler interface {
-	Create(context.Context, *Sku, *SkuResponse) error
-	Update(context.Context, *Sku, *SkuResponse) error
-	Delete(context.Context, *Sku, *SkuResponse) error
+	//获取货品
 	Get(context.Context, *Sku, *SkuResponse) error
+	//获取货品详情
+	Detail(context.Context, *Sku, *SkuResponse) error
+	//获取列表
 	List(context.Context, *SkuRequest, *SkuResponse) error
-	//货品查询
+	//货品查询（基于SKU查询）
 	Search(context.Context, *SkuRequest, *SkuResponse) error
-	//商品查询
-	GoodsSearch(context.Context, *SkuRequest, *SkuResponse) error
-	//商品详情显示
-	Display(context.Context, *SkuRequest, *SkuResponse) error
 }
 
 func RegisterSkuServiceHandler(s server.Server, hdlr SkuServiceHandler, opts ...server.HandlerOption) error {
 	type skuService interface {
-		Create(ctx context.Context, in *Sku, out *SkuResponse) error
-		Update(ctx context.Context, in *Sku, out *SkuResponse) error
-		Delete(ctx context.Context, in *Sku, out *SkuResponse) error
 		Get(ctx context.Context, in *Sku, out *SkuResponse) error
+		Detail(ctx context.Context, in *Sku, out *SkuResponse) error
 		List(ctx context.Context, in *SkuRequest, out *SkuResponse) error
 		Search(ctx context.Context, in *SkuRequest, out *SkuResponse) error
-		GoodsSearch(ctx context.Context, in *SkuRequest, out *SkuResponse) error
-		Display(ctx context.Context, in *SkuRequest, out *SkuResponse) error
 	}
 	type SkuService struct {
 		skuService
@@ -353,20 +311,12 @@ type skuServiceHandler struct {
 	SkuServiceHandler
 }
 
-func (h *skuServiceHandler) Create(ctx context.Context, in *Sku, out *SkuResponse) error {
-	return h.SkuServiceHandler.Create(ctx, in, out)
-}
-
-func (h *skuServiceHandler) Update(ctx context.Context, in *Sku, out *SkuResponse) error {
-	return h.SkuServiceHandler.Update(ctx, in, out)
-}
-
-func (h *skuServiceHandler) Delete(ctx context.Context, in *Sku, out *SkuResponse) error {
-	return h.SkuServiceHandler.Delete(ctx, in, out)
-}
-
 func (h *skuServiceHandler) Get(ctx context.Context, in *Sku, out *SkuResponse) error {
 	return h.SkuServiceHandler.Get(ctx, in, out)
+}
+
+func (h *skuServiceHandler) Detail(ctx context.Context, in *Sku, out *SkuResponse) error {
+	return h.SkuServiceHandler.Detail(ctx, in, out)
 }
 
 func (h *skuServiceHandler) List(ctx context.Context, in *SkuRequest, out *SkuResponse) error {
@@ -377,10 +327,82 @@ func (h *skuServiceHandler) Search(ctx context.Context, in *SkuRequest, out *Sku
 	return h.SkuServiceHandler.Search(ctx, in, out)
 }
 
-func (h *skuServiceHandler) GoodsSearch(ctx context.Context, in *SkuRequest, out *SkuResponse) error {
-	return h.SkuServiceHandler.GoodsSearch(ctx, in, out)
+// Api Endpoints for ProductService service
+
+func NewProductServiceEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
 }
 
-func (h *skuServiceHandler) Display(ctx context.Context, in *SkuRequest, out *SkuResponse) error {
-	return h.SkuServiceHandler.Display(ctx, in, out)
+// Client API for ProductService service
+
+type ProductService interface {
+	//商品查询（基于SPU查询）
+	Search(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
+	//商品详情显示（基于SPU信息）
+	Display(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
+}
+
+type productService struct {
+	c    client.Client
+	name string
+}
+
+func NewProductService(name string, c client.Client) ProductService {
+	return &productService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *productService) Search(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error) {
+	req := c.c.NewRequest(c.name, "ProductService.Search", in)
+	out := new(SpuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productService) Display(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error) {
+	req := c.c.NewRequest(c.name, "ProductService.Display", in)
+	out := new(SpuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for ProductService service
+
+type ProductServiceHandler interface {
+	//商品查询（基于SPU查询）
+	Search(context.Context, *SkuRequest, *SpuResponse) error
+	//商品详情显示（基于SPU信息）
+	Display(context.Context, *SkuRequest, *SpuResponse) error
+}
+
+func RegisterProductServiceHandler(s server.Server, hdlr ProductServiceHandler, opts ...server.HandlerOption) error {
+	type productService interface {
+		Search(ctx context.Context, in *SkuRequest, out *SpuResponse) error
+		Display(ctx context.Context, in *SkuRequest, out *SpuResponse) error
+	}
+	type ProductService struct {
+		productService
+	}
+	h := &productServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&ProductService{h}, opts...))
+}
+
+type productServiceHandler struct {
+	ProductServiceHandler
+}
+
+func (h *productServiceHandler) Search(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
+	return h.ProductServiceHandler.Search(ctx, in, out)
+}
+
+func (h *productServiceHandler) Display(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
+	return h.ProductServiceHandler.Display(ctx, in, out)
 }
