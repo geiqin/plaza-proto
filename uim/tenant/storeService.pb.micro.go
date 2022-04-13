@@ -65,6 +65,8 @@ type StoreService interface {
 	Search(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺列表
 	List(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
+	//获取店铺功能模块
+	GetModules(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 }
 
 type storeService struct {
@@ -189,6 +191,16 @@ func (c *storeService) List(ctx context.Context, in *StoreRequest, opts ...clien
 	return out, nil
 }
 
+func (c *storeService) GetModules(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.GetModules", in)
+	out := new(StoreResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for StoreService service
 
 type StoreServiceHandler interface {
@@ -214,6 +226,8 @@ type StoreServiceHandler interface {
 	Search(context.Context, *StoreRequest, *StoreResponse) error
 	//获取店铺列表
 	List(context.Context, *StoreRequest, *StoreResponse) error
+	//获取店铺功能模块
+	GetModules(context.Context, *StoreRequest, *StoreResponse) error
 }
 
 func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts ...server.HandlerOption) error {
@@ -229,6 +243,7 @@ func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts
 		GetByName(ctx context.Context, in *Store, out *StoreResponse) error
 		Search(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 		List(ctx context.Context, in *StoreRequest, out *StoreResponse) error
+		GetModules(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 	}
 	type StoreService struct {
 		storeService
@@ -283,4 +298,8 @@ func (h *storeServiceHandler) Search(ctx context.Context, in *StoreRequest, out 
 
 func (h *storeServiceHandler) List(ctx context.Context, in *StoreRequest, out *StoreResponse) error {
 	return h.StoreServiceHandler.List(ctx, in, out)
+}
+
+func (h *storeServiceHandler) GetModules(ctx context.Context, in *StoreRequest, out *StoreResponse) error {
+	return h.StoreServiceHandler.GetModules(ctx, in, out)
 }

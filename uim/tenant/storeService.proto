@@ -28,6 +28,8 @@ service StoreService {
     rpc Search (StoreRequest) returns (StoreResponse) {}
     //获取店铺列表
     rpc List (StoreRequest) returns (StoreResponse) {}
+    //获取店铺功能模块
+    rpc GetModules (StoreRequest) returns (StoreResponse) {}
 }
 
 message Store {
@@ -81,6 +83,7 @@ message StoreData {
     common.Pager pager =2;
     repeated Store items = 3;
     common.Info info =4;
+    repeated string Modules = 5;
 }
 
 message StoreResponse {
