@@ -17,23 +17,24 @@ service SchemeService {
 }
 
 message Scheme {
-  int32 total_num =7;
-  float total_weight =8;
-  string currency =9;
-  float goods_amount =11;
-  float discount_amount =12;
-  float shipping_fee =13;
-  float insure_fee =14;
-  float pack_fee =15;
-  float surplus =16;
-  float coupon_money =17;
-  int32 integral =18;
-  float integral_money =19;
-  float amount =20;
-  float paid_money =21;
-  repeated SchemeDetail details = 56;
-  repeated CouponInfo  coupons = 57;
-  repeated PromotionInfo promotions = 58;
+  int32 total_num =1;
+  float total_weight =2;
+  string currency =3;
+  float goods_amount =4;
+  float discount_amount =5;
+  float shipping_fee =6;
+  float insure_fee =7;
+  float pack_fee =8;
+  float surplus =9;
+  float coupon_money =10;
+  int32 integral =11;
+  float integral_money =12;
+  float amount =13;
+  float paid_money =14;
+  bool is_shipment =15;
+  repeated SchemeDetail details = 16;
+  repeated CouponInfo  coupons = 17;
+  repeated PromotionInfo promotions = 18;
 }
 
 message CouponInfo {
@@ -70,7 +71,8 @@ message SchemeRequest {
   string channel =8;
   string payment_method = 9;
   string shipment_method = 10;
-  repeated int64 sku_ids =11;
+  map<int64,int32> sku_list =11;
+  repeated int64 sku_ids =12;
 }
 
 message SchemeData{
