@@ -31,11 +31,18 @@ message GenericProperty{
 message SaleProperty{
     int32 spec_id = 1;
     string spec_name =2;
-    repeated string values=3;
+    repeated value_info values =3;
+    message value_info {
+        string value_text =1;
+        int64 image_id =2;
+        string image_url =3;
+    }
 }
 //SKU自己的属性
 message OwnProperty{
     int32 spec_id = 1;
     string spec_name =2;
     string spec_value =3;
+    int64 image_id =4;
+    string image_url =5;
 }

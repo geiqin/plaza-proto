@@ -1,0 +1,88 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+
+message SkuInfo {
+	int64 id = 1;
+	int64 spu_id = 2;
+	string sku_sn = 3;
+	string title = 4;
+	string type = 5;
+	int32 unit_id = 6;
+	int64 shop_id = 7;
+	int64 image_id = 8;
+	string image_url = 9;
+	float price = 10;
+	float market_price = 11;
+	float cost_price = 12;
+	float promotion_price = 13;
+	string barcode = 14;
+	float weight = 15;
+	int32 volume = 16;
+	int32 stock = 17;
+	int32 frozen_stock = 18;
+	string out_sku_no = 19;
+	bool is_spec = 20;
+	bool is_virtual = 21;
+	bool is_presale = 22;
+	bool is_member_right = 23;
+	bool is_member_price = 24;
+	bool is_hide_stock = 25;
+	bool is_new = 27;
+	bool is_hot = 28;
+	bool is_recommend = 29;
+	bool is_special = 30;
+	bool is_master = 31;
+	string indexes =32;
+	string status = 33;
+	string listed_at = 34;
+	string created_at = 35;
+	string updated_at = 36;
+	repeated int32 indexes_data = 37;
+	map<int32,string> own_desc_data = 38;
+	string unit_name = 39;
+	SkuVip vip = 41;
+	SkuCoupon coupon = 42;
+	SkuPresale presale = 43;
+}
+
+
+message SkuPresale {
+	int64 id = 1;
+	int64 sku_id = 2;
+	int32 presale_type = 3;
+	string payed_date = 4;
+	string advance_start_date = 5;
+	string advance_end_date = 6;
+	string balance_start_date = 7;
+	string balance_end_date = 8;
+	string advance_type = 9;
+	int32 advance_rate = 10;
+	float advance_money = 11;
+	float balance_money = 12;
+	string delivery_type = 13;
+	string delivery_date = 14;
+	int32 delivery_days = 15;
+	string created_at = 16;
+	string updated_at = 17;
+}
+
+
+message SkuCoupon {
+	int64 id = 1;
+	int64 sku_id = 2;
+	int64 coupon_id = 3;
+	string coupon_title = 4;
+	string created_at = 5;
+	string updated_at = 6;
+}
+
+message SkuVip {
+	int64 id = 1;
+	int64 sku_id = 2;
+	int32 member_rank_id = 3;
+	string keep_type = 4;
+	int32 keep_value = 5;
+	string created_at = 6;
+	string updated_at = 7;
+}

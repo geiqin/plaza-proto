@@ -2,7 +2,6 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 import "common/base.proto";
-import "categoryService.proto";
 
 service TermService {
     rpc Create(Term) returns (TermResponse);
@@ -21,14 +20,13 @@ message Term {
     string path = 5;
     int64 media_id = 6;
     string media_url = 7;
-    string category_ids = 8;
+    int32 spu_count = 8;
     string memo = 9;
     int32 sort = 10;
     string created_at = 11;
     string updated_at = 12;
     Term parent = 13;
     repeated Term children = 14;
-    repeated Category categories = 15;
 }
 
 message TermRequest {

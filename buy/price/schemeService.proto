@@ -1,0 +1,87 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "skuInfoService.proto";
+
+//价格核算计划
+service SchemeService {
+  //商品购买计算
+  rpc Purchase (SchemeRequest) returns (SchemeResponse) {}
+  //商品列表计算
+  rpc List (SchemeRequest) returns (SchemeResponse) {}
+  //商品分润计算
+  rpc Profit (SchemeRequest) returns (SchemeResponse) {}
+  //商品佣金计算
+  rpc Commission (SchemeRequest) returns (SchemeResponse) {}
+}
+
+message Scheme {
+  int32 total_num =7;
+  float total_weight =8;
+  string currency =9;
+  float goods_amount =11;
+  float discount_amount =12;
+  float shipping_fee =13;
+  float insure_fee =14;
+  float pack_fee =15;
+  float surplus =16;
+  float coupon_money =17;
+  int32 integral =18;
+  float integral_money =19;
+  float amount =20;
+  float paid_money =21;
+  repeated SchemeDetail details = 56;
+  repeated CouponInfo  coupons = 57;
+  repeated PromotionInfo promotions = 58;
+}
+
+message CouponInfo {
+  int64	 id	=1;
+  string title	=2;
+}
+
+message PromotionInfo {
+  int64	 id	=1;
+  string title	=2;
+}
+
+message SchemeDetail {
+  int64	sku_id	=1;
+  float price = 2;
+  float market_price = 3;
+  float cost_price = 4;
+  float promotion_price = 5;
+  float member_price = 6;
+  float wholesale_price = 7;
+  bool is_gift =8;
+  SkuInfo sku_info =9;
+}
+
+
+message SchemeRequest {
+  int64 area_id = 1;
+  int64 coupon_id = 2;
+  int64 member_id = 3;
+  int32 member_rank_id = 4;
+  int64 shop_id = 5;
+  int64 order_id = 6;
+  string terminal =7;
+  string channel =8;
+  string payment_method = 9;
+  string shipment_method = 10;
+  repeated int64 sku_ids =11;
+}
+
+message SchemeData{
+  Scheme entity = 1;
+  repeated SkuInfo skus = 2;
+  map<string,string> params =3;
+  repeated Scheme items =4;
+  common.Info info =5;
+}
+
+message SchemeResponse {
+  SchemeData data = 1;
+  common.Error error = 2;
+}

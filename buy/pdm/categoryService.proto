@@ -10,24 +10,35 @@ service CategoryService {
     rpc Update(Category) returns (CategoryResponse);
     rpc Delete (Category) returns (CategoryResponse);
     rpc Get (Category) returns (CategoryResponse);
+    rpc ClearUsed (Category) returns (CategoryResponse);
+    rpc History (CategoryRequest) returns (CategoryResponse);
     rpc Tree (CategoryRequest) returns (CategoryResponse);
+    rpc List (CategoryRequest) returns (CategoryResponse);
     rpc Search (CategoryRequest) returns (CategoryResponse);
 }
 
 message Category {
     int32 id = 1;
     string name = 2;
-    int32 parent_id = 3;
-    string path = 4;
-    int64 media_id = 5;
-    string media_url = 6;
-    string memo = 7;
-    int32 sort = 8;
-    string created_at = 9;
-    string updated_at = 10;
-    repeated Brand brands = 11;
-    Category parent = 12;
-    repeated Category children = 13;
+    string full_name = 3;
+    int32 parent_id = 4;
+    string path = 5;
+    int32 depth = 6;
+    int64 media_id = 7;
+    string media_url = 8;
+    string letter = 9;
+    string sku_type = 10;
+    bool is_virtual = 11;
+    bool is_leaf = 12;
+    bool is_used = 13;
+    string used_at = 14;
+    string memo = 15;
+    int32 sort = 16;
+    string created_at = 17;
+    string updated_at = 18;
+    repeated Brand brands = 19;
+    Category parent = 20;
+    repeated Category children = 21;
 }
 
 message CategoryRequest {
@@ -36,6 +47,13 @@ message CategoryRequest {
     string keywords = 3;
     int32 id = 4;
     string name = 5;
+    string full_name = 6;
+    string letter = 7;
+    string sku_type = 8;
+    bool is_virtual = 9;
+    bool is_leaf = 10;
+    bool is_used = 11;
+    int32 parent_id = 12;
 }
 
 message CategoryData {
