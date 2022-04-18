@@ -40,10 +40,16 @@ message SkuInfo {
 	string updated_at = 36;
 	repeated int32 indexes_data = 37;
 	map<int32,string> own_desc_data = 38;
-	string unit_name = 39;
+	Unit unit = 39;
 	SkuVip vip = 41;
 	SkuCoupon coupon = 42;
 	SkuPresale presale = 43;
+}
+
+message Unit {
+	int32 id = 1;
+	string name = 2;
+	string type = 3;
 }
 
 

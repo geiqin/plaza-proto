@@ -49,14 +49,16 @@ message PromotionInfo {
 
 message SchemeDetail {
   int64	sku_id	=1;
-  float price = 2;
-  float market_price = 3;
-  float cost_price = 4;
-  float promotion_price = 5;
-  float member_price = 6;
-  float wholesale_price = 7;
-  bool is_gift =8;
-  SkuInfo sku_info =9;
+  int32 num =2;
+  float sub_total =3;
+  float price = 4;
+  float market_price = 5;
+  float cost_price = 6;
+  float promotion_price = 7;
+  float member_price = 8;
+  float wholesale_price = 9;
+  bool is_gift =10;
+  SkuInfo sku_info =11;
 }
 
 
@@ -71,8 +73,16 @@ message SchemeRequest {
   string channel =8;
   string payment_method = 9;
   string shipment_method = 10;
-  map<int64,int32> sku_list =11;
-  repeated int64 sku_ids =12;
+  float insure_fee =11;
+  float pack_fee =12;
+  float surplus =13;
+  float coupon_money =14;
+  int32 integral =15;
+  float integral_money =16;
+  float paid_money =17;
+  string currency =18;
+  map<int64,int32> sku_list =19;
+  repeated int64 sku_ids =20;
 }
 
 message SchemeData{
