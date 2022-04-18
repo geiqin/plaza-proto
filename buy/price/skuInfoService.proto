@@ -34,16 +34,13 @@ message SkuInfo {
 	bool is_special = 30;
 	bool is_master = 31;
 	string indexes =32;
-	string status = 33;
-	string listed_at = 34;
-	string created_at = 35;
-	string updated_at = 36;
-	repeated int32 indexes_data = 37;
-	map<int32,string> own_desc_data = 38;
-	Unit unit = 39;
-	SkuVip vip = 41;
-	SkuCoupon coupon = 42;
-	SkuPresale presale = 43;
+	string own_desc = 33;
+	string status = 34;
+	string listed_at = 35;
+	Unit unit = 36;
+	SkuVip vip = 37;
+	SkuCoupon coupon = 38;
+	SkuPresale presale = 39;
 }
 
 message Unit {
@@ -69,8 +66,6 @@ message SkuPresale {
 	string delivery_type = 13;
 	string delivery_date = 14;
 	int32 delivery_days = 15;
-	string created_at = 16;
-	string updated_at = 17;
 }
 
 
@@ -79,8 +74,6 @@ message SkuCoupon {
 	int64 sku_id = 2;
 	int64 coupon_id = 3;
 	string coupon_title = 4;
-	string created_at = 5;
-	string updated_at = 6;
 }
 
 message SkuVip {
@@ -89,6 +82,4 @@ message SkuVip {
 	int32 member_rank_id = 3;
 	string keep_type = 4;
 	int32 keep_value = 5;
-	string created_at = 6;
-	string updated_at = 7;
 }

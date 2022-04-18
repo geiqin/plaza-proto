@@ -17,24 +17,26 @@ service SchemeService {
 }
 
 message Scheme {
-  int32 total_num =1;
-  float total_weight =2;
-  string currency =3;
-  float goods_amount =4;
-  float discount_amount =5;
-  float shipping_fee =6;
-  float insure_fee =7;
-  float pack_fee =8;
-  float surplus =9;
-  float coupon_money =10;
-  int32 integral =11;
-  float integral_money =12;
-  float amount =13;
-  float paid_money =14;
-  bool is_shipment =15;
-  repeated SchemeDetail details = 16;
-  repeated CouponInfo  coupons = 17;
-  repeated PromotionInfo promotions = 18;
+  int64 member_id =1;
+  int32 total_num =2;
+  float total_weight =3;
+  string currency =4;
+  float goods_amount =5;
+  float discount_amount =6;
+  float shipping_fee =7;
+  float insure_fee =8;
+  float pack_fee =9;
+  float surplus =10;
+  int64 coupon_id = 11;
+  float coupon_money =12;
+  int32 integral =13;
+  float integral_money =14;
+  float amount =15;
+  float paid_money =16;
+  bool is_shipment =17;
+  repeated SchemeDetail details = 18;
+  repeated CouponInfo  coupons = 19;
+  repeated PromotionInfo promotions = 20;
 }
 
 message CouponInfo {
@@ -50,15 +52,17 @@ message PromotionInfo {
 message SchemeDetail {
   int64	sku_id	=1;
   int32 num =2;
-  float sub_total =3;
-  float price = 4;
-  float market_price = 5;
-  float cost_price = 6;
-  float promotion_price = 7;
-  float member_price = 8;
-  float wholesale_price = 9;
-  bool is_gift =10;
-  SkuInfo sku_info =11;
+  float price = 3;
+  float market_price = 4;
+  float cost_price = 5;
+  float promotion_price = 6;
+  float member_price = 7;
+  float wholesale_price = 8;
+  float row_goods_amount = 9;
+  float row_discount_amount = 10;
+  float row_amount = 11;
+  bool is_gift =12;
+  SkuInfo sku_info =13;
 }
 
 
