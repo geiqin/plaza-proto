@@ -44,13 +44,15 @@ func NewMemberServiceEndpoints() []*api.Endpoint {
 
 type MemberService interface {
 	//通过账号注册用户
-	Register(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
+	Register(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//从粉丝添加用户
 	RegisterByFan(ctx context.Context, in *Fan, opts ...client.CallOption) (*MemberResponse, error)
 	//通过手机注册用户
 	RegisterByMobile(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//通过邮箱注册用户
 	RegisterByEmail(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
+	//验证账户信息
+	ToLogin(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	Create(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
 	//手动添加单位用户
 	CreateCompany(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
@@ -94,7 +96,7 @@ func NewMemberService(name string, c client.Client) MemberService {
 	}
 }
 
-func (c *memberService) Register(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error) {
+func (c *memberService) Register(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
 	req := c.c.NewRequest(c.name, "MemberService.Register", in)
 	out := new(MemberResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -126,6 +128,16 @@ func (c *memberService) RegisterByMobile(ctx context.Context, in *MemberRequest,
 
 func (c *memberService) RegisterByEmail(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
 	req := c.c.NewRequest(c.name, "MemberService.RegisterByEmail", in)
+	out := new(MemberResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberService) ToLogin(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberService.ToLogin", in)
 	out := new(MemberResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -288,13 +300,15 @@ func (c *memberService) GetByEmail(ctx context.Context, in *MemberRequest, opts 
 
 type MemberServiceHandler interface {
 	//通过账号注册用户
-	Register(context.Context, *Member, *MemberResponse) error
+	Register(context.Context, *MemberRequest, *MemberResponse) error
 	//从粉丝添加用户
 	RegisterByFan(context.Context, *Fan, *MemberResponse) error
 	//通过手机注册用户
 	RegisterByMobile(context.Context, *MemberRequest, *MemberResponse) error
 	//通过邮箱注册用户
 	RegisterByEmail(context.Context, *MemberRequest, *MemberResponse) error
+	//验证账户信息
+	ToLogin(context.Context, *MemberRequest, *MemberResponse) error
 	Create(context.Context, *Member, *MemberResponse) error
 	//手动添加单位用户
 	CreateCompany(context.Context, *Member, *MemberResponse) error
@@ -328,10 +342,11 @@ type MemberServiceHandler interface {
 
 func RegisterMemberServiceHandler(s server.Server, hdlr MemberServiceHandler, opts ...server.HandlerOption) error {
 	type memberService interface {
-		Register(ctx context.Context, in *Member, out *MemberResponse) error
+		Register(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		RegisterByFan(ctx context.Context, in *Fan, out *MemberResponse) error
 		RegisterByMobile(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		RegisterByEmail(ctx context.Context, in *MemberRequest, out *MemberResponse) error
+		ToLogin(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		Create(ctx context.Context, in *Member, out *MemberResponse) error
 		CreateCompany(ctx context.Context, in *Member, out *MemberResponse) error
 		UpdateCompany(ctx context.Context, in *Member, out *MemberResponse) error
@@ -359,7 +374,7 @@ type memberServiceHandler struct {
 	MemberServiceHandler
 }
 
-func (h *memberServiceHandler) Register(ctx context.Context, in *Member, out *MemberResponse) error {
+func (h *memberServiceHandler) Register(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
 	return h.MemberServiceHandler.Register(ctx, in, out)
 }
 
@@ -373,6 +388,10 @@ func (h *memberServiceHandler) RegisterByMobile(ctx context.Context, in *MemberR
 
 func (h *memberServiceHandler) RegisterByEmail(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
 	return h.MemberServiceHandler.RegisterByEmail(ctx, in, out)
+}
+
+func (h *memberServiceHandler) ToLogin(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
+	return h.MemberServiceHandler.ToLogin(ctx, in, out)
 }
 
 func (h *memberServiceHandler) Create(ctx context.Context, in *Member, out *MemberResponse) error {

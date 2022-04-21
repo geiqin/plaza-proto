@@ -10,13 +10,15 @@ import "fanService.proto";
 
 service MemberService {
     //通过账号注册用户
-    rpc Register (Member) returns (MemberResponse) {}
+    rpc Register (MemberRequest) returns (MemberResponse) {}
     //从粉丝添加用户
     rpc RegisterByFan (Fan) returns (MemberResponse) {}
     //通过手机注册用户
     rpc RegisterByMobile (MemberRequest) returns (MemberResponse) {}
     //通过邮箱注册用户
     rpc RegisterByEmail (MemberRequest) returns (MemberResponse) {}
+    //验证账户信息
+    rpc ToLogin (MemberRequest) returns (MemberResponse) {}
 
     rpc Create (Member) returns (MemberResponse) {}
     //手动添加单位用户
@@ -119,7 +121,10 @@ message MemberRequest {
     string avatar_url =25;
     string refer_url =26;
     string wx_open_id =27;
-    repeated int64 ids = 28;
+    string username =28;
+    string password =29;
+    string code =30;
+    repeated int64 ids = 31;
 }
 
 message MemberData {
