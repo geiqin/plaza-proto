@@ -2,6 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 import "common/base.proto";
+import "baseInfoService.proto";
 import "skuInfoService.proto";
 
 //价格核算计划
@@ -39,16 +40,6 @@ message Scheme {
   repeated PromotionInfo promotions = 20;
 }
 
-message CouponInfo {
-  int64	 id	=1;
-  string title	=2;
-}
-
-message PromotionInfo {
-  int64	 id	=1;
-  string title	=2;
-}
-
 message SchemeDetail {
   int64	sku_id	=1;
   int32 num =2;
@@ -67,7 +58,7 @@ message SchemeDetail {
 
 
 message SchemeRequest {
-  int64 area_id = 1;
+  int64 address_id = 1;
   int64 coupon_id = 2;
   int64 member_id = 3;
   int32 member_rank_id = 4;
@@ -85,16 +76,22 @@ message SchemeRequest {
   float integral_money =16;
   float paid_money =17;
   string currency =18;
-  map<int64,int32> sku_list =19;
-  repeated int64 sku_ids =20;
+  int64 area_id = 19;
+  map<int64,int32> sku_list =20;
+  repeated int64 sku_ids =21;
 }
 
 message SchemeData{
   Scheme entity = 1;
   repeated SkuInfo skus = 2;
-  map<string,string> params =3;
-  repeated Scheme items =4;
-  common.Info info =5;
+  float available_surplus =3;//可使用的余额
+  int32 available_points =4;//可使用的积分
+  CouponInfo available_coupons = 5;//可使用的优惠劵集合
+  AddressInfo shipping_address =6;//订单收货地址
+  repeated ShopInfo shop_list = 7;//商品中涉及到那些卖家（多店铺模式下）
+  map<string,string> params =8;
+  repeated Scheme items =9;
+  common.Info info =10;
 }
 
 message SchemeResponse {
