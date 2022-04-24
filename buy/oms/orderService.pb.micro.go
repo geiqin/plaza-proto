@@ -34,162 +34,6 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// Api Endpoints for MyOrderService service
-
-func NewMyOrderServiceEndpoints() []*api.Endpoint {
-	return []*api.Endpoint{}
-}
-
-// Client API for MyOrderService service
-
-type MyOrderService interface {
-	//删除订单
-	Delete(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//撤销订单
-	Cancel(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//确认收货
-	Receipt(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//获取订单信息
-	Get(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//获取订单信息(详细信息)
-	Display(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//查询订单
-	Search(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
-}
-
-type myOrderService struct {
-	c    client.Client
-	name string
-}
-
-func NewMyOrderService(name string, c client.Client) MyOrderService {
-	return &myOrderService{
-		c:    c,
-		name: name,
-	}
-}
-
-func (c *myOrderService) Delete(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "MyOrderService.Delete", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *myOrderService) Cancel(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "MyOrderService.Cancel", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *myOrderService) Receipt(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "MyOrderService.Receipt", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *myOrderService) Get(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "MyOrderService.Get", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *myOrderService) Display(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "MyOrderService.Display", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *myOrderService) Search(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "MyOrderService.Search", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for MyOrderService service
-
-type MyOrderServiceHandler interface {
-	//删除订单
-	Delete(context.Context, *Order, *OrderResponse) error
-	//撤销订单
-	Cancel(context.Context, *Order, *OrderResponse) error
-	//确认收货
-	Receipt(context.Context, *Order, *OrderResponse) error
-	//获取订单信息
-	Get(context.Context, *Order, *OrderResponse) error
-	//获取订单信息(详细信息)
-	Display(context.Context, *Order, *OrderResponse) error
-	//查询订单
-	Search(context.Context, *OrderRequest, *OrderResponse) error
-}
-
-func RegisterMyOrderServiceHandler(s server.Server, hdlr MyOrderServiceHandler, opts ...server.HandlerOption) error {
-	type myOrderService interface {
-		Delete(ctx context.Context, in *Order, out *OrderResponse) error
-		Cancel(ctx context.Context, in *Order, out *OrderResponse) error
-		Receipt(ctx context.Context, in *Order, out *OrderResponse) error
-		Get(ctx context.Context, in *Order, out *OrderResponse) error
-		Display(ctx context.Context, in *Order, out *OrderResponse) error
-		Search(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-	}
-	type MyOrderService struct {
-		myOrderService
-	}
-	h := &myOrderServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&MyOrderService{h}, opts...))
-}
-
-type myOrderServiceHandler struct {
-	MyOrderServiceHandler
-}
-
-func (h *myOrderServiceHandler) Delete(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.MyOrderServiceHandler.Delete(ctx, in, out)
-}
-
-func (h *myOrderServiceHandler) Cancel(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.MyOrderServiceHandler.Cancel(ctx, in, out)
-}
-
-func (h *myOrderServiceHandler) Receipt(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.MyOrderServiceHandler.Receipt(ctx, in, out)
-}
-
-func (h *myOrderServiceHandler) Get(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.MyOrderServiceHandler.Get(ctx, in, out)
-}
-
-func (h *myOrderServiceHandler) Display(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.MyOrderServiceHandler.Display(ctx, in, out)
-}
-
-func (h *myOrderServiceHandler) Search(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
-	return h.MyOrderServiceHandler.Search(ctx, in, out)
-}
-
 // Api Endpoints for OrderService service
 
 func NewOrderServiceEndpoints() []*api.Endpoint {
@@ -199,45 +43,38 @@ func NewOrderServiceEndpoints() []*api.Endpoint {
 // Client API for OrderService service
 
 type OrderService interface {
-	//审核订单
-	Check(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//修改价格
 	ModifyPrice(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//修改地址
 	ModifyAddress(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
+	//撤销订单
+	Cancel(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//删除订单
 	Delete(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
+	//订单追加备注
+	AppendRemark(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	//确认订单(接单/拒单操作)
+	ConfirmOrder(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	//确认已收货
+	ConfirmReceived(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	//确认已结算操作
+	//结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
+	//适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
+	ConfirmSettled(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	//扫码核销订单
+	Verification(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//获取订单信息
 	Get(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//获取订单信息(详细信息)
+	//显示订单信息(详细信息)
 	Display(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
+	//前端显示订单信息(详细信息)
+	FrontDisplay(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//查询订单
 	Search(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//按条件获取订单列表
 	List(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
-	//订单备注
-	Remarks(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	// 订单发货(快递发货)
-	Ship(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
-	// 订单发货(同城配送)
-	DeliveryShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
-	// 验证提货码(上门自提)
-	CodeVerify(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
-	// 订单发货(上门自提)
-	FetchShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
-	//订单补发货
-	RepairShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
-	//订单换货发货
-	ExchangeShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
-	// 获取订单赠送\使用的优惠券列表
-	OrderCouponList(ctx context.Context, in *OrderCoupon, opts ...client.CallOption) (*OrderCouponResponse, error)
-	// 获取订单数量
-	Count(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
-	// 接单|拒绝接单
-	Confirm(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	// 结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
-	// 适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
-	Settlement(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	//获取订单赠送\使用的优惠券列表
+	GetCouponList(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 }
 
 type orderService struct {
@@ -250,16 +87,6 @@ func NewOrderService(name string, c client.Client) OrderService {
 		c:    c,
 		name: name,
 	}
-}
-
-func (c *orderService) Check(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.Check", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *orderService) ModifyPrice(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
@@ -282,8 +109,68 @@ func (c *orderService) ModifyAddress(ctx context.Context, in *Order, opts ...cli
 	return out, nil
 }
 
+func (c *orderService) Cancel(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.Cancel", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderService) Delete(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.Delete", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) AppendRemark(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.AppendRemark", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) ConfirmOrder(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.ConfirmOrder", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) ConfirmReceived(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.ConfirmReceived", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) ConfirmSettled(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.ConfirmSettled", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) Verification(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.Verification", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -312,6 +199,16 @@ func (c *orderService) Display(ctx context.Context, in *Order, opts ...client.Ca
 	return out, nil
 }
 
+func (c *orderService) FrontDisplay(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.FrontDisplay", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderService) Search(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.Search", in)
 	out := new(OrderResponse)
@@ -332,108 +229,8 @@ func (c *orderService) List(ctx context.Context, in *OrderRequest, opts ...clien
 	return out, nil
 }
 
-func (c *orderService) Remarks(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.Remarks", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) Ship(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.Ship", in)
-	out := new(ShipmentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) DeliveryShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.DeliveryShip", in)
-	out := new(ShipmentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) CodeVerify(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.CodeVerify", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) FetchShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.FetchShip", in)
-	out := new(ShipmentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) RepairShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.RepairShip", in)
-	out := new(ShipmentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) ExchangeShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.ExchangeShip", in)
-	out := new(ShipmentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) OrderCouponList(ctx context.Context, in *OrderCoupon, opts ...client.CallOption) (*OrderCouponResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderCouponList", in)
-	out := new(OrderCouponResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) Count(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.Count", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) Confirm(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.Confirm", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) Settlement(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.Settlement", in)
+func (c *orderService) GetCouponList(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.GetCouponList", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -445,68 +242,57 @@ func (c *orderService) Settlement(ctx context.Context, in *OrderRequest, opts ..
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
-	//审核订单
-	Check(context.Context, *Order, *OrderResponse) error
 	//修改价格
 	ModifyPrice(context.Context, *Order, *OrderResponse) error
 	//修改地址
 	ModifyAddress(context.Context, *Order, *OrderResponse) error
+	//撤销订单
+	Cancel(context.Context, *Order, *OrderResponse) error
 	//删除订单
 	Delete(context.Context, *Order, *OrderResponse) error
+	//订单追加备注
+	AppendRemark(context.Context, *OrderRequest, *OrderResponse) error
+	//确认订单(接单/拒单操作)
+	ConfirmOrder(context.Context, *OrderRequest, *OrderResponse) error
+	//确认已收货
+	ConfirmReceived(context.Context, *OrderRequest, *OrderResponse) error
+	//确认已结算操作
+	//结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
+	//适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
+	ConfirmSettled(context.Context, *OrderRequest, *OrderResponse) error
+	//扫码核销订单
+	Verification(context.Context, *OrderRequest, *OrderResponse) error
 	//获取订单信息
 	Get(context.Context, *Order, *OrderResponse) error
-	//获取订单信息(详细信息)
+	//显示订单信息(详细信息)
 	Display(context.Context, *Order, *OrderResponse) error
+	//前端显示订单信息(详细信息)
+	FrontDisplay(context.Context, *Order, *OrderResponse) error
 	//查询订单
 	Search(context.Context, *OrderRequest, *OrderResponse) error
 	//按条件获取订单列表
 	List(context.Context, *OrderRequest, *OrderResponse) error
-	//订单备注
-	Remarks(context.Context, *Order, *OrderResponse) error
-	// 订单发货(快递发货)
-	Ship(context.Context, *ShipmentRequest, *ShipmentResponse) error
-	// 订单发货(同城配送)
-	DeliveryShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
-	// 验证提货码(上门自提)
-	CodeVerify(context.Context, *OrderRequest, *OrderResponse) error
-	// 订单发货(上门自提)
-	FetchShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
-	//订单补发货
-	RepairShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
-	//订单换货发货
-	ExchangeShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
-	// 获取订单赠送\使用的优惠券列表
-	OrderCouponList(context.Context, *OrderCoupon, *OrderCouponResponse) error
-	// 获取订单数量
-	Count(context.Context, *OrderRequest, *OrderResponse) error
-	// 接单|拒绝接单
-	Confirm(context.Context, *Order, *OrderResponse) error
-	// 结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
-	// 适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
-	Settlement(context.Context, *OrderRequest, *OrderResponse) error
+	//获取订单赠送\使用的优惠券列表
+	GetCouponList(context.Context, *OrderRequest, *OrderResponse) error
 }
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
 	type orderService interface {
-		Check(ctx context.Context, in *Order, out *OrderResponse) error
 		ModifyPrice(ctx context.Context, in *Order, out *OrderResponse) error
 		ModifyAddress(ctx context.Context, in *Order, out *OrderResponse) error
+		Cancel(ctx context.Context, in *Order, out *OrderResponse) error
 		Delete(ctx context.Context, in *Order, out *OrderResponse) error
+		AppendRemark(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		ConfirmOrder(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		ConfirmReceived(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		ConfirmSettled(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		Verification(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		Get(ctx context.Context, in *Order, out *OrderResponse) error
 		Display(ctx context.Context, in *Order, out *OrderResponse) error
+		FrontDisplay(ctx context.Context, in *Order, out *OrderResponse) error
 		Search(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		List(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		Remarks(ctx context.Context, in *Order, out *OrderResponse) error
-		Ship(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
-		DeliveryShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
-		CodeVerify(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		FetchShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
-		RepairShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
-		ExchangeShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
-		OrderCouponList(ctx context.Context, in *OrderCoupon, out *OrderCouponResponse) error
-		Count(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		Confirm(ctx context.Context, in *Order, out *OrderResponse) error
-		Settlement(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		GetCouponList(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 	}
 	type OrderService struct {
 		orderService
@@ -519,10 +305,6 @@ type orderServiceHandler struct {
 	OrderServiceHandler
 }
 
-func (h *orderServiceHandler) Check(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.OrderServiceHandler.Check(ctx, in, out)
-}
-
 func (h *orderServiceHandler) ModifyPrice(ctx context.Context, in *Order, out *OrderResponse) error {
 	return h.OrderServiceHandler.ModifyPrice(ctx, in, out)
 }
@@ -531,8 +313,32 @@ func (h *orderServiceHandler) ModifyAddress(ctx context.Context, in *Order, out 
 	return h.OrderServiceHandler.ModifyAddress(ctx, in, out)
 }
 
+func (h *orderServiceHandler) Cancel(ctx context.Context, in *Order, out *OrderResponse) error {
+	return h.OrderServiceHandler.Cancel(ctx, in, out)
+}
+
 func (h *orderServiceHandler) Delete(ctx context.Context, in *Order, out *OrderResponse) error {
 	return h.OrderServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *orderServiceHandler) AppendRemark(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.AppendRemark(ctx, in, out)
+}
+
+func (h *orderServiceHandler) ConfirmOrder(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.ConfirmOrder(ctx, in, out)
+}
+
+func (h *orderServiceHandler) ConfirmReceived(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.ConfirmReceived(ctx, in, out)
+}
+
+func (h *orderServiceHandler) ConfirmSettled(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.ConfirmSettled(ctx, in, out)
+}
+
+func (h *orderServiceHandler) Verification(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.Verification(ctx, in, out)
 }
 
 func (h *orderServiceHandler) Get(ctx context.Context, in *Order, out *OrderResponse) error {
@@ -543,6 +349,10 @@ func (h *orderServiceHandler) Display(ctx context.Context, in *Order, out *Order
 	return h.OrderServiceHandler.Display(ctx, in, out)
 }
 
+func (h *orderServiceHandler) FrontDisplay(ctx context.Context, in *Order, out *OrderResponse) error {
+	return h.OrderServiceHandler.FrontDisplay(ctx, in, out)
+}
+
 func (h *orderServiceHandler) Search(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
 	return h.OrderServiceHandler.Search(ctx, in, out)
 }
@@ -551,46 +361,6 @@ func (h *orderServiceHandler) List(ctx context.Context, in *OrderRequest, out *O
 	return h.OrderServiceHandler.List(ctx, in, out)
 }
 
-func (h *orderServiceHandler) Remarks(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.OrderServiceHandler.Remarks(ctx, in, out)
-}
-
-func (h *orderServiceHandler) Ship(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
-	return h.OrderServiceHandler.Ship(ctx, in, out)
-}
-
-func (h *orderServiceHandler) DeliveryShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
-	return h.OrderServiceHandler.DeliveryShip(ctx, in, out)
-}
-
-func (h *orderServiceHandler) CodeVerify(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
-	return h.OrderServiceHandler.CodeVerify(ctx, in, out)
-}
-
-func (h *orderServiceHandler) FetchShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
-	return h.OrderServiceHandler.FetchShip(ctx, in, out)
-}
-
-func (h *orderServiceHandler) RepairShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
-	return h.OrderServiceHandler.RepairShip(ctx, in, out)
-}
-
-func (h *orderServiceHandler) ExchangeShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
-	return h.OrderServiceHandler.ExchangeShip(ctx, in, out)
-}
-
-func (h *orderServiceHandler) OrderCouponList(ctx context.Context, in *OrderCoupon, out *OrderCouponResponse) error {
-	return h.OrderServiceHandler.OrderCouponList(ctx, in, out)
-}
-
-func (h *orderServiceHandler) Count(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
-	return h.OrderServiceHandler.Count(ctx, in, out)
-}
-
-func (h *orderServiceHandler) Confirm(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.OrderServiceHandler.Confirm(ctx, in, out)
-}
-
-func (h *orderServiceHandler) Settlement(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
-	return h.OrderServiceHandler.Settlement(ctx, in, out)
+func (h *orderServiceHandler) GetCouponList(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.GetCouponList(ctx, in, out)
 }

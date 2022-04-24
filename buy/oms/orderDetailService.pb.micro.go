@@ -5,16 +5,8 @@ package services
 
 import (
 	fmt "fmt"
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
-)
-
-import (
-	context "context"
-	api "github.com/micro/go-micro/v2/api"
-	client "github.com/micro/go-micro/v2/client"
-	server "github.com/micro/go-micro/v2/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -27,70 +19,3 @@ var _ = math.Inf
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ api.Endpoint
-var _ context.Context
-var _ client.Option
-var _ server.Option
-
-// Api Endpoints for OrderDetailService service
-
-func NewOrderDetailServiceEndpoints() []*api.Endpoint {
-	return []*api.Endpoint{}
-}
-
-// Client API for OrderDetailService service
-
-type OrderDetailService interface {
-	//订单明细列表
-	List(ctx context.Context, in *OrderDetailRequest, opts ...client.CallOption) (*OrderDetailResponse, error)
-}
-
-type orderDetailService struct {
-	c    client.Client
-	name string
-}
-
-func NewOrderDetailService(name string, c client.Client) OrderDetailService {
-	return &orderDetailService{
-		c:    c,
-		name: name,
-	}
-}
-
-func (c *orderDetailService) List(ctx context.Context, in *OrderDetailRequest, opts ...client.CallOption) (*OrderDetailResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderDetailService.List", in)
-	out := new(OrderDetailResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for OrderDetailService service
-
-type OrderDetailServiceHandler interface {
-	//订单明细列表
-	List(context.Context, *OrderDetailRequest, *OrderDetailResponse) error
-}
-
-func RegisterOrderDetailServiceHandler(s server.Server, hdlr OrderDetailServiceHandler, opts ...server.HandlerOption) error {
-	type orderDetailService interface {
-		List(ctx context.Context, in *OrderDetailRequest, out *OrderDetailResponse) error
-	}
-	type OrderDetailService struct {
-		orderDetailService
-	}
-	h := &orderDetailServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&OrderDetailService{h}, opts...))
-}
-
-type orderDetailServiceHandler struct {
-	OrderDetailServiceHandler
-}
-
-func (h *orderDetailServiceHandler) List(ctx context.Context, in *OrderDetailRequest, out *OrderDetailResponse) error {
-	return h.OrderDetailServiceHandler.List(ctx, in, out)
-}

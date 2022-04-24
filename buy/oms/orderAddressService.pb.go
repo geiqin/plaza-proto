@@ -46,7 +46,7 @@ type OrderAddress struct {
 	CreatedAt    string `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
 	UpdatedAt    string `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	// @inject_tag: gorm:"-"
-	Area *AreaInfo `protobuf:"bytes,16,opt,name=area,proto3" json:"area" gorm:"-"`
+	Area *AreaInfo `protobuf:"bytes,16,opt,name=area,proto3" json:"area"`
 	Lng  string    `protobuf:"bytes,17,opt,name=lng,proto3" json:"lng"`
 	Lat  string    `protobuf:"bytes,18,opt,name=lat,proto3" json:"lat"`
 }

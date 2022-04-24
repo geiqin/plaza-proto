@@ -7,48 +7,54 @@ import "orderService.proto";
 //订单支付
 service PaymentService {
   //选择支付方式
-  rpc Choose (PayRequest) returns (PayMethodResponse) {}
+  rpc Choose (PaymentRequest) returns (PaymentResponse) {}
   //余额支付
-  rpc Balance (PayRequest) returns (PayResponse) {}
+  rpc Balance (PaymentRequest) returns (PaymentResponse) {}
   //信用支付
-  rpc Credit (PayRequest) returns (PayResponse) {}
+  rpc Credit (PaymentRequest) returns (PaymentResponse) {}
   //微信APP支付
-  rpc WxApp (PayRequest) returns (PayResponse) {}
+  rpc WxApp (PaymentRequest) returns (PaymentResponse) {}
   //微信小程序支付
-  rpc WxMini (PayRequest) returns (PayResponse) {}
+  rpc WxMini (PaymentRequest) returns (PaymentResponse) {}
   //支付宝手机网页支付
-  rpc AliWap (PayRequest) returns (PayResponse) {}
+  rpc AliWap (PaymentRequest) returns (PaymentResponse) {}
   //支付宝APP支付
-  rpc AliApp (PayRequest) returns (PayResponse) {}
+  rpc AliApp (PaymentRequest) returns (PaymentResponse) {}
+}
+
+message Payment {
+  int32 id = 1;
+  string code =2;
+  string name =3;
+  int64 icon_id =5;
+  string icon_url =6;
+  bool is_cod =7;
+  bool is_online =8;
+  string terminals =9;
+  string memo =10;
+  int32 sort =11;
+  string status =12;
 }
 
 //支付请求参数
-message PayRequest {
-  int64 order_id = 1;
+message PaymentRequest {
+  int32 id  =1;
+  string code =2;
+  string terminal =3;
+  int64 order_id =4;
+  string status =5;
+  map<string,string> params =6;
 }
 
-message PayMethod {
-  int32 id = 1;
-  string name =2;
-  string title =3;
-  string icon =4;
-  string tips =5;
-  bool enabled =6;
-  string route =7;
-}
-
-message PayMethodResponse {
-  Order entity = 1;
-  map<string,string> params   =2;
-  repeated PayMethod items =3;
-  common.Error error = 4;
+message PaymentData{
+  Payment entity = 1;
+  Order order = 2;
+  map<string,string> params =3;
+  repeated Payment items =4;
   common.Info info =5;
 }
 
-
-message PayResponse {
-  Order entity = 1;
-  map<string,string> params   =2;
-  common.Error error = 4;
-  common.Info info =5;
+message PaymentResponse {
+  PaymentData data = 1;
+  common.Error error = 2;
 }

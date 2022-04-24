@@ -1,0 +1,26 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+
+//同步操作
+service SynchroniseService {
+    //同步订单支付情况
+    rpc OrderPay (SynchroniseRequest) returns (SynchroniseResponse) {}
+    //同步订单物流情况
+    rpc OrderShip (SynchroniseRequest) returns (SynchroniseResponse) {}
+}
+
+message SynchroniseRequest {
+    int32 paged =1;
+    int32 page_size =2;
+    //----------
+    int64 order_id = 3;
+    string order_sn = 4;
+    repeated int64 order_ids = 34;
+}
+
+message SynchroniseResponse {
+    common.Error error = 1;
+    common.Info info =2;
+}

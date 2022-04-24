@@ -1,0 +1,90 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+
+
+service CartService {
+    //加入购物车商品
+    rpc Add (CartRequest) returns (CartResponse) {}
+    //修改购物车商品
+    rpc Update (CartRequest) returns (CartResponse) {}
+    //删除购物车商品
+    rpc Remove (CartRequest) returns (CartResponse) {}
+    //递增购物车数量
+    rpc Increase (CartRequest) returns (CartResponse) {}
+    //递减购物车数量
+    rpc Decrease (CartRequest) returns (CartResponse) {}
+    //清除购物车
+    rpc Clear (CartRequest) returns (CartResponse) {}
+    //获取购物车
+    rpc Get (CartRequest) returns (CartResponse) {}
+}
+
+message Cart {
+    int32 total_num =1;
+    float total_weight =2;
+    string currency =3;
+    float goods_amount =4;
+    float discount_amount =5;
+    float shipping_fee =6;
+    float insure_fee =7;
+    float pack_fee =8;
+    float amount =9;
+    int64 member_id = 10;
+    int64 address_id = 11;
+    repeated CartItem items = 12;
+    map<int64,int32> sku_list =13;
+}
+
+message CartItem {
+    int64 spu_id = 1;
+    int64 sku_id = 2;
+    string sku_sn = 3;
+    int64 image_id = 4;
+    string image_url = 5;
+    string title = 6;
+    float weight = 7;
+    int32 num = 8;
+    float price = 9;
+    float market_price = 10;
+    float promotion_price = 11;
+    float cost_price = 12;
+    float row_goods_amount = 13;
+    float row_discount_amount = 14;
+    float row_amount = 15;
+    int32 brand_id = 16;
+    string brand_name = 17;
+    int32 unit_id = 18;
+    string unit_name = 19;
+    string indexes = 20;
+    string own_desc = 21;
+    bool is_spec = 22;
+    bool is_virtual = 23;
+    bool is_presale = 24;
+    string status = 25;
+}
+
+
+message CartRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    string row_id =4;
+    int64 sku_id =5;
+    string direction =6;
+    int32 num =7;
+    map<int64,int32> sku_list =13;
+}
+
+message CartData {
+    Cart entity = 1;
+    common.Pager pager =2;
+    repeated Cart items = 3;
+    common.Info info =4;
+}
+
+message CartResponse {
+    CartData data = 1;
+    common.Error error = 2;
+}

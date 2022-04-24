@@ -4,188 +4,158 @@ option go_package = ".;services";
 import "common/base.proto";
 import "orderDetailService.proto";
 import "orderAddressService.proto";
-import "shipmentService.proto";
+import "orderPromotionService.proto";
 import "orderCouponService.proto";
+import "memberInfoService.proto";
 
-service MyOrderService {
-    //删除订单
-    rpc Delete (Order) returns (OrderResponse) {}
-    //撤销订单
-    rpc Cancel (Order) returns (OrderResponse) {}
-    //确认收货
-    rpc Receipt (Order) returns (OrderResponse) {}
-    //获取订单信息
-    rpc Get (Order) returns (OrderResponse) {}
-    //获取订单信息(详细信息)
-    rpc Display (Order) returns (OrderResponse) {}
-    //查询订单
-    rpc Search (OrderRequest) returns (OrderResponse) {}
-}
-
+//订单
 service OrderService {
-    //审核订单
-    rpc Check (Order) returns (OrderResponse) {}
     //修改价格
     rpc ModifyPrice (Order) returns (OrderResponse) {}
     //修改地址
     rpc ModifyAddress (Order) returns (OrderResponse) {}
+    //撤销订单
+    rpc Cancel (Order) returns (OrderResponse) {}
     //删除订单
     rpc Delete (Order) returns (OrderResponse) {}
+    //订单追加备注
+    rpc AppendRemark (OrderRequest) returns (OrderResponse) {}
+    //确认订单(接单/拒单操作)
+    rpc ConfirmOrder(OrderRequest) returns (OrderResponse) {}
+    //确认已收货
+    rpc ConfirmReceived(OrderRequest) returns (OrderResponse) {}
+    //确认已结算操作
+    //结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
+    //适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
+    rpc ConfirmSettled (OrderRequest) returns (OrderResponse) {}
+    //扫码核销订单
+    rpc Verification (OrderRequest) returns (OrderResponse) {}
+
     //获取订单信息
     rpc Get (Order) returns (OrderResponse) {}
-    //获取订单信息(详细信息)
+    //显示订单信息(详细信息)
     rpc Display (Order) returns (OrderResponse) {}
+    //前端显示订单信息(详细信息)
+    rpc FrontDisplay (Order) returns (OrderResponse) {}
     //查询订单
     rpc Search (OrderRequest) returns (OrderResponse) {}
     //按条件获取订单列表
     rpc List (OrderRequest) returns (OrderResponse) {}
-    //订单备注
-    rpc Remarks (Order) returns (OrderResponse) {}
-    // 订单发货(快递发货)
-    rpc Ship (ShipmentRequest) returns (ShipmentResponse) {}
-    // 订单发货(同城配送)
-    rpc DeliveryShip (ShipmentRequest) returns (ShipmentResponse) {}
-    // 验证提货码(上门自提)
-    rpc CodeVerify (OrderRequest) returns (OrderResponse) {}
-    // 订单发货(上门自提)
-    rpc FetchShip (ShipmentRequest) returns (ShipmentResponse) {}
-    //订单补发货
-    rpc RepairShip (ShipmentRequest) returns (ShipmentResponse) {}
-    //订单换货发货
-    rpc ExchangeShip (ShipmentRequest) returns (ShipmentResponse) {}
-    // 获取订单赠送\使用的优惠券列表
-    rpc OrderCouponList (OrderCoupon) returns (OrderCouponResponse) {}
-    // 获取订单数量
-    rpc Count (OrderRequest) returns (OrderResponse) {}
-    // 接单|拒绝接单
-    rpc Confirm(Order) returns (OrderResponse) {}
-    // 结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
-    // 适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
-    rpc Settlement (OrderRequest) returns (OrderResponse) {}
+    //获取订单赠送\使用的优惠券列表
+    rpc GetCouponList (OrderRequest) returns (OrderResponse) {}
 }
 
 message Order {
     int64  id =1;
-    string order_sn  =2;
-    int32 order_type   =3;
-    int32 serial =4;
-    string channel    =5;
-    int64 member_id  =6;
+    string order_sn =2;
+    string type =3;
+    int64 shop_id =4;
+    int64 member_id =6;
     int32 total_num =7;
     float total_weight =8;
     string currency =9;
-    float amount =10;
-    float before_amount =11;
-    float actual_amount =12;
-    float amount_paid =13;
-    float amount_refunded =14;
-    float express_amount  =15;
-    float discount_amount =16;
-    bool paid =17;
-    bool refunded  =18;
-    bool is_shipment =19;
-    bool is_cod =20;
-    bool invoiced =21;
-    bool modified =22;
-    bool safeguarded =23;
-    bool returnable =24;
-    string subject =25;
-    string body =26;
-    int32 pay_type =27;
-    int64 branch_id =28;
-    string client_ip =29;
-    int32 flag =30;
-    string memo =31;
-    string buyer_memo =32;
-    int32 cancel_id =33;
-    string cancel_reason =34;
-    int32 status =35;
-    int32 pay_status =36;
-    string expire_at =37;
-    string paid_at =39;
-    string shipped_at =40;
-    string signed_at =41;
-    string refunded_at =42;
-    string finished_at =43;
-    string created_at =44;
-    string updated_at =45;
-    string platform_source =46;
-    string shipment_method = 47;
-    float point_exchange_money = 48;
-    int32 used_points = 49;
-    bool is_distribution = 50;
-    bool is_confirmed = 51;
-    int64 ext11 =52;
-    int32 ext21 =53;
-    int32 ext22 =54;
-    string ext31 =55;
-    string ext32 =56;
-    string ext33 =57;
-    OrderAddress address =58;
-    repeated OrderDetail details = 59;
-    // @inject_tag: gorm:"-"
-    Member member = 60;
-    // @inject_tag: gorm:"-"
-    map<string,string> metas =61;
-}
-
-message Member {
-    int64 id =1;
-    string member_sn =2;
-    string name =3;
-    string display_name =4;
-    string real_name =5;
-    string id_card =6;
-    int32 gender =7;
-    string mobile =8;
-    string email =9;
-    int64 avatar_id =10;
-    string avatar_url =11;
+    float goods_amount =11;
+    float discount_amount =12;
+    float shipping_fee =13;
+    float insure_fee =14;
+    float pack_fee =15;
+    float surplus =16;
+    float coupon_money =17;
+    int32 integral =18;
+    float integral_money =19;
+    float amount =20;
+    float paid_money =21;
+    string subject =22;
+    string body =23;
+    int64 cover_id =24;
+    string cover_url =25;
+    string postscript =26;
+    string to_buyer =27;
+    string pay_note =28;
+    string referer =29;
+    bool is_cod =30;
+    bool is_invoiced =31;
+    bool is_modified =32;
+    bool is_paid =33;
+    bool is_safeguard =34;
+    bool is_separate =35;
+    bool is_shipment =36;
+    bool is_refunded =37;
+    bool is_payment_timeout =38;
+    bool is_return_timeout =39;
+    int32 shipping_id =40;
+    string shipping_name =41;
+    int64 pay_id =42;
+    string pay_name =43;
+    int32 pack_id =44;
+    int64 coupon_id =45;
+    string extension_code =46;
+    int64 extension_id =47;
+    int64 parent_id =48;
+    string shipping_status =49;
+    string order_status =50;
+    string pay_status =51;
+    string display_status =52;
+    string payment_expire_date =53;
+    string return_expire_date =54;
+    string confirm_at =55;
+    string shipped_at =56;
+    string signed_at =57;
+    string refunded_at =58;
+    string finished_at =59;
+    string created_at =60;
+    string updated_at =61;
+    OrderAddress address =62;
+    MemberInfo member = 63;
+    repeated OrderDetail details = 64;
+    repeated OrderCoupon coupons = 65;
+    repeated OrderPromotion promotions = 66;
+    map<string,string> metas =67;
 }
 
 message OrderRequest {
     int32 paged =1;
     int32 page_size =2;
+    string	keywords =3;
     //----------
-    int64 id = 3;
-    string order_sn = 4;
-    int32 order_type = 5;
-    int32 pay_type = 6;
-    bool is_shipment = 7;
-    bool is_cod = 8;
-    int64 member_id = 9;
-    float payment = 10;
-    bool is_free = 11;
-    int32 status = 12;
-    int32 pay_status = 13;
-    string deliver_status = 14;
-    int32 branch_id = 15;
-    int32 flag = 16;
-    bool safeguarded = 17;
-    string start_at = 18;
-    string end_at = 19;
-    bool paid = 20;
-    string shipment_method = 21;
-    string fetch_status = 22;// 自提状态: waiting待自提, finished已自提
-    bool is_distribution = 23;
-    int64 ext11 =24;
-    int32 ext21 =25;
-    int32 ext22 =26;
-    string ext31 =27;
-    string ext32 =28;
-    string ext33 =29;
-    map<string,string> metas =30;
-    string	sorting	=31;
-    string	keywords =32;
-    string code = 33;
-    // @inject_tag: gorm:"-"
-    repeated int64 ids = 34;
+    int64 id = 4;
+    string order_sn = 5;
+    string type = 6;
+    int64 shop_id =7;
+    int64 member_id  =8;
+    int32 pay_type = 9;
+    bool is_shipment = 10;
+    bool is_cod = 13;
+    bool is_invoiced = 14;
+    bool is_modified = 15;
+    bool is_paid = 16;
+    bool is_safeguard = 17;
+    bool is_separate = 18;
+    int32 shipping_id = 19;
+    string shipping_name =20;
+    int64 pay_id =21;
+    string pay_name =22;
+    int32 pack_id =23;
+    int64 coupon_id =24;
+    string extension_code =25;
+    int64 extension_id =26;
+    string shipping_status =27;
+    string order_status =28;
+    string pay_status =29;
+    string display_status =30;
+    string start_date = 31;
+    string end_date = 32;
+    repeated int64 ids = 33;
 }
 
-message OrderResponse {
+message OrderData {
     Order entity = 1;
     common.Pager pager =2;
     repeated Order items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    common.Info info =4;
+}
+
+message OrderResponse {
+    OrderData data = 1;
+    common.Error error = 2;
 }

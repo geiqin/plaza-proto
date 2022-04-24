@@ -1,72 +1,48 @@
 syntax = "proto3";
 package services;
 option go_package = ".;services";
-import "common/base.proto";
 
 message OrderDetail {
     int64 id = 1;
     int64 order_id = 2;
-    int64 item_id = 3;
-    string item_sn = 4;
-    int32 item_type = 5;
+    int64 spu_id = 3;
+    string sku_type = 5;
     int64 sku_id = 6;
     string sku_sn = 7;
-    int64 thumb_id = 8;
-    string thumb_url = 9;
-    string name = 10;
+    int64 image_id = 8;
+    string image_url = 9;
+    string title = 10;
     float weight = 11;
     int32 num = 12;
     float price = 13;
-    float total_price = 14;
-    float origin_price = 15;
+    float market_price = 14;
+    float promotion_price = 15;
     float cost_price = 16;
-    float before_price = 17;
-    bool modified = 18;
-    int32 shipped_num = 19;
-    int32 points = 20;
-    string sale_type = 21;
-    string additional = 22;
-    bool attached = 23;
-    string attach_type = 24;
-    bool is_sku = 25;
-    bool is_virtual = 26;
-    bool is_right = 27;
-    bool is_presale = 28;
-    int32 ship_status = 29;
-    int32 refund_status = 30;
-    int64  present_id = 31;
-    string sku_spec_desc = 32;
-    int32 vip_level_id =33;
-    int32 vip_keep_type =34;
-    int32 vip_keep_value =35;
-    int32 child_count =36;
-    int64 ext11 =37;
-    int32 ext21 =38;
-    int32 ext22 =39;
-    string ext31 =40;
-    string ext32 =41;
-    string ext33 =42;
+    float goods_amount = 17;
+    float discount_amount = 18;
+    int32 brand_id = 19;
+    int32 brand_name = 20;
+    string indexes = 21;
+    string own_desc = 22;
+    bool is_spec = 23;
+    bool is_virtual = 24;
+    bool is_presale = 25;
+    bool is_modified = 27;
+    bool is_gift = 28;
+    int32 shipped_num = 29;
+    int32 points = 30;
+    string  ship_status = 31;
+    string refund_status = 32;
     string created_at  = 43;
     string updated_at  = 44;
-    // @inject_tag: gorm:"-"
     map<string,string> metas =45;
+    DetailVip Vip =46;
+
 }
 
-message OrderDetailRequest {
-    int64 order_id = 1;
-    string order_type = 2;
-}
-
-message OrderDetailResponse {
-    OrderDetail entity = 1;
-    common.Pager pager =2;
-    repeated OrderDetail items = 3;
-    common.Error error = 4;
-    common.Info info =5;
-}
-
-
-service OrderDetailService {
-    //订单明细列表
-    rpc List (OrderDetailRequest) returns (OrderDetailResponse) {}
+message DetailVip {
+    int64 detail_id = 1;
+    int32 member_rank_id = 2;
+    string keep_type = 3;
+    int32 keep_value = 4;
 }

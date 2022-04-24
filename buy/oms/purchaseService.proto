@@ -2,8 +2,9 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 import "common/base.proto";
-import "goodsInfoService.proto";
 import "orderService.proto";
+import "orderAddressService.proto";
+import "couponInfoService.proto";
 
 //下单操作
 service PurchaseService {
@@ -15,82 +16,70 @@ service PurchaseService {
     rpc Recharge (PurchaseRequest) returns (OrderResponse) {}
 }
 
+message Purchase {
+    float available_balance =1;//可使用的余额
+    int32 available_points =2;//可使用的积分数
+    CouponInfo available_coupons = 3;//可使用的优惠劵集合
+    OrderAddress order_address =4;//订单收货地址
+    repeated shop shop_list = 5;//商品中涉及到那些卖家（多店铺模式下）
+    repeated shipment shipment_list = 6; //可选的配送方式
+    repeated payment payment_list = 7; //可选的支付方式
+    message shop {
+        int64 id =1;
+        string name =2;
+        int64 logo_id =3;
+        string logo_url =4;
+    }
+    message payment {
+        int32 id = 1;
+        string code =2;
+        string name =3;
+        int64 icon_id =5;
+        string icon_url =6;
+        bool is_cod =7;
+        bool is_online =8;
+        string memo =9;
+        string status =10;
+    }
+    message shipment {
+        int32 id = 1;
+        string code =2;
+        string name =3;
+        int64 icon_id =4;
+        string icon_url =5;
+        string status =6;
+    }
+}
+
+
 //下单请求参数
 message PurchaseRequest {
-    int32 type = 1; //订单类型（默认为普通订单）
-    int32 serial = 2; //订单类型序
-    int64 address_id = 3; //收货地址ID
-    string message = 4; //买家留言(50字以内)
-    int32 pay_method = 5; //选中的支付方式
-    string source = 6; //下单来源
-    int64 ticket_id = 7; //选中的优惠劵凭证ID
-    int32 points = 8; //使用的积分数
-    int64 vip_card_id = 9; //选中的会员卡
-    int64 member_id = 10; //客户ID（代客下单）
-    int64 ext11 =11;
-    int32 ext21 =12;
-    int32 ext22 =13;
-    string ext31 =14;
-    string ext32 =15;
-    string ext33 =16;
-    float money =17; //订单金额【充值订单】
-    string subject =18; //订单标题【充值订单】
-    map<string,string> metas = 19; //订单扩展信息
-    repeated PurchaseItem goods_list = 20;//选中的商品清单
+    string type = 1; //订单类型（默认为普通订单）
+    int64 address_id = 2; //收货地址ID
+    string postscript = 3; //买家留言(50字以内)
+    string shipment_method = 4; //选中的配送方式
+    string payment_method = 5; //选中的支付方式
+    string terminal = 6; //下单来源终端：site/app/wx_mini/ali_mini/h5/pos
+    int64 coupon_id = 7; //选中的优惠劵凭证ID
+    int32 integral = 8; //使用的积分数
+    int32 surplus = 9; //使用的余额数
+    int64 agent_member_id = 10; //代理的客户ID（操作员代客下单）
+    float recharge_money =11; //订单金额【充值订单】
+    string recharge_subject =12; //订单标题【充值订单】
+    map<int64,int32> sku_list =13; //购买的商品清单
+    map<string,string> metas = 14; //订单扩展信息
+    map<int64,string> postscripts =15;//多店铺模式下给各个商家的留言
 }
 
-//下单商品项
-message PurchaseItem {
-    int64 item_id = 1;
-    int64 sku_id = 2;
-    int32 num = 3;
-    string cart_row_id = 4;
-}
-
-//付款清单（开具账单）
-message Billing {
-    int32 count = 1;
-    float total = 2;
-    float total_weight = 3;
-    float discount = 4;
-    float freight = 5;
-    float amount = 6;
-    int64 address_id = 7;
-    int64 member_id = 8;
-    string message = 9; //买家留言(50字以内)
-    string source = 10; //下单来源
-    int64 ticket_id = 11; //正在使用的优惠劵ID
-    repeated int64 ticket_ids = 12; //可使用的优惠劵ID集合
-    repeated BillItem items = 13;//选中的商品清单
-}
-
-//账单条目
-message BillItem {
-    int64 item_id =1;
-    int64 sku_id =2;
-    int32 num =3;
-    float price =4;
-    float origin_price =5;
-    float sub_total =6;
-    bool is_gift =7;
-    int64 promotion_id =8;
-    float member_price =9;// 会员价
-    float limit_discount_price =10;// 限时折扣价
-    int32 limit_discount_num =11;// 享受限时折扣的商品数量
-    int32 exchange_num =12;// 兑换券兑换商品的数量
-    GoodsInfo goods =13;
-    string cart_row_id = 14;
-}
-
-message Shopping{
-    PurchaseRequest request = 1;
-    Billing billing = 2;
+message PurchaseData {
+    Purchase entity = 1;
+    Order order =2;
+    PurchaseRequest request =3;//请求数据原始返回
+    map<string,string> params = 4;
+    common.Info info = 5;
 }
 
 message PurchaseResponse {
-    Shopping entity = 1;
-    //map<string,string> params   = 2;
-    //repeated PayMethod methods = 3;
-    common.Error error = 4;
-    common.Info info = 5;
+    PurchaseData data = 1;
+    common.Error error = 2;
 }
