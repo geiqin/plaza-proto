@@ -43,7 +43,9 @@ func NewSchemeServiceEndpoints() []*api.Endpoint {
 // Client API for SchemeService service
 
 type SchemeService interface {
-	//商品购买计算
+	//购物车计算
+	Cart(ctx context.Context, in *SchemeRequest, opts ...client.CallOption) (*SchemeResponse, error)
+	//下单购买计算
 	Purchase(ctx context.Context, in *SchemeRequest, opts ...client.CallOption) (*SchemeResponse, error)
 	//商品列表计算
 	List(ctx context.Context, in *SchemeRequest, opts ...client.CallOption) (*SchemeResponse, error)
@@ -63,6 +65,16 @@ func NewSchemeService(name string, c client.Client) SchemeService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *schemeService) Cart(ctx context.Context, in *SchemeRequest, opts ...client.CallOption) (*SchemeResponse, error) {
+	req := c.c.NewRequest(c.name, "SchemeService.Cart", in)
+	out := new(SchemeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *schemeService) Purchase(ctx context.Context, in *SchemeRequest, opts ...client.CallOption) (*SchemeResponse, error) {
@@ -108,7 +120,9 @@ func (c *schemeService) Commission(ctx context.Context, in *SchemeRequest, opts 
 // Server API for SchemeService service
 
 type SchemeServiceHandler interface {
-	//商品购买计算
+	//购物车计算
+	Cart(context.Context, *SchemeRequest, *SchemeResponse) error
+	//下单购买计算
 	Purchase(context.Context, *SchemeRequest, *SchemeResponse) error
 	//商品列表计算
 	List(context.Context, *SchemeRequest, *SchemeResponse) error
@@ -120,6 +134,7 @@ type SchemeServiceHandler interface {
 
 func RegisterSchemeServiceHandler(s server.Server, hdlr SchemeServiceHandler, opts ...server.HandlerOption) error {
 	type schemeService interface {
+		Cart(ctx context.Context, in *SchemeRequest, out *SchemeResponse) error
 		Purchase(ctx context.Context, in *SchemeRequest, out *SchemeResponse) error
 		List(ctx context.Context, in *SchemeRequest, out *SchemeResponse) error
 		Profit(ctx context.Context, in *SchemeRequest, out *SchemeResponse) error
@@ -134,6 +149,10 @@ func RegisterSchemeServiceHandler(s server.Server, hdlr SchemeServiceHandler, op
 
 type schemeServiceHandler struct {
 	SchemeServiceHandler
+}
+
+func (h *schemeServiceHandler) Cart(ctx context.Context, in *SchemeRequest, out *SchemeResponse) error {
+	return h.SchemeServiceHandler.Cart(ctx, in, out)
 }
 
 func (h *schemeServiceHandler) Purchase(ctx context.Context, in *SchemeRequest, out *SchemeResponse) error {

@@ -7,7 +7,9 @@ import "skuInfoService.proto";
 
 //价格核算计划
 service SchemeService {
-  //商品购买计算
+  //购物车计算
+  rpc Cart (SchemeRequest) returns (SchemeResponse) {}
+  //下单购买计算
   rpc Purchase (SchemeRequest) returns (SchemeResponse) {}
   //商品列表计算
   rpc List (SchemeRequest) returns (SchemeResponse) {}
@@ -53,7 +55,8 @@ message SchemeDetail {
   float row_discount_amount = 10;
   float row_amount = 11;
   bool is_gift =12;
-  SkuInfo sku_info =13;
+  bool checked =13; //是否已选中拿入计算
+  SkuInfo sku_info =14;
 }
 
 
