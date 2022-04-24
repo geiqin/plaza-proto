@@ -63,7 +63,7 @@ message Member {
     int32 rank_id =7;
     string rank_expired_at =8;
     bool rank_valid =9;
-    float capital =10;
+    float surplus =10;
     float deposit =11;
     int32 pay_points =12;
     int32 rank_points =13;

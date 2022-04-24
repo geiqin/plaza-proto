@@ -3,22 +3,22 @@ package services;
 option go_package =".;services";
 import "common/base.proto";
 
-service CapitalSchemeService {
+service SurplusSchemeService {
   //增加充值方案
-  rpc Create (CapitalScheme) returns (CapitalSchemeResponse) {}
+  rpc Create (SurplusScheme) returns (SurplusSchemeResponse) {}
   //修改充值方案
-  rpc Update (CapitalScheme) returns (CapitalSchemeResponse) {}
+  rpc Update (SurplusScheme) returns (SurplusSchemeResponse) {}
   //获得充值方案信息
-  rpc Get (CapitalScheme) returns (CapitalSchemeResponse) {}
+  rpc Get (SurplusScheme) returns (SurplusSchemeResponse) {}
   //查询充值方案信息
-  rpc Search (CapitalSchemeRequest) returns (CapitalSchemeResponse) {}
+  rpc Search (SurplusSchemeRequest) returns (SurplusSchemeResponse) {}
   //有效方案列表
-  rpc List (CapitalSchemeRequest) returns (CapitalSchemeResponse) {}
+  rpc List (SurplusSchemeRequest) returns (SurplusSchemeResponse) {}
   //根据金额匹配最优方案
-  rpc Matching (CapitalSchemeRequest) returns (CapitalSchemeResponse) {}
+  rpc Matching (SurplusSchemeRequest) returns (SurplusSchemeResponse) {}
 }
 
-message CapitalScheme {
+message SurplusScheme {
   int64 id =1;
   string name=2;
   string start_at =3;
@@ -34,7 +34,7 @@ message CapitalScheme {
 
 }
 
-message CapitalSchemeRequest {
+message SurplusSchemeRequest {
   int32 paged = 1;
   int32 page_size = 2;
   //以下为自定义参数
@@ -45,14 +45,14 @@ message CapitalSchemeRequest {
   string name =8;
 }
 
-message CapitalSchemeData {
-  CapitalScheme entity = 1;
+message SurplusSchemeData {
+  SurplusScheme entity = 1;
   common.Pager pager =2;
-  repeated CapitalScheme items = 3;
+  repeated SurplusScheme items = 3;
   common.Info info =4;
 }
 
-message CapitalSchemeResponse {
-  CapitalSchemeData data = 1;
+message SurplusSchemeResponse {
+  SurplusSchemeData data = 1;
   common.Error error = 2;
 }

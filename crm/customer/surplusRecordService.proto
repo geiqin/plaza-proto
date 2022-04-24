@@ -2,22 +2,22 @@ syntax = "proto3";
 package services;
 option go_package =".;services";
 import "common/base.proto";
-import "customerService.proto";
+import "memberService.proto";
 
-service CapitalRecordService {
+service SurplusRecordService {
   //增加余额（增加）
-  rpc Income (CapitalRecord) returns (CapitalRecordResponse) {}
+  rpc Income (SurplusRecord) returns (SurplusRecordResponse) {}
   //扣除余额(支出)
-  rpc Expend (CapitalRecord) returns (CapitalRecordResponse) {}
+  rpc Expend (SurplusRecord) returns (SurplusRecordResponse) {}
   //获得余额记录信息
-  rpc Get (CapitalRecord) returns (CapitalRecordResponse) {}
+  rpc Get (SurplusRecord) returns (SurplusRecordResponse) {}
   //查询余额记录信息
-  rpc Search (CapitalRecordRequest) returns (CapitalRecordResponse) {}
+  rpc Search (SurplusRecordRequest) returns (SurplusRecordResponse) {}
 }
 
-message CapitalRecord {
+message SurplusRecord {
   int64 id =1;
-  int64 customer_id =2;
+  int64 member_id =2;
   string direction =3;
   float amount =4;
   float balance =5;
@@ -27,16 +27,16 @@ message CapitalRecord {
   string memo =9;
   string created_at =10;
   string updated_at =11;
-  Customer customer =12;
+  Member member =12;
 }
 
 
 //查询参数
-message CapitalRecordRequest {
+message SurplusRecordRequest {
   int32 paged = 1;
   int32 page_size = 2;
   //以下为自定义参数
-  int64 customer_id =3;
+  int64 member_id =3;
   int32 direction =4;
   float amount =5;
   float balance =6;
@@ -48,13 +48,14 @@ message CapitalRecordRequest {
   string end_date = 12;
 }
 
-
-
-//
-message CapitalRecordResponse {
-  CapitalRecord entity = 1;
+message SurplusRecordData {
+  SurplusRecord entity = 1;
   common.Pager pager =2;
-  repeated CapitalRecord items = 3;
-  common.Error error = 4;
-  common.Info info =5;
+  repeated SurplusRecord items = 3;
+  common.Info info =4;
+}
+
+message SurplusRecordResponse {
+  SurplusRecordData data = 1;
+  common.Error error = 2;
 }
