@@ -6,9 +6,9 @@ import "common/base.proto";
 
 service AreaService {
     rpc Get (Area) returns (AreaResponse) {}
-    rpc Search (common.BaseWhere) returns (AreaResponse) {}
-    rpc Tree (Area) returns (AreaResponse) {}
-    rpc List (Area) returns (AreaResponse) {}
+    rpc Search (AreaRequest) returns (AreaResponse) {}
+    rpc Tree (AreaRequest) returns (AreaResponse) {}
+    rpc List (AreaRequest) returns (AreaResponse) {}
 }
 
 // 区域信息
@@ -40,9 +40,29 @@ message Area {
     repeated Area children =25;
 }
 
-message AreaResponse {
+
+//查询参数
+message AreaRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords =3;
+    //以下为自定义参数
+    int64 id = 4;
+    string name =5;
+    string type = 6;
+    string status = 7;
+    repeated int64 ids =8;
+}
+
+
+message AreaData {
     Area entity = 1;
     common.Pager pager =2;
     repeated Area items = 3;
-    common.Error error = 4;
+}
+
+
+message AreaResponse {
+    AreaData data = 1;
+    common.Error error =2;
 }

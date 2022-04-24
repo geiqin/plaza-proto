@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -44,9 +44,9 @@ func NewAreaServiceEndpoints() []*api.Endpoint {
 
 type AreaService interface {
 	Get(ctx context.Context, in *Area, opts ...client.CallOption) (*AreaResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*AreaResponse, error)
-	Tree(ctx context.Context, in *Area, opts ...client.CallOption) (*AreaResponse, error)
-	List(ctx context.Context, in *Area, opts ...client.CallOption) (*AreaResponse, error)
+	Search(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
+	Tree(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
+	List(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
 }
 
 type areaService struct {
@@ -71,7 +71,7 @@ func (c *areaService) Get(ctx context.Context, in *Area, opts ...client.CallOpti
 	return out, nil
 }
 
-func (c *areaService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*AreaResponse, error) {
+func (c *areaService) Search(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error) {
 	req := c.c.NewRequest(c.name, "AreaService.Search", in)
 	out := new(AreaResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -81,7 +81,7 @@ func (c *areaService) Search(ctx context.Context, in *common.BaseWhere, opts ...
 	return out, nil
 }
 
-func (c *areaService) Tree(ctx context.Context, in *Area, opts ...client.CallOption) (*AreaResponse, error) {
+func (c *areaService) Tree(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error) {
 	req := c.c.NewRequest(c.name, "AreaService.Tree", in)
 	out := new(AreaResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -91,7 +91,7 @@ func (c *areaService) Tree(ctx context.Context, in *Area, opts ...client.CallOpt
 	return out, nil
 }
 
-func (c *areaService) List(ctx context.Context, in *Area, opts ...client.CallOption) (*AreaResponse, error) {
+func (c *areaService) List(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error) {
 	req := c.c.NewRequest(c.name, "AreaService.List", in)
 	out := new(AreaResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -105,17 +105,17 @@ func (c *areaService) List(ctx context.Context, in *Area, opts ...client.CallOpt
 
 type AreaServiceHandler interface {
 	Get(context.Context, *Area, *AreaResponse) error
-	Search(context.Context, *common.BaseWhere, *AreaResponse) error
-	Tree(context.Context, *Area, *AreaResponse) error
-	List(context.Context, *Area, *AreaResponse) error
+	Search(context.Context, *AreaRequest, *AreaResponse) error
+	Tree(context.Context, *AreaRequest, *AreaResponse) error
+	List(context.Context, *AreaRequest, *AreaResponse) error
 }
 
 func RegisterAreaServiceHandler(s server.Server, hdlr AreaServiceHandler, opts ...server.HandlerOption) error {
 	type areaService interface {
 		Get(ctx context.Context, in *Area, out *AreaResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *AreaResponse) error
-		Tree(ctx context.Context, in *Area, out *AreaResponse) error
-		List(ctx context.Context, in *Area, out *AreaResponse) error
+		Search(ctx context.Context, in *AreaRequest, out *AreaResponse) error
+		Tree(ctx context.Context, in *AreaRequest, out *AreaResponse) error
+		List(ctx context.Context, in *AreaRequest, out *AreaResponse) error
 	}
 	type AreaService struct {
 		areaService
@@ -132,14 +132,14 @@ func (h *areaServiceHandler) Get(ctx context.Context, in *Area, out *AreaRespons
 	return h.AreaServiceHandler.Get(ctx, in, out)
 }
 
-func (h *areaServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *AreaResponse) error {
+func (h *areaServiceHandler) Search(ctx context.Context, in *AreaRequest, out *AreaResponse) error {
 	return h.AreaServiceHandler.Search(ctx, in, out)
 }
 
-func (h *areaServiceHandler) Tree(ctx context.Context, in *Area, out *AreaResponse) error {
+func (h *areaServiceHandler) Tree(ctx context.Context, in *AreaRequest, out *AreaResponse) error {
 	return h.AreaServiceHandler.Tree(ctx, in, out)
 }
 
-func (h *areaServiceHandler) List(ctx context.Context, in *Area, out *AreaResponse) error {
+func (h *areaServiceHandler) List(ctx context.Context, in *AreaRequest, out *AreaResponse) error {
 	return h.AreaServiceHandler.List(ctx, in, out)
 }
