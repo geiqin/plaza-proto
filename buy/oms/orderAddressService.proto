@@ -9,35 +9,53 @@ service OrderAddressService {
     rpc Update (OrderAddress) returns (OrderAddressResponse) {}
     rpc Delete (OrderAddress) returns (OrderAddressResponse) {}
     rpc Get (OrderAddress) returns (OrderAddressResponse) {}
-    rpc Search (common.BaseWhere) returns (OrderAddressResponse) {}
+    rpc Search (OrderAddressRequest) returns (OrderAddressResponse) {}
 }
 
 message OrderAddress {
     int64 id = 1;
-    string name = 3;
-    int64 area_id = 4;
-    string addr = 5;
-    string zip = 6;
-    string phone = 7;
-    string mobile = 8;
-    string email = 9;
-    string delivery_time = 10;
-    bool confirmed = 11;
-    int64 order_id = 12;
-    int64 address_id = 13;
-    string created_at = 14;
-    string updated_at = 15;
-    // @inject_tag: gorm:"-"
-    AreaInfo area = 16;
-    string lng = 17;
-    string lat = 18;
+    int64 order_id = 2;
+    int64 address_id = 3;
+    string name =4;
+    string last_name =5;
+    string first_name =6;
+    int64 area_id =7;
+    int64 street_id =8;
+    string addr =9;
+    string postcode =10;
+    string mobile =11;
+    string tel =12;
+    string delivery_day =13;
+    string delivery_time =14;
+    string lng =15;
+    string lat =16;
+    string created_at = 17;
+    string updated_at = 18;
+    AreaInfo area = 19;
 }
 
 
-message OrderAddressResponse {
+message OrderAddressRequest {
+    int32 paged =1;
+    int32 page_size =2;
+    string	keywords =3;
+    //----------
+    int64 id = 4;
+    string order_sn = 5;
+    string type = 6;
+    string start_date = 7;
+    string end_date = 8;
+    repeated int64 ids = 9;
+}
+
+message OrderAddressData {
     OrderAddress entity = 1;
     common.Pager pager =2;
     repeated OrderAddress items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    common.Info info =4;
+}
+
+message OrderAddressResponse {
+    OrderAddressData data = 1;
+    common.Error error =2 ;
 }

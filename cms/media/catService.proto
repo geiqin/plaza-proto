@@ -11,22 +11,21 @@ service CatService {
     rpc List (Cat) returns (CatResponse) {}
     rpc Tree (Cat) returns (CatResponse) {}
     rpc Search (CatRequest) returns (CatResponse) {}
-
 }
 
 // 字典信息
 message Cat {
     int32 id =1;
-    string name =2;
+    string type =2;
     string slug =3;
-    int32 type =4;
+    string name =4;
     string path =5;
-    int32 total_num	=6;
-    float total_size =7;
-    int32 cat_id=8;
-    int64 user_id =9;
-    repeated Cat children =10;
-
+    int32 parent_id =6;
+    int32 total_num	=7;
+    float total_size =8;
+    int64 creator_id =9;
+    Cat parent =10;
+    repeated Cat children =11;
 }
 
 message CatRequest {
@@ -34,20 +33,22 @@ message CatRequest {
     int32 page_size = 2;
     int32 top = 3;
     //file params
-    int64 id =4;
+    int32 id =4;
     string name =5;
     string slug =6;
-    int32 type =7;
-    int32 cat_id=9;
-    repeated string types =10;
+    string type =7;
+    int32 parent_id =9;
     repeated int64 ids =11;
 }
 
-//
-message CatResponse {
+message CatData {
     Cat entity = 1;
     common.Pager pager =2;
     repeated Cat items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    common.Info info =4;
+}
+
+message CatResponse {
+    CatData data = 1;
+    common.Error error = 2;
 }

@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -47,7 +47,7 @@ type OrderAddressService interface {
 	Update(ctx context.Context, in *OrderAddress, opts ...client.CallOption) (*OrderAddressResponse, error)
 	Delete(ctx context.Context, in *OrderAddress, opts ...client.CallOption) (*OrderAddressResponse, error)
 	Get(ctx context.Context, in *OrderAddress, opts ...client.CallOption) (*OrderAddressResponse, error)
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*OrderAddressResponse, error)
+	Search(ctx context.Context, in *OrderAddressRequest, opts ...client.CallOption) (*OrderAddressResponse, error)
 }
 
 type orderAddressService struct {
@@ -102,7 +102,7 @@ func (c *orderAddressService) Get(ctx context.Context, in *OrderAddress, opts ..
 	return out, nil
 }
 
-func (c *orderAddressService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*OrderAddressResponse, error) {
+func (c *orderAddressService) Search(ctx context.Context, in *OrderAddressRequest, opts ...client.CallOption) (*OrderAddressResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderAddressService.Search", in)
 	out := new(OrderAddressResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -119,7 +119,7 @@ type OrderAddressServiceHandler interface {
 	Update(context.Context, *OrderAddress, *OrderAddressResponse) error
 	Delete(context.Context, *OrderAddress, *OrderAddressResponse) error
 	Get(context.Context, *OrderAddress, *OrderAddressResponse) error
-	Search(context.Context, *common.BaseWhere, *OrderAddressResponse) error
+	Search(context.Context, *OrderAddressRequest, *OrderAddressResponse) error
 }
 
 func RegisterOrderAddressServiceHandler(s server.Server, hdlr OrderAddressServiceHandler, opts ...server.HandlerOption) error {
@@ -128,7 +128,7 @@ func RegisterOrderAddressServiceHandler(s server.Server, hdlr OrderAddressServic
 		Update(ctx context.Context, in *OrderAddress, out *OrderAddressResponse) error
 		Delete(ctx context.Context, in *OrderAddress, out *OrderAddressResponse) error
 		Get(ctx context.Context, in *OrderAddress, out *OrderAddressResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *OrderAddressResponse) error
+		Search(ctx context.Context, in *OrderAddressRequest, out *OrderAddressResponse) error
 	}
 	type OrderAddressService struct {
 		orderAddressService
@@ -157,6 +157,6 @@ func (h *orderAddressServiceHandler) Get(ctx context.Context, in *OrderAddress, 
 	return h.OrderAddressServiceHandler.Get(ctx, in, out)
 }
 
-func (h *orderAddressServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *OrderAddressResponse) error {
+func (h *orderAddressServiceHandler) Search(ctx context.Context, in *OrderAddressRequest, out *OrderAddressResponse) error {
 	return h.OrderAddressServiceHandler.Search(ctx, in, out)
 }

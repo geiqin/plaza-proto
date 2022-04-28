@@ -10,7 +10,7 @@ service DownloadService {
     rpc Update (Download) returns (DownloadResponse) {}
     rpc Delete (Download) returns (DownloadResponse) {}
     rpc Get (Download) returns (DownloadResponse) {}
-    rpc Search (DownloadWhere) returns (DownloadResponse) {}
+    rpc Search (DownloadRequest) returns (DownloadResponse) {}
 }
 
 // 下载信息
@@ -34,7 +34,7 @@ message Download {
     repeated int64 ids =17;
 }
 
-message DownloadWhere {
+message DownloadRequest {
     int32 paged = 1;
     int32 page_size = 2;
     int32 top = 3;
@@ -50,11 +50,14 @@ message DownloadWhere {
     repeated int64 ids = 13;
 }
 
-//
-message DownloadResponse {
+message DownloadData {
     Download entity = 1;
     common.Pager pager =2;
     repeated Download items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    common.Info info =4;
+}
+
+message DownloadResponse {
+    DownloadData data = 1;
+    common.Error error = 2;
 }

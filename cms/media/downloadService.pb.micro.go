@@ -49,7 +49,7 @@ type DownloadService interface {
 	Update(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
 	Delete(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
 	Get(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
-	Search(ctx context.Context, in *DownloadWhere, opts ...client.CallOption) (*DownloadResponse, error)
+	Search(ctx context.Context, in *DownloadRequest, opts ...client.CallOption) (*DownloadResponse, error)
 }
 
 type downloadService struct {
@@ -124,7 +124,7 @@ func (c *downloadService) Get(ctx context.Context, in *Download, opts ...client.
 	return out, nil
 }
 
-func (c *downloadService) Search(ctx context.Context, in *DownloadWhere, opts ...client.CallOption) (*DownloadResponse, error) {
+func (c *downloadService) Search(ctx context.Context, in *DownloadRequest, opts ...client.CallOption) (*DownloadResponse, error) {
 	req := c.c.NewRequest(c.name, "DownloadService.Search", in)
 	out := new(DownloadResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -143,7 +143,7 @@ type DownloadServiceHandler interface {
 	Update(context.Context, *Download, *DownloadResponse) error
 	Delete(context.Context, *Download, *DownloadResponse) error
 	Get(context.Context, *Download, *DownloadResponse) error
-	Search(context.Context, *DownloadWhere, *DownloadResponse) error
+	Search(context.Context, *DownloadRequest, *DownloadResponse) error
 }
 
 func RegisterDownloadServiceHandler(s server.Server, hdlr DownloadServiceHandler, opts ...server.HandlerOption) error {
@@ -154,7 +154,7 @@ func RegisterDownloadServiceHandler(s server.Server, hdlr DownloadServiceHandler
 		Update(ctx context.Context, in *Download, out *DownloadResponse) error
 		Delete(ctx context.Context, in *Download, out *DownloadResponse) error
 		Get(ctx context.Context, in *Download, out *DownloadResponse) error
-		Search(ctx context.Context, in *DownloadWhere, out *DownloadResponse) error
+		Search(ctx context.Context, in *DownloadRequest, out *DownloadResponse) error
 	}
 	type DownloadService struct {
 		downloadService
@@ -191,6 +191,6 @@ func (h *downloadServiceHandler) Get(ctx context.Context, in *Download, out *Dow
 	return h.DownloadServiceHandler.Get(ctx, in, out)
 }
 
-func (h *downloadServiceHandler) Search(ctx context.Context, in *DownloadWhere, out *DownloadResponse) error {
+func (h *downloadServiceHandler) Search(ctx context.Context, in *DownloadRequest, out *DownloadResponse) error {
 	return h.DownloadServiceHandler.Search(ctx, in, out)
 }

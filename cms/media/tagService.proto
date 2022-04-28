@@ -7,7 +7,7 @@ service TagService {
     rpc Create (Tag) returns (TagResponse) {}
     rpc Delete (Tag) returns (TagResponse) {}
     rpc Get (Tag) returns (TagResponse) {}
-    rpc Search (common.BaseWhere) returns (TagResponse) {}
+    rpc Search (TatRequest) returns (TagResponse) {}
 }
 
 // 标签信息
@@ -17,11 +17,26 @@ message Tag {
     int32 total_num	=5;
 }
 
-//
-message TagResponse {
+message TatRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //file params
+    int64 id =4;
+    string name =5;
+    string slug =6;
+    repeated int64 ids =7;
+}
+
+message TagData {
     Tag entity = 1;
     common.Pager pager =2;
     repeated Tag items = 3;
-    common.Error error = 4;
     common.Info info =5;
+}
+
+
+message TagResponse {
+    TagData data = 1;
+    common.Error error = 2;
 }

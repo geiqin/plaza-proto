@@ -7,18 +7,16 @@ import "common/base.proto";
 service CartService {
     //加入购物车商品
     rpc Add (CartRequest) returns (CartResponse) {}
-    //修改购物车商品
-    rpc Update (CartRequest) returns (CartResponse) {}
+    //设置购物车商品数量
+    rpc Set (CartRequest) returns (CartResponse) {}
     //删除购物车商品
-    rpc Remove (CartRequest) returns (CartResponse) {}
-    //递增购物车数量
-    rpc Increase (CartRequest) returns (CartResponse) {}
-    //递减购物车数量
-    rpc Decrease (CartRequest) returns (CartResponse) {}
+    rpc Remove (CartRequest) returns (CartResponse){}
     //清除购物车
     rpc Clear (CartRequest) returns (CartResponse) {}
     //获取购物车
     rpc Get (CartRequest) returns (CartResponse) {}
+    //选中商品计算
+    rpc Checked (CartRequest) returns (CartResponse) {}
 }
 
 message Cart {
@@ -33,8 +31,9 @@ message Cart {
     float amount =9;
     int64 member_id = 10;
     int64 address_id = 11;
-    repeated CartItem items = 12;
-    map<int64,int32> sku_list =13;
+    int32 checked_status = 12;
+    repeated CartItem items = 13;
+    map<int64,int32> sku_list =14;
 }
 
 message CartItem {
@@ -63,6 +62,7 @@ message CartItem {
     bool is_virtual = 23;
     bool is_presale = 24;
     string status = 25;
+    bool checked = 26;
 }
 
 
@@ -74,7 +74,8 @@ message CartRequest {
     int64 sku_id =5;
     string direction =6;
     int32 num =7;
-    map<int64,int32> sku_list =13;
+    repeated int64 sku_ids =8;
+    map<int64,int32> sku_list =9;
 }
 
 message CartData {

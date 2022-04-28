@@ -32,8 +32,8 @@ message File {
     string type	 =5;
     bool is_private	 =6;
     string source	 =7;
-    string persistent_id =8;
-    int32 cat_id =9;
+    int32 cat_id =8;
+    string cat_path =9;
     string file_name =10;
     string raw_name =11;
     string path	 =12;
@@ -63,36 +63,41 @@ message FileRequest {
     int32 paged = 1;
     int32 page_size = 2;
     int32 top = 3;
+    int32 keywords = 4;
     //file params
-    int64 id =4;
-    string title =5;
-    int32 cat_id =6;
-    string type =7;
-    string mime_type =8;
-    string file_name =9;
-    string raw_name =10;
-    string hash =11;
-    string persistent_id =12;
+    int64 id =5;
+    string title =6;
+    int32 cat_id =7;
+    string type =8;
+    string mime_type =9;
+    string file_name =10;
+    string raw_name =11;
+    string hash =12;
     string flag	 =13;
-    bool is_private	 =14;
-    string creator_type	 =15;
-    int64 creator_id	 =16;
-    string memo	 =17;
-    int64 cover_id =18;
-    string cover_url =19;
-    string code =20;
-    string cat_slug =21;
-    repeated string types =22;
-    repeated string codes =23;
-    repeated int64 ids =24;
+    bool is_big_file =14;
+    bool is_not_cat =15;
+    bool is_private	 =16;
+    string creator_type	 =17;
+    int64 creator_id	 =18;
+    string memo	 =19;
+    int64 cover_id =20;
+    string cover_url =21;
+    string code =22;
+    string cat_slug =23;
+    repeated string types =24;
+    repeated string codes =25;
+    repeated int64 ids =26;
 }
 
-//
-message FileResponse {
+message FileData {
     File entity = 1;
     common.Pager pager =2;
     repeated File items = 3;
-    common.Error error = 4;
-    common.Info info =5;
-    map<string,string> params =6;
+    common.Info info =4;
+    map<string,string> params =5;
+}
+
+message FileResponse {
+    FileData data = 1;
+    common.Error error = 2;
 }

@@ -45,18 +45,16 @@ func NewCartServiceEndpoints() []*api.Endpoint {
 type CartService interface {
 	//加入购物车商品
 	Add(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
-	//修改购物车商品
-	Update(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
+	//设置购物车商品数量
+	Set(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
 	//删除购物车商品
 	Remove(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
-	//递增购物车数量
-	Increase(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
-	//递减购物车数量
-	Decrease(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
 	//清除购物车
 	Clear(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
 	//获取购物车
 	Get(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
+	//选中商品计算
+	Checked(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
 }
 
 type cartService struct {
@@ -81,8 +79,8 @@ func (c *cartService) Add(ctx context.Context, in *CartRequest, opts ...client.C
 	return out, nil
 }
 
-func (c *cartService) Update(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error) {
-	req := c.c.NewRequest(c.name, "CartService.Update", in)
+func (c *cartService) Set(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error) {
+	req := c.c.NewRequest(c.name, "CartService.Set", in)
 	out := new(CartResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -93,26 +91,6 @@ func (c *cartService) Update(ctx context.Context, in *CartRequest, opts ...clien
 
 func (c *cartService) Remove(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error) {
 	req := c.c.NewRequest(c.name, "CartService.Remove", in)
-	out := new(CartResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cartService) Increase(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error) {
-	req := c.c.NewRequest(c.name, "CartService.Increase", in)
-	out := new(CartResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cartService) Decrease(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error) {
-	req := c.c.NewRequest(c.name, "CartService.Decrease", in)
 	out := new(CartResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -141,34 +119,41 @@ func (c *cartService) Get(ctx context.Context, in *CartRequest, opts ...client.C
 	return out, nil
 }
 
+func (c *cartService) Checked(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error) {
+	req := c.c.NewRequest(c.name, "CartService.Checked", in)
+	out := new(CartResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for CartService service
 
 type CartServiceHandler interface {
 	//加入购物车商品
 	Add(context.Context, *CartRequest, *CartResponse) error
-	//修改购物车商品
-	Update(context.Context, *CartRequest, *CartResponse) error
+	//设置购物车商品数量
+	Set(context.Context, *CartRequest, *CartResponse) error
 	//删除购物车商品
 	Remove(context.Context, *CartRequest, *CartResponse) error
-	//递增购物车数量
-	Increase(context.Context, *CartRequest, *CartResponse) error
-	//递减购物车数量
-	Decrease(context.Context, *CartRequest, *CartResponse) error
 	//清除购物车
 	Clear(context.Context, *CartRequest, *CartResponse) error
 	//获取购物车
 	Get(context.Context, *CartRequest, *CartResponse) error
+	//选中商品计算
+	Checked(context.Context, *CartRequest, *CartResponse) error
 }
 
 func RegisterCartServiceHandler(s server.Server, hdlr CartServiceHandler, opts ...server.HandlerOption) error {
 	type cartService interface {
 		Add(ctx context.Context, in *CartRequest, out *CartResponse) error
-		Update(ctx context.Context, in *CartRequest, out *CartResponse) error
+		Set(ctx context.Context, in *CartRequest, out *CartResponse) error
 		Remove(ctx context.Context, in *CartRequest, out *CartResponse) error
-		Increase(ctx context.Context, in *CartRequest, out *CartResponse) error
-		Decrease(ctx context.Context, in *CartRequest, out *CartResponse) error
 		Clear(ctx context.Context, in *CartRequest, out *CartResponse) error
 		Get(ctx context.Context, in *CartRequest, out *CartResponse) error
+		Checked(ctx context.Context, in *CartRequest, out *CartResponse) error
 	}
 	type CartService struct {
 		cartService
@@ -185,20 +170,12 @@ func (h *cartServiceHandler) Add(ctx context.Context, in *CartRequest, out *Cart
 	return h.CartServiceHandler.Add(ctx, in, out)
 }
 
-func (h *cartServiceHandler) Update(ctx context.Context, in *CartRequest, out *CartResponse) error {
-	return h.CartServiceHandler.Update(ctx, in, out)
+func (h *cartServiceHandler) Set(ctx context.Context, in *CartRequest, out *CartResponse) error {
+	return h.CartServiceHandler.Set(ctx, in, out)
 }
 
 func (h *cartServiceHandler) Remove(ctx context.Context, in *CartRequest, out *CartResponse) error {
 	return h.CartServiceHandler.Remove(ctx, in, out)
-}
-
-func (h *cartServiceHandler) Increase(ctx context.Context, in *CartRequest, out *CartResponse) error {
-	return h.CartServiceHandler.Increase(ctx, in, out)
-}
-
-func (h *cartServiceHandler) Decrease(ctx context.Context, in *CartRequest, out *CartResponse) error {
-	return h.CartServiceHandler.Decrease(ctx, in, out)
 }
 
 func (h *cartServiceHandler) Clear(ctx context.Context, in *CartRequest, out *CartResponse) error {
@@ -207,4 +184,8 @@ func (h *cartServiceHandler) Clear(ctx context.Context, in *CartRequest, out *Ca
 
 func (h *cartServiceHandler) Get(ctx context.Context, in *CartRequest, out *CartResponse) error {
 	return h.CartServiceHandler.Get(ctx, in, out)
+}
+
+func (h *cartServiceHandler) Checked(ctx context.Context, in *CartRequest, out *CartResponse) error {
+	return h.CartServiceHandler.Checked(ctx, in, out)
 }
