@@ -30,10 +30,11 @@ message Address {
     string delivery_time =13;
     string lng =14;
     string lat =15;
-    bool defaulted =16;
-    string created_at =17;
-    string updated_at =18;
-    Area area = 19;
+    string tag =16;
+    bool defaulted =17;
+    string created_at =18;
+    string updated_at =19;
+    Area area = 20;
 }
 
 message Area {
