@@ -43,20 +43,12 @@ func NewPaymentServiceEndpoints() []*api.Endpoint {
 // Client API for PaymentService service
 
 type PaymentService interface {
+	//获取支付方式
+	Get(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
 	//选择支付方式
-	Choose(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
-	//余额支付
-	Balance(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
-	//信用支付
-	Credit(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
-	//微信APP支付
-	WxApp(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
-	//微信小程序支付
-	WxMini(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
-	//支付宝手机网页支付
-	AliWap(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
-	//支付宝APP支付
-	AliApp(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
+	List(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
+	//支付方式开关
+	Switch(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
 }
 
 type paymentService struct {
@@ -71,8 +63,8 @@ func NewPaymentService(name string, c client.Client) PaymentService {
 	}
 }
 
-func (c *paymentService) Choose(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.Choose", in)
+func (c *paymentService) Get(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.Get", in)
 	out := new(PaymentResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -81,8 +73,8 @@ func (c *paymentService) Choose(ctx context.Context, in *PaymentRequest, opts ..
 	return out, nil
 }
 
-func (c *paymentService) Balance(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.Balance", in)
+func (c *paymentService) List(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.List", in)
 	out := new(PaymentResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -91,48 +83,8 @@ func (c *paymentService) Balance(ctx context.Context, in *PaymentRequest, opts .
 	return out, nil
 }
 
-func (c *paymentService) Credit(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.Credit", in)
-	out := new(PaymentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *paymentService) WxApp(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.WxApp", in)
-	out := new(PaymentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *paymentService) WxMini(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.WxMini", in)
-	out := new(PaymentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *paymentService) AliWap(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.AliWap", in)
-	out := new(PaymentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *paymentService) AliApp(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.AliApp", in)
+func (c *paymentService) Switch(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.Switch", in)
 	out := new(PaymentResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -144,31 +96,19 @@ func (c *paymentService) AliApp(ctx context.Context, in *PaymentRequest, opts ..
 // Server API for PaymentService service
 
 type PaymentServiceHandler interface {
+	//获取支付方式
+	Get(context.Context, *PaymentRequest, *PaymentResponse) error
 	//选择支付方式
-	Choose(context.Context, *PaymentRequest, *PaymentResponse) error
-	//余额支付
-	Balance(context.Context, *PaymentRequest, *PaymentResponse) error
-	//信用支付
-	Credit(context.Context, *PaymentRequest, *PaymentResponse) error
-	//微信APP支付
-	WxApp(context.Context, *PaymentRequest, *PaymentResponse) error
-	//微信小程序支付
-	WxMini(context.Context, *PaymentRequest, *PaymentResponse) error
-	//支付宝手机网页支付
-	AliWap(context.Context, *PaymentRequest, *PaymentResponse) error
-	//支付宝APP支付
-	AliApp(context.Context, *PaymentRequest, *PaymentResponse) error
+	List(context.Context, *PaymentRequest, *PaymentResponse) error
+	//支付方式开关
+	Switch(context.Context, *PaymentRequest, *PaymentResponse) error
 }
 
 func RegisterPaymentServiceHandler(s server.Server, hdlr PaymentServiceHandler, opts ...server.HandlerOption) error {
 	type paymentService interface {
-		Choose(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
-		Balance(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
-		Credit(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
-		WxApp(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
-		WxMini(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
-		AliWap(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
-		AliApp(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
+		Get(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
+		List(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
+		Switch(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
 	}
 	type PaymentService struct {
 		paymentService
@@ -181,30 +121,14 @@ type paymentServiceHandler struct {
 	PaymentServiceHandler
 }
 
-func (h *paymentServiceHandler) Choose(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.Choose(ctx, in, out)
+func (h *paymentServiceHandler) Get(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.Get(ctx, in, out)
 }
 
-func (h *paymentServiceHandler) Balance(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.Balance(ctx, in, out)
+func (h *paymentServiceHandler) List(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.List(ctx, in, out)
 }
 
-func (h *paymentServiceHandler) Credit(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.Credit(ctx, in, out)
-}
-
-func (h *paymentServiceHandler) WxApp(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.WxApp(ctx, in, out)
-}
-
-func (h *paymentServiceHandler) WxMini(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.WxMini(ctx, in, out)
-}
-
-func (h *paymentServiceHandler) AliWap(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.AliWap(ctx, in, out)
-}
-
-func (h *paymentServiceHandler) AliApp(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.AliApp(ctx, in, out)
+func (h *paymentServiceHandler) Switch(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.Switch(ctx, in, out)
 }

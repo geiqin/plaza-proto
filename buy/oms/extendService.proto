@@ -1,0 +1,18 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+
+//订单详情步骤
+message OrderFlow  {
+  step current =1;
+  repeated step steps =2;
+  message step {
+    string code =1;
+    string name =2;
+    string short_name =3;
+    string icon_url =4;
+    string status =5;
+    string happen_at =6;
+    string description =7;
+  }
+}

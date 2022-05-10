@@ -1,0 +1,55 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+
+//配送方式
+service ShipmentService {
+  //创建配送方式
+  rpc Create (Shipment) returns (ShipmentResponse) {}
+  //获取配送
+  rpc Get (ShipmentRequest) returns (ShipmentResponse) {}
+  //获取配送列表
+  rpc List (ShipmentRequest) returns (ShipmentResponse) {}
+  //开启/关闭配送方式
+  rpc Switch (ShipmentRequest) returns (ShipmentResponse) {}
+  //查询配送方式
+  rpc Search (ShipmentRequest) returns (ShipmentResponse) {}
+}
+
+message Shipment {
+  int32 id = 1;
+  string code =2;
+  string name =3;
+  int64 icon_id =5;
+  string icon_url =6;
+  string memo =7;
+  int32 sort =8;
+  string status =9;
+}
+
+//配送请求参数
+message ShipmentRequest {
+  int32 paged = 1;
+  int32 page_size = 2;
+  string sorting = 3;
+  //----
+  int32 id  =4;
+  string code =5;
+  string name =6;
+  int64 order_id =7;
+  string status =8;
+  map<string,string> params =9;
+}
+
+message ShipmentData{
+  Shipment entity = 1;
+  map<string,string> params =2;
+  repeated Shipment items =3;
+  common.Info info =4;
+}
+
+message ShipmentResponse {
+  ShipmentData data = 1;
+  common.Error error = 2;
+}

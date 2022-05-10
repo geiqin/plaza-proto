@@ -2,24 +2,15 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 import "common/base.proto";
-import "orderService.proto";
 
-//订单支付
+//支付方式
 service PaymentService {
+  //获取支付方式
+  rpc Get (PaymentRequest) returns (PaymentResponse) {}
   //选择支付方式
-  rpc Choose (PaymentRequest) returns (PaymentResponse) {}
-  //余额支付
-  rpc Balance (PaymentRequest) returns (PaymentResponse) {}
-  //信用支付
-  rpc Credit (PaymentRequest) returns (PaymentResponse) {}
-  //微信APP支付
-  rpc WxApp (PaymentRequest) returns (PaymentResponse) {}
-  //微信小程序支付
-  rpc WxMini (PaymentRequest) returns (PaymentResponse) {}
-  //支付宝手机网页支付
-  rpc AliWap (PaymentRequest) returns (PaymentResponse) {}
-  //支付宝APP支付
-  rpc AliApp (PaymentRequest) returns (PaymentResponse) {}
+  rpc List (PaymentRequest) returns (PaymentResponse) {}
+  //支付方式开关
+  rpc Switch (PaymentRequest) returns (PaymentResponse) {}
 }
 
 message Payment {
@@ -43,15 +34,17 @@ message PaymentRequest {
   string terminal =3;
   int64 order_id =4;
   string status =5;
-  map<string,string> params =6;
+  string  type	=6;
+  bool is_online	=7;
+  string memo =8;
+  map<string,string> params =9;
 }
 
 message PaymentData{
   Payment entity = 1;
-  Order order = 2;
-  map<string,string> params =3;
-  repeated Payment items =4;
-  common.Info info =5;
+  map<string,string> params =2;
+  repeated Payment items =3;
+  common.Info info =4;
 }
 
 message PaymentResponse {

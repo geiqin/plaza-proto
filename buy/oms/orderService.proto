@@ -4,9 +4,12 @@ option go_package = ".;services";
 import "common/base.proto";
 import "orderDetailService.proto";
 import "orderAddressService.proto";
-import "orderPromotionService.proto";
-import "orderCouponService.proto";
+import "adjustmentService.proto";
+import "orderGiftService.proto";
 import "memberInfoService.proto";
+import "extendService.proto";
+import "shipmentService.proto";
+import "paymentService.proto";
 
 //订单
 service OrderService {
@@ -83,10 +86,10 @@ message Order {
     bool is_refunded =37;
     bool is_payment_timeout =38;
     bool is_return_timeout =39;
-    int32 shipping_id =40;
-    string shipping_name =41;
-    int64 pay_id =42;
-    string pay_name =43;
+    int32 shipment_id =40;
+    string shipment_code =41;
+    int32 payment_id =42;
+    string payment_code =43;
     int32 pack_id =44;
     int64 coupon_id =45;
     string extension_code =46;
@@ -107,10 +110,12 @@ message Order {
     string updated_at =61;
     OrderAddress address =62;
     MemberInfo member = 63;
-    repeated OrderDetail details = 64;
-    repeated OrderCoupon coupons = 65;
-    repeated OrderPromotion promotions = 66;
-    map<string,string> metas =67;
+    Shipment shipment = 64;
+    Payment payment = 65;
+    repeated OrderDetail details = 66;
+    repeated OrderGift gifts = 67;
+    repeated Adjustment adjustments = 68;
+    map<string,string> metas =69;
 }
 
 message OrderRequest {
@@ -153,6 +158,7 @@ message OrderData {
     common.Pager pager =2;
     repeated Order items = 3;
     common.Info info =4;
+    OrderFlow order_flow = 5;
 }
 
 message OrderResponse {
