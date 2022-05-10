@@ -17,11 +17,12 @@ message Role {
     int32 id = 1;
     string name = 2;
     bool is_admin =3;
-    string memo = 4;
-    string created_at = 5;
-    string updated_at = 6;
-    repeated Nav navs = 7;
-    repeated int32 nav_ids = 8;
+    string data_scope = 4;
+    string memo = 5;
+    string created_at = 6;
+    string updated_at = 7;
+    repeated Nav navs = 8;
+    repeated int32 nav_ids = 9;
 }
 
 message RoleRequest {

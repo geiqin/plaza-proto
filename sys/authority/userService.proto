@@ -35,14 +35,15 @@ message User {
     string gender = 8;
     int32 dept_id =9;
     int32 post_id =10;
-    int64 source_manager_id =11;
-    string status = 12;
-    string memo = 13;
-    string created_at =14;
-    string updated_at = 15;
-    Dept dept =16;
-    Post post =17;
-    repeated Role roles =18;
+    int32 role_id =11;
+    int64 source_manager_id =12;
+    string status = 13;
+    string memo = 14;
+    string created_at =15;
+    string updated_at = 16;
+    Dept dept =17;
+    Post post =18;
+    Role role =19;
 }
 
 
@@ -60,16 +61,15 @@ message UserRequest {
     string gender = 9;
     int32 dept_id = 10;
     int32 post_id = 11;
-    int64 avatar_id = 12;
-    string avatar_url = 13;
-    string status =14;
-    string email = 15;
-    string mobile =16;
-    string password = 17;
-    int64 source_manager_id =18;
-    repeated Role roles =19;
-    repeated int32 role_ids =20;
-    repeated int64 ids =21;
+    int32 role_id = 12;
+    int64 avatar_id = 13;
+    string avatar_url = 14;
+    string status =15;
+    string email = 16;
+    string mobile =17;
+    string password = 18;
+    int64 source_manager_id =19;
+    repeated int64 ids =20;
 }
 
 
