@@ -18,7 +18,7 @@ message ShipOrder {
     int64 id = 1;
     string code = 2;
     int64 order_id = 3;
-    string method = 4;
+    string shipment_code = 4;
     string type = 5;
     float freight = 6;
     bool protected = 7;
@@ -29,8 +29,8 @@ message ShipOrder {
     int64 location_id = 12;
     string fetch_at = 13;
     string delivery_at = 14;
-    int32 delivery_type = 33;
-    int64 customer_id = 15;
+    string delivery_type = 33;
+    int64 member_id = 15;
     string receiver_name = 16;
     int64 receiver_area_id = 17;
     string receiver_addr = 18;
@@ -73,7 +73,7 @@ message ShipOrderRequest {
     string type = 7;
     string method = 8;
     int64 order_id = 9;
-    int32 delivery_type = 10;
+    string delivery_type = 10;
     repeated int64 ids = 6;
 }
 
