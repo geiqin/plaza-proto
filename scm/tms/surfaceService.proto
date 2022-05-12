@@ -5,8 +5,8 @@ import "common/base.proto";
 
 //电子面单
 service SurfaceService {
-    // 快递下单
-    rpc Submit(SurfaceRequest) returns(SurfaceResponse) {};
+    // 生成电子面单（独立提供）
+    rpc Build(SurfaceRequest) returns(SurfaceResponse) {};
 }
 
 message Surface {

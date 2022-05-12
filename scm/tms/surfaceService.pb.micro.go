@@ -43,8 +43,8 @@ func NewSurfaceServiceEndpoints() []*api.Endpoint {
 // Client API for SurfaceService service
 
 type SurfaceService interface {
-	// 快递下单
-	Submit(ctx context.Context, in *SurfaceRequest, opts ...client.CallOption) (*SurfaceResponse, error)
+	// 生成电子面单（独立提供）
+	Build(ctx context.Context, in *SurfaceRequest, opts ...client.CallOption) (*SurfaceResponse, error)
 }
 
 type surfaceService struct {
@@ -59,8 +59,8 @@ func NewSurfaceService(name string, c client.Client) SurfaceService {
 	}
 }
 
-func (c *surfaceService) Submit(ctx context.Context, in *SurfaceRequest, opts ...client.CallOption) (*SurfaceResponse, error) {
-	req := c.c.NewRequest(c.name, "SurfaceService.Submit", in)
+func (c *surfaceService) Build(ctx context.Context, in *SurfaceRequest, opts ...client.CallOption) (*SurfaceResponse, error) {
+	req := c.c.NewRequest(c.name, "SurfaceService.Build", in)
 	out := new(SurfaceResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -72,13 +72,13 @@ func (c *surfaceService) Submit(ctx context.Context, in *SurfaceRequest, opts ..
 // Server API for SurfaceService service
 
 type SurfaceServiceHandler interface {
-	// 快递下单
-	Submit(context.Context, *SurfaceRequest, *SurfaceResponse) error
+	// 生成电子面单（独立提供）
+	Build(context.Context, *SurfaceRequest, *SurfaceResponse) error
 }
 
 func RegisterSurfaceServiceHandler(s server.Server, hdlr SurfaceServiceHandler, opts ...server.HandlerOption) error {
 	type surfaceService interface {
-		Submit(ctx context.Context, in *SurfaceRequest, out *SurfaceResponse) error
+		Build(ctx context.Context, in *SurfaceRequest, out *SurfaceResponse) error
 	}
 	type SurfaceService struct {
 		surfaceService
@@ -91,6 +91,6 @@ type surfaceServiceHandler struct {
 	SurfaceServiceHandler
 }
 
-func (h *surfaceServiceHandler) Submit(ctx context.Context, in *SurfaceRequest, out *SurfaceResponse) error {
-	return h.SurfaceServiceHandler.Submit(ctx, in, out)
+func (h *surfaceServiceHandler) Build(ctx context.Context, in *SurfaceRequest, out *SurfaceResponse) error {
+	return h.SurfaceServiceHandler.Build(ctx, in, out)
 }
