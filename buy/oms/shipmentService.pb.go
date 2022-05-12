@@ -31,14 +31,14 @@ type Shipment struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id      int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Code    string `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
-	Name    string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	IconId  int64  `protobuf:"varint,5,opt,name=icon_id,json=iconId,proto3" json:"icon_id"`
-	IconUrl string `protobuf:"bytes,6,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`
-	Memo    string `protobuf:"bytes,7,opt,name=memo,proto3" json:"memo"`
-	Sort    int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort"`
-	Status  string `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
+	Id      int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Code    string `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name    string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	IconId  int64  `protobuf:"varint,5,opt,name=icon_id,json=iconId,proto3" json:"icon_id,omitempty"`
+	IconUrl string `protobuf:"bytes,6,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url,omitempty"`
+	Memo    string `protobuf:"bytes,7,opt,name=memo,proto3" json:"memo,omitempty"`
+	Sort    int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort,omitempty"`
+	Status  string `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
 }
 
 func (x *Shipment) Reset() {
@@ -135,16 +135,16 @@ type ShipmentRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
 	//----
-	Id      int32             `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	Code    string            `protobuf:"bytes,5,opt,name=code,proto3" json:"code"`
-	Name    string            `protobuf:"bytes,6,opt,name=name,proto3" json:"name"`
-	OrderId int64             `protobuf:"varint,7,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	Status  string            `protobuf:"bytes,8,opt,name=status,proto3" json:"status"`
-	Params  map[string]string `protobuf:"bytes,9,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Id      int32             `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	Code    string            `protobuf:"bytes,5,opt,name=code,proto3" json:"code,omitempty"`
+	Name    string            `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	OrderId int64             `protobuf:"varint,7,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Status  string            `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
+	Params  map[string]string `protobuf:"bytes,9,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *ShipmentRequest) Reset() {
@@ -247,10 +247,10 @@ type ShipmentData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Shipment         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Items  []*Shipment       `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Entity *Shipment         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Items  []*Shipment       `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *ShipmentData) Reset() {
@@ -318,8 +318,8 @@ type ShipmentResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *ShipmentData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *ShipmentData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *ShipmentResponse) Reset() {

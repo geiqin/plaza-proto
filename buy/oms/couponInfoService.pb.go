@@ -31,21 +31,21 @@ type CouponInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                   int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CouponSn             string  `protobuf:"bytes,2,opt,name=coupon_sn,json=couponSn,proto3" json:"coupon_sn"`
-	Title                string  `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
-	IsAtLeast            bool    `protobuf:"varint,4,opt,name=is_at_least,json=isAtLeast,proto3" json:"is_at_least"`
-	AtLeast              float32 `protobuf:"fixed32,5,opt,name=at_least,json=atLeast,proto3" json:"at_least"`
-	PreferentialType     int32   `protobuf:"varint,6,opt,name=preferential_type,json=preferentialType,proto3" json:"preferential_type"`
-	PreferentialMoney    float32 `protobuf:"fixed32,7,opt,name=preferential_money,json=preferentialMoney,proto3" json:"preferential_money"`
-	PreferentialDiscount float32 `protobuf:"fixed32,8,opt,name=preferential_discount,json=preferentialDiscount,proto3" json:"preferential_discount"`
-	ExchangeNum          int32   `protobuf:"varint,9,opt,name=exchange_num,json=exchangeNum,proto3" json:"exchange_num"`
-	RangeType            string  `protobuf:"bytes,10,opt,name=range_type,json=rangeType,proto3" json:"range_type"`
-	Description          string  `protobuf:"bytes,11,opt,name=description,proto3" json:"description"`
-	TicketId             int64   `protobuf:"varint,12,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id"`
-	TicketSn             string  `protobuf:"bytes,13,opt,name=ticket_sn,json=ticketSn,proto3" json:"ticket_sn"`
-	TicketStartAt        string  `protobuf:"bytes,14,opt,name=ticket_start_at,json=ticketStartAt,proto3" json:"ticket_start_at"`
-	TicketEndAt          string  `protobuf:"bytes,15,opt,name=ticket_end_at,json=ticketEndAt,proto3" json:"ticket_end_at"`
+	Id                   int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CouponSn             string  `protobuf:"bytes,2,opt,name=coupon_sn,json=couponSn,proto3" json:"coupon_sn,omitempty"`
+	Title                string  `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	IsAtLeast            bool    `protobuf:"varint,4,opt,name=is_at_least,json=isAtLeast,proto3" json:"is_at_least,omitempty"`
+	AtLeast              float32 `protobuf:"fixed32,5,opt,name=at_least,json=atLeast,proto3" json:"at_least,omitempty"`
+	PreferentialType     int32   `protobuf:"varint,6,opt,name=preferential_type,json=preferentialType,proto3" json:"preferential_type,omitempty"`
+	PreferentialMoney    float32 `protobuf:"fixed32,7,opt,name=preferential_money,json=preferentialMoney,proto3" json:"preferential_money,omitempty"`
+	PreferentialDiscount float32 `protobuf:"fixed32,8,opt,name=preferential_discount,json=preferentialDiscount,proto3" json:"preferential_discount,omitempty"`
+	ExchangeNum          int32   `protobuf:"varint,9,opt,name=exchange_num,json=exchangeNum,proto3" json:"exchange_num,omitempty"`
+	RangeType            string  `protobuf:"bytes,10,opt,name=range_type,json=rangeType,proto3" json:"range_type,omitempty"`
+	Description          string  `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"`
+	TicketId             int64   `protobuf:"varint,12,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TicketSn             string  `protobuf:"bytes,13,opt,name=ticket_sn,json=ticketSn,proto3" json:"ticket_sn,omitempty"`
+	TicketStartAt        string  `protobuf:"bytes,14,opt,name=ticket_start_at,json=ticketStartAt,proto3" json:"ticket_start_at,omitempty"`
+	TicketEndAt          string  `protobuf:"bytes,15,opt,name=ticket_end_at,json=ticketEndAt,proto3" json:"ticket_end_at,omitempty"`
 }
 
 func (x *CouponInfo) Reset() {

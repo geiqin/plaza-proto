@@ -336,10 +336,14 @@ func NewProductServiceEndpoints() []*api.Endpoint {
 // Client API for ProductService service
 
 type ProductService interface {
-	//商品查询（基于SPU查询）
+	//商品查询【后端使用】
 	Search(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
-	//商品详情显示（基于SPU信息）
+	//商品详情显示【后端使用】
 	Display(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
+	//商品查询【前端使用】
+	FrontSearch(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
+	//商品详情显示【前端使用】
+	FrontDisplay(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
 }
 
 type productService struct {
@@ -374,19 +378,45 @@ func (c *productService) Display(ctx context.Context, in *SkuRequest, opts ...cl
 	return out, nil
 }
 
+func (c *productService) FrontSearch(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error) {
+	req := c.c.NewRequest(c.name, "ProductService.FrontSearch", in)
+	out := new(SpuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productService) FrontDisplay(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error) {
+	req := c.c.NewRequest(c.name, "ProductService.FrontDisplay", in)
+	out := new(SpuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ProductService service
 
 type ProductServiceHandler interface {
-	//商品查询（基于SPU查询）
+	//商品查询【后端使用】
 	Search(context.Context, *SkuRequest, *SpuResponse) error
-	//商品详情显示（基于SPU信息）
+	//商品详情显示【后端使用】
 	Display(context.Context, *SkuRequest, *SpuResponse) error
+	//商品查询【前端使用】
+	FrontSearch(context.Context, *SkuRequest, *SpuResponse) error
+	//商品详情显示【前端使用】
+	FrontDisplay(context.Context, *SkuRequest, *SpuResponse) error
 }
 
 func RegisterProductServiceHandler(s server.Server, hdlr ProductServiceHandler, opts ...server.HandlerOption) error {
 	type productService interface {
 		Search(ctx context.Context, in *SkuRequest, out *SpuResponse) error
 		Display(ctx context.Context, in *SkuRequest, out *SpuResponse) error
+		FrontSearch(ctx context.Context, in *SkuRequest, out *SpuResponse) error
+		FrontDisplay(ctx context.Context, in *SkuRequest, out *SpuResponse) error
 	}
 	type ProductService struct {
 		productService
@@ -405,4 +435,12 @@ func (h *productServiceHandler) Search(ctx context.Context, in *SkuRequest, out 
 
 func (h *productServiceHandler) Display(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
 	return h.ProductServiceHandler.Display(ctx, in, out)
+}
+
+func (h *productServiceHandler) FrontSearch(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
+	return h.ProductServiceHandler.FrontSearch(ctx, in, out)
+}
+
+func (h *productServiceHandler) FrontDisplay(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
+	return h.ProductServiceHandler.FrontDisplay(ctx, in, out)
 }

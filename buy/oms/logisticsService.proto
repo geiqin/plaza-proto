@@ -87,7 +87,7 @@ message TransportationInfo {
 
 //订单发货的请求数据(快递发货)
 message LogisticsRequest {
-    string method = 1;
+    string shipment_code = 1;
     string type = 2;
     int64 order_id = 3;
     bool is_delivery = 4;

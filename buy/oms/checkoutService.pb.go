@@ -31,14 +31,14 @@ type Checkout struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CheckoutId       string          `protobuf:"bytes,1,opt,name=checkout_id,json=checkoutId,proto3" json:"checkout_id"`                     //结账台ID
-	AvailableSurplus float32         `protobuf:"fixed32,2,opt,name=available_surplus,json=availableSurplus,proto3" json:"available_surplus"` //可使用的余额
-	AvailablePoints  int32           `protobuf:"varint,3,opt,name=available_points,json=availablePoints,proto3" json:"available_points"`     //可使用的积分数
-	AvailableCoupons *CouponInfo     `protobuf:"bytes,4,opt,name=available_coupons,json=availableCoupons,proto3" json:"available_coupons"`   //可使用的优惠劵集合
-	ShippingAddress  *OrderAddress   `protobuf:"bytes,5,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address"`      //订单收货地址
-	ShopList         []*CheckoutShop `protobuf:"bytes,6,rep,name=shop_list,json=shopList,proto3" json:"shop_list"`                           //商品中涉及到那些卖家（多店铺模式下）
-	ShipmentList     []*Shipment     `protobuf:"bytes,7,rep,name=shipment_list,json=shipmentList,proto3" json:"shipment_list"`               //可选的配送方式
-	PaymentList      []*Payment      `protobuf:"bytes,8,rep,name=payment_list,json=paymentList,proto3" json:"payment_list"`                  //可选的支付方式
+	CheckoutId       string          `protobuf:"bytes,1,opt,name=checkout_id,json=checkoutId,proto3" json:"checkout_id,omitempty"`                     //结账台ID
+	AvailableSurplus float32         `protobuf:"fixed32,2,opt,name=available_surplus,json=availableSurplus,proto3" json:"available_surplus,omitempty"` //可使用的余额
+	AvailablePoints  int32           `protobuf:"varint,3,opt,name=available_points,json=availablePoints,proto3" json:"available_points,omitempty"`     //可使用的积分数
+	AvailableCoupons *CouponInfo     `protobuf:"bytes,4,opt,name=available_coupons,json=availableCoupons,proto3" json:"available_coupons,omitempty"`   //可使用的优惠劵集合
+	ShippingAddress  *OrderAddress   `protobuf:"bytes,5,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address,omitempty"`      //订单收货地址
+	ShopList         []*CheckoutShop `protobuf:"bytes,6,rep,name=shop_list,json=shopList,proto3" json:"shop_list,omitempty"`                           //商品中涉及到那些卖家（多店铺模式下）
+	ShipmentList     []*Shipment     `protobuf:"bytes,7,rep,name=shipment_list,json=shipmentList,proto3" json:"shipment_list,omitempty"`               //可选的配送方式
+	PaymentList      []*Payment      `protobuf:"bytes,8,rep,name=payment_list,json=paymentList,proto3" json:"payment_list,omitempty"`                  //可选的支付方式
 }
 
 func (x *Checkout) Reset() {
@@ -135,22 +135,22 @@ type CheckoutRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CheckoutId      string            `protobuf:"bytes,1,opt,name=checkout_id,json=checkoutId,proto3" json:"checkout_id"`                                                                                   //结账台ID
-	OrderType       string            `protobuf:"bytes,2,opt,name=order_type,json=orderType,proto3" json:"order_type"`                                                                                      //订单类型（默认为普通订单）
-	AddressId       int64             `protobuf:"varint,3,opt,name=address_id,json=addressId,proto3" json:"address_id"`                                                                                     //收货地址ID
-	Postscript      string            `protobuf:"bytes,4,opt,name=postscript,proto3" json:"postscript"`                                                                                                     //买家留言(50字以内)
-	ShipmentId      int32             `protobuf:"varint,5,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id"`                                                                                  //选中的配送方式
-	PaymentId       int32             `protobuf:"varint,6,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`                                                                                     //选中的支付方式
-	Terminal        string            `protobuf:"bytes,7,opt,name=terminal,proto3" json:"terminal"`                                                                                                         //下单来源终端：site/app/wx_mini/ali_mini/h5/pos
-	CouponId        int64             `protobuf:"varint,8,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`                                                                                        //选中的优惠劵凭证ID
-	Integral        int32             `protobuf:"varint,9,opt,name=integral,proto3" json:"integral"`                                                                                                        //使用的积分数
-	Surplus         int32             `protobuf:"varint,10,opt,name=surplus,proto3" json:"surplus"`                                                                                                         //使用的余额数
-	AgentMemberId   int64             `protobuf:"varint,11,opt,name=agent_member_id,json=agentMemberId,proto3" json:"agent_member_id"`                                                                      //代理的客户ID（操作员代客下单）
-	RechargeMoney   float32           `protobuf:"fixed32,12,opt,name=recharge_money,json=rechargeMoney,proto3" json:"recharge_money"`                                                                       //订单金额【充值订单】
-	RechargeSubject string            `protobuf:"bytes,13,opt,name=recharge_subject,json=rechargeSubject,proto3" json:"recharge_subject"`                                                                   //订单标题【充值订单】
-	SkuList         map[int64]int32   `protobuf:"bytes,14,rep,name=sku_list,json=skuList,proto3" json:"sku_list" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"` //购买的商品清单
-	Metas           map[string]string `protobuf:"bytes,15,rep,name=metas,proto3" json:"metas" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`                      //订单扩展信息
-	Postscripts     map[int64]string  `protobuf:"bytes,16,rep,name=postscripts,proto3" json:"postscripts" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`         //多店铺模式下给各个商家的留言
+	CheckoutId      string            `protobuf:"bytes,1,opt,name=checkout_id,json=checkoutId,proto3" json:"checkout_id,omitempty"`                                                                                   //结账台ID
+	OrderType       string            `protobuf:"bytes,2,opt,name=order_type,json=orderType,proto3" json:"order_type,omitempty"`                                                                                      //订单类型（默认为普通订单）
+	AddressId       int64             `protobuf:"varint,3,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`                                                                                     //收货地址ID
+	Postscript      string            `protobuf:"bytes,4,opt,name=postscript,proto3" json:"postscript,omitempty"`                                                                                                     //买家留言(50字以内)
+	ShipmentId      int32             `protobuf:"varint,5,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`                                                                                  //选中的配送方式
+	PaymentId       int32             `protobuf:"varint,6,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`                                                                                     //选中的支付方式
+	Terminal        string            `protobuf:"bytes,7,opt,name=terminal,proto3" json:"terminal,omitempty"`                                                                                                         //下单来源终端：site/app/wx_mini/ali_mini/h5/pos
+	CouponId        int64             `protobuf:"varint,8,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id,omitempty"`                                                                                        //选中的优惠劵凭证ID
+	Integral        int32             `protobuf:"varint,9,opt,name=integral,proto3" json:"integral,omitempty"`                                                                                                        //使用的积分数
+	Surplus         int32             `protobuf:"varint,10,opt,name=surplus,proto3" json:"surplus,omitempty"`                                                                                                         //使用的余额数
+	AgentMemberId   int64             `protobuf:"varint,11,opt,name=agent_member_id,json=agentMemberId,proto3" json:"agent_member_id,omitempty"`                                                                      //代理的客户ID（操作员代客下单）
+	RechargeMoney   float32           `protobuf:"fixed32,12,opt,name=recharge_money,json=rechargeMoney,proto3" json:"recharge_money,omitempty"`                                                                       //订单金额【充值订单】
+	RechargeSubject string            `protobuf:"bytes,13,opt,name=recharge_subject,json=rechargeSubject,proto3" json:"recharge_subject,omitempty"`                                                                   //订单标题【充值订单】
+	SkuList         map[int64]int32   `protobuf:"bytes,14,rep,name=sku_list,json=skuList,proto3" json:"sku_list,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"` //购买的商品清单
+	Metas           map[string]string `protobuf:"bytes,15,rep,name=metas,proto3" json:"metas,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`                      //订单扩展信息
+	Postscripts     map[int64]string  `protobuf:"bytes,16,rep,name=postscripts,proto3" json:"postscripts,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`         //多店铺模式下给各个商家的留言
 }
 
 func (x *CheckoutRequest) Reset() {
@@ -302,12 +302,12 @@ type CheckoutData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity  *Checkout         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Scheme  *Order            `protobuf:"bytes,2,opt,name=scheme,proto3" json:"scheme"`
-	Order   *Order            `protobuf:"bytes,3,opt,name=order,proto3" json:"order"`
-	Request *CheckoutRequest  `protobuf:"bytes,4,opt,name=request,proto3" json:"request"` //请求数据原始返回
-	Params  map[string]string `protobuf:"bytes,5,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Info    *common.Info      `protobuf:"bytes,6,opt,name=info,proto3" json:"info"`
+	Entity  *Checkout         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Scheme  *Order            `protobuf:"bytes,2,opt,name=scheme,proto3" json:"scheme,omitempty"`
+	Order   *Order            `protobuf:"bytes,3,opt,name=order,proto3" json:"order,omitempty"`
+	Request *CheckoutRequest  `protobuf:"bytes,4,opt,name=request,proto3" json:"request,omitempty"` //请求数据原始返回
+	Params  map[string]string `protobuf:"bytes,5,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Info    *common.Info      `protobuf:"bytes,6,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *CheckoutData) Reset() {
@@ -389,8 +389,8 @@ type CheckoutResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *CheckoutData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *CheckoutData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *CheckoutResponse) Reset() {
@@ -444,10 +444,10 @@ type CheckoutShop struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id      int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	LogoId  int64  `protobuf:"varint,3,opt,name=logo_id,json=logoId,proto3" json:"logo_id"`
-	LogoUrl string `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url"`
+	Id      int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	LogoId  int64  `protobuf:"varint,3,opt,name=logo_id,json=logoId,proto3" json:"logo_id,omitempty"`
+	LogoUrl string `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
 }
 
 func (x *CheckoutShop) Reset() {

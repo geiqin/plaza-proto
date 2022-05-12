@@ -30,17 +30,17 @@ type Adjustment struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	OrderId         int64   `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	OrderItemId     int64   `protobuf:"varint,3,opt,name=order_item_id,json=orderItemId,proto3" json:"order_item_id"`
-	OrderItemUnitId int64   `protobuf:"varint,4,opt,name=order_item_unit_id,json=orderItemUnitId,proto3" json:"order_item_unit_id"`
-	Type            string  `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`
-	Label           string  `protobuf:"bytes,6,opt,name=label,proto3" json:"label"`
-	OriginCode      string  `protobuf:"bytes,7,opt,name=origin_code,json=originCode,proto3" json:"origin_code"`
-	Amount          float32 `protobuf:"fixed32,8,opt,name=amount,proto3" json:"amount"`
-	Included        bool    `protobuf:"varint,9,opt,name=included,proto3" json:"included"`
-	CreatedAt       string  `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt       string  `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id              int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	OrderId         int64   `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	OrderItemId     int64   `protobuf:"varint,3,opt,name=order_item_id,json=orderItemId,proto3" json:"order_item_id,omitempty"`
+	OrderItemUnitId int64   `protobuf:"varint,4,opt,name=order_item_unit_id,json=orderItemUnitId,proto3" json:"order_item_unit_id,omitempty"`
+	Type            string  `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
+	Label           string  `protobuf:"bytes,6,opt,name=label,proto3" json:"label,omitempty"`
+	OriginCode      string  `protobuf:"bytes,7,opt,name=origin_code,json=originCode,proto3" json:"origin_code,omitempty"`
+	Amount          float32 `protobuf:"fixed32,8,opt,name=amount,proto3" json:"amount,omitempty"`
+	Included        bool    `protobuf:"varint,9,opt,name=included,proto3" json:"included,omitempty"`
+	CreatedAt       string  `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt       string  `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
 
 func (x *Adjustment) Reset() {

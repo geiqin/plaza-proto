@@ -45,10 +45,14 @@ service SkuService {
 
 //商品信息（查询/显示）
 service ProductService {
-    //商品查询（基于SPU查询）
+    //商品查询【后端使用】
     rpc Search (SkuRequest) returns (SpuResponse);
-    //商品详情显示（基于SPU信息）
+    //商品详情显示【后端使用】
     rpc Display (SkuRequest) returns (SpuResponse);
+    //商品查询【前端使用】
+    rpc FrontSearch (SkuRequest) returns (SpuResponse);
+    //商品详情显示【前端使用】
+    rpc FrontDisplay (SkuRequest) returns (SpuResponse);
 }
 
 message Sku {
@@ -77,12 +81,13 @@ message Sku {
     bool is_member_right = 23;
     bool is_member_price = 24;
     bool is_hide_stock = 25;
-    bool is_new = 27;
-    bool is_hot = 28;
-    bool is_recommend = 29;
-    bool is_special = 30;
-    bool is_master = 31;
-    string indexes =32;
+    bool is_new = 26;
+    bool is_hot = 27;
+    bool is_recommend = 28;
+    bool is_special = 29;
+    bool is_master = 30;
+    string indexes =31;
+    string index_pos =32;
     string status = 33;
     string listed_at = 34;
     string created_at = 35;
@@ -162,18 +167,20 @@ message SkuRequest {
     string type = 7;
     int32 category_id = 10;
     int32 term_id = 11;
-    int32 brand_id = 12;
-    int64 shop_id = 13;
-    string status =14;
-    string start_date =15;
-    string end_date =16;
-    int32 param_id = 17;
-    string param_value = 18;
-    string tag_id = 19;
-    string tag_name = 20;
-    int32 listed_status =21;
-    repeated int64 spu_ids = 22;
-    repeated int64 sku_ids = 23;
+    string term_name = 12;
+    int32 brand_id = 13;
+    int64 shop_id = 14;
+    string status =15;
+    string start_date =16;
+    string end_date =17;
+    int32 param_id = 18;
+    string param_value = 19;
+    string tag_id = 20;
+    string tag_name = 21;
+    int32 listed_status =22;
+    int32 sort =23;
+    repeated int64 spu_ids = 24;
+    repeated int64 sku_ids = 25;
 }
 
 message SkuData {
