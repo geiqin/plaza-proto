@@ -41,9 +41,10 @@ message User {
     string memo = 14;
     string created_at =15;
     string updated_at = 16;
-    Dept dept =17;
-    Post post =18;
-    Role role =19;
+    string data_permission =17;
+    Dept dept =18;
+    Post post =19;
+    Role role =20;
 }
 
 
