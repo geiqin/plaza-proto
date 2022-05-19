@@ -139,11 +139,11 @@ message Spu {
     string memo = 35;
     int32 button_mode = 36;
     string button_custom = 37;
-    string shipment_codes = 38;
+    repeated string shipment_codes = 38;
     int32 freight_mode = 39;
     float uniform_freight = 40;
     int32 express_id = 41;
-    string after_sale_codes = 42;
+    repeated string after_sale_codes = 42;
     string status = 43;
     string created_at = 44;
     string updated_at = 45;
