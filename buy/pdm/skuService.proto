@@ -8,7 +8,6 @@ import "categoryService.proto";
 import "termService.proto";
 import "tagService.proto";
 import "spuGalleryService.proto";
-import "unitService.proto";
 import "skuVipService.proto";
 import "skuCouponService.proto";
 import "skuPresaleService.proto";
@@ -61,7 +60,7 @@ message Sku {
     string sku_sn = 3;
     string title = 4;
     string type = 5;
-    int32 unit_id = 6;
+    string unit = 6;
     int64 shop_id = 7;
     int64 image_id = 8;
     string image_url = 9;
@@ -94,7 +93,6 @@ message Sku {
     string updated_at = 36;
     repeated int32 indexes_data = 37;
     map<int32,string> own_desc_data = 38;
-    Unit unit = 39;
     Spu spu = 40;
     SkuVip vip = 41;
     SkuCoupon coupon = 42;
@@ -108,7 +106,7 @@ message Spu {
     string code = 2;
     string title = 3;
     string type = 4;
-    int32 unit_id = 5;
+    string unit = 5;
     int32 category_id = 6;
     string category_ids = 7;
     int32 brand_id = 8;
@@ -139,20 +137,26 @@ message Spu {
     bool is_spec = 33;
     int32 sort = 34;
     string memo = 35;
-    string status = 36;
-    string created_at = 37;
-    string updated_at = 38;
-    SpuDesc desc = 39;
-    Brand brand = 40;
-    Category category = 41;
-    Sku sku = 42;
-    Unit unit = 43;
-    repeated Term terms = 44;
-    repeated Tag tags = 45;
-    repeated Sku skus = 46;
-    repeated SpuGallery galleries = 47;
-    GenericProperty generic_property = 48;
-    repeated SaleProperty sale_property =49;
+    int32 button_mode = 36;
+    string button_custom = 37;
+    string shipment_codes = 38;
+    int32 freight_mode = 39;
+    float uniform_freight = 40;
+    int32 express_id = 41;
+    string after_sale_codes = 42;
+    string status = 43;
+    string created_at = 44;
+    string updated_at = 45;
+    SpuDesc desc = 46;
+    Brand brand = 47;
+    Category category = 48;
+    Sku sku = 49;
+    repeated Term terms = 50;
+    repeated Tag tags = 51;
+    repeated Sku skus = 52;
+    repeated SpuGallery galleries = 53;
+    GenericProperty generic_property = 54;
+    repeated SaleProperty sale_property =55;
 }
 
 message SkuRequest {
@@ -175,12 +179,15 @@ message SkuRequest {
     string end_date =17;
     int32 param_id = 18;
     string param_value = 19;
-    string tag_id = 20;
+    int32 tag_id = 20;
     string tag_name = 21;
     int32 listed_status =22;
     int32 sort =23;
     repeated int64 spu_ids = 24;
     repeated int64 sku_ids = 25;
+    repeated int64 brand_ids = 26;
+    repeated int64 tag_ids = 27;
+    repeated int64 term_ids = 28;
 }
 
 message SkuData {

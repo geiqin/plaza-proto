@@ -37,18 +37,9 @@ message AttrParam {
     string updated_at = 19;
     AttrGroup group = 20;
     Category category = 21;
-    repeated AttrValue values = 22;
+    repeated string values = 22;
 }
 
-message AttrValue {
-    int32 id = 1;
-    int32 param_id = 2;
-    string param_value = 3;
-    int32 sort = 4;
-    string status = 5;
-    string created_at = 6;
-    string updated_at = 7;
-}
 
 message AttrParamRequest {
     int32 paged = 1;
@@ -66,9 +57,10 @@ message AttrParamRequest {
 
 message AttrParamData {
     AttrParam  entity = 1;
-    common.Pager pager = 2;
-    repeated AttrParam items = 3;
-    common.Info info = 4;
+    string  param_value = 2;
+    common.Pager pager = 3;
+    repeated AttrParam items = 4;
+    common.Info info = 5;
 }
 
 message AttrParamResponse {
