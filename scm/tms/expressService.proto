@@ -50,16 +50,9 @@ message ExpressDetail {
   string created_at = 9;
   string updated_at = 10;
   string area_content = 11;
-  repeated ExpressArea areas = 12;
+  repeated int64 area_range_ids = 12;
 }
 
-message ExpressArea {
-  int64 id = 1;
-  int64 express_detail_id = 2;
-  int64 area_id = 3;
-  string created_at = 4;
-  string updated_at = 5;
-}
 
 message ExpressData {
   Express entity = 1;

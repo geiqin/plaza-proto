@@ -6,15 +6,15 @@ import "shipperService.proto";
 import "skuInfoService.proto";
 import "fetchService.proto";
 
-service ShipOrderService {
-    rpc Create (ShipOrder) returns (ShipOrderResponse) {}
-    rpc Update (ShipOrder) returns (ShipOrderResponse) {}
-    rpc Get (ShipOrderRequest) returns (ShipOrderResponse) {}
-    rpc List (ShipOrderRequest) returns (ShipOrderResponse) {}
+service DispatchService {
+    rpc Create (Dispatch) returns (DispatchResponse) {}
+    rpc Update (Dispatch) returns (DispatchResponse) {}
+    rpc Get (DispatchRequest) returns (DispatchResponse) {}
+    rpc List (DispatchRequest) returns (DispatchResponse) {}
 }
 
 
-message ShipOrder {
+message Dispatch {
     int64 id = 1;
     string code = 2;
     int64 order_id = 3;
@@ -46,7 +46,7 @@ message ShipOrder {
     string arrived_at = 29;
     string created_at = 30;
     string updated_at = 31;
-    repeated ShipOrderDetail details = 32;
+    repeated DispatchDetail details = 32;
     string start_time = 33;
     string end_time = 34;
     string shipped_at = 35;
@@ -54,7 +54,7 @@ message ShipOrder {
     Fetch location = 37;
 }
 
-message ShipOrderDetail {
+message DispatchDetail {
     int64 id = 1;
     int64 ship_order_id = 2;
     int64 order_detail_id = 3;
@@ -66,7 +66,7 @@ message ShipOrderDetail {
     SkuInfo sku = 9;
 }
 
-message ShipOrderRequest {
+message DispatchRequest {
     int32 paged = 1;
     int32 page_size = 2;
     string sorting = 3;
@@ -79,16 +79,16 @@ message ShipOrderRequest {
     repeated int64 ids = 6;
 }
 
-message ShipOrderData {
-    ShipOrder entity = 1;
+message DispatchData {
+    Dispatch entity = 1;
     common.Pager pager =2;
-    repeated ShipOrder items = 3;
+    repeated Dispatch items = 3;
     common.Info info =4;
 }
 
 
-message ShipOrderResponse {
-    ShipOrderData data = 1;
+message DispatchResponse {
+    DispatchData data = 1;
     common.Error error = 2;
 }
 
