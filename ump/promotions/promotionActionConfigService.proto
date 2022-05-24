@@ -1,0 +1,36 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+
+//活动常用优惠策略
+message PromotionActionConfig {
+    float order_fixed_discount =1; //订单固定折扣
+    float order_percentage_discount =2; //订单百分比折扣
+    float promotion_items_fixed_discount =3; //订单中促销项目固定折扣
+    bool free_postage =4; //免运费
+    float shipping_percentage_discount =5; //运费百分比折扣
+    int32 send_integral =6; //送积分
+    repeated int64 send_present_ids =7; //送赠品（送完为止）
+    repeated int64 send_coupon_batch_ids =8; //送优惠劵（送完为止）
+    map<string,int64> send_custom_thing_ids  =9; //送自定义事物对象Ids
+    int32 promotion_items_ladder_mode =10; //订单中促销项目-阶梯模式：1-阶梯满减，2-循环满减
+    repeated LadderDiscount promotion_items_ladder_increase =11; //订单中促销项目-阶梯递增满减
+    LadderDiscount promotion_items_ladder_loop =12; //订单中促销项目-阶梯循环满减
+}
+
+//阶梯优惠
+message LadderDiscount {
+    float method =1; //方式：0-元，1-件
+    float least_amount =2;//满N元
+    int32 least_number =3;//满N件
+    LadderDiscountPreferential preferential =4;//优惠内容
+}
+
+//阶梯优惠内容
+message LadderDiscountPreferential  {
+    bool free_postage =1; //免运费
+    int32 send_integral =2; //送积分
+    repeated int64 send_present_ids =3; //送赠品（送完为止）
+    repeated int64 send_coupon_batch_ids =4; //送优惠劵（送完为止）
+    map<string,int64> send_custom_thing_ids  =5; //送自定义事物对象Ids
+}

@@ -1,0 +1,76 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "promotionActionConfigService.proto";
+import "promotionRuleConfigService.proto";
+import "promotionVariantService.proto";
+
+service PromotionService {
+    //创建促销活动
+    rpc Create (Promotion) returns (PromotionResponse) {}
+    // 编辑促销活动
+    rpc Update (Promotion) returns (PromotionResponse) {}
+    // 删除促销活动
+    rpc Delete (Promotion) returns (PromotionResponse) {}
+    //启动活动
+    rpc Start (Promotion) returns (PromotionResponse) {}
+    //终止活动
+    rpc Stop (Promotion) returns (PromotionResponse) {}
+    // 获取活动详情
+    rpc Get (Promotion) returns (PromotionResponse) {}
+    //获取活动列表
+    rpc List (PromotionRequest) returns (PromotionResponse) {}
+}
+
+//营销活动
+message Promotion {
+    int64 id = 1; //活动ID
+    string type = 2; //活动类型:Coupon优惠劵[CPN]/满减送/限时折扣/秒杀/拼团/通用
+    string code = 3; //活动编码:如：coupon_20210101212
+    string title = 4; //活动标题
+    string began_at = 5; //活动生效时间
+    string ended_at = 6; //活动结束时间
+    int64 cover_id = 7; //促销封面ID
+    string cover_url = 8; //促销封面url
+    string asset_url = 9; //促销详情链接
+    string description = 10; //活动描述
+    int32 level = 11; //促销级别：1 商品级，2订单级，3特殊级
+    string goods_range = 12;  //商品参与范围: 0-全部，1-部分参与，2-部分不参与
+    string rule_config_data = 13; //限制规则配置json
+    string action_config_data = 14; //优惠策略配置json
+    string status =15; //活动状态：0未开始 1进行中 2已结束 3已失效
+    string created_at = 16; //创建时间
+    string updated_at = 17; //修改时间
+    PromotionActionConfig action_config = 18; //限制规则配置
+    PromotionRuleConfig rule_config = 19; //优惠策略配置
+    PromotionVariant variants =20; //参与活动商品变体
+}
+
+
+message PromotionRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    //以下为自定义参数
+    int32 id = 4;
+    string title =5;
+    string status =6;
+    int32 type_id = 7;
+    string start_date =8;
+    string end_date =9;
+    repeated int32 ids = 10;
+}
+
+
+message PromotionData {
+    Promotion entity = 1;
+    common.Pager pager =2;
+    repeated Promotion items = 3;
+    common.Info info =4;
+}
+
+message PromotionResponse {
+    PromotionData data = 1;
+    common.Error error = 2;
+}

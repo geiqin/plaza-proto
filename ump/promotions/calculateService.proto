@@ -1,0 +1,38 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "skuInfoService.proto";
+
+//活动核算
+service CalculateService {
+    //商品级核算
+    rpc Products (CalculateRequest) returns (CalculateResponse) {}
+    //购物车级核算
+    rpc Cart (CalculateRequest) returns (CalculateResponse) {}
+    //下单购买级核算
+    rpc Purchase (CalculateRequest) returns (CalculateResponse) {}
+    //订单成功支付级核算（有效订单后的核算）
+    rpc Order (CalculateRequest) returns (CalculateResponse) {}
+}
+
+message Calculate {
+    string buying =1;
+}
+
+message CalculateRequest {
+    Calculate buying =1;
+    SkuInfo sku = 2;
+    repeated SkuInfo skus = 3;
+}
+
+message CalculateData {
+    Calculate entity = 1;
+    repeated SkuInfo skus = 2;
+    common.Info info = 3;
+}
+
+message CalculateResponse {
+    CalculateData data = 1;
+    common.Error error = 2;
+}
