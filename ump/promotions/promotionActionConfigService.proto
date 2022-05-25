@@ -4,8 +4,8 @@ option go_package = ".;services";
 
 //活动常用优惠策略
 message PromotionActionConfig {
-    float order_fixed_discount =1; //订单固定折扣
-    float order_percentage_discount =2; //订单百分比折扣
+    float order_reduce_amount =1; //订单优惠金额
+    float order_fixed_discount =2; //订单固定折扣
     float promotion_items_fixed_discount =3; //订单中促销项目固定折扣
     bool free_postage =4; //免运费
     float shipping_percentage_discount =5; //运费百分比折扣
