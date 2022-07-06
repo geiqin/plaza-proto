@@ -11,8 +11,10 @@ service ShipmentService {
   rpc Get (ShipmentRequest) returns (ShipmentResponse) {}
   //获取配送列表
   rpc List (ShipmentRequest) returns (ShipmentResponse) {}
-  //开启/关闭配送方式
-  rpc Switch (ShipmentRequest) returns (ShipmentResponse) {}
+  //开启服务
+  rpc Open (ShipmentRequest) returns (ShipmentResponse) {}
+  //关闭服务
+  rpc Close (ShipmentRequest) returns (ShipmentResponse) {}
   //查询配送方式
   rpc Search (ShipmentRequest) returns (ShipmentResponse) {}
 }

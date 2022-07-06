@@ -45,6 +45,7 @@ func NewRoleServiceEndpoints() []*api.Endpoint {
 type RoleService interface {
 	Create(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
 	Update(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
+	UpdateScope(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
 	Delete(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
 	Get(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
 	Search(ctx context.Context, in *RoleRequest, opts ...client.CallOption) (*RoleResponse, error)
@@ -74,6 +75,16 @@ func (c *roleService) Create(ctx context.Context, in *Role, opts ...client.CallO
 
 func (c *roleService) Update(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
 	req := c.c.NewRequest(c.name, "RoleService.Update", in)
+	out := new(RoleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleService) UpdateScope(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "RoleService.UpdateScope", in)
 	out := new(RoleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -117,6 +128,7 @@ func (c *roleService) Search(ctx context.Context, in *RoleRequest, opts ...clien
 type RoleServiceHandler interface {
 	Create(context.Context, *Role, *RoleResponse) error
 	Update(context.Context, *Role, *RoleResponse) error
+	UpdateScope(context.Context, *Role, *RoleResponse) error
 	Delete(context.Context, *Role, *RoleResponse) error
 	Get(context.Context, *Role, *RoleResponse) error
 	Search(context.Context, *RoleRequest, *RoleResponse) error
@@ -126,6 +138,7 @@ func RegisterRoleServiceHandler(s server.Server, hdlr RoleServiceHandler, opts .
 	type roleService interface {
 		Create(ctx context.Context, in *Role, out *RoleResponse) error
 		Update(ctx context.Context, in *Role, out *RoleResponse) error
+		UpdateScope(ctx context.Context, in *Role, out *RoleResponse) error
 		Delete(ctx context.Context, in *Role, out *RoleResponse) error
 		Get(ctx context.Context, in *Role, out *RoleResponse) error
 		Search(ctx context.Context, in *RoleRequest, out *RoleResponse) error
@@ -147,6 +160,10 @@ func (h *roleServiceHandler) Create(ctx context.Context, in *Role, out *RoleResp
 
 func (h *roleServiceHandler) Update(ctx context.Context, in *Role, out *RoleResponse) error {
 	return h.RoleServiceHandler.Update(ctx, in, out)
+}
+
+func (h *roleServiceHandler) UpdateScope(ctx context.Context, in *Role, out *RoleResponse) error {
+	return h.RoleServiceHandler.UpdateScope(ctx, in, out)
 }
 
 func (h *roleServiceHandler) Delete(ctx context.Context, in *Role, out *RoleResponse) error {

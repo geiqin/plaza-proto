@@ -31,12 +31,12 @@ type SynchroniseRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
 	//----------
-	OrderId  int64   `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	OrderSn  string  `protobuf:"bytes,4,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
-	OrderIds []int64 `protobuf:"varint,34,rep,packed,name=order_ids,json=orderIds,proto3" json:"order_ids,omitempty"`
+	OrderId  int64   `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	OrderSn  string  `protobuf:"bytes,4,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
+	OrderIds []int64 `protobuf:"varint,34,rep,packed,name=order_ids,json=orderIds,proto3" json:"order_ids"`
 }
 
 func (x *SynchroniseRequest) Reset() {
@@ -111,8 +111,8 @@ type SynchroniseResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Error *common.Error `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
-	Info  *common.Info  `protobuf:"bytes,2,opt,name=info,proto3" json:"info,omitempty"`
+	Error *common.Error `protobuf:"bytes,1,opt,name=error,proto3" json:"error"`
+	Info  *common.Info  `protobuf:"bytes,2,opt,name=info,proto3" json:"info"`
 }
 
 func (x *SynchroniseResponse) Reset() {

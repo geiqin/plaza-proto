@@ -7,6 +7,7 @@ import "navService.proto";
 service RoleService {
     rpc Create (Role) returns (RoleResponse) {}
     rpc Update (Role) returns (RoleResponse) {}
+    rpc UpdateScope (Role) returns (RoleResponse) {}
     rpc Delete (Role) returns (RoleResponse) {}
     rpc Get (Role) returns (RoleResponse) {}
     rpc Search (RoleRequest) returns (RoleResponse) {}

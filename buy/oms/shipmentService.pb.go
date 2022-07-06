@@ -31,14 +31,14 @@ type Shipment struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id      int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code    string `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name    string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	IconId  int64  `protobuf:"varint,5,opt,name=icon_id,json=iconId,proto3" json:"icon_id,omitempty"`
-	IconUrl string `protobuf:"bytes,6,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url,omitempty"`
-	Memo    string `protobuf:"bytes,7,opt,name=memo,proto3" json:"memo,omitempty"`
-	Sort    int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort,omitempty"`
-	Status  string `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
+	Id      int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Code    string `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
+	Name    string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	IconId  int64  `protobuf:"varint,5,opt,name=icon_id,json=iconId,proto3" json:"icon_id"`
+	IconUrl string `protobuf:"bytes,6,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`
+	Memo    string `protobuf:"bytes,7,opt,name=memo,proto3" json:"memo"`
+	Sort    int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort"`
+	Status  string `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
 }
 
 func (x *Shipment) Reset() {
@@ -135,16 +135,16 @@ type ShipmentRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//----
-	Id      int32             `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Code    string            `protobuf:"bytes,5,opt,name=code,proto3" json:"code,omitempty"`
-	Name    string            `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	OrderId int64             `protobuf:"varint,7,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	Status  string            `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
-	Params  map[string]string `protobuf:"bytes,9,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Id      int32             `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Code    string            `protobuf:"bytes,5,opt,name=code,proto3" json:"code"`
+	Name    string            `protobuf:"bytes,6,opt,name=name,proto3" json:"name"`
+	OrderId int64             `protobuf:"varint,7,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	Status  string            `protobuf:"bytes,8,opt,name=status,proto3" json:"status"`
+	Params  map[string]string `protobuf:"bytes,9,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *ShipmentRequest) Reset() {
@@ -247,10 +247,10 @@ type ShipmentData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Shipment         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Items  []*Shipment       `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Shipment         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Items  []*Shipment       `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *ShipmentData) Reset() {
@@ -318,8 +318,8 @@ type ShipmentResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *ShipmentData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *ShipmentData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *ShipmentResponse) Reset() {
@@ -428,7 +428,7 @@ var file_shipmentService_proto_rawDesc = []byte{
 	0x2e, 0x53, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64,
 	0x61, 0x74, 0x61, 0x12, 0x23, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x45, 0x72, 0x72, 0x6f,
-	0x72, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x32, 0xd4, 0x02, 0x0a, 0x0f, 0x53, 0x68, 0x69,
+	0x72, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x32, 0x94, 0x03, 0x0a, 0x0f, 0x53, 0x68, 0x69,
 	0x70, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x3a, 0x0a, 0x06,
 	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x12, 0x12, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x73, 0x2e, 0x53, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x1a, 0x1a, 0x2e, 0x73, 0x65, 0x72,
@@ -441,8 +441,12 @@ var file_shipmentService_proto_rawDesc = []byte{
 	0x12, 0x19, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53, 0x68, 0x69, 0x70,
 	0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x73, 0x65,
 	0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x41, 0x0a, 0x06, 0x53, 0x77, 0x69,
-	0x74, 0x63, 0x68, 0x12, 0x19, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3f, 0x0a, 0x04, 0x4f, 0x70, 0x65,
+	0x6e, 0x12, 0x19, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53, 0x68, 0x69,
+	0x70, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x73,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x05, 0x43, 0x6c,
+	0x6f, 0x73, 0x65, 0x12, 0x19, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53,
 	0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a,
 	0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53, 0x68, 0x69, 0x70, 0x6d, 0x65,
 	0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x41, 0x0a, 0x06,
@@ -488,15 +492,17 @@ var file_shipmentService_proto_depIdxs = []int32{
 	0,  // 7: services.ShipmentService.Create:input_type -> services.Shipment
 	1,  // 8: services.ShipmentService.Get:input_type -> services.ShipmentRequest
 	1,  // 9: services.ShipmentService.List:input_type -> services.ShipmentRequest
-	1,  // 10: services.ShipmentService.Switch:input_type -> services.ShipmentRequest
-	1,  // 11: services.ShipmentService.Search:input_type -> services.ShipmentRequest
-	3,  // 12: services.ShipmentService.Create:output_type -> services.ShipmentResponse
-	3,  // 13: services.ShipmentService.Get:output_type -> services.ShipmentResponse
-	3,  // 14: services.ShipmentService.List:output_type -> services.ShipmentResponse
-	3,  // 15: services.ShipmentService.Switch:output_type -> services.ShipmentResponse
-	3,  // 16: services.ShipmentService.Search:output_type -> services.ShipmentResponse
-	12, // [12:17] is the sub-list for method output_type
-	7,  // [7:12] is the sub-list for method input_type
+	1,  // 10: services.ShipmentService.Open:input_type -> services.ShipmentRequest
+	1,  // 11: services.ShipmentService.Close:input_type -> services.ShipmentRequest
+	1,  // 12: services.ShipmentService.Search:input_type -> services.ShipmentRequest
+	3,  // 13: services.ShipmentService.Create:output_type -> services.ShipmentResponse
+	3,  // 14: services.ShipmentService.Get:output_type -> services.ShipmentResponse
+	3,  // 15: services.ShipmentService.List:output_type -> services.ShipmentResponse
+	3,  // 16: services.ShipmentService.Open:output_type -> services.ShipmentResponse
+	3,  // 17: services.ShipmentService.Close:output_type -> services.ShipmentResponse
+	3,  // 18: services.ShipmentService.Search:output_type -> services.ShipmentResponse
+	13, // [13:19] is the sub-list for method output_type
+	7,  // [7:13] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
 	7,  // [7:7] is the sub-list for extension extendee
 	0,  // [0:7] is the sub-list for field type_name

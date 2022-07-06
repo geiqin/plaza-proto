@@ -49,8 +49,10 @@ type ShipmentService interface {
 	Get(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
 	//获取配送列表
 	List(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
-	//开启/关闭配送方式
-	Switch(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
+	//开启服务
+	Open(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
+	//关闭服务
+	Close(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
 	//查询配送方式
 	Search(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
 }
@@ -97,8 +99,18 @@ func (c *shipmentService) List(ctx context.Context, in *ShipmentRequest, opts ..
 	return out, nil
 }
 
-func (c *shipmentService) Switch(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
-	req := c.c.NewRequest(c.name, "ShipmentService.Switch", in)
+func (c *shipmentService) Open(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
+	req := c.c.NewRequest(c.name, "ShipmentService.Open", in)
+	out := new(ShipmentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *shipmentService) Close(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
+	req := c.c.NewRequest(c.name, "ShipmentService.Close", in)
 	out := new(ShipmentResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -126,8 +138,10 @@ type ShipmentServiceHandler interface {
 	Get(context.Context, *ShipmentRequest, *ShipmentResponse) error
 	//获取配送列表
 	List(context.Context, *ShipmentRequest, *ShipmentResponse) error
-	//开启/关闭配送方式
-	Switch(context.Context, *ShipmentRequest, *ShipmentResponse) error
+	//开启服务
+	Open(context.Context, *ShipmentRequest, *ShipmentResponse) error
+	//关闭服务
+	Close(context.Context, *ShipmentRequest, *ShipmentResponse) error
 	//查询配送方式
 	Search(context.Context, *ShipmentRequest, *ShipmentResponse) error
 }
@@ -137,7 +151,8 @@ func RegisterShipmentServiceHandler(s server.Server, hdlr ShipmentServiceHandler
 		Create(ctx context.Context, in *Shipment, out *ShipmentResponse) error
 		Get(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		List(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
-		Switch(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
+		Open(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
+		Close(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		Search(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 	}
 	type ShipmentService struct {
@@ -163,8 +178,12 @@ func (h *shipmentServiceHandler) List(ctx context.Context, in *ShipmentRequest, 
 	return h.ShipmentServiceHandler.List(ctx, in, out)
 }
 
-func (h *shipmentServiceHandler) Switch(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
-	return h.ShipmentServiceHandler.Switch(ctx, in, out)
+func (h *shipmentServiceHandler) Open(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
+	return h.ShipmentServiceHandler.Open(ctx, in, out)
+}
+
+func (h *shipmentServiceHandler) Close(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
+	return h.ShipmentServiceHandler.Close(ctx, in, out)
 }
 
 func (h *shipmentServiceHandler) Search(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {

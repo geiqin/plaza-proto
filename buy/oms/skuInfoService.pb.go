@@ -30,42 +30,42 @@ type SkuInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ItemId       int64             `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	ItemSn       string            `protobuf:"bytes,2,opt,name=item_sn,json=itemSn,proto3" json:"item_sn,omitempty"`
-	Type         int32             `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`
-	Name         string            `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Unit         string            `protobuf:"bytes,5,opt,name=unit,proto3" json:"unit,omitempty"`
-	BrandId      int32             `protobuf:"varint,6,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
-	TaxonomyId   int64             `protobuf:"varint,7,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id,omitempty"`
-	Quantity     int32             `protobuf:"varint,8,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	ThumbId      int64             `protobuf:"varint,9,opt,name=thumb_id,json=thumbId,proto3" json:"thumb_id,omitempty"`
-	ThumbUrl     string            `protobuf:"bytes,10,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url,omitempty"`
-	Barcode      string            `protobuf:"bytes,11,opt,name=barcode,proto3" json:"barcode,omitempty"`
-	Price        float32           `protobuf:"fixed32,12,opt,name=price,proto3" json:"price,omitempty"`
-	OriginPrice  float32           `protobuf:"fixed32,13,opt,name=origin_price,json=originPrice,proto3" json:"origin_price,omitempty"`
-	CostPrice    float32           `protobuf:"fixed32,14,opt,name=cost_price,json=costPrice,proto3" json:"cost_price,omitempty"`
-	Weight       float32           `protobuf:"fixed32,15,opt,name=weight,proto3" json:"weight,omitempty"`
-	SkuId        int64             `protobuf:"varint,16,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"` // 规格商品时使用
-	SkuSn        string            `protobuf:"bytes,17,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn,omitempty"`
-	SkuName      string            `protobuf:"bytes,18,opt,name=sku_name,json=skuName,proto3" json:"sku_name,omitempty"`
-	SkuSpecDesc  string            `protobuf:"bytes,19,opt,name=sku_spec_desc,json=skuSpecDesc,proto3" json:"sku_spec_desc,omitempty"`
-	MinBuy       int32             `protobuf:"varint,20,opt,name=min_buy,json=minBuy,proto3" json:"min_buy,omitempty"`
-	BuyQuota     int32             `protobuf:"varint,21,opt,name=buy_quota,json=buyQuota,proto3" json:"buy_quota,omitempty"`
-	IsSku        bool              `protobuf:"varint,22,opt,name=is_sku,json=isSku,proto3" json:"is_sku,omitempty"`
-	IsVirtual    bool              `protobuf:"varint,23,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual,omitempty"`
-	IsRight      bool              `protobuf:"varint,24,opt,name=is_right,json=isRight,proto3" json:"is_right,omitempty"`
-	IsPresale    bool              `protobuf:"varint,25,opt,name=is_presale,json=isPresale,proto3" json:"is_presale,omitempty"`
-	VipLevelId   int32             `protobuf:"varint,26,opt,name=vip_level_id,json=vipLevelId,proto3" json:"vip_level_id,omitempty"`
-	VipKeepType  int32             `protobuf:"varint,27,opt,name=vip_keep_type,json=vipKeepType,proto3" json:"vip_keep_type,omitempty"`
-	VipKeepValue int32             `protobuf:"varint,28,opt,name=vip_keep_value,json=vipKeepValue,proto3" json:"vip_keep_value,omitempty"`
-	ChildCount   int32             `protobuf:"varint,29,opt,name=child_count,json=childCount,proto3" json:"child_count,omitempty"`
-	Ext11        int64             `protobuf:"varint,30,opt,name=ext11,proto3" json:"ext11,omitempty"`
-	Ext21        int32             `protobuf:"varint,31,opt,name=ext21,proto3" json:"ext21,omitempty"`
-	Ext22        int32             `protobuf:"varint,32,opt,name=ext22,proto3" json:"ext22,omitempty"`
-	Ext31        string            `protobuf:"bytes,33,opt,name=ext31,proto3" json:"ext31,omitempty"`
-	Ext32        string            `protobuf:"bytes,34,opt,name=ext32,proto3" json:"ext32,omitempty"`
-	Ext33        string            `protobuf:"bytes,35,opt,name=ext33,proto3" json:"ext33,omitempty"`
-	Metas        map[string]string `protobuf:"bytes,36,rep,name=metas,proto3" json:"metas,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	ItemId       int64             `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id"`
+	ItemSn       string            `protobuf:"bytes,2,opt,name=item_sn,json=itemSn,proto3" json:"item_sn"`
+	Type         int32             `protobuf:"varint,3,opt,name=type,proto3" json:"type"`
+	Name         string            `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
+	Unit         string            `protobuf:"bytes,5,opt,name=unit,proto3" json:"unit"`
+	BrandId      int32             `protobuf:"varint,6,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`
+	TaxonomyId   int64             `protobuf:"varint,7,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id"`
+	Quantity     int32             `protobuf:"varint,8,opt,name=quantity,proto3" json:"quantity"`
+	ThumbId      int64             `protobuf:"varint,9,opt,name=thumb_id,json=thumbId,proto3" json:"thumb_id"`
+	ThumbUrl     string            `protobuf:"bytes,10,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url"`
+	Barcode      string            `protobuf:"bytes,11,opt,name=barcode,proto3" json:"barcode"`
+	Price        float32           `protobuf:"fixed32,12,opt,name=price,proto3" json:"price"`
+	OriginPrice  float32           `protobuf:"fixed32,13,opt,name=origin_price,json=originPrice,proto3" json:"origin_price"`
+	CostPrice    float32           `protobuf:"fixed32,14,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`
+	Weight       float32           `protobuf:"fixed32,15,opt,name=weight,proto3" json:"weight"`
+	SkuId        int64             `protobuf:"varint,16,opt,name=sku_id,json=skuId,proto3" json:"sku_id"` // 规格商品时使用
+	SkuSn        string            `protobuf:"bytes,17,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn"`
+	SkuName      string            `protobuf:"bytes,18,opt,name=sku_name,json=skuName,proto3" json:"sku_name"`
+	SkuSpecDesc  string            `protobuf:"bytes,19,opt,name=sku_spec_desc,json=skuSpecDesc,proto3" json:"sku_spec_desc"`
+	MinBuy       int32             `protobuf:"varint,20,opt,name=min_buy,json=minBuy,proto3" json:"min_buy"`
+	BuyQuota     int32             `protobuf:"varint,21,opt,name=buy_quota,json=buyQuota,proto3" json:"buy_quota"`
+	IsSku        bool              `protobuf:"varint,22,opt,name=is_sku,json=isSku,proto3" json:"is_sku"`
+	IsVirtual    bool              `protobuf:"varint,23,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`
+	IsRight      bool              `protobuf:"varint,24,opt,name=is_right,json=isRight,proto3" json:"is_right"`
+	IsPresale    bool              `protobuf:"varint,25,opt,name=is_presale,json=isPresale,proto3" json:"is_presale"`
+	VipLevelId   int32             `protobuf:"varint,26,opt,name=vip_level_id,json=vipLevelId,proto3" json:"vip_level_id"`
+	VipKeepType  int32             `protobuf:"varint,27,opt,name=vip_keep_type,json=vipKeepType,proto3" json:"vip_keep_type"`
+	VipKeepValue int32             `protobuf:"varint,28,opt,name=vip_keep_value,json=vipKeepValue,proto3" json:"vip_keep_value"`
+	ChildCount   int32             `protobuf:"varint,29,opt,name=child_count,json=childCount,proto3" json:"child_count"`
+	Ext11        int64             `protobuf:"varint,30,opt,name=ext11,proto3" json:"ext11"`
+	Ext21        int32             `protobuf:"varint,31,opt,name=ext21,proto3" json:"ext21"`
+	Ext22        int32             `protobuf:"varint,32,opt,name=ext22,proto3" json:"ext22"`
+	Ext31        string            `protobuf:"bytes,33,opt,name=ext31,proto3" json:"ext31"`
+	Ext32        string            `protobuf:"bytes,34,opt,name=ext32,proto3" json:"ext32"`
+	Ext33        string            `protobuf:"bytes,35,opt,name=ext33,proto3" json:"ext33"`
+	Metas        map[string]string `protobuf:"bytes,36,rep,name=metas,proto3" json:"metas" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *SkuInfo) Reset() {

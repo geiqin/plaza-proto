@@ -30,16 +30,16 @@ type MemberInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	MemberSn    string `protobuf:"bytes,2,opt,name=member_sn,json=memberSn,proto3" json:"member_sn,omitempty"`
-	Username    string `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	DisplayName string `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	RealName    string `protobuf:"bytes,5,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`
-	RankId      int32  `protobuf:"varint,7,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
-	Gender      string `protobuf:"bytes,8,opt,name=gender,proto3" json:"gender,omitempty"`
-	AvatarId    int64  `protobuf:"varint,10,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id,omitempty"`
-	AvatarUrl   string `protobuf:"bytes,11,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Status      string `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"`
+	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	MemberSn    string `protobuf:"bytes,2,opt,name=member_sn,json=memberSn,proto3" json:"member_sn"`
+	Username    string `protobuf:"bytes,3,opt,name=username,proto3" json:"username"`
+	DisplayName string `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name"`
+	RealName    string `protobuf:"bytes,5,opt,name=real_name,json=realName,proto3" json:"real_name"`
+	RankId      int32  `protobuf:"varint,7,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
+	Gender      string `protobuf:"bytes,8,opt,name=gender,proto3" json:"gender"`
+	AvatarId    int64  `protobuf:"varint,10,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id"`
+	AvatarUrl   string `protobuf:"bytes,11,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
+	Status      string `protobuf:"bytes,12,opt,name=status,proto3" json:"status"`
 }
 
 func (x *MemberInfo) Reset() {

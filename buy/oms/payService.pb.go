@@ -32,24 +32,24 @@ type PayRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                  int32             `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code                string            `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Terminal            string            `protobuf:"bytes,3,opt,name=terminal,proto3" json:"terminal,omitempty"`
-	OrderId             int64             `protobuf:"varint,4,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	Status              string            `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	Amount              float32           `protobuf:"fixed32,6,opt,name=amount,proto3" json:"amount,omitempty"`
-	PayerId             int64             `protobuf:"varint,7,opt,name=payer_id,json=payerId,proto3" json:"payer_id,omitempty"`
-	PayerName           string            `protobuf:"bytes,8,opt,name=payer_name,json=payerName,proto3" json:"payer_name,omitempty"`
-	PayerBankName       string            `protobuf:"bytes,9,opt,name=payer_bank_name,json=payerBankName,proto3" json:"payer_bank_name,omitempty"`
-	PayerBankAccount    string            `protobuf:"bytes,10,opt,name=payer_bank_account,json=payerBankAccount,proto3" json:"payer_bank_account,omitempty"`
-	ReceiverId          int64             `protobuf:"varint,11,opt,name=receiver_id,json=receiverId,proto3" json:"receiver_id,omitempty"`
-	ReceiverName        string            `protobuf:"bytes,12,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name,omitempty"`
-	ReceiverAccountId   string            `protobuf:"bytes,13,opt,name=receiver_account_id,json=receiverAccountId,proto3" json:"receiver_account_id,omitempty"`
-	ReceiverAccountName string            `protobuf:"bytes,14,opt,name=receiver_account_name,json=receiverAccountName,proto3" json:"receiver_account_name,omitempty"`
-	PayType             string            `protobuf:"bytes,15,opt,name=pay_type,json=payType,proto3" json:"pay_type,omitempty"`
-	PayDate             string            `protobuf:"bytes,16,opt,name=pay_date,json=payDate,proto3" json:"pay_date,omitempty"`
-	Memo                string            `protobuf:"bytes,17,opt,name=memo,proto3" json:"memo,omitempty"`
-	Params              map[string]string `protobuf:"bytes,18,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Id                  int32             `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Code                string            `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
+	Terminal            string            `protobuf:"bytes,3,opt,name=terminal,proto3" json:"terminal"`
+	OrderId             int64             `protobuf:"varint,4,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	Status              string            `protobuf:"bytes,5,opt,name=status,proto3" json:"status"`
+	Amount              float32           `protobuf:"fixed32,6,opt,name=amount,proto3" json:"amount"`
+	PayerId             int64             `protobuf:"varint,7,opt,name=payer_id,json=payerId,proto3" json:"payer_id"`
+	PayerName           string            `protobuf:"bytes,8,opt,name=payer_name,json=payerName,proto3" json:"payer_name"`
+	PayerBankName       string            `protobuf:"bytes,9,opt,name=payer_bank_name,json=payerBankName,proto3" json:"payer_bank_name"`
+	PayerBankAccount    string            `protobuf:"bytes,10,opt,name=payer_bank_account,json=payerBankAccount,proto3" json:"payer_bank_account"`
+	ReceiverId          int64             `protobuf:"varint,11,opt,name=receiver_id,json=receiverId,proto3" json:"receiver_id"`
+	ReceiverName        string            `protobuf:"bytes,12,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name"`
+	ReceiverAccountId   string            `protobuf:"bytes,13,opt,name=receiver_account_id,json=receiverAccountId,proto3" json:"receiver_account_id"`
+	ReceiverAccountName string            `protobuf:"bytes,14,opt,name=receiver_account_name,json=receiverAccountName,proto3" json:"receiver_account_name"`
+	PayType             string            `protobuf:"bytes,15,opt,name=pay_type,json=payType,proto3" json:"pay_type"`
+	PayDate             string            `protobuf:"bytes,16,opt,name=pay_date,json=payDate,proto3" json:"pay_date"`
+	Memo                string            `protobuf:"bytes,17,opt,name=memo,proto3" json:"memo"`
+	Params              map[string]string `protobuf:"bytes,18,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *PayRequest) Reset() {
@@ -215,9 +215,9 @@ type PayData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Order  *Order            `protobuf:"bytes,1,opt,name=order,proto3" json:"order,omitempty"`
-	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Info   *common.Info      `protobuf:"bytes,3,opt,name=info,proto3" json:"info,omitempty"`
+	Order  *Order            `protobuf:"bytes,1,opt,name=order,proto3" json:"order"`
+	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Info   *common.Info      `protobuf:"bytes,3,opt,name=info,proto3" json:"info"`
 }
 
 func (x *PayData) Reset() {
@@ -278,8 +278,8 @@ type PayResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *PayData      `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *PayData      `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *PayResponse) Reset() {

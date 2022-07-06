@@ -2,7 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = ".;services";
 import "common/base.proto";
-import "spuDescService.proto";
+import "spuPropertyService.proto";
 import "brandService.proto";
 import "categoryService.proto";
 import "termService.proto";
@@ -157,6 +157,13 @@ message Spu {
     repeated SpuGallery galleries = 53;
     GenericProperty generic_property = 54;
     repeated SaleProperty sale_property =55;
+    repeated ServiceProperty service_property =56;
+}
+
+message SpuDesc {
+    string content = 1;
+    string packing_list = 2;
+    string after_service = 3;
 }
 
 message SkuRequest {

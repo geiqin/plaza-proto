@@ -15,6 +15,7 @@ service AttrParamService {
     rpc AddValue (AttrParamRequest) returns (AttrParamResponse);
 }
 
+
 message AttrParam {
     int32 id = 1;
     string name = 2;
@@ -32,12 +33,18 @@ message AttrParam {
     bool is_multi = 14;
     string unit = 15;
     int32 sort = 16;
-    string status = 17;
-    string created_at = 18;
-    string updated_at = 19;
-    AttrGroup group = 20;
-    Category category = 21;
-    repeated string values = 22;
+    int32 goods_count = 17;
+    string status = 18;
+    string created_at = 19;
+    string updated_at = 20;
+    AttrGroup group = 21;
+    Category category = 22;
+    repeated string values = 23;
+    repeated service_value service_values =24;
+    message service_value  {
+        string value_text =1;
+        float price =2;
+    }
 }
 
 
@@ -52,7 +59,8 @@ message AttrParamRequest {
     string type = 8;
     int32 param_id = 9;
     string param_value = 10;
-    repeated int32 ids =11;
+    float value_price = 11;
+    repeated int32 ids =12;
 }
 
 message AttrParamData {

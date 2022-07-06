@@ -31,8 +31,8 @@ type OrderFlow struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Current *OrderFlowStep   `protobuf:"bytes,1,opt,name=current,proto3" json:"current,omitempty"`
-	Steps   []*OrderFlowStep `protobuf:"bytes,2,rep,name=steps,proto3" json:"steps,omitempty"`
+	Current *OrderFlowStep   `protobuf:"bytes,1,opt,name=current,proto3" json:"current"`
+	Steps   []*OrderFlowStep `protobuf:"bytes,2,rep,name=steps,proto3" json:"steps"`
 }
 
 func (x *OrderFlow) Reset() {
@@ -86,13 +86,13 @@ type OrderFlowStep struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code        string `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	ShortName   string `protobuf:"bytes,3,opt,name=short_name,json=shortName,proto3" json:"short_name,omitempty"`
-	IconUrl     string `protobuf:"bytes,4,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url,omitempty"`
-	Status      string `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	HappenAt    string `protobuf:"bytes,6,opt,name=happen_at,json=happenAt,proto3" json:"happen_at,omitempty"`
-	Description string `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	Code        string `protobuf:"bytes,1,opt,name=code,proto3" json:"code"`
+	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	ShortName   string `protobuf:"bytes,3,opt,name=short_name,json=shortName,proto3" json:"short_name"`
+	IconUrl     string `protobuf:"bytes,4,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`
+	Status      string `protobuf:"bytes,5,opt,name=status,proto3" json:"status"`
+	HappenAt    string `protobuf:"bytes,6,opt,name=happen_at,json=happenAt,proto3" json:"happen_at"`
+	Description string `protobuf:"bytes,7,opt,name=description,proto3" json:"description"`
 }
 
 func (x *OrderFlowStep) Reset() {

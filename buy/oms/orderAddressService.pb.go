@@ -31,25 +31,25 @@ type OrderAddress struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	OrderId      int64     `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	AddressId    int64     `protobuf:"varint,3,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
-	Name         string    `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	LastName     string    `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	FirstName    string    `protobuf:"bytes,6,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	AreaId       int64     `protobuf:"varint,7,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
-	StreetId     int64     `protobuf:"varint,8,opt,name=street_id,json=streetId,proto3" json:"street_id,omitempty"`
-	Addr         string    `protobuf:"bytes,9,opt,name=addr,proto3" json:"addr,omitempty"`
-	Postcode     string    `protobuf:"bytes,10,opt,name=postcode,proto3" json:"postcode,omitempty"`
-	Mobile       string    `protobuf:"bytes,11,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Tel          string    `protobuf:"bytes,12,opt,name=tel,proto3" json:"tel,omitempty"`
-	DeliveryDay  string    `protobuf:"bytes,13,opt,name=delivery_day,json=deliveryDay,proto3" json:"delivery_day,omitempty"`
-	DeliveryTime string    `protobuf:"bytes,14,opt,name=delivery_time,json=deliveryTime,proto3" json:"delivery_time,omitempty"`
-	Lng          string    `protobuf:"bytes,15,opt,name=lng,proto3" json:"lng,omitempty"`
-	Lat          string    `protobuf:"bytes,16,opt,name=lat,proto3" json:"lat,omitempty"`
-	CreatedAt    string    `protobuf:"bytes,17,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt    string    `protobuf:"bytes,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Area         *AreaInfo `protobuf:"bytes,19,opt,name=area,proto3" json:"area,omitempty"`
+	Id           int64     `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	OrderId      int64     `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	AddressId    int64     `protobuf:"varint,3,opt,name=address_id,json=addressId,proto3" json:"address_id"`
+	Name         string    `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
+	LastName     string    `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3" json:"last_name"`
+	FirstName    string    `protobuf:"bytes,6,opt,name=first_name,json=firstName,proto3" json:"first_name"`
+	AreaId       int64     `protobuf:"varint,7,opt,name=area_id,json=areaId,proto3" json:"area_id"`
+	StreetId     int64     `protobuf:"varint,8,opt,name=street_id,json=streetId,proto3" json:"street_id"`
+	Addr         string    `protobuf:"bytes,9,opt,name=addr,proto3" json:"addr"`
+	Postcode     string    `protobuf:"bytes,10,opt,name=postcode,proto3" json:"postcode"`
+	Mobile       string    `protobuf:"bytes,11,opt,name=mobile,proto3" json:"mobile"`
+	Tel          string    `protobuf:"bytes,12,opt,name=tel,proto3" json:"tel"`
+	DeliveryDay  string    `protobuf:"bytes,13,opt,name=delivery_day,json=deliveryDay,proto3" json:"delivery_day"`
+	DeliveryTime string    `protobuf:"bytes,14,opt,name=delivery_time,json=deliveryTime,proto3" json:"delivery_time"`
+	Lng          string    `protobuf:"bytes,15,opt,name=lng,proto3" json:"lng"`
+	Lat          string    `protobuf:"bytes,16,opt,name=lat,proto3" json:"lat"`
+	CreatedAt    string    `protobuf:"bytes,17,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt    string    `protobuf:"bytes,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Area         *AreaInfo `protobuf:"bytes,19,opt,name=area,proto3" json:"area"`
 }
 
 func (x *OrderAddress) Reset() {
@@ -222,16 +222,16 @@ type OrderAddressRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
 	//----------
-	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	OrderSn   string  `protobuf:"bytes,5,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
-	Type      string  `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
-	StartDate string  `protobuf:"bytes,7,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
-	EndDate   string  `protobuf:"bytes,8,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
-	Ids       []int64 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	OrderSn   string  `protobuf:"bytes,5,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
+	Type      string  `protobuf:"bytes,6,opt,name=type,proto3" json:"type"`
+	StartDate string  `protobuf:"bytes,7,opt,name=start_date,json=startDate,proto3" json:"start_date"`
+	EndDate   string  `protobuf:"bytes,8,opt,name=end_date,json=endDate,proto3" json:"end_date"`
+	Ids       []int64 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *OrderAddressRequest) Reset() {
@@ -334,10 +334,10 @@ type OrderAddressData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *OrderAddress   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*OrderAddress `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info    `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *OrderAddress   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*OrderAddress `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info    `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *OrderAddressData) Reset() {
@@ -405,8 +405,8 @@ type OrderAddressResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *OrderAddressData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error     `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *OrderAddressData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error     `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *OrderAddressResponse) Reset() {
