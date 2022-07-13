@@ -8,7 +8,7 @@ message SkuInfo {
 	string sku_sn = 3;
 	string title = 4;
 	string type = 5;
-	int32 unit_id = 6;
+	string unit = 6;
 	int64 shop_id = 7;
 	int64 image_id = 8;
 	string image_url = 9;

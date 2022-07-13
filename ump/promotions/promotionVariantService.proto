@@ -1,6 +1,7 @@
 syntax = "proto3";
 package services;
 option go_package = ".;services";
+import "skuInfoService.proto";
 
 //营销活动变体
 message PromotionVariant {
@@ -17,4 +18,5 @@ message PromotionVariant {
     bool enabled = 11; //已启用
     string created_at = 16; //创建时间
     string updated_at = 17; //修改时间
+    SkuInfo sku =18;
 }
