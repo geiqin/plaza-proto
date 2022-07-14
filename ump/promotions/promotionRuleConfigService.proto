@@ -5,7 +5,7 @@ option go_package = ".;services";
 //活动常用规则
 message PromotionRuleConfig {
     float order_total_amount = 1;//订单总金额
-    float order_total_count = 2;//订单总数量
+    int32 order_total_count = 2;//订单总数量
     float promotion_items_total = 3;//订单中促销项目总额
     int32 which_order = 4;//第N笔订单
     repeated int32 member_rank_ids = 5;//消费者会员等级组

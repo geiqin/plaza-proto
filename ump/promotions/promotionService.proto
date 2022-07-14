@@ -36,15 +36,16 @@ message Promotion {
     string asset_url = 9; //促销详情链接
     string description = 10; //活动描述
     int32 level = 11; //促销级别：1 商品级，2订单级，3特殊级
-    string goods_range = 12;  //商品参与范围: 0-全部，1-部分参与，2-部分不参与
+    string variant_range = 12;  //变体商品范围: 0-全部，1-部分参与，2-部分不参与
     string rule_config_data = 13; //限制规则配置json
     string action_config_data = 14; //优惠策略配置json
     string status =15; //活动状态：0未开始 1进行中 2已结束 3已失效
     string created_at = 16; //创建时间
     string updated_at = 17; //修改时间
-    PromotionActionConfig action_config = 18; //限制规则配置
-    PromotionRuleConfig rule_config = 19; //优惠策略配置
-    PromotionVariant variants =20; //参与活动商品变体
+    repeated int64 variant_range_sku_ids =18; //变体商品IDS
+    PromotionActionConfig action_config = 19; //限制规则配置
+    PromotionRuleConfig rule_config = 20; //优惠策略配置
+    PromotionVariant variants =21; //参与活动商品变体
 }
 
 
