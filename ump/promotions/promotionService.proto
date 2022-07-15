@@ -21,6 +21,8 @@ service PromotionService {
     rpc Get (Promotion) returns (PromotionResponse) {}
     //获取活动列表
     rpc List (PromotionRequest) returns (PromotionResponse) {}
+    //查询活动
+    rpc Search (PromotionRequest) returns (PromotionResponse) {}
 }
 
 //营销活动
@@ -37,15 +39,18 @@ message Promotion {
     string description = 10; //活动描述
     int32 level = 11; //促销级别：1 商品级，2订单级，3特殊级
     string variant_range = 12;  //变体商品范围: 0-全部，1-部分参与，2-部分不参与
-    string rule_config_data = 13; //限制规则配置json
-    string action_config_data = 14; //优惠策略配置json
-    string status =15; //活动状态：0未开始 1进行中 2已结束 3已失效
-    string created_at = 16; //创建时间
-    string updated_at = 17; //修改时间
-    repeated int64 variant_range_sku_ids =18; //变体商品IDS
-    PromotionActionConfig action_config = 19; //限制规则配置
-    PromotionRuleConfig rule_config = 20; //优惠策略配置
-    PromotionVariant variants =21; //参与活动商品变体
+    string config_data = 13; //自定义配置数据json
+    int32 total_count = 14; //发放总量 【备选项】
+    int32 assign_count = 15; //已发放数量 【备选项】
+    int32 used_count = 16; //已使用数量 【备选项】
+    int32 failed_count = 17; //失败，失效数量 【备选项】
+    string status =18; //活动状态：0未开始 1进行中 2已结束 3已失效
+    string created_at = 19; //创建时间
+    string updated_at = 20; //修改时间
+    repeated int64 variant_range_sku_ids =21; //变体商品IDS
+    PromotionActionConfig action_config = 22; //限制规则配置
+    PromotionRuleConfig rule_config = 23; //优惠策略配置
+    PromotionVariant variants =24; //参与活动商品变体
 }
 
 

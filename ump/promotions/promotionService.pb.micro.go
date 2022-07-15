@@ -57,6 +57,8 @@ type PromotionService interface {
 	Get(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
 	//获取活动列表
 	List(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error)
+	//查询活动
+	Search(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error)
 }
 
 type promotionService struct {
@@ -141,6 +143,16 @@ func (c *promotionService) List(ctx context.Context, in *PromotionRequest, opts 
 	return out, nil
 }
 
+func (c *promotionService) Search(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error) {
+	req := c.c.NewRequest(c.name, "PromotionService.Search", in)
+	out := new(PromotionResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for PromotionService service
 
 type PromotionServiceHandler interface {
@@ -158,6 +170,8 @@ type PromotionServiceHandler interface {
 	Get(context.Context, *Promotion, *PromotionResponse) error
 	//获取活动列表
 	List(context.Context, *PromotionRequest, *PromotionResponse) error
+	//查询活动
+	Search(context.Context, *PromotionRequest, *PromotionResponse) error
 }
 
 func RegisterPromotionServiceHandler(s server.Server, hdlr PromotionServiceHandler, opts ...server.HandlerOption) error {
@@ -169,6 +183,7 @@ func RegisterPromotionServiceHandler(s server.Server, hdlr PromotionServiceHandl
 		Stop(ctx context.Context, in *Promotion, out *PromotionResponse) error
 		Get(ctx context.Context, in *Promotion, out *PromotionResponse) error
 		List(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error
+		Search(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error
 	}
 	type PromotionService struct {
 		promotionService
@@ -207,4 +222,8 @@ func (h *promotionServiceHandler) Get(ctx context.Context, in *Promotion, out *P
 
 func (h *promotionServiceHandler) List(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error {
 	return h.PromotionServiceHandler.List(ctx, in, out)
+}
+
+func (h *promotionServiceHandler) Search(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error {
+	return h.PromotionServiceHandler.Search(ctx, in, out)
 }
