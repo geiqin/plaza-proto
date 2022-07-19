@@ -6,7 +6,7 @@ import "skuInfoService.proto";
 //营销活动变体
 message PromotionVariant {
     int64 id = 1; //活动ID
-    string promotion_id = 2; //促销ID
+    int64 promotion_id = 2; //促销ID
     string promotion_type = 3; //促销类型 [冗余]
     string type = 4; //变体类型：spu,sku
     int64 spu_id = 5; //商品ID [冗余]
