@@ -47,10 +47,9 @@ message Promotion {
     string status =18; //活动状态：0未开始 1进行中 2已结束 3已失效
     string created_at = 19; //创建时间
     string updated_at = 20; //修改时间
-    repeated int64 variant_range_sku_ids =21; //变体商品IDS
     PromotionActionConfig action_config = 22; //限制规则配置
     PromotionRuleConfig rule_config = 23; //优惠策略配置
-    PromotionVariant variants =24; //参与活动商品变体
+    repeated PromotionVariant variants =24; //参与活动商品变体
 }
 
 
