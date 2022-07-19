@@ -58,13 +58,13 @@ message PromotionRequest {
     int32 page_size = 2;
     string keywords = 3;
     //以下为自定义参数
-    int32 id = 4;
+    int64 id = 4;
     string title =5;
     string status =6;
-    int32 type_id = 7;
+    string type  = 7;
     string start_date =8;
     string end_date =9;
-    repeated int32 ids = 10;
+    repeated string types = 10;
 }
 
 
