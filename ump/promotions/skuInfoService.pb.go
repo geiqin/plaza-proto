@@ -25,6 +25,125 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
+type SpuInfo struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id       int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Code     int64  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
+	Title    string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Type     string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Unit     string `protobuf:"bytes,5,opt,name=unit,proto3" json:"unit,omitempty"`
+	ShopId   int64  `protobuf:"varint,6,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	ImageId  int64  `protobuf:"varint,7,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	ImageUrl string `protobuf:"bytes,8,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	IsSpec   bool   `protobuf:"varint,9,opt,name=is_spec,json=isSpec,proto3" json:"is_spec,omitempty"`
+	Status   string `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+}
+
+func (x *SpuInfo) Reset() {
+	*x = SpuInfo{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_skuInfoService_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SpuInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpuInfo) ProtoMessage() {}
+
+func (x *SpuInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_skuInfoService_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpuInfo.ProtoReflect.Descriptor instead.
+func (*SpuInfo) Descriptor() ([]byte, []int) {
+	return file_skuInfoService_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *SpuInfo) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SpuInfo) GetCode() int64 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *SpuInfo) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *SpuInfo) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *SpuInfo) GetUnit() string {
+	if x != nil {
+		return x.Unit
+	}
+	return ""
+}
+
+func (x *SpuInfo) GetShopId() int64 {
+	if x != nil {
+		return x.ShopId
+	}
+	return 0
+}
+
+func (x *SpuInfo) GetImageId() int64 {
+	if x != nil {
+		return x.ImageId
+	}
+	return 0
+}
+
+func (x *SpuInfo) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
+}
+
+func (x *SpuInfo) GetIsSpec() bool {
+	if x != nil {
+		return x.IsSpec
+	}
+	return false
+}
+
+func (x *SpuInfo) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
 type SkuInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -73,7 +192,7 @@ type SkuInfo struct {
 func (x *SkuInfo) Reset() {
 	*x = SkuInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_skuInfoService_proto_msgTypes[0]
+		mi := &file_skuInfoService_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -86,7 +205,7 @@ func (x *SkuInfo) String() string {
 func (*SkuInfo) ProtoMessage() {}
 
 func (x *SkuInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_skuInfoService_proto_msgTypes[0]
+	mi := &file_skuInfoService_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -99,7 +218,7 @@ func (x *SkuInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SkuInfo.ProtoReflect.Descriptor instead.
 func (*SkuInfo) Descriptor() ([]byte, []int) {
-	return file_skuInfoService_proto_rawDescGZIP(), []int{0}
+	return file_skuInfoService_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *SkuInfo) GetId() int64 {
@@ -373,6 +492,21 @@ var File_skuInfoService_proto protoreflect.FileDescriptor
 var file_skuInfoService_proto_rawDesc = []byte{
 	0x0a, 0x14, 0x73, 0x6b, 0x75, 0x49, 0x6e, 0x66, 0x6f, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x08, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73,
+	0x22, 0xed, 0x01, 0x0a, 0x07, 0x53, 0x70, 0x75, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
+	0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65,
+	0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x6e,
+	0x69, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x6e, 0x69, 0x74, 0x12, 0x17,
+	0x0a, 0x07, 0x73, 0x68, 0x6f, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x06, 0x73, 0x68, 0x6f, 0x70, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x69, 0x6d, 0x61, 0x67, 0x65,
+	0x5f, 0x69, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x69, 0x6d, 0x61, 0x67, 0x65,
+	0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x5f, 0x75, 0x72, 0x6c, 0x18,
+	0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72, 0x6c, 0x12,
+	0x17, 0x0a, 0x07, 0x69, 0x73, 0x5f, 0x73, 0x70, 0x65, 0x63, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x06, 0x69, 0x73, 0x53, 0x70, 0x65, 0x63, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
 	0x22, 0xa5, 0x09, 0x0a, 0x07, 0x53, 0x6b, 0x75, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x0e, 0x0a, 0x02,
 	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x15, 0x0a, 0x06,
 	0x73, 0x70, 0x75, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x73, 0x70,
@@ -463,13 +597,14 @@ func file_skuInfoService_proto_rawDescGZIP() []byte {
 	return file_skuInfoService_proto_rawDescData
 }
 
-var file_skuInfoService_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_skuInfoService_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_skuInfoService_proto_goTypes = []interface{}{
-	(*SkuInfo)(nil), // 0: services.SkuInfo
-	nil,             // 1: services.SkuInfo.OwnDescDataEntry
+	(*SpuInfo)(nil), // 0: services.SpuInfo
+	(*SkuInfo)(nil), // 1: services.SkuInfo
+	nil,             // 2: services.SkuInfo.OwnDescDataEntry
 }
 var file_skuInfoService_proto_depIdxs = []int32{
-	1, // 0: services.SkuInfo.own_desc_data:type_name -> services.SkuInfo.OwnDescDataEntry
+	2, // 0: services.SkuInfo.own_desc_data:type_name -> services.SkuInfo.OwnDescDataEntry
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -484,6 +619,18 @@ func file_skuInfoService_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_skuInfoService_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SpuInfo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_skuInfoService_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SkuInfo); i {
 			case 0:
 				return &v.state
@@ -502,7 +649,7 @@ func file_skuInfoService_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_skuInfoService_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
