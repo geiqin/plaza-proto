@@ -11,7 +11,7 @@ message PromotionVariant {
     string type = 4; //变体类型：spu,sku
     int64 spu_id = 5; //商品ID [冗余]
     int64 sku_id = 6; //货品ID
-    string stock = 7; //促销库存
+    int32 stock = 7; //促销库存
     int64 method = 8; //优惠方式：1 折扣 2减价,3固定金额
     float discount_rate = 9; //优惠折扣
     float discount_money = 10; //优惠金额(立减金额/固定金额)
