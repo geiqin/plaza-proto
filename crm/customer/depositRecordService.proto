@@ -20,7 +20,7 @@ message DepositRecord {
   int64 member_id =2;
   int32 direction =3;
   int64 amount =4;
-  float balance =5;
+  int64 balance =5;
   int32 source =6;
   int64 order_id =7;
   string order_sn =8;
@@ -38,8 +38,8 @@ message DepositRecordRequest {
   //以下为自定义参数
   int64 member_id =3;
   int32 direction =4;
-  float amount =5;
-  float balance =6;
+  int64 amount =5;
+  int64 balance =6;
   int32 source =7;
   int64 order_id =8;
   string order_sn =9;
