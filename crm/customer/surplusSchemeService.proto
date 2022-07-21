@@ -24,8 +24,8 @@ message SurplusScheme {
   string start_at =3;
   string end_at=4;
   int32 condition_type =5;
-  float condition_value =6;
-  float give_money =7;
+  int64 condition_value =6;
+  int64 give_money =7;
   int32 give_score =8;
   int32 stock =9;
   string memo =10;
@@ -41,7 +41,7 @@ message SurplusSchemeRequest {
   int64 start_at =3;
   string end_at =4;
   string condition_type =5;
-  float money =6;
+  int64 money =6;
   string name =8;
 }
 

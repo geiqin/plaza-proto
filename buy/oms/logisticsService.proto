@@ -34,9 +34,9 @@ message Logistics {
     string fetch_at = 9; // 下单选择的自提时间【上门自提】
     bool deliverable = 10; // 收货地址是否在配送区域
     string delivery_at = 11; // 下单选择的配送时间【同城配送】
-    float express_fee = 12; // 快递发货运费
-    float delivery_fee = 13; // 同城配送配送费
-    float start_price = 14; // 起送价
+    int64 express_fee = 12; // 快递发货运费
+    int64 delivery_fee = 13; // 同城配送配送费
+    int64 start_price = 14; // 起送价
     string start_time = 15; // 选择的配送或自提的开始时间
     string end_time = 16; // 选择的配送或自提的结束时间
     DeliveryInfo delivery_info = 17; // 同城配送信息

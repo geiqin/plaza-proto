@@ -30,17 +30,17 @@ type Adjustment struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	OrderId         int64   `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	OrderItemId     int64   `protobuf:"varint,3,opt,name=order_item_id,json=orderItemId,proto3" json:"order_item_id"`
-	OrderItemUnitId int64   `protobuf:"varint,4,opt,name=order_item_unit_id,json=orderItemUnitId,proto3" json:"order_item_unit_id"`
-	Type            string  `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`
-	Label           string  `protobuf:"bytes,6,opt,name=label,proto3" json:"label"`
-	OriginCode      string  `protobuf:"bytes,7,opt,name=origin_code,json=originCode,proto3" json:"origin_code"`
-	Amount          float32 `protobuf:"fixed32,8,opt,name=amount,proto3" json:"amount"`
-	Included        bool    `protobuf:"varint,9,opt,name=included,proto3" json:"included"`
-	CreatedAt       string  `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt       string  `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id              int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	OrderId         int64  `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	OrderItemId     int64  `protobuf:"varint,3,opt,name=order_item_id,json=orderItemId,proto3" json:"order_item_id"`
+	OrderItemUnitId int64  `protobuf:"varint,4,opt,name=order_item_unit_id,json=orderItemUnitId,proto3" json:"order_item_unit_id"`
+	Type            string `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`
+	Label           string `protobuf:"bytes,6,opt,name=label,proto3" json:"label"`
+	OriginCode      string `protobuf:"bytes,7,opt,name=origin_code,json=originCode,proto3" json:"origin_code"`
+	Amount          int64  `protobuf:"varint,8,opt,name=amount,proto3" json:"amount"`
+	Included        bool   `protobuf:"varint,9,opt,name=included,proto3" json:"included"`
+	CreatedAt       string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt       string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *Adjustment) Reset() {
@@ -124,7 +124,7 @@ func (x *Adjustment) GetOriginCode() string {
 	return ""
 }
 
-func (x *Adjustment) GetAmount() float32 {
+func (x *Adjustment) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -171,7 +171,7 @@ var file_adjustmentService_proto_rawDesc = []byte{
 	0x09, 0x52, 0x05, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x12, 0x1f, 0x0a, 0x0b, 0x6f, 0x72, 0x69, 0x67,
 	0x69, 0x6e, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x6f,
 	0x72, 0x69, 0x67, 0x69, 0x6e, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f,
-	0x75, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e,
+	0x75, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e,
 	0x74, 0x12, 0x1a, 0x0a, 0x08, 0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x64, 0x18, 0x09, 0x20,
 	0x01, 0x28, 0x08, 0x52, 0x08, 0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x64, 0x12, 0x1d, 0x0a,
 	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28,

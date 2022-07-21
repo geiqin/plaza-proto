@@ -31,14 +31,14 @@ type Checkout struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CheckoutId       string          `protobuf:"bytes,1,opt,name=checkout_id,json=checkoutId,proto3" json:"checkout_id"`                     //结账台ID
-	AvailableSurplus float32         `protobuf:"fixed32,2,opt,name=available_surplus,json=availableSurplus,proto3" json:"available_surplus"` //可使用的余额
-	AvailablePoints  int32           `protobuf:"varint,3,opt,name=available_points,json=availablePoints,proto3" json:"available_points"`     //可使用的积分数
-	AvailableCoupons *CouponInfo     `protobuf:"bytes,4,opt,name=available_coupons,json=availableCoupons,proto3" json:"available_coupons"`   //可使用的优惠劵集合
-	ShippingAddress  *OrderAddress   `protobuf:"bytes,5,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address"`      //订单收货地址
-	ShopList         []*CheckoutShop `protobuf:"bytes,6,rep,name=shop_list,json=shopList,proto3" json:"shop_list"`                           //商品中涉及到那些卖家（多店铺模式下）
-	ShipmentList     []*Shipment     `protobuf:"bytes,7,rep,name=shipment_list,json=shipmentList,proto3" json:"shipment_list"`               //可选的配送方式
-	PaymentList      []*Payment      `protobuf:"bytes,8,rep,name=payment_list,json=paymentList,proto3" json:"payment_list"`                  //可选的支付方式
+	CheckoutId       string          `protobuf:"bytes,1,opt,name=checkout_id,json=checkoutId,proto3" json:"checkout_id"`                    //结账台ID
+	AvailableSurplus int64           `protobuf:"varint,2,opt,name=available_surplus,json=availableSurplus,proto3" json:"available_surplus"` //可使用的余额
+	AvailablePoints  int32           `protobuf:"varint,3,opt,name=available_points,json=availablePoints,proto3" json:"available_points"`    //可使用的积分数
+	AvailableCoupons *CouponInfo     `protobuf:"bytes,4,opt,name=available_coupons,json=availableCoupons,proto3" json:"available_coupons"`  //可使用的优惠劵集合
+	ShippingAddress  *OrderAddress   `protobuf:"bytes,5,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address"`     //订单收货地址
+	ShopList         []*CheckoutShop `protobuf:"bytes,6,rep,name=shop_list,json=shopList,proto3" json:"shop_list"`                          //商品中涉及到那些卖家（多店铺模式下）
+	ShipmentList     []*Shipment     `protobuf:"bytes,7,rep,name=shipment_list,json=shipmentList,proto3" json:"shipment_list"`              //可选的配送方式
+	PaymentList      []*Payment      `protobuf:"bytes,8,rep,name=payment_list,json=paymentList,proto3" json:"payment_list"`                 //可选的支付方式
 }
 
 func (x *Checkout) Reset() {
@@ -80,7 +80,7 @@ func (x *Checkout) GetCheckoutId() string {
 	return ""
 }
 
-func (x *Checkout) GetAvailableSurplus() float32 {
+func (x *Checkout) GetAvailableSurplus() int64 {
 	if x != nil {
 		return x.AvailableSurplus
 	}
@@ -144,7 +144,7 @@ type CheckoutRequest struct {
 	Terminal        string            `protobuf:"bytes,7,opt,name=terminal,proto3" json:"terminal"`                                                                                                         //下单来源终端：site/app/wx_mini/ali_mini/h5/pos
 	CouponId        int64             `protobuf:"varint,8,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`                                                                                        //选中的优惠劵凭证ID
 	Integral        int32             `protobuf:"varint,9,opt,name=integral,proto3" json:"integral"`                                                                                                        //使用的积分数
-	Surplus         int32             `protobuf:"varint,10,opt,name=surplus,proto3" json:"surplus"`                                                                                                         //使用的余额数
+	Surplus         int64             `protobuf:"varint,10,opt,name=surplus,proto3" json:"surplus"`                                                                                                         //使用的余额数
 	AgentMemberId   int64             `protobuf:"varint,11,opt,name=agent_member_id,json=agentMemberId,proto3" json:"agent_member_id"`                                                                      //代理的客户ID（操作员代客下单）
 	RechargeMoney   float32           `protobuf:"fixed32,12,opt,name=recharge_money,json=rechargeMoney,proto3" json:"recharge_money"`                                                                       //订单金额【充值订单】
 	RechargeSubject string            `protobuf:"bytes,13,opt,name=recharge_subject,json=rechargeSubject,proto3" json:"recharge_subject"`                                                                   //订单标题【充值订单】
@@ -248,7 +248,7 @@ func (x *CheckoutRequest) GetIntegral() int32 {
 	return 0
 }
 
-func (x *CheckoutRequest) GetSurplus() int32 {
+func (x *CheckoutRequest) GetSurplus() int64 {
 	if x != nil {
 		return x.Surplus
 	}
@@ -528,7 +528,7 @@ var file_checkoutService_proto_rawDesc = []byte{
 	0x75, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x68, 0x65,
 	0x63, 0x6b, 0x6f, 0x75, 0x74, 0x49, 0x64, 0x12, 0x2b, 0x0a, 0x11, 0x61, 0x76, 0x61, 0x69, 0x6c,
 	0x61, 0x62, 0x6c, 0x65, 0x5f, 0x73, 0x75, 0x72, 0x70, 0x6c, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x02, 0x52, 0x10, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x53, 0x75, 0x72,
+	0x28, 0x03, 0x52, 0x10, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x53, 0x75, 0x72,
 	0x70, 0x6c, 0x75, 0x73, 0x12, 0x29, 0x0a, 0x10, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c,
 	0x65, 0x5f, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0f,
 	0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x12,
@@ -576,7 +576,7 @@ var file_checkoutService_proto_rawDesc = []byte{
 	0x75, 0x70, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72,
 	0x61, 0x6c, 0x18, 0x09, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72,
 	0x61, 0x6c, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x72, 0x70, 0x6c, 0x75, 0x73, 0x18, 0x0a, 0x20,
-	0x01, 0x28, 0x05, 0x52, 0x07, 0x73, 0x75, 0x72, 0x70, 0x6c, 0x75, 0x73, 0x12, 0x26, 0x0a, 0x0f,
+	0x01, 0x28, 0x03, 0x52, 0x07, 0x73, 0x75, 0x72, 0x70, 0x6c, 0x75, 0x73, 0x12, 0x26, 0x0a, 0x0f,
 	0x61, 0x67, 0x65, 0x6e, 0x74, 0x5f, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18,
 	0x0b, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x6d, 0x62,
 	0x65, 0x72, 0x49, 0x64, 0x12, 0x25, 0x0a, 0x0e, 0x72, 0x65, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65,

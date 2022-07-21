@@ -14,9 +14,9 @@ message SkuInfo {
 	int64	thumb_id	=9;
 	string	thumb_url	=10;
 	string	barcode	=11;
-	float	price	=12;
-	float	origin_price	=13;
-	float	cost_price	=14;
+	int64	price	=12;
+	int64	origin_price	=13;
+	int64	cost_price	=14;
 	float	weight	=15;
 	int64 sku_id =16; // 规格商品时使用
 	string sku_sn =17;

@@ -338,6 +338,8 @@ func NewProductServiceEndpoints() []*api.Endpoint {
 type ProductService interface {
 	//商品查询【后端使用】
 	Search(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
+	//商品详情查询【后端使用】
+	SkuSearch(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//商品详情显示【后端使用】
 	Display(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//商品查询【前端使用】
@@ -360,6 +362,16 @@ func NewProductService(name string, c client.Client) ProductService {
 
 func (c *productService) Search(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "ProductService.Search", in)
+	out := new(SpuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productService) SkuSearch(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error) {
+	req := c.c.NewRequest(c.name, "ProductService.SkuSearch", in)
 	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -403,6 +415,8 @@ func (c *productService) FrontDisplay(ctx context.Context, in *SkuRequest, opts 
 type ProductServiceHandler interface {
 	//商品查询【后端使用】
 	Search(context.Context, *SkuRequest, *SpuResponse) error
+	//商品详情查询【后端使用】
+	SkuSearch(context.Context, *SkuRequest, *SpuResponse) error
 	//商品详情显示【后端使用】
 	Display(context.Context, *SkuRequest, *SpuResponse) error
 	//商品查询【前端使用】
@@ -414,6 +428,7 @@ type ProductServiceHandler interface {
 func RegisterProductServiceHandler(s server.Server, hdlr ProductServiceHandler, opts ...server.HandlerOption) error {
 	type productService interface {
 		Search(ctx context.Context, in *SkuRequest, out *SpuResponse) error
+		SkuSearch(ctx context.Context, in *SkuRequest, out *SpuResponse) error
 		Display(ctx context.Context, in *SkuRequest, out *SpuResponse) error
 		FrontSearch(ctx context.Context, in *SkuRequest, out *SpuResponse) error
 		FrontDisplay(ctx context.Context, in *SkuRequest, out *SpuResponse) error
@@ -431,6 +446,10 @@ type productServiceHandler struct {
 
 func (h *productServiceHandler) Search(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
 	return h.ProductServiceHandler.Search(ctx, in, out)
+}
+
+func (h *productServiceHandler) SkuSearch(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
+	return h.ProductServiceHandler.SkuSearch(ctx, in, out)
 }
 
 func (h *productServiceHandler) Display(ctx context.Context, in *SkuRequest, out *SpuResponse) error {

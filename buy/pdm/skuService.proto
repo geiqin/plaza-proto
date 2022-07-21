@@ -46,6 +46,8 @@ service SkuService {
 service ProductService {
     //商品查询【后端使用】
     rpc Search (SkuRequest) returns (SpuResponse);
+    //商品详情查询【后端使用】
+    rpc SkuSearch (SkuRequest) returns (SpuResponse);
     //商品详情显示【后端使用】
     rpc Display (SkuRequest) returns (SpuResponse);
     //商品查询【前端使用】
@@ -64,10 +66,10 @@ message Sku {
     int64 shop_id = 7;
     int64 image_id = 8;
     string image_url = 9;
-    float price = 10;
-    float market_price = 11;
-    float cost_price = 12;
-    float promotion_price = 13;
+    int64 price = 10;
+    int64 market_price = 11;
+    int64 cost_price = 12;
+    int64 promotion_price = 13;
     string barcode = 14;
     float weight = 15;
     int32 volume = 16;

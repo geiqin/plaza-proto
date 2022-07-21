@@ -10,7 +10,7 @@ message Adjustment {
     string type = 5;
     string label = 6;
     string origin_code = 7;
-    float amount =8;
+    int64 amount =8;
     bool included =9;
     string created_at = 10;
     string updated_at = 11;

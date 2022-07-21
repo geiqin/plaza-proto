@@ -31,20 +31,20 @@ type PromotionVariant struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                              //活动ID
-	PromotionId   int64    `protobuf:"varint,2,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id,omitempty"`         //促销ID
-	PromotionType string   `protobuf:"bytes,3,opt,name=promotion_type,json=promotionType,proto3" json:"promotion_type,omitempty"`    //促销类型 [冗余]
-	Type          string   `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`                                           //变体类型：spu,sku
-	SpuId         int64    `protobuf:"varint,5,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`                           //商品ID [冗余]
-	SkuId         int64    `protobuf:"varint,6,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`                           //货品ID
-	Stock         int32    `protobuf:"varint,7,opt,name=stock,proto3" json:"stock,omitempty"`                                        //促销库存
-	Method        int64    `protobuf:"varint,8,opt,name=method,proto3" json:"method,omitempty"`                                      //优惠方式：1 折扣 2减价,3固定金额
-	DiscountRate  float32  `protobuf:"fixed32,9,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`     //优惠折扣
-	DiscountMoney float32  `protobuf:"fixed32,10,opt,name=discount_money,json=discountMoney,proto3" json:"discount_money,omitempty"` //优惠金额(立减金额/固定金额)
-	QuantityLimit int32    `protobuf:"varint,11,opt,name=quantity_limit,json=quantityLimit,proto3" json:"quantity_limit,omitempty"`  //购买数量限制
-	Enabled       bool     `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`                                   //已启用
-	CreatedAt     string   `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`               //创建时间
-	UpdatedAt     string   `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`               //修改时间
+	Id            int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                             //活动ID
+	PromotionId   int64    `protobuf:"varint,2,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id,omitempty"`        //促销ID
+	PromotionType string   `protobuf:"bytes,3,opt,name=promotion_type,json=promotionType,proto3" json:"promotion_type,omitempty"`   //促销类型 [冗余]
+	Type          string   `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`                                          //变体类型：spu,sku
+	SpuId         int64    `protobuf:"varint,5,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`                          //商品ID [冗余]
+	SkuId         int64    `protobuf:"varint,6,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`                          //货品ID
+	Stock         int32    `protobuf:"varint,7,opt,name=stock,proto3" json:"stock,omitempty"`                                       //促销库存
+	Method        int64    `protobuf:"varint,8,opt,name=method,proto3" json:"method,omitempty"`                                     //优惠方式：1 折扣 2减价,3固定金额
+	DiscountRate  float32  `protobuf:"fixed32,9,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`    //优惠折扣
+	DiscountMoney int64    `protobuf:"varint,10,opt,name=discount_money,json=discountMoney,proto3" json:"discount_money,omitempty"` //优惠金额(立减金额/固定金额)
+	QuantityLimit int32    `protobuf:"varint,11,opt,name=quantity_limit,json=quantityLimit,proto3" json:"quantity_limit,omitempty"` //购买数量限制
+	Enabled       bool     `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`                                  //已启用
+	CreatedAt     string   `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`              //创建时间
+	UpdatedAt     string   `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`              //修改时间
 	Spu           *SpuInfo `protobuf:"bytes,15,opt,name=spu,proto3" json:"spu,omitempty"`
 	Sku           *SkuInfo `protobuf:"bytes,16,opt,name=sku,proto3" json:"sku,omitempty"`
 }
@@ -144,7 +144,7 @@ func (x *PromotionVariant) GetDiscountRate() float32 {
 	return 0
 }
 
-func (x *PromotionVariant) GetDiscountMoney() float32 {
+func (x *PromotionVariant) GetDiscountMoney() int64 {
 	if x != nil {
 		return x.DiscountMoney
 	}
@@ -217,7 +217,7 @@ var file_promotionVariantService_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x72, 0x61, 0x74, 0x65, 0x18,
 	0x09, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0c, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52,
 	0x61, 0x74, 0x65, 0x12, 0x25, 0x0a, 0x0e, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f,
-	0x6d, 0x6f, 0x6e, 0x65, 0x79, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0d, 0x64, 0x69, 0x73,
+	0x6d, 0x6f, 0x6e, 0x65, 0x79, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x64, 0x69, 0x73,
 	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x4d, 0x6f, 0x6e, 0x65, 0x79, 0x12, 0x25, 0x0a, 0x0e, 0x71, 0x75,
 	0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x5f, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x0b, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x0d, 0x71, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4c, 0x69, 0x6d, 0x69,

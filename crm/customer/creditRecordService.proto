@@ -19,7 +19,7 @@ message CreditRecord {
   int64 credit_id =2;
   int64 member_id =3;
   string direction =4;
-  float amount =5;
+  int64 amount =5;
   int32 type =6;
   int64 order_id =7;
   string order_sn =8;

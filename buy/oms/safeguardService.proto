@@ -59,7 +59,7 @@ message Safeguard {
     string express_code = 9;
     string mobile = 10;
     bool refunded = 11;
-    float refund_fee = 12;
+    int64 refund_fee = 12;
     string refund_method = 13;
     string check_status = 142;
     string status = 15;

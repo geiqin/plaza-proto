@@ -60,8 +60,8 @@ message SkuPresale {
 	string balance_end_date = 8;
 	string advance_type = 9;
 	int32 advance_rate = 10;
-	float advance_money = 11;
-	float balance_money = 12;
+	int64 advance_money = 11;
+	int64 balance_money = 12;
 	string delivery_type = 13;
 	string delivery_date = 14;
 	int32 delivery_days = 15;

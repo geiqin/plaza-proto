@@ -428,21 +428,21 @@ type SkuPresale struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	SkuId            int64   `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	PresaleType      int32   `protobuf:"varint,3,opt,name=presale_type,json=presaleType,proto3" json:"presale_type"`
-	PayedDate        string  `protobuf:"bytes,4,opt,name=payed_date,json=payedDate,proto3" json:"payed_date"`
-	AdvanceStartDate string  `protobuf:"bytes,5,opt,name=advance_start_date,json=advanceStartDate,proto3" json:"advance_start_date"`
-	AdvanceEndDate   string  `protobuf:"bytes,6,opt,name=advance_end_date,json=advanceEndDate,proto3" json:"advance_end_date"`
-	BalanceStartDate string  `protobuf:"bytes,7,opt,name=balance_start_date,json=balanceStartDate,proto3" json:"balance_start_date"`
-	BalanceEndDate   string  `protobuf:"bytes,8,opt,name=balance_end_date,json=balanceEndDate,proto3" json:"balance_end_date"`
-	AdvanceType      string  `protobuf:"bytes,9,opt,name=advance_type,json=advanceType,proto3" json:"advance_type"`
-	AdvanceRate      int32   `protobuf:"varint,10,opt,name=advance_rate,json=advanceRate,proto3" json:"advance_rate"`
-	AdvanceMoney     float32 `protobuf:"fixed32,11,opt,name=advance_money,json=advanceMoney,proto3" json:"advance_money"`
-	BalanceMoney     float32 `protobuf:"fixed32,12,opt,name=balance_money,json=balanceMoney,proto3" json:"balance_money"`
-	DeliveryType     string  `protobuf:"bytes,13,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type"`
-	DeliveryDate     string  `protobuf:"bytes,14,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date"`
-	DeliveryDays     int32   `protobuf:"varint,15,opt,name=delivery_days,json=deliveryDays,proto3" json:"delivery_days"`
+	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	SkuId            int64  `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	PresaleType      int32  `protobuf:"varint,3,opt,name=presale_type,json=presaleType,proto3" json:"presale_type"`
+	PayedDate        string `protobuf:"bytes,4,opt,name=payed_date,json=payedDate,proto3" json:"payed_date"`
+	AdvanceStartDate string `protobuf:"bytes,5,opt,name=advance_start_date,json=advanceStartDate,proto3" json:"advance_start_date"`
+	AdvanceEndDate   string `protobuf:"bytes,6,opt,name=advance_end_date,json=advanceEndDate,proto3" json:"advance_end_date"`
+	BalanceStartDate string `protobuf:"bytes,7,opt,name=balance_start_date,json=balanceStartDate,proto3" json:"balance_start_date"`
+	BalanceEndDate   string `protobuf:"bytes,8,opt,name=balance_end_date,json=balanceEndDate,proto3" json:"balance_end_date"`
+	AdvanceType      string `protobuf:"bytes,9,opt,name=advance_type,json=advanceType,proto3" json:"advance_type"`
+	AdvanceRate      int32  `protobuf:"varint,10,opt,name=advance_rate,json=advanceRate,proto3" json:"advance_rate"`
+	AdvanceMoney     int64  `protobuf:"varint,11,opt,name=advance_money,json=advanceMoney,proto3" json:"advance_money"`
+	BalanceMoney     int64  `protobuf:"varint,12,opt,name=balance_money,json=balanceMoney,proto3" json:"balance_money"`
+	DeliveryType     string `protobuf:"bytes,13,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type"`
+	DeliveryDate     string `protobuf:"bytes,14,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date"`
+	DeliveryDays     int32  `protobuf:"varint,15,opt,name=delivery_days,json=deliveryDays,proto3" json:"delivery_days"`
 }
 
 func (x *SkuPresale) Reset() {
@@ -547,14 +547,14 @@ func (x *SkuPresale) GetAdvanceRate() int32 {
 	return 0
 }
 
-func (x *SkuPresale) GetAdvanceMoney() float32 {
+func (x *SkuPresale) GetAdvanceMoney() int64 {
 	if x != nil {
 		return x.AdvanceMoney
 	}
 	return 0
 }
 
-func (x *SkuPresale) GetBalanceMoney() float32 {
+func (x *SkuPresale) GetBalanceMoney() int64 {
 	if x != nil {
 		return x.BalanceMoney
 	}
@@ -833,9 +833,9 @@ var file_skuInfoService_proto_rawDesc = []byte{
 	0x61, 0x6e, 0x63, 0x65, 0x5f, 0x72, 0x61, 0x74, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x05, 0x52,
 	0x0b, 0x61, 0x64, 0x76, 0x61, 0x6e, 0x63, 0x65, 0x52, 0x61, 0x74, 0x65, 0x12, 0x23, 0x0a, 0x0d,
 	0x61, 0x64, 0x76, 0x61, 0x6e, 0x63, 0x65, 0x5f, 0x6d, 0x6f, 0x6e, 0x65, 0x79, 0x18, 0x0b, 0x20,
-	0x01, 0x28, 0x02, 0x52, 0x0c, 0x61, 0x64, 0x76, 0x61, 0x6e, 0x63, 0x65, 0x4d, 0x6f, 0x6e, 0x65,
+	0x01, 0x28, 0x03, 0x52, 0x0c, 0x61, 0x64, 0x76, 0x61, 0x6e, 0x63, 0x65, 0x4d, 0x6f, 0x6e, 0x65,
 	0x79, 0x12, 0x23, 0x0a, 0x0d, 0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x5f, 0x6d, 0x6f, 0x6e,
-	0x65, 0x79, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0c, 0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63,
+	0x65, 0x79, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63,
 	0x65, 0x4d, 0x6f, 0x6e, 0x65, 0x79, 0x12, 0x23, 0x0a, 0x0d, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65,
 	0x72, 0x79, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x64,
 	0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x54, 0x79, 0x70, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x64,

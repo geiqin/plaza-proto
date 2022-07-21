@@ -31,18 +31,18 @@ type SurplusScheme struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id             int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name           string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	StartAt        string  `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at"`
-	EndAt          string  `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at"`
-	ConditionType  int32   `protobuf:"varint,5,opt,name=condition_type,json=conditionType,proto3" json:"condition_type"`
-	ConditionValue float32 `protobuf:"fixed32,6,opt,name=condition_value,json=conditionValue,proto3" json:"condition_value"`
-	GiveMoney      float32 `protobuf:"fixed32,7,opt,name=give_money,json=giveMoney,proto3" json:"give_money"`
-	GiveScore      int32   `protobuf:"varint,8,opt,name=give_score,json=giveScore,proto3" json:"give_score"`
-	Stock          int32   `protobuf:"varint,9,opt,name=stock,proto3" json:"stock"`
-	Memo           string  `protobuf:"bytes,10,opt,name=memo,proto3" json:"memo"`
-	CreatedAt      string  `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt      string  `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id             int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name           string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	StartAt        string `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt          string `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	ConditionType  int32  `protobuf:"varint,5,opt,name=condition_type,json=conditionType,proto3" json:"condition_type"`
+	ConditionValue int64  `protobuf:"varint,6,opt,name=condition_value,json=conditionValue,proto3" json:"condition_value"`
+	GiveMoney      int64  `protobuf:"varint,7,opt,name=give_money,json=giveMoney,proto3" json:"give_money"`
+	GiveScore      int32  `protobuf:"varint,8,opt,name=give_score,json=giveScore,proto3" json:"give_score"`
+	Stock          int32  `protobuf:"varint,9,opt,name=stock,proto3" json:"stock"`
+	Memo           string `protobuf:"bytes,10,opt,name=memo,proto3" json:"memo"`
+	CreatedAt      string `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt      string `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *SurplusScheme) Reset() {
@@ -112,14 +112,14 @@ func (x *SurplusScheme) GetConditionType() int32 {
 	return 0
 }
 
-func (x *SurplusScheme) GetConditionValue() float32 {
+func (x *SurplusScheme) GetConditionValue() int64 {
 	if x != nil {
 		return x.ConditionValue
 	}
 	return 0
 }
 
-func (x *SurplusScheme) GetGiveMoney() float32 {
+func (x *SurplusScheme) GetGiveMoney() int64 {
 	if x != nil {
 		return x.GiveMoney
 	}
@@ -169,11 +169,11 @@ type SurplusSchemeRequest struct {
 	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
 	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
 	//以下为自定义参数
-	StartAt       int64   `protobuf:"varint,3,opt,name=start_at,json=startAt,proto3" json:"start_at"`
-	EndAt         string  `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at"`
-	ConditionType string  `protobuf:"bytes,5,opt,name=condition_type,json=conditionType,proto3" json:"condition_type"`
-	Money         float32 `protobuf:"fixed32,6,opt,name=money,proto3" json:"money"`
-	Name          string  `protobuf:"bytes,8,opt,name=name,proto3" json:"name"`
+	StartAt       int64  `protobuf:"varint,3,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt         string `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	ConditionType string `protobuf:"bytes,5,opt,name=condition_type,json=conditionType,proto3" json:"condition_type"`
+	Money         int64  `protobuf:"varint,6,opt,name=money,proto3" json:"money"`
+	Name          string `protobuf:"bytes,8,opt,name=name,proto3" json:"name"`
 }
 
 func (x *SurplusSchemeRequest) Reset() {
@@ -243,7 +243,7 @@ func (x *SurplusSchemeRequest) GetConditionType() string {
 	return ""
 }
 
-func (x *SurplusSchemeRequest) GetMoney() float32 {
+func (x *SurplusSchemeRequest) GetMoney() int64 {
 	if x != nil {
 		return x.Money
 	}
@@ -400,9 +400,9 @@ var file_surplusSchemeService_proto_rawDesc = []byte{
 	0x79, 0x70, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x63, 0x6f, 0x6e, 0x64, 0x69,
 	0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x12, 0x27, 0x0a, 0x0f, 0x63, 0x6f, 0x6e, 0x64,
 	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x0e, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x56, 0x61, 0x6c, 0x75,
+	0x03, 0x52, 0x0e, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x56, 0x61, 0x6c, 0x75,
 	0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x67, 0x69, 0x76, 0x65, 0x5f, 0x6d, 0x6f, 0x6e, 0x65, 0x79, 0x18,
-	0x07, 0x20, 0x01, 0x28, 0x02, 0x52, 0x09, 0x67, 0x69, 0x76, 0x65, 0x4d, 0x6f, 0x6e, 0x65, 0x79,
+	0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x67, 0x69, 0x76, 0x65, 0x4d, 0x6f, 0x6e, 0x65, 0x79,
 	0x12, 0x1d, 0x0a, 0x0a, 0x67, 0x69, 0x76, 0x65, 0x5f, 0x73, 0x63, 0x6f, 0x72, 0x65, 0x18, 0x08,
 	0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x67, 0x69, 0x76, 0x65, 0x53, 0x63, 0x6f, 0x72, 0x65, 0x12,
 	0x14, 0x0a, 0x05, 0x73, 0x74, 0x6f, 0x63, 0x6b, 0x18, 0x09, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05,
@@ -422,7 +422,7 @@ var file_surplusSchemeService_proto_rawDesc = []byte{
 	0x65, 0x6e, 0x64, 0x41, 0x74, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69,
 	0x6f, 0x6e, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x63,
 	0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a, 0x05,
-	0x6d, 0x6f, 0x6e, 0x65, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x02, 0x52, 0x05, 0x6d, 0x6f, 0x6e,
+	0x6d, 0x6f, 0x6e, 0x65, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x6d, 0x6f, 0x6e,
 	0x65, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0xba, 0x01, 0x0a, 0x11, 0x53, 0x75, 0x72, 0x70, 0x6c,
 	0x75, 0x73, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12, 0x2f, 0x0a, 0x06,

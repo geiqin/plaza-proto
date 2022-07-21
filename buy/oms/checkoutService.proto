@@ -20,7 +20,7 @@ service CheckoutService {
 
 message Checkout {
     string checkout_id = 1; //结账台ID
-    float available_surplus =2;//可使用的余额
+    int64 available_surplus =2;//可使用的余额
     int32 available_points =3;//可使用的积分数
     CouponInfo available_coupons = 4;//可使用的优惠劵集合
     OrderAddress shipping_address =5;//订单收货地址
@@ -46,7 +46,7 @@ message CheckoutRequest {
     string terminal = 7; //下单来源终端：site/app/wx_mini/ali_mini/h5/pos
     int64 coupon_id = 8; //选中的优惠劵凭证ID
     int32 integral = 9; //使用的积分数
-    int32 surplus = 10; //使用的余额数
+    int64 surplus = 10; //使用的余额数
     int64 agent_member_id = 11; //代理的客户ID（操作员代客下单）
     float recharge_money =12; //订单金额【充值订单】
     string recharge_subject =13; //订单标题【充值订单】

@@ -68,7 +68,7 @@ message Member {
     int32 pay_points =12;
     int32 rank_points =13;
     int32 traded_num =14;
-    float traded_money =15;
+    int64 traded_money =15;
     int32 comment_num =16;
     int32 collect_num =17;
     int64 recommender_id =18;

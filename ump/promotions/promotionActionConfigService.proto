@@ -4,7 +4,7 @@ option go_package = ".;services";
 
 //活动常用优惠策略
 message PromotionActionConfig {
-    float order_reduce_amount =1; //订单优惠金额
+    int64 order_reduce_amount =1; //订单优惠金额
     float order_fixed_discount =2; //订单固定折扣
     float promotion_items_fixed_discount =3; //订单中促销项目固定折扣
     bool free_postage =4; //免运费
@@ -20,18 +20,19 @@ message PromotionActionConfig {
 
 //阶梯优惠
 message LadderDiscount {
-    float method =1; //方式：0-元，1-件
-    float least_amount =2;//满N元
-    int32 least_number =3;//满N件
-    LadderDiscountPreferential preferential =4;//优惠内容
+    int64 least_amount =1;//满N元
+    int32 least_number =2;//满N件
+    LadderDiscountPreferential preferential =3;//优惠内容
 }
 
 //阶梯优惠内容
 message LadderDiscountPreferential  {
-    float reduce_amount =1;//减金额
-    bool free_postage =2; //免运费
-    int32 send_integral =3; //送积分
-    repeated int64 send_present_ids =4; //送赠品（送完为止）
-    repeated int64 send_coupon_batch_ids =5; //送优惠劵（送完为止）
-    map<string,int64> send_custom_thing_ids  =6; //送自定义事物对象Ids
+    string money_type =1;//金额类型：0-无，1-减金额，2-打折
+    int64 money_reduce =2;//减金额
+    float money_discount =3;//打折
+    bool free_postage =4; //免运费
+    int32 send_integral =5; //送积分
+    repeated int64 send_present_ids =6; //送赠品（送完为止）
+    repeated int64 send_coupon_batch_ids =7; //送优惠劵（送完为止）
+    map<string,int64> send_custom_thing_ids  =8; //送自定义事物对象Ids
 }
