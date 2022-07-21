@@ -10,7 +10,7 @@ message PaymentRequest{
     int32 order_type =1;
     int64 order_id = 2;
     string order_sn = 3;
-    float amount = 4;
+    int64 amount = 4;
     string currency = 5;
     string subject = 6;
     string body = 7;

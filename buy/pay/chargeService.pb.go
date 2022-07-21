@@ -32,39 +32,39 @@ type Charge struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id             int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	ChargeSn       string  `protobuf:"bytes,2,opt,name=charge_sn,json=chargeSn,proto3" json:"charge_sn"`
-	Lived          bool    `protobuf:"varint,3,opt,name=lived,proto3" json:"lived"`
-	Paid           bool    `protobuf:"varint,4,opt,name=paid,proto3" json:"paid"`
-	Refunded       bool    `protobuf:"varint,5,opt,name=refunded,proto3" json:"refunded"`
-	Reversed       bool    `protobuf:"varint,6,opt,name=reversed,proto3" json:"reversed"`
-	PayGatewayId   int64   `protobuf:"varint,7,opt,name=pay_gateway_id,json=payGatewayId,proto3" json:"pay_gateway_id"`
-	OpenId         string  `protobuf:"bytes,8,opt,name=open_id,json=openId,proto3" json:"open_id"`
-	TargetUserType string  `protobuf:"bytes,9,opt,name=target_user_type,json=targetUserType,proto3" json:"target_user_type"`
-	TargetUserId   int64   `protobuf:"varint,10,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id"`
-	OrderType      int32   `protobuf:"varint,11,opt,name=order_type,json=orderType,proto3" json:"order_type"`
-	OrderId        int64   `protobuf:"varint,12,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	OrderSn        string  `protobuf:"bytes,13,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
-	Amount         float32 `protobuf:"fixed32,14,opt,name=amount,proto3" json:"amount"`
-	Currency       string  `protobuf:"bytes,15,opt,name=currency,proto3" json:"currency"`
-	Subject        string  `protobuf:"bytes,16,opt,name=subject,proto3" json:"subject"`
-	Body           string  `protobuf:"bytes,17,opt,name=body,proto3" json:"body"`
-	Extra          string  `protobuf:"bytes,18,opt,name=extra,proto3" json:"extra"`
-	Channel        string  `protobuf:"bytes,19,opt,name=channel,proto3" json:"channel"`
-	TradeType      string  `protobuf:"bytes,20,opt,name=trade_type,json=tradeType,proto3" json:"trade_type"`
-	TransactionNo  string  `protobuf:"bytes,21,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no"`
-	RefundedAmount float32 `protobuf:"fixed32,22,opt,name=refunded_amount,json=refundedAmount,proto3" json:"refunded_amount"`
-	FailureCode    string  `protobuf:"bytes,23,opt,name=failure_code,json=failureCode,proto3" json:"failure_code"`
-	FailureMsg     string  `protobuf:"bytes,24,opt,name=failure_msg,json=failureMsg,proto3" json:"failure_msg"`
-	Credential     string  `protobuf:"bytes,25,opt,name=credential,proto3" json:"credential"`
-	ClientIp       string  `protobuf:"bytes,26,opt,name=client_ip,json=clientIp,proto3" json:"client_ip"`
-	Memo           string  `protobuf:"bytes,27,opt,name=memo,proto3" json:"memo"`
-	Metadata       string  `protobuf:"bytes,28,opt,name=metadata,proto3" json:"metadata"`
-	Status         int32   `protobuf:"varint,29,opt,name=status,proto3" json:"status"`
-	PaidAt         string  `protobuf:"bytes,30,opt,name=paid_at,json=paidAt,proto3" json:"paid_at"`
-	ExpiredAt      string  `protobuf:"bytes,31,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at"`
-	CreatedAt      string  `protobuf:"bytes,32,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt      string  `protobuf:"bytes,33,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id             int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ChargeSn       string `protobuf:"bytes,2,opt,name=charge_sn,json=chargeSn,proto3" json:"charge_sn,omitempty"`
+	Lived          bool   `protobuf:"varint,3,opt,name=lived,proto3" json:"lived,omitempty"`
+	Paid           bool   `protobuf:"varint,4,opt,name=paid,proto3" json:"paid,omitempty"`
+	Refunded       bool   `protobuf:"varint,5,opt,name=refunded,proto3" json:"refunded,omitempty"`
+	Reversed       bool   `protobuf:"varint,6,opt,name=reversed,proto3" json:"reversed,omitempty"`
+	PayGatewayId   int64  `protobuf:"varint,7,opt,name=pay_gateway_id,json=payGatewayId,proto3" json:"pay_gateway_id,omitempty"`
+	OpenId         string `protobuf:"bytes,8,opt,name=open_id,json=openId,proto3" json:"open_id,omitempty"`
+	TargetUserType string `protobuf:"bytes,9,opt,name=target_user_type,json=targetUserType,proto3" json:"target_user_type,omitempty"`
+	TargetUserId   int64  `protobuf:"varint,10,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
+	OrderType      int32  `protobuf:"varint,11,opt,name=order_type,json=orderType,proto3" json:"order_type,omitempty"`
+	OrderId        int64  `protobuf:"varint,12,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	OrderSn        string `protobuf:"bytes,13,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
+	Amount         int64  `protobuf:"varint,14,opt,name=amount,proto3" json:"amount,omitempty"`
+	Currency       string `protobuf:"bytes,15,opt,name=currency,proto3" json:"currency,omitempty"`
+	Subject        string `protobuf:"bytes,16,opt,name=subject,proto3" json:"subject,omitempty"`
+	Body           string `protobuf:"bytes,17,opt,name=body,proto3" json:"body,omitempty"`
+	Extra          string `protobuf:"bytes,18,opt,name=extra,proto3" json:"extra,omitempty"`
+	Channel        string `protobuf:"bytes,19,opt,name=channel,proto3" json:"channel,omitempty"`
+	TradeType      string `protobuf:"bytes,20,opt,name=trade_type,json=tradeType,proto3" json:"trade_type,omitempty"`
+	TransactionNo  string `protobuf:"bytes,21,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no,omitempty"`
+	RefundedAmount int64  `protobuf:"varint,22,opt,name=refunded_amount,json=refundedAmount,proto3" json:"refunded_amount,omitempty"`
+	FailureCode    string `protobuf:"bytes,23,opt,name=failure_code,json=failureCode,proto3" json:"failure_code,omitempty"`
+	FailureMsg     string `protobuf:"bytes,24,opt,name=failure_msg,json=failureMsg,proto3" json:"failure_msg,omitempty"`
+	Credential     string `protobuf:"bytes,25,opt,name=credential,proto3" json:"credential,omitempty"`
+	ClientIp       string `protobuf:"bytes,26,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	Memo           string `protobuf:"bytes,27,opt,name=memo,proto3" json:"memo,omitempty"`
+	Metadata       string `protobuf:"bytes,28,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Status         int32  `protobuf:"varint,29,opt,name=status,proto3" json:"status,omitempty"`
+	PaidAt         string `protobuf:"bytes,30,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
+	ExpiredAt      string `protobuf:"bytes,31,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
+	CreatedAt      string `protobuf:"bytes,32,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt      string `protobuf:"bytes,33,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
 
 func (x *Charge) Reset() {
@@ -190,7 +190,7 @@ func (x *Charge) GetOrderSn() string {
 	return ""
 }
 
-func (x *Charge) GetAmount() float32 {
+func (x *Charge) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -246,7 +246,7 @@ func (x *Charge) GetTransactionNo() string {
 	return ""
 }
 
-func (x *Charge) GetRefundedAmount() float32 {
+func (x *Charge) GetRefundedAmount() int64 {
 	if x != nil {
 		return x.RefundedAmount
 	}
@@ -336,11 +336,11 @@ type ChargeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Charge       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*Charge     `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity *Charge       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*Charge     `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *ChargeResponse) Reset() {
@@ -440,7 +440,7 @@ var file_chargeService_proto_rawDesc = []byte{
 	0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x6f, 0x72,
 	0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x73,
 	0x6e, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x53, 0x6e,
-	0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x02,
+	0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x75, 0x72, 0x72,
 	0x65, 0x6e, 0x63, 0x79, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x75, 0x72, 0x72,
 	0x65, 0x6e, 0x63, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x18,
@@ -455,7 +455,7 @@ var file_chargeService_proto_rawDesc = []byte{
 	0x5f, 0x6e, 0x6f, 0x18, 0x15, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x74, 0x72, 0x61, 0x6e, 0x73,
 	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x6f, 0x12, 0x27, 0x0a, 0x0f, 0x72, 0x65, 0x66, 0x75,
 	0x6e, 0x64, 0x65, 0x64, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x16, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x0e, 0x72, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x65, 0x64, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
+	0x03, 0x52, 0x0e, 0x72, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x65, 0x64, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
 	0x74, 0x12, 0x21, 0x0a, 0x0c, 0x66, 0x61, 0x69, 0x6c, 0x75, 0x72, 0x65, 0x5f, 0x63, 0x6f, 0x64,
 	0x65, 0x18, 0x17, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x66, 0x61, 0x69, 0x6c, 0x75, 0x72, 0x65,
 	0x43, 0x6f, 0x64, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x61, 0x69, 0x6c, 0x75, 0x72, 0x65, 0x5f,

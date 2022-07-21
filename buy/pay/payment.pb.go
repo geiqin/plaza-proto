@@ -32,18 +32,18 @@ type PaymentRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderType      int32   `protobuf:"varint,1,opt,name=order_type,json=orderType,proto3" json:"order_type"`
-	OrderId        int64   `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	OrderSn        string  `protobuf:"bytes,3,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
-	Amount         float32 `protobuf:"fixed32,4,opt,name=amount,proto3" json:"amount"`
-	Currency       string  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency"`
-	Subject        string  `protobuf:"bytes,6,opt,name=subject,proto3" json:"subject"`
-	Body           string  `protobuf:"bytes,7,opt,name=body,proto3" json:"body"`
-	Extra          string  `protobuf:"bytes,8,opt,name=extra,proto3" json:"extra"`
-	Channel        string  `protobuf:"bytes,9,opt,name=channel,proto3" json:"channel"`
-	TargetUserType string  `protobuf:"bytes,10,opt,name=target_user_type,json=targetUserType,proto3" json:"target_user_type"`
-	TargetUserId   int64   `protobuf:"varint,11,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id"`
-	Lived          bool    `protobuf:"varint,12,opt,name=lived,proto3" json:"lived"`
+	OrderType      int32  `protobuf:"varint,1,opt,name=order_type,json=orderType,proto3" json:"order_type,omitempty"`
+	OrderId        int64  `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	OrderSn        string `protobuf:"bytes,3,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
+	Amount         int64  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	Currency       string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	Subject        string `protobuf:"bytes,6,opt,name=subject,proto3" json:"subject,omitempty"`
+	Body           string `protobuf:"bytes,7,opt,name=body,proto3" json:"body,omitempty"`
+	Extra          string `protobuf:"bytes,8,opt,name=extra,proto3" json:"extra,omitempty"`
+	Channel        string `protobuf:"bytes,9,opt,name=channel,proto3" json:"channel,omitempty"`
+	TargetUserType string `protobuf:"bytes,10,opt,name=target_user_type,json=targetUserType,proto3" json:"target_user_type,omitempty"`
+	TargetUserId   int64  `protobuf:"varint,11,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
+	Lived          bool   `protobuf:"varint,12,opt,name=lived,proto3" json:"lived,omitempty"`
 }
 
 func (x *PaymentRequest) Reset() {
@@ -99,7 +99,7 @@ func (x *PaymentRequest) GetOrderSn() string {
 	return ""
 }
 
-func (x *PaymentRequest) GetAmount() float32 {
+func (x *PaymentRequest) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -168,9 +168,9 @@ type PaymentResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Charge       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity *Charge       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *PaymentResponse) Reset() {
@@ -240,7 +240,7 @@ var file_payment_proto_rawDesc = []byte{
 	0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x19,
 	0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x73, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x53, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f,
-	0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e,
+	0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e,
 	0x74, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x18, 0x05, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x18, 0x0a,
 	0x07, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,

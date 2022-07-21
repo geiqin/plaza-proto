@@ -31,7 +31,7 @@ message Charge{
     int32 order_type = 11;
     int64 order_id = 12;
     string order_sn = 13;
-    float amount = 14;
+    int64 amount = 14;
     string currency = 15;
     string subject = 16;
     string body = 17;
@@ -39,7 +39,7 @@ message Charge{
     string channel = 19;
     string trade_type = 20;
     string transaction_no = 21;
-    float refunded_amount = 22;
+    int64 refunded_amount = 22;
     string failure_code = 23;
     string failure_msg = 24;
     string credential = 25;

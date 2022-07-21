@@ -23,8 +23,8 @@ service RefundService {
 message Refund{
     int64 id = 1;
     string refund_sn = 2;
-    float total_fee = 3;
-    float refund_fee = 4;
+    int64 total_fee = 3;
+    int64 refund_fee = 4;
     string currency = 5;
     int64 charge_id = 8;
     string charge_sn = 9;
@@ -47,7 +47,7 @@ message Refund{
 message RefundRequest{
     int64 safeguard_id = 1;
     string safeguard_sn = 2;
-    float refund_fee = 3;
+    int64 refund_fee = 3;
     string currency = 4;
     int64 order_id = 5;
     string refund_desc = 6;

@@ -31,7 +31,7 @@ message Transfer{
     string channel = 5; //wx_wallet
     string recipient = 6;
     string real_name = 7;
-    float amount = 8;
+    int64 amount = 8;
     string currency = 9;
     string order_type = 10;
     int64 order_id = 11;
@@ -40,7 +40,7 @@ message Transfer{
     string extra = 14;
     string metadata = 15;
     int32 status = 16;
-    int64 customer_id = 17;
+    int64 member_id = 17;
     string open_id = 18;
     string finished_at =19;
     string created_at = 20;
@@ -48,9 +48,9 @@ message Transfer{
 }
 
 message TransferRequest {
-    float amount = 1;
+    int64 amount = 1;
     string currency = 2;
-    int64 customer_id = 3;
+    int64 member_id = 3;
     string extra = 4;
     string memo = 5;
     string metadata = 6;
