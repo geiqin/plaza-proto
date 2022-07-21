@@ -30,43 +30,43 @@ type SkuInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id             int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	SpuId          int64       `protobuf:"varint,2,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
-	SkuSn          string      `protobuf:"bytes,3,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn"`
-	Title          string      `protobuf:"bytes,4,opt,name=title,proto3" json:"title"`
-	Type           string      `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`
-	Unit           string      `protobuf:"bytes,6,opt,name=unit,proto3" json:"unit"`
-	ShopId         int64       `protobuf:"varint,7,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`
-	ImageId        int64       `protobuf:"varint,8,opt,name=image_id,json=imageId,proto3" json:"image_id"`
-	ImageUrl       string      `protobuf:"bytes,9,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
-	Price          float32     `protobuf:"fixed32,10,opt,name=price,proto3" json:"price"`
-	MarketPrice    float32     `protobuf:"fixed32,11,opt,name=market_price,json=marketPrice,proto3" json:"market_price"`
-	CostPrice      float32     `protobuf:"fixed32,12,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`
-	PromotionPrice float32     `protobuf:"fixed32,13,opt,name=promotion_price,json=promotionPrice,proto3" json:"promotion_price"`
-	Barcode        string      `protobuf:"bytes,14,opt,name=barcode,proto3" json:"barcode"`
-	Weight         float32     `protobuf:"fixed32,15,opt,name=weight,proto3" json:"weight"`
-	Volume         int32       `protobuf:"varint,16,opt,name=volume,proto3" json:"volume"`
-	Stock          int32       `protobuf:"varint,17,opt,name=stock,proto3" json:"stock"`
-	FrozenStock    int32       `protobuf:"varint,18,opt,name=frozen_stock,json=frozenStock,proto3" json:"frozen_stock"`
-	OutSkuNo       string      `protobuf:"bytes,19,opt,name=out_sku_no,json=outSkuNo,proto3" json:"out_sku_no"`
-	IsSpec         bool        `protobuf:"varint,20,opt,name=is_spec,json=isSpec,proto3" json:"is_spec"`
-	IsVirtual      bool        `protobuf:"varint,21,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`
-	IsPresale      bool        `protobuf:"varint,22,opt,name=is_presale,json=isPresale,proto3" json:"is_presale"`
-	IsMemberRight  bool        `protobuf:"varint,23,opt,name=is_member_right,json=isMemberRight,proto3" json:"is_member_right"`
-	IsMemberPrice  bool        `protobuf:"varint,24,opt,name=is_member_price,json=isMemberPrice,proto3" json:"is_member_price"`
-	IsHideStock    bool        `protobuf:"varint,25,opt,name=is_hide_stock,json=isHideStock,proto3" json:"is_hide_stock"`
-	IsNew          bool        `protobuf:"varint,27,opt,name=is_new,json=isNew,proto3" json:"is_new"`
-	IsHot          bool        `protobuf:"varint,28,opt,name=is_hot,json=isHot,proto3" json:"is_hot"`
-	IsRecommend    bool        `protobuf:"varint,29,opt,name=is_recommend,json=isRecommend,proto3" json:"is_recommend"`
-	IsSpecial      bool        `protobuf:"varint,30,opt,name=is_special,json=isSpecial,proto3" json:"is_special"`
-	IsMaster       bool        `protobuf:"varint,31,opt,name=is_master,json=isMaster,proto3" json:"is_master"`
-	Indexes        string      `protobuf:"bytes,32,opt,name=indexes,proto3" json:"indexes"`
-	OwnDesc        string      `protobuf:"bytes,33,opt,name=own_desc,json=ownDesc,proto3" json:"own_desc"`
-	Status         string      `protobuf:"bytes,34,opt,name=status,proto3" json:"status"`
-	ListedAt       string      `protobuf:"bytes,35,opt,name=listed_at,json=listedAt,proto3" json:"listed_at"`
-	Vip            *SkuVip     `protobuf:"bytes,37,opt,name=vip,proto3" json:"vip"`
-	Coupon         *SkuCoupon  `protobuf:"bytes,38,opt,name=coupon,proto3" json:"coupon"`
-	Presale        *SkuPresale `protobuf:"bytes,39,opt,name=presale,proto3" json:"presale"`
+	Id             int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	SpuId          int64       `protobuf:"varint,2,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`
+	SkuSn          string      `protobuf:"bytes,3,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn,omitempty"`
+	Title          string      `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	Type           string      `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
+	Unit           string      `protobuf:"bytes,6,opt,name=unit,proto3" json:"unit,omitempty"`
+	ShopId         int64       `protobuf:"varint,7,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	ImageId        int64       `protobuf:"varint,8,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	ImageUrl       string      `protobuf:"bytes,9,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	Price          int64       `protobuf:"varint,10,opt,name=price,proto3" json:"price,omitempty"`
+	MarketPrice    int64       `protobuf:"varint,11,opt,name=market_price,json=marketPrice,proto3" json:"market_price,omitempty"`
+	CostPrice      int64       `protobuf:"varint,12,opt,name=cost_price,json=costPrice,proto3" json:"cost_price,omitempty"`
+	PromotionPrice int64       `protobuf:"varint,13,opt,name=promotion_price,json=promotionPrice,proto3" json:"promotion_price,omitempty"`
+	Barcode        string      `protobuf:"bytes,14,opt,name=barcode,proto3" json:"barcode,omitempty"`
+	Weight         float32     `protobuf:"fixed32,15,opt,name=weight,proto3" json:"weight,omitempty"`
+	Volume         int32       `protobuf:"varint,16,opt,name=volume,proto3" json:"volume,omitempty"`
+	Stock          int32       `protobuf:"varint,17,opt,name=stock,proto3" json:"stock,omitempty"`
+	FrozenStock    int32       `protobuf:"varint,18,opt,name=frozen_stock,json=frozenStock,proto3" json:"frozen_stock,omitempty"`
+	OutSkuNo       string      `protobuf:"bytes,19,opt,name=out_sku_no,json=outSkuNo,proto3" json:"out_sku_no,omitempty"`
+	IsSpec         bool        `protobuf:"varint,20,opt,name=is_spec,json=isSpec,proto3" json:"is_spec,omitempty"`
+	IsVirtual      bool        `protobuf:"varint,21,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual,omitempty"`
+	IsPresale      bool        `protobuf:"varint,22,opt,name=is_presale,json=isPresale,proto3" json:"is_presale,omitempty"`
+	IsMemberRight  bool        `protobuf:"varint,23,opt,name=is_member_right,json=isMemberRight,proto3" json:"is_member_right,omitempty"`
+	IsMemberPrice  bool        `protobuf:"varint,24,opt,name=is_member_price,json=isMemberPrice,proto3" json:"is_member_price,omitempty"`
+	IsHideStock    bool        `protobuf:"varint,25,opt,name=is_hide_stock,json=isHideStock,proto3" json:"is_hide_stock,omitempty"`
+	IsNew          bool        `protobuf:"varint,27,opt,name=is_new,json=isNew,proto3" json:"is_new,omitempty"`
+	IsHot          bool        `protobuf:"varint,28,opt,name=is_hot,json=isHot,proto3" json:"is_hot,omitempty"`
+	IsRecommend    bool        `protobuf:"varint,29,opt,name=is_recommend,json=isRecommend,proto3" json:"is_recommend,omitempty"`
+	IsSpecial      bool        `protobuf:"varint,30,opt,name=is_special,json=isSpecial,proto3" json:"is_special,omitempty"`
+	IsMaster       bool        `protobuf:"varint,31,opt,name=is_master,json=isMaster,proto3" json:"is_master,omitempty"`
+	Indexes        string      `protobuf:"bytes,32,opt,name=indexes,proto3" json:"indexes,omitempty"`
+	OwnDesc        string      `protobuf:"bytes,33,opt,name=own_desc,json=ownDesc,proto3" json:"own_desc,omitempty"`
+	Status         string      `protobuf:"bytes,34,opt,name=status,proto3" json:"status,omitempty"`
+	ListedAt       string      `protobuf:"bytes,35,opt,name=listed_at,json=listedAt,proto3" json:"listed_at,omitempty"`
+	Vip            *SkuVip     `protobuf:"bytes,37,opt,name=vip,proto3" json:"vip,omitempty"`
+	Coupon         *SkuCoupon  `protobuf:"bytes,38,opt,name=coupon,proto3" json:"coupon,omitempty"`
+	Presale        *SkuPresale `protobuf:"bytes,39,opt,name=presale,proto3" json:"presale,omitempty"`
 }
 
 func (x *SkuInfo) Reset() {
@@ -164,28 +164,28 @@ func (x *SkuInfo) GetImageUrl() string {
 	return ""
 }
 
-func (x *SkuInfo) GetPrice() float32 {
+func (x *SkuInfo) GetPrice() int64 {
 	if x != nil {
 		return x.Price
 	}
 	return 0
 }
 
-func (x *SkuInfo) GetMarketPrice() float32 {
+func (x *SkuInfo) GetMarketPrice() int64 {
 	if x != nil {
 		return x.MarketPrice
 	}
 	return 0
 }
 
-func (x *SkuInfo) GetCostPrice() float32 {
+func (x *SkuInfo) GetCostPrice() int64 {
 	if x != nil {
 		return x.CostPrice
 	}
 	return 0
 }
 
-func (x *SkuInfo) GetPromotionPrice() float32 {
+func (x *SkuInfo) GetPromotionPrice() int64 {
 	if x != nil {
 		return x.PromotionPrice
 	}
@@ -365,9 +365,9 @@ type Unit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id   int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
+	Id   int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 }
 
 func (x *Unit) Reset() {
@@ -428,21 +428,21 @@ type SkuPresale struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	SkuId            int64  `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	PresaleType      int32  `protobuf:"varint,3,opt,name=presale_type,json=presaleType,proto3" json:"presale_type"`
-	PayedDate        string `protobuf:"bytes,4,opt,name=payed_date,json=payedDate,proto3" json:"payed_date"`
-	AdvanceStartDate string `protobuf:"bytes,5,opt,name=advance_start_date,json=advanceStartDate,proto3" json:"advance_start_date"`
-	AdvanceEndDate   string `protobuf:"bytes,6,opt,name=advance_end_date,json=advanceEndDate,proto3" json:"advance_end_date"`
-	BalanceStartDate string `protobuf:"bytes,7,opt,name=balance_start_date,json=balanceStartDate,proto3" json:"balance_start_date"`
-	BalanceEndDate   string `protobuf:"bytes,8,opt,name=balance_end_date,json=balanceEndDate,proto3" json:"balance_end_date"`
-	AdvanceType      string `protobuf:"bytes,9,opt,name=advance_type,json=advanceType,proto3" json:"advance_type"`
-	AdvanceRate      int32  `protobuf:"varint,10,opt,name=advance_rate,json=advanceRate,proto3" json:"advance_rate"`
-	AdvanceMoney     int64  `protobuf:"varint,11,opt,name=advance_money,json=advanceMoney,proto3" json:"advance_money"`
-	BalanceMoney     int64  `protobuf:"varint,12,opt,name=balance_money,json=balanceMoney,proto3" json:"balance_money"`
-	DeliveryType     string `protobuf:"bytes,13,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type"`
-	DeliveryDate     string `protobuf:"bytes,14,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date"`
-	DeliveryDays     int32  `protobuf:"varint,15,opt,name=delivery_days,json=deliveryDays,proto3" json:"delivery_days"`
+	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	SkuId            int64  `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	PresaleType      int32  `protobuf:"varint,3,opt,name=presale_type,json=presaleType,proto3" json:"presale_type,omitempty"`
+	PayedDate        string `protobuf:"bytes,4,opt,name=payed_date,json=payedDate,proto3" json:"payed_date,omitempty"`
+	AdvanceStartDate string `protobuf:"bytes,5,opt,name=advance_start_date,json=advanceStartDate,proto3" json:"advance_start_date,omitempty"`
+	AdvanceEndDate   string `protobuf:"bytes,6,opt,name=advance_end_date,json=advanceEndDate,proto3" json:"advance_end_date,omitempty"`
+	BalanceStartDate string `protobuf:"bytes,7,opt,name=balance_start_date,json=balanceStartDate,proto3" json:"balance_start_date,omitempty"`
+	BalanceEndDate   string `protobuf:"bytes,8,opt,name=balance_end_date,json=balanceEndDate,proto3" json:"balance_end_date,omitempty"`
+	AdvanceType      string `protobuf:"bytes,9,opt,name=advance_type,json=advanceType,proto3" json:"advance_type,omitempty"`
+	AdvanceRate      int32  `protobuf:"varint,10,opt,name=advance_rate,json=advanceRate,proto3" json:"advance_rate,omitempty"`
+	AdvanceMoney     int64  `protobuf:"varint,11,opt,name=advance_money,json=advanceMoney,proto3" json:"advance_money,omitempty"`
+	BalanceMoney     int64  `protobuf:"varint,12,opt,name=balance_money,json=balanceMoney,proto3" json:"balance_money,omitempty"`
+	DeliveryType     string `protobuf:"bytes,13,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type,omitempty"`
+	DeliveryDate     string `protobuf:"bytes,14,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date,omitempty"`
+	DeliveryDays     int32  `protobuf:"varint,15,opt,name=delivery_days,json=deliveryDays,proto3" json:"delivery_days,omitempty"`
 }
 
 func (x *SkuPresale) Reset() {
@@ -587,10 +587,10 @@ type SkuCoupon struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	SkuId       int64  `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	CouponId    int64  `protobuf:"varint,3,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`
-	CouponTitle string `protobuf:"bytes,4,opt,name=coupon_title,json=couponTitle,proto3" json:"coupon_title"`
+	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	SkuId       int64  `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	CouponId    int64  `protobuf:"varint,3,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id,omitempty"`
+	CouponTitle string `protobuf:"bytes,4,opt,name=coupon_title,json=couponTitle,proto3" json:"coupon_title,omitempty"`
 }
 
 func (x *SkuCoupon) Reset() {
@@ -658,11 +658,11 @@ type SkuVip struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	SkuId        int64  `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	MemberRankId int32  `protobuf:"varint,3,opt,name=member_rank_id,json=memberRankId,proto3" json:"member_rank_id"`
-	KeepType     string `protobuf:"bytes,4,opt,name=keep_type,json=keepType,proto3" json:"keep_type"`
-	KeepValue    int32  `protobuf:"varint,5,opt,name=keep_value,json=keepValue,proto3" json:"keep_value"`
+	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	SkuId        int64  `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	MemberRankId int32  `protobuf:"varint,3,opt,name=member_rank_id,json=memberRankId,proto3" json:"member_rank_id,omitempty"`
+	KeepType     string `protobuf:"bytes,4,opt,name=keep_type,json=keepType,proto3" json:"keep_type,omitempty"`
+	KeepValue    int32  `protobuf:"varint,5,opt,name=keep_value,json=keepValue,proto3" json:"keep_value,omitempty"`
 }
 
 func (x *SkuVip) Reset() {
@@ -751,13 +751,13 @@ var file_skuInfoService_proto_rawDesc = []byte{
 	0x01, 0x28, 0x03, 0x52, 0x07, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09,
 	0x69, 0x6d, 0x61, 0x67, 0x65, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x08, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x69,
-	0x63, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x02, 0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x12,
+	0x63, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x12,
 	0x21, 0x0a, 0x0c, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18,
-	0x0b, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0b, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x50, 0x72, 0x69,
+	0x0b, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x50, 0x72, 0x69,
 	0x63, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x73, 0x74, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65,
-	0x18, 0x0c, 0x20, 0x01, 0x28, 0x02, 0x52, 0x09, 0x63, 0x6f, 0x73, 0x74, 0x50, 0x72, 0x69, 0x63,
+	0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x6f, 0x73, 0x74, 0x50, 0x72, 0x69, 0x63,
 	0x65, 0x12, 0x27, 0x0a, 0x0f, 0x70, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70,
-	0x72, 0x69, 0x63, 0x65, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0e, 0x70, 0x72, 0x6f, 0x6d,
+	0x72, 0x69, 0x63, 0x65, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0e, 0x70, 0x72, 0x6f, 0x6d,
 	0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x62, 0x61,
 	0x72, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x62, 0x61, 0x72,
 	0x63, 0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x77, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x0f,

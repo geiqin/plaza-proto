@@ -12,10 +12,10 @@ message SkuInfo {
 	int64 shop_id = 7;
 	int64 image_id = 8;
 	string image_url = 9;
-	float price = 10;
-	float market_price = 11;
-	float cost_price = 12;
-	float promotion_price = 13;
+	int64 price = 10;
+	int64 market_price = 11;
+	int64 cost_price = 12;
+	int64 promotion_price = 13;
 	string barcode = 14;
 	float weight = 15;
 	int32 volume = 16;
