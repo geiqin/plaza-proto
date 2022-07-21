@@ -13,18 +13,18 @@ message PromotionRuleConfig {
     bool is_new_member = 7;//是否为新客户
     bool is_old_member = 8;//是否为老客户
     bool is_mutex = 9;//是否互斥，true 表示互斥，false 表示不互斥
-    bool is_cycle_repeat = 10;//是否按周期重复
+    string time_repeat_type = 10;//周期重复类型：0-不重复，1-每天，2-每周，3-每月
     int32 use_range = 11;//使用范围，0—全场，1—分店，2—类别，3—商品
-    int32 catch_limit = 12;//每个用户可以领取的数量
-    repeated string allow_payment_terminals = 13; //允许的支付终端
-    repeated string allow_payment_codes = 14;//允许的支付方式
-    CycleRepeatData cycle_repeat_data = 15;//按周期重复数据设置
+    string limit_catch_type =13; //限购类型：0不限购 1每人每种商品限购 2每人每种商品前XX件享受折扣
+    int32 limit_catch_num = 14; //限购数量/每个用户可以领取的数量
+    repeated string allow_payment_terminals = 15; //允许的支付终端
+    repeated string allow_payment_codes = 16;//允许的支付方式
+    TimeRepeatInfo time_repeat_data = 17;//周期重复数据设置
 }
 
 //按周期重复数据
-message CycleRepeatData {
-    float time_type = 1; //模式：1-每天,2-每周，3-每月
-    float began_time = 2;//开始时间： hh:mm
-    float ended_time = 3;//结束时间： hh:mm
-    repeated int32 per_values = 4;//具体每天数(每周和每月有效)
+message TimeRepeatInfo {
+    string time_began = 1;//每天开始时间： hh:mm
+    string time_ended = 2;//每天结束时间： hh:mm
+    repeated int32 repeat_values = 3;//具体每天数(每周和每月有效)
 }
