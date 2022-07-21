@@ -55,7 +55,7 @@ message Order {
     int64 shop_id =4;
     int64 member_id =6;
     int32 total_num =7;
-    float total_weight =8;
+    int64 total_weight =8;
     string currency =9;
     int64 goods_amount =11;
     int64 discount_amount =12;

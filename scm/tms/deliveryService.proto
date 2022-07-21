@@ -37,8 +37,8 @@ message Delivery {
     int64 first_km_fee = 13;
     float additional_km = 14;
     int64 additional_km_fee = 15;
-    float first_weight = 16;
-    float additional_weight = 17;
+    int64 first_weight = 16;
+    int64 additional_weight = 17;
     int64 additional_weight_fee = 18;
     bool is_timed_arrival = 19;
     string delivery = 20;

@@ -31,26 +31,26 @@ type Scheme struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MemberId       int64            `protobuf:"varint,1,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	TotalNum       int32            `protobuf:"varint,2,opt,name=total_num,json=totalNum,proto3" json:"total_num,omitempty"`
-	TotalWeight    float32          `protobuf:"fixed32,3,opt,name=total_weight,json=totalWeight,proto3" json:"total_weight,omitempty"`
-	Currency       string           `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	GoodsAmount    int64            `protobuf:"varint,5,opt,name=goods_amount,json=goodsAmount,proto3" json:"goods_amount,omitempty"`
-	DiscountAmount int64            `protobuf:"varint,6,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
-	ShippingFee    int64            `protobuf:"varint,7,opt,name=shipping_fee,json=shippingFee,proto3" json:"shipping_fee,omitempty"`
-	InsureFee      int64            `protobuf:"varint,8,opt,name=insure_fee,json=insureFee,proto3" json:"insure_fee,omitempty"`
-	PackFee        int64            `protobuf:"varint,9,opt,name=pack_fee,json=packFee,proto3" json:"pack_fee,omitempty"`
-	Surplus        int64            `protobuf:"varint,10,opt,name=surplus,proto3" json:"surplus,omitempty"`
-	CouponId       int64            `protobuf:"varint,11,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id,omitempty"`
-	CouponMoney    int64            `protobuf:"varint,12,opt,name=coupon_money,json=couponMoney,proto3" json:"coupon_money,omitempty"`
-	Integral       int32            `protobuf:"varint,13,opt,name=integral,proto3" json:"integral,omitempty"`
-	IntegralMoney  int64            `protobuf:"varint,14,opt,name=integral_money,json=integralMoney,proto3" json:"integral_money,omitempty"`
-	Amount         int64            `protobuf:"varint,15,opt,name=amount,proto3" json:"amount,omitempty"`
-	PaidMoney      int64            `protobuf:"varint,16,opt,name=paid_money,json=paidMoney,proto3" json:"paid_money,omitempty"`
-	IsShipment     bool             `protobuf:"varint,17,opt,name=is_shipment,json=isShipment,proto3" json:"is_shipment,omitempty"`
-	Details        []*SchemeDetail  `protobuf:"bytes,18,rep,name=details,proto3" json:"details,omitempty"`
-	Coupons        []*CouponInfo    `protobuf:"bytes,19,rep,name=coupons,proto3" json:"coupons,omitempty"`
-	Promotions     []*PromotionInfo `protobuf:"bytes,20,rep,name=promotions,proto3" json:"promotions,omitempty"`
+	MemberId       int64            `protobuf:"varint,1,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	TotalNum       int32            `protobuf:"varint,2,opt,name=total_num,json=totalNum,proto3" json:"total_num"`
+	TotalWeight    int64            `protobuf:"varint,3,opt,name=total_weight,json=totalWeight,proto3" json:"total_weight"`
+	Currency       string           `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency"`
+	GoodsAmount    int64            `protobuf:"varint,5,opt,name=goods_amount,json=goodsAmount,proto3" json:"goods_amount"`
+	DiscountAmount int64            `protobuf:"varint,6,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount"`
+	ShippingFee    int64            `protobuf:"varint,7,opt,name=shipping_fee,json=shippingFee,proto3" json:"shipping_fee"`
+	InsureFee      int64            `protobuf:"varint,8,opt,name=insure_fee,json=insureFee,proto3" json:"insure_fee"`
+	PackFee        int64            `protobuf:"varint,9,opt,name=pack_fee,json=packFee,proto3" json:"pack_fee"`
+	Surplus        int64            `protobuf:"varint,10,opt,name=surplus,proto3" json:"surplus"`
+	CouponId       int64            `protobuf:"varint,11,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`
+	CouponMoney    int64            `protobuf:"varint,12,opt,name=coupon_money,json=couponMoney,proto3" json:"coupon_money"`
+	Integral       int32            `protobuf:"varint,13,opt,name=integral,proto3" json:"integral"`
+	IntegralMoney  int64            `protobuf:"varint,14,opt,name=integral_money,json=integralMoney,proto3" json:"integral_money"`
+	Amount         int64            `protobuf:"varint,15,opt,name=amount,proto3" json:"amount"`
+	PaidMoney      int64            `protobuf:"varint,16,opt,name=paid_money,json=paidMoney,proto3" json:"paid_money"`
+	IsShipment     bool             `protobuf:"varint,17,opt,name=is_shipment,json=isShipment,proto3" json:"is_shipment"`
+	Details        []*SchemeDetail  `protobuf:"bytes,18,rep,name=details,proto3" json:"details"`
+	Coupons        []*CouponInfo    `protobuf:"bytes,19,rep,name=coupons,proto3" json:"coupons"`
+	Promotions     []*PromotionInfo `protobuf:"bytes,20,rep,name=promotions,proto3" json:"promotions"`
 }
 
 func (x *Scheme) Reset() {
@@ -99,7 +99,7 @@ func (x *Scheme) GetTotalNum() int32 {
 	return 0
 }
 
-func (x *Scheme) GetTotalWeight() float32 {
+func (x *Scheme) GetTotalWeight() int64 {
 	if x != nil {
 		return x.TotalWeight
 	}
@@ -230,20 +230,20 @@ type SchemeDetail struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SkuId             int64    `protobuf:"varint,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	Num               int32    `protobuf:"varint,2,opt,name=num,proto3" json:"num,omitempty"`
-	Price             int64    `protobuf:"varint,3,opt,name=price,proto3" json:"price,omitempty"`
-	MarketPrice       int64    `protobuf:"varint,4,opt,name=market_price,json=marketPrice,proto3" json:"market_price,omitempty"`
-	CostPrice         int64    `protobuf:"varint,5,opt,name=cost_price,json=costPrice,proto3" json:"cost_price,omitempty"`
-	PromotionPrice    int64    `protobuf:"varint,6,opt,name=promotion_price,json=promotionPrice,proto3" json:"promotion_price,omitempty"`
-	MemberPrice       int64    `protobuf:"varint,7,opt,name=member_price,json=memberPrice,proto3" json:"member_price,omitempty"`
-	WholesalePrice    int64    `protobuf:"varint,8,opt,name=wholesale_price,json=wholesalePrice,proto3" json:"wholesale_price,omitempty"`
-	RowGoodsAmount    int64    `protobuf:"varint,9,opt,name=row_goods_amount,json=rowGoodsAmount,proto3" json:"row_goods_amount,omitempty"`
-	RowDiscountAmount int64    `protobuf:"varint,10,opt,name=row_discount_amount,json=rowDiscountAmount,proto3" json:"row_discount_amount,omitempty"`
-	RowAmount         int64    `protobuf:"varint,11,opt,name=row_amount,json=rowAmount,proto3" json:"row_amount,omitempty"`
-	IsGift            bool     `protobuf:"varint,12,opt,name=is_gift,json=isGift,proto3" json:"is_gift,omitempty"`
-	Checked           bool     `protobuf:"varint,13,opt,name=checked,proto3" json:"checked,omitempty"` //是否已选中拿入计算
-	SkuInfo           *SkuInfo `protobuf:"bytes,14,opt,name=sku_info,json=skuInfo,proto3" json:"sku_info,omitempty"`
+	SkuId             int64    `protobuf:"varint,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	Num               int32    `protobuf:"varint,2,opt,name=num,proto3" json:"num"`
+	Price             int64    `protobuf:"varint,3,opt,name=price,proto3" json:"price"`
+	MarketPrice       int64    `protobuf:"varint,4,opt,name=market_price,json=marketPrice,proto3" json:"market_price"`
+	CostPrice         int64    `protobuf:"varint,5,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`
+	PromotionPrice    int64    `protobuf:"varint,6,opt,name=promotion_price,json=promotionPrice,proto3" json:"promotion_price"`
+	MemberPrice       int64    `protobuf:"varint,7,opt,name=member_price,json=memberPrice,proto3" json:"member_price"`
+	WholesalePrice    int64    `protobuf:"varint,8,opt,name=wholesale_price,json=wholesalePrice,proto3" json:"wholesale_price"`
+	RowGoodsAmount    int64    `protobuf:"varint,9,opt,name=row_goods_amount,json=rowGoodsAmount,proto3" json:"row_goods_amount"`
+	RowDiscountAmount int64    `protobuf:"varint,10,opt,name=row_discount_amount,json=rowDiscountAmount,proto3" json:"row_discount_amount"`
+	RowAmount         int64    `protobuf:"varint,11,opt,name=row_amount,json=rowAmount,proto3" json:"row_amount"`
+	IsGift            bool     `protobuf:"varint,12,opt,name=is_gift,json=isGift,proto3" json:"is_gift"`
+	Checked           bool     `protobuf:"varint,13,opt,name=checked,proto3" json:"checked"` //是否已选中拿入计算
+	SkuInfo           *SkuInfo `protobuf:"bytes,14,opt,name=sku_info,json=skuInfo,proto3" json:"sku_info"`
 }
 
 func (x *SchemeDetail) Reset() {
@@ -381,27 +381,27 @@ type SchemeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AddressId      int64           `protobuf:"varint,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
-	CouponId       int64           `protobuf:"varint,2,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id,omitempty"`
-	MemberId       int64           `protobuf:"varint,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	MemberRankId   int32           `protobuf:"varint,4,opt,name=member_rank_id,json=memberRankId,proto3" json:"member_rank_id,omitempty"`
-	ShopId         int64           `protobuf:"varint,5,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	OrderId        int64           `protobuf:"varint,6,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	Terminal       string          `protobuf:"bytes,7,opt,name=terminal,proto3" json:"terminal,omitempty"`
-	Channel        string          `protobuf:"bytes,8,opt,name=channel,proto3" json:"channel,omitempty"`
-	PaymentMethod  string          `protobuf:"bytes,9,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	ShipmentMethod string          `protobuf:"bytes,10,opt,name=shipment_method,json=shipmentMethod,proto3" json:"shipment_method,omitempty"`
-	InsureFee      int64           `protobuf:"varint,11,opt,name=insure_fee,json=insureFee,proto3" json:"insure_fee,omitempty"`
-	PackFee        int64           `protobuf:"varint,12,opt,name=pack_fee,json=packFee,proto3" json:"pack_fee,omitempty"`
-	Surplus        int64           `protobuf:"varint,13,opt,name=surplus,proto3" json:"surplus,omitempty"`
-	CouponMoney    int64           `protobuf:"varint,14,opt,name=coupon_money,json=couponMoney,proto3" json:"coupon_money,omitempty"`
-	Integral       int32           `protobuf:"varint,15,opt,name=integral,proto3" json:"integral,omitempty"`
-	IntegralMoney  int64           `protobuf:"varint,16,opt,name=integral_money,json=integralMoney,proto3" json:"integral_money,omitempty"`
-	PaidMoney      int64           `protobuf:"varint,17,opt,name=paid_money,json=paidMoney,proto3" json:"paid_money,omitempty"`
-	Currency       string          `protobuf:"bytes,18,opt,name=currency,proto3" json:"currency,omitempty"`
-	AreaId         int64           `protobuf:"varint,19,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
-	SkuList        map[int64]int32 `protobuf:"bytes,20,rep,name=sku_list,json=skuList,proto3" json:"sku_list,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	SkuIds         []int64         `protobuf:"varint,21,rep,packed,name=sku_ids,json=skuIds,proto3" json:"sku_ids,omitempty"`
+	AddressId      int64           `protobuf:"varint,1,opt,name=address_id,json=addressId,proto3" json:"address_id"`
+	CouponId       int64           `protobuf:"varint,2,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`
+	MemberId       int64           `protobuf:"varint,3,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	MemberRankId   int32           `protobuf:"varint,4,opt,name=member_rank_id,json=memberRankId,proto3" json:"member_rank_id"`
+	ShopId         int64           `protobuf:"varint,5,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`
+	OrderId        int64           `protobuf:"varint,6,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	Terminal       string          `protobuf:"bytes,7,opt,name=terminal,proto3" json:"terminal"`
+	Channel        string          `protobuf:"bytes,8,opt,name=channel,proto3" json:"channel"`
+	PaymentMethod  string          `protobuf:"bytes,9,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method"`
+	ShipmentMethod string          `protobuf:"bytes,10,opt,name=shipment_method,json=shipmentMethod,proto3" json:"shipment_method"`
+	InsureFee      int64           `protobuf:"varint,11,opt,name=insure_fee,json=insureFee,proto3" json:"insure_fee"`
+	PackFee        int64           `protobuf:"varint,12,opt,name=pack_fee,json=packFee,proto3" json:"pack_fee"`
+	Surplus        int64           `protobuf:"varint,13,opt,name=surplus,proto3" json:"surplus"`
+	CouponMoney    int64           `protobuf:"varint,14,opt,name=coupon_money,json=couponMoney,proto3" json:"coupon_money"`
+	Integral       int32           `protobuf:"varint,15,opt,name=integral,proto3" json:"integral"`
+	IntegralMoney  int64           `protobuf:"varint,16,opt,name=integral_money,json=integralMoney,proto3" json:"integral_money"`
+	PaidMoney      int64           `protobuf:"varint,17,opt,name=paid_money,json=paidMoney,proto3" json:"paid_money"`
+	Currency       string          `protobuf:"bytes,18,opt,name=currency,proto3" json:"currency"`
+	AreaId         int64           `protobuf:"varint,19,opt,name=area_id,json=areaId,proto3" json:"area_id"`
+	SkuList        map[int64]int32 `protobuf:"bytes,20,rep,name=sku_list,json=skuList,proto3" json:"sku_list" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	SkuIds         []int64         `protobuf:"varint,21,rep,packed,name=sku_ids,json=skuIds,proto3" json:"sku_ids"`
 }
 
 func (x *SchemeRequest) Reset() {
@@ -588,16 +588,16 @@ type SchemeData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity           *Scheme           `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Skus             []*SkuInfo        `protobuf:"bytes,2,rep,name=skus,proto3" json:"skus,omitempty"`
-	AvailableSurplus int64             `protobuf:"varint,3,opt,name=available_surplus,json=availableSurplus,proto3" json:"available_surplus,omitempty"` //可使用的余额
-	AvailablePoints  int32             `protobuf:"varint,4,opt,name=available_points,json=availablePoints,proto3" json:"available_points,omitempty"`    //可使用的积分
-	AvailableCoupons *CouponInfo       `protobuf:"bytes,5,opt,name=available_coupons,json=availableCoupons,proto3" json:"available_coupons,omitempty"`  //可使用的优惠劵集合
-	ShippingAddress  *AddressInfo      `protobuf:"bytes,6,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address,omitempty"`     //订单收货地址
-	ShopList         []*ShopInfo       `protobuf:"bytes,7,rep,name=shop_list,json=shopList,proto3" json:"shop_list,omitempty"`                          //商品中涉及到那些卖家（多店铺模式下）
-	Params           map[string]string `protobuf:"bytes,8,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Items            []*Scheme         `protobuf:"bytes,9,rep,name=items,proto3" json:"items,omitempty"`
-	Info             *common.Info      `protobuf:"bytes,10,opt,name=info,proto3" json:"info,omitempty"`
+	Entity           *Scheme           `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Skus             []*SkuInfo        `protobuf:"bytes,2,rep,name=skus,proto3" json:"skus"`
+	AvailableSurplus int64             `protobuf:"varint,3,opt,name=available_surplus,json=availableSurplus,proto3" json:"available_surplus"` //可使用的余额
+	AvailablePoints  int32             `protobuf:"varint,4,opt,name=available_points,json=availablePoints,proto3" json:"available_points"`    //可使用的积分
+	AvailableCoupons *CouponInfo       `protobuf:"bytes,5,opt,name=available_coupons,json=availableCoupons,proto3" json:"available_coupons"`  //可使用的优惠劵集合
+	ShippingAddress  *AddressInfo      `protobuf:"bytes,6,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address"`     //订单收货地址
+	ShopList         []*ShopInfo       `protobuf:"bytes,7,rep,name=shop_list,json=shopList,proto3" json:"shop_list"`                          //商品中涉及到那些卖家（多店铺模式下）
+	Params           map[string]string `protobuf:"bytes,8,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Items            []*Scheme         `protobuf:"bytes,9,rep,name=items,proto3" json:"items"`
+	Info             *common.Info      `protobuf:"bytes,10,opt,name=info,proto3" json:"info"`
 }
 
 func (x *SchemeData) Reset() {
@@ -707,8 +707,8 @@ type SchemeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *SchemeData   `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *SchemeData   `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *SchemeResponse) Reset() {
@@ -771,7 +771,7 @@ var file_schemeService_proto_rawDesc = []byte{
 	0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x74, 0x6f, 0x74, 0x61, 0x6c,
 	0x5f, 0x6e, 0x75, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x74, 0x6f, 0x74, 0x61,
 	0x6c, 0x4e, 0x75, 0x6d, 0x12, 0x21, 0x0a, 0x0c, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x77, 0x65,
-	0x69, 0x67, 0x68, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0b, 0x74, 0x6f, 0x74, 0x61,
+	0x69, 0x67, 0x68, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x74, 0x6f, 0x74, 0x61,
 	0x6c, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x75, 0x72, 0x72, 0x65,
 	0x6e, 0x63, 0x79, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x75, 0x72, 0x72, 0x65,
 	0x6e, 0x63, 0x79, 0x12, 0x21, 0x0a, 0x0c, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x5f, 0x61, 0x6d, 0x6f,

@@ -71,7 +71,7 @@ message Sku {
     int64 cost_price = 12;
     int64 promotion_price = 13;
     string barcode = 14;
-    float weight = 15;
+    int64 weight = 15;
     int32 volume = 16;
     int32 stock = 17;
     int32 frozen_stock = 18;

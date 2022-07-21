@@ -12,7 +12,7 @@ message OrderDetail {
     int64 image_id = 8;
     string image_url = 9;
     string title = 10;
-    float weight = 11;
+    int64 weight = 11;
     int32 num = 12;
     int64 price = 13;
     int64 market_price = 14;
