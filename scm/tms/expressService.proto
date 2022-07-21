@@ -43,10 +43,10 @@ message ExpressDetail {
   int64 express_id = 2;
   float first_weight = 3;
   int32 first_number = 4;
-  float express_fee = 5;
+  int64 express_fee = 5;
   float additional_weight = 6;
   int32 additional_number = 7;
-  float additional_fee = 8;
+  int64 additional_fee = 8;
   string created_at = 9;
   string updated_at = 10;
   string area_content = 11;

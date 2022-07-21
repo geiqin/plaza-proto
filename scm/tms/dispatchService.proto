@@ -20,7 +20,7 @@ message Dispatch {
     int64 order_id = 3;
     string shipment_code = 4;
     string type = 5;
-    float freight = 6;
+    int64 freight = 6;
     bool protected = 7;
     bool is_delivery = 8;
     bool is_auto_surface = 9;

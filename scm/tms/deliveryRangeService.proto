@@ -6,8 +6,8 @@ message DeliveryRange {
     int32 id = 1;
     int64 delivery_id = 2;
     string area_name = 3;
-    float start_price = 4;
-    float delivery_price = 5;
+    int64 start_price = 4;
+    int64 delivery_price = 5;
     int32 method = 6;
     float region_radius = 7;
     string region_data = 8;
