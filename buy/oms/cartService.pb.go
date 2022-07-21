@@ -32,7 +32,7 @@ type Cart struct {
 	unknownFields protoimpl.UnknownFields
 
 	TotalNum       int32           `protobuf:"varint,1,opt,name=total_num,json=totalNum,proto3" json:"total_num"`
-	TotalWeight    float32         `protobuf:"fixed32,2,opt,name=total_weight,json=totalWeight,proto3" json:"total_weight"`
+	TotalWeight    int64           `protobuf:"varint,2,opt,name=total_weight,json=totalWeight,proto3" json:"total_weight"`
 	Currency       string          `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency"`
 	GoodsAmount    int64           `protobuf:"varint,4,opt,name=goods_amount,json=goodsAmount,proto3" json:"goods_amount"`
 	DiscountAmount int64           `protobuf:"varint,5,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount"`
@@ -86,7 +86,7 @@ func (x *Cart) GetTotalNum() int32 {
 	return 0
 }
 
-func (x *Cart) GetTotalWeight() float32 {
+func (x *Cart) GetTotalWeight() int64 {
 	if x != nil {
 		return x.TotalWeight
 	}
@@ -182,32 +182,32 @@ type CartItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SpuId             int64   `protobuf:"varint,1,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
-	SkuId             int64   `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	SkuSn             string  `protobuf:"bytes,3,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn"`
-	ImageId           int64   `protobuf:"varint,4,opt,name=image_id,json=imageId,proto3" json:"image_id"`
-	ImageUrl          string  `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
-	Title             string  `protobuf:"bytes,6,opt,name=title,proto3" json:"title"`
-	Weight            float32 `protobuf:"fixed32,7,opt,name=weight,proto3" json:"weight"`
-	Num               int32   `protobuf:"varint,8,opt,name=num,proto3" json:"num"`
-	Price             int64   `protobuf:"varint,9,opt,name=price,proto3" json:"price"`
-	MarketPrice       int64   `protobuf:"varint,10,opt,name=market_price,json=marketPrice,proto3" json:"market_price"`
-	PromotionPrice    int64   `protobuf:"varint,11,opt,name=promotion_price,json=promotionPrice,proto3" json:"promotion_price"`
-	CostPrice         int64   `protobuf:"varint,12,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`
-	RowGoodsAmount    int64   `protobuf:"varint,13,opt,name=row_goods_amount,json=rowGoodsAmount,proto3" json:"row_goods_amount"`
-	RowDiscountAmount int64   `protobuf:"varint,14,opt,name=row_discount_amount,json=rowDiscountAmount,proto3" json:"row_discount_amount"`
-	RowAmount         int64   `protobuf:"varint,15,opt,name=row_amount,json=rowAmount,proto3" json:"row_amount"`
-	BrandId           int32   `protobuf:"varint,16,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`
-	BrandName         string  `protobuf:"bytes,17,opt,name=brand_name,json=brandName,proto3" json:"brand_name"`
-	UnitId            int32   `protobuf:"varint,18,opt,name=unit_id,json=unitId,proto3" json:"unit_id"`
-	UnitName          string  `protobuf:"bytes,19,opt,name=unit_name,json=unitName,proto3" json:"unit_name"`
-	Indexes           string  `protobuf:"bytes,20,opt,name=indexes,proto3" json:"indexes"`
-	OwnDesc           string  `protobuf:"bytes,21,opt,name=own_desc,json=ownDesc,proto3" json:"own_desc"`
-	IsSpec            bool    `protobuf:"varint,22,opt,name=is_spec,json=isSpec,proto3" json:"is_spec"`
-	IsVirtual         bool    `protobuf:"varint,23,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`
-	IsPresale         bool    `protobuf:"varint,24,opt,name=is_presale,json=isPresale,proto3" json:"is_presale"`
-	Status            string  `protobuf:"bytes,25,opt,name=status,proto3" json:"status"`
-	Checked           bool    `protobuf:"varint,26,opt,name=checked,proto3" json:"checked"`
+	SpuId             int64  `protobuf:"varint,1,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
+	SkuId             int64  `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	SkuSn             string `protobuf:"bytes,3,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn"`
+	ImageId           int64  `protobuf:"varint,4,opt,name=image_id,json=imageId,proto3" json:"image_id"`
+	ImageUrl          string `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
+	Title             string `protobuf:"bytes,6,opt,name=title,proto3" json:"title"`
+	Weight            int64  `protobuf:"varint,7,opt,name=weight,proto3" json:"weight"`
+	Num               int32  `protobuf:"varint,8,opt,name=num,proto3" json:"num"`
+	Price             int64  `protobuf:"varint,9,opt,name=price,proto3" json:"price"`
+	MarketPrice       int64  `protobuf:"varint,10,opt,name=market_price,json=marketPrice,proto3" json:"market_price"`
+	PromotionPrice    int64  `protobuf:"varint,11,opt,name=promotion_price,json=promotionPrice,proto3" json:"promotion_price"`
+	CostPrice         int64  `protobuf:"varint,12,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`
+	RowGoodsAmount    int64  `protobuf:"varint,13,opt,name=row_goods_amount,json=rowGoodsAmount,proto3" json:"row_goods_amount"`
+	RowDiscountAmount int64  `protobuf:"varint,14,opt,name=row_discount_amount,json=rowDiscountAmount,proto3" json:"row_discount_amount"`
+	RowAmount         int64  `protobuf:"varint,15,opt,name=row_amount,json=rowAmount,proto3" json:"row_amount"`
+	BrandId           int32  `protobuf:"varint,16,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`
+	BrandName         string `protobuf:"bytes,17,opt,name=brand_name,json=brandName,proto3" json:"brand_name"`
+	UnitId            int32  `protobuf:"varint,18,opt,name=unit_id,json=unitId,proto3" json:"unit_id"`
+	UnitName          string `protobuf:"bytes,19,opt,name=unit_name,json=unitName,proto3" json:"unit_name"`
+	Indexes           string `protobuf:"bytes,20,opt,name=indexes,proto3" json:"indexes"`
+	OwnDesc           string `protobuf:"bytes,21,opt,name=own_desc,json=ownDesc,proto3" json:"own_desc"`
+	IsSpec            bool   `protobuf:"varint,22,opt,name=is_spec,json=isSpec,proto3" json:"is_spec"`
+	IsVirtual         bool   `protobuf:"varint,23,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`
+	IsPresale         bool   `protobuf:"varint,24,opt,name=is_presale,json=isPresale,proto3" json:"is_presale"`
+	Status            string `protobuf:"bytes,25,opt,name=status,proto3" json:"status"`
+	Checked           bool   `protobuf:"varint,26,opt,name=checked,proto3" json:"checked"`
 }
 
 func (x *CartItem) Reset() {
@@ -284,7 +284,7 @@ func (x *CartItem) GetTitle() string {
 	return ""
 }
 
-func (x *CartItem) GetWeight() float32 {
+func (x *CartItem) GetWeight() int64 {
 	if x != nil {
 		return x.Weight
 	}
@@ -670,7 +670,7 @@ var file_cartService_proto_rawDesc = []byte{
 	0x22, 0xa4, 0x04, 0x0a, 0x04, 0x43, 0x61, 0x72, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x74, 0x6f, 0x74,
 	0x61, 0x6c, 0x5f, 0x6e, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x74, 0x6f,
 	0x74, 0x61, 0x6c, 0x4e, 0x75, 0x6d, 0x12, 0x21, 0x0a, 0x0c, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f,
-	0x77, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0b, 0x74, 0x6f,
+	0x77, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x74, 0x6f,
 	0x74, 0x61, 0x6c, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x75, 0x72,
 	0x72, 0x65, 0x6e, 0x63, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x75, 0x72,
 	0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x21, 0x0a, 0x0c, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x5f, 0x61,
@@ -712,7 +712,7 @@ var file_cartService_proto_rawDesc = []byte{
 	0x6c, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72,
 	0x6c, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x77, 0x65, 0x69, 0x67, 0x68,
-	0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x77, 0x65, 0x69, 0x67, 0x68, 0x74, 0x12,
+	0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x77, 0x65, 0x69, 0x67, 0x68, 0x74, 0x12,
 	0x10, 0x0a, 0x03, 0x6e, 0x75, 0x6d, 0x18, 0x08, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x6e, 0x75,
 	0x6d, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x6d, 0x61, 0x72, 0x6b, 0x65,

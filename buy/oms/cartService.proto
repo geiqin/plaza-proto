@@ -21,7 +21,7 @@ service CartService {
 
 message Cart {
     int32 total_num =1;
-    float total_weight =2;
+    int64 total_weight =2;
     string currency =3;
     int64 goods_amount =4;
     int64 discount_amount =5;
@@ -43,7 +43,7 @@ message CartItem {
     int64 image_id = 4;
     string image_url = 5;
     string title = 6;
-    float weight = 7;
+    int64 weight = 7;
     int32 num = 8;
     int64 price = 9;
     int64 market_price = 10;
