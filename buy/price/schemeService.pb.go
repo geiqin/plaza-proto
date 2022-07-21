@@ -590,11 +590,11 @@ type SchemeData struct {
 
 	Entity           *Scheme           `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
 	Skus             []*SkuInfo        `protobuf:"bytes,2,rep,name=skus,proto3" json:"skus"`
-	AvailableSurplus float32           `protobuf:"fixed32,3,opt,name=available_surplus,json=availableSurplus,proto3" json:"available_surplus"` //可使用的余额
-	AvailablePoints  int32             `protobuf:"varint,4,opt,name=available_points,json=availablePoints,proto3" json:"available_points"`     //可使用的积分
-	AvailableCoupons *CouponInfo       `protobuf:"bytes,5,opt,name=available_coupons,json=availableCoupons,proto3" json:"available_coupons"`   //可使用的优惠劵集合
-	ShippingAddress  *AddressInfo      `protobuf:"bytes,6,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address"`      //订单收货地址
-	ShopList         []*ShopInfo       `protobuf:"bytes,7,rep,name=shop_list,json=shopList,proto3" json:"shop_list"`                           //商品中涉及到那些卖家（多店铺模式下）
+	AvailableSurplus int64             `protobuf:"varint,3,opt,name=available_surplus,json=availableSurplus,proto3" json:"available_surplus"` //可使用的余额
+	AvailablePoints  int32             `protobuf:"varint,4,opt,name=available_points,json=availablePoints,proto3" json:"available_points"`    //可使用的积分
+	AvailableCoupons *CouponInfo       `protobuf:"bytes,5,opt,name=available_coupons,json=availableCoupons,proto3" json:"available_coupons"`  //可使用的优惠劵集合
+	ShippingAddress  *AddressInfo      `protobuf:"bytes,6,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address"`     //订单收货地址
+	ShopList         []*ShopInfo       `protobuf:"bytes,7,rep,name=shop_list,json=shopList,proto3" json:"shop_list"`                          //商品中涉及到那些卖家（多店铺模式下）
 	Params           map[string]string `protobuf:"bytes,8,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	Items            []*Scheme         `protobuf:"bytes,9,rep,name=items,proto3" json:"items"`
 	Info             *common.Info      `protobuf:"bytes,10,opt,name=info,proto3" json:"info"`
@@ -646,7 +646,7 @@ func (x *SchemeData) GetSkus() []*SkuInfo {
 	return nil
 }
 
-func (x *SchemeData) GetAvailableSurplus() float32 {
+func (x *SchemeData) GetAvailableSurplus() int64 {
 	if x != nil {
 		return x.AvailableSurplus
 	}
@@ -894,7 +894,7 @@ var file_schemeService_proto_rawDesc = []byte{
 	0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53,
 	0x6b, 0x75, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x04, 0x73, 0x6b, 0x75, 0x73, 0x12, 0x2b, 0x0a, 0x11,
 	0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x5f, 0x73, 0x75, 0x72, 0x70, 0x6c, 0x75,
-	0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x02, 0x52, 0x10, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62,
+	0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62,
 	0x6c, 0x65, 0x53, 0x75, 0x72, 0x70, 0x6c, 0x75, 0x73, 0x12, 0x29, 0x0a, 0x10, 0x61, 0x76, 0x61,
 	0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x5f, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x18, 0x04, 0x20,
 	0x01, 0x28, 0x05, 0x52, 0x0f, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x50, 0x6f,

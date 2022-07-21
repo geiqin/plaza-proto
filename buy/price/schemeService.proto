@@ -87,7 +87,7 @@ message SchemeRequest {
 message SchemeData{
   Scheme entity = 1;
   repeated SkuInfo skus = 2;
-  float available_surplus =3;//可使用的余额
+  int64 available_surplus =3;//可使用的余额
   int32 available_points =4;//可使用的积分
   CouponInfo available_coupons = 5;//可使用的优惠劵集合
   AddressInfo shipping_address =6;//订单收货地址
