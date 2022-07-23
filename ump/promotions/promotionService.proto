@@ -35,23 +35,24 @@ message Promotion {
     string ended_at = 6; //活动结束时间
     int64 cover_id = 7; //促销封面ID
     string cover_url = 8; //促销封面url
-    string asset_url = 9; //促销详情链接
+    string tag = 9; //标签
     string description = 10; //活动描述
     int32 level = 11; //促销级别：1 商品级，2订单级，3特殊级
     string variant_type = 12;  //变体商品类型: spu,sku
     string variant_range = 13;  //变体商品范围: 0-全部，1-部分参与，2-部分不参与
     string config_data = 14; //自定义配置数据json
-    int32 total_count = 15; //发放总量 【备选项】
-    int32 assign_count = 16; //已发放数量 【备选项】
-    int32 used_count = 17; //已使用数量 【备选项】
-    int32 failed_count = 18; //失败，失效数量 【备选项】
-    string status =19; //活动状态：0未开始 1进行中 2已结束 3已失效
-    string created_at = 20; //创建时间
-    string updated_at = 21; //修改时间
-    PromotionActionConfig action_config = 22; //限制规则配置
-    PromotionRuleConfig rule_config = 23; //优惠策略配置
-    repeated PromotionVariant variant_spu_list =24; //参与活动商品SPU列表
-    repeated PromotionVariant variant_sku_list =25; //参与活动商品SKU列表
+    string asset_url = 15;  //促销详情链接
+    int32 total_count = 16; //发放总量 【备选项】
+    int32 assign_count = 17; //已发放数量 【备选项】
+    int32 used_count = 18; //已使用数量 【备选项】
+    int32 failed_count = 19; //失败，失效数量 【备选项】
+    string status =20; //活动状态：0未开始 1进行中 2已结束 3已失效
+    string created_at = 21; //创建时间
+    string updated_at = 22; //修改时间
+    PromotionActionConfig action_config = 23; //限制规则配置
+    PromotionRuleConfig rule_config = 24; //优惠策略配置
+    repeated PromotionVariant variant_spu_list =25; //参与活动商品SPU列表
+    repeated PromotionVariant variant_sku_list =26; //参与活动商品SKU列表
 }
 
 
