@@ -12,7 +12,7 @@ message PromotionVariant {
     int64 spu_id = 5; //商品ID [冗余]
     int64 sku_id = 6; //货品ID
     int32 stock = 7; //促销库存
-    int64 method = 8; //优惠方式：1 折扣 2减价,3固定金额
+    string method = 8; //优惠方式：1 折扣 2减价,3固定金额
     float discount_rate = 9; //优惠折扣
     int64 discount_money = 10; //优惠金额(立减金额/固定金额)
     int32 quantity_limit = 11; //购买数量限制
