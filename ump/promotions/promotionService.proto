@@ -11,6 +11,10 @@ service PromotionService {
     rpc Create (Promotion) returns (PromotionResponse) {}
     // 编辑促销活动
     rpc Update (Promotion) returns (PromotionResponse) {}
+    //修改已报名数
+    rpc UpdateAssignCount (Promotion) returns (PromotionResponse) {}
+    //修改已使用数
+    rpc UpdateUsedCount (Promotion) returns (PromotionResponse) {}
     // 删除促销活动
     rpc Delete (Promotion) returns (PromotionResponse) {}
     //启动活动
