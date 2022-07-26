@@ -32,31 +32,32 @@ service PromotionService {
 //营销活动
 message Promotion {
     int64 id = 1; //活动ID
-    string type = 2; //活动类型:Coupon优惠劵[CPN]/满减送/限时折扣/秒杀/拼团/通用
-    string code = 3; //活动编码:如：coupon_20210101212
-    string title = 4; //活动标题
-    string began_at = 5; //活动生效时间
-    string ended_at = 6; //活动结束时间
-    int64 cover_id = 7; //促销封面ID
-    string cover_url = 8; //促销封面url
-    string tag = 9; //标签
-    string description = 10; //活动描述
-    int32 level = 11; //促销级别：1 商品级，2订单级，3特殊级
-    string variant_type = 12;  //变体商品类型: spu,sku
-    string variant_range = 13;  //变体商品范围: 0-全部，1-部分参与，2-部分不参与
-    string config_data = 14; //自定义配置数据json
-    string asset_url = 15;  //促销详情链接
-    int32 total_count = 16; //发放总量 【备选项】
-    int32 assign_count = 17; //已发放数量 【备选项】
-    int32 used_count = 18; //已使用数量 【备选项】
-    int32 failed_count = 19; //失败，失效数量 【备选项】
-    string status =20; //活动状态：0未开始 1进行中 2已结束 3已失效
-    string created_at = 21; //创建时间
-    string updated_at = 22; //修改时间
-    PromotionActionConfig action_config = 23; //限制规则配置
-    PromotionRuleConfig rule_config = 24; //优惠策略配置
-    repeated PromotionVariant variant_spu_list =25; //参与活动商品SPU列表
-    repeated PromotionVariant variant_sku_list =26; //参与活动商品SKU列表
+    string code =2; //活动编码:如：coupon_20210101212
+    string title = 3; //活动标题
+    string type = 4; //活动类型:Coupon优惠劵/满减送/限时折扣/秒杀/拼团/通用
+    string subtype = 5; //活动子类型
+    string began_at = 6; //活动生效时间
+    string ended_at = 7; //活动结束时间
+    int64 cover_id = 8; //促销封面ID
+    string cover_url = 9; //促销封面url
+    string tag = 10; //标签
+    string description = 11; //活动描述
+    int32 level = 12; //促销级别：1 商品级，2订单级，3特殊级
+    string variant_type = 13;  //变体商品类型: spu,sku
+    string variant_range = 14;  //变体商品范围: 0-全部，1-部分参与，2-部分不参与
+    string config_data = 15; //自定义配置数据json
+    string asset_url = 16;  //促销详情链接
+    int32 total_count = 17; //发放总量 【备选项】
+    int32 assign_count = 18; //已发放数量 【备选项】
+    int32 used_count = 19; //已使用数量 【备选项】
+    int32 failed_count = 20; //失败，失效数量 【备选项】
+    string status =21; //活动状态：0未开始 1进行中 2已结束 3已失效
+    string created_at = 22; //创建时间
+    string updated_at = 23; //修改时间
+    PromotionActionConfig action_config = 24; //限制规则配置
+    PromotionRuleConfig rule_config = 25; //优惠策略配置
+    repeated PromotionVariant variant_spu_list =26; //参与活动商品SPU列表
+    repeated PromotionVariant variant_sku_list =27; //参与活动商品SKU列表
 }
 
 
@@ -69,9 +70,11 @@ message PromotionRequest {
     string title =5;
     string status =6;
     string type  = 7;
-    string start_date =8;
-    string end_date =9;
-    repeated string types = 10;
+    string subtype  = 8;
+    string start_date =9;
+    string end_date =10;
+    int32 level  = 11;
+    repeated string types = 12;
 }
 
 
