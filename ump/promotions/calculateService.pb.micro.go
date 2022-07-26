@@ -43,14 +43,12 @@ func NewCalculateServiceEndpoints() []*api.Endpoint {
 // Client API for CalculateService service
 
 type CalculateService interface {
-	//商品级核算
-	Products(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error)
-	//购物车级核算
-	Cart(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error)
+	//商品显示级核算
+	Display(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error)
 	//下单购买级核算
 	Purchase(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error)
-	//订单成功支付级核算（有效订单后的核算）
-	Order(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error)
+	//支付完成级核算
+	Payment(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error)
 }
 
 type calculateService struct {
@@ -65,18 +63,8 @@ func NewCalculateService(name string, c client.Client) CalculateService {
 	}
 }
 
-func (c *calculateService) Products(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error) {
-	req := c.c.NewRequest(c.name, "CalculateService.Products", in)
-	out := new(CalculateResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *calculateService) Cart(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error) {
-	req := c.c.NewRequest(c.name, "CalculateService.Cart", in)
+func (c *calculateService) Display(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error) {
+	req := c.c.NewRequest(c.name, "CalculateService.Display", in)
 	out := new(CalculateResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -95,8 +83,8 @@ func (c *calculateService) Purchase(ctx context.Context, in *CalculateRequest, o
 	return out, nil
 }
 
-func (c *calculateService) Order(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error) {
-	req := c.c.NewRequest(c.name, "CalculateService.Order", in)
+func (c *calculateService) Payment(ctx context.Context, in *CalculateRequest, opts ...client.CallOption) (*CalculateResponse, error) {
+	req := c.c.NewRequest(c.name, "CalculateService.Payment", in)
 	out := new(CalculateResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -108,22 +96,19 @@ func (c *calculateService) Order(ctx context.Context, in *CalculateRequest, opts
 // Server API for CalculateService service
 
 type CalculateServiceHandler interface {
-	//商品级核算
-	Products(context.Context, *CalculateRequest, *CalculateResponse) error
-	//购物车级核算
-	Cart(context.Context, *CalculateRequest, *CalculateResponse) error
+	//商品显示级核算
+	Display(context.Context, *CalculateRequest, *CalculateResponse) error
 	//下单购买级核算
 	Purchase(context.Context, *CalculateRequest, *CalculateResponse) error
-	//订单成功支付级核算（有效订单后的核算）
-	Order(context.Context, *CalculateRequest, *CalculateResponse) error
+	//支付完成级核算
+	Payment(context.Context, *CalculateRequest, *CalculateResponse) error
 }
 
 func RegisterCalculateServiceHandler(s server.Server, hdlr CalculateServiceHandler, opts ...server.HandlerOption) error {
 	type calculateService interface {
-		Products(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error
-		Cart(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error
+		Display(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error
 		Purchase(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error
-		Order(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error
+		Payment(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error
 	}
 	type CalculateService struct {
 		calculateService
@@ -136,18 +121,14 @@ type calculateServiceHandler struct {
 	CalculateServiceHandler
 }
 
-func (h *calculateServiceHandler) Products(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error {
-	return h.CalculateServiceHandler.Products(ctx, in, out)
-}
-
-func (h *calculateServiceHandler) Cart(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error {
-	return h.CalculateServiceHandler.Cart(ctx, in, out)
+func (h *calculateServiceHandler) Display(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error {
+	return h.CalculateServiceHandler.Display(ctx, in, out)
 }
 
 func (h *calculateServiceHandler) Purchase(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error {
 	return h.CalculateServiceHandler.Purchase(ctx, in, out)
 }
 
-func (h *calculateServiceHandler) Order(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error {
-	return h.CalculateServiceHandler.Order(ctx, in, out)
+func (h *calculateServiceHandler) Payment(ctx context.Context, in *CalculateRequest, out *CalculateResponse) error {
+	return h.CalculateServiceHandler.Payment(ctx, in, out)
 }
