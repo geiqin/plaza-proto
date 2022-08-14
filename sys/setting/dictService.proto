@@ -33,11 +33,13 @@ message Dict {
     string value =3;
     string text	=4;
     string term	=5;
-    string memo	=6;
-    int32 sort	=7;
-    string status = 8;
-    string created_at = 9;
-    string updated_at = 10;
+    string tag	=6;
+    string color	=7;
+    string memo	=8;
+    int32 sort	=9;
+    string status = 10;
+    string created_at = 11;
+    string updated_at = 12;
 }
 
 //
