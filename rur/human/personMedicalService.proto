@@ -1,0 +1,61 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "personService.proto";
+
+service PersonMedicalService {
+	//创建医疗状况
+	rpc Create (PersonMedical) returns (PersonMedicalResponse) {}
+	// 编辑医疗状况
+	rpc Update (PersonMedical) returns (PersonMedicalResponse) {}
+	// 删除医疗状况
+	rpc Delete (PersonMedical) returns (PersonMedicalResponse) {}
+	// 获取医疗状况详情
+	rpc Get (PersonMedical) returns (PersonMedicalResponse) {}
+	//分页查询医疗状况列表
+	rpc Search (PersonMedicalRequest) returns (PersonMedicalResponse) {}
+}
+
+//医疗状况
+message PersonMedical {
+	int64 id = 1;
+	int64 family_id = 2;
+	string real_name = 3;
+	string id_card = 4;
+	string category = 5;
+	int64 total_amount = 6;
+	int64 personal_payment = 7;
+	string disease = 8;
+	string status = 9;
+	string created_at = 10;
+	string updated_at = 11;
+	Person person =12;
+}
+
+message PersonMedicalRequest {
+	int32 paged = 1;
+	int32 page_size = 2;
+	string sorting = 3;
+	//----
+	int64 family_id = 4;
+	int64 person_id = 5;
+	string real_name = 6;
+	int64 id_card = 7;
+	string category = 8;
+	string disease = 9;
+	string status = 10;
+	repeated int64 ids =11;
+}
+
+message PersonMedicalData {
+	PersonMedical entity = 1;
+	common.Pager pager =2;
+	repeated PersonMedical items = 3;
+	common.Info info =4;
+}
+
+message PersonMedicalResponse {
+	PersonMedicalData data = 1;
+	common.Error error = 2;
+}

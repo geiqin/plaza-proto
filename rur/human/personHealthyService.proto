@@ -1,0 +1,59 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "personService.proto";
+
+service PersonHealthyService {
+	//创建健康状况
+	rpc Create (PersonHealthy) returns (PersonHealthyResponse) {}
+	// 编辑健康状况
+	rpc Update (PersonHealthy) returns (PersonHealthyResponse) {}
+	// 删除健康状况
+	rpc Delete (PersonHealthy) returns (PersonHealthyResponse) {}
+	// 获取健康状况详情
+	rpc Get (PersonHealthy) returns (PersonHealthyResponse) {}
+	//分页查询家庭列表
+	rpc Search (PersonHealthyRequest) returns (PersonHealthyResponse) {}
+}
+
+//健康状况
+message PersonHealthy {
+	int64 id = 1;
+	int64 person_id = 2;
+	string real_name = 3;
+	string id_card = 4;
+	string chronic_disease = 5;
+	string serious_disease = 6;
+	string disability_certificate_no = 7;
+	string has_join = 8;
+	string status = 9;
+	string created_at = 10;
+	string updated_at = 11;
+	Person person =12;
+}
+
+message PersonHealthyRequest {
+	int32 paged = 1;
+	int32 page_size = 2;
+	string sorting = 3;
+	//----
+	int64 family_id = 4;
+	int64 person_id = 5;
+	int64 master_id = 6;
+	string real_name = 7;
+	string id_card = 8;
+	string status = 9;
+}
+
+message PersonHealthyData {
+	PersonHealthy entity = 1;
+	common.Pager pager =2;
+	repeated PersonHealthy items = 3;
+	common.Info info =4;
+}
+
+message PersonHealthyResponse {
+	PersonHealthyData data = 1;
+	common.Error error = 2;
+}

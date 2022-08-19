@@ -1,0 +1,71 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "personService.proto";
+import "streetService.proto";
+
+service FamilyService {
+	//创建家庭信息
+	rpc Create (Family) returns (FamilyResponse) {}
+	// 编辑家庭信息
+	rpc Update (Family) returns (FamilyResponse) {}
+	// 删除家庭信息
+	rpc Delete (Family) returns (FamilyResponse) {}
+	// 获取家庭信息详情
+	rpc Get (Family) returns (FamilyResponse) {}
+	//分页查询家庭列表
+	rpc Search (FamilyRequest) returns (FamilyResponse) {}
+
+}
+
+//家庭信息
+message Family {
+	int64 id = 1;
+	string code = 2;
+	string house_number = 3;
+	int64 master_id = 4;
+	string master_name = 5;
+	string master_id_card = 6;
+	int64 cover_id = 7;
+	string cover_url = 8;
+	int64 area_id = 9;
+	int64 street_id = 10;
+	string addr =11;
+	string lng =12;
+	string lat = 13;
+	int32 altitude = 14;
+	int64 member_count = 15;
+	string status = 16;
+	string created_at = 17;
+	string updated_at = 18;
+	Person master =19;
+	Street street =20;
+	repeated Person membership =21;
+}
+
+
+message FamilyRequest {
+	int32 paged = 1;
+	int32 page_size = 2;
+	string sorting = 3;
+	//----
+	int64 family_id = 4;
+	int64 person_id = 5;
+	int64 master_id = 6;
+	string relation = 7;
+	string status = 8;
+	repeated int64 ids =9;
+}
+
+message FamilyData {
+	Family entity = 1;
+	common.Pager pager =2;
+	repeated Family items = 3;
+	common.Info info =4;
+}
+
+message FamilyResponse {
+	FamilyData data = 1;
+	common.Error error = 2;
+}

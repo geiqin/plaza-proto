@@ -1,0 +1,59 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+import "personService.proto";
+
+service PersonDeathService {
+	//创建死亡状况
+	rpc Create (PersonDeath) returns (PersonDeathResponse) {}
+	// 编辑死亡状况
+	rpc Update (PersonDeath) returns (PersonDeathResponse) {}
+	// 删除死亡状况
+	rpc Delete (PersonDeath) returns (PersonDeathResponse) {}
+	// 获取死亡状况详情
+	rpc Get (PersonDeath) returns (PersonDeathResponse) {}
+	//分页查询家庭列表
+	rpc Search (PersonDeathRequest) returns (PersonDeathResponse) {}
+}
+
+//死亡状况
+message PersonDeath {
+	int64 id = 1;
+	int64 person_id = 2;
+	string real_name = 3;
+	string id_card = 4;
+	int32 year = 5;
+	int32 month = 6;
+	int32 day = 7;
+	string reason = 8;
+	string status = 9;
+	string created_at = 10;
+	string updated_at = 11;
+	Person person =12;
+}
+
+message PersonDeathRequest {
+	int32 paged = 1;
+	int32 page_size = 2;
+	string sorting = 3;
+	//----
+	int64 family_id = 4;
+	int64 person_id = 5;
+	int64 master_id = 6;
+	string real_name = 7;
+	string id_card = 8;
+	string status = 9;
+}
+
+message PersonDeathData {
+	PersonDeath entity = 1;
+	common.Pager pager =2;
+	repeated PersonDeath items = 3;
+	common.Info info =4;
+}
+
+message PersonDeathResponse {
+	PersonDeathData data = 1;
+	common.Error error = 2;
+}
