@@ -22,7 +22,7 @@ message FamilyWater {
 	int64 id = 1;
 	int64 family_id = 2;
 	string real_name = 3;
-	int64 id_card = 4;
+	string id_card = 4;
 	string is_safety = 5;
 	string rebuild_method = 6;
 	string status = 7;

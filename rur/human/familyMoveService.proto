@@ -23,7 +23,7 @@ message FamilyMove {
 	int64 id = 1;
 	int64 family_id = 2;
 	string real_name = 3;
-	int64 id_card = 4;
+	string id_card = 4;
 	int32 move_year = 5;
 	int32 move_month = 6;
 	int32 move_day = 7;

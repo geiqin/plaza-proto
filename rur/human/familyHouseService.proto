@@ -22,7 +22,7 @@ message FamilyHouse {
 	int64 id = 1;
 	int64 family_id = 2;
 	string real_name = 3;
-	int64 id_card = 4;
+	string id_card = 4;
 	string safety_level = 5;
 	string dangerous_rebuild_subsidy = 6;
 	int32 rebuild_year = 7;

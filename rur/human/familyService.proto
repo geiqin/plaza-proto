@@ -28,21 +28,22 @@ message Family {
 	int64 master_id = 4;
 	string master_name = 5;
 	string master_id_card = 6;
-	int64 cover_id = 7;
-	string cover_url = 8;
-	int64 area_id = 9;
-	int64 street_id = 10;
-	string addr =11;
-	string lng =12;
-	string lat = 13;
-	int32 altitude = 14;
-	int64 member_count = 15;
-	string status = 16;
-	string created_at = 17;
-	string updated_at = 18;
-	Person master =19;
-	Street street =20;
-	repeated Person membership =21;
+	string type = 7;
+	int64 cover_id = 8;
+	string cover_url = 9;
+	int64 area_id = 10;
+	int64 street_id = 11;
+	string addr =12;
+	string lng =13;
+	string lat = 14;
+	int32 altitude = 15;
+	int64 member_count = 16;
+	string status = 17;
+	string created_at = 18;
+	string updated_at = 19;
+	Person master =20;
+	Street street =21;
+	repeated Person membership =22;
 }
 
 
