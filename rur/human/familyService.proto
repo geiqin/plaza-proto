@@ -16,7 +16,8 @@ service FamilyService {
 	rpc Get (Family) returns (FamilyResponse) {}
 	//分页查询家庭列表
 	rpc Search (FamilyRequest) returns (FamilyResponse) {}
-
+	//获取家庭列表
+	rpc List (FamilyRequest) returns (FamilyResponse) {}
 }
 
 //家庭信息

@@ -14,7 +14,8 @@ service PersonService {
     rpc Get (Person) returns (PersonResponse) {}
     //分页查询人员列表
     rpc Search (PersonRequest) returns (PersonResponse) {}
-
+    //获取人口列表
+    rpc List (PersonRequest) returns (PersonResponse) {}
 }
 
 //人员

@@ -53,6 +53,8 @@ type FamilyService interface {
 	Get(ctx context.Context, in *Family, opts ...client.CallOption) (*FamilyResponse, error)
 	//分页查询家庭列表
 	Search(ctx context.Context, in *FamilyRequest, opts ...client.CallOption) (*FamilyResponse, error)
+	//获取家庭列表
+	List(ctx context.Context, in *FamilyRequest, opts ...client.CallOption) (*FamilyResponse, error)
 }
 
 type familyService struct {
@@ -117,6 +119,16 @@ func (c *familyService) Search(ctx context.Context, in *FamilyRequest, opts ...c
 	return out, nil
 }
 
+func (c *familyService) List(ctx context.Context, in *FamilyRequest, opts ...client.CallOption) (*FamilyResponse, error) {
+	req := c.c.NewRequest(c.name, "FamilyService.List", in)
+	out := new(FamilyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for FamilyService service
 
 type FamilyServiceHandler interface {
@@ -130,6 +142,8 @@ type FamilyServiceHandler interface {
 	Get(context.Context, *Family, *FamilyResponse) error
 	//分页查询家庭列表
 	Search(context.Context, *FamilyRequest, *FamilyResponse) error
+	//获取家庭列表
+	List(context.Context, *FamilyRequest, *FamilyResponse) error
 }
 
 func RegisterFamilyServiceHandler(s server.Server, hdlr FamilyServiceHandler, opts ...server.HandlerOption) error {
@@ -139,6 +153,7 @@ func RegisterFamilyServiceHandler(s server.Server, hdlr FamilyServiceHandler, op
 		Delete(ctx context.Context, in *Family, out *FamilyResponse) error
 		Get(ctx context.Context, in *Family, out *FamilyResponse) error
 		Search(ctx context.Context, in *FamilyRequest, out *FamilyResponse) error
+		List(ctx context.Context, in *FamilyRequest, out *FamilyResponse) error
 	}
 	type FamilyService struct {
 		familyService
@@ -169,4 +184,8 @@ func (h *familyServiceHandler) Get(ctx context.Context, in *Family, out *FamilyR
 
 func (h *familyServiceHandler) Search(ctx context.Context, in *FamilyRequest, out *FamilyResponse) error {
 	return h.FamilyServiceHandler.Search(ctx, in, out)
+}
+
+func (h *familyServiceHandler) List(ctx context.Context, in *FamilyRequest, out *FamilyResponse) error {
+	return h.FamilyServiceHandler.List(ctx, in, out)
 }

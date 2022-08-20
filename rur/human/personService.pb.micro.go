@@ -53,6 +53,8 @@ type PersonService interface {
 	Get(ctx context.Context, in *Person, opts ...client.CallOption) (*PersonResponse, error)
 	//分页查询人员列表
 	Search(ctx context.Context, in *PersonRequest, opts ...client.CallOption) (*PersonResponse, error)
+	//获取人口列表
+	List(ctx context.Context, in *PersonRequest, opts ...client.CallOption) (*PersonResponse, error)
 }
 
 type personService struct {
@@ -117,6 +119,16 @@ func (c *personService) Search(ctx context.Context, in *PersonRequest, opts ...c
 	return out, nil
 }
 
+func (c *personService) List(ctx context.Context, in *PersonRequest, opts ...client.CallOption) (*PersonResponse, error) {
+	req := c.c.NewRequest(c.name, "PersonService.List", in)
+	out := new(PersonResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for PersonService service
 
 type PersonServiceHandler interface {
@@ -130,6 +142,8 @@ type PersonServiceHandler interface {
 	Get(context.Context, *Person, *PersonResponse) error
 	//分页查询人员列表
 	Search(context.Context, *PersonRequest, *PersonResponse) error
+	//获取人口列表
+	List(context.Context, *PersonRequest, *PersonResponse) error
 }
 
 func RegisterPersonServiceHandler(s server.Server, hdlr PersonServiceHandler, opts ...server.HandlerOption) error {
@@ -139,6 +153,7 @@ func RegisterPersonServiceHandler(s server.Server, hdlr PersonServiceHandler, op
 		Delete(ctx context.Context, in *Person, out *PersonResponse) error
 		Get(ctx context.Context, in *Person, out *PersonResponse) error
 		Search(ctx context.Context, in *PersonRequest, out *PersonResponse) error
+		List(ctx context.Context, in *PersonRequest, out *PersonResponse) error
 	}
 	type PersonService struct {
 		personService
@@ -169,4 +184,8 @@ func (h *personServiceHandler) Get(ctx context.Context, in *Person, out *PersonR
 
 func (h *personServiceHandler) Search(ctx context.Context, in *PersonRequest, out *PersonResponse) error {
 	return h.PersonServiceHandler.Search(ctx, in, out)
+}
+
+func (h *personServiceHandler) List(ctx context.Context, in *PersonRequest, out *PersonResponse) error {
+	return h.PersonServiceHandler.List(ctx, in, out)
 }
