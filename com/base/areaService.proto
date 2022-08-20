@@ -52,6 +52,7 @@ message AreaRequest {
     string type = 6;
     string status = 7;
     repeated int64 ids =8;
+    int64 parent_id = 9;
 }
 
 
