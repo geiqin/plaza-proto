@@ -48,7 +48,7 @@ type TransferService interface {
 	//获得转账信息
 	Get(ctx context.Context, in *Transfer, opts ...client.CallOption) (*TransferResponse, error)
 	//查询转账
-	Search(ctx context.Context, in *TransferWhere, opts ...client.CallOption) (*TransferResponse, error)
+	Search(ctx context.Context, in *TransferRequest, opts ...client.CallOption) (*TransferResponse, error)
 	// 转账到企业银行账户
 	ToCorpBank(ctx context.Context, in *TransferRequest, opts ...client.CallOption) (*TransferResponse, error)
 	//转账到微信个人钱包
@@ -89,7 +89,7 @@ func (c *transferService) Get(ctx context.Context, in *Transfer, opts ...client.
 	return out, nil
 }
 
-func (c *transferService) Search(ctx context.Context, in *TransferWhere, opts ...client.CallOption) (*TransferResponse, error) {
+func (c *transferService) Search(ctx context.Context, in *TransferRequest, opts ...client.CallOption) (*TransferResponse, error) {
 	req := c.c.NewRequest(c.name, "TransferService.Search", in)
 	out := new(TransferResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -137,7 +137,7 @@ type TransferServiceHandler interface {
 	//获得转账信息
 	Get(context.Context, *Transfer, *TransferResponse) error
 	//查询转账
-	Search(context.Context, *TransferWhere, *TransferResponse) error
+	Search(context.Context, *TransferRequest, *TransferResponse) error
 	// 转账到企业银行账户
 	ToCorpBank(context.Context, *TransferRequest, *TransferResponse) error
 	//转账到微信个人钱包
@@ -150,7 +150,7 @@ func RegisterTransferServiceHandler(s server.Server, hdlr TransferServiceHandler
 	type transferService interface {
 		Create(ctx context.Context, in *Transfer, out *TransferResponse) error
 		Get(ctx context.Context, in *Transfer, out *TransferResponse) error
-		Search(ctx context.Context, in *TransferWhere, out *TransferResponse) error
+		Search(ctx context.Context, in *TransferRequest, out *TransferResponse) error
 		ToCorpBank(ctx context.Context, in *TransferRequest, out *TransferResponse) error
 		ToWxWallet(ctx context.Context, in *TransferRequest, out *TransferResponse) error
 		ToAliAccount(ctx context.Context, in *TransferRequest, out *TransferResponse) error
@@ -174,7 +174,7 @@ func (h *transferServiceHandler) Get(ctx context.Context, in *Transfer, out *Tra
 	return h.TransferServiceHandler.Get(ctx, in, out)
 }
 
-func (h *transferServiceHandler) Search(ctx context.Context, in *TransferWhere, out *TransferResponse) error {
+func (h *transferServiceHandler) Search(ctx context.Context, in *TransferRequest, out *TransferResponse) error {
 	return h.TransferServiceHandler.Search(ctx, in, out)
 }
 

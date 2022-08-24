@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -45,12 +45,12 @@ func NewChargeServiceEndpoints() []*api.Endpoint {
 type ChargeService interface {
 	//删除支付凭证
 	Delete(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error)
-	//支付凭证对账（向第三方发起对账）
-	Reconciliation(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error)
 	//获得支付凭证
 	Get(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error)
 	//查询支付凭证
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*ChargeResponse, error)
+	Search(ctx context.Context, in *ChargeRequest, opts ...client.CallOption) (*ChargeResponse, error)
+	//支付凭证对账（向第三方发起对账）
+	Reconciliation(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error)
 }
 
 type chargeService struct {
@@ -75,16 +75,6 @@ func (c *chargeService) Delete(ctx context.Context, in *Charge, opts ...client.C
 	return out, nil
 }
 
-func (c *chargeService) Reconciliation(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error) {
-	req := c.c.NewRequest(c.name, "ChargeService.Reconciliation", in)
-	out := new(ChargeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *chargeService) Get(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error) {
 	req := c.c.NewRequest(c.name, "ChargeService.Get", in)
 	out := new(ChargeResponse)
@@ -95,8 +85,18 @@ func (c *chargeService) Get(ctx context.Context, in *Charge, opts ...client.Call
 	return out, nil
 }
 
-func (c *chargeService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*ChargeResponse, error) {
+func (c *chargeService) Search(ctx context.Context, in *ChargeRequest, opts ...client.CallOption) (*ChargeResponse, error) {
 	req := c.c.NewRequest(c.name, "ChargeService.Search", in)
+	out := new(ChargeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chargeService) Reconciliation(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error) {
+	req := c.c.NewRequest(c.name, "ChargeService.Reconciliation", in)
 	out := new(ChargeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -110,20 +110,20 @@ func (c *chargeService) Search(ctx context.Context, in *common.BaseWhere, opts .
 type ChargeServiceHandler interface {
 	//删除支付凭证
 	Delete(context.Context, *Charge, *ChargeResponse) error
-	//支付凭证对账（向第三方发起对账）
-	Reconciliation(context.Context, *Charge, *ChargeResponse) error
 	//获得支付凭证
 	Get(context.Context, *Charge, *ChargeResponse) error
 	//查询支付凭证
-	Search(context.Context, *common.BaseWhere, *ChargeResponse) error
+	Search(context.Context, *ChargeRequest, *ChargeResponse) error
+	//支付凭证对账（向第三方发起对账）
+	Reconciliation(context.Context, *Charge, *ChargeResponse) error
 }
 
 func RegisterChargeServiceHandler(s server.Server, hdlr ChargeServiceHandler, opts ...server.HandlerOption) error {
 	type chargeService interface {
 		Delete(ctx context.Context, in *Charge, out *ChargeResponse) error
-		Reconciliation(ctx context.Context, in *Charge, out *ChargeResponse) error
 		Get(ctx context.Context, in *Charge, out *ChargeResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *ChargeResponse) error
+		Search(ctx context.Context, in *ChargeRequest, out *ChargeResponse) error
+		Reconciliation(ctx context.Context, in *Charge, out *ChargeResponse) error
 	}
 	type ChargeService struct {
 		chargeService
@@ -140,14 +140,14 @@ func (h *chargeServiceHandler) Delete(ctx context.Context, in *Charge, out *Char
 	return h.ChargeServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *chargeServiceHandler) Reconciliation(ctx context.Context, in *Charge, out *ChargeResponse) error {
-	return h.ChargeServiceHandler.Reconciliation(ctx, in, out)
-}
-
 func (h *chargeServiceHandler) Get(ctx context.Context, in *Charge, out *ChargeResponse) error {
 	return h.ChargeServiceHandler.Get(ctx, in, out)
 }
 
-func (h *chargeServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *ChargeResponse) error {
+func (h *chargeServiceHandler) Search(ctx context.Context, in *ChargeRequest, out *ChargeResponse) error {
 	return h.ChargeServiceHandler.Search(ctx, in, out)
+}
+
+func (h *chargeServiceHandler) Reconciliation(ctx context.Context, in *Charge, out *ChargeResponse) error {
+	return h.ChargeServiceHandler.Reconciliation(ctx, in, out)
 }

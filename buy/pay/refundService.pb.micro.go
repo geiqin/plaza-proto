@@ -5,7 +5,7 @@ package services
 
 import (
 	fmt "fmt"
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -44,15 +44,15 @@ func NewRefundServiceEndpoints() []*api.Endpoint {
 
 type RefundService interface {
 	//创建退款
-	Create(ctx context.Context, in *RefundRequest, opts ...client.CallOption) (*RefundResponse, error)
-	//退款对账（向第三方发起对账）
-	Reconciliation(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error)
+	Create(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error)
 	//删除退款
 	Delete(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error)
 	//获得退款信息
 	Get(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error)
 	//查询退款
-	Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*RefundResponse, error)
+	Search(ctx context.Context, in *RefundRequest, opts ...client.CallOption) (*RefundResponse, error)
+	//退款对账（向第三方发起对账）
+	Reconciliation(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error)
 }
 
 type refundService struct {
@@ -67,18 +67,8 @@ func NewRefundService(name string, c client.Client) RefundService {
 	}
 }
 
-func (c *refundService) Create(ctx context.Context, in *RefundRequest, opts ...client.CallOption) (*RefundResponse, error) {
+func (c *refundService) Create(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error) {
 	req := c.c.NewRequest(c.name, "RefundService.Create", in)
-	out := new(RefundResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *refundService) Reconciliation(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error) {
-	req := c.c.NewRequest(c.name, "RefundService.Reconciliation", in)
 	out := new(RefundResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -107,8 +97,18 @@ func (c *refundService) Get(ctx context.Context, in *Refund, opts ...client.Call
 	return out, nil
 }
 
-func (c *refundService) Search(ctx context.Context, in *common.BaseWhere, opts ...client.CallOption) (*RefundResponse, error) {
+func (c *refundService) Search(ctx context.Context, in *RefundRequest, opts ...client.CallOption) (*RefundResponse, error) {
 	req := c.c.NewRequest(c.name, "RefundService.Search", in)
+	out := new(RefundResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *refundService) Reconciliation(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error) {
+	req := c.c.NewRequest(c.name, "RefundService.Reconciliation", in)
 	out := new(RefundResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -121,24 +121,24 @@ func (c *refundService) Search(ctx context.Context, in *common.BaseWhere, opts .
 
 type RefundServiceHandler interface {
 	//创建退款
-	Create(context.Context, *RefundRequest, *RefundResponse) error
-	//退款对账（向第三方发起对账）
-	Reconciliation(context.Context, *Refund, *RefundResponse) error
+	Create(context.Context, *Refund, *RefundResponse) error
 	//删除退款
 	Delete(context.Context, *Refund, *RefundResponse) error
 	//获得退款信息
 	Get(context.Context, *Refund, *RefundResponse) error
 	//查询退款
-	Search(context.Context, *common.BaseWhere, *RefundResponse) error
+	Search(context.Context, *RefundRequest, *RefundResponse) error
+	//退款对账（向第三方发起对账）
+	Reconciliation(context.Context, *Refund, *RefundResponse) error
 }
 
 func RegisterRefundServiceHandler(s server.Server, hdlr RefundServiceHandler, opts ...server.HandlerOption) error {
 	type refundService interface {
-		Create(ctx context.Context, in *RefundRequest, out *RefundResponse) error
-		Reconciliation(ctx context.Context, in *Refund, out *RefundResponse) error
+		Create(ctx context.Context, in *Refund, out *RefundResponse) error
 		Delete(ctx context.Context, in *Refund, out *RefundResponse) error
 		Get(ctx context.Context, in *Refund, out *RefundResponse) error
-		Search(ctx context.Context, in *common.BaseWhere, out *RefundResponse) error
+		Search(ctx context.Context, in *RefundRequest, out *RefundResponse) error
+		Reconciliation(ctx context.Context, in *Refund, out *RefundResponse) error
 	}
 	type RefundService struct {
 		refundService
@@ -151,12 +151,8 @@ type refundServiceHandler struct {
 	RefundServiceHandler
 }
 
-func (h *refundServiceHandler) Create(ctx context.Context, in *RefundRequest, out *RefundResponse) error {
+func (h *refundServiceHandler) Create(ctx context.Context, in *Refund, out *RefundResponse) error {
 	return h.RefundServiceHandler.Create(ctx, in, out)
-}
-
-func (h *refundServiceHandler) Reconciliation(ctx context.Context, in *Refund, out *RefundResponse) error {
-	return h.RefundServiceHandler.Reconciliation(ctx, in, out)
 }
 
 func (h *refundServiceHandler) Delete(ctx context.Context, in *Refund, out *RefundResponse) error {
@@ -167,6 +163,10 @@ func (h *refundServiceHandler) Get(ctx context.Context, in *Refund, out *RefundR
 	return h.RefundServiceHandler.Get(ctx, in, out)
 }
 
-func (h *refundServiceHandler) Search(ctx context.Context, in *common.BaseWhere, out *RefundResponse) error {
+func (h *refundServiceHandler) Search(ctx context.Context, in *RefundRequest, out *RefundResponse) error {
 	return h.RefundServiceHandler.Search(ctx, in, out)
+}
+
+func (h *refundServiceHandler) Reconciliation(ctx context.Context, in *Refund, out *RefundResponse) error {
+	return h.RefundServiceHandler.Reconciliation(ctx, in, out)
 }

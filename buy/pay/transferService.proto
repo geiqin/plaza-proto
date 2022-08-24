@@ -11,7 +11,7 @@ service TransferService {
     //获得转账信息
     rpc Get (Transfer) returns (TransferResponse) {}
     //查询转账
-    rpc Search (TransferWhere) returns (TransferResponse) {}
+    rpc Search (TransferRequest) returns (TransferResponse) {}
     // 转账到企业银行账户
     rpc ToCorpBank(TransferRequest) returns (TransferResponse) {}
     //转账到微信个人钱包
@@ -39,7 +39,7 @@ message Transfer{
     string memo = 13;
     string extra = 14;
     string metadata = 15;
-    int32 status = 16;
+    string status = 16;
     int64 member_id = 17;
     string open_id = 18;
     string finished_at =19;
@@ -48,37 +48,34 @@ message Transfer{
 }
 
 message TransferRequest {
-    int64 amount = 1;
-    string currency = 2;
-    int64 member_id = 3;
-    string extra = 4;
-    string memo = 5;
-    string metadata = 6;
-    string order_type = 7;
-    int64 order_id = 8;
-    string order_sn = 9;
-}
-
-message TransferWhere {
     int32 paged = 1;
     int32 page_size = 2;
     int32 top = 3;
     //base params
     int64 id = 4;
-    string type = 5;
-    string real_name = 6;
-    string keywords = 8;
-    int32 status =9;
-    string start_date =13;
-    string end_date =14;
+    string currency = 5;
+    int64 member_id = 6;
+    string extra = 7;
+    string memo = 8;
+    string type = 9;
+    string order_type = 10;
+    int64 order_id =11;
+    string order_sn = 12;
+    string keywords = 13;
+    string status =14;
+    string start_date =15;
+    string end_date =16;
 }
 
-
-//
-message TransferResponse {
+message TransferData {
     Transfer entity = 1;
     common.Pager pager =2;
     repeated Transfer items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    common.Info info =4;
 }
+
+message TransferResponse {
+    TransferData data = 1;
+    common.Error error = 2;
+}
+
