@@ -1,0 +1,50 @@
+syntax = "proto3";
+package services;
+option go_package =".;services";
+import "common/base.proto";
+
+//设置信息
+service ConfigurationService {
+    rpc Set (Configuration) returns (ConfigurationResponse) {}
+    rpc Get (Configuration) returns (ConfigurationResponse) {}
+}
+
+message Configuration {
+    int64 id =1;
+    string code =2;
+    string  title =3;
+    string module =4;
+    bool is_private =5;
+    string config_data =6;
+    string memo =7;
+    string created_at = 8;
+    string updated_at = 9;
+}
+
+
+message ConfigurationRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    string keywords =4;
+    //-----
+    int64 id = 5;
+    string code = 7;
+    string title =8;
+    string module = 9;
+    bool is_private = 10;
+    repeated int64 ids = 11;
+}
+
+message ConfigurationData{
+    bool has_empty = 1;
+    Configuration entity = 2;
+    common.Pager pager =3;
+    repeated Configuration items = 4;
+    common.Info info =5;
+}
+
+message ConfigurationResponse {
+    ConfigurationData data = 1;
+    common.Error error = 2;
+}
