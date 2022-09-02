@@ -46,7 +46,7 @@ type OrderService interface {
 	//修改价格
 	ModifyPrice(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//修改地址
-	ModifyAddress(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
+	ModifyAddress(ctx context.Context, in *OrderAddress, opts ...client.CallOption) (*OrderResponse, error)
 	//撤销订单
 	Cancel(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//删除订单
@@ -99,7 +99,7 @@ func (c *orderService) ModifyPrice(ctx context.Context, in *Order, opts ...clien
 	return out, nil
 }
 
-func (c *orderService) ModifyAddress(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
+func (c *orderService) ModifyAddress(ctx context.Context, in *OrderAddress, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.ModifyAddress", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -245,7 +245,7 @@ type OrderServiceHandler interface {
 	//修改价格
 	ModifyPrice(context.Context, *Order, *OrderResponse) error
 	//修改地址
-	ModifyAddress(context.Context, *Order, *OrderResponse) error
+	ModifyAddress(context.Context, *OrderAddress, *OrderResponse) error
 	//撤销订单
 	Cancel(context.Context, *Order, *OrderResponse) error
 	//删除订单
@@ -279,7 +279,7 @@ type OrderServiceHandler interface {
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
 	type orderService interface {
 		ModifyPrice(ctx context.Context, in *Order, out *OrderResponse) error
-		ModifyAddress(ctx context.Context, in *Order, out *OrderResponse) error
+		ModifyAddress(ctx context.Context, in *OrderAddress, out *OrderResponse) error
 		Cancel(ctx context.Context, in *Order, out *OrderResponse) error
 		Delete(ctx context.Context, in *Order, out *OrderResponse) error
 		AppendRemark(ctx context.Context, in *OrderRequest, out *OrderResponse) error
@@ -309,7 +309,7 @@ func (h *orderServiceHandler) ModifyPrice(ctx context.Context, in *Order, out *O
 	return h.OrderServiceHandler.ModifyPrice(ctx, in, out)
 }
 
-func (h *orderServiceHandler) ModifyAddress(ctx context.Context, in *Order, out *OrderResponse) error {
+func (h *orderServiceHandler) ModifyAddress(ctx context.Context, in *OrderAddress, out *OrderResponse) error {
 	return h.OrderServiceHandler.ModifyAddress(ctx, in, out)
 }
 

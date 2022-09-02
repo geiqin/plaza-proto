@@ -16,7 +16,7 @@ service OrderService {
     //修改价格
     rpc ModifyPrice (Order) returns (OrderResponse) {}
     //修改地址
-    rpc ModifyAddress (Order) returns (OrderResponse) {}
+    rpc ModifyAddress (OrderAddress) returns (OrderResponse) {}
     //撤销订单
     rpc Cancel (Order) returns (OrderResponse) {}
     //删除订单

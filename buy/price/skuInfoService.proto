@@ -8,26 +8,27 @@ message SkuInfo {
 	string sku_sn = 3;
 	string title = 4;
 	string type = 5;
-	string unit = 6;
-	int64 shop_id = 7;
-	int64 image_id = 8;
-	string image_url = 9;
-	int64 price = 10;
-	int64 market_price = 11;
-	int64 cost_price = 12;
-	int64 promotion_price = 13;
-	string barcode = 14;
-	int64 weight = 15;
-	int32 volume = 16;
-	int32 stock = 17;
-	int32 frozen_stock = 18;
-	string out_sku_no = 19;
-	bool is_spec = 20;
-	bool is_virtual = 21;
-	bool is_presale = 22;
-	bool is_member_right = 23;
-	bool is_member_price = 24;
-	bool is_hide_stock = 25;
+	string subtype = 6;
+	string unit = 7;
+	int64 shop_id = 8;
+	int64 image_id = 9;
+	string image_url = 10;
+	int64 price = 11;
+	int64 market_price = 12;
+	int64 cost_price = 13;
+	int64 promotion_price = 14;
+	string barcode = 15;
+	int64 weight = 16;
+	int32 volume = 17;
+	int32 stock = 18;
+	int32 frozen_stock = 19;
+	string out_sku_no = 20;
+	bool is_spec = 21;
+	bool is_virtual = 22;
+	bool is_presale = 23;
+	bool is_member_right = 24;
+	bool is_member_price = 25;
+	bool is_hide_stock = 26;
 	bool is_new = 27;
 	bool is_hot = 28;
 	bool is_recommend = 29;
@@ -40,12 +41,6 @@ message SkuInfo {
 	SkuVip vip = 37;
 	SkuCoupon coupon = 38;
 	SkuPresale presale = 39;
-}
-
-message Unit {
-	int32 id = 1;
-	string name = 2;
-	string type = 3;
 }
 
 
