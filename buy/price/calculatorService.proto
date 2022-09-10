@@ -38,6 +38,11 @@ message PurchaseResult {
   repeated CouponInfo  coupons = 19;
   repeated PromotionInfo promotions = 20;
   repeated AdjustmentInfo adjustments =21;
+  //available
+  int64 available_surplus =22;//可使用的余额
+  int32 available_points =23;//可使用的积分
+  CouponInfo available_coupons = 24;//可使用的优惠劵集合
+  AddressInfo shipping_address =25;//订单收货地址
 }
 
 //购买商品信息
@@ -141,19 +146,11 @@ message DisplayRequest {
   }
 }
 
-//可使用信息
-message AvailableInfo{
-  int64 available_surplus =1;//可使用的余额
-  int32 available_points =2;//可使用的积分
-  CouponInfo available_coupons = 3;//可使用的优惠劵集合
-  AddressInfo shipping_address =4;//订单收货地址
-}
 
 message CalculatorData{
   PurchaseResult cart_result =1;
   PurchaseResult purchase_result =2;
   repeated DisplaySkuInfo display_result =3;
-  AvailableInfo available_info =4;
 }
 
 message CalculatorResponse {
