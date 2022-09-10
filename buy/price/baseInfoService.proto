@@ -7,10 +7,6 @@ message CouponInfo {
   string title	=2;
 }
 
-message PromotionInfo {
-  int64	 id	=1;
-  string title	=2;
-}
 
 message ShopInfo {
   int64 id =1;

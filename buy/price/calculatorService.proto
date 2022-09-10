@@ -34,13 +34,14 @@ message PurchaseResult {
   int64 amount =15;
   int64 paid_money =16;
   bool is_shipment =17;
-  repeated PurchaseDetail details = 18;
+  repeated PurchaseSkuInfo details = 18;
   repeated CouponInfo  coupons = 19;
   repeated PromotionInfo promotions = 20;
+  repeated AdjustmentInfo adjustments =21;
 }
 
-//购买清单明细
-message PurchaseDetail {
+//购买商品信息
+message PurchaseSkuInfo {
   int64	sku_id	=1;
   int32 num =2;
   int64 price = 3;
@@ -54,30 +55,36 @@ message PurchaseDetail {
   int64 row_amount = 11;
   bool is_gift =12;
   bool checked =13; //是否已选中拿入计算
-  SkuInfo sku_info =14;
+  SkuInfo sku =14;
 }
 
-//商品显示结果
-message DisplayResult{
+//显示商品信息
+message DisplaySkuInfo{
   int64	sku_id	=1;
-  int32 num =2;
-  int64 price = 3;
-  int64 market_price = 4;
-  int64 cost_price = 5;
-  int64 promotion_price = 6;
-  int64 member_price = 7;
-  int64 wholesale_price = 8;
-  PromotionDesc promotions =9;
+  int64 price = 2;
+  int64 member_price = 3;
+  int64 promotion_price = 4;
+  int64 discount_money = 5;
+  repeated PromotionInfo promotions =6;
 }
 
 //参与的活动
-message PromotionDesc {
+message PromotionInfo {
   int64 id = 1; //活动ID
   string code = 2; //活动编码:如：coupon_20210101212
   string title = 3; //活动标题
   string type = 4; //活动类型:Coupon优惠劵/满减送/限时折扣/秒杀/拼团/通用
   string subtype = 5; //活动子类型
   string tag = 6; //标签
+}
+
+message AdjustmentInfo {
+  int64 sku_id = 1;
+  string type = 2;
+  string label = 3;
+  string origin_code = 4;
+  int64 amount =5;
+  bool included =6;
 }
 
 message PurchaseRequest {
@@ -100,32 +107,38 @@ message PurchaseRequest {
   int64 paid_money =17;
   string currency =18;
   int64 area_id = 19;
-  repeated PurchaseSku purchase_skus =20;
+  repeated sku  skus =20;//需要计算的SKUS
+  //需要计算的商品
+  message sku {
+    int64 sku_id =1;
+    int32 num =2;
+    int64 price =3;
+    int64 weight =4;
+    int64 volume =5;
+    int32 stock = 6;
+    bool is_virtual = 7;
+    bool is_member_right = 8;
+    bool is_member_price = 9;
+    int64 uniform_freight =10;
+    int64 express_id =11;
+  }
 }
 
-message PurchaseSku {
-  int64 sku_id =1;
-  int32 num =2;
-  int64 price =3;
-  int64 weight =4;
-  int64 volume =5;
-  int32 stock = 6;
-  bool is_virtual = 7;
-  bool is_member_right = 8;
-  bool is_member_price = 9;
-}
 
 message DisplayRequest {
-  string currency =1;
-  DisplaySku display_sku =2;
-  repeated DisplaySku display_skus =3;
-}
-
-message DisplaySku {
-  int64 spu_id =1;
-  int64 sku_id =2;
-  int64 price =3;
-  bool is_member_price =4;
+  string currency =1; //货币类型
+  int64 area_id = 2;//所在区域ID
+  int64 member_id = 3;//会员ID
+  int32 member_rank_id = 4;//会员等级ID
+  repeated sku skus =5; //需要计算的skus
+  //需要计算的商品
+  message sku {
+    int64 sku_id =1; //skuId
+    int64 weight =2; //重量
+    int64 price =3; //销售价
+    int64 member_price =4; //会员价
+    bool is_member_price =5;//是否自定义会员价
+  }
 }
 
 //可使用信息
@@ -139,9 +152,8 @@ message AvailableInfo{
 message CalculatorData{
   PurchaseResult cart_result =1;
   PurchaseResult purchase_result =2;
-  DisplayResult display_entity_result =3;
-  repeated DisplayResult display_list_result =4;
-  AvailableInfo available_info =5;
+  repeated DisplaySkuInfo display_result =3;
+  AvailableInfo available_info =4;
 }
 
 message CalculatorResponse {
