@@ -1,6 +1,6 @@
 syntax = "proto3";
 package services;
-option go_package = ".;services";
+option go_package = "/.;services";
 import "skuInfoService.proto";
 
 //营销活动变体

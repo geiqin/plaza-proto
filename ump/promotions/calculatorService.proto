@@ -1,0 +1,133 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "skuInfoService.proto";
+
+//活动核算
+service CalculatorService {
+    //商品显示级核算
+    rpc Display (DisplayRequest) returns (CalculatorResponse) {}
+    //下单购买级核算
+    rpc Purchase (PurchaseRequest) returns (CalculatorResponse) {}
+    //支付完成级核算
+    rpc Payment (PaymentRequest) returns (CalculatorResponse) {}
+}
+
+//赠送的优惠卷
+message PresentInfo{
+    int64 sku_id =1;
+    int32 num =2;
+    int32 stock = 3;
+    SkuInfo sku = 4;
+}
+
+message PurchaseSkuInfo{
+    int64 sku_id =1;//SkuId
+    int32 num =2;//数量
+    int64 price =3; //销售价
+    int64 promotion_price =4;//促销价
+    int64 discount_money =5;//优惠金额
+    int64 subtotal_amount =6;//商品小计金额
+    int64 discount_allocation_amount =7;//优惠分摊金额
+}
+
+//请求商品参数
+message RequestSkuInfo {
+    int64 sku_id =1; //skuId
+    int32 num =2; //数量
+    int64 weight =3; //重量
+    int64 price =4; //销售价
+    int64 member_price =5; //会员价
+}
+
+message AdjustmentInfo {
+    int64 sku_id = 1;
+    string type = 2;
+    string label = 3;
+    string origin_code = 4;
+    int64 amount =5;
+    bool included =6;
+}
+
+//参与的活动
+message PromotionInfo {
+    int64 id = 1; //活动ID
+    string code = 2; //活动编码:如：coupon_20210101212
+    string title = 3; //活动标题
+    string type = 4; //活动类型:Coupon优惠劵/满减送/限时折扣/秒杀/拼团/通用
+    string subtype = 5; //活动子类型
+    string tag = 6; //标签
+}
+
+//购买结果
+message PurchaseResult {
+    string currency =1;//货币类型
+    int64 total_discount_amount =2; //优惠总金额
+    int64 total_discount_freight =3; //优惠总运费
+    bool is_free_freight =4; //是否免运费优惠
+    repeated PurchaseSkuInfo skus =5; //结算商品列表
+    repeated AdjustmentInfo adjustments =7; //价格变动记录
+    repeated PresentInfo presents =8; //赠品列表
+    repeated PromotionInfo promotions = 9;//参与的活动
+}
+
+//显示商品信息
+message DisplaySkuInfo{
+    int64 sku_id =1; //SkuId
+    int64 price =2;//销售价
+    int64 promotion_price =3; //促销价（优惠价）
+    int64 discount_money =4;//优惠金额
+    repeated PromotionInfo promotions = 5;//参与的活动
+    repeated PresentInfo presents =8; //赠品列表
+}
+
+//显示商品信息
+message DisplayResult{
+    string mode =1; //模式：1-单个模式，2-多个模式
+    DisplaySkuInfo display_sku = 2;//显示商品信息（单个模式）
+    repeated DisplaySkuInfo display_skus =3;//显示商品列表（多个模式）
+}
+
+message DisplayRequest {
+    int64 area_id = 1;//所在区域ID
+    int64 member_id = 2;//会员ID
+    int32 member_rank_id = 3;//会员等级ID
+    RequestSkuInfo sku = 4;//单个商品
+    repeated RequestSkuInfo skus = 5;//多个商品
+}
+
+message PurchaseRequest {
+    int32 total_num =1;
+    int64 total_weight =2;
+    string currency =3;
+    int64 goods_amount =4;
+    int64 discount_amount =5;
+    int64 ship_area_id = 6;
+    int64 coupon_id = 7;
+    int64 member_id = 8;
+    int32 member_rank_id = 9;
+    repeated RequestSkuInfo skus = 10;
+}
+
+message PaymentRequest {
+    int32 order_id =1;
+    int32 total_num =2;
+    int64 total_weight =3;
+    string currency =4;
+    int64 total_amount =5;
+    int64 payment_amount =6;
+    int64 member_id = 8;
+    int32 member_rank_id = 9;
+    repeated RequestSkuInfo skus = 14;
+}
+
+message CalculatorData {
+    DisplayResult display_result =1;//显示商品结果
+    PurchaseResult purchase_result =2; //购买清单结果
+}
+
+message CalculatorResponse {
+    CalculatorData data = 1;
+    common.Error error = 2;
+}
