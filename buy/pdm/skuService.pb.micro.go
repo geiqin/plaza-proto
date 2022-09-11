@@ -57,6 +57,8 @@ type SpuService interface {
 	Sale(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//商品排序
 	Sort(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SpuResponse, error)
+	//获取列表(后台服务)
+	List(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error)
 }
 
 type spuService struct {
@@ -141,6 +143,16 @@ func (c *spuService) Sort(ctx context.Context, in *SkuRequest, opts ...client.Ca
 	return out, nil
 }
 
+func (c *spuService) List(ctx context.Context, in *SkuRequest, opts ...client.CallOption) (*SkuResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuService.List", in)
+	out := new(SkuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SpuService service
 
 type SpuServiceHandler interface {
@@ -158,6 +170,8 @@ type SpuServiceHandler interface {
 	Sale(context.Context, *SkuRequest, *SpuResponse) error
 	//商品排序
 	Sort(context.Context, *SkuRequest, *SpuResponse) error
+	//获取列表(后台服务)
+	List(context.Context, *SkuRequest, *SkuResponse) error
 }
 
 func RegisterSpuServiceHandler(s server.Server, hdlr SpuServiceHandler, opts ...server.HandlerOption) error {
@@ -169,6 +183,7 @@ func RegisterSpuServiceHandler(s server.Server, hdlr SpuServiceHandler, opts ...
 		Action(ctx context.Context, in *SkuRequest, out *SpuResponse) error
 		Sale(ctx context.Context, in *SkuRequest, out *SpuResponse) error
 		Sort(ctx context.Context, in *SkuRequest, out *SpuResponse) error
+		List(ctx context.Context, in *SkuRequest, out *SkuResponse) error
 	}
 	type SpuService struct {
 		spuService
@@ -207,6 +222,10 @@ func (h *spuServiceHandler) Sale(ctx context.Context, in *SkuRequest, out *SpuRe
 
 func (h *spuServiceHandler) Sort(ctx context.Context, in *SkuRequest, out *SpuResponse) error {
 	return h.SpuServiceHandler.Sort(ctx, in, out)
+}
+
+func (h *spuServiceHandler) List(ctx context.Context, in *SkuRequest, out *SkuResponse) error {
+	return h.SpuServiceHandler.List(ctx, in, out)
 }
 
 // Api Endpoints for SkuService service

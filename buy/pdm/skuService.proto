@@ -1,6 +1,6 @@
 syntax = "proto3";
 package services;
-option go_package = ".;services";
+option go_package = "/.;services";
 import "common/base.proto";
 import "spuPropertyService.proto";
 import "brandService.proto";
@@ -28,6 +28,8 @@ service SpuService {
     rpc Sale (SkuRequest) returns (SpuResponse);
     //商品排序
     rpc Sort(SkuRequest) returns (SpuResponse);
+    //获取列表(后台服务)
+    rpc List (SkuRequest) returns (SkuResponse);
 }
 
 //货品查询（基于后台及服务）
@@ -162,12 +164,24 @@ message Spu {
     GenericProperty generic_property = 55;
     repeated SaleProperty sale_property =56;
     repeated ServiceProperty service_property =57;
+    repeated PromotionInfo promotions =58;
 }
 
 message SpuDesc {
     string content = 1;
     string packing_list = 2;
     string after_service = 3;
+}
+
+//参与的活动
+message PromotionInfo {
+    int64 id = 1; //活动ID
+    string code = 2; //活动编码:如：coupon_20210101212
+    string title = 3; //活动标题
+    string type = 4; //活动类型:Coupon优惠劵/满减送/限时折扣/秒杀/拼团/通用
+    string subtype = 5; //活动子类型
+    string tag = 6; //标签
+    repeated string preferential_items =7; //优惠项目描述
 }
 
 message SkuRequest {
