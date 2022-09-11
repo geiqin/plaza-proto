@@ -29,7 +29,7 @@ service SpuService {
     //商品排序
     rpc Sort(SkuRequest) returns (SpuResponse);
     //获取列表(后台服务)
-    rpc List (SkuRequest) returns (SkuResponse);
+    rpc List (SkuRequest) returns (SpuResponse);
 }
 
 //货品查询（基于后台及服务）
