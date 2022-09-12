@@ -17,50 +17,48 @@ service CalculatorService {
 
 //购买计算结果
 message PurchaseResult {
-  int64 member_id =1;
-  int32 total_num =2;
-  int64 total_weight =3;
-  string currency =4;
-  int64 goods_amount =5;
-  int64 discount_amount =6;
-  int64 shipping_fee =7;
-  int64 insure_fee =8;
-  int64 pack_fee =9;
-  int64 surplus =10;
-  int64 coupon_id = 11;
-  int64 coupon_money =12;
-  int32 integral =13;
-  int64 integral_money =14;
-  int64 amount =15;
-  int64 paid_money =16;
-  bool is_shipment =17;
+  string currency =1; //货币类型
+  int32 total_num =2; //总数量
+  int64 total_weight =3; //总重量
+  int64 total_price =4; //销售总格
+  int64 total_discount =5;//优惠总额
+  int64 total_amount =6;//实付金额
+  int64 shipping_fee =7; //运费
+  int64 insure_fee =8; //保险费
+  int64 pack_fee =9; //包装费
+  int64 surplus =10;//使用账户余额
+  int64 coupon_id = 11;//使用优惠劵ID
+  int64 coupon_money =12; //使用优惠劵金额
+  int32 integral =13; //积分数量
+  int64 integral_money =14;//积分金额
+  int64 paid_money =15;//已支付金额
+  int64 member_id =16;//会员ID
+  bool is_shipment =17;//是否物流
   repeated PurchaseSkuInfo details = 18;
-  repeated CouponInfo  coupons = 19;
-  repeated PromotionInfo promotions = 20;
-  repeated AdjustmentInfo adjustments =21;
+  repeated CouponInfo coupons = 19; //可获得的优惠
+  repeated PromotionInfo promotions = 20; //参与的活动
+  repeated AdjustmentInfo adjustments =21;//变动记录
+  repeated SkuInfo presents =22; //可获得的赠品
   //available
-  int64 available_surplus =22;//可使用的余额
-  int32 available_points =23;//可使用的积分
-  CouponInfo available_coupons = 24;//可使用的优惠劵集合
-  AddressInfo shipping_address =25;//订单收货地址
+  int64 available_surplus =23;//可使用的余额
+  int32 available_points =24;//可使用的积分
+  CouponInfo available_coupons = 25;//可使用的优惠劵集合
+  AddressInfo shipping_address =26;//订单收货地址
 }
 
 //购买商品信息
 message PurchaseSkuInfo {
-  int64	sku_id	=1;
+  int64	sku_id =1;
   int32 num =2;
   int64 price = 3;
   int64 market_price = 4;
   int64 cost_price = 5;
   int64 promotion_price = 6;
   int64 member_price = 7;
-  int64 wholesale_price = 8;
-  int64 row_goods_amount = 9;
-  int64 row_discount_amount = 10;
-  int64 row_amount = 11;
-  bool is_gift =12;
-  bool checked =13; //是否已选中拿入计算
-  SkuInfo sku =14;
+  int64 subtotal_price = 8;
+  int64 subtotal_discount = 9;
+  int64 subtotal_amount = 10;
+  SkuInfo sku =11;
 }
 
 //显示商品信息
@@ -69,8 +67,9 @@ message DisplaySkuInfo{
   int64 price = 2;
   int64 member_price = 3;
   int64 promotion_price = 4;
-  int64 discount_money = 5;
-  repeated PromotionInfo promotions =6;
+  int64 subtotal_amount = 5;
+  int64 subtotal_discount = 6;
+  repeated PromotionInfo promotions =7;
 }
 
 //参与的活动
