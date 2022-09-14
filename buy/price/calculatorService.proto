@@ -60,6 +60,7 @@ message PurchaseSkuInfo {
   int64 subtotal_discount = 9;
   int64 subtotal_amount = 10;
   SkuInfo sku =11;
+  repeated PromotionInfo promotions = 12;
 }
 
 //显示商品信息
