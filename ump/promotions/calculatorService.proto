@@ -27,19 +27,11 @@ message PurchaseSkuInfo{
     int32 num =2;//数量
     int64 price =3; //销售价
     int64 promotion_price =4;//促销价
-    int64 discount_money =5;//优惠金额
-    int64 subtotal_amount =6;//商品小计金额
-    int64 discount_allocation_amount =7;//优惠分摊金额
+    int64 subtotal_discount =5;//优惠金额（小计）
+    int64 subtotal_amount =6;//商品金额（小计）
+    int64 discount_allocation =7;//优惠金额分摊
 }
 
-//请求商品参数
-message RequestSkuInfo {
-    int64 sku_id =1; //skuId
-    int32 num =2; //数量
-    int64 weight =3; //重量
-    int64 price =4; //销售价
-    int64 member_price =5; //会员价
-}
 
 message AdjustmentInfo {
     int64 sku_id = 1;
@@ -63,9 +55,9 @@ message PromotionInfo {
 //购买结果
 message PurchaseResult {
     string currency =1;//货币类型
-    int64 total_discount_amount =2; //优惠总金额
-    int64 total_discount_freight =3; //优惠总运费
-    bool is_free_freight =4; //是否免运费优惠
+    int64 total_discount =2; //总优惠
+    int64 total_amount =3; //总金额
+    int64 total_freight =4; //总运费
     repeated PurchaseSkuInfo skus =5; //结算商品列表
     repeated AdjustmentInfo adjustments =7; //价格变动记录
     repeated PresentInfo presents =8; //赠品列表
@@ -85,41 +77,47 @@ message DisplaySkuInfo{
 //显示商品信息
 message DisplayResult{
     string mode =1; //模式：1-单个模式，2-多个模式
-    DisplaySkuInfo display_sku = 2;//显示商品信息（单个模式）
-    repeated DisplaySkuInfo display_skus =3;//显示商品列表（多个模式）
+    repeated DisplaySkuInfo skus =2;//显示商品列表
+}
+
+//请求商品参数
+message RequestSkuInfo {
+    int64 sku_id =1; //skuId
+    int32 num =2; //数量
+    int64 weight =3; //重量
+    int64 price =4; //销售价
+    int64 member_price =5; //会员价
 }
 
 message DisplayRequest {
     int64 area_id = 1;//所在区域ID
     int64 member_id = 2;//会员ID
     int32 member_rank_id = 3;//会员等级ID
-    RequestSkuInfo sku = 4;//单个商品
     repeated RequestSkuInfo skus = 5;//多个商品
 }
 
 message PurchaseRequest {
-    int32 total_num =1;
-    int64 total_weight =2;
-    string currency =3;
-    int64 goods_amount =4;
-    int64 discount_amount =5;
-    int64 ship_area_id = 6;
-    int64 coupon_id = 7;
-    int64 member_id = 8;
-    int32 member_rank_id = 9;
-    repeated RequestSkuInfo skus = 10;
+    string currency =1;//货币类型
+    int64 integral = 2;//使用的积分
+    int64 coupon_id = 3;//使用的优惠劵
+    int64 member_id = 4;//会员ID
+    int32 member_rank_id = 5;//会员等级ID
+    int64 destination_area_id = 6;//目的地区域ID
+    repeated RequestSkuInfo skus = 7;//购买的商品列表
 }
 
 message PaymentRequest {
-    int32 order_id =1;
-    int32 total_num =2;
-    int64 total_weight =3;
-    string currency =4;
-    int64 total_amount =5;
-    int64 payment_amount =6;
-    int64 member_id = 8;
-    int32 member_rank_id = 9;
-    repeated RequestSkuInfo skus = 14;
+    string currency =1;//货币类型
+    int32 order_id =2;//订单ID
+    int32 total_num =3; //总数量
+    int64 total_weight =4;//总重量
+    int64 total_discount =5;//优惠总额
+    int64 total_amount =6;//订单总额
+    int64 pay_amount =7;//当前支付金额
+    int64 paid_money =8;//已支付金额
+    int64 member_id = 9;//会员ID
+    int32 member_rank_id = 10;//会员等级ID
+    repeated RequestSkuInfo skus = 11;//购买的商品列表
 }
 
 message CalculatorData {
