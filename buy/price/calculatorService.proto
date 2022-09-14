@@ -22,28 +22,29 @@ message PurchaseResult {
   int64 total_weight =3; //总重量
   int64 total_price =4; //销售总格
   int64 total_discount =5;//优惠总额
-  int64 total_amount =6;//实付金额
-  int64 shipping_fee =7; //运费
-  int64 insure_fee =8; //保险费
-  int64 pack_fee =9; //包装费
-  int64 surplus =10;//使用账户余额
-  int64 coupon_id = 11;//使用优惠劵ID
-  int64 coupon_money =12; //使用优惠劵金额
-  int32 integral =13; //积分数量
-  int64 integral_money =14;//积分金额
-  int64 paid_money =15;//已支付金额
-  int64 member_id =16;//会员ID
-  bool is_shipment =17;//是否物流
-  repeated PurchaseSkuInfo details = 18;
-  repeated CouponInfo coupons = 19; //可获得的优惠
-  repeated PromotionInfo promotions = 20; //参与的活动
-  repeated AdjustmentInfo adjustments =21;//变动记录
-  repeated SkuInfo presents =22; //可获得的赠品
+  int64 total_amount =6;//应付金额
+  int64 pay_money =7;//实付现金
+  int64 freight_fee =8; //运费
+  int64 insure_fee =9; //保险费
+  int64 pack_fee =10; //包装费
+  int64 surplus =11;//使用账户余额
+  int64 coupon_id = 12;//使用优惠劵ID
+  int64 coupon_money =13; //使用优惠劵金额
+  int32 integral =14; //积分数量
+  int64 integral_money =15;//积分金额
+  int64 paid_amount =16;//已支付金额
+  int64 member_id =17;//会员ID
+  bool is_shipment =18;//是否物流
+  repeated PurchaseSkuInfo skus = 19; //购买商品列表
+  repeated CouponInfo coupons = 20; //可获得的优惠
+  repeated PromotionInfo promotions = 21; //参与的活动
+  repeated AdjustmentInfo adjustments =22;//变动记录
+  repeated SkuInfo presents =23; //可获得的赠品
   //available
-  int64 available_surplus =23;//可使用的余额
-  int32 available_points =24;//可使用的积分
-  CouponInfo available_coupons = 25;//可使用的优惠劵集合
-  AddressInfo shipping_address =26;//订单收货地址
+  int64 available_surplus =24;//可使用的余额
+  int32 available_points =25;//可使用的积分
+  CouponInfo available_coupons = 26;//可使用的优惠劵集合
+  AddressInfo shipping_address =27;//订单收货地址
 }
 
 //购买商品信息
