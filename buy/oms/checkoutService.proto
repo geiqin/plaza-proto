@@ -65,7 +65,7 @@ message CheckoutRequest {
     int32 payment_id = 6; //选中的支付方式
     string terminal = 7; //下单来源终端：site/app/wx_mini/ali_mini/h5/pos
     int64 coupon_id = 8; //选中的优惠劵凭证ID
-    int32 integral = 9; //使用的积分数
+    int64 integral = 9; //使用的积分数
     int64 surplus = 10; //使用的余额数
     int64 agent_member_id = 11; //代理的客户ID（操作员代客下单）
     int64 recharge_money =12; //订单金额【充值订单】

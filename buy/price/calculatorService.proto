@@ -30,7 +30,7 @@ message PurchaseResult {
   int64 surplus =11;//使用账户余额
   int64 coupon_id = 12;//使用优惠劵ID
   int64 coupon_money =13; //使用优惠劵金额
-  int32 integral =14; //积分数量
+  int64 integral =14; //积分数量
   int64 integral_money =15;//积分金额
   int64 paid_money =16;//已支付现金
   int64 member_id =17;//会员ID
@@ -108,7 +108,7 @@ message PurchaseRequest {
   int64 pack_fee =12;
   int64 surplus =13;
   int64 coupon_money =14;
-  int32 integral =15;
+  int64 integral =15;
   int64 integral_money =16;
   int64 paid_money =17;
   string currency =18;
