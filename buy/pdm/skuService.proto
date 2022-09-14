@@ -104,6 +104,7 @@ message Sku {
     SkuPresale presale = 43;
     repeated SpuGallery galleries = 44;
     repeated OwnProperty own_property =45;
+    repeated PromotionInfo promotions =46;
 }
 
 message Spu {
@@ -164,7 +165,6 @@ message Spu {
     GenericProperty generic_property = 55;
     repeated SaleProperty sale_property =56;
     repeated ServiceProperty service_property =57;
-    repeated PromotionInfo promotions =58;
 }
 
 message SpuDesc {
