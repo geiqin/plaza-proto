@@ -1,6 +1,6 @@
 syntax = "proto3";
 package services;
-option go_package =".;services";
+option go_package ="/.;services";
 import "common/base.proto";
 import "tagService.proto";
 import "rankService.proto";
@@ -65,8 +65,8 @@ message Member {
     bool rank_valid =9;
     int64 surplus =10;
     int64 deposit =11;
-    int32 pay_points =12;
-    int32 rank_points =13;
+    int64 pay_integral =12;
+    int64 rank_integral =13;
     int32 traded_num =14;
     int64 traded_money =15;
     int32 comment_num =16;

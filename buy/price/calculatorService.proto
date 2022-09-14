@@ -23,7 +23,7 @@ message PurchaseResult {
   int64 total_price =4; //销售总格
   int64 total_discount =5;//优惠总额
   int64 total_amount =6;//应付金额
-  int64 pay_money =7;//实付现金
+  int64 pay_money =7;//支付现金
   int64 freight_fee =8; //运费
   int64 insure_fee =9; //保险费
   int64 pack_fee =10; //包装费
@@ -32,7 +32,7 @@ message PurchaseResult {
   int64 coupon_money =13; //使用优惠劵金额
   int32 integral =14; //积分数量
   int64 integral_money =15;//积分金额
-  int64 paid_amount =16;//已支付金额
+  int64 paid_money =16;//已支付现金
   int64 member_id =17;//会员ID
   bool is_shipment =18;//是否物流
   repeated PurchaseSkuInfo skus = 19; //购买商品列表

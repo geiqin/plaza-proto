@@ -31,13 +31,17 @@ message Checkout {
     int64 shipping_fee =8;
     int64 insure_fee =9;
     int64 pack_fee =10;
-    int64 member_id = 11;
-    int64 address_id = 12;
-    OrderAddress shipping_address =13;//收货地址
-    repeated CheckoutItem details = 14;//商品明细
-    repeated CouponInfo available_coupons = 15;//可使用的优惠劵集合
-    repeated Shipment shipment_list = 16; //可选的配送方式
-    repeated Payment payment_list = 17; //可选的支付方式
+    int64 pay_money =11;
+    int64 member_id = 12;
+    int64 address_id = 13;
+    int64 available_surplus =14;//可使用的余额
+    int32 available_points =15;//可使用的积分数
+    OrderAddress shipping_address =16;//收货地址
+    repeated CheckoutItem details = 17;//商品明细
+    repeated SkuInfo presents =18; //获得的赠品
+    repeated CouponInfo available_coupons = 19;//可使用的优惠劵集合
+    repeated Shipment shipment_list = 20; //可选的配送方式
+    repeated Payment payment_list = 21; //可选的支付方式
 }
 
 message CheckoutItem {
@@ -67,7 +71,7 @@ message CheckoutRequest {
     int64 recharge_money =12; //订单金额【充值订单】
     string recharge_subject =13; //订单标题【充值订单】
     int64 direct_sku_id =14; //直接购买SkuId
-    repeated int64 cart_sku_ids =15 ;//购物车选中的SkuIds
+    string cart_code =15;////购物车Code
     repeated shop shops = 16; //多店铺数据提交
     message shop {
         int64 shop_id = 1; //分店ID

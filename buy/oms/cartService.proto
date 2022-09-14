@@ -4,6 +4,7 @@ option go_package = "/.;services";
 import "common/base.proto";
 import "skuInfoService.proto";
 import "promotionInfoService.proto";
+import "adjustmentService.proto";
 
 service CartService {
     //加入购物车商品
@@ -21,20 +22,23 @@ service CartService {
 }
 
 message Cart {
-    string currency =1;
-    int32 total_num =2;
-    int64 total_weight =3;
-    int64 total_price =4;
-    int64 total_discount =5;
-    int64 total_amount =6;
-    int64 shipping_fee =7;
-    int64 insure_fee =8;
-    int64 pack_fee =9;
-    int64 member_id = 10;
-    int64 address_id = 11;
-    int32 checked_status = 12;
-    repeated CartItem details = 13;
-    repeated PromotionInfo store_promotions =14;
+    string code =1;
+    string currency =2;
+    int32 total_num =3;
+    int64 total_weight =4;
+    int64 total_price =5;
+    int64 total_discount =6;
+    int64 total_amount =7;
+    int64 freight_fee =8;
+    int64 insure_fee =9;
+    int64 pack_fee =10;
+    int64 member_id = 11;
+    int64 address_id = 12;
+    int32 checked_status = 13;
+    repeated CartItem skus = 14;
+    repeated PromotionInfo promotions =15;//店铺营销活动
+    repeated Adjustment adjustments =16;//变动记录
+    repeated SkuInfo presents =17; //可获得的赠品
 }
 
 message CartItem {
@@ -46,8 +50,8 @@ message CartItem {
     int64 subtotal_discount = 6;
     bool checked = 7;
     SkuInfo sku = 8;
+    repeated PromotionInfo promotions =9;
 }
-
 
 message CartRequest {
     int32 paged = 1;
