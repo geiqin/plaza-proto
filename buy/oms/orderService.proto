@@ -59,7 +59,7 @@ message Order {
     int64 total_price =10;
     int64 total_discount =11;
     int64 total_amount =12;
-    int64 shipping_fee =13;
+    int64 freight_fee =13;
     int64 insure_fee =14;
     int64 pack_fee =15;
     int64 surplus =16;

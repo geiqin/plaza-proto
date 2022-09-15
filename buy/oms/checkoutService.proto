@@ -4,10 +4,10 @@ option go_package = "/.;services";
 import "common/base.proto";
 import "orderService.proto";
 import "orderAddressService.proto";
-import "couponInfoService.proto";
 import "paymentService.proto";
 import "shipmentService.proto";
-import "skuInfoService.proto";
+import "baseInfoService.proto";
+import "adjustmentService.proto";
 
 //结账台操作
 service CheckoutService {
@@ -19,41 +19,54 @@ service CheckoutService {
     rpc Recharge (CheckoutRequest) returns (CheckoutResponse) {}
 }
 
-
+//结算信息
 message Checkout {
-    string checkout_id = 1;
-    string currency =2;
-    int32 total_num =3;
-    int64 total_weight =4;
-    int64 total_price =5;
-    int64 total_discount =6;
-    int64 total_amount =7;
-    int64 shipping_fee =8;
-    int64 insure_fee =9;
-    int64 pack_fee =10;
-    int64 pay_money =11;
-    int64 member_id = 12;
-    int64 address_id = 13;
-    int64 available_surplus =14;//可使用的余额
-    int32 available_points =15;//可使用的积分数
-    OrderAddress shipping_address =16;//收货地址
-    repeated CheckoutItem details = 17;//商品明细
-    repeated SkuInfo presents =18; //获得的赠品
-    repeated CouponInfo available_coupons = 19;//可使用的优惠劵集合
-    repeated Shipment shipment_list = 20; //可选的配送方式
-    repeated Payment payment_list = 21; //可选的支付方式
+    string checkout_id =1; //货币类型
+    string currency =2; //货币类型
+    int32 total_num =3; //总数量
+    int64 total_weight =4; //总重量
+    int64 total_price =5; //销售总格
+    int64 total_discount =6;//优惠总额
+    int64 total_amount =7;//应付金额
+    int64 pay_money =8;//支付现金
+    int64 freight_fee =9; //运费
+    int64 insure_fee =10; //保险费
+    int64 pack_fee =11; //包装费
+    int64 surplus =12;//使用账户余额
+    int64 coupon_id = 13;//使用优惠劵ID
+    int64 coupon_money =14; //使用优惠劵金额
+    int64 integral =15; //积分数量
+    int64 integral_money =16;//积分金额
+    int64 paid_money =17;//已支付现金
+    int64 member_id =18;//会员ID
+    bool is_shipment =19;//是否物流
+    repeated CheckoutSkuInfo skus = 20; //购买商品列表
+    repeated CouponInfo coupons = 21; //可获得的优惠
+    repeated PromotionInfo promotions = 22; //参与的活动
+    repeated Adjustment  adjustments =23;//变动记录
+    repeated SkuInfo presents =24; //可获得的赠品
+    //available
+    int64 available_surplus =25;//可使用的余额
+    int64 available_integral =26;//可使用的积分
+    CouponInfo available_coupons = 27;//可使用的优惠劵集合
+    OrderAddress shipping_address =28;//订单收货地址
+    Shipment shipment_list =29;//订单收货地址
+    Payment payment_list =30;//订单收货地址
 }
 
-message CheckoutItem {
-    int64 sku_id = 1;
-    int32 num = 2;
+//购买商品信息
+message CheckoutSkuInfo {
+    int64	sku_id =1;
+    int32 num =2;
     int64 price = 3;
     int64 promotion_price = 4;
-    int64 subtotal_amount = 5;
-    int64 subtotal_discount = 6;
-    SkuInfo sku = 8;
+    int64 member_price = 5;
+    int64 subtotal_price = 6;
+    int64 subtotal_discount = 7;
+    int64 subtotal_amount = 8;
+    SkuInfo sku =9;
+    repeated PromotionInfo promotions = 10;
 }
-
 
 //结账台请求参数
 message CheckoutRequest {

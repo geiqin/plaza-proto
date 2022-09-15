@@ -2,7 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "areaInfoService.proto";
+import "baseInfoService.proto";
 
 //物流相关操作
 service LogisticsService {

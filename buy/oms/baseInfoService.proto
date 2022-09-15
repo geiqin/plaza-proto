@@ -1,0 +1,97 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+
+message AreaInfo {
+	int64 id = 1;
+	int64 area_id = 2;
+	string level_type = 3;
+	string name = 4;
+	string shortname = 5;
+	string parent_path = 6;
+	string province = 7;
+	string city = 8;
+	string district = 9;
+	string province_shortname = 11;
+	string city_shortname = 12;
+	string district_shortname = 13;
+	string province_pinyin = 14;
+	string city_pinyin = 15;
+	string district_pinyin = 16;
+	string pinyin = 17;
+	string jianpin = 18;
+	string first_char = 19;
+	string city_code = 20;
+	string zip_code = 21;
+	string lng = 22;
+	string lat = 23;
+	string remark1 = 24;
+	string remark2 = 25;
+}
+
+
+message SkuInfo {
+	int64 id = 1;
+	int64 spu_id = 2;
+	string sku_sn = 3;
+	string title = 4;
+	string type = 5;
+	string subtype = 6;
+	string unit = 7;
+	int64 shop_id = 8;
+	int64 image_id = 9;
+	string image_url = 10;
+	int64 price = 11;
+	int64 market_price = 12;
+	int64 cost_price = 13;
+	int64 promotion_price = 14;
+	string barcode = 15;
+	int64 weight = 16;
+	int32 volume = 17;
+	int32 stock = 18;
+	int32 frozen_stock = 19;
+	string out_sku_no = 20;
+	bool is_spec = 21;
+	bool is_virtual = 22;
+	bool is_presale = 23;
+	bool is_member_right = 24;
+	bool is_member_price = 25;
+	bool is_hide_stock = 26;
+	bool is_new = 27;
+	bool is_hot = 28;
+	bool is_recommend = 29;
+	bool is_special = 30;
+	bool is_master = 31;
+	string indexes =32;
+	string own_desc = 33;
+	string status = 34;
+}
+
+//参与的活动
+message PromotionInfo {
+	int64 id = 1; //活动ID
+	string code = 2; //活动编码:如：coupon_20210101212
+	string title = 3; //活动标题
+	string type = 4; //活动类型:Coupon优惠劵/满减送/限时折扣/秒杀/拼团/通用
+	string subtype = 5; //活动子类型
+	string tag = 6; //标签
+}
+
+//优惠券信息
+message CouponInfo  {
+	int64 id = 1;
+	string coupon_sn = 2;
+	string title = 3;
+	bool is_at_least = 4;
+	float at_least = 5;
+	int32 preferential_type = 6;
+	int64 preferential_money = 7;
+	float preferential_discount = 8;
+	int32 exchange_num = 9;
+	string range_type = 10;
+	string description = 11;
+	int64 ticket_id = 12;
+	string ticket_sn = 13;
+	string ticket_start_at = 14;
+	string ticket_end_at = 15;
+}
