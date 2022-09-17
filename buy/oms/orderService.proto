@@ -5,8 +5,7 @@ import "common/base.proto";
 import "orderDetailService.proto";
 import "orderAddressService.proto";
 import "adjustmentService.proto";
-import "memberInfoService.proto";
-import "extendService.proto";
+import "baseInfoService.proto";
 import "shipmentService.proto";
 import "paymentService.proto";
 

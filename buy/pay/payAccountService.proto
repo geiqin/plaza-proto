@@ -1,0 +1,74 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+//支付账号
+service PayAccountService {
+    rpc Create (PayAccount) returns (PayAccountResponse) {}
+    rpc Update (PayAccount) returns (PayAccountResponse) {}
+    rpc Delete (PayAccount) returns (PayAccountResponse) {}
+    rpc Get (PayAccount) returns (PayAccountResponse) {}
+    rpc Search (PayAccountRequest) returns (PayAccountResponse) {}
+}
+
+message PayAccount {
+    int32	id =1;
+    string code =2;
+    string title =3;
+    string type	=4;
+    string provider_mode =5;
+    string version = 6;
+    string config_data =7;
+    string status	=8;
+    string created_at = 9;
+    string updated_at = 10;
+    WxConfig wx_config =11;
+    AlipayConfig alipay_config =12;
+}
+
+message WxConfig {
+    string mch_id =1;
+    string sign_type =2;
+    string md5_key	=3;
+    string cert_serial_no =4;
+    string private_key =5;
+    string public_cert	=6;
+    string v3_api_key = 7;
+    string v3_private_key = 8;
+    string api_client_cert_file = 9;
+    string api_client_key_file = 10;
+    string api_client_p12_file = 11;
+}
+
+message AlipayConfig {
+    string mch_id =1;
+}
+
+
+message PayAccountRequest{
+    int32 paged =1;
+    int32 page_size =2;
+    string keywords =3;
+    int32	id =5;
+    string code =6;
+    string name =7;
+    string type	=8;
+    string provider_mode = 9;
+    string status = 10;
+    string reason =11;
+}
+
+
+message PayAccountData {
+    PayAccount entity = 1;
+    common.Pager pager =2;
+    repeated PayAccount items = 3;
+    common.Info info =4;
+}
+
+
+message PayAccountResponse {
+    PayAccountData data = 1;
+    common.Error error = 2;
+}

@@ -9,14 +9,14 @@ import "shipmentService.proto";
 import "baseInfoService.proto";
 import "adjustmentService.proto";
 
-//结账台操作
+//结账台
 service CheckoutService {
-    //填写订单
-    rpc Write (CheckoutRequest) returns (CheckoutResponse) {}
+    //填写商品
+    rpc Write (WriteRequest) returns (CheckoutResponse) {}
+    //确认信息
+    rpc Confirm (ConfirmInfo) returns (CheckoutResponse) {}
     //提交订单
-    rpc Submit (CheckoutRequest) returns (CheckoutResponse) {}
-    //充值下单
-    rpc Recharge (CheckoutRequest) returns (CheckoutResponse) {}
+    rpc Submit (ConfirmInfo) returns (CheckoutResponse) {}
 }
 
 //结算信息
@@ -39,19 +39,20 @@ message Checkout {
     int64 integral_money =16;//积分金额
     int64 paid_money =17;//已支付现金
     int64 member_id =18;//会员ID
-    bool is_shipment =19;//是否物流
-    repeated CheckoutSkuInfo skus = 20; //购买商品列表
-    repeated CouponInfo coupons = 21; //可获得的优惠
-    repeated PromotionInfo promotions = 22; //参与的活动
-    repeated Adjustment  adjustments =23;//变动记录
-    repeated SkuInfo presents =24; //可获得的赠品
+    int64 address_id =19; //地址ID
+    bool is_shipment =20;//是否物流
+    repeated CheckoutSkuInfo skus = 21; //购买商品列表
+    repeated CouponInfo coupons = 22; //可获得的优惠
+    repeated PromotionInfo promotions = 23; //参与的活动
+    repeated Adjustment  adjustments =24;//变动记录
+    repeated SkuInfo presents =25; //可获得的赠品
     //available
-    int64 available_surplus =25;//可使用的余额
-    int64 available_integral =26;//可使用的积分
-    CouponInfo available_coupons = 27;//可使用的优惠劵集合
-    OrderAddress shipping_address =28;//订单收货地址
-    Shipment shipment_list =29;//订单收货地址
-    Payment payment_list =30;//订单收货地址
+    int64 available_surplus =26;//可使用的余额
+    int64 available_integral =27;//可使用的积分
+    CouponInfo available_coupons = 28;//可使用的优惠劵集合
+    OrderAddress shipping_address =29;//订单收货地址
+    Shipment shipment_list =30;//订单收货地址
+    Payment payment_list =31;//订单收货地址
 }
 
 //购买商品信息
@@ -68,36 +69,77 @@ message CheckoutSkuInfo {
     repeated PromotionInfo promotions = 10;
 }
 
-//结账台请求参数
-message CheckoutRequest {
-    string checkout_id = 1; //结账台ID
-    string order_type = 2; //订单类型（默认为普通订单）
+//充值信息
+message RechargeInfo {
+    string type =1; //充值类型
+    string subject =2; //充值标题
+    int64 money =3; //充值金额
+    string mobile =4; //充值手机号
+    string user_name = 5; //用户姓名
+    string origin_code = 6; //来源单号
+    string memo =7; //备注信息
+}
+
+
+//确认信息请求参数
+message ConfirmRequest {
+    string type = 1; //订单类型（默认为普通订单）
+    int64 address_id = 2; //收货地址ID
+    string postscript = 3; //买家留言(50字以内)
+    int32 shipment_id = 4; //选中的配送方式
+    int32 payment_id = 5; //选中的支付方式
+    int64 coupon_id = 6; //选中的优惠劵凭证ID
+    int64 integral = 7; //使用的积分数
+    int64 surplus = 8; //使用的余额数
+    int64 agent_member_id = 9; //代理的客户ID（操作员代客下单）
+    repeated sku skus = 10; //商品清单
+    message sku {
+        int64 sku_id = 1; //商品ID
+        int32 num = 2; //数量
+    }
+
+
+}
+
+//填写商品请求参数
+message WriteRequest {
+    string order_type = 1; //订单类型（默认为普通订单）
+    int64 direct_sku_id =2; //直接购买SkuId
+    string cart_code =3;////购物车Code
+    RechargeInfo recharge =4; //充值信息
+    map<string,string> params = 5; //附加参数
+}
+
+//确认信息
+message ConfirmInfo {
+    string order_type = 1; //订单类型（默认为普通订单）
+    string purchase_method = 2; //下单方式：cart，direct
     int64 address_id = 3; //收货地址ID
     string postscript = 4; //买家留言(50字以内)
     int32 shipment_id = 5; //选中的配送方式
     int32 payment_id = 6; //选中的支付方式
-    string terminal = 7; //下单来源终端：site/app/wx_mini/ali_mini/h5/pos
-    int64 coupon_id = 8; //选中的优惠劵凭证ID
-    int64 integral = 9; //使用的积分数
-    int64 surplus = 10; //使用的余额数
-    int64 agent_member_id = 11; //代理的客户ID（操作员代客下单）
-    int64 recharge_money =12; //订单金额【充值订单】
-    string recharge_subject =13; //订单标题【充值订单】
-    int64 direct_sku_id =14; //直接购买SkuId
-    string cart_code =15;////购物车Code
-    repeated shop shops = 16; //多店铺数据提交
+    int64 coupon_id = 7; //使用的优惠劵凭证ID
+    int64 integral = 8; //使用的积分数
+    int64 surplus = 9; //使用的余额数
+    int64 agent_member_id = 10; //代理的客户ID（操作员代客下单）
+    map<string,string> params = 11; //扩展信息
+    repeated sku skus = 12; //商品清单
+    message sku {
+        int64 sku_id = 1; //商品ID
+        int32 num = 2; //数量
+    }
+    repeated shop shops = 16; //多店铺数据
     message shop {
         int64 shop_id = 1; //分店ID
         int32 shipment_id = 2; //选中的配送方式
-        string postscript  =3;//商家的留言
+        string postscript =3;//商家的留言
     }
 }
 
 message CheckoutData {
     Checkout checkout = 1;//结算信息
-    Order order =2;//订单信息
-    CheckoutRequest request =3;//请求数据原始返回
-    map<string,string> params = 5; //扩展信息
+    ConfirmInfo confirm_info =2;//确认信息
+    Order order_info =3;//订单信息
 }
 
 message CheckoutResponse {

@@ -44,11 +44,11 @@ func NewAlipayServiceEndpoints() []*api.Endpoint {
 
 type AlipayService interface {
 	//手机网站支付接口2.0（手机网站支付）
-	WapPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*AlipayResponse, error)
+	WapPay(ctx context.Context, in *Alipay, opts ...client.CallOption) (*AlipayResponse, error)
 	//统一收单下单并支付页面接口（电脑网站支付）
-	PagePay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*AlipayResponse, error)
+	PagePay(ctx context.Context, in *Alipay, opts ...client.CallOption) (*AlipayResponse, error)
 	//APP支付接口2.0（APP支付）
-	AppPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*AlipayResponse, error)
+	AppPay(ctx context.Context, in *Alipay, opts ...client.CallOption) (*AlipayResponse, error)
 }
 
 type alipayService struct {
@@ -63,7 +63,7 @@ func NewAlipayService(name string, c client.Client) AlipayService {
 	}
 }
 
-func (c *alipayService) WapPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*AlipayResponse, error) {
+func (c *alipayService) WapPay(ctx context.Context, in *Alipay, opts ...client.CallOption) (*AlipayResponse, error) {
 	req := c.c.NewRequest(c.name, "AlipayService.WapPay", in)
 	out := new(AlipayResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -73,7 +73,7 @@ func (c *alipayService) WapPay(ctx context.Context, in *PaymentRequest, opts ...
 	return out, nil
 }
 
-func (c *alipayService) PagePay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*AlipayResponse, error) {
+func (c *alipayService) PagePay(ctx context.Context, in *Alipay, opts ...client.CallOption) (*AlipayResponse, error) {
 	req := c.c.NewRequest(c.name, "AlipayService.PagePay", in)
 	out := new(AlipayResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -83,7 +83,7 @@ func (c *alipayService) PagePay(ctx context.Context, in *PaymentRequest, opts ..
 	return out, nil
 }
 
-func (c *alipayService) AppPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*AlipayResponse, error) {
+func (c *alipayService) AppPay(ctx context.Context, in *Alipay, opts ...client.CallOption) (*AlipayResponse, error) {
 	req := c.c.NewRequest(c.name, "AlipayService.AppPay", in)
 	out := new(AlipayResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -97,18 +97,18 @@ func (c *alipayService) AppPay(ctx context.Context, in *PaymentRequest, opts ...
 
 type AlipayServiceHandler interface {
 	//手机网站支付接口2.0（手机网站支付）
-	WapPay(context.Context, *PaymentRequest, *AlipayResponse) error
+	WapPay(context.Context, *Alipay, *AlipayResponse) error
 	//统一收单下单并支付页面接口（电脑网站支付）
-	PagePay(context.Context, *PaymentRequest, *AlipayResponse) error
+	PagePay(context.Context, *Alipay, *AlipayResponse) error
 	//APP支付接口2.0（APP支付）
-	AppPay(context.Context, *PaymentRequest, *AlipayResponse) error
+	AppPay(context.Context, *Alipay, *AlipayResponse) error
 }
 
 func RegisterAlipayServiceHandler(s server.Server, hdlr AlipayServiceHandler, opts ...server.HandlerOption) error {
 	type alipayService interface {
-		WapPay(ctx context.Context, in *PaymentRequest, out *AlipayResponse) error
-		PagePay(ctx context.Context, in *PaymentRequest, out *AlipayResponse) error
-		AppPay(ctx context.Context, in *PaymentRequest, out *AlipayResponse) error
+		WapPay(ctx context.Context, in *Alipay, out *AlipayResponse) error
+		PagePay(ctx context.Context, in *Alipay, out *AlipayResponse) error
+		AppPay(ctx context.Context, in *Alipay, out *AlipayResponse) error
 	}
 	type AlipayService struct {
 		alipayService
@@ -121,14 +121,14 @@ type alipayServiceHandler struct {
 	AlipayServiceHandler
 }
 
-func (h *alipayServiceHandler) WapPay(ctx context.Context, in *PaymentRequest, out *AlipayResponse) error {
+func (h *alipayServiceHandler) WapPay(ctx context.Context, in *Alipay, out *AlipayResponse) error {
 	return h.AlipayServiceHandler.WapPay(ctx, in, out)
 }
 
-func (h *alipayServiceHandler) PagePay(ctx context.Context, in *PaymentRequest, out *AlipayResponse) error {
+func (h *alipayServiceHandler) PagePay(ctx context.Context, in *Alipay, out *AlipayResponse) error {
 	return h.AlipayServiceHandler.PagePay(ctx, in, out)
 }
 
-func (h *alipayServiceHandler) AppPay(ctx context.Context, in *PaymentRequest, out *AlipayResponse) error {
+func (h *alipayServiceHandler) AppPay(ctx context.Context, in *Alipay, out *AlipayResponse) error {
 	return h.AlipayServiceHandler.AppPay(ctx, in, out)
 }

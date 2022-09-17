@@ -1,0 +1,55 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "payAccountService.proto";
+
+service PayChannelService {
+    rpc Bind (PayChannel) returns (PayChannelResponse) {}
+    rpc Cancel (PayChannel) returns (PayChannelResponse) {}
+    rpc SetStatus (PayChannel) returns (PayChannelResponse) {}
+    rpc Get (PayChannel) returns (PayChannelResponse) {}
+    rpc List (PayChannelRequest) returns (PayChannelResponse) {}
+    rpc Search (PayChannelRequest) returns (PayChannelResponse) {}
+}
+
+message PayChannel {
+    int32	id =1;
+    int32 pay_account_id =2;
+    int32 channel_id =3;
+    string channel_type	=4;
+    string app_id =5;
+    string config_data =6;
+    string status	=7;
+    string created_at = 8;
+    string updated_at = 9;
+    PayAccount pay_account =10;
+}
+
+
+message PayChannelRequest{
+    int32 paged =1;
+    int32 page_size =2;
+    string keywords =3;
+    int32	id =5;
+    int32 pay_account_id =6;
+    int32 channel_id =7;
+    string channel_type	=8;
+    string app_id = 9;
+    string status = 10;
+    string reason =11;
+}
+
+
+message PayChannelData {
+    PayChannel entity = 1;
+    common.Pager pager =2;
+    repeated PayChannel items = 3;
+    common.Info info =4;
+}
+
+
+message PayChannelResponse {
+    PayChannelData data = 1;
+    common.Error error = 2;
+}

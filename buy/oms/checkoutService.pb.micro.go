@@ -43,12 +43,12 @@ func NewCheckoutServiceEndpoints() []*api.Endpoint {
 // Client API for CheckoutService service
 
 type CheckoutService interface {
-	//填写订单
-	Write(ctx context.Context, in *CheckoutRequest, opts ...client.CallOption) (*CheckoutResponse, error)
+	//填写商品
+	Write(ctx context.Context, in *WriteRequest, opts ...client.CallOption) (*CheckoutResponse, error)
+	//确认信息
+	Confirm(ctx context.Context, in *ConfirmInfo, opts ...client.CallOption) (*CheckoutResponse, error)
 	//提交订单
-	Submit(ctx context.Context, in *CheckoutRequest, opts ...client.CallOption) (*CheckoutResponse, error)
-	//充值下单
-	Recharge(ctx context.Context, in *CheckoutRequest, opts ...client.CallOption) (*CheckoutResponse, error)
+	Submit(ctx context.Context, in *ConfirmInfo, opts ...client.CallOption) (*CheckoutResponse, error)
 }
 
 type checkoutService struct {
@@ -63,7 +63,7 @@ func NewCheckoutService(name string, c client.Client) CheckoutService {
 	}
 }
 
-func (c *checkoutService) Write(ctx context.Context, in *CheckoutRequest, opts ...client.CallOption) (*CheckoutResponse, error) {
+func (c *checkoutService) Write(ctx context.Context, in *WriteRequest, opts ...client.CallOption) (*CheckoutResponse, error) {
 	req := c.c.NewRequest(c.name, "CheckoutService.Write", in)
 	out := new(CheckoutResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -73,8 +73,8 @@ func (c *checkoutService) Write(ctx context.Context, in *CheckoutRequest, opts .
 	return out, nil
 }
 
-func (c *checkoutService) Submit(ctx context.Context, in *CheckoutRequest, opts ...client.CallOption) (*CheckoutResponse, error) {
-	req := c.c.NewRequest(c.name, "CheckoutService.Submit", in)
+func (c *checkoutService) Confirm(ctx context.Context, in *ConfirmInfo, opts ...client.CallOption) (*CheckoutResponse, error) {
+	req := c.c.NewRequest(c.name, "CheckoutService.Confirm", in)
 	out := new(CheckoutResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -83,8 +83,8 @@ func (c *checkoutService) Submit(ctx context.Context, in *CheckoutRequest, opts 
 	return out, nil
 }
 
-func (c *checkoutService) Recharge(ctx context.Context, in *CheckoutRequest, opts ...client.CallOption) (*CheckoutResponse, error) {
-	req := c.c.NewRequest(c.name, "CheckoutService.Recharge", in)
+func (c *checkoutService) Submit(ctx context.Context, in *ConfirmInfo, opts ...client.CallOption) (*CheckoutResponse, error) {
+	req := c.c.NewRequest(c.name, "CheckoutService.Submit", in)
 	out := new(CheckoutResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -96,19 +96,19 @@ func (c *checkoutService) Recharge(ctx context.Context, in *CheckoutRequest, opt
 // Server API for CheckoutService service
 
 type CheckoutServiceHandler interface {
-	//填写订单
-	Write(context.Context, *CheckoutRequest, *CheckoutResponse) error
+	//填写商品
+	Write(context.Context, *WriteRequest, *CheckoutResponse) error
+	//确认信息
+	Confirm(context.Context, *ConfirmInfo, *CheckoutResponse) error
 	//提交订单
-	Submit(context.Context, *CheckoutRequest, *CheckoutResponse) error
-	//充值下单
-	Recharge(context.Context, *CheckoutRequest, *CheckoutResponse) error
+	Submit(context.Context, *ConfirmInfo, *CheckoutResponse) error
 }
 
 func RegisterCheckoutServiceHandler(s server.Server, hdlr CheckoutServiceHandler, opts ...server.HandlerOption) error {
 	type checkoutService interface {
-		Write(ctx context.Context, in *CheckoutRequest, out *CheckoutResponse) error
-		Submit(ctx context.Context, in *CheckoutRequest, out *CheckoutResponse) error
-		Recharge(ctx context.Context, in *CheckoutRequest, out *CheckoutResponse) error
+		Write(ctx context.Context, in *WriteRequest, out *CheckoutResponse) error
+		Confirm(ctx context.Context, in *ConfirmInfo, out *CheckoutResponse) error
+		Submit(ctx context.Context, in *ConfirmInfo, out *CheckoutResponse) error
 	}
 	type CheckoutService struct {
 		checkoutService
@@ -121,14 +121,14 @@ type checkoutServiceHandler struct {
 	CheckoutServiceHandler
 }
 
-func (h *checkoutServiceHandler) Write(ctx context.Context, in *CheckoutRequest, out *CheckoutResponse) error {
+func (h *checkoutServiceHandler) Write(ctx context.Context, in *WriteRequest, out *CheckoutResponse) error {
 	return h.CheckoutServiceHandler.Write(ctx, in, out)
 }
 
-func (h *checkoutServiceHandler) Submit(ctx context.Context, in *CheckoutRequest, out *CheckoutResponse) error {
-	return h.CheckoutServiceHandler.Submit(ctx, in, out)
+func (h *checkoutServiceHandler) Confirm(ctx context.Context, in *ConfirmInfo, out *CheckoutResponse) error {
+	return h.CheckoutServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *checkoutServiceHandler) Recharge(ctx context.Context, in *CheckoutRequest, out *CheckoutResponse) error {
-	return h.CheckoutServiceHandler.Recharge(ctx, in, out)
+func (h *checkoutServiceHandler) Submit(ctx context.Context, in *ConfirmInfo, out *CheckoutResponse) error {
+	return h.CheckoutServiceHandler.Submit(ctx, in, out)
 }

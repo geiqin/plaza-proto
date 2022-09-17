@@ -44,13 +44,13 @@ func NewWxServiceEndpoints() []*api.Endpoint {
 
 type WxService interface {
 	//小程序支付
-	MiniPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*WxResponse, error)
-	//H5支付
-	H5Pay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*WxResponse, error)
+	MiniPay(ctx context.Context, in *WxPay, opts ...client.CallOption) (*WxResponse, error)
 	//APP支付
-	AppPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*WxResponse, error)
+	AppPay(ctx context.Context, in *WxPay, opts ...client.CallOption) (*WxResponse, error)
+	//H5支付
+	H5Pay(ctx context.Context, in *WxPay, opts ...client.CallOption) (*WxResponse, error)
 	//提交付款码支付
-	MicroPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*WxResponse, error)
+	MicroPay(ctx context.Context, in *WxPay, opts ...client.CallOption) (*WxResponse, error)
 }
 
 type wxService struct {
@@ -65,7 +65,7 @@ func NewWxService(name string, c client.Client) WxService {
 	}
 }
 
-func (c *wxService) MiniPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*WxResponse, error) {
+func (c *wxService) MiniPay(ctx context.Context, in *WxPay, opts ...client.CallOption) (*WxResponse, error) {
 	req := c.c.NewRequest(c.name, "WxService.MiniPay", in)
 	out := new(WxResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -75,17 +75,7 @@ func (c *wxService) MiniPay(ctx context.Context, in *PaymentRequest, opts ...cli
 	return out, nil
 }
 
-func (c *wxService) H5Pay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*WxResponse, error) {
-	req := c.c.NewRequest(c.name, "WxService.H5Pay", in)
-	out := new(WxResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wxService) AppPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*WxResponse, error) {
+func (c *wxService) AppPay(ctx context.Context, in *WxPay, opts ...client.CallOption) (*WxResponse, error) {
 	req := c.c.NewRequest(c.name, "WxService.AppPay", in)
 	out := new(WxResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -95,7 +85,17 @@ func (c *wxService) AppPay(ctx context.Context, in *PaymentRequest, opts ...clie
 	return out, nil
 }
 
-func (c *wxService) MicroPay(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*WxResponse, error) {
+func (c *wxService) H5Pay(ctx context.Context, in *WxPay, opts ...client.CallOption) (*WxResponse, error) {
+	req := c.c.NewRequest(c.name, "WxService.H5Pay", in)
+	out := new(WxResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wxService) MicroPay(ctx context.Context, in *WxPay, opts ...client.CallOption) (*WxResponse, error) {
 	req := c.c.NewRequest(c.name, "WxService.MicroPay", in)
 	out := new(WxResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -109,21 +109,21 @@ func (c *wxService) MicroPay(ctx context.Context, in *PaymentRequest, opts ...cl
 
 type WxServiceHandler interface {
 	//小程序支付
-	MiniPay(context.Context, *PaymentRequest, *WxResponse) error
-	//H5支付
-	H5Pay(context.Context, *PaymentRequest, *WxResponse) error
+	MiniPay(context.Context, *WxPay, *WxResponse) error
 	//APP支付
-	AppPay(context.Context, *PaymentRequest, *WxResponse) error
+	AppPay(context.Context, *WxPay, *WxResponse) error
+	//H5支付
+	H5Pay(context.Context, *WxPay, *WxResponse) error
 	//提交付款码支付
-	MicroPay(context.Context, *PaymentRequest, *WxResponse) error
+	MicroPay(context.Context, *WxPay, *WxResponse) error
 }
 
 func RegisterWxServiceHandler(s server.Server, hdlr WxServiceHandler, opts ...server.HandlerOption) error {
 	type wxService interface {
-		MiniPay(ctx context.Context, in *PaymentRequest, out *WxResponse) error
-		H5Pay(ctx context.Context, in *PaymentRequest, out *WxResponse) error
-		AppPay(ctx context.Context, in *PaymentRequest, out *WxResponse) error
-		MicroPay(ctx context.Context, in *PaymentRequest, out *WxResponse) error
+		MiniPay(ctx context.Context, in *WxPay, out *WxResponse) error
+		AppPay(ctx context.Context, in *WxPay, out *WxResponse) error
+		H5Pay(ctx context.Context, in *WxPay, out *WxResponse) error
+		MicroPay(ctx context.Context, in *WxPay, out *WxResponse) error
 	}
 	type WxService struct {
 		wxService
@@ -136,18 +136,18 @@ type wxServiceHandler struct {
 	WxServiceHandler
 }
 
-func (h *wxServiceHandler) MiniPay(ctx context.Context, in *PaymentRequest, out *WxResponse) error {
+func (h *wxServiceHandler) MiniPay(ctx context.Context, in *WxPay, out *WxResponse) error {
 	return h.WxServiceHandler.MiniPay(ctx, in, out)
 }
 
-func (h *wxServiceHandler) H5Pay(ctx context.Context, in *PaymentRequest, out *WxResponse) error {
-	return h.WxServiceHandler.H5Pay(ctx, in, out)
-}
-
-func (h *wxServiceHandler) AppPay(ctx context.Context, in *PaymentRequest, out *WxResponse) error {
+func (h *wxServiceHandler) AppPay(ctx context.Context, in *WxPay, out *WxResponse) error {
 	return h.WxServiceHandler.AppPay(ctx, in, out)
 }
 
-func (h *wxServiceHandler) MicroPay(ctx context.Context, in *PaymentRequest, out *WxResponse) error {
+func (h *wxServiceHandler) H5Pay(ctx context.Context, in *WxPay, out *WxResponse) error {
+	return h.WxServiceHandler.H5Pay(ctx, in, out)
+}
+
+func (h *wxServiceHandler) MicroPay(ctx context.Context, in *WxPay, out *WxResponse) error {
 	return h.WxServiceHandler.MicroPay(ctx, in, out)
 }

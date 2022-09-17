@@ -1,25 +1,54 @@
 syntax = "proto3";
 
 package services;
-option go_package =".;services";
+option go_package ="/.;services";
 import "common/base.proto";
-import "payment.proto";
+import "baseInfoService.proto";
 
 //微信支付
 service WxService {
     //小程序支付
-    rpc MiniPay (PaymentRequest) returns (WxResponse) {}
-    //H5支付
-    rpc H5Pay (PaymentRequest) returns (WxResponse) {}
+    rpc MiniPay (WxPay) returns (WxResponse) {}
     //APP支付
-    rpc AppPay (PaymentRequest) returns (WxResponse) {}
+    rpc AppPay (WxPay) returns (WxResponse) {}
+    //H5支付
+    rpc H5Pay (WxPay) returns (WxResponse) {}
     //提交付款码支付
-    rpc MicroPay (PaymentRequest) returns (WxResponse) {}
+    rpc MicroPay (WxPay) returns (WxResponse) {}
+}
+
+//微信支付
+message WxPay{
+    ChargeInfo charge =1; //订单信息
+    WxPayerInfo payer_info =2; //微信买家信息
+    WxSceneInfo scene_info =3;//微信支付场景
+    SettleInfo settle_info =4;//微信结算信息
+}
+
+//微信买家信息
+message WxPayerInfo{
+    string open_id =1; //用户标识
+}
+
+//微信支付场景
+message WxSceneInfo{
+    string payer_client_ip =1; //用户终端IP
+    string device_id =2;//商户端设备号
+}
+
+//微信结算信息
+message SettleInfo{
+  bool profit_sharing =1; //是否指定分账
+}
+
+
+message WxData {
+    WxPay entity =1;
+    map<string,string> params =2;
 }
 
 
 message WxResponse {
-    map<string,string> params=2;
-    common.Error error = 4;
-    common.Info info =5;
+    WxData data =1;
+    common.Error error = 2;
 }
