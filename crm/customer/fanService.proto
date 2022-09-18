@@ -7,6 +7,7 @@ service FanService {
     rpc Update (Fan) returns (FanResponse) {}
     rpc Delete (Fan) returns (FanResponse) {}
     rpc Get (Fan) returns (FanResponse) {}
+    rpc List (FanRequest) returns (FanResponse) {}
     rpc Search (FanRequest) returns (FanResponse) {}
 }
 
