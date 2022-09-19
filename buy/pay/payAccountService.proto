@@ -19,7 +19,7 @@ message PayAccount {
     string type	=4;
     string provider_mode =5;
     string version = 6;
-    string config_data =7;
+    string private_cert = 7;
     string status	=8;
     string created_at = 9;
     string updated_at = 10;

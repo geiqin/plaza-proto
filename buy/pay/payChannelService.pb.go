@@ -26,16 +26,16 @@ type PayChannel struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int32       `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	PayAccountId int32       `protobuf:"varint,2,opt,name=pay_account_id,json=payAccountId,proto3" json:"pay_account_id,omitempty"`
-	ChannelId    int32       `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	ChannelType  string      `protobuf:"bytes,4,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
-	AppId        string      `protobuf:"bytes,5,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
-	ConfigData   string      `protobuf:"bytes,6,opt,name=config_data,json=configData,proto3" json:"config_data,omitempty"`
-	Status       string      `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt    string      `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt    string      `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	PayAccount   *PayAccount `protobuf:"bytes,10,opt,name=pay_account,json=payAccount,proto3" json:"pay_account,omitempty"`
+	Id           int32       `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	PayAccountId int32       `protobuf:"varint,2,opt,name=pay_account_id,json=payAccountId,proto3" json:"pay_account_id"`
+	ChannelId    int32       `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id"`
+	ChannelType  string      `protobuf:"bytes,4,opt,name=channel_type,json=channelType,proto3" json:"channel_type"`
+	AppId        string      `protobuf:"bytes,5,opt,name=app_id,json=appId,proto3" json:"app_id"`
+	ConfigData   string      `protobuf:"bytes,6,opt,name=config_data,json=configData,proto3" json:"config_data"`
+	Status       string      `protobuf:"bytes,7,opt,name=status,proto3" json:"status"`
+	CreatedAt    string      `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt    string      `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	PayAccount   *PayAccount `protobuf:"bytes,10,opt,name=pay_account,json=payAccount,proto3" json:"pay_account"`
 }
 
 func (x *PayChannel) Reset() {
@@ -145,16 +145,16 @@ type PayChannelRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged        int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize     int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords     string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Id           int32  `protobuf:"varint,5,opt,name=id,proto3" json:"id,omitempty"`
-	PayAccountId int32  `protobuf:"varint,6,opt,name=pay_account_id,json=payAccountId,proto3" json:"pay_account_id,omitempty"`
-	ChannelId    int32  `protobuf:"varint,7,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	ChannelType  string `protobuf:"bytes,8,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
-	AppId        string `protobuf:"bytes,9,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
-	Status       string `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
-	Reason       string `protobuf:"bytes,11,opt,name=reason,proto3" json:"reason,omitempty"`
+	Paged        int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize     int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords     string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
+	Id           int32  `protobuf:"varint,5,opt,name=id,proto3" json:"id"`
+	PayAccountId int32  `protobuf:"varint,6,opt,name=pay_account_id,json=payAccountId,proto3" json:"pay_account_id"`
+	ChannelId    int32  `protobuf:"varint,7,opt,name=channel_id,json=channelId,proto3" json:"channel_id"`
+	ChannelType  string `protobuf:"bytes,8,opt,name=channel_type,json=channelType,proto3" json:"channel_type"`
+	AppId        string `protobuf:"bytes,9,opt,name=app_id,json=appId,proto3" json:"app_id"`
+	Status       string `protobuf:"bytes,10,opt,name=status,proto3" json:"status"`
+	Reason       string `protobuf:"bytes,11,opt,name=reason,proto3" json:"reason"`
 }
 
 func (x *PayChannelRequest) Reset() {
@@ -264,10 +264,10 @@ type PayChannelData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *PayChannel   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*PayChannel `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *PayChannel   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*PayChannel `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *PayChannelData) Reset() {
@@ -335,8 +335,8 @@ type PayChannelResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *PayChannelData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *PayChannelData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *PayChannelResponse) Reset() {

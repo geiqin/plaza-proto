@@ -27,7 +27,7 @@ type Alipay struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Charge *ChargeInfo `protobuf:"bytes,1,opt,name=charge,proto3" json:"charge,omitempty"` //订单信息
+	Charge *ChargeInfo `protobuf:"bytes,1,opt,name=charge,proto3" json:"charge"` //订单信息
 }
 
 func (x *Alipay) Reset() {
@@ -74,8 +74,8 @@ type AlipayData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Alipay           `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Entity *Alipay           `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *AlipayData) Reset() {
@@ -129,8 +129,8 @@ type AlipayResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *AlipayData   `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *AlipayData   `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *AlipayResponse) Reset() {

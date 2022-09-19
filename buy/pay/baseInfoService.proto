@@ -12,7 +12,7 @@ message ChargeInfo{
     string currency = 5;//货币类型
     string subject = 6; //支付标题
     string body = 7; //主体描述
-    string extra = 8; //扩展信息
+    string attach = 8; //附加信息
     string target_user_type =9; //目标用户类型
     int64 target_user_id = 10;//目标用户ID
 }

@@ -20,37 +20,36 @@ service ChargeService {
 message Charge{
     int64 id = 1;
     string charge_sn = 2;
-    bool lived = 3;
-    bool paid = 4;
-    bool refunded = 5;
-    bool reversed = 6;
-    int64 pay_gateway_id = 7;
-    string open_id = 8;
-    string target_user_type = 9;
-    int64 target_user_id = 10;
-    int32 order_type = 11;
-    int64 order_id = 12;
-    string order_sn = 13;
-    int64 amount = 14;
-    string currency = 15;
-    string subject = 16;
-    string body = 17;
-    string extra = 18;
-    string channel = 19;
-    string trade_type = 20;
-    string transaction_no = 21;
-    int64 refunded_amount = 22;
-    string failure_code = 23;
-    string failure_msg = 24;
-    string credential = 25;
-    string client_ip = 26;
-    string memo = 27;
-    string metadata = 28;
-    string status = 29;
-    string paid_at = 30;
-    string expired_at = 31;
-    string created_at = 32;
-    string updated_at = 33;
+    string order_type = 3;
+    int64 order_id = 4;
+    string order_sn = 5;
+    int64 amount = 6;
+    string currency = 7;
+    string subject = 8;
+    string body = 9;
+    string attach = 10;
+    string target_user_type = 11;
+    int64 target_user_id = 12;
+    int32 pay_account_id = 13;
+    string channel_type = 14;
+    string open_id = 15;
+    string trade_type = 16;
+    string transaction_no = 17;
+    int64 refunded_amount = 18;
+    string failure_code = 19;
+    string failure_msg = 20;
+    string credential = 21;
+    string client_ip = 22;
+    string memo = 23;
+    bool is_lived = 24;
+    bool is_paid = 25;
+    bool is_refunded = 26;
+    bool is_reversed = 27;
+    string status = 28;
+    string paid_at = 29;
+    string expired_at = 30;
+    string created_at = 31;
+    string updated_at = 32;
 }
 
 
@@ -61,11 +60,11 @@ message ChargeRequest{
     //base params
     int64 charge_id = 4;
     string charge_sn = 5;
-    int64 refund_fee = 6;
+    int64 amount = 6;
     string status = 7;
     int64 order_id = 8;
     string open_id = 9;
-    string metadata = 10;
+    string attach = 10;
     string target_user_type = 11;
     int64 target_user_id = 12;
 }

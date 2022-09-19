@@ -27,10 +27,10 @@ type WxPay struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Charge     *ChargeInfo  `protobuf:"bytes,1,opt,name=charge,proto3" json:"charge,omitempty"`                           //订单信息
-	PayerInfo  *WxPayerInfo `protobuf:"bytes,2,opt,name=payer_info,json=payerInfo,proto3" json:"payer_info,omitempty"`    //微信买家信息
-	SceneInfo  *WxSceneInfo `protobuf:"bytes,3,opt,name=scene_info,json=sceneInfo,proto3" json:"scene_info,omitempty"`    //微信支付场景
-	SettleInfo *SettleInfo  `protobuf:"bytes,4,opt,name=settle_info,json=settleInfo,proto3" json:"settle_info,omitempty"` //微信结算信息
+	Charge     *ChargeInfo  `protobuf:"bytes,1,opt,name=charge,proto3" json:"charge"`                           //订单信息
+	PayerInfo  *WxPayerInfo `protobuf:"bytes,2,opt,name=payer_info,json=payerInfo,proto3" json:"payer_info"`    //微信买家信息
+	SceneInfo  *WxSceneInfo `protobuf:"bytes,3,opt,name=scene_info,json=sceneInfo,proto3" json:"scene_info"`    //微信支付场景
+	SettleInfo *SettleInfo  `protobuf:"bytes,4,opt,name=settle_info,json=settleInfo,proto3" json:"settle_info"` //微信结算信息
 }
 
 func (x *WxPay) Reset() {
@@ -99,7 +99,7 @@ type WxPayerInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OpenId string `protobuf:"bytes,1,opt,name=open_id,json=openId,proto3" json:"open_id,omitempty"` //用户标识
+	OpenId string `protobuf:"bytes,1,opt,name=open_id,json=openId,proto3" json:"open_id"` //用户标识
 }
 
 func (x *WxPayerInfo) Reset() {
@@ -147,8 +147,8 @@ type WxSceneInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PayerClientIp string `protobuf:"bytes,1,opt,name=payer_client_ip,json=payerClientIp,proto3" json:"payer_client_ip,omitempty"` //用户终端IP
-	DeviceId      string `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                  //商户端设备号
+	PayerClientIp string `protobuf:"bytes,1,opt,name=payer_client_ip,json=payerClientIp,proto3" json:"payer_client_ip"` //用户终端IP
+	DeviceId      string `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id"`                  //商户端设备号
 }
 
 func (x *WxSceneInfo) Reset() {
@@ -203,7 +203,7 @@ type SettleInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProfitSharing bool `protobuf:"varint,1,opt,name=profit_sharing,json=profitSharing,proto3" json:"profit_sharing,omitempty"` //是否指定分账
+	ProfitSharing bool `protobuf:"varint,1,opt,name=profit_sharing,json=profitSharing,proto3" json:"profit_sharing"` //是否指定分账
 }
 
 func (x *SettleInfo) Reset() {
@@ -250,8 +250,8 @@ type WxData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *WxPay            `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Entity *WxPay            `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *WxData) Reset() {
@@ -305,8 +305,8 @@ type WxResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *WxData       `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *WxData       `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *WxResponse) Reset() {
