@@ -28,8 +28,8 @@ message Charge{
     string subject = 8;
     string body = 9;
     string attach = 10;
-    string target_user_type = 11;
-    int64 target_user_id = 12;
+    string trade_user_type = 11;
+    int64 trade_user_id = 12;
     int32 pay_account_id = 13;
     string channel_type = 14;
     string open_id = 15;
@@ -65,8 +65,8 @@ message ChargeRequest{
     int64 order_id = 8;
     string open_id = 9;
     string attach = 10;
-    string target_user_type = 11;
-    int64 target_user_id = 12;
+    string trade_user_type = 11;
+    int64 trade_user_id = 12;
 }
 
 message ChargeData {

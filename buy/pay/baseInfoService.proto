@@ -13,6 +13,6 @@ message ChargeInfo{
     string subject = 6; //支付标题
     string body = 7; //主体描述
     string attach = 8; //附加信息
-    string target_user_type =9; //目标用户类型
-    int64 target_user_id = 10;//目标用户ID
+    string trade_user_type =9; //交易用户类型
+    int64 trade_user_id = 10;//交易用户ID
 }
