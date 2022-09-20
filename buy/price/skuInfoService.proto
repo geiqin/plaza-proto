@@ -38,11 +38,37 @@ message SkuInfo {
 	string own_desc = 33;
 	string status = 34;
 	string listed_at = 35;
-	SkuVip vip = 37;
-	SkuCoupon coupon = 38;
-	SkuPresale presale = 39;
+	SpuInfo spu = 37;
+	SkuPresale presale = 38;
 }
 
+
+message SpuInfo {
+	int64 id = 1;
+	string code = 2;
+	string title = 3;
+	string type = 4;
+	string extend_type = 5;
+	string unit = 6;
+	int32 category_id = 7;
+	int32 brand_id = 9;
+	int64 shop_id = 10;
+	int32 max_buy = 11;
+	int32 min_buy = 12;
+	int64 province_id = 13;
+	int64 city_id = 14;
+	int32 stocks = 24;
+	int64 master_sku_id = 33;
+	bool is_spec = 34;
+	int32 sort = 35;
+	string memo = 36;
+	string freight_type = 40;
+	int64 freight_uniform_fee = 41;
+	int64 freight_express_id = 42;
+	string status = 44;
+	string created_at = 45;
+	string updated_at = 46;
+}
 
 message SkuPresale {
 	int64 id = 1;
@@ -60,20 +86,4 @@ message SkuPresale {
 	string delivery_type = 13;
 	string delivery_date = 14;
 	int32 delivery_days = 15;
-}
-
-
-message SkuCoupon {
-	int64 id = 1;
-	int64 sku_id = 2;
-	int64 coupon_id = 3;
-	string coupon_title = 4;
-}
-
-message SkuVip {
-	int64 id = 1;
-	int64 sku_id = 2;
-	int32 member_rank_id = 3;
-	string keep_type = 4;
-	int32 keep_value = 5;
 }
