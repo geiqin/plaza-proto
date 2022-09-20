@@ -8,8 +8,7 @@ import "categoryService.proto";
 import "termService.proto";
 import "tagService.proto";
 import "spuGalleryService.proto";
-import "skuVipService.proto";
-import "skuCouponService.proto";
+import "extendInfoService.proto";
 import "skuPresaleService.proto";
 
 //操作编辑为主
@@ -64,7 +63,6 @@ message Sku {
     string sku_sn = 3;
     string title = 4;
     string type = 5;
-    string subtype = 6;
     string unit = 7;
     int64 shop_id = 8;
     int64 image_id = 9;
@@ -75,7 +73,7 @@ message Sku {
     int64 promotion_price = 14;
     string barcode = 15;
     int64 weight = 16;
-    int32 volume = 17;
+    int64 volume = 17;
     int32 stock = 18;
     int32 frozen_stock = 19;
     string out_sku_no = 20;
@@ -92,19 +90,21 @@ message Sku {
     bool is_master = 31;
     string indexes =32;
     string index_pos =33;
-    string status = 34;
-    string listed_at = 35;
-    string created_at = 36;
-    string updated_at = 37;
-    repeated int32 indexes_data = 38;
-    map<int32,string> own_desc_data = 39;
-    Spu spu = 40;
-    SkuVip vip = 41;
-    SkuCoupon coupon = 42;
+    string extend_type = 34;
+    string extend_data = 35;
+    string status = 36;
+    string listed_at = 37;
+    string created_at = 38;
+    string updated_at = 39;
+    repeated int32 indexes_data = 40;
+    map<int32,string> own_desc_data = 41;
+    Spu spu = 42;
     SkuPresale presale = 43;
     repeated SpuGallery galleries = 44;
     repeated OwnProperty own_property =45;
     repeated PromotionInfo promotions =46;
+    ExtendVipInfo extend_vip = 48;
+    ExtendCouponInfo extend_coupon = 49;
 }
 
 message Spu {
@@ -112,7 +112,7 @@ message Spu {
     string code = 2;
     string title = 3;
     string type = 4;
-    string subtype = 5;
+    string extend_type = 5;
     string unit = 6;
     int32 category_id = 7;
     string category_ids = 8;
