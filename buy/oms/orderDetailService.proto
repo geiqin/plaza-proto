@@ -21,29 +21,30 @@ message OrderDetail {
     int64 subtotal_price = 17;
     int64 subtotal_discount = 18;
     int64 subtotal_amount = 19;
-    int32 brand_id = 20;
-    int32 brand_name = 21;
-    string indexes = 22;
-    string own_desc = 23;
-    bool is_spec = 24;
-    bool is_virtual = 25;
-    bool is_presale = 26;
-    bool is_modified = 27;
-    bool is_present = 28;
-    int32 shipped_num = 29;
-    int32 points = 30;
-    string  ship_status = 31;
-    string refund_status = 32;
-    string created_at  = 43;
-    string updated_at  = 44;
-    map<string,string> metas =45;
-    DetailVip Vip =46;
-
+    int64 discount_allocation = 20;
+    int64 last_discount_allocation = 21;
+    int32 brand_id = 22;
+    int32 brand_name = 23;
+    string indexes = 24;
+    string own_desc = 25;
+    bool is_spec = 26;
+    bool is_virtual = 27;
+    bool is_presale = 28;
+    bool is_modified = 29;
+    bool is_present = 30;
+    int32 shipped_num = 31;
+    int64 pay_integral = 32;
+    string  ship_status = 33;
+    string refund_status = 34;
+    string extend_type =35;
+    string extend_data =36;
+    string created_at  = 37;
+    string updated_at  = 38;
+    ExtendVipInfo extend_vip =39;
 }
 
-message DetailVip {
-    int64 detail_id = 1;
-    int32 member_rank_id = 2;
-    string keep_type = 3;
-    int32 keep_value = 4;
+message ExtendVipInfo {
+    int32 member_rank_id = 1;
+    string keep_type = 2;
+    int32 keep_value = 3;
 }

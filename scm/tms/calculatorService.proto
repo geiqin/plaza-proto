@@ -25,8 +25,9 @@ message PurchaseSku {
     int64 sku_id =1; //skuId
     int32 num =2; //数量
     int64 weight =3; //重量
-    int64 uniform_freight =4; //统一运费
-    int64 express_id =5;  //运费模板ID
+    string freight_type =4; //运费类型
+    int64 freight_uniform_fee =5; //统一运费
+    int64 freight_express_id =6;  //运费模板ID
 }
 
 message AdjustmentInfo {

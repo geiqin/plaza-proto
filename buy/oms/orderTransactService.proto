@@ -46,7 +46,8 @@ message OrderTransactRequest {
 message OrderTransactData{
   OrderTransact entity = 1;
   repeated OrderTransact items =2;
-  common.Info info =3;
+  common.Pager pager = 3;
+  common.Info info =4;
 }
 
 message OrderTransactResponse {
