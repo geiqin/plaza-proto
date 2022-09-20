@@ -44,7 +44,6 @@ message PurchaseResult {
   int64 available_surplus =24;//可使用的余额
   int64 available_integral =25;//可使用的积分
   CouponInfo available_coupons = 26;//可使用的优惠劵集合
-  AddressInfo shipping_address =27;//订单收货地址
 }
 
 //购买商品信息
@@ -123,8 +122,9 @@ message PurchaseRequest {
     bool is_virtual = 7;
     bool is_member_right = 8;
     bool is_member_price = 9;
-    int64 uniform_freight =10;
-    int64 express_id =11;
+    string freight_type =10;
+    int64 freight_uniform_fee =11;
+    int64 freight_express_id =12;
   }
 }
 
