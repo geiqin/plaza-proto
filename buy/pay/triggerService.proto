@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//触发器
+service TriggerService {
+    //推送支付对账
+    rpc PushCharge (TriggerRequest) returns (TriggerResponse) {}
+    //推送退款对账
+    rpc PushRefund (TriggerRequest) returns (TriggerResponse) {}
+    //推送转账对账
+    rpc PushTransfer (TriggerRequest) returns (TriggerResponse) {}
+    //拉取支付凭证对账（向第三方发起对账）
+    rpc PullCharge (TriggerRequest) returns (TriggerResponse) {}
+    //拉取退款凭证对账（向第三方发起对账）
+    rpc PullRefund (TriggerRequest) returns (TriggerResponse) {}
+}
+
+message TriggerRequest {
+    int64 order_id = 1;
+    int64 safeguard_id = 2;
+    repeated int64 order_ids = 3;
+    repeated int64 safeguard_ids = 4;
+}
+
+message TriggerData{
+    map<string,string> params=1;
+    common.Info info =2;
+}
+
+message TriggerResponse {
+    TriggerData data =1;
+    common.Error error = 2;
+}

@@ -15,35 +15,35 @@ service RefundService {
     rpc Get (Refund) returns (RefundResponse) {}
     //查询退款
     rpc Search (RefundRequest) returns (RefundResponse) {}
-    //退款对账（向第三方发起对账）
-    rpc Reconciliation (Refund) returns (RefundResponse) {}
 }
 
 //退款
 message Refund{
     int64 id = 1;
     string refund_sn = 2;
-    int64 total_fee = 3;
-    int64 refund_fee = 4;
+    int64 safeguard_id = 3;
+    string safeguard_sn = 4;
     string currency = 5;
-    int64 charge_id = 8;
-    string charge_sn = 9;
-    string charge_transaction_no = 10;
-    string target_user_type = 11;
-    int64 target_user_id = 12;
-    int64 source_order_id =13;
-    string refund_desc = 14;
-    string refund_source = 15;
-    string metadata = 16;
-    string return_extra = 17;
-    string transaction_no = 18;
-    int64 safeguard_id = 19;
-    string safeguard_sn = 20;
-    string status = 21;
-    string finished_at = 22;
-    string created_at = 23;
-    string updated_at = 24;
+    int64 amount = 8;
+    int64 source_order_id = 9;
+    int64 charge_id = 10;
+    string charge_sn = 11;
+    int64 charge_amount = 12;
+    string transaction_no =13;
+    string trade_user_type = 14;
+    int64 trade_user_id = 15;
+    int32 pay_account_id = 16;
+    string channel_type = 17;
+    string open_id = 18;
+    string refund_reason = 19;
+    string refund_source = 20;
+    string attach = 21;
+    string status = 22;
+    string finished_at = 23;
+    string created_at = 24;
+    string updated_at = 25;
 }
+
 
 message RefundRequest{
     int32 paged = 1;

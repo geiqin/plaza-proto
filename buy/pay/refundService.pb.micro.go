@@ -51,8 +51,6 @@ type RefundService interface {
 	Get(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error)
 	//查询退款
 	Search(ctx context.Context, in *RefundRequest, opts ...client.CallOption) (*RefundResponse, error)
-	//退款对账（向第三方发起对账）
-	Reconciliation(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error)
 }
 
 type refundService struct {
@@ -107,16 +105,6 @@ func (c *refundService) Search(ctx context.Context, in *RefundRequest, opts ...c
 	return out, nil
 }
 
-func (c *refundService) Reconciliation(ctx context.Context, in *Refund, opts ...client.CallOption) (*RefundResponse, error) {
-	req := c.c.NewRequest(c.name, "RefundService.Reconciliation", in)
-	out := new(RefundResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for RefundService service
 
 type RefundServiceHandler interface {
@@ -128,8 +116,6 @@ type RefundServiceHandler interface {
 	Get(context.Context, *Refund, *RefundResponse) error
 	//查询退款
 	Search(context.Context, *RefundRequest, *RefundResponse) error
-	//退款对账（向第三方发起对账）
-	Reconciliation(context.Context, *Refund, *RefundResponse) error
 }
 
 func RegisterRefundServiceHandler(s server.Server, hdlr RefundServiceHandler, opts ...server.HandlerOption) error {
@@ -138,7 +124,6 @@ func RegisterRefundServiceHandler(s server.Server, hdlr RefundServiceHandler, op
 		Delete(ctx context.Context, in *Refund, out *RefundResponse) error
 		Get(ctx context.Context, in *Refund, out *RefundResponse) error
 		Search(ctx context.Context, in *RefundRequest, out *RefundResponse) error
-		Reconciliation(ctx context.Context, in *Refund, out *RefundResponse) error
 	}
 	type RefundService struct {
 		refundService
@@ -165,8 +150,4 @@ func (h *refundServiceHandler) Get(ctx context.Context, in *Refund, out *RefundR
 
 func (h *refundServiceHandler) Search(ctx context.Context, in *RefundRequest, out *RefundResponse) error {
 	return h.RefundServiceHandler.Search(ctx, in, out)
-}
-
-func (h *refundServiceHandler) Reconciliation(ctx context.Context, in *Refund, out *RefundResponse) error {
-	return h.RefundServiceHandler.Reconciliation(ctx, in, out)
 }
