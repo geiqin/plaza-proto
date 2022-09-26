@@ -29,21 +29,22 @@ message Refund{
     int64 charge_id = 10;
     string charge_sn = 11;
     int64 charge_amount = 12;
-    string transaction_no =13;
-    string trade_user_type = 14;
-    int64 trade_user_id = 15;
-    int32 pay_account_id = 16;
-    string channel_type = 17;
-    string open_id = 18;
-    string refund_reason = 19;
-    string refund_source = 20;
-    string attach = 21;
-    string status = 22;
-    string finished_at = 23;
-    string created_at = 24;
-    string updated_at = 25;
+    string trade_user_type = 13;
+    int64 trade_user_id = 14;
+    int32 pay_account_id = 15;
+    string channel_type = 16;
+    string refund_reason = 17;
+    string refund_source = 18;
+    string attach = 19;
+    string trx_transaction_id =20; //交易方支付流水号
+    string trx_refund_id =21; //交易方退款单号
+    string trx_funds_source =22; //交易方退款资金来源
+    string trx_status =23; //交易方退款状态
+    string status = 24;
+    string finished_at = 25;
+    string created_at = 26;
+    string updated_at = 27;
 }
-
 
 message RefundRequest{
     int32 paged = 1;

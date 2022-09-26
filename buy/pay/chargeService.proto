@@ -31,23 +31,24 @@ message Charge{
     int32 pay_account_id = 13;
     string channel_type = 14;
     string open_id = 15;
-    string trade_type = 16;
-    string transaction_no = 17;
-    int64 refunded_amount = 18;
-    string failure_code = 19;
-    string failure_msg = 20;
-    string credential = 21;
-    string client_ip = 22;
-    string memo = 23;
-    bool is_lived = 24;
-    bool is_paid = 25;
-    bool is_refunded = 26;
-    bool is_reversed = 27;
-    string status = 28;
-    string paid_at = 29;
-    string expired_at = 30;
-    string created_at = 31;
-    string updated_at = 32;
+    string bill_type = 16;
+    int64 refunded_amount = 17;
+    string credential = 18;
+    string client_ip = 19;
+    string memo = 20;
+    bool is_lived = 21;
+    bool is_paid = 22;
+    bool is_refunded = 23;
+    bool is_reversed = 24;
+    string trx_transaction_id =25; //交易方支付流水号
+    string trx_trade_type =26; //交易方支付类型
+    string trx_bank_type =27; //交易方付款银行
+    string trx_status =28; //交易方支付状态
+    string status = 29;
+    string paid_at = 30;
+    string expired_at = 31;
+    string created_at = 32;
+    string updated_at = 33;
 }
 
 
