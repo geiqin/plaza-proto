@@ -4,14 +4,14 @@ option go_package = "/.;services";
 import "common/base.proto";
 
 //订单交易记录
-service OrderTransactService {
+service OrderTransactionService {
   //获取订单交易记录
-  rpc Get (OrderTransact) returns (OrderTransactResponse) {}
+  rpc Get (OrderTransaction) returns (OrderTransactionResponse) {}
   //查询订单交易记录
-  rpc Search (OrderTransactRequest) returns (OrderTransactResponse) {}
+  rpc Search (OrderTransactionRequest) returns (OrderTransactionResponse) {}
 }
 
-message OrderTransact {
+message OrderTransaction {
   int64 id = 1;
   int64 order_id =2;
   string type =3;
@@ -20,15 +20,15 @@ message OrderTransact {
   string trade_user_type =7;
   int64 trade_user_id =8;
   int32 pay_account_id =9;
-  string transaction_no =10;
+  string trx_transaction_id =10;
   string channel_type =11;
   int64 charge_id =12;
-  int64 refund_id =13;
+  string origin_code =13;
 }
 
 
 //支付请求参数
-message OrderTransactRequest {
+message OrderTransactionRequest {
   int32 paged = 1;
   int32 page_size = 2;
   string sorting = 3;
@@ -39,18 +39,18 @@ message OrderTransactRequest {
   string channel_type =7;
   string  type	=8;
   int64 charge_id	=9;
-  int64 refund_id =10;
+  string origin_code =10;
   repeated int64 ids =11;
 }
 
-message OrderTransactData{
-  OrderTransact entity = 1;
-  repeated OrderTransact items =2;
+message OrderTransactionData{
+  OrderTransaction entity = 1;
+  repeated OrderTransaction items =2;
   common.Pager pager = 3;
   common.Info info =4;
 }
 
-message OrderTransactResponse {
-  OrderTransactData data = 1;
+message OrderTransactionResponse {
+  OrderTransactionData data = 1;
   common.Error error = 2;
 }

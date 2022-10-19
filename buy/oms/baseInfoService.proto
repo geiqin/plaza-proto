@@ -84,6 +84,32 @@ message SkuInfo {
 	string indexes =32;
 	string own_desc = 33;
 	string status = 34;
+	SpuInfo spu =35;
+}
+
+message SpuInfo {
+	int64 id = 1;
+	string code = 2;
+	string title = 3;
+	string type = 4;
+	string extend_type = 5;
+	string unit = 6;
+	int32 category_id = 7;
+	int32 brand_id = 9;
+	int64 shop_id = 10;
+	int32 max_buy = 11;
+	int32 min_buy = 12;
+	int64 province_id = 13;
+	int64 city_id = 14;
+	int32 stocks = 24;
+	int64 master_sku_id = 33;
+	bool is_spec = 34;
+	int32 sort = 35;
+	string memo = 36;
+	string freight_type = 40;
+	int64 freight_uniform_fee = 41;
+	int64 freight_express_id = 42;
+	string status = 44;
 }
 
 //参与的活动

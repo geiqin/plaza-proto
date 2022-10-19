@@ -47,8 +47,6 @@ type CategoryService interface {
 	Update(ctx context.Context, in *Category, opts ...client.CallOption) (*CategoryResponse, error)
 	Delete(ctx context.Context, in *Category, opts ...client.CallOption) (*CategoryResponse, error)
 	Get(ctx context.Context, in *Category, opts ...client.CallOption) (*CategoryResponse, error)
-	ClearUsed(ctx context.Context, in *Category, opts ...client.CallOption) (*CategoryResponse, error)
-	History(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error)
 	Tree(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error)
 	List(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error)
 	Search(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error)
@@ -106,26 +104,6 @@ func (c *categoryService) Get(ctx context.Context, in *Category, opts ...client.
 	return out, nil
 }
 
-func (c *categoryService) ClearUsed(ctx context.Context, in *Category, opts ...client.CallOption) (*CategoryResponse, error) {
-	req := c.c.NewRequest(c.name, "CategoryService.ClearUsed", in)
-	out := new(CategoryResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *categoryService) History(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error) {
-	req := c.c.NewRequest(c.name, "CategoryService.History", in)
-	out := new(CategoryResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *categoryService) Tree(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error) {
 	req := c.c.NewRequest(c.name, "CategoryService.Tree", in)
 	out := new(CategoryResponse)
@@ -163,8 +141,6 @@ type CategoryServiceHandler interface {
 	Update(context.Context, *Category, *CategoryResponse) error
 	Delete(context.Context, *Category, *CategoryResponse) error
 	Get(context.Context, *Category, *CategoryResponse) error
-	ClearUsed(context.Context, *Category, *CategoryResponse) error
-	History(context.Context, *CategoryRequest, *CategoryResponse) error
 	Tree(context.Context, *CategoryRequest, *CategoryResponse) error
 	List(context.Context, *CategoryRequest, *CategoryResponse) error
 	Search(context.Context, *CategoryRequest, *CategoryResponse) error
@@ -176,8 +152,6 @@ func RegisterCategoryServiceHandler(s server.Server, hdlr CategoryServiceHandler
 		Update(ctx context.Context, in *Category, out *CategoryResponse) error
 		Delete(ctx context.Context, in *Category, out *CategoryResponse) error
 		Get(ctx context.Context, in *Category, out *CategoryResponse) error
-		ClearUsed(ctx context.Context, in *Category, out *CategoryResponse) error
-		History(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error
 		Tree(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error
 		List(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error
 		Search(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error
@@ -207,14 +181,6 @@ func (h *categoryServiceHandler) Delete(ctx context.Context, in *Category, out *
 
 func (h *categoryServiceHandler) Get(ctx context.Context, in *Category, out *CategoryResponse) error {
 	return h.CategoryServiceHandler.Get(ctx, in, out)
-}
-
-func (h *categoryServiceHandler) ClearUsed(ctx context.Context, in *Category, out *CategoryResponse) error {
-	return h.CategoryServiceHandler.ClearUsed(ctx, in, out)
-}
-
-func (h *categoryServiceHandler) History(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error {
-	return h.CategoryServiceHandler.History(ctx, in, out)
 }
 
 func (h *categoryServiceHandler) Tree(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error {

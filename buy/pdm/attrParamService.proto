@@ -19,7 +19,7 @@ service AttrParamService {
 message AttrParam {
     int32 id = 1;
     string name = 2;
-    int32 category_id = 3;
+    int64 category_id = 3;
     int32 group_id = 4;
     string type = 5;
     string input_type = 6;

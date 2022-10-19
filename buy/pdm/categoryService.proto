@@ -2,7 +2,6 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "brandService.proto";
 
 
 service CategoryService {
@@ -10,51 +9,39 @@ service CategoryService {
     rpc Update(Category) returns (CategoryResponse);
     rpc Delete (Category) returns (CategoryResponse);
     rpc Get (Category) returns (CategoryResponse);
-    rpc ClearUsed (Category) returns (CategoryResponse);
-    rpc History (CategoryRequest) returns (CategoryResponse);
     rpc Tree (CategoryRequest) returns (CategoryResponse);
     rpc List (CategoryRequest) returns (CategoryResponse);
     rpc Search (CategoryRequest) returns (CategoryResponse);
 }
 
 message Category {
-    int32 id = 1;
-    string name = 2;
-    string full_name = 3;
-    int32 parent_id = 4;
+    int64 id = 1;
+    string code = 2;
+    string name = 3;
+    int64 parent_id = 4;
     string path = 5;
-    int32 depth = 6;
-    int64 media_id = 7;
-    string media_url = 8;
+    int64 cover_id = 7;
+    string cover_url = 8;
     string letter = 9;
-    string sku_type = 10;
-    bool is_virtual = 11;
-    bool is_leaf = 12;
-    bool is_used = 13;
-    string used_at = 14;
-    string memo = 15;
-    int32 sort = 16;
-    string status = 17;
-    string created_at = 18;
-    string updated_at = 19;
-    repeated Brand brands = 20;
-    Category parent = 21;
-    repeated Category children = 22;
+    string memo = 10;
+    int32 sort = 11;
+    string status = 12;
+    string created_at = 13;
+    string updated_at = 14;
+    Category parent = 15;
+    repeated Category children = 16;
 }
+
 
 message CategoryRequest {
     int32 paged = 1;
     int32 page_size = 2;
     string keywords = 3;
-    int32 id = 4;
+    int64 id = 4;
     string name = 5;
-    string full_name = 6;
+    string code = 6;
     string letter = 7;
-    string sku_type = 8;
-    bool is_virtual = 9;
-    bool is_leaf = 10;
-    bool is_used = 11;
-    int32 parent_id = 12;
+    int64 parent_id = 12;
     string status = 13;
 }
 
