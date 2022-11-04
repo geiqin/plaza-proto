@@ -28,7 +28,7 @@ message PurchaseResult {
   int64 insure_fee =9; //保险费
   int64 pack_fee =10; //包装费
   int64 surplus =11;//使用账户余额
-  int64 coupon_id = 12;//使用优惠劵ID
+  int64 coupon_batch_id = 12;//使用优惠劵批次ID
   int64 coupon_money =13; //使用优惠劵金额
   int64 integral =14; //积分数量
   int64 integral_money =15;//积分金额
@@ -92,25 +92,24 @@ message AdjustmentInfo {
 
 message PurchaseRequest {
   int64 address_id = 1;
-  int64 coupon_id = 2;
-  int64 member_id = 3;
-  int32 member_rank_id = 4;
-  int64 shop_id = 5;
-  int64 order_id = 6;
-  string terminal =7;
-  string channel =8;
-  string payment_method = 9;
-  string shipment_method = 10;
-  int64 insure_fee =11;
-  int64 pack_fee =12;
-  int64 surplus =13;
-  int64 coupon_money =14;
-  int64 integral =15;
-  int64 integral_money =16;
-  int64 paid_money =17;
-  string currency =18;
-  int64 area_id = 19;
-  repeated sku  skus =20;//需要计算的SKUS
+  int64 coupon_batch_id = 2;
+  int64 shop_id = 3;
+  int64 order_id = 4;
+  string terminal =5;
+  string channel =6;
+  string payment_method = 7;
+  string shipment_method = 8;
+  int64 insure_fee =9;
+  int64 pack_fee =10;
+  int64 surplus =11;
+  int64 coupon_money =12;
+  int64 integral =13;
+  int64 integral_money =14;
+  int64 paid_money =15;
+  string currency =16;
+  int64 area_id = 17;
+  BuyerInfo buyer =18; //买家信息
+  repeated sku  skus =19;//需要计算的SKUS
   //需要计算的商品
   message sku {
     int64 sku_id =1;
@@ -132,9 +131,8 @@ message PurchaseRequest {
 message DisplayRequest {
   string currency =1; //货币类型
   int64 area_id = 2;//所在区域ID
-  int64 member_id = 3;//会员ID
-  int32 member_rank_id = 4;//会员等级ID
-  repeated sku skus =5; //需要计算的skus
+  BuyerInfo buyer =3; //买家信息
+  repeated sku skus =4; //需要计算的skus
   //需要计算的商品
   message sku {
     int64 sku_id =1; //skuId

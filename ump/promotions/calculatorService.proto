@@ -124,7 +124,7 @@ message DisplayRequest {
 message PurchaseRequest {
     string currency =1;//货币类型
     int64 integral = 2;//使用的积分
-    int64 coupon_id = 3;//使用的优惠劵
+    int64 coupon_batch_id = 3;//使用的优惠劵批次ID
     int64 destination_area_id = 4;//目的地区域ID
     int64 freight_fee =5; //运费
     BuyerInfo buyer =6; //买家信息
