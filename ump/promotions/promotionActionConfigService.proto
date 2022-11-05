@@ -10,7 +10,7 @@ message PromotionActionConfig {
     float shipping_percentage_discount =5; //运费百分比折扣
     int64 send_integral =6; //送积分
     map<int64,int32> send_presents =7; //送赠品【skuId,num】
-    map<int64,int32> send_coupons =8; //送优惠劵【couponId,num】
+    map<int64,int32> send_coupon_batches =8; //送优惠劵批次【couponBatchId,num】
     string ladder_discount_mode =10; //阶梯优惠模式：1-阶梯满减，2-循环满减
     repeated LadderDiscount ladder_discount_increase =11; //阶梯优惠-阶梯满减
     LadderDiscount ladder_discount_loop =12; //阶梯优惠-循环满减
@@ -31,5 +31,5 @@ message LadderDiscountPreferential  {
     bool free_postage =4; //免运费
     int64 send_integral =5; //送积分
     map<int64,int32> send_presents =6; //送赠品【skuId,num】
-    map<int64,int32> send_coupons =7; //送优惠劵【couponId,num】
+    map<int64,int32> send_coupon_batches =7; //送优惠劵批次【couponBatchId,num】
 }

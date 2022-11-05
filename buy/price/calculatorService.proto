@@ -28,7 +28,7 @@ message PurchaseResult {
   int64 insure_fee =9; //保险费
   int64 pack_fee =10; //包装费
   int64 surplus =11;//使用账户余额
-  int64 coupon_batch_id = 12;//使用优惠劵批次ID
+  int64 coupon_id = 12;//使用优惠劵ID
   int64 coupon_money =13; //使用优惠劵金额
   int64 integral =14; //积分数量
   int64 integral_money =15;//积分金额
@@ -92,7 +92,7 @@ message AdjustmentInfo {
 
 message PurchaseRequest {
   int64 address_id = 1;
-  int64 coupon_batch_id = 2;
+  int64 coupon_id = 2;
   int64 shop_id = 3;
   int64 order_id = 4;
   string terminal =5;
