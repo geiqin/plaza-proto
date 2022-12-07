@@ -1,0 +1,51 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+
+message OrderDayStats {
+    int64 id = 1;
+    string type = 2;
+    string method = 3;
+    int64 item_id = 4;
+    int64 sku_id = 5;
+    int32 num = 6;
+    float cost_price = 7;
+    float cost_total = 8;
+    string stats_at = 9;
+    string created_at = 10;
+    string updated_at = 11;
+    SkuInfo sku = 12;
+}
+
+
+message StatisticsRequest{
+    int32 paged = 1;
+    int32 page_size = 2;
+    string start_time = 3;
+    string end_time = 4;
+    int32 month = 5;
+    string type = 6;
+    string stats_at = 7;
+    int64 spu_id = 8;
+    int64 sku_id = 9;
+    string method = 10;
+}
+
+// 订单入库日统计
+service Statistics{
+    rpc OrderDay (StatisticsRequest) returns (StatisticsResponse) {}
+    //出库月统计
+    rpc StockOutMonth (StatisticsRequest) returns (StatisticsResponse) {}
+}
+
+message StatisticsData {
+    repeated OrderDayStats order_days = 1;
+}
+
+message StatisticsResponse {
+    StatisticsData data = 1;
+    common.Error error = 2;
+}

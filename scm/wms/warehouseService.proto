@@ -1,0 +1,51 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+service WarehouseService {
+    rpc Create (Warehouse) returns (WarehouseResponse) {}
+    rpc Update (Warehouse) returns (WarehouseResponse) {}
+    rpc Delete (Warehouse) returns (WarehouseResponse) {}
+    rpc Get (Warehouse) returns (WarehouseResponse) {}
+    rpc List (WarehouseRequest) returns (WarehouseResponse) {}
+    rpc Search (WarehouseRequest) returns (WarehouseResponse) {}
+}
+
+message Warehouse {
+    int64 id = 1;
+    string code = 2;
+    string name = 3;
+    int64 area_id = 4;
+    string address = 5;
+    string contact_man = 6;
+    string contact_tel = 7;
+    string memo = 8;
+    string status = 9;
+    string created_at = 10;
+    string updated_at = 11;
+    AreaInfo area =12;
+}
+
+message WarehouseRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    int64 id = 4;
+    string code = 5;
+    string name = 6;
+    string status = 7;
+    repeated int64 ids = 8;
+}
+
+message WarehouseData {
+    Warehouse entity = 1;
+    common.Pager pager =2;
+    repeated Warehouse items = 3;
+    common.Info info =4;
+}
+message WarehouseResponse {
+    WarehouseData data = 1;
+    common.Error error = 2;
+}
