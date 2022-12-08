@@ -34,38 +34,51 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// Api Endpoints for InventoryService service
+// Api Endpoints for InboundService service
 
-func NewInventoryServiceEndpoints() []*api.Endpoint {
+func NewInboundServiceEndpoints() []*api.Endpoint {
 	return []*api.Endpoint{}
 }
 
-// Client API for InventoryService service
+// Client API for InboundService service
 
-type InventoryService interface {
+type InboundService interface {
+	//创建采购入库单（服务间调用）
+	CreatePurchase(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//创建调拨入库单（服务间调用）
+	CreateTransfer(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//创建销售退货入库单（服务间调用）
+	CreateSaleReturn(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//创建入库单（手工单调用）
 	Create(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//修改入库单
 	Update(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//撤销入库单
 	Cancel(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//删除入库单
 	Delete(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//确认入库单
 	Confirm(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//获取入库单
 	Get(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//查询入库单
 	Search(ctx context.Context, in *InventoryRequest, opts ...client.CallOption) (*InventoryResponse, error)
 }
 
-type inventoryService struct {
+type inboundService struct {
 	c    client.Client
 	name string
 }
 
-func NewInventoryService(name string, c client.Client) InventoryService {
-	return &inventoryService{
+func NewInboundService(name string, c client.Client) InboundService {
+	return &inboundService{
 		c:    c,
 		name: name,
 	}
 }
 
-func (c *inventoryService) Create(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.Create", in)
+func (c *inboundService) CreatePurchase(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.CreatePurchase", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -74,8 +87,8 @@ func (c *inventoryService) Create(ctx context.Context, in *Inventory, opts ...cl
 	return out, nil
 }
 
-func (c *inventoryService) Update(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.Update", in)
+func (c *inboundService) CreateTransfer(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.CreateTransfer", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -84,8 +97,8 @@ func (c *inventoryService) Update(ctx context.Context, in *Inventory, opts ...cl
 	return out, nil
 }
 
-func (c *inventoryService) Cancel(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.Cancel", in)
+func (c *inboundService) CreateSaleReturn(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.CreateSaleReturn", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -94,8 +107,8 @@ func (c *inventoryService) Cancel(ctx context.Context, in *Inventory, opts ...cl
 	return out, nil
 }
 
-func (c *inventoryService) Delete(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.Delete", in)
+func (c *inboundService) Create(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.Create", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -104,8 +117,8 @@ func (c *inventoryService) Delete(ctx context.Context, in *Inventory, opts ...cl
 	return out, nil
 }
 
-func (c *inventoryService) Confirm(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.Confirm", in)
+func (c *inboundService) Update(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.Update", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -114,8 +127,8 @@ func (c *inventoryService) Confirm(ctx context.Context, in *Inventory, opts ...c
 	return out, nil
 }
 
-func (c *inventoryService) Get(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.Get", in)
+func (c *inboundService) Cancel(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.Cancel", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -124,8 +137,8 @@ func (c *inventoryService) Get(ctx context.Context, in *Inventory, opts ...clien
 	return out, nil
 }
 
-func (c *inventoryService) Search(ctx context.Context, in *InventoryRequest, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.Search", in)
+func (c *inboundService) Delete(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.Delete", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -134,20 +147,66 @@ func (c *inventoryService) Search(ctx context.Context, in *InventoryRequest, opt
 	return out, nil
 }
 
-// Server API for InventoryService service
+func (c *inboundService) Confirm(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.Confirm", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
 
-type InventoryServiceHandler interface {
+func (c *inboundService) Get(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.Get", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inboundService) Search(ctx context.Context, in *InventoryRequest, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InboundService.Search", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for InboundService service
+
+type InboundServiceHandler interface {
+	//创建采购入库单（服务间调用）
+	CreatePurchase(context.Context, *Inventory, *InventoryResponse) error
+	//创建调拨入库单（服务间调用）
+	CreateTransfer(context.Context, *Inventory, *InventoryResponse) error
+	//创建销售退货入库单（服务间调用）
+	CreateSaleReturn(context.Context, *Inventory, *InventoryResponse) error
+	//创建入库单（手工单调用）
 	Create(context.Context, *Inventory, *InventoryResponse) error
+	//修改入库单
 	Update(context.Context, *Inventory, *InventoryResponse) error
+	//撤销入库单
 	Cancel(context.Context, *Inventory, *InventoryResponse) error
+	//删除入库单
 	Delete(context.Context, *Inventory, *InventoryResponse) error
+	//确认入库单
 	Confirm(context.Context, *Inventory, *InventoryResponse) error
+	//获取入库单
 	Get(context.Context, *Inventory, *InventoryResponse) error
+	//查询入库单
 	Search(context.Context, *InventoryRequest, *InventoryResponse) error
 }
 
-func RegisterInventoryServiceHandler(s server.Server, hdlr InventoryServiceHandler, opts ...server.HandlerOption) error {
-	type inventoryService interface {
+func RegisterInboundServiceHandler(s server.Server, hdlr InboundServiceHandler, opts ...server.HandlerOption) error {
+	type inboundService interface {
+		CreatePurchase(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		CreateTransfer(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		CreateSaleReturn(ctx context.Context, in *Inventory, out *InventoryResponse) error
 		Create(ctx context.Context, in *Inventory, out *InventoryResponse) error
 		Update(ctx context.Context, in *Inventory, out *InventoryResponse) error
 		Cancel(ctx context.Context, in *Inventory, out *InventoryResponse) error
@@ -156,41 +215,285 @@ func RegisterInventoryServiceHandler(s server.Server, hdlr InventoryServiceHandl
 		Get(ctx context.Context, in *Inventory, out *InventoryResponse) error
 		Search(ctx context.Context, in *InventoryRequest, out *InventoryResponse) error
 	}
-	type InventoryService struct {
-		inventoryService
+	type InboundService struct {
+		inboundService
 	}
-	h := &inventoryServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&InventoryService{h}, opts...))
+	h := &inboundServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&InboundService{h}, opts...))
 }
 
-type inventoryServiceHandler struct {
-	InventoryServiceHandler
+type inboundServiceHandler struct {
+	InboundServiceHandler
 }
 
-func (h *inventoryServiceHandler) Create(ctx context.Context, in *Inventory, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.Create(ctx, in, out)
+func (h *inboundServiceHandler) CreatePurchase(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.InboundServiceHandler.CreatePurchase(ctx, in, out)
 }
 
-func (h *inventoryServiceHandler) Update(ctx context.Context, in *Inventory, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.Update(ctx, in, out)
+func (h *inboundServiceHandler) CreateTransfer(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.InboundServiceHandler.CreateTransfer(ctx, in, out)
 }
 
-func (h *inventoryServiceHandler) Cancel(ctx context.Context, in *Inventory, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.Cancel(ctx, in, out)
+func (h *inboundServiceHandler) CreateSaleReturn(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.InboundServiceHandler.CreateSaleReturn(ctx, in, out)
 }
 
-func (h *inventoryServiceHandler) Delete(ctx context.Context, in *Inventory, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.Delete(ctx, in, out)
+func (h *inboundServiceHandler) Create(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.InboundServiceHandler.Create(ctx, in, out)
 }
 
-func (h *inventoryServiceHandler) Confirm(ctx context.Context, in *Inventory, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.Confirm(ctx, in, out)
+func (h *inboundServiceHandler) Update(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.InboundServiceHandler.Update(ctx, in, out)
 }
 
-func (h *inventoryServiceHandler) Get(ctx context.Context, in *Inventory, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.Get(ctx, in, out)
+func (h *inboundServiceHandler) Cancel(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.InboundServiceHandler.Cancel(ctx, in, out)
 }
 
-func (h *inventoryServiceHandler) Search(ctx context.Context, in *InventoryRequest, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.Search(ctx, in, out)
+func (h *inboundServiceHandler) Delete(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.InboundServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *inboundServiceHandler) Confirm(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.InboundServiceHandler.Confirm(ctx, in, out)
+}
+
+func (h *inboundServiceHandler) Get(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.InboundServiceHandler.Get(ctx, in, out)
+}
+
+func (h *inboundServiceHandler) Search(ctx context.Context, in *InventoryRequest, out *InventoryResponse) error {
+	return h.InboundServiceHandler.Search(ctx, in, out)
+}
+
+// Api Endpoints for OutboundService service
+
+func NewOutboundServiceEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
+
+// Client API for OutboundService service
+
+type OutboundService interface {
+	//创建销售出库单（服务间调用）
+	CreateSale(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//创建销售出库单（服务间调用）
+	CreateTransfer(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//创建采购退货出库单（服务间调用）
+	CreatePurchaseReturn(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//创建出库单（手工单调用）
+	Create(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//修改出库单
+	Update(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//撤销出库单
+	Cancel(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//删除出库单
+	Delete(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//确认出库单
+	Confirm(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//获取出库
+	Get(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error)
+	//查询出库单
+	Search(ctx context.Context, in *InventoryRequest, opts ...client.CallOption) (*InventoryResponse, error)
+}
+
+type outboundService struct {
+	c    client.Client
+	name string
+}
+
+func NewOutboundService(name string, c client.Client) OutboundService {
+	return &outboundService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *outboundService) CreateSale(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.CreateSale", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *outboundService) CreateTransfer(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.CreateTransfer", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *outboundService) CreatePurchaseReturn(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.CreatePurchaseReturn", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *outboundService) Create(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.Create", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *outboundService) Update(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.Update", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *outboundService) Cancel(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.Cancel", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *outboundService) Delete(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.Delete", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *outboundService) Confirm(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.Confirm", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *outboundService) Get(ctx context.Context, in *Inventory, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.Get", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *outboundService) Search(ctx context.Context, in *InventoryRequest, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "OutboundService.Search", in)
+	out := new(InventoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for OutboundService service
+
+type OutboundServiceHandler interface {
+	//创建销售出库单（服务间调用）
+	CreateSale(context.Context, *Inventory, *InventoryResponse) error
+	//创建销售出库单（服务间调用）
+	CreateTransfer(context.Context, *Inventory, *InventoryResponse) error
+	//创建采购退货出库单（服务间调用）
+	CreatePurchaseReturn(context.Context, *Inventory, *InventoryResponse) error
+	//创建出库单（手工单调用）
+	Create(context.Context, *Inventory, *InventoryResponse) error
+	//修改出库单
+	Update(context.Context, *Inventory, *InventoryResponse) error
+	//撤销出库单
+	Cancel(context.Context, *Inventory, *InventoryResponse) error
+	//删除出库单
+	Delete(context.Context, *Inventory, *InventoryResponse) error
+	//确认出库单
+	Confirm(context.Context, *Inventory, *InventoryResponse) error
+	//获取出库
+	Get(context.Context, *Inventory, *InventoryResponse) error
+	//查询出库单
+	Search(context.Context, *InventoryRequest, *InventoryResponse) error
+}
+
+func RegisterOutboundServiceHandler(s server.Server, hdlr OutboundServiceHandler, opts ...server.HandlerOption) error {
+	type outboundService interface {
+		CreateSale(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		CreateTransfer(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		CreatePurchaseReturn(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		Create(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		Update(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		Cancel(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		Delete(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		Confirm(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		Get(ctx context.Context, in *Inventory, out *InventoryResponse) error
+		Search(ctx context.Context, in *InventoryRequest, out *InventoryResponse) error
+	}
+	type OutboundService struct {
+		outboundService
+	}
+	h := &outboundServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&OutboundService{h}, opts...))
+}
+
+type outboundServiceHandler struct {
+	OutboundServiceHandler
+}
+
+func (h *outboundServiceHandler) CreateSale(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.CreateSale(ctx, in, out)
+}
+
+func (h *outboundServiceHandler) CreateTransfer(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.CreateTransfer(ctx, in, out)
+}
+
+func (h *outboundServiceHandler) CreatePurchaseReturn(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.CreatePurchaseReturn(ctx, in, out)
+}
+
+func (h *outboundServiceHandler) Create(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.Create(ctx, in, out)
+}
+
+func (h *outboundServiceHandler) Update(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.Update(ctx, in, out)
+}
+
+func (h *outboundServiceHandler) Cancel(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.Cancel(ctx, in, out)
+}
+
+func (h *outboundServiceHandler) Delete(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *outboundServiceHandler) Confirm(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.Confirm(ctx, in, out)
+}
+
+func (h *outboundServiceHandler) Get(ctx context.Context, in *Inventory, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.Get(ctx, in, out)
+}
+
+func (h *outboundServiceHandler) Search(ctx context.Context, in *InventoryRequest, out *InventoryResponse) error {
+	return h.OutboundServiceHandler.Search(ctx, in, out)
 }

@@ -6,41 +6,82 @@ import "baseInfoService.proto";
 import "sheetTypeService.proto";
 import "warehouseService.proto";
 
-//出入库单
-service InventoryService {
+//入库单
+service InboundService {
+    //创建采购入库单（服务间调用）
+    rpc CreatePurchase (Inventory) returns (InventoryResponse) {}
+    //创建调拨入库单（服务间调用）
+    rpc CreateTransfer (Inventory) returns (InventoryResponse) {}
+    //创建销售退货入库单（服务间调用）
+    rpc CreateSaleReturn (Inventory) returns (InventoryResponse) {}
+    //创建入库单（手工单调用）
     rpc Create (Inventory) returns (InventoryResponse) {}
+    //修改入库单
     rpc Update (Inventory) returns (InventoryResponse) {}
+    //撤销入库单
     rpc Cancel (Inventory) returns (InventoryResponse) {}
+    //删除入库单
     rpc Delete (Inventory) returns (InventoryResponse) {}
+    //确认入库单
     rpc Confirm (Inventory) returns (InventoryResponse) {}
+    //获取入库单
     rpc Get (Inventory) returns (InventoryResponse) {}
+    //查询入库单
     rpc Search (InventoryRequest) returns (InventoryResponse) {}
+}
+
+
+//出库单
+service OutboundService {
+    //创建销售出库单（服务间调用）
+    rpc CreateSale (Inventory) returns (InventoryResponse) {}
+    //创建销售出库单（服务间调用）
+    rpc CreateTransfer (Inventory) returns (InventoryResponse) {}
+    //创建采购退货出库单（服务间调用）
+    rpc CreatePurchaseReturn (Inventory) returns (InventoryResponse) {}
+    //创建出库单（手工单调用）
+    rpc Create (Inventory) returns (InventoryResponse) {}
+    //修改出库单
+    rpc Update (Inventory) returns (InventoryResponse) {}
+    //撤销出库单
+    rpc Cancel (Inventory) returns (InventoryResponse) {}
+    //删除出库单
+    rpc Delete (Inventory) returns (InventoryResponse) {}
+    //确认出库单
+    rpc Confirm (Inventory) returns (InventoryResponse) {}
+    //获取出库
+    rpc Get (Inventory) returns (InventoryResponse) {}
+    //查询出库单
+    rpc Search (InventoryRequest) returns (InventoryResponse) {}
+
 }
 
 message Inventory {
     int64 id = 1;
     string inventory_sn = 2;
     string type = 3;
-    int32 sheet_type_id = 4;
-    int64 warehouse_id = 5;
-    int64 dispatch_id = 6;
-    int64 dispatch_sync_id = 7;
-    string origin_code = 8;
-    int64 company_id = 9;
-    string company_name = 10;
-    int32 total_num = 11;
-    int64 total_cost = 12;
-    string memo = 13;
-    int64 operator_id = 14;
-    string fail_reason = 15;
-    string status = 16;
-    string handled_at = 17;
-    string created_at = 18;
-    string updated_at = 19;
-    repeated InventoryDetail details =20;
-    SheetType  sheet_type =21;
-    Warehouse warehouse =22;
-    UserInfo operator =23;
+    string method = 4;
+    int32 sheet_type_id = 5;
+    int64 warehouse_id = 6;
+    int64 dispatch_id = 7;
+    int64 dispatch_sync_id = 8;
+    int64 origin_id = 9;
+    string origin_code = 10;
+    int64 company_id = 11;
+    string company_name = 12;
+    int32 total_num = 13;
+    int64 total_cost = 14;
+    string memo = 15;
+    int64 operator_id = 16;
+    string fail_reason = 17;
+    string status = 18;
+    string handled_at = 19;
+    string created_at = 20;
+    string updated_at = 21;
+    repeated InventoryDetail details =22;
+    SheetType  sheet_type =23;
+    Warehouse warehouse =24;
+    UserInfo operator =25;
 }
 
 message InventoryDetail {
@@ -66,11 +107,12 @@ message InventoryRequest {
     int32 page_size = 2;
     int64 id = 3;
     string type = 5;
-    string status = 6;
-    int32 sheet_type_id = 7;
-    int32 warehouse_id = 8;
-    int64 inventory_id = 9;
-    repeated int64 ids = 10;
+    string method = 6;
+    string status = 7;
+    int32 sheet_type_id = 8;
+    int32 warehouse_id = 9;
+    int64 inventory_id = 10;
+    repeated int64 ids = 11;
 }
 
 
