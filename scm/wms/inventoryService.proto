@@ -64,7 +64,7 @@ message Inventory {
     int32 sheet_type_id = 5;
     int64 warehouse_id = 6;
     int64 dispatch_id = 7;
-    int64 dispatch_sync_id = 8;
+    int64 dispatch_send_id = 8;
     int64 origin_id = 9;
     string origin_code = 10;
     int64 company_id = 11;
