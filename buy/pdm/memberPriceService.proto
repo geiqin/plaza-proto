@@ -2,7 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "skuService.proto";
+import "spuService.proto";
 service MemberPriceService {
     rpc Set (MemberPriceRequest) returns (MemberPriceResponse) {}
     rpc Get (MemberPriceRequest) returns (MemberPriceResponse) {}

@@ -1,0 +1,22 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+// 协议配置信息
+service AgreementConfigService {
+    rpc Set (AgreementConfig) returns (AgreementConfigResponse) {}
+    rpc Get (AgreementConfig) returns (AgreementConfigResponse) {}
+}
+
+
+message AgreementConfig {
+    string home_site_user_register =1;//用户注册协议
+    string home_site_user_privacy =2;//用户隐私政策
+    string home_site_user_logout =3;//账号注销协议
+}
+
+message AgreementConfigResponse {
+    AgreementConfig data = 1;
+    common.Error error = 2;
+}

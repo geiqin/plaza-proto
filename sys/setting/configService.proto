@@ -1,0 +1,41 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//配置信息
+service ConfigService {
+    rpc Set (ConfigData) returns (ConfigResponse) {}
+    rpc GetMap (ConfigRequest) returns (ConfigResponse) {}
+    rpc GetList (ConfigRequest) returns (ConfigResponse) {}
+}
+
+message Config {
+    int64 id =1;
+    string name =2;//唯一名称
+    string value =3;//内容
+    string type =4;//类型：admin后台，home前台，common公共
+    string tag =5; //标签
+    string created_at = 8;
+    string updated_at = 9;
+}
+
+message ConfigRequest {
+    int64 id = 1;
+    string code =2;//唯一标识
+    string  name =3;//名称
+    string type = 4;//类型：admin后台，home前台，common公共
+    string tag = 5;
+    repeated string names = 6;
+    repeated int64 ids = 7;
+}
+
+message ConfigData{
+    repeated Config config_list =1;//配置对象集合
+    map<string,string> config_map =2;//配置键值集合：如<code,value>集合
+}
+
+message ConfigResponse {
+    ConfigData data = 1;
+    common.Error error = 2;
+}

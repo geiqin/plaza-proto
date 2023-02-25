@@ -15,31 +15,33 @@ service CompanyService {
 //往来单位
 message Company {
     int64 id =1;
-    string name	 =3;
+    string type	=2;
+    string name	=3;
     string short_name =4;
     string pinyin	 =5;
-    int32 cat_id	 =6;
+    int64 cat_id	 =6;
     string legal_man =7;
-    float  registered_capital =8;
+    int64  registered_capital =8;
     string registered_date  =9;
     string unified_social_code =10;
     int64 area_id  =11;
-    string address =12;
-    string contacts =13;
-    string contact_post =14;
-    string contact_tel =15;
-    string contact_email  =16;
-    string telephone  =17;
-    string invoice_type  =18;
-    string bank_no  =19;
-    string bank_name  =20;
-    string nature  =21;
-    string memo  =22;
-    string status =23;
-    string created_at =24;
-    string updated_at =25;
-    map<string,string> metas  =26;
-    Cat cat = 27;
+    int64 street_id  =12;
+    string address =13;
+    string contacts =14;
+    string contact_post =15;
+    string contact_tel =16;
+    string contact_email  =17;
+    string telephone  =18;
+    string invoice_type  =19;
+    string bank_no  =20;
+    string bank_name  =21;
+    string nature  =22;
+    string memo  =23;
+    string status =24;
+    string created_at =25;
+    string updated_at =26;
+    map<string,string> metas  =27;
+    Cat cat = 28;
 }
 
 
@@ -53,10 +55,11 @@ message CompanyRequest {
     string short_name = 6;
     string status = 7;
     int64 area_id =8;
-    string invoice_type =9;
-    string nature  =10;
-    int32 cat_id =11;
-    repeated int64 ids = 12;
+    int64 street_id =9;
+    string type =10;
+    string nature  =11;
+    int64 cat_id =12;
+    repeated int64 ids = 13;
 }
 
 //

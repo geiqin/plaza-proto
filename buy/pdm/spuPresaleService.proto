@@ -1,0 +1,23 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+
+message SpuPresale {
+    int64 id = 1;
+    int64 spu_id = 2;
+    int32 presale_type = 3;
+    string payed_date = 4;
+    string advance_start_date = 5;
+    string advance_end_date = 6;
+    string balance_start_date = 7;
+    string balance_end_date = 8;
+    string advance_type = 9;
+    int32 advance_rate = 10;
+    int64 advance_money = 11;
+    int64 balance_money = 12;
+    string delivery_type = 13;
+    string delivery_date = 14;
+    int32 delivery_days = 15;
+    string created_at = 16;
+    string updated_at = 17;
+}

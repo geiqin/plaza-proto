@@ -1,0 +1,40 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+// Email配置信息
+service EmailConfigService {
+    rpc Set (EmailConfig) returns (EmailConfigResponse) {}
+    rpc Get (EmailConfig) returns (EmailConfigResponse) {}
+}
+
+
+message EmailConfig {
+    EmailBaseConfig base =1;//基础设置
+    EmailTemplateConfig template =2;//消息模板
+}
+
+message EmailBaseConfig {
+    string common_email_smtp_host =1;//SMTP服务器(设置SMTP服务器的地址，如 smtp.163.com)
+    int32 common_email_smtp_port =2;//SMTP端口(设置SMTP服务器的端口，默认为 25)
+    string common_email_smtp_account =3;//发信人邮件地址(发信人邮件地址，使用SMTP协议发送的邮件地址，如 qindev@163.com)
+    string common_email_smtp_name =4;//SMTP身份验证用户名(如 qindev@163.com)
+    string common_email_smtp_pwd =5;//SMTP身份验证密码(qindev@163.com邮件的密码或授权码)
+    bool common_email_is_use_ssl =6;//SSL方式加密
+    string common_email_smtp_send_name =7;//发件人显示名称(如 QinDev)
+}
+
+message EmailTemplateConfig {
+    string admin_sms_login_template =1;//后台登录-短信模板ID【后台】
+    string common_sms_currency_template =2;//通用-短信模板ID【前端】
+    string home_sms_login_template =3;//用户登录-短信模板ID【前端】
+    string home_sms_user_reg =4;//用户注册-短信模板ID【前端】
+    string home_sms_user_forget_pwd =5;//密码找回-短信模板ID【前端】
+    string home_sms_user_mobile_binding =7;//手机号码绑定-短信模板ID【前端】
+}
+
+message EmailConfigResponse {
+    EmailConfig data = 1;
+    common.Error error = 2;
+}

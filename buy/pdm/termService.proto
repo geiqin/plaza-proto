@@ -2,7 +2,6 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "categoryService.proto";
 
 service TermService {
     rpc Create(Term) returns (TermResponse);
@@ -14,30 +13,39 @@ service TermService {
 }
 
 message Term {
-    int32 id = 1;
-    string name = 2;
-    string title = 3;
-    int32 parent_id = 4;
-    string path = 5;
-    int64 media_id = 6;
-    string media_url = 7;
-    string category_ids = 8;
-    string memo = 9;
-    int32 sort = 10;
-    string status = 11;
-    string created_at = 12;
-    string updated_at = 13;
-    Term parent = 14;
-    repeated Term children = 15;
-    repeated Category categories = 16;
+    int64 id = 1;
+    string coding = 2;
+    string name = 3;
+    string vice_name = 4;
+    int64 parent_id = 5;
+    string describe = 6;
+    string icon_url = 7;
+    string image_url = 8;
+    string bg_color = 9;
+    string is_home_recommended = 11;
+    string seo_title = 13;
+    string seo_keywords = 14;
+    string seo_desc = 15;
+    string dept_path = 16;
+    int32 sort = 17;
+    string status = 18;
+    string created_at = 19;
+    string updated_at = 20;
+    Term parent = 21;
+    repeated Term children = 22;
 }
 
 message TermRequest {
     int32 paged = 1;
     int32 page_size = 2;
     string keywords = 3;
-    int32 id = 4;
-    string name = 5;
+    int64 id = 4;
+    int64 parent_id = 5;
+    string coding = 6;
+    string name = 7;
+    string is_home_recommended = 8;
+    string status = 9;
+    repeated int64 ids = 10;
 }
 
 message TermData {
