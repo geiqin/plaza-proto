@@ -29,7 +29,7 @@ message Goods {
     string title = 6; //标题
     string title_color = 7; //标题颜色
     string simple_desc = 8; //简单描述
-    int64 inventory = 9; //库存数量
+    int32 inventory = 9; //库存数量
     string inventory_unit = 10; //库存单位
     string thumb_url = 11;
     string image_url = 12; //封面URL
