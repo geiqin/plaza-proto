@@ -1,0 +1,89 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+//内部商品信息【内部服务专用】
+service InnerGoodsService {
+    //获取商品（简单的）
+    rpc Get(InnerGoodsRequest) returns (InnerGoodsResponse);
+    //商品详情（详细的）
+    rpc Detail(InnerGoodsRequest) returns (InnerGoodsResponse);
+    //商品列表
+    rpc List(InnerGoodsRequest) returns (InnerGoodsResponse);
+}
+
+//内部商品信息(基于SKU)
+message InnerGoods {
+    int64 spu_id = 2;
+    int64 sku_id = 3;
+    string type = 5; //类型
+    string title = 6; //标题
+    string title_color = 7; //标题颜色
+    string simple_desc = 8; //简单描述
+    int64 inventory = 9; //库存数量
+    string unit = 10; //库存单位
+    string image_url = 12; //封面URL
+    string video_url = 13; //视频URL
+    bool is_many_spec = 14;//是否多规格商品
+    bool is_deduction_inventory = 15; //是否扣减库存
+    bool is_listed = 16; //是否上架
+    int64 shop_id = 18; //分店ID
+    int32 brand_id = 19;//品牌ID
+    string brand_name = 20; //品牌名称
+    string barcode = 21; //条码
+    int64 taxonomy_id = 22;//
+    int64 category_id  =23;
+    int64 min_original_price  = 31;
+    int64 max_original_price  = 32;
+    int64 min_price  = 34;
+    int64 max_price  = 35;
+    int64 give_integral  = 36;
+    int32 buy_min_number  = 37;
+    int32 buy_max_number  = 38;
+    int32 photo_count =39; //相册数量
+    int32 sales_count =40; //销售量
+    int32 access_count =41; //访问量
+    int64 sku_weight = 45;
+    int64 sku_volume = 46;
+    string sku_coding = 47;
+    string sku_barcode = 48;
+    int64 sku_price = 49;
+    int64 sku_original_price = 50;
+    int64 sku_cost_price = 51;
+    string sku_specification =52;
+    string sku_image_url = 53;
+}
+
+message InnerGoodsResponse {
+    InnerGoods goods = 1;
+    repeated InnerGoods list = 2;
+    common.Error error = 3;
+}
+
+message InnerGoodsRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string keywords = 3;
+    int64 sku_id = 4;
+    string sku_sn = 5;
+    int64 spu_id = 6;
+    string code = 7;
+    string title =8;
+    string type = 9;
+    int64 parent_id = 10;
+    int64 category_id = 11;
+    int32 term_id = 12;
+    string term_name = 13;
+    int32 brand_id = 14;
+    int64 shop_id = 15;
+    string status =16;
+    string start_date =17;
+    string end_date =18;
+    int32 param_id = 19;
+    string param_value = 20;
+    int32 tag_id = 21;
+    string tag_name = 22;
+    string subtype =23;
+    repeated int64 sku_ids =24;
+}

@@ -4,7 +4,7 @@ option go_package ="/.;services";
 import "common/base.proto";
 import "tagService.proto";
 import "rankService.proto";
-import "addressService.proto";
+import "memberAddressService.proto";
 import "fanService.proto";
 
 
@@ -88,7 +88,7 @@ message Member {
     string deleted_at =32;
     Rank rank =33;
     repeated Tag tags = 34;
-    repeated Address addresses = 36;
+    repeated MemberAddress addresses = 36;
 }
 
 //客户查询参数

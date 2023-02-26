@@ -20,6 +20,7 @@ service GoodsService {
     rpc SpecType(GoodsRequest) returns (GoodsSpecTypeResponse);
 }
 
+//前端商品信息
 message Goods {
     int64 id = 1;
     int64 spu_id = 2;
@@ -45,11 +46,10 @@ message Goods {
     int64 category_id  =23;
     string content_web =24; //web内容
     string content_app =25; //app内容
-
     string original_price  = 30;
     int64 min_original_price  = 31;
     int64 max_original_price  = 32;
-    int64 price  = 33;
+    string price  = 33;
     int64 min_price  = 34;
     int64 max_price  = 35;
     int64 give_integral  = 36;
@@ -61,7 +61,6 @@ message Goods {
     string show_field_original_price_text =42;
     string show_field_price_text =43;
     string goods_url =44;
-
     repeated string category_names =45;
     repeated GoodsSpecBase spec_base =46;
     GoodsSpecification specifications =47;

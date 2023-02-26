@@ -44,7 +44,7 @@ func NewAuthorizeServiceEndpoints() []*api.Endpoint {
 
 type AuthorizeService interface {
 	//获得当前客户
-	Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*MemberResponse, error)
+	Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error)
 	//绑定手机
 	BindMobile(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error)
 	//绑定邮箱
@@ -67,9 +67,9 @@ func NewAuthorizeService(name string, c client.Client) AuthorizeService {
 	}
 }
 
-func (c *authorizeService) Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*MemberResponse, error) {
+func (c *authorizeService) Info(ctx context.Context, in *AuthorizeRequest, opts ...client.CallOption) (*AuthorizeResponse, error) {
 	req := c.c.NewRequest(c.name, "AuthorizeService.Info", in)
-	out := new(MemberResponse)
+	out := new(AuthorizeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -121,7 +121,7 @@ func (c *authorizeService) BindWxByApp(ctx context.Context, in *AuthorizeRequest
 
 type AuthorizeServiceHandler interface {
 	//获得当前客户
-	Info(context.Context, *AuthorizeRequest, *MemberResponse) error
+	Info(context.Context, *AuthorizeRequest, *AuthorizeResponse) error
 	//绑定手机
 	BindMobile(context.Context, *AuthorizeRequest, *AuthorizeResponse) error
 	//绑定邮箱
@@ -134,7 +134,7 @@ type AuthorizeServiceHandler interface {
 
 func RegisterAuthorizeServiceHandler(s server.Server, hdlr AuthorizeServiceHandler, opts ...server.HandlerOption) error {
 	type authorizeService interface {
-		Info(ctx context.Context, in *AuthorizeRequest, out *MemberResponse) error
+		Info(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
 		BindMobile(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
 		BindEmail(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
 		BindWxByMini(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error
@@ -151,7 +151,7 @@ type authorizeServiceHandler struct {
 	AuthorizeServiceHandler
 }
 
-func (h *authorizeServiceHandler) Info(ctx context.Context, in *AuthorizeRequest, out *MemberResponse) error {
+func (h *authorizeServiceHandler) Info(ctx context.Context, in *AuthorizeRequest, out *AuthorizeResponse) error {
 	return h.AuthorizeServiceHandler.Info(ctx, in, out)
 }
 
