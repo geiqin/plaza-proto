@@ -43,18 +43,10 @@ func NewGoodsServiceEndpoints() []*api.Endpoint {
 // Client API for GoodsService service
 
 type GoodsService interface {
-	//商品详情
-	Detail(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error)
-	//商品搜索
-	Search(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsSearchResponse, error)
+	//获取商品（简单的）
+	Get(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error)
 	//商品列表
-	List(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsListResponse, error)
-	//分类导航
-	Category(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsCategoryResponse, error)
-	//规格详情
-	SpecDetail(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsSpecDetailResponse, error)
-	//规格类型
-	SpecType(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsSpecTypeResponse, error)
+	List(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error)
 }
 
 type goodsService struct {
@@ -69,8 +61,8 @@ func NewGoodsService(name string, c client.Client) GoodsService {
 	}
 }
 
-func (c *goodsService) Detail(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error) {
-	req := c.c.NewRequest(c.name, "GoodsService.Detail", in)
+func (c *goodsService) Get(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error) {
+	req := c.c.NewRequest(c.name, "GoodsService.Get", in)
 	out := new(GoodsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -79,49 +71,9 @@ func (c *goodsService) Detail(ctx context.Context, in *GoodsRequest, opts ...cli
 	return out, nil
 }
 
-func (c *goodsService) Search(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsSearchResponse, error) {
-	req := c.c.NewRequest(c.name, "GoodsService.Search", in)
-	out := new(GoodsSearchResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *goodsService) List(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsListResponse, error) {
+func (c *goodsService) List(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error) {
 	req := c.c.NewRequest(c.name, "GoodsService.List", in)
-	out := new(GoodsListResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *goodsService) Category(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsCategoryResponse, error) {
-	req := c.c.NewRequest(c.name, "GoodsService.Category", in)
-	out := new(GoodsCategoryResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *goodsService) SpecDetail(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsSpecDetailResponse, error) {
-	req := c.c.NewRequest(c.name, "GoodsService.SpecDetail", in)
-	out := new(GoodsSpecDetailResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *goodsService) SpecType(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsSpecTypeResponse, error) {
-	req := c.c.NewRequest(c.name, "GoodsService.SpecType", in)
-	out := new(GoodsSpecTypeResponse)
+	out := new(GoodsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -132,28 +84,16 @@ func (c *goodsService) SpecType(ctx context.Context, in *GoodsRequest, opts ...c
 // Server API for GoodsService service
 
 type GoodsServiceHandler interface {
-	//商品详情
-	Detail(context.Context, *GoodsRequest, *GoodsResponse) error
-	//商品搜索
-	Search(context.Context, *GoodsRequest, *GoodsSearchResponse) error
+	//获取商品（简单的）
+	Get(context.Context, *GoodsRequest, *GoodsResponse) error
 	//商品列表
-	List(context.Context, *GoodsRequest, *GoodsListResponse) error
-	//分类导航
-	Category(context.Context, *GoodsRequest, *GoodsCategoryResponse) error
-	//规格详情
-	SpecDetail(context.Context, *GoodsRequest, *GoodsSpecDetailResponse) error
-	//规格类型
-	SpecType(context.Context, *GoodsRequest, *GoodsSpecTypeResponse) error
+	List(context.Context, *GoodsRequest, *GoodsResponse) error
 }
 
 func RegisterGoodsServiceHandler(s server.Server, hdlr GoodsServiceHandler, opts ...server.HandlerOption) error {
 	type goodsService interface {
-		Detail(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error
-		Search(ctx context.Context, in *GoodsRequest, out *GoodsSearchResponse) error
-		List(ctx context.Context, in *GoodsRequest, out *GoodsListResponse) error
-		Category(ctx context.Context, in *GoodsRequest, out *GoodsCategoryResponse) error
-		SpecDetail(ctx context.Context, in *GoodsRequest, out *GoodsSpecDetailResponse) error
-		SpecType(ctx context.Context, in *GoodsRequest, out *GoodsSpecTypeResponse) error
+		Get(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error
+		List(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error
 	}
 	type GoodsService struct {
 		goodsService
@@ -166,26 +106,10 @@ type goodsServiceHandler struct {
 	GoodsServiceHandler
 }
 
-func (h *goodsServiceHandler) Detail(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error {
-	return h.GoodsServiceHandler.Detail(ctx, in, out)
+func (h *goodsServiceHandler) Get(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error {
+	return h.GoodsServiceHandler.Get(ctx, in, out)
 }
 
-func (h *goodsServiceHandler) Search(ctx context.Context, in *GoodsRequest, out *GoodsSearchResponse) error {
-	return h.GoodsServiceHandler.Search(ctx, in, out)
-}
-
-func (h *goodsServiceHandler) List(ctx context.Context, in *GoodsRequest, out *GoodsListResponse) error {
+func (h *goodsServiceHandler) List(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error {
 	return h.GoodsServiceHandler.List(ctx, in, out)
-}
-
-func (h *goodsServiceHandler) Category(ctx context.Context, in *GoodsRequest, out *GoodsCategoryResponse) error {
-	return h.GoodsServiceHandler.Category(ctx, in, out)
-}
-
-func (h *goodsServiceHandler) SpecDetail(ctx context.Context, in *GoodsRequest, out *GoodsSpecDetailResponse) error {
-	return h.GoodsServiceHandler.SpecDetail(ctx, in, out)
-}
-
-func (h *goodsServiceHandler) SpecType(ctx context.Context, in *GoodsRequest, out *GoodsSpecTypeResponse) error {
-	return h.GoodsServiceHandler.SpecType(ctx, in, out)
 }

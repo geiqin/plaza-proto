@@ -74,19 +74,22 @@ message Spu {
     string freight_type =40;//运费模式：1统一邮费，2运费模板
     int64  freight_uniform_fee =41;//统一运费
     int64  freight_express_id =42;//运费模板ID
-    string spec_base =43;//规格基础数据
-    string seo_title =44;//SEO标题
-    string seo_keywords =45;//SEO关键字
-    string status = 46;
-    string created_at = 47;
-    string updated_at = 48;
-    Brand brand = 50;
-    Category category = 51;
-    SpuPresale presale = 52;
-    repeated SpuPhoto photos = 53;
-    repeated Term terms = 54;
-    repeated Tag tags = 55;
-    repeated Sku skus = 56;
+    string is_virtual =43;//是否虚拟商品（0否, 1是）
+    string virtual_type =44;//虚拟类型
+    string spec_base =45;//规格基础数据
+    string seo_title =46;//SEO标题
+    string seo_keywords =47;//SEO关键字
+    string status = 48;
+    string created_at = 49;
+    string updated_at = 50;
+    Brand brand = 51;
+    Category category = 52;
+    SpuPresale presale = 53;
+    SpuVirtual virtual = 54;
+    repeated SpuPhoto photos = 55;
+    repeated Term terms = 56;
+    repeated Tag tags = 57;
+    repeated Sku skus = 58;
     repeated SpecTypeProperty spec_type_data = 59;//规格类型数据
 }
 
@@ -107,6 +110,13 @@ message Sku  {
     string updated_at = 14;
     Spu spu =15;
     repeated SpecificationProperty specification_data =16; //规格信息列表
+}
+
+//虚拟商品数据
+message SpuVirtual  {
+    int64 id = 1;
+    int64 spu_id = 2;
+    string Data = 3;
 }
 
 //表单商品
