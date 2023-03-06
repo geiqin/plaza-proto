@@ -14,27 +14,30 @@ service PaymentService {
 }
 
 message Payment {
-  int32 id = 1;
-  string code =2;
-  string name =3;
-  int64 icon_id =5;
-  string icon_url =6;
-  bool is_cod =7;
-  bool is_online =8;
-  string terminals =9;
-  string memo =10;
-  int32 sort =11;
-  string status =12;
+  int32  id =1;//ID
+  string code =2;//唯一标记
+  string name =3;//支付名称
+  int64  icon_id =4;//图标ID
+  string icon_url =5;//图标URL
+  string is_cod =6;//是否货到付款（0否，1是）
+  string is_under_line =7;//是否为线下支付（0否，1是）
+  repeated string apply_terminal =8;//适用终端 一维数组json字符串存储（pc, h5, ios, android, alipay, weixin, baidu, toutiao, qq）
+  string config =9;//支付配置
+  string desc =10;//支付描述
+  int32  sort =11;//支付方式在页面的显示顺序
+  string status =12;//状态: 1启用，0 禁用
+  string created_at = 13;
+  string updated_at = 14;
 }
 
 //支付请求参数
 message PaymentRequest {
-  int32 id  =1;
+  int32 id =1;
   string code =2;
   string terminal =3;
   int64 order_id =4;
   string status =5;
-  string  type	=6;
+  string type	=6;
   bool is_online	=7;
   string memo =8;
   map<string,string> params =9;

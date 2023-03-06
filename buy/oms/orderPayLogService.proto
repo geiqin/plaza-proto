@@ -3,15 +3,15 @@ package services;
 option go_package = "/.;services";
 import "common/base.proto";
 
-//订单交易记录
-service OrderTransactionService {
+//订单支付记录
+service OrderPayLogService {
   //获取订单交易记录
-  rpc Get (OrderTransaction) returns (OrderTransactionResponse) {}
+  rpc Get (OrderPayLog) returns (OrderPayLogResponse) {}
   //查询订单交易记录
-  rpc Search (OrderTransactionRequest) returns (OrderTransactionResponse) {}
+  rpc Search (OrderPayLogRequest) returns (OrderPayLogResponse) {}
 }
 
-message OrderTransaction {
+message OrderPayLog {
   int64 id = 1;
   int64 order_id =2;
   string type =3;
@@ -28,7 +28,7 @@ message OrderTransaction {
 
 
 //支付请求参数
-message OrderTransactionRequest {
+message OrderPayLogRequest {
   int32 paged = 1;
   int32 page_size = 2;
   string sorting = 3;
@@ -43,14 +43,14 @@ message OrderTransactionRequest {
   repeated int64 ids =11;
 }
 
-message OrderTransactionData{
-  OrderTransaction entity = 1;
-  repeated OrderTransaction items =2;
+message OrderPayLogData{
+  OrderPayLog entity = 1;
+  repeated OrderPayLog items =2;
   common.Pager pager = 3;
   common.Info info =4;
 }
 
-message OrderTransactionResponse {
-  OrderTransactionData data = 1;
+message OrderPayLogResponse {
+  OrderPayLogData data = 1;
   common.Error error = 2;
 }

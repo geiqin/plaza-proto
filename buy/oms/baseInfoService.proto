@@ -2,23 +2,36 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 
-message AddressInfo {
-	int64 id = 1;
-	int64 member_id =2;
-	string name =3;
-	string last_name =4;
-	string first_name =5;
-	int64 area_id =6;
-	int64 street_id =7;
-	string addr =8;
-	string postcode =9;
-	string mobile =10;
-	string tel =11;
-	string delivery_day =12;
-	string delivery_time =13;
-	string lng =14;
-	string lat =15;
-	AreaInfo area =16;
+
+message PaymentInfo {
+	int32  id =1;//ID
+	string name =2;//支付名称
+	string icon_url =3;//图标URL
+	string payment =4;//支付标识
+}
+
+message MemberAddressInfo {
+	int64 id =1;
+	int64 member_id =2; //会员ID
+	string name =3; //姓名
+	string alias =4;//别名
+	string tel =5;//电话
+	int64 area_id =6;//所属区域ID
+	int64 province_id =7;//所在省
+	int64 cite_id =8;//所在市
+	int64 county_id =9;//所在县/区
+	string address =10;//详细地址
+	string lng =11; //经度
+	string lat =12;  //纬度
+	string idcard_name =13;//身份证姓名
+	string idcard_number =14;//身份证号码
+	string idcard_front =15;//身份证人像面图片
+	string idcard_back =16;//身份证国微面图片
+	string is_default =17;//是否默认地址（0否, 1是）
+	string tag =18;   //标签
+	string created_at =19;
+	string updated_at =20;
+	AreaInfo area =21;
 }
 
 message AreaInfo {
@@ -48,68 +61,40 @@ message AreaInfo {
 	string remark2 = 25;
 }
 
-
-message SkuInfo {
-	int64 id = 1;
+//商品信息
+message GoodsInfo {
+	int64 id = 1; //等同于sku_id
 	int64 spu_id = 2;
-	string sku_sn = 3;
-	string title = 4;
-	string type = 5;
-	string subtype = 6;
-	string unit = 7;
-	int64 shop_id = 8;
-	int64 image_id = 9;
-	string image_url = 10;
-	int64 price = 11;
-	int64 market_price = 12;
-	int64 cost_price = 13;
-	int64 promotion_price = 14;
-	string barcode = 15;
-	int64 weight = 16;
-	int32 volume = 17;
-	int32 stock = 18;
-	int32 frozen_stock = 19;
-	string out_sku_no = 20;
-	bool is_spec = 21;
-	bool is_virtual = 22;
-	bool is_presale = 23;
-	bool is_member_right = 24;
-	bool is_member_price = 25;
-	bool is_hide_stock = 26;
-	bool is_new = 27;
-	bool is_hot = 28;
-	bool is_recommend = 29;
-	bool is_special = 30;
-	bool is_master = 31;
-	string indexes =32;
-	string own_desc = 33;
-	string status = 34;
-	SpuInfo spu =35;
-}
-
-message SpuInfo {
-	int64 id = 1;
-	string code = 2;
-	string title = 3;
-	string type = 4;
-	string extend_type = 5;
-	string unit = 6;
-	int32 category_id = 7;
-	int32 brand_id = 9;
-	int64 shop_id = 10;
-	int32 max_buy = 11;
-	int32 min_buy = 12;
-	int64 province_id = 13;
-	int64 city_id = 14;
-	int32 stocks = 24;
-	int64 master_sku_id = 33;
-	bool is_spec = 34;
-	int32 sort = 35;
-	string memo = 36;
-	string freight_type = 40;
-	int64 freight_uniform_fee = 41;
-	int64 freight_express_id = 42;
-	string status = 44;
+	int64 sku_id = 3;
+	string type = 5; //类型
+	string title = 6; //标题
+	int64 inventory = 7; //库存数量
+	string unit = 8; //库存单位
+	string image_url = 9; //封面URL
+	bool is_many_spec = 10;//是否多规格商品
+	bool is_invalid = 11; //是否无效
+	int64 shop_id = 12; //分店ID
+	int64 brand_id = 13;//品牌ID
+	string brand_name = 14; //品牌名称
+	string spec_desc = 15; //规格描述
+	int64 sku_weight = 16;
+	int64 sku_volume = 17;
+	string sku_coding = 18;
+	string sku_barcode = 19;
+	int64 sku_original_price = 20;
+	int64 sku_price = 21;
+	int64 original_price = 22;
+	int64 price = 23;
+	int64 give_integral = 24;
+	bool is_virtual = 25;
+	int32 buy_min_number = 28;
+	int32 buy_max_number = 29;
+	string show_field_original_price_text =30;
+	string show_field_price_text =31;
+	string goods_url =32;
+	bool checked = 33; //是否选中
+	int32 number = 34; //购买数量
+	int64 subtotal_price = 35; //合计价格
 }
 
 //参与的活动
@@ -154,6 +139,27 @@ message MemberInfo {
 	bool bound_email =10;
 	bool bound_wx =11;
 	string status =12;
+}
+
+message UserInfo {
+	int64 id =1;
+	string type = 2;
+	string name =3;
+	string status =4;
+}
+
+message CompanyInfo {
+	int64 id =1;
+	string type = 2;
+	string name =3;
+	string status =4;
+}
+
+message WarehouseInfo {
+	int64 id =1;
+	string type = 2;
+	string name =3;
+	string status =4;
 }
 
 //订单详情步骤

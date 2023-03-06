@@ -13,25 +13,27 @@ service OrderAddressService {
 }
 
 message OrderAddress {
-    int64 id = 1;
-    int64 order_id = 2;
-    int64 address_id = 3;
-    string name =4;
-    string last_name =5;
-    string first_name =6;
-    int64 area_id =7;
-    int64 street_id =8;
-    string addr =9;
-    string postcode =10;
-    string mobile =11;
-    string tel =12;
-    string delivery_day =13;
-    string delivery_time =14;
-    string lng =15;
-    string lat =16;
-    string created_at = 17;
-    string updated_at = 18;
-    AreaInfo area = 19;
+    int64  id =1;//ID
+    int64  order_id =2;//区域ID
+    int64  address_id =3;//引用客户地址ID
+    string name =4;//姓名
+    string alias =5;//别名
+    string tel =6;//电话
+    string address =7;//地址
+    int64  area_id =8;//区域ID
+    string province_name =9;//收件人-省-名称
+    string city_name =10;//收件人-市-名称
+    string county_name =11;//收件人-县/区-名称
+    string lng =12;//经度
+    string lat =13;//纬度
+    string idcard_name =14;//身份证姓名
+    string idcard_number =15;//身份证号码
+    string idcard_front =16;//身份证人像面图片
+    string idcard_back =17;//身份证国微面图片
+    int64  street_id =18;//街道ID
+    string created_at = 19;
+    string updated_at = 20;
+    AreaInfo area = 21;
 }
 
 

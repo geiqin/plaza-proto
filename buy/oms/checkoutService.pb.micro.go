@@ -43,12 +43,10 @@ func NewCheckoutServiceEndpoints() []*api.Endpoint {
 // Client API for CheckoutService service
 
 type CheckoutService interface {
-	//填写商品
-	Write(ctx context.Context, in *WriteRequest, opts ...client.CallOption) (*CheckoutResponse, error)
 	//确认信息
-	Confirm(ctx context.Context, in *ConfirmInfo, opts ...client.CallOption) (*CheckoutResponse, error)
+	Confirm(ctx context.Context, in *CheckRequest, opts ...client.CallOption) (*CheckoutResponse, error)
 	//提交订单
-	Submit(ctx context.Context, in *ConfirmInfo, opts ...client.CallOption) (*CheckoutResponse, error)
+	Submit(ctx context.Context, in *CheckRequest, opts ...client.CallOption) (*CheckoutSubmitResponse, error)
 }
 
 type checkoutService struct {
@@ -63,17 +61,7 @@ func NewCheckoutService(name string, c client.Client) CheckoutService {
 	}
 }
 
-func (c *checkoutService) Write(ctx context.Context, in *WriteRequest, opts ...client.CallOption) (*CheckoutResponse, error) {
-	req := c.c.NewRequest(c.name, "CheckoutService.Write", in)
-	out := new(CheckoutResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *checkoutService) Confirm(ctx context.Context, in *ConfirmInfo, opts ...client.CallOption) (*CheckoutResponse, error) {
+func (c *checkoutService) Confirm(ctx context.Context, in *CheckRequest, opts ...client.CallOption) (*CheckoutResponse, error) {
 	req := c.c.NewRequest(c.name, "CheckoutService.Confirm", in)
 	out := new(CheckoutResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -83,9 +71,9 @@ func (c *checkoutService) Confirm(ctx context.Context, in *ConfirmInfo, opts ...
 	return out, nil
 }
 
-func (c *checkoutService) Submit(ctx context.Context, in *ConfirmInfo, opts ...client.CallOption) (*CheckoutResponse, error) {
+func (c *checkoutService) Submit(ctx context.Context, in *CheckRequest, opts ...client.CallOption) (*CheckoutSubmitResponse, error) {
 	req := c.c.NewRequest(c.name, "CheckoutService.Submit", in)
-	out := new(CheckoutResponse)
+	out := new(CheckoutSubmitResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -96,19 +84,16 @@ func (c *checkoutService) Submit(ctx context.Context, in *ConfirmInfo, opts ...c
 // Server API for CheckoutService service
 
 type CheckoutServiceHandler interface {
-	//填写商品
-	Write(context.Context, *WriteRequest, *CheckoutResponse) error
 	//确认信息
-	Confirm(context.Context, *ConfirmInfo, *CheckoutResponse) error
+	Confirm(context.Context, *CheckRequest, *CheckoutResponse) error
 	//提交订单
-	Submit(context.Context, *ConfirmInfo, *CheckoutResponse) error
+	Submit(context.Context, *CheckRequest, *CheckoutSubmitResponse) error
 }
 
 func RegisterCheckoutServiceHandler(s server.Server, hdlr CheckoutServiceHandler, opts ...server.HandlerOption) error {
 	type checkoutService interface {
-		Write(ctx context.Context, in *WriteRequest, out *CheckoutResponse) error
-		Confirm(ctx context.Context, in *ConfirmInfo, out *CheckoutResponse) error
-		Submit(ctx context.Context, in *ConfirmInfo, out *CheckoutResponse) error
+		Confirm(ctx context.Context, in *CheckRequest, out *CheckoutResponse) error
+		Submit(ctx context.Context, in *CheckRequest, out *CheckoutSubmitResponse) error
 	}
 	type CheckoutService struct {
 		checkoutService
@@ -121,14 +106,10 @@ type checkoutServiceHandler struct {
 	CheckoutServiceHandler
 }
 
-func (h *checkoutServiceHandler) Write(ctx context.Context, in *WriteRequest, out *CheckoutResponse) error {
-	return h.CheckoutServiceHandler.Write(ctx, in, out)
-}
-
-func (h *checkoutServiceHandler) Confirm(ctx context.Context, in *ConfirmInfo, out *CheckoutResponse) error {
+func (h *checkoutServiceHandler) Confirm(ctx context.Context, in *CheckRequest, out *CheckoutResponse) error {
 	return h.CheckoutServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *checkoutServiceHandler) Submit(ctx context.Context, in *ConfirmInfo, out *CheckoutResponse) error {
+func (h *checkoutServiceHandler) Submit(ctx context.Context, in *CheckRequest, out *CheckoutSubmitResponse) error {
 	return h.CheckoutServiceHandler.Submit(ctx, in, out)
 }

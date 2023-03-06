@@ -3,76 +3,65 @@ package services;
 option go_package = "/.;services";
 import "common/base.proto";
 import "baseInfoService.proto";
-import "adjustmentService.proto";
 
 service CartService {
-    //加入购物车商品
-    rpc Add (CartRequest) returns (CartResponse) {}
-    //设置购物车商品数量
+    //设置购物车商品
     rpc Set (CartRequest) returns (CartResponse) {}
     //删除购物车商品
-    rpc Remove (CartRequest) returns (CartResponse){}
+    rpc Remove (CartRequest) returns (CartDetailResponse){}
     //清除购物车
-    rpc Clear (CartRequest) returns (CartResponse) {}
-    //获取购物车
-    rpc Get (CartRequest) returns (CartResponse) {}
+    rpc Clear (CartRequest) returns (CartDetailResponse) {}
+    //购物车详情
+    rpc Detail (CartRequest) returns (CartDetailResponse) {}
+    //获得单个商品库存状况
+    rpc Stock (CartRequest) returns (CartStockResponse) {}
+    //获得统计数量(服务调的多)
+    rpc Count (CartRequest) returns (CartDetailResponse) {}
     //选中商品计算
-    rpc Checked (CartRequest) returns (CartResponse) {}
+    rpc Checked (CartRequest) returns (CartDetailResponse) {}
 }
 
-message Cart {
-    string code =1;
-    string currency =2;
-    int32 total_num =3;
-    int64 total_weight =4;
-    int64 total_price =5;
-    int64 total_discount =6;
-    int64 total_amount =7;
-    int64 freight_fee =8;
-    int64 insure_fee =9;
-    int64 pack_fee =10;
-    int64 pay_money =11;
-    int64 member_id = 12;
-    int64 address_id = 13;
-    int32 checked_status = 14;
-    repeated CartItem skus = 15;
-    repeated PromotionInfo promotions =16;//店铺营销活动
-    repeated Adjustment adjustments =17;//变动记录
-    repeated SkuInfo presents =18; //可获得的赠品
+message Cart  {
+    int64  id =1; //ID
+    int64  member_id =2; //会员ID
+    int64  sku_id =3; //商品skuId
+    int64  spu_id =4; //商品spuId
+    string title =5; //标题
+    string image_url =6; //封面图片
+    int64  original_price =7; //原价
+    int64  price =8; //销售价格
+    int32  number =9; //购买数量
+    string spec_desc =10; //规格描述
+    int32  inventory =11; //库存量
 }
 
-message CartItem {
-    int64 sku_id = 1;
-    int32 num = 2;
-    int64 price = 3;
-    int64 promotion_price = 4;
-    int64 subtotal_amount = 5;
-    int64 subtotal_discount = 6;
-    bool checked = 7;
-    SkuInfo sku = 8;
-    repeated PromotionInfo promotions =9;
+//购物车数据
+message CartData {
+    int32 buy_number =1;
+    int64 total_price =2;
+    int64 address_id = 3;
+    repeated GoodsInfo items =4;
+    repeated PromotionInfo promotions_data =5;
 }
 
 message CartRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
-    string keywords = 3;
-    string row_id =4;
-    int64 sku_id =5;
-    string direction =6;
-    int32 num =7;
-    repeated int64 sku_ids =8;
-    map<int64,int32> sku_list =9;
-}
-
-message CartData {
-    Cart entity = 1;
-    common.Pager pager =2;
-    repeated Cart items = 3;
-    common.Info info =4;
+    string type =1;
+    int64 sku_id =2;
+    int32 number =3;
+    int64 id =4;
+    repeated int64 ids =5;
 }
 
 message CartResponse {
+    Cart data = 1;
+    common.Error error = 2;
+}
+
+message CartDetailResponse {
     CartData data = 1;
+    common.Error error = 2;
+}
+message CartStockResponse {
+    Cart data = 1;
     common.Error error = 2;
 }

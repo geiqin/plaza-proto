@@ -1,0 +1,160 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "orderService.proto";
+import "baseInfoService.proto";
+
+service AftersaleService {
+    // 售后处理页
+    rpc Index (AftersaleRequest) returns (AftersaleIndexResponse) {}
+    // 申请售后
+    rpc Create (Aftersale) returns (AftersaleResponse) {}
+
+    //审核处理
+    rpc AuditHandle (Aftersale) returns (AftersaleResponse) {}
+    //商家已发货（针对换货商品的发货）
+    rpc MerchantShipped (Aftersale) returns (AftersaleResponse) {}
+    //商家已收货（已收到回寄的商品）
+    rpc MerchantReceived (Aftersale) returns (AftersaleResponse) {}
+
+    //买家已撤销维权
+    rpc BuyerCanceled (Aftersale) returns (AftersaleResponse) {}
+    //买家已寄回商品
+    rpc BuyerSent (Aftersale) returns (AftersaleResponse) {}
+    //买家已签收（针对换货商品的签收）
+    rpc BuyerReceived (Aftersale) returns (AftersaleResponse) {}
+
+    //立即打款
+    rpc DoRefund (Aftersale) returns (AftersaleResponse) {}
+
+    // 获取维权信息（基本信息）
+    rpc Get (Aftersale) returns (AftersaleResponse) {}
+    //查询维权信息
+    rpc Search (AftersaleRequest) returns (AftersaleResponse) {}
+}
+
+message Aftersale {
+    int64  id =1; //ID
+    string order_sn =2; //订单编号
+    int64  order_id =3; //订单ID
+    int64  order_detail_id =4; //订单详情id
+    int64  sku_id =5; //SkuID
+    int64  member_id =6; //用户id
+    string type =7; //业务类型（0仅退款, 1退货退款）
+    string refund_method =8; //退款类型（0原路退回, 1退至钱包, 2手动处理）
+    string reason =9; //申请原因
+    int32  number =10; //退货数量
+    int64  price =11; //退款金额
+    int64  freight_subsidy =12; //运费补贴金
+    string msg =13; //退款说明
+    string status =14; //状态（0待确认, 1待退货, 2待审核, 3已完成, 4已拒绝, 5已取消）
+    string refuse_reason =15; //拒绝原因
+    string express_name =16; //快递名称
+    string express_number =17; //快递单号
+    string apply_time =18; //申请时间
+    string confirm_time =19; //确认时间
+    string delivery_time =20; //退货时间
+    string audit_time =21; //审核时间
+    string cancel_time =22; //取消时间
+    string created_at = 23;
+    string updated_at = 24;
+    GoodsInfo goods = 25;
+    Order order = 26;
+    repeated AftersaleImage images = 27;
+    string status_text =28;
+    string type_text =29;
+    string tips_msg =30;
+}
+
+
+message AftersaleImage {
+    int64 id = 1;
+    int64 safeguard_id = 2;
+    int64 image_id = 3;
+    string image_url = 4;
+}
+
+//商家收货地址
+message AftersaleAddress {
+    string name = 1;
+    int64 area_id = 2;
+    string addr = 3;
+    string mobile = 4;
+    AreaInfo area = 5;
+}
+
+
+message AftersaleRequest {
+    int32 paged =1;
+    int32 page_size =2;
+    string	sorting	=3;
+    int64 id = 4;
+    int64 order_id = 6;
+    int64 member_id = 7;
+    string type = 8;
+    int64 goods_id = 9;
+    string keywords = 10;
+    string refund_status = 11;
+    string status = 13;
+    string order_sn = 14;
+    int64 sku_id = 15;
+    int64 detail_id = 16;
+    repeated int64 ids = 17;
+}
+
+message AftersaleData {
+    Aftersale aftersale = 1;
+    common.Pager pager = 4;
+    repeated Aftersale items = 5;
+    common.Info info = 6;
+}
+
+message AftersaleResponse {
+    AftersaleData data = 1;
+    common.Error error = 2;
+}
+
+message AftersaleStepInfo{
+    int32 number =1;
+    string name =2;
+    bool is_caret =3;
+    bool is_angle =4;
+    bool is_active =5;
+    bool is_end =6;
+}
+
+
+message AftersaleStepData{
+    repeated AftersaleStepInfo step0 =1;
+    repeated AftersaleStepInfo step1 =2;
+}
+message AftersaleReturnedData{
+    int32 returned_quantity =1;
+    int64 refund_price =2;
+}
+
+message AftersaleTypeInfo {
+    int32 value =1;
+    string name =2;
+    string desc =3;
+    string icon =4;
+    string class =5;
+}
+
+message AftersaleIndexData {
+    Order order_data = 1;
+    Aftersale new_aftersale_data = 2;
+    AftersaleStepData step_data =3;
+    AftersaleReturnedData returned_data =4;
+    repeated string return_only_money_reason =5;
+    repeated string return_money_goods_reason =6;
+    string return_goods_address =7;
+    repeated AftersaleTypeInfo aftersale_type_list =8;
+    string editor_path_type =9;
+}
+
+message AftersaleIndexResponse {
+    AftersaleIndexData data = 1;
+    common.Error error = 2;
+}
