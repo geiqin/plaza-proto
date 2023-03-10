@@ -21,10 +21,10 @@ service MemberSecurityService {
 message MemberSecurity{
     int64 id =1;
     int64 member_id =2;
-    string username = 3;
-    string password =4;
-    string email = 5;
-    string mobile = 6;
+    string password =3;
+    string salt = 4;
+    string created_at =5;
+    string updated_at =6;
     Member member =7;
 }
 

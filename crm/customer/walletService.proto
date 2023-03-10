@@ -1,0 +1,60 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "memberService.proto";
+
+service WalletService {
+  //钱包中心
+  rpc Index (WalletRequest) returns (WalletResponse) {}
+  //创建钱包
+  rpc Create (WalletRequest) returns (WalletResponse) {}
+  //提现申请 - 初始化
+  rpc CashInit  (WalletRequest) returns (WalletResponse) {}
+  //提现申请 - 验证码发送
+  rpc VerifySend (WalletRequest) returns (WalletResponse) {}
+  //提现申请 - 验证码验证
+  rpc VerifyCheck (WalletRequest) returns (WalletResponse) {}
+  //获取钱包
+  rpc Get (WalletRequest) returns (WalletResponse) {}
+  //查询钱包
+  rpc Search (WalletRequest) returns (WalletResponse) {}
+}
+
+message Wallet {
+  int64  id =1;//ID
+  int64  member_id =2;//用户ID
+  int64  normal_money =3;//有效金额（可用余额=现金余额+赠送金+信用额度-冻结金额）
+  int64  frozen_money =4;//冻结金额
+  int64  give_money =5;//赠送金额
+  int64  credit_money =6;//信用额度
+  string status =7;//状态：0停用 1正常
+  string created_at =8;
+  string updated_at =9;
+  Member member =10;
+}
+
+//查询参数
+message WalletRequest {
+  int32 paged = 1;
+  int32 page_size = 2;
+  //以下为自定义参数
+  string name = 3;
+  int64  id =4;
+  int64  member_id =5;
+  string status =6;
+  int32 type = 7;
+}
+
+message WalletData{
+  Wallet entity = 1;
+  common.Pager pager =2;
+  repeated Wallet items = 3;
+  common.Info info =4;
+}
+
+
+message WalletResponse {
+  WalletData data = 1;
+  common.Error error = 2;
+}

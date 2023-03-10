@@ -3,16 +3,15 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 import "tagService.proto";
-import "rankService.proto";
+import "vipService.proto";
 import "memberAddressService.proto";
-import "fanService.proto";
 
 
 service MemberService {
     //通过账号注册用户
     rpc Register (MemberRequest) returns (MemberResponse) {}
     //从粉丝添加用户
-    rpc RegisterByFan (Fan) returns (MemberResponse) {}
+    rpc RegisterByFan (RegisterMemberFan) returns (MemberResponse) {}
     //通过手机注册用户
     rpc RegisterByMobile (MemberRequest) returns (MemberResponse) {}
     //通过邮箱注册用户
@@ -44,51 +43,69 @@ service MemberService {
     rpc Search (MemberRequest) returns (MemberResponse) {}
     //设置会员标签
     rpc SetTags (Member) returns (MemberResponse) {}
-    //设置会员等级
-    rpc SetRank (Member) returns (MemberResponse) {}
     //获取已绑定手机用户(SRV专用)
-    rpc GetByMobile (MemberRequest) returns (MemberResponse) {}
+    rpc GetByBindMobile (MemberRequest) returns (MemberResponse) {}
     //获取已绑定邮箱用户(SRV专用)
-    rpc GetByEmail (MemberRequest) returns (MemberResponse) {}
+    rpc GetByBindEmail (MemberRequest) returns (MemberResponse) {}
 }
 
 
 message Member {
-    int64 id =1;
-    string type = 2;
-    string name =3;
-    string gender =4;
-    int64 avatar_id =5;
-    string avatar_url =6;
-    int32 rank_id =7;
-    string rank_expired_at =8;
-    bool rank_valid =9;
-    int64 surplus =10;
-    int64 deposit =11;
-    int64 pay_integral =12;
-    int64 rank_integral =13;
-    int32 traded_num =14;
-    int64 traded_money =15;
-    int32 comment_num =16;
-    int32 collect_num =17;
-    int64 recommender_id =18;
-    bool trusted =19;
-    bool bound_mobile =20;
-    bool bound_email =21;
-    bool bound_wx =22;
-    int64 area_id =23;
-    string birthday =24;
-    string contact_tel= 25;
-    string memo =26;
-    string source =27;
-    int64 by_fan_id = 28;
-    string status =29;
-    string created_at =30;
-    string updated_at =31;
-    string deleted_at =32;
-    Rank rank =33;
-    repeated Tag tags = 34;
-    repeated MemberAddress addresses = 36;
+    int64  id =1;//ID
+    string type =2;//类型：0个人,1企业
+    string number_code =3;//会员编号
+    string username =4;//用户名称
+    string nickname =5;//用户昵称
+    string gender =6;//性别:0=未知,1=男,2=女
+    string birthday =7;//会员生日
+    int64  area_id =8;//区域ID
+    string province_name =9;//所在省
+    string city_name =10;//所在市
+    string county_name =11;//所在区/县
+    string address =12;//详细地址
+    string email =13;//邮箱
+    string mobile =14;//手机号
+    int64  avatar_id =15;//会员头像ID
+    string avatar_url =16;//会员头像url地址
+    int32  level_vip_id =17;//等级会员ID
+    int64  integral =18;//会员积分（可兑换）
+    int64  frozen_integral =19;//冻结积分
+    int64  level_integral =20;//会员等级积分(升级专用)
+    int32  total_order_num =21;//成交订单笔数
+    int64  total_order_money =122;//成交订单总额,单位:元
+    int32  comment_num =23;//评价总数
+    int32  collect_num =24;//商品收藏总数
+    int64  recommender_id =25;//推荐会员ID
+    string is_trusted =26;//已实名认证
+    string is_bind_mobile =27;//已绑定手机
+    string is_bind_email =28;//已绑定邮箱
+    string is_bind_wx =29;//是否绑定微信
+    string memo =30;//备注
+    string source_type =31;//来源类型
+    int64  create_fan_id =32;//注册来源粉丝ID
+    string status =33;//状态：1正常，2锁定，3禁用，9注销
+    string created_at =34;
+    string updated_at =35;
+    string deleted_at =36;
+    Vip level_vip =37;
+    repeated Tag tags = 38;
+    repeated MemberAddress address_list = 39;
+}
+
+message RegisterMemberFan{
+    string open_id = 1;//openId
+    string union_id = 2;//unionId
+    string platform = 3; //所属平台
+    string original_data = 4; //平台原始数据
+    string type =5;//类型：0个人,1企业
+    string username =6;//用户名称
+    string nickname =7;//用户昵称
+    string avatar_url =8;//会员头像url地址
+    int64  recommender_id =9;//推荐会员ID
+    string province_name =10;//所在省
+    string city_name =11;//所在市
+    string county_name =12;//所在区/县
+    string address =13;//详细地址
 }
 
 //客户查询参数
@@ -99,29 +116,28 @@ message MemberRequest {
     //以下为自定义参数
     int64 id = 4;
     string type = 5;
-    string name = 6;
-    string gender =7;
-    string contact_tel =8;
-    string real_name =9;
-    int32 rank_id =10;
-    int32 card_id =11;
-    int32 tag_id =12;
-    string source =13;
-    int64 area_id =14;
-    string status =15;
-    string keywords =16;
-    int64 member_id = 17;
-    string mobile =18;
-    string email =19;
-    bool bound_mobile =20;
-    bool bound_email =21;
-    bool bound_wx =22;
+    string number_code = 6;
+    string username = 7;
+    string nickname =8;
+    string gender =9;
+    string mobile =10;
+    string email =11;
+    int32 vip_id =12;
+    int32 card_id =13;
+    int32 tag_id =14;
+    string source_type =15;
+    int64 area_id =16;
+    string status =17;
+    string keywords =18;
+    int64 member_id = 19;
+    string is_bind_mobile =20;
+    string is_bind_email =21;
+    string is_bind_wx =22;
     int64 recommender_id =23;
     int64 avatar_id =24;
     string avatar_url =25;
     string refer_url =26;
     string wx_open_id =27;
-    string username =28;
     string password =29;
     string code =30;
     repeated int64 ids = 31;

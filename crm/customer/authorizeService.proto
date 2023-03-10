@@ -12,9 +12,9 @@ service AuthorizeService {
     //绑定邮箱
     rpc BindEmail (AuthorizeRequest) returns (AuthorizeResponse) {}
     //微信小程序邀请码
-    rpc BindWxByMini (AuthorizeRequest) returns (AuthorizeResponse) {}
+   // rpc BindWxByMini (AuthorizeRequest) returns (AuthorizeResponse) {}
     //APP邀请二维码
-    rpc BindWxByApp (AuthorizeRequest) returns (AuthorizeResponse) {}
+   // rpc BindWxByApp (AuthorizeRequest) returns (AuthorizeResponse) {}
 }
 
 

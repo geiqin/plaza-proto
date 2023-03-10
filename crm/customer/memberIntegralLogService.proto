@@ -1,0 +1,49 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "memberService.proto";
+
+service MemberIntegralLogService {
+  rpc Create (MemberIntegralLog) returns (MemberIntegralLogResponse) {}
+  rpc Delete (MemberIntegralLog) returns (MemberIntegralLogResponse) {}
+  rpc Get (MemberIntegralLog) returns (MemberIntegralLogResponse) {}
+  rpc List (MemberIntegralLogRequest) returns (MemberIntegralLogResponse) {}
+  rpc Search (MemberIntegralLogRequest) returns (MemberIntegralLogResponse) {}
+}
+
+message MemberIntegralLog {
+  int64  id =1;//ID
+  int64  member_id =2;//用户ID
+  string type =3;//操作类型（0减少, 1增加）
+  int64  original_integral =4;//原始积分
+  int64  new_integral =5;//最新积分
+  int64  operation_integral =6;//操作积分
+  string msg =7;//操作原因
+  string created_at =9;
+  string updated_at =10;
+  Member member = 11;
+}
+
+message MemberIntegralLogRequest {
+  int32 paged = 1;
+  int32 page_size = 2;
+  string sorting = 3;
+  //以下为自定义参数
+  string type = 4;
+  int64 member_id = 5;
+}
+
+message MemberIntegralLogData {
+  MemberIntegralLog entity = 1;
+  common.Pager pager =2;
+  repeated MemberIntegralLog items = 3;
+  common.Info info =4;
+}
+
+
+message MemberIntegralLogResponse {
+  MemberIntegralLogData data = 1;
+  common.Error error = 2;
+}
+

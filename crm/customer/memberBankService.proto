@@ -2,6 +2,7 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "memberService.proto";
 
 service MemberBankService {
     rpc Create (MemberBank) returns (MemberBankResponse) {}
@@ -11,13 +12,16 @@ service MemberBankService {
 }
 
 message MemberBank{
-    int64 id =1;
-    int64 member_id =2;
-    string cardholder = 3;
-    string card_no =4;
-    string bank_name =5;
-    string reserve_mobile =6;
-    string status = 7;
+    int64  id =1;//ID
+    int64  member_id =2;//用户ID
+    string bank_name =3;//开户平台
+    string bank_account =4;//开户账号
+    string bank_username =5;//开户姓名
+    string is_default =6;//是否为默认
+    string status =7;//状态：0 无效，1 正常
+    string created_at =8;
+    string updated_at =9;
+    Member member =10;
 }
 
 message MemberBankRequest{
@@ -25,8 +29,8 @@ message MemberBankRequest{
     int32 page_size = 2;
     int64 id =3;
     int64 member_id =4;
-    string cardholder = 5;
-    string card_no =6;
+    string bank_username = 5;
+    string bank_account =6;
     string bank_name =7;
     string status =8;
 }

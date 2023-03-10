@@ -46,7 +46,7 @@ type MemberService interface {
 	//通过账号注册用户
 	Register(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//从粉丝添加用户
-	RegisterByFan(ctx context.Context, in *Fan, opts ...client.CallOption) (*MemberResponse, error)
+	RegisterByFan(ctx context.Context, in *RegisterMemberFan, opts ...client.CallOption) (*MemberResponse, error)
 	//通过手机注册用户
 	RegisterByMobile(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//通过邮箱注册用户
@@ -76,12 +76,10 @@ type MemberService interface {
 	Search(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//设置会员标签
 	SetTags(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
-	//设置会员等级
-	SetRank(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
 	//获取已绑定手机用户(SRV专用)
-	GetByMobile(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
+	GetByBindMobile(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//获取已绑定邮箱用户(SRV专用)
-	GetByEmail(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
+	GetByBindEmail(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 }
 
 type memberService struct {
@@ -106,7 +104,7 @@ func (c *memberService) Register(ctx context.Context, in *MemberRequest, opts ..
 	return out, nil
 }
 
-func (c *memberService) RegisterByFan(ctx context.Context, in *Fan, opts ...client.CallOption) (*MemberResponse, error) {
+func (c *memberService) RegisterByFan(ctx context.Context, in *RegisterMemberFan, opts ...client.CallOption) (*MemberResponse, error) {
 	req := c.c.NewRequest(c.name, "MemberService.RegisterByFan", in)
 	out := new(MemberResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -266,8 +264,8 @@ func (c *memberService) SetTags(ctx context.Context, in *Member, opts ...client.
 	return out, nil
 }
 
-func (c *memberService) SetRank(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberService.SetRank", in)
+func (c *memberService) GetByBindMobile(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberService.GetByBindMobile", in)
 	out := new(MemberResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -276,18 +274,8 @@ func (c *memberService) SetRank(ctx context.Context, in *Member, opts ...client.
 	return out, nil
 }
 
-func (c *memberService) GetByMobile(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberService.GetByMobile", in)
-	out := new(MemberResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberService) GetByEmail(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberService.GetByEmail", in)
+func (c *memberService) GetByBindEmail(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberService.GetByBindEmail", in)
 	out := new(MemberResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -302,7 +290,7 @@ type MemberServiceHandler interface {
 	//通过账号注册用户
 	Register(context.Context, *MemberRequest, *MemberResponse) error
 	//从粉丝添加用户
-	RegisterByFan(context.Context, *Fan, *MemberResponse) error
+	RegisterByFan(context.Context, *RegisterMemberFan, *MemberResponse) error
 	//通过手机注册用户
 	RegisterByMobile(context.Context, *MemberRequest, *MemberResponse) error
 	//通过邮箱注册用户
@@ -332,18 +320,16 @@ type MemberServiceHandler interface {
 	Search(context.Context, *MemberRequest, *MemberResponse) error
 	//设置会员标签
 	SetTags(context.Context, *Member, *MemberResponse) error
-	//设置会员等级
-	SetRank(context.Context, *Member, *MemberResponse) error
 	//获取已绑定手机用户(SRV专用)
-	GetByMobile(context.Context, *MemberRequest, *MemberResponse) error
+	GetByBindMobile(context.Context, *MemberRequest, *MemberResponse) error
 	//获取已绑定邮箱用户(SRV专用)
-	GetByEmail(context.Context, *MemberRequest, *MemberResponse) error
+	GetByBindEmail(context.Context, *MemberRequest, *MemberResponse) error
 }
 
 func RegisterMemberServiceHandler(s server.Server, hdlr MemberServiceHandler, opts ...server.HandlerOption) error {
 	type memberService interface {
 		Register(ctx context.Context, in *MemberRequest, out *MemberResponse) error
-		RegisterByFan(ctx context.Context, in *Fan, out *MemberResponse) error
+		RegisterByFan(ctx context.Context, in *RegisterMemberFan, out *MemberResponse) error
 		RegisterByMobile(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		RegisterByEmail(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		ToLogin(ctx context.Context, in *MemberRequest, out *MemberResponse) error
@@ -359,9 +345,8 @@ func RegisterMemberServiceHandler(s server.Server, hdlr MemberServiceHandler, op
 		List(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		Search(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		SetTags(ctx context.Context, in *Member, out *MemberResponse) error
-		SetRank(ctx context.Context, in *Member, out *MemberResponse) error
-		GetByMobile(ctx context.Context, in *MemberRequest, out *MemberResponse) error
-		GetByEmail(ctx context.Context, in *MemberRequest, out *MemberResponse) error
+		GetByBindMobile(ctx context.Context, in *MemberRequest, out *MemberResponse) error
+		GetByBindEmail(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 	}
 	type MemberService struct {
 		memberService
@@ -378,7 +363,7 @@ func (h *memberServiceHandler) Register(ctx context.Context, in *MemberRequest, 
 	return h.MemberServiceHandler.Register(ctx, in, out)
 }
 
-func (h *memberServiceHandler) RegisterByFan(ctx context.Context, in *Fan, out *MemberResponse) error {
+func (h *memberServiceHandler) RegisterByFan(ctx context.Context, in *RegisterMemberFan, out *MemberResponse) error {
 	return h.MemberServiceHandler.RegisterByFan(ctx, in, out)
 }
 
@@ -442,14 +427,10 @@ func (h *memberServiceHandler) SetTags(ctx context.Context, in *Member, out *Mem
 	return h.MemberServiceHandler.SetTags(ctx, in, out)
 }
 
-func (h *memberServiceHandler) SetRank(ctx context.Context, in *Member, out *MemberResponse) error {
-	return h.MemberServiceHandler.SetRank(ctx, in, out)
+func (h *memberServiceHandler) GetByBindMobile(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
+	return h.MemberServiceHandler.GetByBindMobile(ctx, in, out)
 }
 
-func (h *memberServiceHandler) GetByMobile(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
-	return h.MemberServiceHandler.GetByMobile(ctx, in, out)
-}
-
-func (h *memberServiceHandler) GetByEmail(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
-	return h.MemberServiceHandler.GetByEmail(ctx, in, out)
+func (h *memberServiceHandler) GetByBindEmail(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
+	return h.MemberServiceHandler.GetByBindEmail(ctx, in, out)
 }
