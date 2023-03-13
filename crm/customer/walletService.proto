@@ -3,10 +3,14 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 import "memberService.proto";
+import "configService.proto";
+import "baseInfoService.proto";
 
 service WalletService {
   //钱包中心
-  rpc Index (WalletRequest) returns (WalletResponse) {}
+  rpc Index (WalletRequest) returns (WalletIndexResponse) {}
+  //生成付款码
+  rpc PaymentCode (WalletRequest) returns (WalletPaymentCodeResponse) {}
   //创建钱包
   rpc Create (WalletRequest) returns (WalletResponse) {}
   //提现申请 - 初始化
@@ -56,5 +60,27 @@ message WalletData{
 
 message WalletResponse {
   WalletData data = 1;
+  common.Error error = 2;
+}
+
+
+message WalletIndexData {
+  WalletConfig base = 1;
+  Wallet member_wallet =2;
+  repeated NavInfo nav_list = 3;
+}
+
+message WalletIndexResponse {
+  WalletIndexData data = 1;
+  common.Error error = 2;
+}
+
+message WalletPaymentCodeData {
+  string code= 1;
+  int32 time =2;
+}
+
+message WalletPaymentCodeResponse {
+  WalletPaymentCodeData data = 1;
   common.Error error = 2;
 }

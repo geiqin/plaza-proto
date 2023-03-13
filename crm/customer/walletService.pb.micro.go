@@ -44,7 +44,9 @@ func NewWalletServiceEndpoints() []*api.Endpoint {
 
 type WalletService interface {
 	//钱包中心
-	Index(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletResponse, error)
+	Index(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletIndexResponse, error)
+	//生成付款码
+	PaymentCode(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletPaymentCodeResponse, error)
 	//创建钱包
 	Create(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletResponse, error)
 	//提现申请 - 初始化
@@ -71,9 +73,19 @@ func NewWalletService(name string, c client.Client) WalletService {
 	}
 }
 
-func (c *walletService) Index(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletResponse, error) {
+func (c *walletService) Index(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletIndexResponse, error) {
 	req := c.c.NewRequest(c.name, "WalletService.Index", in)
-	out := new(WalletResponse)
+	out := new(WalletIndexResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletService) PaymentCode(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletPaymentCodeResponse, error) {
+	req := c.c.NewRequest(c.name, "WalletService.PaymentCode", in)
+	out := new(WalletPaymentCodeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -145,7 +157,9 @@ func (c *walletService) Search(ctx context.Context, in *WalletRequest, opts ...c
 
 type WalletServiceHandler interface {
 	//钱包中心
-	Index(context.Context, *WalletRequest, *WalletResponse) error
+	Index(context.Context, *WalletRequest, *WalletIndexResponse) error
+	//生成付款码
+	PaymentCode(context.Context, *WalletRequest, *WalletPaymentCodeResponse) error
 	//创建钱包
 	Create(context.Context, *WalletRequest, *WalletResponse) error
 	//提现申请 - 初始化
@@ -162,7 +176,8 @@ type WalletServiceHandler interface {
 
 func RegisterWalletServiceHandler(s server.Server, hdlr WalletServiceHandler, opts ...server.HandlerOption) error {
 	type walletService interface {
-		Index(ctx context.Context, in *WalletRequest, out *WalletResponse) error
+		Index(ctx context.Context, in *WalletRequest, out *WalletIndexResponse) error
+		PaymentCode(ctx context.Context, in *WalletRequest, out *WalletPaymentCodeResponse) error
 		Create(ctx context.Context, in *WalletRequest, out *WalletResponse) error
 		CashInit(ctx context.Context, in *WalletRequest, out *WalletResponse) error
 		VerifySend(ctx context.Context, in *WalletRequest, out *WalletResponse) error
@@ -181,8 +196,12 @@ type walletServiceHandler struct {
 	WalletServiceHandler
 }
 
-func (h *walletServiceHandler) Index(ctx context.Context, in *WalletRequest, out *WalletResponse) error {
+func (h *walletServiceHandler) Index(ctx context.Context, in *WalletRequest, out *WalletIndexResponse) error {
 	return h.WalletServiceHandler.Index(ctx, in, out)
+}
+
+func (h *walletServiceHandler) PaymentCode(ctx context.Context, in *WalletRequest, out *WalletPaymentCodeResponse) error {
+	return h.WalletServiceHandler.PaymentCode(ctx, in, out)
 }
 
 func (h *walletServiceHandler) Create(ctx context.Context, in *WalletRequest, out *WalletResponse) error {

@@ -53,6 +53,8 @@ type MemberService interface {
 	RegisterByEmail(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//验证账户信息
 	ToLogin(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
+	//个人中心
+	Index(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberIndexResponse, error)
 	Create(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
 	//手动添加单位用户
 	CreateCompany(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
@@ -137,6 +139,16 @@ func (c *memberService) RegisterByEmail(ctx context.Context, in *MemberRequest, 
 func (c *memberService) ToLogin(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
 	req := c.c.NewRequest(c.name, "MemberService.ToLogin", in)
 	out := new(MemberResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberService) Index(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberIndexResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberService.Index", in)
+	out := new(MemberIndexResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -297,6 +309,8 @@ type MemberServiceHandler interface {
 	RegisterByEmail(context.Context, *MemberRequest, *MemberResponse) error
 	//验证账户信息
 	ToLogin(context.Context, *MemberRequest, *MemberResponse) error
+	//个人中心
+	Index(context.Context, *Member, *MemberIndexResponse) error
 	Create(context.Context, *Member, *MemberResponse) error
 	//手动添加单位用户
 	CreateCompany(context.Context, *Member, *MemberResponse) error
@@ -333,6 +347,7 @@ func RegisterMemberServiceHandler(s server.Server, hdlr MemberServiceHandler, op
 		RegisterByMobile(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		RegisterByEmail(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		ToLogin(ctx context.Context, in *MemberRequest, out *MemberResponse) error
+		Index(ctx context.Context, in *Member, out *MemberIndexResponse) error
 		Create(ctx context.Context, in *Member, out *MemberResponse) error
 		CreateCompany(ctx context.Context, in *Member, out *MemberResponse) error
 		UpdateCompany(ctx context.Context, in *Member, out *MemberResponse) error
@@ -377,6 +392,10 @@ func (h *memberServiceHandler) RegisterByEmail(ctx context.Context, in *MemberRe
 
 func (h *memberServiceHandler) ToLogin(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
 	return h.MemberServiceHandler.ToLogin(ctx, in, out)
+}
+
+func (h *memberServiceHandler) Index(ctx context.Context, in *Member, out *MemberIndexResponse) error {
+	return h.MemberServiceHandler.Index(ctx, in, out)
 }
 
 func (h *memberServiceHandler) Create(ctx context.Context, in *Member, out *MemberResponse) error {

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+message NavInfo {
+    string icon =1;
+    string title =2;
+    string  url =3;
+}
+
+message DictInfo {
+    string text =1;
+    string value =2;
+    bool checked =3;
+}

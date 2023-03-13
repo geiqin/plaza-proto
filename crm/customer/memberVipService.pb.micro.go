@@ -43,6 +43,10 @@ func NewMemberVipServiceEndpoints() []*api.Endpoint {
 // Client API for MemberVipService service
 
 type MemberVipService interface {
+	//会员中心
+	Index(ctx context.Context, in *MemberVip, opts ...client.CallOption) (*MemberVipIndexResponse, error)
+	//分享海报
+	Poster(ctx context.Context, in *MemberVip, opts ...client.CallOption) (*MemberVipPosterResponse, error)
 	Get(ctx context.Context, in *MemberVip, opts ...client.CallOption) (*MemberVipResponse, error)
 	Search(ctx context.Context, in *MemberVipRequest, opts ...client.CallOption) (*MemberVipResponse, error)
 	List(ctx context.Context, in *MemberVipRequest, opts ...client.CallOption) (*MemberVipResponse, error)
@@ -58,6 +62,26 @@ func NewMemberVipService(name string, c client.Client) MemberVipService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *memberVipService) Index(ctx context.Context, in *MemberVip, opts ...client.CallOption) (*MemberVipIndexResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberVipService.Index", in)
+	out := new(MemberVipIndexResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberVipService) Poster(ctx context.Context, in *MemberVip, opts ...client.CallOption) (*MemberVipPosterResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberVipService.Poster", in)
+	out := new(MemberVipPosterResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *memberVipService) Get(ctx context.Context, in *MemberVip, opts ...client.CallOption) (*MemberVipResponse, error) {
@@ -93,6 +117,10 @@ func (c *memberVipService) List(ctx context.Context, in *MemberVipRequest, opts 
 // Server API for MemberVipService service
 
 type MemberVipServiceHandler interface {
+	//会员中心
+	Index(context.Context, *MemberVip, *MemberVipIndexResponse) error
+	//分享海报
+	Poster(context.Context, *MemberVip, *MemberVipPosterResponse) error
 	Get(context.Context, *MemberVip, *MemberVipResponse) error
 	Search(context.Context, *MemberVipRequest, *MemberVipResponse) error
 	List(context.Context, *MemberVipRequest, *MemberVipResponse) error
@@ -100,6 +128,8 @@ type MemberVipServiceHandler interface {
 
 func RegisterMemberVipServiceHandler(s server.Server, hdlr MemberVipServiceHandler, opts ...server.HandlerOption) error {
 	type memberVipService interface {
+		Index(ctx context.Context, in *MemberVip, out *MemberVipIndexResponse) error
+		Poster(ctx context.Context, in *MemberVip, out *MemberVipPosterResponse) error
 		Get(ctx context.Context, in *MemberVip, out *MemberVipResponse) error
 		Search(ctx context.Context, in *MemberVipRequest, out *MemberVipResponse) error
 		List(ctx context.Context, in *MemberVipRequest, out *MemberVipResponse) error
@@ -113,6 +143,14 @@ func RegisterMemberVipServiceHandler(s server.Server, hdlr MemberVipServiceHandl
 
 type memberVipServiceHandler struct {
 	MemberVipServiceHandler
+}
+
+func (h *memberVipServiceHandler) Index(ctx context.Context, in *MemberVip, out *MemberVipIndexResponse) error {
+	return h.MemberVipServiceHandler.Index(ctx, in, out)
+}
+
+func (h *memberVipServiceHandler) Poster(ctx context.Context, in *MemberVip, out *MemberVipPosterResponse) error {
+	return h.MemberVipServiceHandler.Poster(ctx, in, out)
 }
 
 func (h *memberVipServiceHandler) Get(ctx context.Context, in *MemberVip, out *MemberVipResponse) error {

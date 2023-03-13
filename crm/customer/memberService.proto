@@ -5,7 +5,7 @@ import "common/base.proto";
 import "tagService.proto";
 import "vipService.proto";
 import "memberAddressService.proto";
-
+import "baseInfoService.proto";
 
 service MemberService {
     //通过账号注册用户
@@ -18,6 +18,9 @@ service MemberService {
     rpc RegisterByEmail (MemberRequest) returns (MemberResponse) {}
     //验证账户信息
     rpc ToLogin (MemberRequest) returns (MemberResponse) {}
+
+    //个人中心
+    rpc Index (Member) returns (MemberIndexResponse) {}
 
     rpc Create (Member) returns (MemberResponse) {}
     //手动添加单位用户
@@ -152,5 +155,15 @@ message MemberData {
 
 message MemberResponse {
     MemberData data = 1;
+    common.Error error = 2;
+}
+
+message MemberIndexData {
+    Member member =1;
+    repeated DictInfo gender_list =2;
+}
+
+message MemberIndexResponse {
+    MemberIndexData data = 1;
     common.Error error = 2;
 }

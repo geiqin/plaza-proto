@@ -15,7 +15,7 @@ service VipService {
 
 message Vip {
     int32   id =1;//ID
-    string  type =2;//类型：0免费会员，1付费会员
+    string  type =2;//类型：free免费会员，pay付费会员
     string  name =3;//等级名称
     int64   icon_id =4;//图标ID
     string  icon_url =5;//图标URL
@@ -31,13 +31,15 @@ message Vip {
     string  is_member_price =15;//是否会员价(会员权益)：单独设置会员价活动的商品，不享受消费折扣(0否，1是)
     string  is_point_rate =16;//是否积分回馈倍率(0否，1是)
     string  is_upgrade_package =17;//是否有升级包(0否，1是)
-    float   discount_rate =18;//会员折扣率
-    float   point_rate =19;//积分回馈倍率
-    string  status =20;//状态：启用，禁用
-    string created_at =21;
-    string updated_at =22;
-    VipPackage upgrade_package =23;
-    repeated Benefit benefits =24;
+    string  is_supported_renew =18;//是否允许会员续费(0否，1是)
+    string  is_supported_pay_buy =19;//是否开启付费购买会员(0否，1是)
+    float   discount_rate =20;//会员折扣率
+    float   point_rate =21;//积分回馈倍率
+    string  status =22;//状态：启用，禁用
+    string created_at =23;
+    string updated_at =24;
+    VipPackage upgrade_package =25;
+    repeated Benefit benefits =26;
 }
 
 message VipPackage {

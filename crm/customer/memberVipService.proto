@@ -2,8 +2,15 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "vipService.proto";
+import "configService.proto";
+import "baseInfoService.proto";
 
 service MemberVipService {
+    //会员中心
+    rpc Index (MemberVip) returns (MemberVipIndexResponse) {}
+    //分享海报
+    rpc Poster (MemberVip) returns (MemberVipPosterResponse) {}
     rpc Get (MemberVip) returns (MemberVipResponse) {}
     rpc Search (MemberVipRequest) returns (MemberVipResponse) {}
     rpc List (MemberVipRequest) returns (MemberVipResponse) {}
@@ -18,9 +25,13 @@ message MemberVip {
     int32  order_trade_num =6;//成交订单笔数
     int64  order_trade_money =7;//成交订单总额
     int32  renew_num =8;//续展次数
-    string status =9;//状态：0失效，1正常
-    string created_at =10;
-    string updated_at =11;
+    int32  surplus_time_number =9;//剩余时间值
+    string surplus_time_unit =10;//剩余时间单位
+    string is_permanent =11;//是否永久会员
+    string status =12;//状态：0失效，1正常
+    string created_at =13;
+    string updated_at =14;
+    Vip vip =15;
 }
 
 message MemberVipRequest {
@@ -43,5 +54,26 @@ message MemberVipData {
 
 message MemberVipResponse {
     MemberVipData data = 1;
+    common.Error error = 2;
+}
+
+message MemberVipIndexData {
+    VipConfig base = 1;
+    MemberVip member_vip =2;
+    repeated NavInfo nav_list = 3;
+}
+
+message MemberVipIndexResponse {
+    MemberVipIndexData data = 1;
+    common.Error error = 2;
+}
+
+message MemberVipPosterData {
+    string user_share_qrode =1;
+    string user_share_url =2;
+}
+
+message MemberVipPosterResponse {
+    MemberVipPosterData data = 1;
     common.Error error = 2;
 }

@@ -22,21 +22,24 @@ message MemberAddress {
     string alias =4;//别名
     string tel =5;//电话
     int64 area_id =6;//所属区域ID
-    int64 province_id =7;//所在省
-    int64 cite_id =8;//所在市
-    int64 county_id =9;//所在县/区
-    string address =10;//详细地址
-    string lng =11; //经度
-    string lat =12;  //纬度
-    string idcard_name =13;//身份证姓名
-    string idcard_number =14;//身份证号码
-    string idcard_front =15;//身份证人像面图片
-    string idcard_back =16;//身份证国微面图片
-    string is_default =17;//是否默认地址（0否, 1是）
-    string tag =18;   //标签
-    string created_at =19;
-    string updated_at =20;
-    Area area = 21;
+    int64 province_id =7;//所在省ID
+    int64 city_id =8;//所在市ID
+    int64 county_id =9;//所在县/区ID
+    string province_name =10;//所在省
+    string city_name =11;//所在市
+    string county_name =12;//所在县/区
+    string address =13;//详细地址
+    string lng =14; //经度
+    string lat =15;  //纬度
+    string idcard_name =16;//身份证姓名
+    string idcard_number =17;//身份证号码
+    string idcard_front =18;//身份证人像面图片
+    string idcard_back =19;//身份证国微面图片
+    string is_default =20;//是否默认地址（0否, 1是）
+    string tag =21;   //标签
+    string created_at =22;
+    string updated_at =23;
+    Area area = 24;
 }
 
 
