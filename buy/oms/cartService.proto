@@ -5,15 +5,15 @@ import "common/base.proto";
 import "baseInfoService.proto";
 
 service CartService {
-    //设置购物车商品
-    rpc Set (CartRequest) returns (CartResponse) {}
+    //加入购物车
+    rpc Save (CartRequest) returns (CartResponse) {}
     //删除购物车商品
     rpc Remove (CartRequest) returns (CartDetailResponse){}
     //清除购物车
     rpc Clear (CartRequest) returns (CartDetailResponse) {}
     //购物车详情
     rpc Detail (CartRequest) returns (CartDetailResponse) {}
-    //获得单个商品库存状况
+    //更新购物车数量（根据cartId）
     rpc Stock (CartRequest) returns (CartStockResponse) {}
     //获得统计数量(服务调的多)
     rpc Count (CartRequest) returns (CartDetailResponse) {}
@@ -31,8 +31,8 @@ message Cart  {
     int64  original_price =7; //原价
     int64  price =8; //销售价格
     int32  number =9; //购买数量
-    string spec_desc =10; //规格描述
     int32  inventory =11; //库存量
+    repeated SpecificationData spec =10; //规格描述
 }
 
 //购物车数据
@@ -46,11 +46,15 @@ message CartData {
 
 message CartRequest {
     string type =1;
-    int64 sku_id =2;
-    int32 number =3;
-    int64 id =4;
-    repeated int64 ids =5;
+    int64 id =2;
+    int64 spu_id =3;
+    int64 sku_id =4;
+    int32 number =5;
+    repeated SpecificationData spec =6;
+    repeated int64 ids =9;
 }
+
+
 
 message CartResponse {
     Cart data = 1;

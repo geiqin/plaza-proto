@@ -26,61 +26,61 @@ type Order struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                   int64             `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                           //ID
-	OrderSn              string            `protobuf:"bytes,2,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`                                   //单号
-	OrderType            string            `protobuf:"bytes,3,opt,name=order_type,json=orderType,proto3" json:"order_type"`                             //订单类型: general普通订单, card权益卡订单,recharge充值订单,retail分销订单(已弃用),hotel酒店商品订单,group多人拼团订单,eat_room 堂食订单,eat_out 外卖订单
-	ShopId               int64             `protobuf:"varint,4,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`                                     //分店ID
-	MemberId             int64             `protobuf:"varint,5,opt,name=member_id,json=memberId,proto3" json:"member_id"`                               //买家ID
-	BuyNumberCount       int32             `protobuf:"varint,6,opt,name=buy_number_count,json=buyNumberCount,proto3" json:"buy_number_count"`           //购买商品总数量
-	IncreasePrice        int64             `protobuf:"varint,7,opt,name=increase_price,json=increasePrice,proto3" json:"increase_price"`                //增加的金额
-	PreferentialPrice    int64             `protobuf:"varint,8,opt,name=preferential_price,json=preferentialPrice,proto3" json:"preferential_price"`    //优惠金额
-	ActualPrice          int64             `protobuf:"varint,9,opt,name=actual_price,json=actualPrice,proto3" json:"actual_price"`                      //订单总价(订单最终价格)
-	TotalPrice           int64             `protobuf:"varint,10,opt,name=total_price,json=totalPrice,proto3" json:"total_price"`                        //订单单价
-	PaidMoney            int64             `protobuf:"varint,11,opt,name=paid_money,json=paidMoney,proto3" json:"paid_money"`                           //已支付金额
-	RefundedMoney        int64             `protobuf:"varint,12,opt,name=refunded_money,json=refundedMoney,proto3" json:"refunded_money"`               //已退款金额
-	ReturnedQuantity     int32             `protobuf:"varint,13,opt,name=returned_quantity,json=returnedQuantity,proto3" json:"returned_quantity"`      //已退货数量
-	ClientType           string            `protobuf:"bytes,14,opt,name=client_type,json=clientType,proto3" json:"client_type"`                         //客户端类型（pc, h5, ios, android, alipay, weixin, baidu）取APPLICATION_CLIENT_TYPE常量值
-	OrderModel           string            `protobuf:"bytes,15,opt,name=order_model,json=orderModel,proto3" json:"order_model"`                         //订单模式
-	Subject              string            `protobuf:"bytes,23,opt,name=subject,proto3" json:"subject"`                                                 //订单标题。
-	Body                 string            `protobuf:"bytes,24,opt,name=body,proto3" json:"body"`                                                       //订单商品描述信息。
-	CoverId              int64             `protobuf:"varint,25,opt,name=cover_id,json=coverId,proto3" json:"cover_id"`                                 //订单商品封面ID
-	CoverUrl             string            `protobuf:"bytes,26,opt,name=cover_url,json=coverUrl,proto3" json:"cover_url"`                               //订单商品封面URL（默认取商品明细里数量最多的商品主图）
-	Postscript           string            `protobuf:"bytes,27,opt,name=postscript,proto3" json:"postscript"`                                           //订单附言,由用户提交订单前填写
-	SellerNote           string            `protobuf:"bytes,28,opt,name=seller_note,json=sellerNote,proto3" json:"seller_note"`                         //商家留言,当该字段值时可以在订单查询看到
-	PayNote              string            `protobuf:"bytes,29,opt,name=pay_note,json=payNote,proto3" json:"pay_note"`                                  //付款备注, 在订单管理编辑修改
-	ChannelType          string            `protobuf:"bytes,31,opt,name=channel_type,json=channelType,proto3" json:"channel_type"`                      //支付通道类型
-	IsDispatched         bool              `protobuf:"varint,32,opt,name=is_dispatched,json=isDispatched,proto3" json:"is_dispatched"`                  //是否已分发
-	IsSafeguardClosed    bool              `protobuf:"varint,33,opt,name=is_safeguard_closed,json=isSafeguardClosed,proto3" json:"is_safeguard_closed"` //是否售后已关闭
-	IsUnderLine          bool              `protobuf:"varint,34,opt,name=is_under_line,json=isUnderLine,proto3" json:"is_under_line"`                   //是否线下支付（0否，1是）
-	IsCod                bool              `protobuf:"varint,35,opt,name=is_cod,json=isCod,proto3" json:"is_cod"`                                       //是否货到付款
-	IsInvoiced           bool              `protobuf:"varint,36,opt,name=is_invoiced,json=isInvoiced,proto3" json:"is_invoiced"`                        //是否已过开票
-	IsModified           bool              `protobuf:"varint,37,opt,name=is_modified,json=isModified,proto3" json:"is_modified"`                        //是否订单已改过价 【订单改价】
-	IsPaid               bool              `protobuf:"varint,39,opt,name=is_paid,json=isPaid,proto3" json:"is_paid"`                                    //是否已付款。当订单的全部金额已结清
-	IsSafeguard          bool              `protobuf:"varint,40,opt,name=is_safeguard,json=isSafeguard,proto3" json:"is_safeguard"`                     //是否参与过维权，无论维权是否成功。
-	IsSeparate           bool              `protobuf:"varint,41,opt,name=is_separate,json=isSeparate,proto3" json:"is_separate"`                        //是否已分成0未分成或等待分成;1已分成;2取消分成
-	IsShipment           bool              `protobuf:"varint,42,opt,name=is_shipment,json=isShipment,proto3" json:"is_shipment"`                        //是否需要物流派送
-	IsRefunded           bool              `protobuf:"varint,43,opt,name=is_refunded,json=isRefunded,proto3" json:"is_refunded"`                        //是否已产生退款
-	IsPayTimeout         bool              `protobuf:"varint,44,opt,name=is_pay_timeout,json=isPayTimeout,proto3" json:"is_pay_timeout"`                //是否支付已超时
-	IsReturnTimeout      bool              `protobuf:"varint,45,opt,name=is_return_timeout,json=isReturnTimeout,proto3" json:"is_return_timeout"`       //是否退货已超时
-	IsFinished           bool              `protobuf:"varint,46,opt,name=is_finished,json=isFinished,proto3" json:"is_finished"`                        //是否已完成（最终完成，指不可维权）
-	DispatchType         string            `protobuf:"bytes,47,opt,name=dispatch_type,json=dispatchType,proto3" json:"dispatch_type"`                   //配送方式:express快递发货，delivery同城配送，fetch 到店自提
-	PaymentId            int32             `protobuf:"varint,48,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`                           //用户选择的支付方式的id,取值表payment
-	WarehouseId          int64             `protobuf:"varint,49,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id"`                     //仓库ID
-	ParentId             int64             `protobuf:"varint,50,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`                              //父级订单: 有值表示子订单
-	CancelType           string            `protobuf:"bytes,51,opt,name=cancel_type,json=cancelType,proto3" json:"cancel_type"`                         //取消类型:【枚举：OrderCancelType】
-	ShipStatus           string            `protobuf:"bytes,52,opt,name=ship_status,json=shipStatus,proto3" json:"ship_status"`                         //发货状态:【枚举：OrderShipStatus】
-	PayStatus            string            `protobuf:"bytes,53,opt,name=pay_status,json=payStatus,proto3" json:"pay_status"`                            //付款状态:【枚举：OrderPayStatus】
-	Status               string            `protobuf:"bytes,54,opt,name=status,proto3" json:"status"`                                                   //订单状态:【枚举：OrderStatus】
-	PayExpireDate        string            `protobuf:"bytes,55,opt,name=pay_expire_date,json=payExpireDate,proto3" json:"pay_expire_date"`              //支付截止时间，配合IsPayTimeout字段，时间范围在订单创建后的 5 分钟到 7 天，默认值为 1 天，
-	ReturnExpireDate     string            `protobuf:"bytes,56,opt,name=return_expire_date,json=returnExpireDate,proto3" json:"return_expire_date"`     //退货截止时间，配合IsReturnTimeout字段
-	ConfirmAt            string            `protobuf:"bytes,57,opt,name=confirm_at,json=confirmAt,proto3" json:"confirm_at"`                            //订单确认时间
-	PaidAt               string            `protobuf:"bytes,58,opt,name=paid_at,json=paidAt,proto3" json:"paid_at"`                                     //订单支付时间
-	ShippedAt            string            `protobuf:"bytes,59,opt,name=shipped_at,json=shippedAt,proto3" json:"shipped_at"`                            //订单发货时间
-	SignedAt             string            `protobuf:"bytes,60,opt,name=signed_at,json=signedAt,proto3" json:"signed_at"`                               //签收完成时间
-	RefundedAt           string            `protobuf:"bytes,61,opt,name=refunded_at,json=refundedAt,proto3" json:"refunded_at"`                         //退款完成时间
-	FinishedAt           string            `protobuf:"bytes,62,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at"`                         //订单完成时间
-	StatusName           string            `protobuf:"bytes,63,opt,name=status_name,json=statusName,proto3" json:"status_name"`                         //状态名称
-	StatusColor          string            `protobuf:"bytes,64,opt,name=status_color,json=statusColor,proto3" json:"status_color"`                      //状态颜色
+	Id                   int64             `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                          //ID
+	OrderSn              string            `protobuf:"bytes,2,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`                                  //单号
+	OrderType            string            `protobuf:"bytes,3,opt,name=order_type,json=orderType,proto3" json:"order_type"`                            //订单类型: general普通订单, card权益卡订单,recharge充值订单,retail分销订单(已弃用),hotel酒店商品订单,group多人拼团订单,eat_room 堂食订单,eat_out 外卖订单
+	ShopId               int64             `protobuf:"varint,4,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`                                    //分店ID
+	MemberId             int64             `protobuf:"varint,5,opt,name=member_id,json=memberId,proto3" json:"member_id"`                              //买家ID
+	BuyNumberCount       int32             `protobuf:"varint,6,opt,name=buy_number_count,json=buyNumberCount,proto3" json:"buy_number_count"`          //购买商品总数量
+	IncreasePrice        int64             `protobuf:"varint,7,opt,name=increase_price,json=increasePrice,proto3" json:"increase_price"`               //增加的金额
+	PreferentialPrice    int64             `protobuf:"varint,8,opt,name=preferential_price,json=preferentialPrice,proto3" json:"preferential_price"`   //优惠金额
+	ActualPrice          int64             `protobuf:"varint,9,opt,name=actual_price,json=actualPrice,proto3" json:"actual_price"`                     //订单总价(订单最终价格)
+	TotalPrice           int64             `protobuf:"varint,10,opt,name=total_price,json=totalPrice,proto3" json:"total_price"`                       //订单单价
+	PaidMoney            int64             `protobuf:"varint,11,opt,name=paid_money,json=paidMoney,proto3" json:"paid_money"`                          //已支付金额
+	RefundedMoney        int64             `protobuf:"varint,12,opt,name=refunded_money,json=refundedMoney,proto3" json:"refunded_money"`              //已退款金额
+	ReturnedQuantity     int32             `protobuf:"varint,13,opt,name=returned_quantity,json=returnedQuantity,proto3" json:"returned_quantity"`     //已退货数量
+	ClientType           string            `protobuf:"bytes,14,opt,name=client_type,json=clientType,proto3" json:"client_type"`                        //客户端类型（pc, h5, ios, android, alipay, weixin, baidu）取APPLICATION_CLIENT_TYPE常量值
+	OrderModel           string            `protobuf:"bytes,15,opt,name=order_model,json=orderModel,proto3" json:"order_model"`                        //订单模式
+	Subject              string            `protobuf:"bytes,23,opt,name=subject,proto3" json:"subject"`                                                //订单标题。
+	Body                 string            `protobuf:"bytes,24,opt,name=body,proto3" json:"body"`                                                      //订单商品描述信息。
+	CoverId              int64             `protobuf:"varint,25,opt,name=cover_id,json=coverId,proto3" json:"cover_id"`                                //订单商品封面ID
+	CoverUrl             string            `protobuf:"bytes,26,opt,name=cover_url,json=coverUrl,proto3" json:"cover_url"`                              //订单商品封面URL（默认取商品明细里数量最多的商品主图）
+	Postscript           string            `protobuf:"bytes,27,opt,name=postscript,proto3" json:"postscript"`                                          //订单附言,由用户提交订单前填写
+	SellerNote           string            `protobuf:"bytes,28,opt,name=seller_note,json=sellerNote,proto3" json:"seller_note"`                        //商家留言,当该字段值时可以在订单查询看到
+	PayNote              string            `protobuf:"bytes,29,opt,name=pay_note,json=payNote,proto3" json:"pay_note"`                                 //付款备注, 在订单管理编辑修改
+	ChannelType          string            `protobuf:"bytes,31,opt,name=channel_type,json=channelType,proto3" json:"channel_type"`                     //支付通道类型
+	IsDispatched         string            `protobuf:"bytes,32,opt,name=is_dispatched,json=isDispatched,proto3" json:"is_dispatched"`                  //是否已分发（0否，1是）
+	IsSafeguardClosed    string            `protobuf:"bytes,33,opt,name=is_safeguard_closed,json=isSafeguardClosed,proto3" json:"is_safeguard_closed"` //是否售后已关闭（0否，1是）
+	IsUnderLine          string            `protobuf:"bytes,34,opt,name=is_under_line,json=isUnderLine,proto3" json:"is_under_line"`                   //是否线下支付（0否，1是）
+	IsCod                string            `protobuf:"bytes,35,opt,name=is_cod,json=isCod,proto3" json:"is_cod"`                                       //是否货到付款（0否，1是）
+	IsInvoiced           string            `protobuf:"bytes,36,opt,name=is_invoiced,json=isInvoiced,proto3" json:"is_invoiced"`                        //是否已过开票（0否，1是）
+	IsModified           string            `protobuf:"bytes,37,opt,name=is_modified,json=isModified,proto3" json:"is_modified"`                        //是否订单已改过价 【订单改价】（0否，1是）
+	IsPaid               string            `protobuf:"bytes,39,opt,name=is_paid,json=isPaid,proto3" json:"is_paid"`                                    //是否已付款。当订单的全部金额已结清（0否，1是）
+	IsSafeguard          string            `protobuf:"bytes,40,opt,name=is_safeguard,json=isSafeguard,proto3" json:"is_safeguard"`                     //是否参与过维权，无论维权是否成功。（0否，1是）
+	IsSeparate           string            `protobuf:"bytes,41,opt,name=is_separate,json=isSeparate,proto3" json:"is_separate"`                        //是否已分成 （0否，1是）
+	IsShipment           string            `protobuf:"bytes,42,opt,name=is_shipment,json=isShipment,proto3" json:"is_shipment"`                        //是否需要物流派送（0否，1是）
+	IsRefunded           string            `protobuf:"bytes,43,opt,name=is_refunded,json=isRefunded,proto3" json:"is_refunded"`                        //是否已产生退款（0否，1是）
+	IsPayTimeout         string            `protobuf:"bytes,44,opt,name=is_pay_timeout,json=isPayTimeout,proto3" json:"is_pay_timeout"`                //是否支付已超时（0否，1是）
+	IsReturnTimeout      string            `protobuf:"bytes,45,opt,name=is_return_timeout,json=isReturnTimeout,proto3" json:"is_return_timeout"`       //是否退货已超时（0否，1是）
+	IsFinished           string            `protobuf:"bytes,46,opt,name=is_finished,json=isFinished,proto3" json:"is_finished"`                        //是否已完成（最终完成，指不可维权）（0否，1是）
+	DispatchType         string            `protobuf:"bytes,47,opt,name=dispatch_type,json=dispatchType,proto3" json:"dispatch_type"`                  //配送方式:express快递发货，delivery同城配送，fetch 到店自提
+	PaymentId            int32             `protobuf:"varint,48,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`                          //用户选择的支付方式的id,取值表payment
+	WarehouseId          int64             `protobuf:"varint,49,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id"`                    //仓库ID
+	ParentId             int64             `protobuf:"varint,50,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`                             //父级订单: 有值表示子订单
+	CancelType           string            `protobuf:"bytes,51,opt,name=cancel_type,json=cancelType,proto3" json:"cancel_type"`                        //取消类型:【枚举：OrderCancelType】
+	ShipStatus           string            `protobuf:"bytes,52,opt,name=ship_status,json=shipStatus,proto3" json:"ship_status"`                        //发货状态:【枚举：OrderShipStatus】
+	PayStatus            string            `protobuf:"bytes,53,opt,name=pay_status,json=payStatus,proto3" json:"pay_status"`                           //付款状态:【枚举：OrderPayStatus】
+	Status               string            `protobuf:"bytes,54,opt,name=status,proto3" json:"status"`                                                  //订单状态:【枚举：OrderStatus】
+	PayExpireDate        string            `protobuf:"bytes,55,opt,name=pay_expire_date,json=payExpireDate,proto3" json:"pay_expire_date"`             //支付截止时间，配合IsPayTimeout字段，时间范围在订单创建后的 5 分钟到 7 天，默认值为 1 天，
+	ReturnExpireDate     string            `protobuf:"bytes,56,opt,name=return_expire_date,json=returnExpireDate,proto3" json:"return_expire_date"`    //退货截止时间，配合IsReturnTimeout字段
+	ConfirmAt            string            `protobuf:"bytes,57,opt,name=confirm_at,json=confirmAt,proto3" json:"confirm_at"`                           //订单确认时间
+	PaidAt               string            `protobuf:"bytes,58,opt,name=paid_at,json=paidAt,proto3" json:"paid_at"`                                    //订单支付时间
+	ShippedAt            string            `protobuf:"bytes,59,opt,name=shipped_at,json=shippedAt,proto3" json:"shipped_at"`                           //订单发货时间
+	SignedAt             string            `protobuf:"bytes,60,opt,name=signed_at,json=signedAt,proto3" json:"signed_at"`                              //签收完成时间
+	RefundedAt           string            `protobuf:"bytes,61,opt,name=refunded_at,json=refundedAt,proto3" json:"refunded_at"`                        //退款完成时间
+	FinishedAt           string            `protobuf:"bytes,62,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at"`                        //订单完成时间
+	StatusName           string            `protobuf:"bytes,63,opt,name=status_name,json=statusName,proto3" json:"status_name"`                        //状态名称
+	StatusColor          string            `protobuf:"bytes,64,opt,name=status_color,json=statusColor,proto3" json:"status_color"`                     //状态颜色
 	Currency             *OrderCurrency    `protobuf:"bytes,68,opt,name=currency,proto3" json:"currency"`
 	Address              *OrderAddress     `protobuf:"bytes,69,opt,name=address,proto3" json:"address"`
 	Member               *MemberInfo       `protobuf:"bytes,70,opt,name=member,proto3" json:"member"`
@@ -286,102 +286,102 @@ func (x *Order) GetChannelType() string {
 	return ""
 }
 
-func (x *Order) GetIsDispatched() bool {
+func (x *Order) GetIsDispatched() string {
 	if x != nil {
 		return x.IsDispatched
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsSafeguardClosed() bool {
+func (x *Order) GetIsSafeguardClosed() string {
 	if x != nil {
 		return x.IsSafeguardClosed
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsUnderLine() bool {
+func (x *Order) GetIsUnderLine() string {
 	if x != nil {
 		return x.IsUnderLine
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsCod() bool {
+func (x *Order) GetIsCod() string {
 	if x != nil {
 		return x.IsCod
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsInvoiced() bool {
+func (x *Order) GetIsInvoiced() string {
 	if x != nil {
 		return x.IsInvoiced
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsModified() bool {
+func (x *Order) GetIsModified() string {
 	if x != nil {
 		return x.IsModified
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsPaid() bool {
+func (x *Order) GetIsPaid() string {
 	if x != nil {
 		return x.IsPaid
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsSafeguard() bool {
+func (x *Order) GetIsSafeguard() string {
 	if x != nil {
 		return x.IsSafeguard
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsSeparate() bool {
+func (x *Order) GetIsSeparate() string {
 	if x != nil {
 		return x.IsSeparate
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsShipment() bool {
+func (x *Order) GetIsShipment() string {
 	if x != nil {
 		return x.IsShipment
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsRefunded() bool {
+func (x *Order) GetIsRefunded() string {
 	if x != nil {
 		return x.IsRefunded
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsPayTimeout() bool {
+func (x *Order) GetIsPayTimeout() string {
 	if x != nil {
 		return x.IsPayTimeout
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsReturnTimeout() bool {
+func (x *Order) GetIsReturnTimeout() string {
 	if x != nil {
 		return x.IsReturnTimeout
 	}
-	return false
+	return ""
 }
 
-func (x *Order) GetIsFinished() bool {
+func (x *Order) GetIsFinished() string {
 	if x != nil {
 		return x.IsFinished
 	}
-	return false
+	return ""
 }
 
 func (x *Order) GetDispatchType() string {
@@ -880,13 +880,13 @@ type OrderRequest struct {
 	ShopId        int64   `protobuf:"varint,7,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`
 	MemberId      int64   `protobuf:"varint,8,opt,name=member_id,json=memberId,proto3" json:"member_id"`
 	PayType       int32   `protobuf:"varint,9,opt,name=pay_type,json=payType,proto3" json:"pay_type"`
-	IsShipment    bool    `protobuf:"varint,10,opt,name=is_shipment,json=isShipment,proto3" json:"is_shipment"`
-	IsCod         bool    `protobuf:"varint,13,opt,name=is_cod,json=isCod,proto3" json:"is_cod"`
-	IsInvoiced    bool    `protobuf:"varint,14,opt,name=is_invoiced,json=isInvoiced,proto3" json:"is_invoiced"`
-	IsModified    bool    `protobuf:"varint,15,opt,name=is_modified,json=isModified,proto3" json:"is_modified"`
-	IsPaid        bool    `protobuf:"varint,16,opt,name=is_paid,json=isPaid,proto3" json:"is_paid"`
-	IsSafeguard   bool    `protobuf:"varint,17,opt,name=is_safeguard,json=isSafeguard,proto3" json:"is_safeguard"`
-	IsSeparate    bool    `protobuf:"varint,18,opt,name=is_separate,json=isSeparate,proto3" json:"is_separate"`
+	IsShipment    string  `protobuf:"bytes,10,opt,name=is_shipment,json=isShipment,proto3" json:"is_shipment"`
+	IsCod         string  `protobuf:"bytes,13,opt,name=is_cod,json=isCod,proto3" json:"is_cod"`
+	IsInvoiced    string  `protobuf:"bytes,14,opt,name=is_invoiced,json=isInvoiced,proto3" json:"is_invoiced"`
+	IsModified    string  `protobuf:"bytes,15,opt,name=is_modified,json=isModified,proto3" json:"is_modified"`
+	IsPaid        string  `protobuf:"bytes,16,opt,name=is_paid,json=isPaid,proto3" json:"is_paid"`
+	IsSafeguard   string  `protobuf:"bytes,17,opt,name=is_safeguard,json=isSafeguard,proto3" json:"is_safeguard"`
+	IsSeparate    string  `protobuf:"bytes,18,opt,name=is_separate,json=isSeparate,proto3" json:"is_separate"`
 	ShippingId    int32   `protobuf:"varint,19,opt,name=shipping_id,json=shippingId,proto3" json:"shipping_id"`
 	ShippingName  string  `protobuf:"bytes,20,opt,name=shipping_name,json=shippingName,proto3" json:"shipping_name"`
 	PaymentId     int32   `protobuf:"varint,21,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`
@@ -1000,53 +1000,53 @@ func (x *OrderRequest) GetPayType() int32 {
 	return 0
 }
 
-func (x *OrderRequest) GetIsShipment() bool {
+func (x *OrderRequest) GetIsShipment() string {
 	if x != nil {
 		return x.IsShipment
 	}
-	return false
+	return ""
 }
 
-func (x *OrderRequest) GetIsCod() bool {
+func (x *OrderRequest) GetIsCod() string {
 	if x != nil {
 		return x.IsCod
 	}
-	return false
+	return ""
 }
 
-func (x *OrderRequest) GetIsInvoiced() bool {
+func (x *OrderRequest) GetIsInvoiced() string {
 	if x != nil {
 		return x.IsInvoiced
 	}
-	return false
+	return ""
 }
 
-func (x *OrderRequest) GetIsModified() bool {
+func (x *OrderRequest) GetIsModified() string {
 	if x != nil {
 		return x.IsModified
 	}
-	return false
+	return ""
 }
 
-func (x *OrderRequest) GetIsPaid() bool {
+func (x *OrderRequest) GetIsPaid() string {
 	if x != nil {
 		return x.IsPaid
 	}
-	return false
+	return ""
 }
 
-func (x *OrderRequest) GetIsSafeguard() bool {
+func (x *OrderRequest) GetIsSafeguard() string {
 	if x != nil {
 		return x.IsSafeguard
 	}
-	return false
+	return ""
 }
 
-func (x *OrderRequest) GetIsSeparate() bool {
+func (x *OrderRequest) GetIsSeparate() string {
 	if x != nil {
 		return x.IsSeparate
 	}
-	return false
+	return ""
 }
 
 func (x *OrderRequest) GetShippingId() int32 {
@@ -1376,10 +1376,10 @@ type OrderPayData struct {
 	OrderId     int64             `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id"`
 	OrderSn     string            `protobuf:"bytes,2,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
 	PaymentType string            `protobuf:"bytes,3,opt,name=payment_type,json=paymentType,proto3" json:"payment_type"`
-	IsSuccess   bool              `protobuf:"varint,4,opt,name=is_success,json=isSuccess,proto3" json:"is_success"`
+	IsSuccess   string            `protobuf:"bytes,4,opt,name=is_success,json=isSuccess,proto3" json:"is_success"`
 	Params      map[string]string `protobuf:"bytes,5,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	Payment     *PaymentInfo      `protobuf:"bytes,6,opt,name=payment,proto3" json:"payment"`
-	IsHtml      bool              `protobuf:"varint,7,opt,name=is_html,json=isHtml,proto3" json:"is_html"`
+	IsHtml      string            `protobuf:"bytes,7,opt,name=is_html,json=isHtml,proto3" json:"is_html"`
 	HtmlText    string            `protobuf:"bytes,8,opt,name=html_text,json=htmlText,proto3" json:"html_text"`
 }
 
@@ -1436,11 +1436,11 @@ func (x *OrderPayData) GetPaymentType() string {
 	return ""
 }
 
-func (x *OrderPayData) GetIsSuccess() bool {
+func (x *OrderPayData) GetIsSuccess() string {
 	if x != nil {
 		return x.IsSuccess
 	}
-	return false
+	return ""
 }
 
 func (x *OrderPayData) GetParams() map[string]string {
@@ -1457,11 +1457,11 @@ func (x *OrderPayData) GetPayment() *PaymentInfo {
 	return nil
 }
 
-func (x *OrderPayData) GetIsHtml() bool {
+func (x *OrderPayData) GetIsHtml() string {
 	if x != nil {
 		return x.IsHtml
 	}
-	return false
+	return ""
 }
 
 func (x *OrderPayData) GetHtmlText() string {
@@ -1696,35 +1696,35 @@ var file_orderService_proto_rawDesc = []byte{
 	0x6e, 0x65, 0x6c, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x1f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
 	0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x69,
 	0x73, 0x5f, 0x64, 0x69, 0x73, 0x70, 0x61, 0x74, 0x63, 0x68, 0x65, 0x64, 0x18, 0x20, 0x20, 0x01,
-	0x28, 0x08, 0x52, 0x0c, 0x69, 0x73, 0x44, 0x69, 0x73, 0x70, 0x61, 0x74, 0x63, 0x68, 0x65, 0x64,
+	0x28, 0x09, 0x52, 0x0c, 0x69, 0x73, 0x44, 0x69, 0x73, 0x70, 0x61, 0x74, 0x63, 0x68, 0x65, 0x64,
 	0x12, 0x2e, 0x0a, 0x13, 0x69, 0x73, 0x5f, 0x73, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64,
-	0x5f, 0x63, 0x6c, 0x6f, 0x73, 0x65, 0x64, 0x18, 0x21, 0x20, 0x01, 0x28, 0x08, 0x52, 0x11, 0x69,
+	0x5f, 0x63, 0x6c, 0x6f, 0x73, 0x65, 0x64, 0x18, 0x21, 0x20, 0x01, 0x28, 0x09, 0x52, 0x11, 0x69,
 	0x73, 0x53, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x43, 0x6c, 0x6f, 0x73, 0x65, 0x64,
 	0x12, 0x22, 0x0a, 0x0d, 0x69, 0x73, 0x5f, 0x75, 0x6e, 0x64, 0x65, 0x72, 0x5f, 0x6c, 0x69, 0x6e,
-	0x65, 0x18, 0x22, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0b, 0x69, 0x73, 0x55, 0x6e, 0x64, 0x65, 0x72,
+	0x65, 0x18, 0x22, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x69, 0x73, 0x55, 0x6e, 0x64, 0x65, 0x72,
 	0x4c, 0x69, 0x6e, 0x65, 0x12, 0x15, 0x0a, 0x06, 0x69, 0x73, 0x5f, 0x63, 0x6f, 0x64, 0x18, 0x23,
-	0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x69, 0x73, 0x43, 0x6f, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x69,
-	0x73, 0x5f, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x64, 0x18, 0x24, 0x20, 0x01, 0x28, 0x08,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x73, 0x43, 0x6f, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x69,
+	0x73, 0x5f, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x64, 0x18, 0x24, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x0a, 0x69, 0x73, 0x49, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x64, 0x12, 0x1f, 0x0a, 0x0b,
 	0x69, 0x73, 0x5f, 0x6d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x64, 0x18, 0x25, 0x20, 0x01, 0x28,
-	0x08, 0x52, 0x0a, 0x69, 0x73, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x64, 0x12, 0x17, 0x0a,
-	0x07, 0x69, 0x73, 0x5f, 0x70, 0x61, 0x69, 0x64, 0x18, 0x27, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06,
+	0x09, 0x52, 0x0a, 0x69, 0x73, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x64, 0x12, 0x17, 0x0a,
+	0x07, 0x69, 0x73, 0x5f, 0x70, 0x61, 0x69, 0x64, 0x18, 0x27, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
 	0x69, 0x73, 0x50, 0x61, 0x69, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x69, 0x73, 0x5f, 0x73, 0x61, 0x66,
-	0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x18, 0x28, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0b, 0x69, 0x73,
+	0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x18, 0x28, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x69, 0x73,
 	0x53, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73, 0x5f,
-	0x73, 0x65, 0x70, 0x61, 0x72, 0x61, 0x74, 0x65, 0x18, 0x29, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a,
+	0x73, 0x65, 0x70, 0x61, 0x72, 0x61, 0x74, 0x65, 0x18, 0x29, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
 	0x69, 0x73, 0x53, 0x65, 0x70, 0x61, 0x72, 0x61, 0x74, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73,
-	0x5f, 0x73, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x2a, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x5f, 0x73, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x2a, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x0a, 0x69, 0x73, 0x53, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x69,
-	0x73, 0x5f, 0x72, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x65, 0x64, 0x18, 0x2b, 0x20, 0x01, 0x28, 0x08,
+	0x73, 0x5f, 0x72, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x65, 0x64, 0x18, 0x2b, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x0a, 0x69, 0x73, 0x52, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x65, 0x64, 0x12, 0x24, 0x0a, 0x0e,
 	0x69, 0x73, 0x5f, 0x70, 0x61, 0x79, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x6f, 0x75, 0x74, 0x18, 0x2c,
-	0x20, 0x01, 0x28, 0x08, 0x52, 0x0c, 0x69, 0x73, 0x50, 0x61, 0x79, 0x54, 0x69, 0x6d, 0x65, 0x6f,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x69, 0x73, 0x50, 0x61, 0x79, 0x54, 0x69, 0x6d, 0x65, 0x6f,
 	0x75, 0x74, 0x12, 0x2a, 0x0a, 0x11, 0x69, 0x73, 0x5f, 0x72, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x5f,
-	0x74, 0x69, 0x6d, 0x65, 0x6f, 0x75, 0x74, 0x18, 0x2d, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0f, 0x69,
+	0x74, 0x69, 0x6d, 0x65, 0x6f, 0x75, 0x74, 0x18, 0x2d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x69,
 	0x73, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x54, 0x69, 0x6d, 0x65, 0x6f, 0x75, 0x74, 0x12, 0x1f,
 	0x0a, 0x0b, 0x69, 0x73, 0x5f, 0x66, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65, 0x64, 0x18, 0x2e, 0x20,
-	0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65, 0x64, 0x12,
+	0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x73, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65, 0x64, 0x12,
 	0x23, 0x0a, 0x0d, 0x64, 0x69, 0x73, 0x70, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x74, 0x79, 0x70, 0x65,
 	0x18, 0x2f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x64, 0x69, 0x73, 0x70, 0x61, 0x74, 0x63, 0x68,
 	0x54, 0x79, 0x70, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x5f,
@@ -1854,19 +1854,19 @@ var file_orderService_proto_rawDesc = []byte{
 	0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12,
 	0x19, 0x0a, 0x08, 0x70, 0x61, 0x79, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28,
 	0x05, 0x52, 0x07, 0x70, 0x61, 0x79, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73,
-	0x5f, 0x73, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x5f, 0x73, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x0a, 0x69, 0x73, 0x53, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x15, 0x0a, 0x06, 0x69,
-	0x73, 0x5f, 0x63, 0x6f, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x69, 0x73, 0x43,
+	0x73, 0x5f, 0x63, 0x6f, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x73, 0x43,
 	0x6f, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73, 0x5f, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65,
-	0x64, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x49, 0x6e, 0x76, 0x6f, 0x69,
+	0x64, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x73, 0x49, 0x6e, 0x76, 0x6f, 0x69,
 	0x63, 0x65, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73, 0x5f, 0x6d, 0x6f, 0x64, 0x69, 0x66, 0x69,
-	0x65, 0x64, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x4d, 0x6f, 0x64, 0x69,
+	0x65, 0x64, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x73, 0x4d, 0x6f, 0x64, 0x69,
 	0x66, 0x69, 0x65, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x69, 0x73, 0x5f, 0x70, 0x61, 0x69, 0x64, 0x18,
-	0x10, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x69, 0x73, 0x50, 0x61, 0x69, 0x64, 0x12, 0x21, 0x0a,
+	0x10, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x69, 0x73, 0x50, 0x61, 0x69, 0x64, 0x12, 0x21, 0x0a,
 	0x0c, 0x69, 0x73, 0x5f, 0x73, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64, 0x18, 0x11, 0x20,
-	0x01, 0x28, 0x08, 0x52, 0x0b, 0x69, 0x73, 0x53, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64,
+	0x01, 0x28, 0x09, 0x52, 0x0b, 0x69, 0x73, 0x53, 0x61, 0x66, 0x65, 0x67, 0x75, 0x61, 0x72, 0x64,
 	0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73, 0x5f, 0x73, 0x65, 0x70, 0x61, 0x72, 0x61, 0x74, 0x65, 0x18,
-	0x12, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x53, 0x65, 0x70, 0x61, 0x72, 0x61, 0x74,
+	0x12, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x73, 0x53, 0x65, 0x70, 0x61, 0x72, 0x61, 0x74,
 	0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x68, 0x69, 0x70, 0x70, 0x69, 0x6e, 0x67, 0x5f, 0x69, 0x64,
 	0x18, 0x13, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x73, 0x68, 0x69, 0x70, 0x70, 0x69, 0x6e, 0x67,
 	0x49, 0x64, 0x12, 0x23, 0x0a, 0x0d, 0x73, 0x68, 0x69, 0x70, 0x70, 0x69, 0x6e, 0x67, 0x5f, 0x6e,
@@ -1951,7 +1951,7 @@ var file_orderService_proto_rawDesc = []byte{
 	0x65, 0x72, 0x53, 0x6e, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x5f,
 	0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x70, 0x61, 0x79, 0x6d,
 	0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x69, 0x73, 0x5f, 0x73, 0x75,
-	0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x69, 0x73, 0x53,
+	0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x69, 0x73, 0x53,
 	0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x3a, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73,
 	0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x73, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x50, 0x61, 0x79, 0x44, 0x61, 0x74, 0x61, 0x2e, 0x50,
@@ -1960,7 +1960,7 @@ var file_orderService_proto_rawDesc = []byte{
 	0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x50,
 	0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x07, 0x70, 0x61, 0x79, 0x6d,
 	0x65, 0x6e, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x69, 0x73, 0x5f, 0x68, 0x74, 0x6d, 0x6c, 0x18, 0x07,
-	0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x69, 0x73, 0x48, 0x74, 0x6d, 0x6c, 0x12, 0x1b, 0x0a, 0x09,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x69, 0x73, 0x48, 0x74, 0x6d, 0x6c, 0x12, 0x1b, 0x0a, 0x09,
 	0x68, 0x74, 0x6d, 0x6c, 0x5f, 0x74, 0x65, 0x78, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x08, 0x68, 0x74, 0x6d, 0x6c, 0x54, 0x65, 0x78, 0x74, 0x1a, 0x39, 0x0a, 0x0b, 0x50, 0x61, 0x72,
 	0x61, 0x6d, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18,

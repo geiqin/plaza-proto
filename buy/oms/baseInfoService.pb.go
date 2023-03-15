@@ -535,38 +535,41 @@ type GoodsInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                         int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"` //等同于sku_id
-	SpuId                      int64  `protobuf:"varint,2,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
-	SkuId                      int64  `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	Type                       string `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`                                   //类型
-	Title                      string `protobuf:"bytes,6,opt,name=title,proto3" json:"title"`                                 //标题
-	Inventory                  int64  `protobuf:"varint,7,opt,name=inventory,proto3" json:"inventory"`                        //库存数量
-	Unit                       string `protobuf:"bytes,8,opt,name=unit,proto3" json:"unit"`                                   //库存单位
-	ImageUrl                   string `protobuf:"bytes,9,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`           //封面URL
-	IsManySpec                 bool   `protobuf:"varint,10,opt,name=is_many_spec,json=isManySpec,proto3" json:"is_many_spec"` //是否多规格商品
-	IsInvalid                  bool   `protobuf:"varint,11,opt,name=is_invalid,json=isInvalid,proto3" json:"is_invalid"`      //是否无效
-	ShopId                     int64  `protobuf:"varint,12,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`               //分店ID
-	BrandId                    int64  `protobuf:"varint,13,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`            //品牌ID
-	BrandName                  string `protobuf:"bytes,14,opt,name=brand_name,json=brandName,proto3" json:"brand_name"`       //品牌名称
-	SpecDesc                   string `protobuf:"bytes,15,opt,name=spec_desc,json=specDesc,proto3" json:"spec_desc"`          //规格描述
-	SkuWeight                  int64  `protobuf:"varint,16,opt,name=sku_weight,json=skuWeight,proto3" json:"sku_weight"`
-	SkuVolume                  int64  `protobuf:"varint,17,opt,name=sku_volume,json=skuVolume,proto3" json:"sku_volume"`
-	SkuCoding                  string `protobuf:"bytes,18,opt,name=sku_coding,json=skuCoding,proto3" json:"sku_coding"`
-	SkuBarcode                 string `protobuf:"bytes,19,opt,name=sku_barcode,json=skuBarcode,proto3" json:"sku_barcode"`
-	SkuOriginalPrice           int64  `protobuf:"varint,20,opt,name=sku_original_price,json=skuOriginalPrice,proto3" json:"sku_original_price"`
-	SkuPrice                   int64  `protobuf:"varint,21,opt,name=sku_price,json=skuPrice,proto3" json:"sku_price"`
-	OriginalPrice              int64  `protobuf:"varint,22,opt,name=original_price,json=originalPrice,proto3" json:"original_price"`
-	Price                      int64  `protobuf:"varint,23,opt,name=price,proto3" json:"price"`
-	GiveIntegral               int64  `protobuf:"varint,24,opt,name=give_integral,json=giveIntegral,proto3" json:"give_integral"`
-	IsVirtual                  bool   `protobuf:"varint,25,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`
-	BuyMinNumber               int32  `protobuf:"varint,28,opt,name=buy_min_number,json=buyMinNumber,proto3" json:"buy_min_number"`
-	BuyMaxNumber               int32  `protobuf:"varint,29,opt,name=buy_max_number,json=buyMaxNumber,proto3" json:"buy_max_number"`
-	ShowFieldOriginalPriceText string `protobuf:"bytes,30,opt,name=show_field_original_price_text,json=showFieldOriginalPriceText,proto3" json:"show_field_original_price_text"`
-	ShowFieldPriceText         string `protobuf:"bytes,31,opt,name=show_field_price_text,json=showFieldPriceText,proto3" json:"show_field_price_text"`
-	GoodsUrl                   string `protobuf:"bytes,32,opt,name=goods_url,json=goodsUrl,proto3" json:"goods_url"`
-	Checked                    bool   `protobuf:"varint,33,opt,name=checked,proto3" json:"checked"`                                  //是否选中
-	Number                     int32  `protobuf:"varint,34,opt,name=number,proto3" json:"number"`                                    //购买数量
-	SubtotalPrice              int64  `protobuf:"varint,35,opt,name=subtotal_price,json=subtotalPrice,proto3" json:"subtotal_price"` //合计价格
+	Id                         int64                `protobuf:"varint,1,opt,name=id,proto3" json:"id"` //等同于sku_id
+	SpuId                      int64                `protobuf:"varint,2,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
+	SkuId                      int64                `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	Type                       string               `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`                                  //类型
+	Title                      string               `protobuf:"bytes,6,opt,name=title,proto3" json:"title"`                                //标题
+	Inventory                  int32                `protobuf:"varint,7,opt,name=inventory,proto3" json:"inventory"`                       //库存数量
+	Unit                       string               `protobuf:"bytes,8,opt,name=unit,proto3" json:"unit"`                                  //库存单位
+	ImageUrl                   string               `protobuf:"bytes,9,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`          //封面URL
+	IsManySpec                 string               `protobuf:"bytes,10,opt,name=is_many_spec,json=isManySpec,proto3" json:"is_many_spec"` //是否多规格商品(0否,1是)
+	IsInvalid                  string               `protobuf:"bytes,11,opt,name=is_invalid,json=isInvalid,proto3" json:"is_invalid"`      //是否无效(0否,1是)
+	ShopId                     int64                `protobuf:"varint,12,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`              //分店ID
+	BrandId                    int64                `protobuf:"varint,13,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`           //品牌ID
+	BrandName                  string               `protobuf:"bytes,14,opt,name=brand_name,json=brandName,proto3" json:"brand_name"`      //品牌名称
+	SpecDesc                   string               `protobuf:"bytes,15,opt,name=spec_desc,json=specDesc,proto3" json:"spec_desc"`         //规格描述
+	SkuWeight                  int64                `protobuf:"varint,16,opt,name=sku_weight,json=skuWeight,proto3" json:"sku_weight"`
+	SkuVolume                  int64                `protobuf:"varint,17,opt,name=sku_volume,json=skuVolume,proto3" json:"sku_volume"`
+	SkuCoding                  string               `protobuf:"bytes,18,opt,name=sku_coding,json=skuCoding,proto3" json:"sku_coding"`
+	SkuBarcode                 string               `protobuf:"bytes,19,opt,name=sku_barcode,json=skuBarcode,proto3" json:"sku_barcode"`
+	SkuOriginalPrice           int64                `protobuf:"varint,20,opt,name=sku_original_price,json=skuOriginalPrice,proto3" json:"sku_original_price"`
+	SkuPrice                   int64                `protobuf:"varint,21,opt,name=sku_price,json=skuPrice,proto3" json:"sku_price"`
+	OriginalPrice              int64                `protobuf:"varint,22,opt,name=original_price,json=originalPrice,proto3" json:"original_price"`
+	Price                      int64                `protobuf:"varint,23,opt,name=price,proto3" json:"price"`
+	GiveIntegral               int64                `protobuf:"varint,24,opt,name=give_integral,json=giveIntegral,proto3" json:"give_integral"`
+	IsVirtual                  string               `protobuf:"bytes,25,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"` //是否虚拟商品(0否,1是)
+	BuyMinNumber               int32                `protobuf:"varint,28,opt,name=buy_min_number,json=buyMinNumber,proto3" json:"buy_min_number"`
+	BuyMaxNumber               int32                `protobuf:"varint,29,opt,name=buy_max_number,json=buyMaxNumber,proto3" json:"buy_max_number"`
+	ShowFieldOriginalPriceText string               `protobuf:"bytes,30,opt,name=show_field_original_price_text,json=showFieldOriginalPriceText,proto3" json:"show_field_original_price_text"`
+	ShowFieldPriceText         string               `protobuf:"bytes,31,opt,name=show_field_price_text,json=showFieldPriceText,proto3" json:"show_field_price_text"`
+	GoodsUrl                   string               `protobuf:"bytes,32,opt,name=goods_url,json=goodsUrl,proto3" json:"goods_url"`
+	Checked                    bool                 `protobuf:"varint,33,opt,name=checked,proto3" json:"checked"`                                  //是否选中
+	Number                     int32                `protobuf:"varint,34,opt,name=number,proto3" json:"number"`                                    //购买数量
+	SubtotalPrice              int64                `protobuf:"varint,35,opt,name=subtotal_price,json=subtotalPrice,proto3" json:"subtotal_price"` //合计价格
+	IsError                    string               `protobuf:"bytes,36,opt,name=is_error,json=isError,proto3" json:"is_error"`                    //购物车用(0否,1是)
+	ErrorMessage               string               `protobuf:"bytes,37,opt,name=error_message,json=errorMessage,proto3" json:"error_message"`     //购物车用
+	Spec                       []*SpecificationData `protobuf:"bytes,38,rep,name=spec,proto3" json:"spec"`                                         //规格
 }
 
 func (x *GoodsInfo) Reset() {
@@ -636,7 +639,7 @@ func (x *GoodsInfo) GetTitle() string {
 	return ""
 }
 
-func (x *GoodsInfo) GetInventory() int64 {
+func (x *GoodsInfo) GetInventory() int32 {
 	if x != nil {
 		return x.Inventory
 	}
@@ -657,18 +660,18 @@ func (x *GoodsInfo) GetImageUrl() string {
 	return ""
 }
 
-func (x *GoodsInfo) GetIsManySpec() bool {
+func (x *GoodsInfo) GetIsManySpec() string {
 	if x != nil {
 		return x.IsManySpec
 	}
-	return false
+	return ""
 }
 
-func (x *GoodsInfo) GetIsInvalid() bool {
+func (x *GoodsInfo) GetIsInvalid() string {
 	if x != nil {
 		return x.IsInvalid
 	}
-	return false
+	return ""
 }
 
 func (x *GoodsInfo) GetShopId() int64 {
@@ -762,11 +765,11 @@ func (x *GoodsInfo) GetGiveIntegral() int64 {
 	return 0
 }
 
-func (x *GoodsInfo) GetIsVirtual() bool {
+func (x *GoodsInfo) GetIsVirtual() string {
 	if x != nil {
 		return x.IsVirtual
 	}
-	return false
+	return ""
 }
 
 func (x *GoodsInfo) GetBuyMinNumber() int32 {
@@ -825,6 +828,83 @@ func (x *GoodsInfo) GetSubtotalPrice() int64 {
 	return 0
 }
 
+func (x *GoodsInfo) GetIsError() string {
+	if x != nil {
+		return x.IsError
+	}
+	return ""
+}
+
+func (x *GoodsInfo) GetErrorMessage() string {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return ""
+}
+
+func (x *GoodsInfo) GetSpec() []*SpecificationData {
+	if x != nil {
+		return x.Spec
+	}
+	return nil
+}
+
+//货品规格信息
+type SpecificationData struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Type  string `protobuf:"bytes,1,opt,name=type,proto3" json:"type"`
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value"`
+}
+
+func (x *SpecificationData) Reset() {
+	*x = SpecificationData{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_baseInfoService_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SpecificationData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpecificationData) ProtoMessage() {}
+
+func (x *SpecificationData) ProtoReflect() protoreflect.Message {
+	mi := &file_baseInfoService_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpecificationData.ProtoReflect.Descriptor instead.
+func (*SpecificationData) Descriptor() ([]byte, []int) {
+	return file_baseInfoService_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *SpecificationData) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *SpecificationData) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
 //参与的活动
 type PromotionInfo struct {
 	state         protoimpl.MessageState
@@ -842,7 +922,7 @@ type PromotionInfo struct {
 func (x *PromotionInfo) Reset() {
 	*x = PromotionInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_baseInfoService_proto_msgTypes[4]
+		mi := &file_baseInfoService_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -855,7 +935,7 @@ func (x *PromotionInfo) String() string {
 func (*PromotionInfo) ProtoMessage() {}
 
 func (x *PromotionInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_baseInfoService_proto_msgTypes[4]
+	mi := &file_baseInfoService_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -868,7 +948,7 @@ func (x *PromotionInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PromotionInfo.ProtoReflect.Descriptor instead.
 func (*PromotionInfo) Descriptor() ([]byte, []int) {
-	return file_baseInfoService_proto_rawDescGZIP(), []int{4}
+	return file_baseInfoService_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *PromotionInfo) GetId() int64 {
@@ -939,7 +1019,7 @@ type CouponInfo struct {
 func (x *CouponInfo) Reset() {
 	*x = CouponInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_baseInfoService_proto_msgTypes[5]
+		mi := &file_baseInfoService_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -952,7 +1032,7 @@ func (x *CouponInfo) String() string {
 func (*CouponInfo) ProtoMessage() {}
 
 func (x *CouponInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_baseInfoService_proto_msgTypes[5]
+	mi := &file_baseInfoService_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -965,7 +1045,7 @@ func (x *CouponInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CouponInfo.ProtoReflect.Descriptor instead.
 func (*CouponInfo) Descriptor() ([]byte, []int) {
-	return file_baseInfoService_proto_rawDescGZIP(), []int{5}
+	return file_baseInfoService_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CouponInfo) GetId() int64 {
@@ -1095,7 +1175,7 @@ type MemberInfo struct {
 func (x *MemberInfo) Reset() {
 	*x = MemberInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_baseInfoService_proto_msgTypes[6]
+		mi := &file_baseInfoService_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1108,7 +1188,7 @@ func (x *MemberInfo) String() string {
 func (*MemberInfo) ProtoMessage() {}
 
 func (x *MemberInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_baseInfoService_proto_msgTypes[6]
+	mi := &file_baseInfoService_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1121,7 +1201,7 @@ func (x *MemberInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemberInfo.ProtoReflect.Descriptor instead.
 func (*MemberInfo) Descriptor() ([]byte, []int) {
-	return file_baseInfoService_proto_rawDescGZIP(), []int{6}
+	return file_baseInfoService_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *MemberInfo) GetId() int64 {
@@ -1222,7 +1302,7 @@ type UserInfo struct {
 func (x *UserInfo) Reset() {
 	*x = UserInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_baseInfoService_proto_msgTypes[7]
+		mi := &file_baseInfoService_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1235,7 +1315,7 @@ func (x *UserInfo) String() string {
 func (*UserInfo) ProtoMessage() {}
 
 func (x *UserInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_baseInfoService_proto_msgTypes[7]
+	mi := &file_baseInfoService_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1248,7 +1328,7 @@ func (x *UserInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserInfo.ProtoReflect.Descriptor instead.
 func (*UserInfo) Descriptor() ([]byte, []int) {
-	return file_baseInfoService_proto_rawDescGZIP(), []int{7}
+	return file_baseInfoService_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserInfo) GetId() int64 {
@@ -1293,7 +1373,7 @@ type CompanyInfo struct {
 func (x *CompanyInfo) Reset() {
 	*x = CompanyInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_baseInfoService_proto_msgTypes[8]
+		mi := &file_baseInfoService_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1306,7 +1386,7 @@ func (x *CompanyInfo) String() string {
 func (*CompanyInfo) ProtoMessage() {}
 
 func (x *CompanyInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_baseInfoService_proto_msgTypes[8]
+	mi := &file_baseInfoService_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1319,7 +1399,7 @@ func (x *CompanyInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompanyInfo.ProtoReflect.Descriptor instead.
 func (*CompanyInfo) Descriptor() ([]byte, []int) {
-	return file_baseInfoService_proto_rawDescGZIP(), []int{8}
+	return file_baseInfoService_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CompanyInfo) GetId() int64 {
@@ -1364,7 +1444,7 @@ type WarehouseInfo struct {
 func (x *WarehouseInfo) Reset() {
 	*x = WarehouseInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_baseInfoService_proto_msgTypes[9]
+		mi := &file_baseInfoService_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1377,7 +1457,7 @@ func (x *WarehouseInfo) String() string {
 func (*WarehouseInfo) ProtoMessage() {}
 
 func (x *WarehouseInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_baseInfoService_proto_msgTypes[9]
+	mi := &file_baseInfoService_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1390,7 +1470,7 @@ func (x *WarehouseInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarehouseInfo.ProtoReflect.Descriptor instead.
 func (*WarehouseInfo) Descriptor() ([]byte, []int) {
-	return file_baseInfoService_proto_rawDescGZIP(), []int{9}
+	return file_baseInfoService_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *WarehouseInfo) GetId() int64 {
@@ -1434,7 +1514,7 @@ type OrderFlow struct {
 func (x *OrderFlow) Reset() {
 	*x = OrderFlow{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_baseInfoService_proto_msgTypes[10]
+		mi := &file_baseInfoService_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1447,7 +1527,7 @@ func (x *OrderFlow) String() string {
 func (*OrderFlow) ProtoMessage() {}
 
 func (x *OrderFlow) ProtoReflect() protoreflect.Message {
-	mi := &file_baseInfoService_proto_msgTypes[10]
+	mi := &file_baseInfoService_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1460,7 +1540,7 @@ func (x *OrderFlow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderFlow.ProtoReflect.Descriptor instead.
 func (*OrderFlow) Descriptor() ([]byte, []int) {
-	return file_baseInfoService_proto_rawDescGZIP(), []int{10}
+	return file_baseInfoService_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *OrderFlow) GetCurrent() *OrderFlowStep {
@@ -1494,7 +1574,7 @@ type OrderFlowStep struct {
 func (x *OrderFlowStep) Reset() {
 	*x = OrderFlowStep{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_baseInfoService_proto_msgTypes[11]
+		mi := &file_baseInfoService_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1507,7 +1587,7 @@ func (x *OrderFlowStep) String() string {
 func (*OrderFlowStep) ProtoMessage() {}
 
 func (x *OrderFlowStep) ProtoReflect() protoreflect.Message {
-	mi := &file_baseInfoService_proto_msgTypes[11]
+	mi := &file_baseInfoService_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1520,7 +1600,7 @@ func (x *OrderFlowStep) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderFlowStep.ProtoReflect.Descriptor instead.
 func (*OrderFlowStep) Descriptor() ([]byte, []int) {
-	return file_baseInfoService_proto_rawDescGZIP(), []int{10, 0}
+	return file_baseInfoService_proto_rawDescGZIP(), []int{11, 0}
 }
 
 func (x *OrderFlowStep) GetCode() string {
@@ -1665,7 +1745,7 @@ var file_baseInfoService_proto_rawDesc = []byte{
 	0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b, 0x31, 0x18, 0x18, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x07, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b, 0x31, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65,
 	0x6d, 0x61, 0x72, 0x6b, 0x32, 0x18, 0x19, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x72, 0x65, 0x6d,
-	0x61, 0x72, 0x6b, 0x32, 0x22, 0xf6, 0x07, 0x0a, 0x09, 0x47, 0x6f, 0x6f, 0x64, 0x73, 0x49, 0x6e,
+	0x61, 0x72, 0x6b, 0x32, 0x22, 0xe7, 0x08, 0x0a, 0x09, 0x47, 0x6f, 0x6f, 0x64, 0x73, 0x49, 0x6e,
 	0x66, 0x6f, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02,
 	0x69, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x73, 0x70, 0x75, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x03, 0x52, 0x05, 0x73, 0x70, 0x75, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x73, 0x6b, 0x75,
@@ -1673,14 +1753,14 @@ var file_baseInfoService_proto_rawDesc = []byte{
 	0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
 	0x74, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x06, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x69, 0x6e,
-	0x76, 0x65, 0x6e, 0x74, 0x6f, 0x72, 0x79, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x69,
+	0x76, 0x65, 0x6e, 0x74, 0x6f, 0x72, 0x79, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x69,
 	0x6e, 0x76, 0x65, 0x6e, 0x74, 0x6f, 0x72, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x6e, 0x69, 0x74,
 	0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x6e, 0x69, 0x74, 0x12, 0x1b, 0x0a, 0x09,
 	0x69, 0x6d, 0x61, 0x67, 0x65, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x08, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72, 0x6c, 0x12, 0x20, 0x0a, 0x0c, 0x69, 0x73, 0x5f,
-	0x6d, 0x61, 0x6e, 0x79, 0x5f, 0x73, 0x70, 0x65, 0x63, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x6d, 0x61, 0x6e, 0x79, 0x5f, 0x73, 0x70, 0x65, 0x63, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x0a, 0x69, 0x73, 0x4d, 0x61, 0x6e, 0x79, 0x53, 0x70, 0x65, 0x63, 0x12, 0x1d, 0x0a, 0x0a, 0x69,
-	0x73, 0x5f, 0x69, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x73, 0x5f, 0x69, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x09, 0x69, 0x73, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x73, 0x68,
 	0x6f, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x73, 0x68, 0x6f,
 	0x70, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x5f, 0x69, 0x64, 0x18,
@@ -1708,7 +1788,7 @@ var file_baseInfoService_proto_rawDesc = []byte{
 	0x12, 0x23, 0x0a, 0x0d, 0x67, 0x69, 0x76, 0x65, 0x5f, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61,
 	0x6c, 0x18, 0x18, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x67, 0x69, 0x76, 0x65, 0x49, 0x6e, 0x74,
 	0x65, 0x67, 0x72, 0x61, 0x6c, 0x12, 0x1d, 0x0a, 0x0a, 0x69, 0x73, 0x5f, 0x76, 0x69, 0x72, 0x74,
-	0x75, 0x61, 0x6c, 0x18, 0x19, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x69, 0x73, 0x56, 0x69, 0x72,
+	0x75, 0x61, 0x6c, 0x18, 0x19, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x69, 0x73, 0x56, 0x69, 0x72,
 	0x74, 0x75, 0x61, 0x6c, 0x12, 0x24, 0x0a, 0x0e, 0x62, 0x75, 0x79, 0x5f, 0x6d, 0x69, 0x6e, 0x5f,
 	0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x1c, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0c, 0x62, 0x75,
 	0x79, 0x4d, 0x69, 0x6e, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x24, 0x0a, 0x0e, 0x62, 0x75,
@@ -1728,7 +1808,18 @@ var file_baseInfoService_proto_rawDesc = []byte{
 	0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x22, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06,
 	0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x25, 0x0a, 0x0e, 0x73, 0x75, 0x62, 0x74, 0x6f, 0x74,
 	0x61, 0x6c, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x23, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d,
-	0x73, 0x75, 0x62, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x50, 0x72, 0x69, 0x63, 0x65, 0x22, 0x89, 0x01,
+	0x73, 0x75, 0x62, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x19, 0x0a,
+	0x08, 0x69, 0x73, 0x5f, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x24, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x69, 0x73, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x23, 0x0a, 0x0d, 0x65, 0x72, 0x72, 0x6f,
+	0x72, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x25, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x2f, 0x0a,
+	0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x26, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x73, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53, 0x70, 0x65, 0x63, 0x69, 0x66, 0x69, 0x63, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x73, 0x70, 0x65, 0x63, 0x22, 0x3d,
+	0x0a, 0x11, 0x53, 0x70, 0x65, 0x63, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x44,
+	0x61, 0x74, 0x61, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x89, 0x01,
 	0x0a, 0x0d, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x12,
 	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12,
 	0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x63,
@@ -1843,30 +1934,32 @@ func file_baseInfoService_proto_rawDescGZIP() []byte {
 	return file_baseInfoService_proto_rawDescData
 }
 
-var file_baseInfoService_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_baseInfoService_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_baseInfoService_proto_goTypes = []interface{}{
 	(*PaymentInfo)(nil),       // 0: services.PaymentInfo
 	(*MemberAddressInfo)(nil), // 1: services.MemberAddressInfo
 	(*AreaInfo)(nil),          // 2: services.AreaInfo
 	(*GoodsInfo)(nil),         // 3: services.GoodsInfo
-	(*PromotionInfo)(nil),     // 4: services.PromotionInfo
-	(*CouponInfo)(nil),        // 5: services.CouponInfo
-	(*MemberInfo)(nil),        // 6: services.MemberInfo
-	(*UserInfo)(nil),          // 7: services.UserInfo
-	(*CompanyInfo)(nil),       // 8: services.CompanyInfo
-	(*WarehouseInfo)(nil),     // 9: services.WarehouseInfo
-	(*OrderFlow)(nil),         // 10: services.OrderFlow
-	(*OrderFlowStep)(nil),     // 11: services.OrderFlow.step
+	(*SpecificationData)(nil), // 4: services.SpecificationData
+	(*PromotionInfo)(nil),     // 5: services.PromotionInfo
+	(*CouponInfo)(nil),        // 6: services.CouponInfo
+	(*MemberInfo)(nil),        // 7: services.MemberInfo
+	(*UserInfo)(nil),          // 8: services.UserInfo
+	(*CompanyInfo)(nil),       // 9: services.CompanyInfo
+	(*WarehouseInfo)(nil),     // 10: services.WarehouseInfo
+	(*OrderFlow)(nil),         // 11: services.OrderFlow
+	(*OrderFlowStep)(nil),     // 12: services.OrderFlow.step
 }
 var file_baseInfoService_proto_depIdxs = []int32{
 	2,  // 0: services.MemberAddressInfo.area:type_name -> services.AreaInfo
-	11, // 1: services.OrderFlow.current:type_name -> services.OrderFlow.step
-	11, // 2: services.OrderFlow.steps:type_name -> services.OrderFlow.step
-	3,  // [3:3] is the sub-list for method output_type
-	3,  // [3:3] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	4,  // 1: services.GoodsInfo.spec:type_name -> services.SpecificationData
+	12, // 2: services.OrderFlow.current:type_name -> services.OrderFlow.step
+	12, // 3: services.OrderFlow.steps:type_name -> services.OrderFlow.step
+	4,  // [4:4] is the sub-list for method output_type
+	4,  // [4:4] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_baseInfoService_proto_init() }
@@ -1924,7 +2017,7 @@ func file_baseInfoService_proto_init() {
 			}
 		}
 		file_baseInfoService_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PromotionInfo); i {
+			switch v := v.(*SpecificationData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1936,7 +2029,7 @@ func file_baseInfoService_proto_init() {
 			}
 		}
 		file_baseInfoService_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CouponInfo); i {
+			switch v := v.(*PromotionInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1948,7 +2041,7 @@ func file_baseInfoService_proto_init() {
 			}
 		}
 		file_baseInfoService_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MemberInfo); i {
+			switch v := v.(*CouponInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1960,7 +2053,7 @@ func file_baseInfoService_proto_init() {
 			}
 		}
 		file_baseInfoService_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserInfo); i {
+			switch v := v.(*MemberInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1972,7 +2065,7 @@ func file_baseInfoService_proto_init() {
 			}
 		}
 		file_baseInfoService_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CompanyInfo); i {
+			switch v := v.(*UserInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1984,7 +2077,7 @@ func file_baseInfoService_proto_init() {
 			}
 		}
 		file_baseInfoService_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WarehouseInfo); i {
+			switch v := v.(*CompanyInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1996,7 +2089,7 @@ func file_baseInfoService_proto_init() {
 			}
 		}
 		file_baseInfoService_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OrderFlow); i {
+			switch v := v.(*WarehouseInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2008,6 +2101,18 @@ func file_baseInfoService_proto_init() {
 			}
 		}
 		file_baseInfoService_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OrderFlow); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_baseInfoService_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*OrderFlowStep); i {
 			case 0:
 				return &v.state
@@ -2026,7 +2131,7 @@ func file_baseInfoService_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_baseInfoService_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

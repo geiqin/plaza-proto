@@ -43,15 +43,15 @@ func NewCartServiceEndpoints() []*api.Endpoint {
 // Client API for CartService service
 
 type CartService interface {
-	//设置购物车商品
-	Set(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
+	//加入购物车
+	Save(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
 	//删除购物车商品
 	Remove(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartDetailResponse, error)
 	//清除购物车
 	Clear(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartDetailResponse, error)
 	//购物车详情
 	Detail(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartDetailResponse, error)
-	//获得单个商品库存状况
+	//更新购物车数量（根据cartId）
 	Stock(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartStockResponse, error)
 	//获得统计数量(服务调的多)
 	Count(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartDetailResponse, error)
@@ -71,8 +71,8 @@ func NewCartService(name string, c client.Client) CartService {
 	}
 }
 
-func (c *cartService) Set(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error) {
-	req := c.c.NewRequest(c.name, "CartService.Set", in)
+func (c *cartService) Save(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error) {
+	req := c.c.NewRequest(c.name, "CartService.Save", in)
 	out := new(CartResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -144,15 +144,15 @@ func (c *cartService) Checked(ctx context.Context, in *CartRequest, opts ...clie
 // Server API for CartService service
 
 type CartServiceHandler interface {
-	//设置购物车商品
-	Set(context.Context, *CartRequest, *CartResponse) error
+	//加入购物车
+	Save(context.Context, *CartRequest, *CartResponse) error
 	//删除购物车商品
 	Remove(context.Context, *CartRequest, *CartDetailResponse) error
 	//清除购物车
 	Clear(context.Context, *CartRequest, *CartDetailResponse) error
 	//购物车详情
 	Detail(context.Context, *CartRequest, *CartDetailResponse) error
-	//获得单个商品库存状况
+	//更新购物车数量（根据cartId）
 	Stock(context.Context, *CartRequest, *CartStockResponse) error
 	//获得统计数量(服务调的多)
 	Count(context.Context, *CartRequest, *CartDetailResponse) error
@@ -162,7 +162,7 @@ type CartServiceHandler interface {
 
 func RegisterCartServiceHandler(s server.Server, hdlr CartServiceHandler, opts ...server.HandlerOption) error {
 	type cartService interface {
-		Set(ctx context.Context, in *CartRequest, out *CartResponse) error
+		Save(ctx context.Context, in *CartRequest, out *CartResponse) error
 		Remove(ctx context.Context, in *CartRequest, out *CartDetailResponse) error
 		Clear(ctx context.Context, in *CartRequest, out *CartDetailResponse) error
 		Detail(ctx context.Context, in *CartRequest, out *CartDetailResponse) error
@@ -181,8 +181,8 @@ type cartServiceHandler struct {
 	CartServiceHandler
 }
 
-func (h *cartServiceHandler) Set(ctx context.Context, in *CartRequest, out *CartResponse) error {
-	return h.CartServiceHandler.Set(ctx, in, out)
+func (h *cartServiceHandler) Save(ctx context.Context, in *CartRequest, out *CartResponse) error {
+	return h.CartServiceHandler.Save(ctx, in, out)
 }
 
 func (h *cartServiceHandler) Remove(ctx context.Context, in *CartRequest, out *CartDetailResponse) error {

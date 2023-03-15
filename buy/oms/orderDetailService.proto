@@ -1,6 +1,7 @@
 syntax = "proto3";
 package services;
 option go_package = "/.;services";
+import "baseInfoService.proto";
 
 message OrderDetail {
     int64  id =1;//ID
@@ -23,18 +24,12 @@ message OrderDetail {
     int64  last_one_allocation_money =18;//最后一个商品的优惠分摊，0为不是最后个
     int64  refunded_money =19;//已退款金额
     int32  returned_quantity =20;//已退货数量
-    bool   is_many_spec =21;//是否多规格商品
-    string specification =22;//规格
-    string spec_desc =23;//规格描述
-    bool   is_give =24;//是否为赠品，礼物等赠送
+    string is_many_spec =21;//是否多规格商品
+    repeated SpecificationData spec =22;//规格
+    string spec_desc =23;//描述
+    string is_give =24;//是否为赠品，礼物等赠送
     string extend_data =25;//扩展数据 json
     string created_at  = 26;
     string updated_at  = 27;
     string order_aftersale_btn_text =28;//订单售后服务按钮文本
-}
-
-message ExtendVipInfo {
-    int32 member_rank_id = 1;
-    string keep_type = 2;
-    int32 keep_value = 3;
 }
