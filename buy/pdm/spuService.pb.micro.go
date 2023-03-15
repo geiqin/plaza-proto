@@ -49,8 +49,10 @@ type SpuService interface {
 	Update(ctx context.Context, in *FormSpu, opts ...client.CallOption) (*SpuResponse, error)
 	//删除商品
 	Delete(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
-	//获取商品（编辑显示）
+	//获取商品（仅有Spu和skus信息）
 	Get(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
+	//商品详情（仅有Spu信息）
+	GetBase(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
 	//商品详情（后台编辑显示）
 	Detail(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
 	//商品上下架
@@ -107,6 +109,16 @@ func (c *spuService) Delete(ctx context.Context, in *Spu, opts ...client.CallOpt
 
 func (c *spuService) Get(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuService.Get", in)
+	out := new(SpuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *spuService) GetBase(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuService.GetBase", in)
 	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -174,8 +186,10 @@ type SpuServiceHandler interface {
 	Update(context.Context, *FormSpu, *SpuResponse) error
 	//删除商品
 	Delete(context.Context, *Spu, *SpuResponse) error
-	//获取商品（编辑显示）
+	//获取商品（仅有Spu和skus信息）
 	Get(context.Context, *Spu, *SpuResponse) error
+	//商品详情（仅有Spu信息）
+	GetBase(context.Context, *Spu, *SpuResponse) error
 	//商品详情（后台编辑显示）
 	Detail(context.Context, *Spu, *SpuResponse) error
 	//商品上下架
@@ -194,6 +208,7 @@ func RegisterSpuServiceHandler(s server.Server, hdlr SpuServiceHandler, opts ...
 		Update(ctx context.Context, in *FormSpu, out *SpuResponse) error
 		Delete(ctx context.Context, in *Spu, out *SpuResponse) error
 		Get(ctx context.Context, in *Spu, out *SpuResponse) error
+		GetBase(ctx context.Context, in *Spu, out *SpuResponse) error
 		Detail(ctx context.Context, in *Spu, out *SpuResponse) error
 		SetSale(ctx context.Context, in *SpuRequest, out *SpuResponse) error
 		SetSort(ctx context.Context, in *SpuRequest, out *SpuResponse) error
@@ -225,6 +240,10 @@ func (h *spuServiceHandler) Delete(ctx context.Context, in *Spu, out *SpuRespons
 
 func (h *spuServiceHandler) Get(ctx context.Context, in *Spu, out *SpuResponse) error {
 	return h.SpuServiceHandler.Get(ctx, in, out)
+}
+
+func (h *spuServiceHandler) GetBase(ctx context.Context, in *Spu, out *SpuResponse) error {
+	return h.SpuServiceHandler.GetBase(ctx, in, out)
 }
 
 func (h *spuServiceHandler) Detail(ctx context.Context, in *Spu, out *SpuResponse) error {

@@ -43,6 +43,7 @@ func NewSpuBrowseServiceEndpoints() []*api.Endpoint {
 // Client API for SpuBrowseService service
 
 type SpuBrowseService interface {
+	Count(ctx context.Context, in *SpuBrowseRequest, opts ...client.CallOption) (*SpuBrowseResponse, error)
 	Delete(ctx context.Context, in *SpuBrowseRequest, opts ...client.CallOption) (*SpuBrowseResponse, error)
 	Search(ctx context.Context, in *SpuBrowseRequest, opts ...client.CallOption) (*SpuBrowseResponse, error)
 }
@@ -57,6 +58,16 @@ func NewSpuBrowseService(name string, c client.Client) SpuBrowseService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *spuBrowseService) Count(ctx context.Context, in *SpuBrowseRequest, opts ...client.CallOption) (*SpuBrowseResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuBrowseService.Count", in)
+	out := new(SpuBrowseResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *spuBrowseService) Delete(ctx context.Context, in *SpuBrowseRequest, opts ...client.CallOption) (*SpuBrowseResponse, error) {
@@ -82,12 +93,14 @@ func (c *spuBrowseService) Search(ctx context.Context, in *SpuBrowseRequest, opt
 // Server API for SpuBrowseService service
 
 type SpuBrowseServiceHandler interface {
+	Count(context.Context, *SpuBrowseRequest, *SpuBrowseResponse) error
 	Delete(context.Context, *SpuBrowseRequest, *SpuBrowseResponse) error
 	Search(context.Context, *SpuBrowseRequest, *SpuBrowseResponse) error
 }
 
 func RegisterSpuBrowseServiceHandler(s server.Server, hdlr SpuBrowseServiceHandler, opts ...server.HandlerOption) error {
 	type spuBrowseService interface {
+		Count(ctx context.Context, in *SpuBrowseRequest, out *SpuBrowseResponse) error
 		Delete(ctx context.Context, in *SpuBrowseRequest, out *SpuBrowseResponse) error
 		Search(ctx context.Context, in *SpuBrowseRequest, out *SpuBrowseResponse) error
 	}
@@ -100,6 +113,10 @@ func RegisterSpuBrowseServiceHandler(s server.Server, hdlr SpuBrowseServiceHandl
 
 type spuBrowseServiceHandler struct {
 	SpuBrowseServiceHandler
+}
+
+func (h *spuBrowseServiceHandler) Count(ctx context.Context, in *SpuBrowseRequest, out *SpuBrowseResponse) error {
+	return h.SpuBrowseServiceHandler.Count(ctx, in, out)
 }
 
 func (h *spuBrowseServiceHandler) Delete(ctx context.Context, in *SpuBrowseRequest, out *SpuBrowseResponse) error {

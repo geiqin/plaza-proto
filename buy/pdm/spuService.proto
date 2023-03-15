@@ -17,8 +17,10 @@ service SpuService {
     rpc Update(FormSpu) returns (SpuResponse);
     //删除商品
     rpc Delete (Spu) returns (SpuResponse);
-    //获取商品（编辑显示）
+    //获取商品（仅有Spu和skus信息）
     rpc Get (Spu) returns (SpuResponse);
+    //商品详情（仅有Spu信息）
+    rpc GetBase (Spu) returns (SpuResponse);
     //商品详情（后台编辑显示）
     rpc Detail (Spu) returns (SpuResponse);
     //商品上下架

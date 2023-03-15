@@ -6,6 +6,7 @@ import "spuService.proto";
 
 
 service SpuBrowseService {
+    rpc Count (SpuBrowseRequest) returns (SpuBrowseResponse);
     rpc Delete (SpuBrowseRequest) returns (SpuBrowseResponse);
     rpc Search (SpuBrowseRequest) returns (SpuBrowseResponse);
 }
@@ -28,7 +29,7 @@ message SpuBrowseRequest {
 }
 
 message SpuBrowseData {
-    SpuBrowse  entity = 1;
+    int64  count = 1;
     common.Pager pager = 2;
     repeated SpuBrowse items = 3;
     common.Info info = 4;

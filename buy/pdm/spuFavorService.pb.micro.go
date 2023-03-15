@@ -43,8 +43,8 @@ func NewSpuFavorServiceEndpoints() []*api.Endpoint {
 // Client API for SpuFavorService service
 
 type SpuFavorService interface {
-	Create(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error)
-	Delete(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error)
+	Collect(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorCollectResponse, error)
+	Count(ctx context.Context, in *SpuFavorRequest, opts ...client.CallOption) (*SpuFavorResponse, error)
 	Search(ctx context.Context, in *SpuFavorRequest, opts ...client.CallOption) (*SpuFavorResponse, error)
 }
 
@@ -60,9 +60,9 @@ func NewSpuFavorService(name string, c client.Client) SpuFavorService {
 	}
 }
 
-func (c *spuFavorService) Create(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error) {
-	req := c.c.NewRequest(c.name, "SpuFavorService.Create", in)
-	out := new(SpuFavorResponse)
+func (c *spuFavorService) Collect(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorCollectResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuFavorService.Collect", in)
+	out := new(SpuFavorCollectResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -70,8 +70,8 @@ func (c *spuFavorService) Create(ctx context.Context, in *SpuFavor, opts ...clie
 	return out, nil
 }
 
-func (c *spuFavorService) Delete(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error) {
-	req := c.c.NewRequest(c.name, "SpuFavorService.Delete", in)
+func (c *spuFavorService) Count(ctx context.Context, in *SpuFavorRequest, opts ...client.CallOption) (*SpuFavorResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuFavorService.Count", in)
 	out := new(SpuFavorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -93,15 +93,15 @@ func (c *spuFavorService) Search(ctx context.Context, in *SpuFavorRequest, opts 
 // Server API for SpuFavorService service
 
 type SpuFavorServiceHandler interface {
-	Create(context.Context, *SpuFavor, *SpuFavorResponse) error
-	Delete(context.Context, *SpuFavor, *SpuFavorResponse) error
+	Collect(context.Context, *SpuFavor, *SpuFavorCollectResponse) error
+	Count(context.Context, *SpuFavorRequest, *SpuFavorResponse) error
 	Search(context.Context, *SpuFavorRequest, *SpuFavorResponse) error
 }
 
 func RegisterSpuFavorServiceHandler(s server.Server, hdlr SpuFavorServiceHandler, opts ...server.HandlerOption) error {
 	type spuFavorService interface {
-		Create(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error
-		Delete(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error
+		Collect(ctx context.Context, in *SpuFavor, out *SpuFavorCollectResponse) error
+		Count(ctx context.Context, in *SpuFavorRequest, out *SpuFavorResponse) error
 		Search(ctx context.Context, in *SpuFavorRequest, out *SpuFavorResponse) error
 	}
 	type SpuFavorService struct {
@@ -115,12 +115,12 @@ type spuFavorServiceHandler struct {
 	SpuFavorServiceHandler
 }
 
-func (h *spuFavorServiceHandler) Create(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error {
-	return h.SpuFavorServiceHandler.Create(ctx, in, out)
+func (h *spuFavorServiceHandler) Collect(ctx context.Context, in *SpuFavor, out *SpuFavorCollectResponse) error {
+	return h.SpuFavorServiceHandler.Collect(ctx, in, out)
 }
 
-func (h *spuFavorServiceHandler) Delete(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error {
-	return h.SpuFavorServiceHandler.Delete(ctx, in, out)
+func (h *spuFavorServiceHandler) Count(ctx context.Context, in *SpuFavorRequest, out *SpuFavorResponse) error {
+	return h.SpuFavorServiceHandler.Count(ctx, in, out)
 }
 
 func (h *spuFavorServiceHandler) Search(ctx context.Context, in *SpuFavorRequest, out *SpuFavorResponse) error {
