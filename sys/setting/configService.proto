@@ -15,7 +15,7 @@ message Config {
     string name =2;//唯一名称
     string value =3;//内容
     string type =4;//类型：admin后台，home前台，common公共
-    string tag =5; //标签
+    string group =5; //组
     string created_at = 8;
     string updated_at = 9;
 }
@@ -25,9 +25,10 @@ message ConfigRequest {
     string code =2;//唯一标识
     string  name =3;//名称
     string type = 4;//类型：admin后台，home前台，common公共
-    string tag = 5;
-    repeated string names = 6;
-    repeated int64 ids = 7;
+    string group = 5;
+    repeated string groups = 6;
+    repeated string names = 7;
+    repeated int64 ids = 8;
 }
 
 message ConfigData{

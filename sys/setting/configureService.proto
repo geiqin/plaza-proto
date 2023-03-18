@@ -1,0 +1,239 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//配置中心
+service ConfigureService {
+    rpc SetConfig (ConfigureData) returns (ConfigureResponse) {}
+    rpc GetConfig (ConfigureRequest) returns (ConfigureResponse) {}
+}
+
+//-------------站点配置--------------
+
+//站点基础设置
+message SiteBaseConfig{
+    string common_timezone =1;//默认时区默认,亚洲/上海 [标准时+8]
+    string home_site_name =2;//站点名称
+    string home_site_logo =3;//电脑端logo支持 [jpg, png, gif]，建议220x60px
+    string home_site_logo_wap =4;//手机端logo支持 [jpg, png, gif]，建议220x66px
+    string home_site_logo_square =5;//正方形logo建议使用png格式，建议300x300px
+}
+
+//站点状态设置(1-开启，2-关闭)
+message SiteStateConfig{
+    string home_site_state =1;//站点状态;可暂时将站点关闭，其他人无法访问，但不影响管理员访问后台
+    string home_site_web_home_state =2;//web端首页访问;默认开启，仅针对web端首页，其他页面不受影响
+    string home_site_web_pc_state =3;//web端PC访问;默认开启，仅针对web端PC
+    string home_site_close_reason =4;//关闭原因;支持html，当网站处于关闭状态时，关闭原因将显示在前台
+}
+
+//站点域名地址
+message SiteDomainConfig{
+    string common_domain_host =1;//主域名,站点地址
+    string common_cdn_attachment_host =2;//附件cdn域名图片/视频/文件
+    string common_cdn_public_host =3;//css/js静态文件cdn域名
+}
+
+//站点备案信息
+message SiteBeianConfig{
+    string home_site_icp =1;//ICP域名备案号
+    string home_site_security_record_name =2;//公安备案号如：京公网安备xxx号
+    string home_site_security_record_url =3;//公安备案地址备案,展示页面的url地址
+    string home_site_telecom_license =4;//增值电信业务经营许可证,如：沪B2-xxx
+    string home_site_company_license =5;//电子营业执照亮照(执照页面展示地址、申请地址：https://zzlz.gsxt.gov.cn/businessShow)
+}
+
+//站点SEO配置
+message SiteSeoConfig {
+    string home_seo_site_title =1;//站点标题，一般不超过80个字符
+    string home_seo_site_keywords =2;//站点关键字，一般不超过100个字符，多个关键字以半圆角逗号 [ , ] 隔开
+    string home_seo_site_description =3;//站点描述，一般不超过200个字符
+}
+
+//站点搜索
+message SiteSearchConfig {
+    string home_search_history_record =1;//请选择开启搜索记录
+    int32 home_search_limit_number =2;//搜索展示数据条数
+    string home_search_keywords =3;//搜索关键字
+    string home_search_is_brand =4;//搜索页开启品牌
+    string home_search_is_category =5;//搜索页开启分类
+    string home_search_is_price =6;//搜索页开启价格
+    string home_search_is_params =7;//搜索页开启参数
+    string home_search_is_spec =8;//搜索页开启规格
+    repeated string home_search_params_type =9;//搜索参数类型
+}
+
+
+//-------------手机配置--------------
+
+
+//手机基础配置
+message MobileBaseConfig{
+    string common_app_h5_url =1;//手机端h5地址uniapp端地址以(#/)结尾、比如：https://plazq.qindev.com/h5/#/
+    string common_is_mobile_concise_model =2;//手机简洁模式,默认否(0否，1是)
+    string common_app_customer_service_tel =3;//客服电话,空则不显示
+    string common_shop_notice =4;//商城公告,空则不显示公告
+    string common_user_center_notice =5;//用户中心公告,空则不显示公告
+}
+
+//APP/小程序通用配置
+message MobileCommonConfig{
+    string common_user_is_mandatory_bind_mobile =1;//强制绑定手机(0否，1是)
+    string common_app_is_use_mobile_detail =2;//使用独立手机详情,默认使用web详情(0否，1是)
+    string common_app_is_enable_search =3;//是否启用搜索(0否，1是)
+    string common_app_is_enable_answer =4;//是否启用留言(0否，1是)
+    string common_app_is_online_service =5;//开启在线客服(0否，1是)
+    string common_app_is_header_nav_fixed =6;//是否固定顶部导航(0否，1是)
+    string common_app_is_head_vice_nav =7;//是否启用用户中心头部小导航(0否，1是)
+    repeated string  common_user_onekey_bind_mobile_list =8;//获取账户手机一键登录,目前仅支持【微信小程序、百度小程序、头条小程序】
+    repeated string  common_user_address_platform_import_list =9;//获取账户地址一键导入,获取当前小程序平台app账户的收货地址，目前仅支持【小程序】
+
+}
+
+//微信小程序配置
+message AppMiniWeixinConfig{
+    string common_app_mini_weixin_appid =1;//AppID,小程序ID
+    string common_app_mini_weixin_app_secret =2;//AppSecret,小程序密钥
+    string common_app_mini_weixin_title =3;//名称
+    string common_app_mini_weixin_describe =4;//描述
+}
+//支付宝小程序配置
+message AppMiniAlipayConfig{
+    string common_app_mini_alipay_appid =1;//AppID
+    string common_app_mini_alipay_rsa_public =2;//应用公钥
+    string common_app_mini_alipay_rsa_private =3;//应用私钥
+    string common_app_mini_alipay_out_rsa_public =4;//支付宝公钥
+    string common_app_mini_alipay_title =5;//名称
+    string common_app_mini_alipay_describe =6;//描述
+}
+//头条小程序配置
+message AppMiniToutiaoConfig{
+    string common_app_mini_toutiao_appid =1; //头条AppID
+    string common_app_mini_toutiao_app_secret =2;
+    string common_app_mini_toutiao_title =3;
+    string common_app_mini_toutiao_describe =4;
+}
+//百度小程序配置
+message AppMiniBaiduConfig{
+    string admin_app_mini_baidu_appid =1;
+    string admin_app_mini_baidu_app_secret =2;
+    string common_app_mini_baidu_title =3;
+    string common_app_mini_baidu_describe =4;
+}
+//QQ小程序配置
+message AppMiniQQConfig{
+    string admin_app_mini_qq_appid =1;
+    string admin_app_mini_qq_app_secret =2;
+    string admin_app_mini_qq_app_token =3;
+    string common_app_mini_qq_title =4;
+    string common_app_mini_qq_describe =5;
+}
+//快手小程序配置
+message AppMiniKuaishouConfig{
+    string admin_app_mini_kuaishou_appid =1;
+    string admin_app_mini_kuaishou_app_secret =2;
+    string common_app_mini_kuaishou_title =3;
+    string common_app_mini_kuaishou_describe =4;
+}
+
+//----------- sms -----------
+
+// Sms配置信息
+message SmsConfig {
+    string common_sms_api_key =1;//短信KeyID(Access Key ID)
+    string common_sms_api_secret =2;//短信KeySecret(Access Key Secret)
+    string common_sms_sign =3;//短信签名(发送短信包含的签名)
+}
+
+//------------ email --------
+
+//邮件基础配置
+message EmailBaseConfig {
+    string common_email_smtp_host =1;//SMTP服务器(设置SMTP服务器的地址，如 smtp.163.com)
+    string common_email_smtp_port =2;//SMTP端口(设置SMTP服务器的端口，默认为 25)
+    string common_email_smtp_account =3;//发信人邮件地址(发信人邮件地址，使用SMTP协议发送的邮件地址，如 qindev@163.com)
+    string common_email_smtp_name =4;//SMTP身份验证用户名(如 qindev@163.com)
+    string common_email_smtp_pwd =5;//SMTP身份验证密码(qindev@163.com邮件的密码或授权码)
+    string common_email_is_use_ssl =6;//SSL方式加密(0否，1是)
+    string common_email_smtp_send_name =7;//发件人显示名称(如 QinDev)
+}
+
+//邮模板配置件
+message EmailTemplateConfig {
+    string admin_sms_login_template =1;//后台登录-短信模板ID【后台】
+    string common_sms_currency_template =2;//通用-短信模板ID【前端】
+    string home_sms_login_template =3;//用户登录-短信模板ID【前端】
+    string home_sms_user_reg =4;//用户注册-短信模板ID【前端】
+    string home_sms_user_forget_pwd =5;//密码找回-短信模板ID【前端】
+    string home_sms_user_mobile_binding =7;//手机号码绑定-短信模板ID【前端】
+}
+
+//-------- map ---------
+//地图数据配置
+message MapConfig {
+    string common_map_type =1;//地图类型
+    string common_baidu_map_ak =2;//百度地图api密钥
+    string common_amap_map_ak =3;//高德地图api秘钥
+    string common_tencent_map_ak =4;//腾讯地图api秘钥
+    string common_tianditu_map_ak =5;//天地图api秘钥
+}
+
+//店铺信息配置
+message StoreConfig {
+    string common_store_title =1;//店铺名称
+    string common_store_customer_tel =2;//商店电话
+    string common_store_customer_email =3;//商店邮箱
+    string common_store_customer_address =4;//店铺地址
+    string common_store_customer_qrcode =5;//店铺二维码
+}
+
+//系统功能配置
+message SystemConfig {
+    string common_is_enable_vip =1;//开启VIP功能
+    string common_is_enable_wallet =2;//开启钱包功能
+    string common_is_enable_integral =3;//开启积分功能
+}
+
+message ConfigureRequest {
+    int64 id = 1;
+    string code =2;//唯一标识
+    string name =3;//名称
+    string type = 4;//类型：admin后台，home前台，common公共
+    string group = 5;
+    repeated string groups = 6;
+    repeated string names = 7;
+    repeated int64 ids = 8;
+}
+
+message ConfigureData {
+    //站点配置
+    SiteBaseConfig site_base =1;
+    SiteStateConfig site_state =2;
+    SiteDomainConfig site_domain =3;
+    SiteBeianConfig site_beian =4;
+    SiteSeoConfig site_seo =5;
+    SiteSearchConfig site_search =6;
+    //手机配置
+    MobileBaseConfig mobile_base =8;
+    MobileCommonConfig mobile_common =9;
+    AppMiniWeixinConfig appmini_weixin =10;
+    AppMiniAlipayConfig appmini_alipay =11;
+    AppMiniBaiduConfig appmini_baidu =12;
+    AppMiniToutiaoConfig appmini_toutiao =13;
+    AppMiniQQConfig appmini_qq =14;
+    AppMiniKuaishouConfig appmini_kuaishou =15;
+    //邮件配置
+    EmailBaseConfig email_base =16;//邮件基础设置
+    EmailTemplateConfig email_template =17;//邮件消息模板
+    //短信配置
+    SmsConfig sms_base =18; //短信配置
+    MapConfig map =19; //地图配置
+    StoreConfig store =20;//店铺信息
+    SystemConfig system =21;//系统功能配置
+}
+
+message ConfigureResponse {
+    ConfigureData data = 1;
+    common.Error error = 2;
+}
