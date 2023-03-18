@@ -45,6 +45,7 @@ func NewConfigureServiceEndpoints() []*api.Endpoint {
 type ConfigureService interface {
 	SetConfig(ctx context.Context, in *ConfigureData, opts ...client.CallOption) (*ConfigureResponse, error)
 	GetConfig(ctx context.Context, in *ConfigureRequest, opts ...client.CallOption) (*ConfigureResponse, error)
+	GetDict(ctx context.Context, in *ConfigureRequest, opts ...client.CallOption) (*ConfigureDictResponse, error)
 }
 
 type configureService struct {
@@ -79,17 +80,29 @@ func (c *configureService) GetConfig(ctx context.Context, in *ConfigureRequest, 
 	return out, nil
 }
 
+func (c *configureService) GetDict(ctx context.Context, in *ConfigureRequest, opts ...client.CallOption) (*ConfigureDictResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigureService.GetDict", in)
+	out := new(ConfigureDictResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ConfigureService service
 
 type ConfigureServiceHandler interface {
 	SetConfig(context.Context, *ConfigureData, *ConfigureResponse) error
 	GetConfig(context.Context, *ConfigureRequest, *ConfigureResponse) error
+	GetDict(context.Context, *ConfigureRequest, *ConfigureDictResponse) error
 }
 
 func RegisterConfigureServiceHandler(s server.Server, hdlr ConfigureServiceHandler, opts ...server.HandlerOption) error {
 	type configureService interface {
 		SetConfig(ctx context.Context, in *ConfigureData, out *ConfigureResponse) error
 		GetConfig(ctx context.Context, in *ConfigureRequest, out *ConfigureResponse) error
+		GetDict(ctx context.Context, in *ConfigureRequest, out *ConfigureDictResponse) error
 	}
 	type ConfigureService struct {
 		configureService
@@ -108,4 +121,8 @@ func (h *configureServiceHandler) SetConfig(ctx context.Context, in *ConfigureDa
 
 func (h *configureServiceHandler) GetConfig(ctx context.Context, in *ConfigureRequest, out *ConfigureResponse) error {
 	return h.ConfigureServiceHandler.GetConfig(ctx, in, out)
+}
+
+func (h *configureServiceHandler) GetDict(ctx context.Context, in *ConfigureRequest, out *ConfigureDictResponse) error {
+	return h.ConfigureServiceHandler.GetDict(ctx, in, out)
 }
