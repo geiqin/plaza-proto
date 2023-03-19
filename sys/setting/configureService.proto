@@ -87,9 +87,9 @@ message MobileCommonConfig{
     string common_app_is_online_service =5;//开启在线客服(0否，1是)
     string common_app_is_header_nav_fixed =6;//是否固定顶部导航(0否，1是)
     string common_app_is_head_vice_nav =7;//是否启用用户中心头部小导航(0否，1是)
-    repeated string  common_user_onekey_bind_mobile_list =8;//获取账户手机一键登录,目前仅支持【微信小程序、百度小程序、头条小程序】
-    repeated string  common_user_address_platform_import_list =9;//获取账户地址一键导入,获取当前小程序平台app账户的收货地址，目前仅支持【小程序】
-
+    string common_app_is_enable_quick_nav =8;//是否开启快捷导航(0否，1是)
+    repeated string  common_user_onekey_bind_mobile_list =9;//获取账户手机一键登录,目前仅支持【微信小程序、百度小程序、头条小程序】
+    repeated string  common_user_address_platform_import_list =10;//获取账户地址一键导入,获取当前小程序平台app账户的收货地址，目前仅支持【小程序】
 }
 
 //微信小程序配置
