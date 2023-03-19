@@ -239,7 +239,12 @@ message ConfigureResponse {
     common.Error error = 2;
 }
 
+message ConfigureDictData {
+    map<string,string> data_list = 1;
+    map<string,string> convert_list = 2;
+}
+
 message ConfigureDictResponse {
-    map<string,string> data = 1;
+    ConfigureDictData data = 1;
     common.Error error = 2;
 }
