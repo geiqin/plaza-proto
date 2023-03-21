@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+
+//退款日志
+service RefundLogService {
+    //创建退款
+    rpc Create (RefundLog) returns (RefundLogResponse) {}
+    //删除退款
+    rpc Delete (RefundLog) returns (RefundLogResponse) {}
+    //获得退款信息
+    rpc Get (RefundLog) returns (RefundLogResponse) {}
+    //查询退款
+    rpc Search (RefundLogRequest) returns (RefundLogResponse) {}
+}
+
+//退款日志
+message RefundLog{
+    int64  id =1;//ID
+    string log_no =2;//退款单号
+    int64  pay_log_id =3;//支付日志id
+    int64  member_id =4;//用户ID
+    int64  business_id =5;// 业务订单id
+    string business_type =6;//订单类型: order 订单, wallet 钱包 vip 会员等级
+    string trade_no =7;//支付平台交易号
+    string buyer_user =8;//支付平台用户帐号
+    int64  refund_price =9;//退款金额
+    int64  pay_price =10;//订单实际支付金额
+    string reason =11;//原因描述
+    int32  payment_id =12;//支付方式ID
+    string payment_code =13;//支付方式标识
+    string payment_name =14;//支付方式名称
+    int32  pay_account_id =15;//支付结算账号ID
+    string refundment =16;//退款类型（0原路退回, 1退至钱包, 2手动处理）
+    string request_params =17;//支付平台返回参数（以json存储）
+    string created_at = 18;
+    string updated_at = 19;
+}
+
+message RefundLogRequest{
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //base params
+    int64  business_id =4;// 业务订单id
+    string business_type =5;//订单类型: order 订单, wallet 钱包 vip 会员等级
+    string trade_no =6;//支付平台交易号
+    string buyer_user =7;//支付平台用户帐号
+    int32  payment_id =8;//支付方式ID
+    string payment_code =9;//支付方式标识
+    string payment_name =10;//支付方式名称
+    string refundment = 11;//退款类型（0原路退回, 1退至钱包, 2手动处理）
+}
+
+message RefundLogData {
+    RefundLog entity = 1;
+    common.Pager pager =2;
+    repeated RefundLog items = 3;
+    common.Info info =5;
+}
+
+
+message RefundLogResponse {
+    RefundLogData data = 1;
+    common.Error error = 2;
+}

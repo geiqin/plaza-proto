@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//支付请求日志
+service PayRequestLogService {
+    //获得支付日志
+    rpc Get (PayRequestLog) returns (PayRequestLogResponse) {}
+    //查询支付日志
+    rpc Search (PayRequestLogRequest) returns (PayRequestLogResponse) {}
+}
+
+//支付请求日志
+message PayRequestLog{
+    int64  id =1;//ID
+    string business_type =2;//订单类型: order 订单, wallet 钱包 vip 会员等级
+    string request_params =3;//请求参数（数组则json字符串存储）
+    string response_data =4;//响应参数（数组则json字符串存储）
+    string business_handle =5;//业务处理结果（数组则json字符串存储）
+    string request_url =6;//请求url地址
+    string server_port =7;//端口号
+    string server_ip =8;//服务器ip
+    string client_ip =9;//客户端ip
+    string os =10;//操作系统
+    string browser =11;//浏览器
+    string method =12;//请求类型
+    string scheme =13;//http类型
+    string version =14;//http版本
+    string client =15;//客户端详情信息
+    string created_at = 16; //创建时间
+    string updated_at = 17; //修改时间
+}
+
+
+message PayRequestLogRequest{
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //base params
+    int64  id =4;//ID
+    string log_no =5;//支付日志订单号
+    string business_type =6;//订单类型: order 订单, wallet 钱包 vip 会员等级
+
+    string os =9;//支付方式标识
+    string payment_name =10;//支付方式名称
+    string subject =11;//订单名称
+    string trade_no =12;//支付平台交易号
+    string buyer_user =13;//支付平台用户帐号
+    int32  pay_account_id =14;//支付结算账号ID
+    string status =15;//状态
+    string begin_time = 16; //开始时间
+    string end_time = 17; //结束时间
+}
+
+message PayRequestLogData {
+    PayRequestLog entity = 1;
+    common.Pager pager =2;
+    repeated PayRequestLog items = 3;
+    common.Info info =4;
+}
+
+
+message PayRequestLogResponse {
+    PayRequestLogData data = 1;
+    common.Error error = 2;
+}

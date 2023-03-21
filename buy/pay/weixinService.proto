@@ -6,32 +6,32 @@ import "common/base.proto";
 import "baseInfoService.proto";
 
 //微信支付
-service WxService {
+service WeixinService {
     //小程序支付
-    rpc MiniPay (WxPay) returns (WxResponse) {}
+    rpc MiniPay (WeixinPay) returns (WeixinResponse) {}
     //APP支付
-    rpc AppPay (WxPay) returns (WxResponse) {}
+    rpc AppPay (WeixinPay) returns (WeixinResponse) {}
     //H5支付
-    rpc H5Pay (WxPay) returns (WxResponse) {}
+    rpc H5Pay (WeixinPay) returns (WeixinResponse) {}
     //提交付款码支付
-    rpc MicroPay (WxPay) returns (WxResponse) {}
+    rpc MicroPay (WeixinPay) returns (WeixinResponse) {}
 }
 
 //微信支付
-message WxPay{
+message WeixinPay{
     ChargeInfo charge =1; //订单信息
-    WxPayerInfo payer_info =2; //微信买家信息
-    WxSceneInfo scene_info =3;//微信支付场景
+    WeixinPayerInfo payer_info =2; //微信买家信息
+    WeixinSceneInfo scene_info =3;//微信支付场景
     SettleInfo settle_info =4;//微信结算信息
 }
 
 //微信买家信息
-message WxPayerInfo{
+message WeixinPayerInfo{
     string open_id =1; //用户标识
 }
 
 //微信支付场景
-message WxSceneInfo{
+message WeixinSceneInfo{
     string payer_client_ip =1; //用户终端IP
     string device_id =2;//商户端设备号
 }
@@ -42,13 +42,13 @@ message SettleInfo{
 }
 
 
-message WxData {
-    WxPay entity =1;
+message WeixinData {
+    WeixinPay entity =1;
     map<string,string> params =2;
 }
 
 
-message WxResponse {
-    WxData data =1;
+message WeixinResponse {
+    WeixinData data =1;
     common.Error error = 2;
 }

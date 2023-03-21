@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//支付日志
+service PayLogService {
+    //支付日志添加
+    rpc Insert (PayLog) returns (PayLogResponse) {}
+    //支付日志更新
+    rpc Success (PayLog) returns (PayLogResponse) {}
+    //支付日志关闭
+    rpc Close (PayLog) returns (PayLogResponse) {}
+    //支付日志类型列表
+    rpc TypeList (PayLog) returns (PayLogResponse) {}
+    //支付日志详情
+    rpc Detail (PayLog) returns (PayLogResponse) {}
+    //支付日志列表
+    rpc List (PayLogRequest) returns (PayLogResponse) {}
+    //支付日志查询
+    rpc Search (PayLogRequest) returns (PayLogResponse) {}
+}
+
+//支付日志
+message PayLog{
+    int64  id =1;//ID
+    string log_no =2;//支付日志订单号
+    string business_type =3;//订单类型: order 订单, wallet 钱包 vip 会员等级
+    int64  member_id =4;//用户ID
+    int32  payment_id =5;//支付方式ID
+    string payment_code =6;//支付方式标识
+    string payment_name =7;//支付方式名称
+    string subject =8;//订单名称
+    int64  total_price =9;//业务订单金额
+    int64  pay_price =10;//支付金额
+    string currency =11;//货币代码
+    string trade_no =12;//支付平台交易号
+    string buyer_user =13;//支付平台用户帐号
+    int32  pay_account_id =14;//支付结算账号ID
+    string status =15;//状态（0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
+    string paid_time =16;//支付时间
+    string closed_time =17;//关闭时间
+    string created_at = 18; //创建时间
+    string updated_at = 19; //修改时间
+    repeated PayLogValue values =20; //支付日志关联业务数据
+}
+
+//支付日志关联业务数据
+message PayLogValue{
+    int64  id =1;//ID
+    int64  pay_log_id =2;//支付日志id
+    int64  business_id =3;//业务订单id
+    string business_no =4;//业务订单号
+    string created_at = 5;//创建时间
+    string updated_at = 6;//修改时间
+}
+
+message PayLogRequest{
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //base params
+    int64  id =4;//ID
+    string log_no =5;//支付日志订单号
+    string business_type =6;//订单类型: order 订单, wallet 钱包 vip 会员等级
+    int64  member_id =7;//用户ID
+    int32  payment_id =8;//支付方式ID
+    string payment_code =9;//支付方式标识
+    string payment_name =10;//支付方式名称
+    string subject =11;//订单名称
+    string trade_no =12;//支付平台交易号
+    string buyer_user =13;//支付平台用户帐号
+    int32  pay_account_id =14;//支付结算账号ID
+    string status =15;//状态
+    string begin_time = 16; //开始时间
+    string end_time = 17; //结束时间
+}
+
+message PayLogData {
+    PayLog entity = 1;
+    common.Pager pager =2;
+    repeated PayLog items = 3;
+    common.Info info =4;
+}
+
+
+message PayLogResponse {
+    PayLogData data = 1;
+    common.Error error = 2;
+}

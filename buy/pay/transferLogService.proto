@@ -5,25 +5,25 @@ option go_package ="/.;services";
 import "common/base.proto";
 
 //转账服务
-service TransferService {
+service TransferLogService {
     //创建转账
-    rpc Create (Transfer) returns (TransferResponse) {}
+    rpc Create (TransferLog) returns (TransferLogResponse) {}
     //获得转账信息
-    rpc Get (Transfer) returns (TransferResponse) {}
+    rpc Get (TransferLog) returns (TransferLogResponse) {}
     //查询转账
-    rpc Search (TransferRequest) returns (TransferResponse) {}
+    rpc Search (TransferLogRequest) returns (TransferLogResponse) {}
     // 转账到企业银行账户
-    rpc ToCorpBank(TransferRequest) returns (TransferResponse) {}
+    rpc ToCorpBank(TransferLogRequest) returns (TransferLogResponse) {}
     //转账到微信个人钱包
-    rpc ToWxWallet(TransferRequest) returns (TransferResponse) {}
+    rpc ToWxWallet(TransferLogRequest) returns (TransferLogResponse) {}
     //转账到支付宝账户
-    rpc ToAliAccount(TransferRequest) returns (TransferResponse) {}
+    rpc ToAliAccount(TransferLogRequest) returns (TransferLogResponse) {}
 }
 
 
 
 //转账
-message Transfer{
+message TransferLog{
     int64 id = 1;
     string transfer_sn = 2;
     int64 pay_gateway_id = 3;
@@ -47,7 +47,7 @@ message Transfer{
     string updated_at = 21;
 }
 
-message TransferRequest {
+message TransferLogRequest {
     int32 paged = 1;
     int32 page_size = 2;
     int32 top = 3;
@@ -67,15 +67,15 @@ message TransferRequest {
     string end_date =16;
 }
 
-message TransferData {
-    Transfer entity = 1;
+message TransferLogData {
+    TransferLog entity = 1;
     common.Pager pager =2;
-    repeated Transfer items = 3;
+    repeated TransferLog items = 3;
     common.Info info =4;
 }
 
-message TransferResponse {
-    TransferData data = 1;
+message TransferLogResponse {
+    TransferLogData data = 1;
     common.Error error = 2;
 }
 
