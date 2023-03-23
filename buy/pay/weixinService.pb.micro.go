@@ -43,14 +43,8 @@ func NewWeixinServiceEndpoints() []*api.Endpoint {
 // Client API for WeixinService service
 
 type WeixinService interface {
-	//小程序支付
-	MiniPay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error)
-	//APP支付
-	AppPay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error)
-	//H5支付
-	H5Pay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error)
-	//提交付款码支付
-	MicroPay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error)
+	//发起微信支付
+	Pay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error)
 }
 
 type weixinService struct {
@@ -65,38 +59,8 @@ func NewWeixinService(name string, c client.Client) WeixinService {
 	}
 }
 
-func (c *weixinService) MiniPay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error) {
-	req := c.c.NewRequest(c.name, "WeixinService.MiniPay", in)
-	out := new(WeixinResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *weixinService) AppPay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error) {
-	req := c.c.NewRequest(c.name, "WeixinService.AppPay", in)
-	out := new(WeixinResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *weixinService) H5Pay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error) {
-	req := c.c.NewRequest(c.name, "WeixinService.H5Pay", in)
-	out := new(WeixinResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *weixinService) MicroPay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error) {
-	req := c.c.NewRequest(c.name, "WeixinService.MicroPay", in)
+func (c *weixinService) Pay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error) {
+	req := c.c.NewRequest(c.name, "WeixinService.Pay", in)
 	out := new(WeixinResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -108,22 +72,13 @@ func (c *weixinService) MicroPay(ctx context.Context, in *WeixinPay, opts ...cli
 // Server API for WeixinService service
 
 type WeixinServiceHandler interface {
-	//小程序支付
-	MiniPay(context.Context, *WeixinPay, *WeixinResponse) error
-	//APP支付
-	AppPay(context.Context, *WeixinPay, *WeixinResponse) error
-	//H5支付
-	H5Pay(context.Context, *WeixinPay, *WeixinResponse) error
-	//提交付款码支付
-	MicroPay(context.Context, *WeixinPay, *WeixinResponse) error
+	//发起微信支付
+	Pay(context.Context, *WeixinPay, *WeixinResponse) error
 }
 
 func RegisterWeixinServiceHandler(s server.Server, hdlr WeixinServiceHandler, opts ...server.HandlerOption) error {
 	type weixinService interface {
-		MiniPay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error
-		AppPay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error
-		H5Pay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error
-		MicroPay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error
+		Pay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error
 	}
 	type WeixinService struct {
 		weixinService
@@ -136,18 +91,6 @@ type weixinServiceHandler struct {
 	WeixinServiceHandler
 }
 
-func (h *weixinServiceHandler) MiniPay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error {
-	return h.WeixinServiceHandler.MiniPay(ctx, in, out)
-}
-
-func (h *weixinServiceHandler) AppPay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error {
-	return h.WeixinServiceHandler.AppPay(ctx, in, out)
-}
-
-func (h *weixinServiceHandler) H5Pay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error {
-	return h.WeixinServiceHandler.H5Pay(ctx, in, out)
-}
-
-func (h *weixinServiceHandler) MicroPay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error {
-	return h.WeixinServiceHandler.MicroPay(ctx, in, out)
+func (h *weixinServiceHandler) Pay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error {
+	return h.WeixinServiceHandler.Pay(ctx, in, out)
 }

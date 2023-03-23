@@ -3,23 +3,16 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-import "baseInfoService.proto";
 
 //微信支付
 service WeixinService {
-    //小程序支付
-    rpc MiniPay (WeixinPay) returns (WeixinResponse) {}
-    //APP支付
-    rpc AppPay (WeixinPay) returns (WeixinResponse) {}
-    //H5支付
-    rpc H5Pay (WeixinPay) returns (WeixinResponse) {}
-    //提交付款码支付
-    rpc MicroPay (WeixinPay) returns (WeixinResponse) {}
+    //发起微信支付
+    rpc  Pay (WeixinPay) returns (WeixinResponse) {}
 }
 
 //微信支付
 message WeixinPay{
-    ChargeInfo charge =1; //订单信息
+    string pay_log_no =1; //支付单号
     WeixinPayerInfo payer_info =2; //微信买家信息
     WeixinSceneInfo scene_info =3;//微信支付场景
     SettleInfo settle_info =4;//微信结算信息

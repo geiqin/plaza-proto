@@ -2,7 +2,6 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-import "baseInfoService.proto";
 
 //支付宝支付
 service AlipayService {
@@ -16,7 +15,7 @@ service AlipayService {
 
 //支付宝
 message Alipay{
-    ChargeInfo charge =1; //订单信息
+    string pay_log_no =1; //支付单号
 }
 
 message AlipayData {
