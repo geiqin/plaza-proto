@@ -43,28 +43,34 @@ func NewAftersaleServiceEndpoints() []*api.Endpoint {
 // Client API for AftersaleService service
 
 type AftersaleService interface {
-	// 售后处理页
-	Index(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleIndexResponse, error)
-	// 申请售后
-	Create(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
-	//审核处理
-	AuditHandle(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
-	//商家已发货（针对换货商品的发货）
-	MerchantShipped(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
-	//商家已收货（已收到回寄的商品）
-	MerchantReceived(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
-	//买家已撤销维权
-	BuyerCanceled(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
-	//买家已寄回商品
-	BuyerSent(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
-	//买家已签收（针对换货商品的签收）
-	BuyerReceived(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
-	//立即打款
-	DoRefund(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
-	// 获取维权信息（基本信息）
+	//售后单列表【user】
+	AftersaleIndex(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error)
+	//售后单详情【admin/user】
+	AftersaleDetail(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleDetailResponse, error)
+	//售后单查询【admin】
+	AftersaleSearch(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error)
+	//售后单总数
+	AftersaleTotal(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	// 售后单创建【user】
+	AftersaleCreate(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	//用户退货【user】
+	AftersaleDelivery(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	//售后单审核【admin】
+	AftersaleAudit(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	//售后单拒绝【admin】
+	AftersaleRefuse(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	//售后单删除【admin/user】
+	AftersaleDelete(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	//售后单确认【admin】
+	AftersaleConfirm(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	//售后单取消【admin/user】
+	AftersaleCancel(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	//启动打款【admin】
+	LaunchRefund(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	//售后单获取【service】
 	Get(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
-	//查询维权信息
-	Search(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error)
+	//售后单列表【service】
+	List(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error)
 }
 
 type aftersaleService struct {
@@ -79,18 +85,8 @@ func NewAftersaleService(name string, c client.Client) AftersaleService {
 	}
 }
 
-func (c *aftersaleService) Index(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleIndexResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.Index", in)
-	out := new(AftersaleIndexResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *aftersaleService) Create(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.Create", in)
+func (c *aftersaleService) AftersaleIndex(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleIndex", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -99,8 +95,18 @@ func (c *aftersaleService) Create(ctx context.Context, in *Aftersale, opts ...cl
 	return out, nil
 }
 
-func (c *aftersaleService) AuditHandle(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.AuditHandle", in)
+func (c *aftersaleService) AftersaleDetail(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleDetailResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleDetail", in)
+	out := new(AftersaleDetailResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *aftersaleService) AftersaleSearch(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleSearch", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -109,8 +115,8 @@ func (c *aftersaleService) AuditHandle(ctx context.Context, in *Aftersale, opts 
 	return out, nil
 }
 
-func (c *aftersaleService) MerchantShipped(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.MerchantShipped", in)
+func (c *aftersaleService) AftersaleTotal(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleTotal", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -119,8 +125,8 @@ func (c *aftersaleService) MerchantShipped(ctx context.Context, in *Aftersale, o
 	return out, nil
 }
 
-func (c *aftersaleService) MerchantReceived(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.MerchantReceived", in)
+func (c *aftersaleService) AftersaleCreate(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleCreate", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -129,8 +135,8 @@ func (c *aftersaleService) MerchantReceived(ctx context.Context, in *Aftersale, 
 	return out, nil
 }
 
-func (c *aftersaleService) BuyerCanceled(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.BuyerCanceled", in)
+func (c *aftersaleService) AftersaleDelivery(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleDelivery", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -139,8 +145,8 @@ func (c *aftersaleService) BuyerCanceled(ctx context.Context, in *Aftersale, opt
 	return out, nil
 }
 
-func (c *aftersaleService) BuyerSent(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.BuyerSent", in)
+func (c *aftersaleService) AftersaleAudit(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleAudit", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -149,8 +155,8 @@ func (c *aftersaleService) BuyerSent(ctx context.Context, in *Aftersale, opts ..
 	return out, nil
 }
 
-func (c *aftersaleService) BuyerReceived(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.BuyerReceived", in)
+func (c *aftersaleService) AftersaleRefuse(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleRefuse", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -159,8 +165,38 @@ func (c *aftersaleService) BuyerReceived(ctx context.Context, in *Aftersale, opt
 	return out, nil
 }
 
-func (c *aftersaleService) DoRefund(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.DoRefund", in)
+func (c *aftersaleService) AftersaleDelete(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleDelete", in)
+	out := new(AftersaleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *aftersaleService) AftersaleConfirm(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleConfirm", in)
+	out := new(AftersaleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *aftersaleService) AftersaleCancel(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleCancel", in)
+	out := new(AftersaleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *aftersaleService) LaunchRefund(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.LaunchRefund", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -179,8 +215,8 @@ func (c *aftersaleService) Get(ctx context.Context, in *Aftersale, opts ...clien
 	return out, nil
 }
 
-func (c *aftersaleService) Search(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error) {
-	req := c.c.NewRequest(c.name, "AftersaleService.Search", in)
+func (c *aftersaleService) List(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.List", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -192,43 +228,52 @@ func (c *aftersaleService) Search(ctx context.Context, in *AftersaleRequest, opt
 // Server API for AftersaleService service
 
 type AftersaleServiceHandler interface {
-	// 售后处理页
-	Index(context.Context, *AftersaleRequest, *AftersaleIndexResponse) error
-	// 申请售后
-	Create(context.Context, *Aftersale, *AftersaleResponse) error
-	//审核处理
-	AuditHandle(context.Context, *Aftersale, *AftersaleResponse) error
-	//商家已发货（针对换货商品的发货）
-	MerchantShipped(context.Context, *Aftersale, *AftersaleResponse) error
-	//商家已收货（已收到回寄的商品）
-	MerchantReceived(context.Context, *Aftersale, *AftersaleResponse) error
-	//买家已撤销维权
-	BuyerCanceled(context.Context, *Aftersale, *AftersaleResponse) error
-	//买家已寄回商品
-	BuyerSent(context.Context, *Aftersale, *AftersaleResponse) error
-	//买家已签收（针对换货商品的签收）
-	BuyerReceived(context.Context, *Aftersale, *AftersaleResponse) error
-	//立即打款
-	DoRefund(context.Context, *Aftersale, *AftersaleResponse) error
-	// 获取维权信息（基本信息）
+	//售后单列表【user】
+	AftersaleIndex(context.Context, *AftersaleRequest, *AftersaleResponse) error
+	//售后单详情【admin/user】
+	AftersaleDetail(context.Context, *AftersaleRequest, *AftersaleDetailResponse) error
+	//售后单查询【admin】
+	AftersaleSearch(context.Context, *AftersaleRequest, *AftersaleResponse) error
+	//售后单总数
+	AftersaleTotal(context.Context, *Aftersale, *AftersaleResponse) error
+	// 售后单创建【user】
+	AftersaleCreate(context.Context, *Aftersale, *AftersaleResponse) error
+	//用户退货【user】
+	AftersaleDelivery(context.Context, *Aftersale, *AftersaleResponse) error
+	//售后单审核【admin】
+	AftersaleAudit(context.Context, *Aftersale, *AftersaleResponse) error
+	//售后单拒绝【admin】
+	AftersaleRefuse(context.Context, *Aftersale, *AftersaleResponse) error
+	//售后单删除【admin/user】
+	AftersaleDelete(context.Context, *Aftersale, *AftersaleResponse) error
+	//售后单确认【admin】
+	AftersaleConfirm(context.Context, *Aftersale, *AftersaleResponse) error
+	//售后单取消【admin/user】
+	AftersaleCancel(context.Context, *Aftersale, *AftersaleResponse) error
+	//启动打款【admin】
+	LaunchRefund(context.Context, *Aftersale, *AftersaleResponse) error
+	//售后单获取【service】
 	Get(context.Context, *Aftersale, *AftersaleResponse) error
-	//查询维权信息
-	Search(context.Context, *AftersaleRequest, *AftersaleResponse) error
+	//售后单列表【service】
+	List(context.Context, *AftersaleRequest, *AftersaleResponse) error
 }
 
 func RegisterAftersaleServiceHandler(s server.Server, hdlr AftersaleServiceHandler, opts ...server.HandlerOption) error {
 	type aftersaleService interface {
-		Index(ctx context.Context, in *AftersaleRequest, out *AftersaleIndexResponse) error
-		Create(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
-		AuditHandle(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
-		MerchantShipped(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
-		MerchantReceived(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
-		BuyerCanceled(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
-		BuyerSent(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
-		BuyerReceived(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
-		DoRefund(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		AftersaleIndex(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error
+		AftersaleDetail(ctx context.Context, in *AftersaleRequest, out *AftersaleDetailResponse) error
+		AftersaleSearch(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error
+		AftersaleTotal(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		AftersaleCreate(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		AftersaleDelivery(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		AftersaleAudit(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		AftersaleRefuse(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		AftersaleDelete(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		AftersaleConfirm(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		AftersaleCancel(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		LaunchRefund(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
 		Get(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
-		Search(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error
+		List(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error
 	}
 	type AftersaleService struct {
 		aftersaleService
@@ -241,46 +286,58 @@ type aftersaleServiceHandler struct {
 	AftersaleServiceHandler
 }
 
-func (h *aftersaleServiceHandler) Index(ctx context.Context, in *AftersaleRequest, out *AftersaleIndexResponse) error {
-	return h.AftersaleServiceHandler.Index(ctx, in, out)
+func (h *aftersaleServiceHandler) AftersaleIndex(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleIndex(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) Create(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
-	return h.AftersaleServiceHandler.Create(ctx, in, out)
+func (h *aftersaleServiceHandler) AftersaleDetail(ctx context.Context, in *AftersaleRequest, out *AftersaleDetailResponse) error {
+	return h.AftersaleServiceHandler.AftersaleDetail(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) AuditHandle(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
-	return h.AftersaleServiceHandler.AuditHandle(ctx, in, out)
+func (h *aftersaleServiceHandler) AftersaleSearch(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleSearch(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) MerchantShipped(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
-	return h.AftersaleServiceHandler.MerchantShipped(ctx, in, out)
+func (h *aftersaleServiceHandler) AftersaleTotal(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleTotal(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) MerchantReceived(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
-	return h.AftersaleServiceHandler.MerchantReceived(ctx, in, out)
+func (h *aftersaleServiceHandler) AftersaleCreate(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleCreate(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) BuyerCanceled(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
-	return h.AftersaleServiceHandler.BuyerCanceled(ctx, in, out)
+func (h *aftersaleServiceHandler) AftersaleDelivery(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleDelivery(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) BuyerSent(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
-	return h.AftersaleServiceHandler.BuyerSent(ctx, in, out)
+func (h *aftersaleServiceHandler) AftersaleAudit(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleAudit(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) BuyerReceived(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
-	return h.AftersaleServiceHandler.BuyerReceived(ctx, in, out)
+func (h *aftersaleServiceHandler) AftersaleRefuse(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleRefuse(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) DoRefund(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
-	return h.AftersaleServiceHandler.DoRefund(ctx, in, out)
+func (h *aftersaleServiceHandler) AftersaleDelete(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleDelete(ctx, in, out)
+}
+
+func (h *aftersaleServiceHandler) AftersaleConfirm(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleConfirm(ctx, in, out)
+}
+
+func (h *aftersaleServiceHandler) AftersaleCancel(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.AftersaleCancel(ctx, in, out)
+}
+
+func (h *aftersaleServiceHandler) LaunchRefund(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.LaunchRefund(ctx, in, out)
 }
 
 func (h *aftersaleServiceHandler) Get(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
 	return h.AftersaleServiceHandler.Get(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) Search(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error {
-	return h.AftersaleServiceHandler.Search(ctx, in, out)
+func (h *aftersaleServiceHandler) List(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error {
+	return h.AftersaleServiceHandler.List(ctx, in, out)
 }

@@ -5,33 +5,50 @@ import "common/base.proto";
 import "orderService.proto";
 import "baseInfoService.proto";
 
+//订单售后服务
 service AftersaleService {
-    // 售后处理页
-    rpc Index (AftersaleRequest) returns (AftersaleIndexResponse) {}
-    // 申请售后
-    rpc Create (Aftersale) returns (AftersaleResponse) {}
 
-    //审核处理
-    rpc AuditHandle (Aftersale) returns (AftersaleResponse) {}
-    //商家已发货（针对换货商品的发货）
-    rpc MerchantShipped (Aftersale) returns (AftersaleResponse) {}
-    //商家已收货（已收到回寄的商品）
-    rpc MerchantReceived (Aftersale) returns (AftersaleResponse) {}
+    //售后单列表【user】
+    rpc AftersaleIndex (AftersaleRequest) returns (AftersaleResponse) {}
 
-    //买家已撤销维权
-    rpc BuyerCanceled (Aftersale) returns (AftersaleResponse) {}
-    //买家已寄回商品
-    rpc BuyerSent (Aftersale) returns (AftersaleResponse) {}
-    //买家已签收（针对换货商品的签收）
-    rpc BuyerReceived (Aftersale) returns (AftersaleResponse) {}
+    //售后单详情【admin/user】
+    rpc AftersaleDetail (AftersaleRequest) returns (AftersaleDetailResponse) {}
 
-    //立即打款
-    rpc DoRefund (Aftersale) returns (AftersaleResponse) {}
+    //售后单查询【admin】
+    rpc AftersaleSearch (AftersaleRequest) returns (AftersaleResponse) {}
 
-    // 获取维权信息（基本信息）
+    //售后单总数
+    rpc AftersaleTotal (Aftersale) returns (AftersaleResponse) {}
+
+    // 售后单创建【user】
+    rpc AftersaleCreate (Aftersale) returns (AftersaleResponse) {}
+
+    //用户退货【user】
+    rpc AftersaleDelivery (Aftersale) returns (AftersaleResponse) {}
+
+    //售后单审核【admin】
+    rpc AftersaleAudit  (Aftersale) returns (AftersaleResponse) {}
+
+    //售后单拒绝【admin】
+    rpc AftersaleRefuse  (Aftersale) returns (AftersaleResponse) {}
+
+    //售后单删除【admin/user】
+    rpc AftersaleDelete (Aftersale) returns (AftersaleResponse) {}
+
+    //售后单确认【admin】
+    rpc AftersaleConfirm  (Aftersale) returns (AftersaleResponse) {}
+
+    //售后单取消【admin/user】
+    rpc AftersaleCancel  (Aftersale) returns (AftersaleResponse) {}
+
+    //启动打款【admin】
+    rpc LaunchRefund (Aftersale) returns (AftersaleResponse) {}
+
+    //售后单获取【service】
     rpc Get (Aftersale) returns (AftersaleResponse) {}
-    //查询维权信息
-    rpc Search (AftersaleRequest) returns (AftersaleResponse) {}
+
+    //售后单列表【service】
+    rpc List (AftersaleRequest) returns (AftersaleResponse) {}
 }
 
 message Aftersale {
@@ -42,7 +59,7 @@ message Aftersale {
     int64  sku_id =5; //SkuID
     int64  member_id =6; //用户id
     string type =7; //业务类型（0仅退款, 1退货退款）
-    string refund_method =8; //退款类型（0原路退回, 1退至钱包, 2手动处理）
+    string refundment =8; //退款类型（0原路退回, 1退至钱包, 2手动处理）
     string reason =9; //申请原因
     int32  number =10; //退货数量
     int64  price =11; //退款金额
@@ -64,7 +81,8 @@ message Aftersale {
     repeated AftersaleImage images = 27;
     string status_text =28;
     string type_text =29;
-    string tips_msg =30;
+    string refundment_text =30;
+    string tips_msg =31;
 }
 
 
@@ -142,7 +160,7 @@ message AftersaleTypeInfo {
     string class =5;
 }
 
-message AftersaleIndexData {
+message AftersaleDetailData {
     Order order_data = 1;
     Aftersale new_aftersale_data = 2;
     AftersaleStepData step_data =3;
@@ -154,7 +172,7 @@ message AftersaleIndexData {
     string editor_path_type =9;
 }
 
-message AftersaleIndexResponse {
-    AftersaleIndexData data = 1;
+message AftersaleDetailResponse {
+    AftersaleDetailData data = 1;
     common.Error error = 2;
 }

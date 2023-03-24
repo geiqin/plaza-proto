@@ -31,5 +31,25 @@ message OrderDetail {
     string extend_data =25;//扩展数据 json
     string created_at  = 26;
     string updated_at  = 27;
-    string order_aftersale_btn_text =28;//订单售后服务按钮文本
+    string orderaftersale_btn_text =28;//订单售后服务按钮文本
+    LastAftersale orderaftersale =29;//最新一条售后单
+}
+
+//最后条售后
+message LastAftersale {
+    int64  id =1; //ID
+    string order_sn =2; //订单编号
+    int64  order_id =3; //订单ID
+    int64  order_detail_id =4; //订单详情id
+    int64  sku_id =5; //SkuID
+    int64  member_id =6; //用户id
+    string type =7; //业务类型（0仅退款, 1退货退款）
+    string refund_method =8; //退款类型（0原路退回, 1退至钱包, 2手动处理）
+    string reason =9; //申请原因
+    int32  number =10; //退货数量
+    int64  price =11; //退款金额
+    int64  freight_subsidy =12; //运费补贴金
+    string msg =13; //退款说明
+    string status =14; //状态（0待确认, 1待退货, 2待审核, 3已完成, 4已拒绝, 5已取消）
+    string status_text =28;
 }

@@ -5,49 +5,64 @@ import "common/base.proto";
 import "orderDetailService.proto";
 import "orderAddressService.proto";
 import "baseInfoService.proto";
-import "paymentService.proto";
 
-//订单
+//订单服务
 service OrderService {
 
-    //修改价格
-    rpc ModifyPrice (Order) returns (OrderResponse) {}
-    //修改地址
-    rpc ModifyAddress (OrderAddress) returns (OrderResponse) {}
-    //订单追加备注
-    rpc AppendRemark (OrderRequest) returns (OrderResponse) {}
+    //订单支付【user】
+    rpc OrderPay (OrderRequest) returns (OrderPayResponse) {}
 
-    //确认接受订单(接单/拒单操作)
-    rpc ConfirmAccept(OrderRequest) returns (OrderResponse) {}
-    //确认撤销订单
-    rpc ConfirmCancel (Order) returns (OrderResponse) {}
-    //确认删除订单
-    rpc ConfirmDelete (Order) returns (OrderResponse) {}
-    //确认已签收（客户操作）
-    rpc ConfirmSigned(OrderRequest) returns (OrderResponse) {}
-    //确认已结算操作
-    //结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
-    //适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
-    rpc ConfirmSettled (OrderRequest) returns (OrderResponse) {}
-    //确认核销订单（如扫码核销）
-    rpc ConfirmVerified (OrderRequest) returns (OrderResponse) {}
+    //订单线下支付【admin】
+    rpc OrderUnderLinePay (OrderRequest) returns (OrderResponse) {}
 
-    //获取订单信息
+    //订单发货【admin】
+    rpc OrderDelivery(OrderRequest) returns (OrderResponse) {}
+
+    //订单取消【admin/user】
+    rpc OrderCancel (OrderRequest) returns (OrderResponse) {}
+
+    //订单删除【admin/user】
+    rpc OrderDelete (OrderRequest) returns (OrderResponse) {}
+
+    //订单确认【admin】
+    rpc OrderConfirm (OrderRequest) returns (OrderResponse) {}
+
+    //订单收货【user】
+    rpc OrderCollect (OrderRequest) returns (OrderResponse) {}
+
+    //支付状态校验
+    rpc OrderPayCheck (OrderRequest) returns (OrderResponse) {}
+
+    //修改订单价格【admin】
+    rpc ModifyOrderPrice (Order) returns (OrderResponse) {}
+
+    //修改订单地址【admin】
+    rpc ModifyOrderAddress (OrderAddress) returns (OrderResponse) {}
+
+    //订单每个环节状态总数
+    rpc OrderStatusStepTotal (OrderRequest) returns (OrderStatusStepTotalResponse) {}
+
+    //订单总数
+    rpc OrderTotal (OrderRequest) returns (OrderResponse) {}
+
+    //订单查询【admin/user】
+    rpc OrderSearch (OrderRequest) returns (OrderResponse) {}
+
+    //订单详情【admin/user】
+    rpc OrderDetail (OrderRequest) returns (OrderResponse) {}
+
+    //支付同步处理
+    rpc Respond (OrderRequest) returns (OrderResponse) {}
+
+    //支付异步处理
+    rpc Notify (OrderRequest) returns (OrderResponse) {}
+
+    //订单获取【service】
     rpc Get (Order) returns (OrderResponse) {}
-    //显示订单信息(详细信息)
-    rpc Display (Order) returns (OrderResponse) {}
-    //前端显示订单信息(详细信息)
-    rpc FrontDisplay (Order) returns (OrderResponse) {}
-    //查询订单
-    rpc Search (OrderRequest) returns (OrderResponse) {}
-    //按条件获取订单列表
+
+    //订单列表【service】
     rpc List (OrderRequest) returns (OrderResponse) {}
-    //获取订单赠送\使用的优惠券列表
-    rpc GetCouponList (OrderRequest) returns (OrderResponse) {}
-    //订单支付
-    rpc Pay (OrderRequest) returns (OrderPayResponse) {}
-    //订单相关统计
-    rpc Count (OrderRequest) returns (OrderCountResponse) {}
+
 }
 
 message Order {
@@ -109,12 +124,12 @@ message Order {
     OrderCurrency  currency=68;
     OrderAddress address =69;
     MemberInfo member = 70;
-    Payment payment = 71;
+    PaymentInfo payment = 71;
     repeated OrderDetail details = 72;
     repeated OrderExtension extension_data = 73;
     map<string,string> metas =74;
     WarehouseInfo warehouse_data =75;
-    OperateInfo operate_data =76;
+    map<string,string> operate_data =76;
     bool is_can_launch_aftersale =77; //是否启动售后服务
 }
 
@@ -132,12 +147,12 @@ message OrderCurrency{
 
 
 message OperateInfo{
-    bool is_cancel =1;//取消
-    bool is_pay =2;//支付
-    bool is_collect =3;//收货
-    bool is_delete =4;//删除
-    bool is_comments =5;//评论
-    bool is_express =6;//物流
+    string is_cancel =1;//取消
+    string is_pay =2;//支付
+    string is_collect =3;//收货
+    string is_delete =4;//删除
+    string is_comments =5;//评论
+    string is_express =6;//物流
 }
 
 message OrderExtension {
@@ -186,7 +201,7 @@ message OrderRequest {
 }
 
 //订单统计数据
-message OrderCountData{
+message OrderStatusStepTotalData{
     int64 member_id =1;//会员ID
     int64 order_count =2; //订单总数
     int64 order_pending_count =3; //待审核数量
@@ -229,7 +244,7 @@ message OrderPayResponse {
     common.Error error = 2;
 }
 
-message OrderCountResponse {
-    OrderCountData data = 1;
+message OrderStatusStepTotalResponse {
+    OrderStatusStepTotalData data = 1;
     common.Error error = 2;
 }

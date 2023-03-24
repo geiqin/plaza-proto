@@ -8,6 +8,7 @@ message PaymentInfo {
 	string name =2;//支付名称
 	string icon_url =3;//图标URL
 	string payment =4;//支付标识
+	string is_under_line =5;//是否线下支付（0否，1是）
 }
 
 message MemberAddressInfo {
