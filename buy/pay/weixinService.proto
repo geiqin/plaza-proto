@@ -51,7 +51,7 @@ message SettleInfo{
 
 
 message WeixinPayData {
-    int32 state =1; //状态：0成功
+    string state =1; //状态：0成功
     map<string,string> params =2;
 }
 
@@ -70,7 +70,7 @@ message WeixinRefundData {
     string user_received_account =6;
     string success_time  =7;
     string create_time =8;
-    int32 state =9; //状态：0成功
+    string state =9; //状态：0成功
     string return_params =10; //平台返回数据JSON
 }
 
