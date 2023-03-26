@@ -27,7 +27,7 @@ service AftersaleService {
     rpc AftersaleDelivery (Aftersale) returns (AftersaleResponse) {}
 
     //售后单审核【admin】
-    rpc AftersaleAudit  (Aftersale) returns (AftersaleResponse) {}
+    rpc AftersaleAudit  (AftersaleRequest) returns (AftersaleResponse) {}
 
     //售后单拒绝【admin】
     rpc AftersaleRefuse  (Aftersale) returns (AftersaleResponse) {}
@@ -53,7 +53,7 @@ service AftersaleService {
 
 message Aftersale {
     int64  id =1; //ID
-    string order_sn =2; //订单编号
+    string order_no =2; //订单编号
     int64  order_id =3; //订单ID
     int64  order_detail_id =4; //订单详情id
     int64  sku_id =5; //SkuID
@@ -109,16 +109,19 @@ message AftersaleRequest {
     string	sorting	=3;
     int64 id = 4;
     int64 order_id = 6;
-    int64 member_id = 7;
-    string type = 8;
-    int64 goods_id = 9;
-    string keywords = 10;
-    string refund_status = 11;
+    int64 order_detail_id = 7;
+    int64 member_id = 8;
+    string type = 9;
+    int64 goods_id = 10;
+    string keywords = 11;
+    string refund_status = 12;
     string status = 13;
-    string order_sn = 14;
-    int64 sku_id = 15;
-    int64 detail_id = 16;
-    repeated int64 ids = 17;
+    string order_no = 14;
+    string check_type = 15;
+    string refundment = 16;
+    repeated string status_list= 17;
+    repeated string not_status_list= 18;
+    repeated int64 ids = 19;
 }
 
 message AftersaleData {

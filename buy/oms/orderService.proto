@@ -66,71 +66,58 @@ service OrderService {
 }
 
 message Order {
-    int64  id =1; //ID
-    string order_sn =2; //单号
-    string order_type =3; //订单类型: general普通订单, card权益卡订单,recharge充值订单,retail分销订单(已弃用),hotel酒店商品订单,group多人拼团订单,eat_room 堂食订单,eat_out 外卖订单
-    int64  shop_id =4; //分店ID
-    int64  member_id =5; //买家ID
-    int32  buy_number_count =6; //购买商品总数量
-    int64  increase_price =7; //增加的金额
-    int64  preferential_price =8; //优惠金额
-    int64  actual_price =9; //订单总价(订单最终价格)
-    int64  total_price =10; //订单单价
-    int64  paid_money =11; //已支付金额
-    int64  refunded_money =12; //已退款金额
-    int32  returned_quantity =13; //已退货数量
-    string client_type =14; //客户端类型（pc, h5, ios, android, alipay, weixin, baidu）取APPLICATION_CLIENT_TYPE常量值
-    string order_model =15; //订单模式
-    string subject =23; //订单标题。
-    string body =24; //订单商品描述信息。
-    int64  cover_id =25; //订单商品封面ID
-    string cover_url =26; //订单商品封面URL（默认取商品明细里数量最多的商品主图）
-    string postscript =27; //订单附言,由用户提交订单前填写
-    string seller_note =28; //商家留言,当该字段值时可以在订单查询看到
-    string pay_note =29; //付款备注, 在订单管理编辑修改
-    string channel_type =31; //支付通道类型
-    string is_dispatched =32; //是否已分发（0否，1是）
-    string is_safeguard_closed =33; //是否售后已关闭（0否，1是）
-    string is_under_line =34; //是否线下支付（0否，1是）
-    string is_cod =35; //是否货到付款（0否，1是）
-    string is_invoiced =36; //是否已过开票（0否，1是）
-    string is_modified =37; //是否订单已改过价 【订单改价】（0否，1是）
-    string is_paid =39; //是否已付款。当订单的全部金额已结清（0否，1是）
-    string is_safeguard =40; //是否参与过维权，无论维权是否成功。（0否，1是）
-    string is_separate =41; //是否已分成 （0否，1是）
-    string is_shipment =42; //是否需要物流派送（0否，1是）
-    string is_refunded =43; //是否已产生退款（0否，1是）
-    string is_pay_timeout =44; //是否支付已超时（0否，1是）
-    string is_return_timeout =45; //是否退货已超时（0否，1是）
-    string is_finished =46; //是否已完成（最终完成，指不可维权）（0否，1是）
-    string dispatch_type =47; //配送方式:express快递发货，delivery同城配送，fetch 到店自提
-    int32  payment_id =48; //用户选择的支付方式的id,取值表payment
-    int64  warehouse_id =49; //仓库ID
-    int64  parent_id =50; //父级订单: 有值表示子订单
-    string cancel_type =51; //取消类型:【枚举：OrderCancelType】
-    string ship_status =52; //发货状态:【枚举：OrderShipStatus】
-    string pay_status =53; //付款状态:【枚举：OrderPayStatus】
-    string status =54; //订单状态:【枚举：OrderStatus】
-    string pay_expire_date =55; //支付截止时间，配合IsPayTimeout字段，时间范围在订单创建后的 5 分钟到 7 天，默认值为 1 天，
-    string return_expire_date =56; //退货截止时间，配合IsReturnTimeout字段
-    string confirm_at =57; //订单确认时间
-    string paid_at =58; //订单支付时间
-    string shipped_at =59; //订单发货时间
-    string signed_at =60; //签收完成时间
-    string refunded_at =61; //退款完成时间
-    string finished_at =62; //订单完成时间
-    string status_name =63; //状态名称
-    string status_color =64; //状态颜色
-    OrderCurrency  currency=68;
-    OrderAddress address =69;
-    MemberInfo member = 70;
-    PaymentInfo payment = 71;
-    repeated OrderDetail details = 72;
-    repeated OrderExtension extension_data = 73;
-    map<string,string> metas =74;
-    WarehouseInfo warehouse_data =75;
-    map<string,string> operate_data =76;
-    bool is_can_launch_aftersale =77; //是否启动售后服务
+    int64  id =1;//ID
+    string order_no =2;//单号
+    int64  shop_id =3;//分店ID
+    int64  member_id =4;//买家ID
+    int64  warehouse_id =5;//仓库ID
+    int32  buy_number_count =6;//购买商品总数量
+    int64  total_price =7;//订单单价
+    int64  actual_price =8;//订单总价(订单最终价格)
+    int64  increase_price =9;//增加的金额
+    int64  preferential_price =10;//优惠金额
+    int64  paid_money =11;//已支付金额
+    int64  refunded_money =12;//已退款金额
+    int32  returned_quantity =13;//已退货数量
+    string client_type =14;//客户端类型（pc, h5, ios, android, alipay, weixin, baidu）取APPLICATION_CLIENT_TYPE常量值
+    string order_model =15;//订单模式（0销售型, 1展示型, 2自提点, 3虚拟销售）
+    string subject =16;//订单标题(为支付提供标题)。
+    int64  cover_id =17;//订单商品封面ID
+    string cover_url =18;//订单商品封面URL（默认取商品明细里数量最多的商品主图）
+    string user_note =19;//订单附言,由用户提交订单前填写
+    string seller_note =20;//商家留言,当该字段值时可以在订单查询看到
+    int64  express_id =21;//快递id
+    string express_number =22;//快递单号
+    string is_under_line =23;//是否线下支付（0否，1是）(如果多次支付以第一次为准)
+    string is_cod =24;//是否货到付款
+    string is_invoiced =25;//是否已过开票
+    string is_refunded =26;//是否已产生退款
+    string is_modify_address =27;//是否手动修改过订单地址
+    string is_modify_price =28;//是否手动修改过订单价
+    int32  payment_id =29;//用户选择的支付方式的id,取值表payment
+    string pay_status =30;//支付状态（0未支付, 1已支付, 2已退款, 3部分退款）
+    string status =31;//订单状态（0待确认, 1已确认/待支付, 2已支付/待发货, 3已发货/待收货, 4已完成, 5已取消, 6已关闭）
+    string pay_time =32;//支付时间
+    string confirm_time =33;//订单确认时间
+    string delivery_time =34;//发货时间
+    string cancel_time =35;//取消时间
+    string collect_time =36;//收货时间
+    string close_time =37;//退款完成时间
+    string finished_time =38;//订单完成时间
+    bool is_can_launch_aftersale =39; //是否启动售后服务
+    //--ext---
+    string status_name =40; //状态名称
+    string status_color =41; //状态颜色
+    OrderCurrency  currency=42;
+    OrderAddress address =43;
+    MemberInfo member = 44;
+    PaymentInfo payment = 45;
+    repeated OrderDetail details = 46;
+    repeated OrderExtension extension_data = 47;
+    map<string,string> metas =48;
+    WarehouseInfo warehouse_data =49;
+    map<string,string> operate_data =50;
+
 }
 
 message OrderCurrency{
@@ -145,15 +132,6 @@ message OrderCurrency{
     string updated_at =9;
 }
 
-
-message OperateInfo{
-    string is_cancel =1;//取消
-    string is_pay =2;//支付
-    string is_collect =3;//收货
-    string is_delete =4;//删除
-    string is_comments =5;//评论
-    string is_express =6;//物流
-}
 
 message OrderExtension {
     int64 id = 1;
@@ -170,7 +148,7 @@ message OrderRequest {
     string	keywords =3;
     //----------
     int64 id = 4;
-    string order_sn = 5;
+    string order_no = 5;
     string type = 6;
     int64 shop_id =7;
     int64 member_id  =8;
@@ -180,8 +158,8 @@ message OrderRequest {
     string is_invoiced = 14;
     string is_modified = 15;
     string is_paid = 16;
-    string is_safeguard = 17;
-    string is_separate = 18;
+    int64  express_id =17;//快递id
+    string express_number =18;//快递单号
     int32 shipping_id = 19;
     string shipping_name =20;
     int32 payment_id =21;
@@ -225,7 +203,7 @@ message OrderData {
 
 message OrderPayData {
     int64 order_id =1;
-    string order_sn =2;
+    string order_no =2;
     string payment_type =3;
     string is_success =4;
     map<string,string> params = 5;

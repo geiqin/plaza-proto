@@ -38,7 +38,7 @@ message OrderDetail {
 //最后条售后
 message LastAftersale {
     int64  id =1; //ID
-    string order_sn =2; //订单编号
+    string order_no =2; //订单编号
     int64  order_id =3; //订单ID
     int64  order_detail_id =4; //订单详情id
     int64  sku_id =5; //SkuID

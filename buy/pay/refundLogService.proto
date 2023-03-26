@@ -36,8 +36,9 @@ message RefundLog{
     int32  pay_account_id =15;//支付结算账号ID
     string refundment =16;//退款类型（0原路退回, 1退至钱包, 2手动处理）
     string request_params =17;//支付平台返回参数（以json存储）
-    string created_at = 18;
-    string updated_at = 19;
+    string status =18;//退款状态：0待退款，1退款成功，2退款失败
+    string created_at = 19;
+    string updated_at = 20;
 }
 
 message RefundLogRequest{

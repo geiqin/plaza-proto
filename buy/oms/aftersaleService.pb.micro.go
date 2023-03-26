@@ -56,7 +56,7 @@ type AftersaleService interface {
 	//用户退货【user】
 	AftersaleDelivery(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
 	//售后单审核【admin】
-	AftersaleAudit(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
+	AftersaleAudit(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error)
 	//售后单拒绝【admin】
 	AftersaleRefuse(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error)
 	//售后单删除【admin/user】
@@ -145,7 +145,7 @@ func (c *aftersaleService) AftersaleDelivery(ctx context.Context, in *Aftersale,
 	return out, nil
 }
 
-func (c *aftersaleService) AftersaleAudit(ctx context.Context, in *Aftersale, opts ...client.CallOption) (*AftersaleResponse, error) {
+func (c *aftersaleService) AftersaleAudit(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error) {
 	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleAudit", in)
 	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -241,7 +241,7 @@ type AftersaleServiceHandler interface {
 	//用户退货【user】
 	AftersaleDelivery(context.Context, *Aftersale, *AftersaleResponse) error
 	//售后单审核【admin】
-	AftersaleAudit(context.Context, *Aftersale, *AftersaleResponse) error
+	AftersaleAudit(context.Context, *AftersaleRequest, *AftersaleResponse) error
 	//售后单拒绝【admin】
 	AftersaleRefuse(context.Context, *Aftersale, *AftersaleResponse) error
 	//售后单删除【admin/user】
@@ -266,7 +266,7 @@ func RegisterAftersaleServiceHandler(s server.Server, hdlr AftersaleServiceHandl
 		AftersaleTotal(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
 		AftersaleCreate(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
 		AftersaleDelivery(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
-		AftersaleAudit(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
+		AftersaleAudit(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error
 		AftersaleRefuse(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
 		AftersaleDelete(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
 		AftersaleConfirm(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
@@ -310,7 +310,7 @@ func (h *aftersaleServiceHandler) AftersaleDelivery(ctx context.Context, in *Aft
 	return h.AftersaleServiceHandler.AftersaleDelivery(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) AftersaleAudit(ctx context.Context, in *Aftersale, out *AftersaleResponse) error {
+func (h *aftersaleServiceHandler) AftersaleAudit(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error {
 	return h.AftersaleServiceHandler.AftersaleAudit(ctx, in, out)
 }
 

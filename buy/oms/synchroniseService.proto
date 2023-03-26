@@ -16,7 +16,7 @@ message SynchroniseRequest {
     int32 page_size =2;
     //----------
     int64 order_id = 3;
-    string order_sn = 4;
+    string order_no = 4;
     repeated int64 order_ids = 34;
 }
 

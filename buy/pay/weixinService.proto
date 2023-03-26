@@ -7,11 +7,26 @@ import "common/base.proto";
 //微信支付
 service WeixinService {
     //发起微信支付
-    rpc  Pay (WeixinPay) returns (WeixinResponse) {}
+    rpc  Pay (WeixinPayRequest) returns (WeixinPayResponse) {}
+    //发起微信退款
+    rpc  Refund (WeixinRefundRequest) returns (WeixinRefundResponse) {}
+}
+
+//微信退款信息
+message WeixinRefundRequest{
+    string transaction_no =1; //平台支付单号
+    string pay_log_no =2; //支付日志编号
+    string refund_log_no =3; //退款日志编号
+    string refund_reason =4; //退款原因
+    int64 refund_money =5; //退款金额
+    int64 pay_money =6; //支付金额
+    string client_type =7; //客户端类型
+    string currency =8;//货币类型
+    string business_type =9;//业务类型
 }
 
 //微信支付
-message WeixinPay{
+message WeixinPayRequest{
     string pay_log_no =1; //支付单号
     WeixinPayerInfo payer_info =2; //微信买家信息
     WeixinSceneInfo scene_info =3;//微信支付场景
@@ -35,13 +50,32 @@ message SettleInfo{
 }
 
 
-message WeixinData {
-    WeixinPay entity =1;
+message WeixinPayData {
+    int32 state =1; //状态：0成功
     map<string,string> params =2;
 }
 
 
-message WeixinResponse {
-    WeixinData data =1;
+message WeixinPayResponse {
+    WeixinPayData data =1;
+    common.Error error = 2;
+}
+
+message WeixinRefundData {
+    string refund_id =1;
+    string out_refund_no =2;
+    string transaction_id =3;
+    string out_trade_no =4;
+    string channel =5;
+    string user_received_account =6;
+    string success_time  =7;
+    string create_time =8;
+    int32 state =9; //状态：0成功
+    string return_params =10; //平台返回数据JSON
+}
+
+
+message WeixinRefundResponse {
+    WeixinRefundData data =1;
     common.Error error = 2;
 }

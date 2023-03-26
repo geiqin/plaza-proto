@@ -43,7 +43,7 @@ message OrderAddressRequest {
     string	keywords =3;
     //----------
     int64 id = 4;
-    string order_sn = 5;
+    string order_no = 5;
     string type = 6;
     string start_date = 7;
     string end_date = 8;

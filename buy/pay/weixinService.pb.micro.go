@@ -44,7 +44,9 @@ func NewWeixinServiceEndpoints() []*api.Endpoint {
 
 type WeixinService interface {
 	//发起微信支付
-	Pay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error)
+	Pay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinPayResponse, error)
+	//发起微信退款
+	Refund(ctx context.Context, in *WeixinRefundRequest, opts ...client.CallOption) (*WeixinRefundResponse, error)
 }
 
 type weixinService struct {
@@ -59,9 +61,19 @@ func NewWeixinService(name string, c client.Client) WeixinService {
 	}
 }
 
-func (c *weixinService) Pay(ctx context.Context, in *WeixinPay, opts ...client.CallOption) (*WeixinResponse, error) {
+func (c *weixinService) Pay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinPayResponse, error) {
 	req := c.c.NewRequest(c.name, "WeixinService.Pay", in)
-	out := new(WeixinResponse)
+	out := new(WeixinPayResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *weixinService) Refund(ctx context.Context, in *WeixinRefundRequest, opts ...client.CallOption) (*WeixinRefundResponse, error) {
+	req := c.c.NewRequest(c.name, "WeixinService.Refund", in)
+	out := new(WeixinRefundResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -73,12 +85,15 @@ func (c *weixinService) Pay(ctx context.Context, in *WeixinPay, opts ...client.C
 
 type WeixinServiceHandler interface {
 	//发起微信支付
-	Pay(context.Context, *WeixinPay, *WeixinResponse) error
+	Pay(context.Context, *WeixinPayRequest, *WeixinPayResponse) error
+	//发起微信退款
+	Refund(context.Context, *WeixinRefundRequest, *WeixinRefundResponse) error
 }
 
 func RegisterWeixinServiceHandler(s server.Server, hdlr WeixinServiceHandler, opts ...server.HandlerOption) error {
 	type weixinService interface {
-		Pay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error
+		Pay(ctx context.Context, in *WeixinPayRequest, out *WeixinPayResponse) error
+		Refund(ctx context.Context, in *WeixinRefundRequest, out *WeixinRefundResponse) error
 	}
 	type WeixinService struct {
 		weixinService
@@ -91,6 +106,10 @@ type weixinServiceHandler struct {
 	WeixinServiceHandler
 }
 
-func (h *weixinServiceHandler) Pay(ctx context.Context, in *WeixinPay, out *WeixinResponse) error {
+func (h *weixinServiceHandler) Pay(ctx context.Context, in *WeixinPayRequest, out *WeixinPayResponse) error {
 	return h.WeixinServiceHandler.Pay(ctx, in, out)
+}
+
+func (h *weixinServiceHandler) Refund(ctx context.Context, in *WeixinRefundRequest, out *WeixinRefundResponse) error {
+	return h.WeixinServiceHandler.Refund(ctx, in, out)
 }
