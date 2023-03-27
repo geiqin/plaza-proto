@@ -52,7 +52,7 @@ type PayLogService interface {
 	//支付日志类型列表
 	TypeList(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error)
 	//支付日志详情
-	Detail(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error)
+	Detail(ctx context.Context, in *PayLogRequest, opts ...client.CallOption) (*PayLogResponse, error)
 	//支付日志列表
 	List(ctx context.Context, in *PayLogRequest, opts ...client.CallOption) (*PayLogResponse, error)
 	//支付日志查询
@@ -111,7 +111,7 @@ func (c *payLogService) TypeList(ctx context.Context, in *PayLog, opts ...client
 	return out, nil
 }
 
-func (c *payLogService) Detail(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error) {
+func (c *payLogService) Detail(ctx context.Context, in *PayLogRequest, opts ...client.CallOption) (*PayLogResponse, error) {
 	req := c.c.NewRequest(c.name, "PayLogService.Detail", in)
 	out := new(PayLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -153,7 +153,7 @@ type PayLogServiceHandler interface {
 	//支付日志类型列表
 	TypeList(context.Context, *PayLog, *PayLogResponse) error
 	//支付日志详情
-	Detail(context.Context, *PayLog, *PayLogResponse) error
+	Detail(context.Context, *PayLogRequest, *PayLogResponse) error
 	//支付日志列表
 	List(context.Context, *PayLogRequest, *PayLogResponse) error
 	//支付日志查询
@@ -166,7 +166,7 @@ func RegisterPayLogServiceHandler(s server.Server, hdlr PayLogServiceHandler, op
 		Success(ctx context.Context, in *PayLog, out *PayLogResponse) error
 		Close(ctx context.Context, in *PayLog, out *PayLogResponse) error
 		TypeList(ctx context.Context, in *PayLog, out *PayLogResponse) error
-		Detail(ctx context.Context, in *PayLog, out *PayLogResponse) error
+		Detail(ctx context.Context, in *PayLogRequest, out *PayLogResponse) error
 		List(ctx context.Context, in *PayLogRequest, out *PayLogResponse) error
 		Search(ctx context.Context, in *PayLogRequest, out *PayLogResponse) error
 	}
@@ -197,7 +197,7 @@ func (h *payLogServiceHandler) TypeList(ctx context.Context, in *PayLog, out *Pa
 	return h.PayLogServiceHandler.TypeList(ctx, in, out)
 }
 
-func (h *payLogServiceHandler) Detail(ctx context.Context, in *PayLog, out *PayLogResponse) error {
+func (h *payLogServiceHandler) Detail(ctx context.Context, in *PayLogRequest, out *PayLogResponse) error {
 	return h.PayLogServiceHandler.Detail(ctx, in, out)
 }
 

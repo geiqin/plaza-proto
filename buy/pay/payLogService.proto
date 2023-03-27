@@ -15,7 +15,7 @@ service PayLogService {
     //支付日志类型列表
     rpc TypeList (PayLog) returns (PayLogResponse) {}
     //支付日志详情
-    rpc Detail (PayLog) returns (PayLogResponse) {}
+    rpc Detail (PayLogRequest) returns (PayLogResponse) {}
     //支付日志列表
     rpc List (PayLogRequest) returns (PayLogResponse) {}
     //支付日志查询
@@ -71,10 +71,11 @@ message PayLogRequest{
     string subject =11;//订单名称
     string trade_no =12;//支付平台交易号
     string buyer_user =13;//支付平台用户帐号
-    int32  pay_account_id =14;//支付结算账号ID
-    string status =15;//状态
-    string begin_time = 16; //开始时间
-    string end_time = 17; //结束时间
+    int64  business_id =14;//业务订单ID
+    string business_no =15;//业务订单编号
+    string status =16;//状态
+    string begin_time = 17; //开始时间
+    string end_time = 18; //结束时间
 }
 
 message PayLogData {
