@@ -52,7 +52,7 @@ message GoodsDetail {
     int32 buy_min_number  = 37;
     int32 buy_max_number  = 38;
     int32 photo_count =39; //相册数量
-    int32 sales_count =40; //销售量
+    int32 sale_count =40; //销售量
     int32 access_count =41;  //访问量
     string show_field_original_price_text =42;
     string show_field_price_text =43;

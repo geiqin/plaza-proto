@@ -47,6 +47,8 @@ type GoodsService interface {
 	Get(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error)
 	//商品列表
 	List(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error)
+	//商品查询
+	Search(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error)
 }
 
 type goodsService struct {
@@ -81,6 +83,16 @@ func (c *goodsService) List(ctx context.Context, in *GoodsRequest, opts ...clien
 	return out, nil
 }
 
+func (c *goodsService) Search(ctx context.Context, in *GoodsRequest, opts ...client.CallOption) (*GoodsResponse, error) {
+	req := c.c.NewRequest(c.name, "GoodsService.Search", in)
+	out := new(GoodsResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for GoodsService service
 
 type GoodsServiceHandler interface {
@@ -88,12 +100,15 @@ type GoodsServiceHandler interface {
 	Get(context.Context, *GoodsRequest, *GoodsResponse) error
 	//商品列表
 	List(context.Context, *GoodsRequest, *GoodsResponse) error
+	//商品查询
+	Search(context.Context, *GoodsRequest, *GoodsResponse) error
 }
 
 func RegisterGoodsServiceHandler(s server.Server, hdlr GoodsServiceHandler, opts ...server.HandlerOption) error {
 	type goodsService interface {
 		Get(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error
 		List(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error
+		Search(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error
 	}
 	type GoodsService struct {
 		goodsService
@@ -112,4 +127,8 @@ func (h *goodsServiceHandler) Get(ctx context.Context, in *GoodsRequest, out *Go
 
 func (h *goodsServiceHandler) List(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error {
 	return h.GoodsServiceHandler.List(ctx, in, out)
+}
+
+func (h *goodsServiceHandler) Search(ctx context.Context, in *GoodsRequest, out *GoodsResponse) error {
+	return h.GoodsServiceHandler.Search(ctx, in, out)
 }
