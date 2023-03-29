@@ -14,7 +14,7 @@ service RefundLogService {
     //退款日志关闭【服务专用】
     rpc RefundLogClose (RefundLog) returns (RefundLogResponse) {}
     //获得退款信息
-    rpc Get (RefundLog) returns (RefundLogResponse) {}
+    rpc Get (RefundLogRequest) returns (RefundLogResponse) {}
     //查询退款
     rpc Search (RefundLogRequest) returns (RefundLogResponse) {}
 }
@@ -48,14 +48,16 @@ message RefundLogRequest{
     int32 page_size = 2;
     int32 top = 3;
     //base params
-    int64  business_id =4;// 业务订单id
-    string business_type =5;//订单类型: order 订单, wallet 钱包 vip 会员等级
-    string trade_no =6;//支付平台交易号
-    string buyer_user =7;//支付平台用户帐号
-    int32  payment_id =8;//支付方式ID
-    string payment_code =9;//支付方式标识
-    string payment_name =10;//支付方式名称
-    string refundment = 11;//退款类型（0原路退回, 1退至钱包, 2手动处理）
+    int64  id =4;//退款日志ID
+    int64  business_id =5;// 业务订单id
+    string business_type =6;//订单类型: order 订单, wallet 钱包 vip 会员等级
+    string trade_no =7;//支付平台交易号
+    string buyer_user =8;//支付平台用户帐号
+    int32  payment_id =9;//支付方式ID
+    string payment_code =10;//支付方式标识
+    string payment_name =11;//支付方式名称
+    string refundment = 12;//退款类型（0原路退回, 1退至钱包, 2手动处理）
+    string log_no =13;//退款日志编号
 }
 
 message RefundLogData {

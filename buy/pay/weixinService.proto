@@ -14,15 +14,8 @@ service WeixinService {
 
 //微信退款信息
 message WeixinRefundRequest{
-    string transaction_no =1; //平台支付单号
-    string pay_log_no =2; //支付日志编号
-    string refund_log_no =3; //退款日志编号
-    string refund_reason =4; //退款原因
-    int64 refund_money =5; //退款金额
-    int64 pay_money =6; //支付金额
-    string client_type =7; //客户端类型
-    string currency =8;//货币类型
-    string business_type =9;//业务类型
+    string refund_log_no =1; //退款日志编号
+    string client_type =2; //客户端类型
 }
 
 //微信支付

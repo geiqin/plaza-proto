@@ -50,7 +50,7 @@ type RefundLogService interface {
 	//退款日志关闭【服务专用】
 	RefundLogClose(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error)
 	//获得退款信息
-	Get(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error)
+	Get(ctx context.Context, in *RefundLogRequest, opts ...client.CallOption) (*RefundLogResponse, error)
 	//查询退款
 	Search(ctx context.Context, in *RefundLogRequest, opts ...client.CallOption) (*RefundLogResponse, error)
 }
@@ -97,7 +97,7 @@ func (c *refundLogService) RefundLogClose(ctx context.Context, in *RefundLog, op
 	return out, nil
 }
 
-func (c *refundLogService) Get(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error) {
+func (c *refundLogService) Get(ctx context.Context, in *RefundLogRequest, opts ...client.CallOption) (*RefundLogResponse, error) {
 	req := c.c.NewRequest(c.name, "RefundLogService.Get", in)
 	out := new(RefundLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -127,7 +127,7 @@ type RefundLogServiceHandler interface {
 	//退款日志关闭【服务专用】
 	RefundLogClose(context.Context, *RefundLog, *RefundLogResponse) error
 	//获得退款信息
-	Get(context.Context, *RefundLog, *RefundLogResponse) error
+	Get(context.Context, *RefundLogRequest, *RefundLogResponse) error
 	//查询退款
 	Search(context.Context, *RefundLogRequest, *RefundLogResponse) error
 }
@@ -137,7 +137,7 @@ func RegisterRefundLogServiceHandler(s server.Server, hdlr RefundLogServiceHandl
 		RefundLogInsert(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
 		RefundLogSuccess(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
 		RefundLogClose(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
-		Get(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
+		Get(ctx context.Context, in *RefundLogRequest, out *RefundLogResponse) error
 		Search(ctx context.Context, in *RefundLogRequest, out *RefundLogResponse) error
 	}
 	type RefundLogService struct {
@@ -163,7 +163,7 @@ func (h *refundLogServiceHandler) RefundLogClose(ctx context.Context, in *Refund
 	return h.RefundLogServiceHandler.RefundLogClose(ctx, in, out)
 }
 
-func (h *refundLogServiceHandler) Get(ctx context.Context, in *RefundLog, out *RefundLogResponse) error {
+func (h *refundLogServiceHandler) Get(ctx context.Context, in *RefundLogRequest, out *RefundLogResponse) error {
 	return h.RefundLogServiceHandler.Get(ctx, in, out)
 }
 
