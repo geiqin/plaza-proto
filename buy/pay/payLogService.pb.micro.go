@@ -43,12 +43,12 @@ func NewPayLogServiceEndpoints() []*api.Endpoint {
 // Client API for PayLogService service
 
 type PayLogService interface {
-	//支付日志添加
-	Insert(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error)
-	//支付日志更新
-	Success(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error)
-	//支付日志关闭
-	Close(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error)
+	//支付日志添加【服务专用】
+	PayLogInsert(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error)
+	//支付日志更新【服务专用】
+	PayLogSuccess(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error)
+	//支付日志关闭【服务专用】
+	PayLogClose(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error)
 	//支付日志类型列表
 	TypeList(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error)
 	//支付日志详情
@@ -71,8 +71,8 @@ func NewPayLogService(name string, c client.Client) PayLogService {
 	}
 }
 
-func (c *payLogService) Insert(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error) {
-	req := c.c.NewRequest(c.name, "PayLogService.Insert", in)
+func (c *payLogService) PayLogInsert(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error) {
+	req := c.c.NewRequest(c.name, "PayLogService.PayLogInsert", in)
 	out := new(PayLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -81,8 +81,8 @@ func (c *payLogService) Insert(ctx context.Context, in *PayLog, opts ...client.C
 	return out, nil
 }
 
-func (c *payLogService) Success(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error) {
-	req := c.c.NewRequest(c.name, "PayLogService.Success", in)
+func (c *payLogService) PayLogSuccess(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error) {
+	req := c.c.NewRequest(c.name, "PayLogService.PayLogSuccess", in)
 	out := new(PayLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -91,8 +91,8 @@ func (c *payLogService) Success(ctx context.Context, in *PayLog, opts ...client.
 	return out, nil
 }
 
-func (c *payLogService) Close(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error) {
-	req := c.c.NewRequest(c.name, "PayLogService.Close", in)
+func (c *payLogService) PayLogClose(ctx context.Context, in *PayLog, opts ...client.CallOption) (*PayLogResponse, error) {
+	req := c.c.NewRequest(c.name, "PayLogService.PayLogClose", in)
 	out := new(PayLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -144,12 +144,12 @@ func (c *payLogService) Search(ctx context.Context, in *PayLogRequest, opts ...c
 // Server API for PayLogService service
 
 type PayLogServiceHandler interface {
-	//支付日志添加
-	Insert(context.Context, *PayLog, *PayLogResponse) error
-	//支付日志更新
-	Success(context.Context, *PayLog, *PayLogResponse) error
-	//支付日志关闭
-	Close(context.Context, *PayLog, *PayLogResponse) error
+	//支付日志添加【服务专用】
+	PayLogInsert(context.Context, *PayLog, *PayLogResponse) error
+	//支付日志更新【服务专用】
+	PayLogSuccess(context.Context, *PayLog, *PayLogResponse) error
+	//支付日志关闭【服务专用】
+	PayLogClose(context.Context, *PayLog, *PayLogResponse) error
 	//支付日志类型列表
 	TypeList(context.Context, *PayLog, *PayLogResponse) error
 	//支付日志详情
@@ -162,9 +162,9 @@ type PayLogServiceHandler interface {
 
 func RegisterPayLogServiceHandler(s server.Server, hdlr PayLogServiceHandler, opts ...server.HandlerOption) error {
 	type payLogService interface {
-		Insert(ctx context.Context, in *PayLog, out *PayLogResponse) error
-		Success(ctx context.Context, in *PayLog, out *PayLogResponse) error
-		Close(ctx context.Context, in *PayLog, out *PayLogResponse) error
+		PayLogInsert(ctx context.Context, in *PayLog, out *PayLogResponse) error
+		PayLogSuccess(ctx context.Context, in *PayLog, out *PayLogResponse) error
+		PayLogClose(ctx context.Context, in *PayLog, out *PayLogResponse) error
 		TypeList(ctx context.Context, in *PayLog, out *PayLogResponse) error
 		Detail(ctx context.Context, in *PayLogRequest, out *PayLogResponse) error
 		List(ctx context.Context, in *PayLogRequest, out *PayLogResponse) error
@@ -181,16 +181,16 @@ type payLogServiceHandler struct {
 	PayLogServiceHandler
 }
 
-func (h *payLogServiceHandler) Insert(ctx context.Context, in *PayLog, out *PayLogResponse) error {
-	return h.PayLogServiceHandler.Insert(ctx, in, out)
+func (h *payLogServiceHandler) PayLogInsert(ctx context.Context, in *PayLog, out *PayLogResponse) error {
+	return h.PayLogServiceHandler.PayLogInsert(ctx, in, out)
 }
 
-func (h *payLogServiceHandler) Success(ctx context.Context, in *PayLog, out *PayLogResponse) error {
-	return h.PayLogServiceHandler.Success(ctx, in, out)
+func (h *payLogServiceHandler) PayLogSuccess(ctx context.Context, in *PayLog, out *PayLogResponse) error {
+	return h.PayLogServiceHandler.PayLogSuccess(ctx, in, out)
 }
 
-func (h *payLogServiceHandler) Close(ctx context.Context, in *PayLog, out *PayLogResponse) error {
-	return h.PayLogServiceHandler.Close(ctx, in, out)
+func (h *payLogServiceHandler) PayLogClose(ctx context.Context, in *PayLog, out *PayLogResponse) error {
+	return h.PayLogServiceHandler.PayLogClose(ctx, in, out)
 }
 
 func (h *payLogServiceHandler) TypeList(ctx context.Context, in *PayLog, out *PayLogResponse) error {

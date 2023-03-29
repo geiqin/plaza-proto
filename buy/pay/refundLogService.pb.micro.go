@@ -43,10 +43,12 @@ func NewRefundLogServiceEndpoints() []*api.Endpoint {
 // Client API for RefundLogService service
 
 type RefundLogService interface {
-	//创建退款
-	Create(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error)
-	//删除退款
-	Delete(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error)
+	//退款日志创建【服务专用】
+	RefundLogInsert(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error)
+	//退款日志更新【服务专用】
+	RefundLogSuccess(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error)
+	//退款日志关闭【服务专用】
+	RefundLogClose(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error)
 	//获得退款信息
 	Get(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error)
 	//查询退款
@@ -65,8 +67,8 @@ func NewRefundLogService(name string, c client.Client) RefundLogService {
 	}
 }
 
-func (c *refundLogService) Create(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error) {
-	req := c.c.NewRequest(c.name, "RefundLogService.Create", in)
+func (c *refundLogService) RefundLogInsert(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error) {
+	req := c.c.NewRequest(c.name, "RefundLogService.RefundLogInsert", in)
 	out := new(RefundLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -75,8 +77,18 @@ func (c *refundLogService) Create(ctx context.Context, in *RefundLog, opts ...cl
 	return out, nil
 }
 
-func (c *refundLogService) Delete(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error) {
-	req := c.c.NewRequest(c.name, "RefundLogService.Delete", in)
+func (c *refundLogService) RefundLogSuccess(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error) {
+	req := c.c.NewRequest(c.name, "RefundLogService.RefundLogSuccess", in)
+	out := new(RefundLogResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *refundLogService) RefundLogClose(ctx context.Context, in *RefundLog, opts ...client.CallOption) (*RefundLogResponse, error) {
+	req := c.c.NewRequest(c.name, "RefundLogService.RefundLogClose", in)
 	out := new(RefundLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -108,10 +120,12 @@ func (c *refundLogService) Search(ctx context.Context, in *RefundLogRequest, opt
 // Server API for RefundLogService service
 
 type RefundLogServiceHandler interface {
-	//创建退款
-	Create(context.Context, *RefundLog, *RefundLogResponse) error
-	//删除退款
-	Delete(context.Context, *RefundLog, *RefundLogResponse) error
+	//退款日志创建【服务专用】
+	RefundLogInsert(context.Context, *RefundLog, *RefundLogResponse) error
+	//退款日志更新【服务专用】
+	RefundLogSuccess(context.Context, *RefundLog, *RefundLogResponse) error
+	//退款日志关闭【服务专用】
+	RefundLogClose(context.Context, *RefundLog, *RefundLogResponse) error
 	//获得退款信息
 	Get(context.Context, *RefundLog, *RefundLogResponse) error
 	//查询退款
@@ -120,8 +134,9 @@ type RefundLogServiceHandler interface {
 
 func RegisterRefundLogServiceHandler(s server.Server, hdlr RefundLogServiceHandler, opts ...server.HandlerOption) error {
 	type refundLogService interface {
-		Create(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
-		Delete(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
+		RefundLogInsert(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
+		RefundLogSuccess(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
+		RefundLogClose(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
 		Get(ctx context.Context, in *RefundLog, out *RefundLogResponse) error
 		Search(ctx context.Context, in *RefundLogRequest, out *RefundLogResponse) error
 	}
@@ -136,12 +151,16 @@ type refundLogServiceHandler struct {
 	RefundLogServiceHandler
 }
 
-func (h *refundLogServiceHandler) Create(ctx context.Context, in *RefundLog, out *RefundLogResponse) error {
-	return h.RefundLogServiceHandler.Create(ctx, in, out)
+func (h *refundLogServiceHandler) RefundLogInsert(ctx context.Context, in *RefundLog, out *RefundLogResponse) error {
+	return h.RefundLogServiceHandler.RefundLogInsert(ctx, in, out)
 }
 
-func (h *refundLogServiceHandler) Delete(ctx context.Context, in *RefundLog, out *RefundLogResponse) error {
-	return h.RefundLogServiceHandler.Delete(ctx, in, out)
+func (h *refundLogServiceHandler) RefundLogSuccess(ctx context.Context, in *RefundLog, out *RefundLogResponse) error {
+	return h.RefundLogServiceHandler.RefundLogSuccess(ctx, in, out)
+}
+
+func (h *refundLogServiceHandler) RefundLogClose(ctx context.Context, in *RefundLog, out *RefundLogResponse) error {
+	return h.RefundLogServiceHandler.RefundLogClose(ctx, in, out)
 }
 
 func (h *refundLogServiceHandler) Get(ctx context.Context, in *RefundLog, out *RefundLogResponse) error {

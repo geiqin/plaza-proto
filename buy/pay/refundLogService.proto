@@ -7,10 +7,12 @@ import "common/base.proto";
 
 //退款日志
 service RefundLogService {
-    //创建退款
-    rpc Create (RefundLog) returns (RefundLogResponse) {}
-    //删除退款
-    rpc Delete (RefundLog) returns (RefundLogResponse) {}
+    //退款日志创建【服务专用】
+    rpc RefundLogInsert (RefundLog) returns (RefundLogResponse) {}
+    //退款日志更新【服务专用】
+    rpc RefundLogSuccess (RefundLog) returns (RefundLogResponse) {}
+    //退款日志关闭【服务专用】
+    rpc RefundLogClose (RefundLog) returns (RefundLogResponse) {}
     //获得退款信息
     rpc Get (RefundLog) returns (RefundLogResponse) {}
     //查询退款

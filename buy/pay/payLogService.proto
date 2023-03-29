@@ -6,12 +6,12 @@ import "common/base.proto";
 
 //支付日志
 service PayLogService {
-    //支付日志添加
-    rpc Insert (PayLog) returns (PayLogResponse) {}
-    //支付日志更新
-    rpc Success (PayLog) returns (PayLogResponse) {}
-    //支付日志关闭
-    rpc Close (PayLog) returns (PayLogResponse) {}
+    //支付日志添加【服务专用】
+    rpc PayLogInsert (PayLog) returns (PayLogResponse) {}
+    //支付日志更新【服务专用】
+    rpc PayLogSuccess (PayLog) returns (PayLogResponse) {}
+    //支付日志关闭【服务专用】
+    rpc PayLogClose (PayLog) returns (PayLogResponse) {}
     //支付日志类型列表
     rpc TypeList (PayLog) returns (PayLogResponse) {}
     //支付日志详情
