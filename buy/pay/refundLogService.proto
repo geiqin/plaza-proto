@@ -58,6 +58,7 @@ message RefundLogRequest{
     string payment_name =11;//支付方式名称
     string refundment = 12;//退款类型（0原路退回, 1退至钱包, 2手动处理）
     string log_no =13;//退款日志编号
+    string status =14;//状态
 }
 
 message RefundLogData {
