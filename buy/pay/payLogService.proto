@@ -37,13 +37,14 @@ message PayLog{
     string currency =11;//货币代码
     string trade_no =12;//支付平台交易号
     string buyer_user =13;//支付平台用户帐号
-    int32  pay_account_id =14;//支付结算账号ID
-    string status =15;//状态（0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
-    string paid_time =16;//支付时间
-    string closed_time =17;//关闭时间
-    string created_at = 18; //创建时间
-    string updated_at = 19; //修改时间
-    repeated PayLogValue values =20; //支付日志关联业务数据
+    string pay_account_no =14;//支付结算账户编号
+    string application_client_type =15;//应用客户端类型
+    string status =16;//状态（0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
+    string paid_time =17;//支付时间
+    string closed_time =18;//关闭时间
+    string created_at = 19; //创建时间
+    string updated_at = 20; //修改时间
+    repeated PayLogValue values =21; //支付日志关联业务数据
 }
 
 //支付日志关联业务数据
@@ -76,6 +77,7 @@ message PayLogRequest{
     string status =16;//状态
     string begin_time = 17; //开始时间
     string end_time = 18; //结束时间
+    string application_client_type =19;//应用客户端类型
 }
 
 message PayLogData {

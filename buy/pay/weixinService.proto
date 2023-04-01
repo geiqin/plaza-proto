@@ -21,9 +21,10 @@ message WeixinRefundRequest{
 //微信支付
 message WeixinPayRequest{
     string pay_log_no =1; //支付单号
-    WeixinPayerInfo payer_info =2; //微信买家信息
-    WeixinSceneInfo scene_info =3;//微信支付场景
-    SettleInfo settle_info =4;//微信结算信息
+    string client_type =2; //客户端类型
+    WeixinPayerInfo payer_info =3; //微信买家信息
+    WeixinSceneInfo scene_info =4;//微信支付场景
+    SettleInfo settle_info =5;//微信结算信息
 }
 
 //微信买家信息
