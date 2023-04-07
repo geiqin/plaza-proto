@@ -1,0 +1,61 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//应用插件
+service PluginService {
+    //创建插件
+    rpc Create (Plugin) returns (PluginResponse) {}
+    //移除插件
+    rpc Remove (Plugin) returns (PluginResponse) {}
+    //插件详情
+    rpc Detail (Plugin) returns (PluginResponse) {}
+    //获取插件配置信息
+    rpc GetPluginData (Plugin) returns (PluginResponse) {}
+    //保存插件配置信息
+    rpc SavePluginData (Plugin) returns (PluginResponse) {}
+    //插件查询
+    rpc Search (PluginRequest) returns (PluginResponse) {}
+}
+
+message Plugin {
+    int32  id =1;//ID
+    string code =2;//唯一标记
+    string name =3;//插件名称
+    string data =4;//应用数据
+    string is_enable =5;//是否启用（0否，1是）
+    string icon_url =6; //插件图标
+    string desc =7;//插件描述
+    int32  sort =8;//排序
+    string created_at =9;
+    string updated_at =10;
+}
+
+
+message PluginRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    string code = 6;
+    string is_enable = 7;
+    string keywords = 8;
+    repeated int64 ids = 10;
+}
+
+//
+message PluginData {
+    Plugin entity = 1;
+    common.Pager pager =2;
+    repeated Plugin items = 3;
+    common.Info info =5;
+}
+
+//
+message PluginResponse {
+    PluginData data = 1;
+    common.Error error = 2;
+}
