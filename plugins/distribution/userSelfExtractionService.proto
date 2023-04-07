@@ -1,0 +1,56 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+service UserSelfExtractionService {
+	rpc Create (UserSelfExtraction) returns (UserSelfExtractionResponse) {}
+	rpc Update (UserSelfExtraction) returns (UserSelfExtractionResponse) {}
+	rpc Delete (UserSelfExtraction) returns (UserSelfExtractionResponse) {}
+	rpc Get (UserSelfExtraction) returns (UserSelfExtractionResponse) {}
+	rpc List (UserSelfExtractionRequest) returns (UserSelfExtractionResponse) {}
+	rpc Search (UserSelfExtractionRequest) returns (UserSelfExtractionResponse) {}
+}
+
+
+message UserSelfExtraction {
+	int64  id =1;//ID
+	int64  member_id =2;//站点所属用户id
+	string logo_url =3;//logo图片
+	string alias =4;//别名
+	string name =5;//别名
+	string tel =6;//电话
+	int64  area_id =7;//区域ID
+	string province_name =8;//所在省-名称
+	string city_name =9;//所在市-名称
+	string county_name =10;//所在县/区-名称
+	string address =11;//详细地址
+	string lng =12;//经度
+	string lat =13;//纬度
+	string fail_reason =14;//审核拒绝原因
+	string status =15;//状态（0待审核, 1已通过, 2已拒绝, 3已解约）
+	string created_at =16;
+	string updated_at =17;
+}
+
+message UserSelfExtractionRequest {
+	int32 paged = 1;
+	int32 page_size = 2;
+	int32 top = 3;
+	int64 id = 4;
+	string type = 6;
+	repeated int64 ids = 5;
+}
+
+
+message UserSelfExtractionData{
+	UserSelfExtraction entity = 1;
+	common.Pager pager = 2;
+	repeated UserSelfExtraction items = 3;
+	common.Info info = 5;
+}
+
+message UserSelfExtractionResponse {
+	UserSelfExtractionData data = 1;
+	common.Error error = 2;
+}

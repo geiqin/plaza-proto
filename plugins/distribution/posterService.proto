@@ -1,0 +1,63 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+service PosterService {
+    //保存推广海报
+    rpc SavePosterPromotion (PosterPromotion) returns (PosterResponse) {}
+    //保存商品海报
+    rpc SavePosterGoods (PosterGoods) returns (PosterResponse) {}
+    //获取推广海报
+    rpc GetPosterPromotion (PosterRequest) returns (PosterResponse) {}
+    //获取推广海报
+    rpc GetPosterGoods (PosterRequest) returns (PosterResponse) {}
+}
+
+//推广海报
+message PosterPromotion {
+    string backdrop =1;//海报背景图片
+    string avatar_width =2;//头像宽度
+    string avatar_border_style =3;//头像样式
+    int64  avatar_top =4;//
+    int64  avatar_left =5;//
+    int64  qrcode_width =6;//二维码宽度
+    int64  qrcode_top =7;//
+    int64  qrcode_left =8;//
+    string qrcode_border_style =9;//二维码样式
+    string nickname_color =10;//昵称颜色
+    string nickname_auto_center =11;//自动计算居中位置
+    int64  nickname_top =12;//
+    int64  nickname_left =13;//
+    string created_at =16;
+    string updated_at =17;
+}
+
+
+//商品海报
+message PosterGoods {
+    string goods_title_text_color =1;//商品标题颜色
+    string bottom_left_text_color =2;//底部左侧文本颜色
+    string bottom_right_text_color =3;//底部右侧文本颜色
+    string bottom_left_text =4;//底部左侧文本
+    string bottom_right_text =5;//底部右侧文本
+}
+
+message PosterRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    int32 id = 4;
+    string type = 6;
+    repeated int64 ids = 5;
+}
+
+message PosterData{
+    PosterPromotion poster_promotion = 1;
+    PosterGoods poster_goods = 2;
+}
+
+message PosterResponse {
+    PosterData data = 1;
+    common.Error error = 2;
+}

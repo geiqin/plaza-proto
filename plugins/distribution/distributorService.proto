@@ -1,0 +1,88 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "levelService.proto";
+import "baseInfoService.proto";
+
+service DistributorService {
+    //检查用户是否是分销员【前端】
+    rpc Exists (DistributorRequest) returns (DistributorResponse) {}
+    //编辑销售员信息
+    rpc Update (Distributor) returns (DistributorResponse) {}
+    //批量设置销售员等级
+    rpc SetRank (DistributorRequest) returns (DistributorResponse) {}
+    //清退销售员
+    rpc Remove (DistributorRequest) returns (DistributorResponse) {}
+    //获取销售员信息
+    rpc Get (Distributor) returns (DistributorResponse) {}
+    //分页查询销售员列表
+    rpc Search (DistributorRequest) returns (DistributorResponse) {}
+    //获取销售员的团队数量
+    rpc TeamNum (DistributorRequest) returns (DistributorResponse) {}
+    //查询销售员团队
+    rpc TeamSearch (DistributorRequest) returns (DistributorResponse) {}
+}
+
+message Distributor {
+    int64 id = 1;
+    string code = 2;
+    int64 inviter_id = 4;
+    int32 rank_id = 6;
+    string rank_type = 7;
+    int64 deposit = 8;
+    int64 available_money = 9;
+    int64 total_money = 10;
+    int64 total_commission_amount = 11;
+    int64 total_bonus_amount = 12;
+    int64 total_deduct_amount = 13;
+    int64 total_withdraw_amount = 14;
+    int64 total_service_fee = 15;
+    int64 wait_commission_amount = 16;
+    int64 wait_bonus_amount = 17;
+    int64 wait_deduct_amount = 18;
+    int32 total_recommend_num = 19;
+    int32 total_member_num = 20;
+    int32 total_promotion_num = 21;
+    int32 total_withdrew_num = 22;
+    string status = 23;
+    string created_at = 24;
+    string updated_at = 25;
+    Level rank = 26;
+    Distributor inviter = 27;
+    repeated Distributor children = 28;
+    map<string,string> metas =29;
+    MemberInfo member = 30;
+}
+
+message DistributorRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    //-----
+    int64 id = 4;
+    string display_name = 5;
+    string mobile =6;
+    int32 rank_id = 7;
+    int32 level = 8;
+    int64 inviter_id = 9;
+    string status = 10;
+    string rank_type = 11;
+    string keywords =12;
+    int64 distributor_id = 13;
+    repeated int64 ids = 14;
+    repeated int64 inviter_ids = 15;
+}
+
+message DistributorData{
+    Distributor entity = 1;
+    common.Pager pager =2;
+    repeated Distributor items = 3;
+    common.Info info =5;
+    map<string,string> params =6;
+}
+
+message DistributorResponse {
+    DistributorData data = 1;
+    common.Error error = 2;
+}

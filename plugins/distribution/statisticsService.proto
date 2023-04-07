@@ -1,0 +1,86 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+service StatisticsService {
+    //分销概况
+    rpc Overview (StatisticsRequest) returns (StatisticsResponse) {}
+    //销售排行
+    rpc SaleStats (StatisticsRequest) returns (StatisticsResponse) {}
+    //分销等级统计
+    rpc RankStats (StatisticsRequest) returns (StatisticsResponse) {}
+}
+
+
+message StatisticsRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int64 id = 3;
+    string mobile = 4;
+    int64 order_id = 5;
+    string order_sn = 6;
+    string keywords = 7;
+    string status = 8;
+    string start_date = 9;
+    string end_date = 10;
+    int64 distributor_id = 12;
+    int32 rank_id = 13;
+    repeated int64 ids = 15;
+}
+
+//分销概况
+message Overview {
+    int64 id = 1;
+    int64 member_id = 3;
+    string display_name = 5;
+    int32 rank_id = 6;
+    int64 commission_withdrew = 14;
+    int64 commission_total = 15;
+    int32 recommend_num = 16;
+    int32 member_num = 17;
+    int64 promotion_amount = 18;
+    string mobile = 28;
+    string rank_name = 29;
+}
+
+//销售排行
+message SaleStats {
+    int64 id = 1;
+    int64 member_id = 3;
+    string display_name = 5;
+    int32 rank_id = 6;
+    int64 commission_withdrew = 14;
+    int64 commission_total = 15;
+    int32 recommend_num = 16;
+    int32 member_num = 17;
+    int64 promotion_amount = 18;
+    string mobile = 28;
+    string rank_name = 29;
+}
+
+message RankStats {
+    int64 id = 1;
+    int64 distributor_id = 2;
+    int32 rank_id = 3;
+    int32 recommend_num = 4;
+    int32 member_num = 5;
+    int32 promotion_num = 6;
+    int32 consumption_num = 7;
+    int64 promotion_amount = 8;
+    int64 consumption_amount = 9;
+    string created_at = 10;
+    string updated_at = 11;
+}
+
+
+message StatisticsData {
+    Overview overview = 1;
+    repeated SaleStats sale_stats = 2;
+    repeated RankStats rank_stats = 3;
+}
+
+message StatisticsResponse {
+    StatisticsData data = 1;
+    common.Error error = 4;
+}

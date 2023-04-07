@@ -1,0 +1,53 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+
+message MemberInfo {
+    int64 id =1;
+    int32 type = 2;
+    string name =3;
+    string gender =4;
+    int64 avatar_id =5;
+    string avatar_url =6;
+    int32 rank_id =7;
+    string rank_expired_at =8;
+    bool rank_valid =9;
+    int64 surplus =10;
+    int64 deposit =11;
+    int32 pay_points =12;
+    int32 rank_points =13;
+    int32 traded_num =14;
+    int64 traded_money =15;
+    int32 comment_num =16;
+    int32 collect_num =17;
+    int64 recommender_id =18;
+    bool trusted =19;
+    bool bound_mobile =20;
+    bool bound_email =21;
+    bool bound_wx =22;
+    int64 area_id =23;
+    string birthday =24;
+    string contact_tel= 25;
+    string memo =26;
+    string source =27;
+    int64 by_fan_id = 28;
+    string status =29;
+    //---
+    string real_name = 30;
+    string id_card = 31;
+    string mobile = 32;
+    string email = 33;
+}
+
+message AppNavInfo {
+    string Icon =1;
+    string Title =2;
+    string Url =3;
+}
+
+message DictInfo {
+    string name	 =1;
+    string value =2;
+    string class =3;
+    bool checked =4;
+}
