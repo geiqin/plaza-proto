@@ -78,7 +78,7 @@ message Member {
     int64  total_order_money =122;//成交订单总额,单位:元
     int32  comment_num =23;//评价总数
     int32  collect_num =24;//商品收藏总数
-    int64  recommender_id =25;//推荐会员ID
+    int64  referrer_id =25;//推荐人ID
     string is_trusted =26;//已实名认证
     string is_bind_mobile =27;//已绑定手机
     string is_bind_email =28;//已绑定邮箱
@@ -104,7 +104,7 @@ message RegisterMemberFan{
     string username =6;//用户名称
     string nickname =7;//用户昵称
     string avatar_url =8;//会员头像url地址
-    int64  recommender_id =9;//推荐会员ID
+    int64  referrer_id =9;//推荐人ID
     string province_name =10;//所在省
     string city_name =11;//所在市
     string county_name =12;//所在区/县
@@ -136,14 +136,15 @@ message MemberRequest {
     string is_bind_mobile =20;
     string is_bind_email =21;
     string is_bind_wx =22;
-    int64 recommender_id =23;
+    int64 referrer_id =23;
     int64 avatar_id =24;
     string avatar_url =25;
     string refer_url =26;
     string wx_open_id =27;
     string password =29;
     string code =30;
-    repeated int64 ids = 31;
+    string referrer =31;
+    repeated int64 ids = 32;
 }
 
 message MemberData {

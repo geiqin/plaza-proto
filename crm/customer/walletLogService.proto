@@ -5,27 +5,27 @@ import "common/base.proto";
 import "memberService.proto";
 import "walletService.proto";
 
-service WalletBalanceLogService {
+service WalletLogService {
   //增加保证金（增加）
-  rpc Income (WalletBalanceLog) returns (WalletBalanceLogResponse) {}
+  rpc Income (WalletLog) returns (WalletLogResponse) {}
   //扣除保证金(支出)
-  rpc Expend (WalletBalanceLog) returns (WalletBalanceLogResponse) {}
+  rpc Expend (WalletLog) returns (WalletLogResponse) {}
   //获得保证金记录信息
-  rpc Get (WalletBalanceLog) returns (WalletBalanceLogResponse) {}
+  rpc Get (WalletLog) returns (WalletLogResponse) {}
   //查询保证金记录信息
-  rpc Search (WalletBalanceLogRequest) returns (WalletBalanceLogResponse) {}
+  rpc Search (WalletLogRequest) returns (WalletLogResponse) {}
 }
 
-message WalletBalanceLog {
+message WalletLog {
   int64  id =1;//ID
   int64  member_id =2;//用户ID
   int64  wallet_id =3;//钱包ID
-  string business_type =4;//业务类型：如 recharge 充值
-  string money_type =5;//资金类型：0 赠送，1冻结
+  string business_type =4;//业务类型（0系统, 1充值, 2提现, 3消费）
+  string money_type =5;//金额类型（0正常, 1冻结, 2赠送）
   string operation_type =6;//操作类型：0 减少，1增加
   int64  operation_money =7;//增减方向：增减金额
-  int64  original_money =8;//充值金额
-  int64  latest_money =9;//支付金额
+  int64  original_money =8;//原始金额
+  int64  latest_money =9;//最新金额
   int64  operator_id =10;//操作员ID（涉及人工处理的需要记录操作员）
   string msg =11;//描述：如：账户充值 [ 赠送500.00元 ]
   string created_at =12;
@@ -36,7 +36,7 @@ message WalletBalanceLog {
 
 
 //查询参数
-message WalletBalanceLogRequest {
+message WalletLogRequest {
   int32 paged = 1;
   int32 page_size = 2;
   //以下为自定义参数
@@ -54,15 +54,15 @@ message WalletBalanceLogRequest {
 
 
 //
-message WalletBalanceLogData {
-  WalletBalanceLog entity = 1;
+message WalletLogData {
+  WalletLog entity = 1;
   common.Pager pager =2;
-  repeated WalletBalanceLog items = 3;
+  repeated WalletLog items = 3;
   common.Info info =4;
 }
 
 //
-message WalletBalanceLogResponse {
-  WalletBalanceLogData data = 1;
+message WalletLogResponse {
+  WalletLogData data = 1;
   common.Error error = 2;
 }

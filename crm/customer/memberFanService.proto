@@ -18,7 +18,7 @@ message MemberFan {
     string union_id = 5;
     string platform = 6;
     string original_data = 7;
-    int64 recommender_id = 8;
+    int64 referrer_id = 8;
     string status = 9;
     string registered_at = 10;
     string created_at = 11;
@@ -39,7 +39,7 @@ message MemberFanRequest {
     string status =9;
     string open_id =10;
     int64 member_id=11;
-    int64 recommender_id = 12;
+    int64 referrer_id = 12;
     string code =13;
     repeated int64 ids = 14;
 }

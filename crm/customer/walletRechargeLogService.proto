@@ -28,8 +28,9 @@ message WalletRechargeLog {
   int64  payment_id =7;//支付方式Id
   int64  operator_id =8;//操作员ID
   string status =9;//状态：0待支付，1已支付，2已失效
-  string created_at =10;
-  string updated_at =11;
+  string pay_time =10;//支付时间
+  string created_at =11;
+  string updated_at =12;
 }
 
 
