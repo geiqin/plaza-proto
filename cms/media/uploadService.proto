@@ -1,0 +1,70 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "fileService.proto";
+
+service UploadService {
+    //字节数据上传
+    rpc UploadBytes (UploadBytesInfo) returns (UploadResponse) {}
+}
+
+//上传数据
+message UploadBytesInfo {
+    string type =1;
+    bytes content =2;
+    string file_name =3;
+    string raw_name =4;
+    string path =5;
+    string url =6;
+    string mime_type =7;
+    int64 size =8;
+    int64 width =9;
+    int64 height =10;
+    int64 length =11;
+    int64 pixel =12;
+    string creator_type	=13;
+    int64 creator_id	=14;
+    string creator_name	=15;
+}
+
+// 修改文件请求信息
+message UploadRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    int32 keywords = 4;
+    //file params
+    int64 id =5;
+    string title =6;
+    int64 cat_id =7;
+    string type =8;
+    string mime_type =9;
+    string file_name =10;
+    string raw_name =11;
+    string hash =12;
+    string flag	 =13;
+    bool is_big_file =14;
+    bool is_not_cat =15;
+    bool is_private	 =16;
+    string creator_type	 =17;
+    int64 creator_id	 =18;
+    string memo	 =19;
+    int64 cover_id =20;
+    string cover_url =21;
+    string code =22;
+    string cat_slug =23;
+    repeated string types =24;
+    repeated string codes =25;
+    repeated int64 ids =26;
+}
+
+message UploadData {
+    File entity = 1;
+    map<string,string> params =5;
+}
+
+message UploadResponse {
+    UploadData data = 1;
+    common.Error error = 2;
+}
