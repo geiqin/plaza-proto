@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service ConfigurationService {
+    rpc Save (Configuration) returns (ConfigurationResponse) {}
+    rpc Get (ConfigurationRequest) returns (ConfigurationResponse) {}
+    rpc Search (ConfigurationRequest) returns (ConfigurationResponse) {}
+    rpc List (ConfigurationRequest) returns (ConfigurationResponse) {}
+}
+
+
+//平台配置
+message Configuration {
+    int32 id =1;
+    string name	=2;
+    string group =3;
+    string value_type = 4;
+    string value = 5; 
+    string created_at = 6;
+    string updated_at = 7;
+}
+
+message ConfigurationRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 id = 3;
+    string keywords = 4;
+    string name = 5;
+    string group = 6;
+    repeated int32 ids = 7;
+}
+
+
+message ConfigurationData {
+    Configuration entity = 1;
+    common.Pager pager =2;
+    repeated Configuration items = 3;
+    common.Info info =4;
+}
+
+message ConfigurationResponse {
+    ConfigurationData data = 1;
+    common.Error error = 2;
+}
