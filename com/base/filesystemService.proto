@@ -16,20 +16,23 @@ service FilesystemService {
 //文件系统
 message Filesystem {
     int32  id =1;//id
-    string code =2;//唯一标识
+    string region =2;//分区标识
     string name =3;//名称
     string driver =4;//驱动器
     string access_key =5;//云端AccessKey
     string secret_key =6;//云端SecretKey
     string bucket =7;//云端Bucket
     string transport =8;//云端Transport
-    string domain =9;//访问域名
-    string is_private =10;//是否为私有资源（0否，1是）
-    string is_local =11;//是否为本地储存（0否，1是）
-    string local_path =12;//本地根路径
-    string status =13;//状态: 1-正常,0-停用
-    string created_at = 14;
-    string updated_at = 15;
+    string domain =9;//云端域名
+    string zone =10;//云端存储区
+    string host_url =12;//访问主机
+    string is_default =13;//是否为默认资源（0否，1是）
+    string is_private =14;//是否为私有资源（0否，1是）
+    string is_local =15;//是否为本地储存（0否，1是）
+    string local_path =16;//本地根路径
+    string status =17;//状态: 1-正常,0-停用
+    string created_at = 18;
+    string updated_at = 19;
 }
 
 message FilesystemRequest {
@@ -37,7 +40,7 @@ message FilesystemRequest {
     int32 page_size = 2;
     int32 id = 3;
     string keywords = 4;
-    string code = 5;
+    string region = 5;
     string name = 6;
     string driver =7;//驱动器
     string is_private =8;//是否为私有资源
