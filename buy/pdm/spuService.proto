@@ -43,7 +43,7 @@ message Spu {
     string title_color =7;//标题颜色
     string simple_desc =8;//简述
     string type =9;//商品类型：product商品,material原料,assets资产
-    string subtype =10;//商品子类型：course,column, recharge, room, vip,food
+    string site_type =10;//商品类型
     string unit =11;//计量单位
     int64  place_origin_id =12;//产地ID（地区省id）
     int32  inventory =13;//库存（所有规格库存总和）
@@ -127,6 +127,7 @@ message FormSpu {
     int64 taxonomy_id =2;//标准类目ID
     int64 category_id =3;//商品分类ID
     int32 brand_id =4;//品牌ID
+    string site_type =5;//商品类型
     string title =6;//商品标题
     string title_color =7;//标题颜色
     string simple_desc =8;//简述
@@ -164,6 +165,7 @@ message FormSpu {
     FormSku sku  = 56;
     repeated FormSku skus = 57;
     repeated SpecTypeProperty spec_types = 59;//规格类型数据
+    repeated Term terms = 60;
 }
 
 message FormSku  {
@@ -207,7 +209,7 @@ message SpuRequest {
     int32 page_size = 2;
     string keywords = 3;
     int64 sku_id = 4;
-    string sku_sn = 5;
+    string is_listed = 5;
     int64 spu_id = 6;
     string code = 7;
     string title =8;
@@ -225,7 +227,7 @@ message SpuRequest {
     string param_value = 20;
     int32 tag_id = 21;
     string tag_name = 22;
-    string subtype =23;
+    string site_type =23;
     int32 sort =24;
     repeated int64 spu_ids = 25;
     repeated int64 sku_ids = 26;
