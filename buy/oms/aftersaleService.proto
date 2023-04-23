@@ -12,7 +12,10 @@ service AftersaleService {
     rpc AftersaleIndex (AftersaleRequest) returns (AftersaleResponse) {}
 
     //售后单详情【admin/user】
-    rpc AftersaleDetail (AftersaleRequest) returns (AftersaleDetailResponse) {}
+    rpc AftersaleService (AftersaleRequest) returns (AftersaleServiceResponse) {}
+
+    //售后单详情【admin/user】
+    rpc AftersaleDetail (AftersaleRequest) returns (AftersaleResponse) {}
 
     //售后单查询【admin】
     rpc AftersaleSearch (AftersaleRequest) returns (AftersaleResponse) {}
@@ -65,7 +68,6 @@ message Aftersale {
     int64  price =11; //退款金额
     int64  freight_subsidy =12; //运费补贴金
     string msg =13; //退款说明
-    string status =14; //状态（0待确认, 1待退货, 2待审核, 3已完成, 4已拒绝, 5已取消）
     string refuse_reason =15; //拒绝原因
     string express_name =16; //快递名称
     string express_number =17; //快递单号
@@ -74,21 +76,24 @@ message Aftersale {
     string delivery_time =20; //退货时间
     string audit_time =21; //审核时间
     string cancel_time =22; //取消时间
-    string created_at = 23;
-    string updated_at = 24;
-    GoodsInfo goods = 25;
-    Order order = 26;
-    repeated AftersaleImage images = 27;
-    string status_text =28;
-    string type_text =29;
-    string refundment_text =30;
-    string tips_msg =31;
+    string refund_time =23; //退款时间
+    string refund_status =24; //退款状态（0待退货, 1已退货, 2退款失败）
+    string status =25; //状态（0待确认, 1待退货, 2待审核, 3已完成, 4已拒绝, 5已取消）
+    string created_at = 26;
+    string updated_at = 27;
+    Order order = 29;
+    repeated AftersaleImage images = 30;
+    string status_text =31;
+    string type_text =32;
+    string refundment_text =33;
+    string tips_msg =34;
+    map<string,string> operate_data =35;
 }
 
 
 message AftersaleImage {
     int64 id = 1;
-    int64 safeguard_id = 2;
+    int64 aftersale_id = 2;
     int64 image_id = 3;
     string image_url = 4;
 }
@@ -163,7 +168,7 @@ message AftersaleTypeInfo {
     string class =5;
 }
 
-message AftersaleDetailData {
+message AftersaleServiceData {
     Order order_data = 1;
     Aftersale new_aftersale_data = 2;
     AftersaleStepData step_data =3;
@@ -175,7 +180,7 @@ message AftersaleDetailData {
     string editor_path_type =9;
 }
 
-message AftersaleDetailResponse {
-    AftersaleDetailData data = 1;
+message AftersaleServiceResponse {
+    AftersaleServiceData data = 1;
     common.Error error = 2;
 }

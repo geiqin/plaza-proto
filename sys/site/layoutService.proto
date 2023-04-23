@@ -1,0 +1,51 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service LayoutService {
+    rpc Create (Layout) returns (LayoutResponse) {}
+    rpc Update (Layout) returns (LayoutResponse) {}
+    rpc Delete (Layout) returns (LayoutResponse) {}
+    rpc Get (Layout) returns (LayoutResponse) {}
+    rpc Search (LayoutRequest) returns (LayoutResponse) {}
+    rpc List (LayoutRequest) returns (LayoutResponse) {}
+}
+
+message Layout {
+    int64 id =1;
+    string type	 =2;
+    string name =3;
+    string config =4;
+    string status  =5;
+    string created_at =6;
+    string updated_at =7;
+}
+
+
+message LayoutRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    string type = 6;
+    int64 parent_id = 7;
+    string keywords = 8;
+    repeated int64 ids = 10;
+}
+
+//
+message LayoutData {
+    Layout entity = 1;
+    common.Pager pager =2;
+    repeated Layout items = 3;
+    common.Info info =5;
+}
+
+//
+message LayoutResponse {
+    LayoutData data = 1;
+    common.Error error = 2;
+}

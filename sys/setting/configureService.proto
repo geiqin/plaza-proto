@@ -2,6 +2,7 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "baseInfoService.proto";
 
 //配置中心
 service ConfigureService {
@@ -29,11 +30,22 @@ message SiteStateConfig{
     string home_site_close_reason =4;//关闭原因;支持html，当网站处于关闭状态时，关闭原因将显示在前台
 }
 
-//站点域名地址
-message SiteDomainConfig{
-    string common_domain_host =1;//主域名,站点地址
-    string common_cdn_attachment_host =2;//附件cdn域名图片/视频/文件
-    string common_cdn_public_host =3;//css/js静态文件cdn域名
+//站点类型
+message SiteTypeConfig{
+    string common_site_type =1;//站点类型（默认快递）
+    string common_site_exhibition_mode_btn_text =2;//展示型操作名称（默认 立即咨询）
+    string common_site_fictitious_return_title =3;//虚拟信息标题【虚拟销售】
+    string common_site_fictitious_return_tips =4;//提示信息【虚拟销售】
+}
+
+//站点用户注册/登录
+message SitePassportConfig{
+    repeated string home_user_reg_type =1;//注册方式
+    string home_user_register_img_verify_state =2;//用户注册图片验证码
+    string common_register_is_enable_audit =3;//用户注册开启审核(0否，1是)
+    string home_is_enable_user_register_agreement =4;//用户注册协议(0否，1是)
+    repeated string home_user_login_type =5;//用户登录方式
+    string home_user_login_img_verify_state =6;//登录图片验证码
 }
 
 //站点备案信息
@@ -52,19 +64,58 @@ message SiteSeoConfig {
     string home_seo_site_description =3;//站点描述，一般不超过200个字符
 }
 
-//站点搜索
+//站点搜索配置
 message SiteSearchConfig {
     string home_search_history_record =1;//请选择开启搜索记录
     int32 home_search_limit_number =2;//搜索展示数据条数
-    string home_search_keywords =3;//搜索关键字
-    string home_search_is_brand =4;//搜索页开启品牌
-    string home_search_is_category =5;//搜索页开启分类
-    string home_search_is_price =6;//搜索页开启价格
-    string home_search_is_params =7;//搜索页开启参数
-    string home_search_is_spec =8;//搜索页开启规格
+    repeated string home_search_keywords =3;//搜索关键字
+    string home_search_is_brand =4;//搜索页开启品牌(0否，1是)
+    string home_search_is_category =5;//搜索页开启分类(0否，1是)
+    string home_search_is_price =6;//搜索页开启价格(0否，1是)
+    string home_search_is_params =7;//搜索页开启参数(0否，1是)
+    string home_search_is_spec =8;//搜索页开启规格(0否，1是)
     repeated string home_search_params_type =9;//搜索参数类型
 }
 
+//商品相关配置
+message TradeGoodsConfig {
+    string common_is_goods_detail_show_photo =1;//商品详情页展示相册(0否，1是)
+    string common_is_show_goods_comments =2;//展示商品评价(0否，1是)
+    int32 common_show_goods_category_level =3;//分类展示层级
+}
+
+//商品相关配置
+message TradeOrderConfig {
+    string common_order_is_booking =1;//订单预约模式(0否，1是)
+    string common_is_deduction_inventory =2;//是否扣减库存(0否，1是)
+    string common_deduction_inventory_rules =3;//订单商品扣减库存规则
+    string common_goods_sales_count_inc_rules =4;//订单商品销量增加规则
+    string common_is_under_line_order_normal =5;//线下支付正常进行(0否，1是)
+    string common_is_fictitious_order_direct_pay =6;//虚拟订单直接提交支付(0否，1是)
+}
+
+//售后服务配置
+message TradeAftersaleConfig {
+    repeated string home_order_aftersale_return_only_money_reason =1;//仅退款原因
+    repeated string home_order_aftersale_return_money_goods_reason =2;//退货退款原因
+    string home_order_aftersale_return_goods_address =3;//退货地址
+    string home_order_aftersale_is_use_warehouse_address =4;//退货地址使用仓库地址(0否，1是)
+    int32 home_order_aftersale_return_launch_day =5;//订单完成可发起售后时限
+}
+
+//站点扩展项
+message SiteExtendsConfig {
+    string common_is_enable_vip =1;//开启VIP功能(0关闭，1开启)
+    string common_is_enable_wallet =2;//开启钱包功能(0关闭，1开启)
+    string common_is_enable_integral =3;//开启积分功能(0关闭，1开启)
+    string common_is_login_answer =4;//留言需要登录(0关闭，1开启)
+    string home_index_friendship_link_status =5;//手机模式下友情链接状态(0关闭，1开启)
+    string home_navigation_main_quick_status =6;//快捷导航状态(0关闭，1开启)
+    string home_navigation_main_quick_name =7;//快捷导航名称
+    string home_user_address_map_status =8;//用户地址地图(0关闭，1开启)
+    string home_user_address_idcard_status =9;//用户地址身份证(0关闭，1开启)
+    string home_extraction_address_position =10;//自提选择地理位置(0关闭，1开启)
+}
 
 //-------------手机配置--------------
 
@@ -98,6 +149,8 @@ message AppMiniWeixinConfig{
     string common_app_mini_weixin_app_secret =2;//AppSecret,小程序密钥
     string common_app_mini_weixin_title =3;//名称
     string common_app_mini_weixin_describe =4;//描述
+    string common_app_weixin_liveplayer =5; //启用直播(0否，1是)
+    string common_app_weixin_liveplayer_ver =6;//直播组件版本号
 }
 //支付宝小程序配置
 message AppMiniAlipayConfig{
@@ -107,6 +160,8 @@ message AppMiniAlipayConfig{
     string common_app_mini_alipay_out_rsa_public =4;//支付宝公钥
     string common_app_mini_alipay_title =5;//名称
     string common_app_mini_alipay_describe =6;//描述
+    string common_app_mini_alipay_tnt_inst_id =7; //在线客服-企业编码
+    string common_app_mini_alipay_scene =8;//在线客服-聊天窗编码
 }
 //头条小程序配置
 message AppMiniToutiaoConfig{
@@ -117,23 +172,24 @@ message AppMiniToutiaoConfig{
 }
 //百度小程序配置
 message AppMiniBaiduConfig{
-    string admin_app_mini_baidu_appid =1;
-    string admin_app_mini_baidu_app_secret =2;
-    string common_app_mini_baidu_title =3;
-    string common_app_mini_baidu_describe =4;
+    string common_app_mini_baidu_appid =1;
+    string common_app_mini_baidu_app_secret =2;
+    string common_app_mini_baidu_app_key =3;
+    string common_app_mini_baidu_title =4;
+    string common_app_mini_baidu_describe =5;
 }
 //QQ小程序配置
 message AppMiniQQConfig{
-    string admin_app_mini_qq_appid =1;
-    string admin_app_mini_qq_app_secret =2;
-    string admin_app_mini_qq_app_token =3;
+    string common_app_mini_qq_appid =1;
+    string common_app_mini_qq_app_secret =2;
+    string common_app_mini_qq_app_token =3;
     string common_app_mini_qq_title =4;
     string common_app_mini_qq_describe =5;
 }
 //快手小程序配置
 message AppMiniKuaishouConfig{
-    string admin_app_mini_kuaishou_appid =1;
-    string admin_app_mini_kuaishou_app_secret =2;
+    string common_app_mini_kuaishou_appid =1;
+    string common_app_mini_kuaishou_app_secret =2;
     string common_app_mini_kuaishou_title =3;
     string common_app_mini_kuaishou_describe =4;
 }
@@ -145,6 +201,16 @@ message SmsConfig {
     string common_sms_api_key =1;//短信KeyID(Access Key ID)
     string common_sms_api_secret =2;//短信KeySecret(Access Key Secret)
     string common_sms_sign =3;//短信签名(发送短信包含的签名)
+}
+
+//短信模板配置
+message SmsTemplateConfig {
+    string admin_sms_login_template =1;//后台登录-短信模板ID【后台】
+    string common_sms_currency_template =2;//通用-短信模板ID【前端】
+    string home_sms_login_template =3;//用户登录-短信模板ID【前端】
+    string home_sms_user_reg =4;//用户注册-短信模板ID【前端】
+    string home_sms_user_forget_pwd =5;//密码找回-短信模板ID【前端】
+    string home_sms_user_mobile_binding =7;//手机号码绑定-短信模板ID【前端】
 }
 
 //------------ email --------
@@ -160,14 +226,10 @@ message EmailBaseConfig {
     string common_email_smtp_send_name =7;//发件人显示名称(如 QinDev)
 }
 
-//邮模板配置件
+//邮件模板配置
 message EmailTemplateConfig {
-    string admin_sms_login_template =1;//后台登录-短信模板ID【后台】
-    string common_sms_currency_template =2;//通用-短信模板ID【前端】
-    string home_sms_login_template =3;//用户登录-短信模板ID【前端】
-    string home_sms_user_reg =4;//用户注册-短信模板ID【前端】
-    string home_sms_user_forget_pwd =5;//密码找回-短信模板ID【前端】
-    string home_sms_user_mobile_binding =7;//手机号码绑定-短信模板ID【前端】
+    string admin_email_login_template =1;//后台登录-邮件模板ID【后台】
+    string common_email_currency_template =2;//通用-邮件模板ID【前端】
 }
 
 //-------- map ---------
@@ -189,16 +251,10 @@ message StoreConfig {
     string common_store_customer_qrcode =5;//店铺二维码
 }
 
-//系统功能配置
-message SystemConfig {
-    string common_is_enable_vip =1;//开启VIP功能
-    string common_is_enable_wallet =2;//开启钱包功能
-    string common_is_enable_integral =3;//开启积分功能
-}
 
 message ConfigureRequest {
     int64 id = 1;
-    string code =2;//唯一标识
+    string is_pull_const =2;//是否拉取常量数据（0否，1是）
     string name =3;//名称
     string type = 4;//类型：admin后台，home前台，common公共
     string group = 5;
@@ -211,27 +267,36 @@ message ConfigureData {
     //站点配置
     SiteBaseConfig site_base =1;
     SiteStateConfig site_state =2;
-    SiteDomainConfig site_domain =3;
+    SiteTypeConfig site_type =3;
     SiteBeianConfig site_beian =4;
     SiteSeoConfig site_seo =5;
-    SiteSearchConfig site_search =6;
-    //手机配置
-    MobileBaseConfig mobile_base =8;
-    MobileCommonConfig mobile_common =9;
-    AppMiniWeixinConfig appmini_weixin =10;
-    AppMiniAlipayConfig appmini_alipay =11;
-    AppMiniBaiduConfig appmini_baidu =12;
-    AppMiniToutiaoConfig appmini_toutiao =13;
-    AppMiniQQConfig appmini_qq =14;
-    AppMiniKuaishouConfig appmini_kuaishou =15;
+    SitePassportConfig site_passport =6;
+    SiteExtendsConfig site_extends =7;
+    SiteSearchConfig site_search =8;
+    TradeGoodsConfig trade_goods =9;
+    TradeOrderConfig trade_order =10;
+    TradeAftersaleConfig trade_aftersale =11;
+
     //邮件配置
-    EmailBaseConfig email_base =16;//邮件基础设置
-    EmailTemplateConfig email_template =17;//邮件消息模板
+    EmailBaseConfig email_base =15;//邮件基础设置
+    EmailTemplateConfig email_template =16;//邮件消息模板
+
     //短信配置
-    SmsConfig sms_base =18; //短信配置
-    MapConfig map =19; //地图配置
-    StoreConfig store =20;//店铺信息
-    SystemConfig system =21;//系统功能配置
+    SmsConfig sms_base =17; //短信配置
+
+    //手机配置
+    MobileBaseConfig mobile_base =20;
+    MobileCommonConfig mobile_common =21;
+    AppMiniWeixinConfig appmini_weixin =22;
+    AppMiniAlipayConfig appmini_alipay =23;
+    AppMiniBaiduConfig appmini_baidu =24;
+    AppMiniToutiaoConfig appmini_toutiao =25;
+    AppMiniQQConfig appmini_qq =26;
+    AppMiniKuaishouConfig appmini_kuaishou =27;
+
+    StoreConfig store =30;//店铺信息
+    MapConfig map =31; //地图配置
+    repeated ConstListData const_data =33;//常量数据
 }
 
 message ConfigureResponse {

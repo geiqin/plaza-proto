@@ -64,41 +64,52 @@ message AreaInfo {
 
 //商品信息
 message GoodsInfo {
-	int64 id = 1; //等同于sku_id
-	int64 spu_id = 2;
-	int64 sku_id = 3;
-	string type = 5; //类型
-	string title = 6; //标题
-	int32 inventory = 7; //库存数量
-	string unit = 8; //库存单位
-	string image_url = 9; //封面URL
-	string is_many_spec = 10;//是否多规格商品(0否,1是)
-	string is_invalid = 11; //是否无效(0否,1是)
-	int64 shop_id = 12; //分店ID
-	int64 brand_id = 13;//品牌ID
-	string brand_name = 14; //品牌名称
-	string spec_desc = 15; //规格描述
-	int64 sku_weight = 16;
-	int64 sku_volume = 17;
-	string sku_coding = 18;
-	string sku_barcode = 19;
-	int64 sku_original_price = 20;
-	int64 sku_price = 21;
-	int64 original_price = 22;
-	int64 price = 23;
-	int64 give_integral = 24;
-	string is_virtual = 25; //是否虚拟商品(0否,1是)
-	int32 buy_min_number = 28;
-	int32 buy_max_number = 29;
-	string show_field_original_price_text =30;
-	string show_field_price_text =31;
-	string goods_url =32;
-	bool checked = 33; //是否选中
-	int32 number = 34; //购买数量
-	int64 subtotal_price = 35; //合计价格
-	string is_error = 36; //购物车用(0否,1是)
-	string error_message = 37; //购物车用
-	repeated SpecificationData spec = 38; //规格
+	int64 id = 1; //比如购物车ID
+	int64 sku_id = 2;
+	int64 spu_id = 3;
+	string type = 4; //类型
+	string title = 5; //标题
+	string title_color = 6; //标题颜色
+	string simple_desc = 7; //简单描述
+	int32 inventory = 8; //库存数量
+	string unit = 9; //库存单位
+	string image_url = 10; //封面URL
+	string video_url = 11; //视频URL
+	string is_many_spec = 12;//是否多规格商品（0否，1是）
+	string is_deduction_inventory = 13; //是否扣减库存
+	string is_listed = 14; //是否上架（0否，1是）
+	string is_virtual = 15; //是否虚拟商品（0否，1是）
+	int64 shop_id = 16; //分店ID
+	int32 brand_id = 17;//品牌ID
+	string brand_name = 18; //品牌名称
+	string virtual_type = 19; //虚拟商品类型
+	string virtual_data = 20; //虚拟商品扩展数据
+	int64 taxonomy_id = 22;//
+	int64 category_id  =23;
+	int64 give_integral  = 24;
+	int32 buy_min_number  = 25;
+	int32 buy_max_number  = 26;
+	int32 photo_count =27; //相册数量
+	int32 sale_count =28; //销售量
+	int32 access_count =29; //访问量
+	int64 place_origin_id =30; //原产地ID
+	int64 weight = 31;
+	int64 volume = 32;
+	string coding = 33;
+	string barcode = 34;
+	int64 price = 35;
+	int64 original_price = 36;
+	int64 cost_price = 37;
+	string spec_desc =38;
+	string show_field_original_price_text =39;
+	string show_field_price_text =40;
+	string goods_url =41;
+	bool checked = 42; //是否选中
+	int32 number = 43; //购买数量
+	int64 subtotal_price = 44; //合计价格
+	string is_error = 45; //购物车用(0否,1是)
+	string error_message = 46; //购物车用
+	repeated SpecificationData spec = 47; //规格
 }
 
 //货品规格信息
@@ -137,18 +148,23 @@ message CouponInfo  {
 }
 
 message MemberInfo {
-	int64 id =1;
-	string type = 2;
-	string name =3;
-	string gender =4;
-	int32 rank_id =5;
-	int64 avatar_id =6;
-	string avatar_url =7;
-	bool trusted =8;
-	bool bound_mobile =9;
-	bool bound_email =10;
-	bool bound_wx =11;
-	string status =12;
+	int64  id =1;//ID
+	string type =2;//类型：0个人,1企业
+	string number_code =3;//会员编号
+	string username =4;//用户名称
+	string nickname =5;//用户昵称
+	string gender =6;//性别:0=未知,1=男,2=女
+	string birthday =7;//会员生日
+	int64  area_id =8;//区域ID
+	string province_name =9;//所在省
+	string city_name =10;//所在市
+	string county_name =11;//所在区/县
+	string address =12;//详细地址
+	string email =13;//邮箱
+	string mobile =14;//手机号
+	int64  avatar_id =15;//会员头像ID
+	string avatar_url =16;//会员头像url地址
+	string status =17;
 }
 
 message UserInfo {

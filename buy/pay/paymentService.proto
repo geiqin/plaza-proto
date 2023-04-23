@@ -5,12 +5,16 @@ import "common/base.proto";
 
 //支付方式
 service PaymentService {
+  //支付方式修改
+  rpc Update (PaymentRequest) returns (PaymentResponse) {}
   //获取支付方式
   rpc Get (PaymentRequest) returns (PaymentResponse) {}
   //选择支付方式
   rpc List (PaymentRequest) returns (PaymentResponse) {}
   //支付方式开关
   rpc Switch (PaymentRequest) returns (PaymentResponse) {}
+  //支付方式查询
+  rpc Search (PaymentRequest) returns (PaymentResponse) {}
 }
 
 message Payment {
@@ -32,20 +36,25 @@ message Payment {
 
 //支付方式请求
 message PaymentRequest {
-  int32 id =1;
-  string code =2;
-  string name =3;
-  string apply_terminal =4;
-  string status =5;
-  string is_cod	=6;
-  string is_under_line	=7;
-  string account_type =8;
+  int32 paged = 1;
+  int32 page_size = 2;
+  int32 top = 3;
+  //base params
+  int32 id =5;
+  string code =6;
+  string name =7;
+  string apply_terminal =8;
+  string status =9;
+  string is_cod	=10;
+  string is_under_line	=11;
+  string account_type =12;
 }
 
 message PaymentData{
   Payment entity = 1;
   repeated Payment items =2;
-  common.Info info =3;
+  common.Pager pager =3;
+  common.Info info =4;
 }
 
 message PaymentResponse {

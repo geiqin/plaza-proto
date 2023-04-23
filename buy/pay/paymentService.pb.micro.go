@@ -43,12 +43,16 @@ func NewPaymentServiceEndpoints() []*api.Endpoint {
 // Client API for PaymentService service
 
 type PaymentService interface {
+	//支付方式修改
+	Update(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
 	//获取支付方式
 	Get(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
 	//选择支付方式
 	List(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
 	//支付方式开关
 	Switch(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
+	//支付方式查询
+	Search(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
 }
 
 type paymentService struct {
@@ -61,6 +65,16 @@ func NewPaymentService(name string, c client.Client) PaymentService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *paymentService) Update(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.Update", in)
+	out := new(PaymentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *paymentService) Get(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
@@ -93,22 +107,38 @@ func (c *paymentService) Switch(ctx context.Context, in *PaymentRequest, opts ..
 	return out, nil
 }
 
+func (c *paymentService) Search(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.Search", in)
+	out := new(PaymentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for PaymentService service
 
 type PaymentServiceHandler interface {
+	//支付方式修改
+	Update(context.Context, *PaymentRequest, *PaymentResponse) error
 	//获取支付方式
 	Get(context.Context, *PaymentRequest, *PaymentResponse) error
 	//选择支付方式
 	List(context.Context, *PaymentRequest, *PaymentResponse) error
 	//支付方式开关
 	Switch(context.Context, *PaymentRequest, *PaymentResponse) error
+	//支付方式查询
+	Search(context.Context, *PaymentRequest, *PaymentResponse) error
 }
 
 func RegisterPaymentServiceHandler(s server.Server, hdlr PaymentServiceHandler, opts ...server.HandlerOption) error {
 	type paymentService interface {
+		Update(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
 		Get(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
 		List(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
 		Switch(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
+		Search(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
 	}
 	type PaymentService struct {
 		paymentService
@@ -121,6 +151,10 @@ type paymentServiceHandler struct {
 	PaymentServiceHandler
 }
 
+func (h *paymentServiceHandler) Update(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.Update(ctx, in, out)
+}
+
 func (h *paymentServiceHandler) Get(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
 	return h.PaymentServiceHandler.Get(ctx, in, out)
 }
@@ -131,4 +165,8 @@ func (h *paymentServiceHandler) List(ctx context.Context, in *PaymentRequest, ou
 
 func (h *paymentServiceHandler) Switch(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
 	return h.PaymentServiceHandler.Switch(ctx, in, out)
+}
+
+func (h *paymentServiceHandler) Search(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.Search(ctx, in, out)
 }

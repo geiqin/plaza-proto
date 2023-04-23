@@ -1,0 +1,54 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service MessageService {
+    rpc Create (Message) returns (MessageResponse) {}
+    rpc Read (Message) returns (MessageResponse) {}
+    rpc Delete (Message) returns (MessageResponse) {}
+    rpc Get (Message) returns (MessageResponse) {}
+    rpc Search (MessageRequest) returns (MessageResponse) {}
+}
+
+message Message {
+    int64 id =1;
+    string type	 =3;
+    int64 user_id =4;
+    string title =5;
+    string detail  =6;
+    int64 business_id =8;
+    string business_type  =9;
+    string is_read  =10;
+    string is_delete  =11;
+    string created_at =12;
+    string updated_at =13;
+}
+
+
+message MessageRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    string code = 6;
+    int64 parent_id = 7;
+    string keywords = 8;
+    repeated int64 ids = 10;
+}
+
+//
+message MessageData {
+    Message entity = 1;
+    common.Pager pager =2;
+    repeated Message items = 3;
+    common.Info info =5;
+}
+
+//
+message MessageResponse {
+    MessageData data = 1;
+    common.Error error = 2;
+}

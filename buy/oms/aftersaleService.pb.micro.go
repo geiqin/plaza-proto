@@ -46,7 +46,9 @@ type AftersaleService interface {
 	//售后单列表【user】
 	AftersaleIndex(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error)
 	//售后单详情【admin/user】
-	AftersaleDetail(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleDetailResponse, error)
+	AftersaleService(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleServiceResponse, error)
+	//售后单详情【admin/user】
+	AftersaleDetail(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error)
 	//售后单查询【admin】
 	AftersaleSearch(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error)
 	//售后单总数
@@ -95,9 +97,19 @@ func (c *aftersaleService) AftersaleIndex(ctx context.Context, in *AftersaleRequ
 	return out, nil
 }
 
-func (c *aftersaleService) AftersaleDetail(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleDetailResponse, error) {
+func (c *aftersaleService) AftersaleService(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleServiceResponse, error) {
+	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleService", in)
+	out := new(AftersaleServiceResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *aftersaleService) AftersaleDetail(ctx context.Context, in *AftersaleRequest, opts ...client.CallOption) (*AftersaleResponse, error) {
 	req := c.c.NewRequest(c.name, "AftersaleService.AftersaleDetail", in)
-	out := new(AftersaleDetailResponse)
+	out := new(AftersaleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -231,7 +243,9 @@ type AftersaleServiceHandler interface {
 	//售后单列表【user】
 	AftersaleIndex(context.Context, *AftersaleRequest, *AftersaleResponse) error
 	//售后单详情【admin/user】
-	AftersaleDetail(context.Context, *AftersaleRequest, *AftersaleDetailResponse) error
+	AftersaleService(context.Context, *AftersaleRequest, *AftersaleServiceResponse) error
+	//售后单详情【admin/user】
+	AftersaleDetail(context.Context, *AftersaleRequest, *AftersaleResponse) error
 	//售后单查询【admin】
 	AftersaleSearch(context.Context, *AftersaleRequest, *AftersaleResponse) error
 	//售后单总数
@@ -261,7 +275,8 @@ type AftersaleServiceHandler interface {
 func RegisterAftersaleServiceHandler(s server.Server, hdlr AftersaleServiceHandler, opts ...server.HandlerOption) error {
 	type aftersaleService interface {
 		AftersaleIndex(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error
-		AftersaleDetail(ctx context.Context, in *AftersaleRequest, out *AftersaleDetailResponse) error
+		AftersaleService(ctx context.Context, in *AftersaleRequest, out *AftersaleServiceResponse) error
+		AftersaleDetail(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error
 		AftersaleSearch(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error
 		AftersaleTotal(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
 		AftersaleCreate(ctx context.Context, in *Aftersale, out *AftersaleResponse) error
@@ -290,7 +305,11 @@ func (h *aftersaleServiceHandler) AftersaleIndex(ctx context.Context, in *Afters
 	return h.AftersaleServiceHandler.AftersaleIndex(ctx, in, out)
 }
 
-func (h *aftersaleServiceHandler) AftersaleDetail(ctx context.Context, in *AftersaleRequest, out *AftersaleDetailResponse) error {
+func (h *aftersaleServiceHandler) AftersaleService(ctx context.Context, in *AftersaleRequest, out *AftersaleServiceResponse) error {
+	return h.AftersaleServiceHandler.AftersaleService(ctx, in, out)
+}
+
+func (h *aftersaleServiceHandler) AftersaleDetail(ctx context.Context, in *AftersaleRequest, out *AftersaleResponse) error {
 	return h.AftersaleServiceHandler.AftersaleDetail(ctx, in, out)
 }
 

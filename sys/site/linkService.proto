@@ -1,0 +1,52 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service LinkService {
+    rpc Create (Link) returns (LinkResponse) {}
+    rpc Update (Link) returns (LinkResponse) {}
+    rpc Delete (Link) returns (LinkResponse) {}
+    rpc Get (Link) returns (LinkResponse) {}
+    rpc Search (LinkRequest) returns (LinkResponse) {}
+    rpc List (LinkRequest) returns (LinkResponse) {}
+}
+
+message Link {
+    int64 id =1;
+    string name	 =2;
+    string url =3;
+    string describe =4;
+    string is_new_window_open  =5;
+    int64 sort =6;
+    string status =7;
+    string created_at =8;
+    string updated_at =9;
+}
+
+message LinkRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    string code = 6;
+    int64 parent_id = 7;
+    string keywords = 8;
+    repeated int64 ids = 10;
+}
+
+//
+message LinkData {
+    Link entity = 1;
+    common.Pager pager =2;
+    repeated Link items = 3;
+    common.Info info =5;
+}
+
+//
+message LinkResponse {
+    LinkData data = 1;
+    common.Error error = 2;
+}

@@ -49,7 +49,7 @@ service OrderService {
     rpc OrderSearch (OrderRequest) returns (OrderResponse) {}
 
     //订单详情【admin/user】
-    rpc OrderDetail (OrderRequest) returns (OrderResponse) {}
+    rpc OrderDetail (OrderRequest) returns (OrderDetailResponse) {}
 
     //支付同步处理
     rpc Respond (OrderRequest) returns (OrderResponse) {}
@@ -105,18 +105,20 @@ message Order {
     string close_time =37;//退款完成时间
     string finished_time =38;//订单完成时间
     bool is_can_launch_aftersale =39; //是否启动售后服务
+    string created_at =40;
+    string updated_at =41;
     //--ext---
-    string status_name =40; //状态名称
-    string status_color =41; //状态颜色
-    OrderCurrency  currency=42;
-    OrderAddress address =43;
-    MemberInfo member = 44;
-    PaymentInfo payment = 45;
-    repeated OrderDetail details = 46;
-    repeated OrderExtension extension_data = 47;
-    map<string,string> metas =48;
-    WarehouseInfo warehouse_data =49;
-    map<string,string> operate_data =50;
+    string status_name =42; //状态名称
+    string status_color =43; //状态颜色
+    OrderCurrency  currency=44;
+    OrderAddress address =45;
+    MemberInfo member = 46;
+    PaymentInfo payment = 47;
+    repeated OrderDetail details = 48;
+    repeated OrderExtension extension_data = 49;
+    map<string,string> metas =50;
+    WarehouseInfo warehouse_data =51;
+    map<string,string> operate_data =52;
 
 }
 
@@ -201,6 +203,13 @@ message OrderData {
     repeated PaymentInfo payment_list =6;
 }
 
+message OrderDetailData {
+    Order order = 1;
+    common.Info info =2;
+    OrderFlow order_flow = 3;
+    repeated PaymentInfo payment_list =4;
+}
+
 message OrderPayData {
     int64 order_id =1;
     string order_no =2;
@@ -214,6 +223,11 @@ message OrderPayData {
 
 message OrderResponse {
     OrderData data = 1;
+    common.Error error = 2;
+}
+
+message OrderDetailResponse {
+    OrderDetailData data = 1;
     common.Error error = 2;
 }
 

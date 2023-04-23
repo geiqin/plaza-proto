@@ -1,0 +1,61 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service SlideService {
+    rpc Create (Slide) returns (SlideResponse) {}
+    rpc Update (Slide) returns (SlideResponse) {}
+    rpc Delete (Slide) returns (SlideResponse) {}
+    rpc Get (Slide) returns (SlideResponse) {}
+    rpc Search (SlideRequest) returns (SlideResponse) {}
+    rpc List (SlideRequest) returns (SlideResponse) {}
+}
+
+message Slide {
+    int64 id =1;
+    string type	 =2;
+    string platform	 =3;
+    string name	 =4;
+    string event_type =5;
+    string event_value =6;
+    string image_url  =7;
+    string desc  =8;
+    string bg_color  =9;
+    int32 sort  =12;
+    string status =14;
+    string created_at =15;
+    string updated_at =16;
+    //extends
+    string platform_name =17;
+    string event_type_name =18;
+    string status_name =19;
+}
+message SlideRequest {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    string type = 6;
+    string status = 7;
+    string platform = 8;
+    string event_type = 9;
+    string keywords = 10;
+    repeated int64 ids = 11;
+}
+
+//
+message SlideData {
+    Slide entity = 1;
+    common.Pager pager =2;
+    repeated Slide items = 3;
+    common.Info info =5;
+}
+
+//
+message SlideResponse {
+    SlideData data = 1;
+    common.Error error = 2;
+}

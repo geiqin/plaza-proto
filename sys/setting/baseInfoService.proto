@@ -28,3 +28,14 @@ message AreaInfo {
 	string remark1 = 24;
 	string remark2 = 25;
 }
+
+message ConstListInfo {
+	string name = 1;
+	string value = 2;
+	bool checked = 3;
+}
+
+message ConstListData {
+	string name = 1;
+  repeated 	ConstListInfo list = 2;
+}

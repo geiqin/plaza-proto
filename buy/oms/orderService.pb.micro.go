@@ -70,7 +70,7 @@ type OrderService interface {
 	//订单查询【admin/user】
 	OrderSearch(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单详情【admin/user】
-	OrderDetail(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	OrderDetail(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderDetailResponse, error)
 	//支付同步处理
 	Respond(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//支付异步处理
@@ -223,9 +223,9 @@ func (c *orderService) OrderSearch(ctx context.Context, in *OrderRequest, opts .
 	return out, nil
 }
 
-func (c *orderService) OrderDetail(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+func (c *orderService) OrderDetail(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderDetailResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.OrderDetail", in)
-	out := new(OrderResponse)
+	out := new(OrderDetailResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -303,7 +303,7 @@ type OrderServiceHandler interface {
 	//订单查询【admin/user】
 	OrderSearch(context.Context, *OrderRequest, *OrderResponse) error
 	//订单详情【admin/user】
-	OrderDetail(context.Context, *OrderRequest, *OrderResponse) error
+	OrderDetail(context.Context, *OrderRequest, *OrderDetailResponse) error
 	//支付同步处理
 	Respond(context.Context, *OrderRequest, *OrderResponse) error
 	//支付异步处理
@@ -329,7 +329,7 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		OrderStatusStepTotal(ctx context.Context, in *OrderRequest, out *OrderStatusStepTotalResponse) error
 		OrderTotal(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderSearch(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		OrderDetail(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		OrderDetail(ctx context.Context, in *OrderRequest, out *OrderDetailResponse) error
 		Respond(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		Notify(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		Get(ctx context.Context, in *Order, out *OrderResponse) error
@@ -398,7 +398,7 @@ func (h *orderServiceHandler) OrderSearch(ctx context.Context, in *OrderRequest,
 	return h.OrderServiceHandler.OrderSearch(ctx, in, out)
 }
 
-func (h *orderServiceHandler) OrderDetail(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+func (h *orderServiceHandler) OrderDetail(ctx context.Context, in *OrderRequest, out *OrderDetailResponse) error {
 	return h.OrderServiceHandler.OrderDetail(ctx, in, out)
 }
 

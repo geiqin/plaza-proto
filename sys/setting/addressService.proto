@@ -3,7 +3,7 @@ package services;
 option go_package = "/.;services";
 import "common/base.proto";
 import "addressTypeService.proto";
-import "areaInfoService.proto";
+import "baseInfoService.proto";
 
 service AddressService {
     rpc Create (Address) returns (AddressResponse) {}

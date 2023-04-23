@@ -45,12 +45,10 @@ func NewShipperServiceEndpoints() []*api.Endpoint {
 type ShipperService interface {
 	Create(ctx context.Context, in *Shipper, opts ...client.CallOption) (*ShipperResponse, error)
 	Update(ctx context.Context, in *Shipper, opts ...client.CallOption) (*ShipperResponse, error)
+	Delete(ctx context.Context, in *Shipper, opts ...client.CallOption) (*ShipperResponse, error)
 	Get(ctx context.Context, in *Shipper, opts ...client.CallOption) (*ShipperResponse, error)
 	Search(ctx context.Context, in *ShipperRequest, opts ...client.CallOption) (*ShipperResponse, error)
-	//快递发货公司列表
-	ExpressList(ctx context.Context, in *ShipperRequest, opts ...client.CallOption) (*ShipperResponse, error)
-	//同城配送公司列表
-	DeliveryList(ctx context.Context, in *ShipperRequest, opts ...client.CallOption) (*ShipperResponse, error)
+	List(ctx context.Context, in *ShipperRequest, opts ...client.CallOption) (*ShipperResponse, error)
 }
 
 type shipperService struct {
@@ -85,6 +83,16 @@ func (c *shipperService) Update(ctx context.Context, in *Shipper, opts ...client
 	return out, nil
 }
 
+func (c *shipperService) Delete(ctx context.Context, in *Shipper, opts ...client.CallOption) (*ShipperResponse, error) {
+	req := c.c.NewRequest(c.name, "ShipperService.Delete", in)
+	out := new(ShipperResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *shipperService) Get(ctx context.Context, in *Shipper, opts ...client.CallOption) (*ShipperResponse, error) {
 	req := c.c.NewRequest(c.name, "ShipperService.Get", in)
 	out := new(ShipperResponse)
@@ -105,18 +113,8 @@ func (c *shipperService) Search(ctx context.Context, in *ShipperRequest, opts ..
 	return out, nil
 }
 
-func (c *shipperService) ExpressList(ctx context.Context, in *ShipperRequest, opts ...client.CallOption) (*ShipperResponse, error) {
-	req := c.c.NewRequest(c.name, "ShipperService.ExpressList", in)
-	out := new(ShipperResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *shipperService) DeliveryList(ctx context.Context, in *ShipperRequest, opts ...client.CallOption) (*ShipperResponse, error) {
-	req := c.c.NewRequest(c.name, "ShipperService.DeliveryList", in)
+func (c *shipperService) List(ctx context.Context, in *ShipperRequest, opts ...client.CallOption) (*ShipperResponse, error) {
+	req := c.c.NewRequest(c.name, "ShipperService.List", in)
 	out := new(ShipperResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -130,22 +128,20 @@ func (c *shipperService) DeliveryList(ctx context.Context, in *ShipperRequest, o
 type ShipperServiceHandler interface {
 	Create(context.Context, *Shipper, *ShipperResponse) error
 	Update(context.Context, *Shipper, *ShipperResponse) error
+	Delete(context.Context, *Shipper, *ShipperResponse) error
 	Get(context.Context, *Shipper, *ShipperResponse) error
 	Search(context.Context, *ShipperRequest, *ShipperResponse) error
-	//快递发货公司列表
-	ExpressList(context.Context, *ShipperRequest, *ShipperResponse) error
-	//同城配送公司列表
-	DeliveryList(context.Context, *ShipperRequest, *ShipperResponse) error
+	List(context.Context, *ShipperRequest, *ShipperResponse) error
 }
 
 func RegisterShipperServiceHandler(s server.Server, hdlr ShipperServiceHandler, opts ...server.HandlerOption) error {
 	type shipperService interface {
 		Create(ctx context.Context, in *Shipper, out *ShipperResponse) error
 		Update(ctx context.Context, in *Shipper, out *ShipperResponse) error
+		Delete(ctx context.Context, in *Shipper, out *ShipperResponse) error
 		Get(ctx context.Context, in *Shipper, out *ShipperResponse) error
 		Search(ctx context.Context, in *ShipperRequest, out *ShipperResponse) error
-		ExpressList(ctx context.Context, in *ShipperRequest, out *ShipperResponse) error
-		DeliveryList(ctx context.Context, in *ShipperRequest, out *ShipperResponse) error
+		List(ctx context.Context, in *ShipperRequest, out *ShipperResponse) error
 	}
 	type ShipperService struct {
 		shipperService
@@ -166,6 +162,10 @@ func (h *shipperServiceHandler) Update(ctx context.Context, in *Shipper, out *Sh
 	return h.ShipperServiceHandler.Update(ctx, in, out)
 }
 
+func (h *shipperServiceHandler) Delete(ctx context.Context, in *Shipper, out *ShipperResponse) error {
+	return h.ShipperServiceHandler.Delete(ctx, in, out)
+}
+
 func (h *shipperServiceHandler) Get(ctx context.Context, in *Shipper, out *ShipperResponse) error {
 	return h.ShipperServiceHandler.Get(ctx, in, out)
 }
@@ -174,10 +174,6 @@ func (h *shipperServiceHandler) Search(ctx context.Context, in *ShipperRequest, 
 	return h.ShipperServiceHandler.Search(ctx, in, out)
 }
 
-func (h *shipperServiceHandler) ExpressList(ctx context.Context, in *ShipperRequest, out *ShipperResponse) error {
-	return h.ShipperServiceHandler.ExpressList(ctx, in, out)
-}
-
-func (h *shipperServiceHandler) DeliveryList(ctx context.Context, in *ShipperRequest, out *ShipperResponse) error {
-	return h.ShipperServiceHandler.DeliveryList(ctx, in, out)
+func (h *shipperServiceHandler) List(ctx context.Context, in *ShipperRequest, out *ShipperResponse) error {
+	return h.ShipperServiceHandler.List(ctx, in, out)
 }
