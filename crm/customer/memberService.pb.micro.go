@@ -70,6 +70,8 @@ type MemberService interface {
 	Unlock(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//获得客户
 	Get(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
+	//获得自己和推荐人
+	GetSelfAndReferrer(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
 	//获得客户详情
 	Detail(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
 	//根据ids获得客户
@@ -236,6 +238,16 @@ func (c *memberService) Get(ctx context.Context, in *Member, opts ...client.Call
 	return out, nil
 }
 
+func (c *memberService) GetSelfAndReferrer(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberService.GetSelfAndReferrer", in)
+	out := new(MemberResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *memberService) Detail(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error) {
 	req := c.c.NewRequest(c.name, "MemberService.Detail", in)
 	out := new(MemberResponse)
@@ -326,6 +338,8 @@ type MemberServiceHandler interface {
 	Unlock(context.Context, *MemberRequest, *MemberResponse) error
 	//获得客户
 	Get(context.Context, *Member, *MemberResponse) error
+	//获得自己和推荐人
+	GetSelfAndReferrer(context.Context, *Member, *MemberResponse) error
 	//获得客户详情
 	Detail(context.Context, *Member, *MemberResponse) error
 	//根据ids获得客户
@@ -356,6 +370,7 @@ func RegisterMemberServiceHandler(s server.Server, hdlr MemberServiceHandler, op
 		Lock(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		Unlock(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		Get(ctx context.Context, in *Member, out *MemberResponse) error
+		GetSelfAndReferrer(ctx context.Context, in *Member, out *MemberResponse) error
 		Detail(ctx context.Context, in *Member, out *MemberResponse) error
 		List(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		Search(ctx context.Context, in *MemberRequest, out *MemberResponse) error
@@ -428,6 +443,10 @@ func (h *memberServiceHandler) Unlock(ctx context.Context, in *MemberRequest, ou
 
 func (h *memberServiceHandler) Get(ctx context.Context, in *Member, out *MemberResponse) error {
 	return h.MemberServiceHandler.Get(ctx, in, out)
+}
+
+func (h *memberServiceHandler) GetSelfAndReferrer(ctx context.Context, in *Member, out *MemberResponse) error {
+	return h.MemberServiceHandler.GetSelfAndReferrer(ctx, in, out)
 }
 
 func (h *memberServiceHandler) Detail(ctx context.Context, in *Member, out *MemberResponse) error {
