@@ -42,14 +42,14 @@ message PluginRequest {
     int32 page_size = 2;
     int32 sorting = 3;
     //base params
-    int64 id = 4;
+    int32 id = 4;
     string name = 5;
     string code = 6;
     string type = 7;
     string is_enable = 8;
     int64 author_id = 9;
     string keywords = 10;
-    repeated int64 ids = 11;
+    repeated int32 ids = 11;
 }
 
 //
