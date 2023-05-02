@@ -30,10 +30,11 @@ message Plugin {
     string author_id =8;//作者ID
     string author_name =9;//作者名称
     string version =10;//版本
-    int32  weight =11;//权重
-    string is_enable =12;//是否启用（0否，1是）
-    string created_at =13;
-    string updated_at =14;
+    string url =11;//URL地址
+    int32  weight =12;//权重
+    string is_enable =13;//是否启用（0否，1是）
+    string created_at =14;
+    string updated_at =15;
 }
 
 
