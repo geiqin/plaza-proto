@@ -22,8 +22,8 @@ message TunnelPay {
 
 
 message TunnelPayRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
+    int64 paged = 1;
+    int64 page_size = 2;
     int32 id = 3;
     string name = 4;
     int32 version = 5;

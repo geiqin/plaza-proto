@@ -28,8 +28,8 @@ message Region {
 }
 
 message RegionRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
+    int64 paged = 1;
+    int64 page_size = 2;
     int32 id = 3;
     string keywords = 4;
     string name = 5;
