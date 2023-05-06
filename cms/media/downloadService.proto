@@ -34,7 +34,7 @@ message Download {
     string save_path =7;
     string url =8;
     string mime_type =9;
-    int32 size =10;
+    int64 size =10;
     string memo =11;
     string private_download_url =12;
     int64 private_download_deadline =13;
