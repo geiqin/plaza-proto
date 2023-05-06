@@ -3,13 +3,23 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 
+//下载信息
 service DownloadService {
-    rpc BuildStart (Download) returns (DownloadResponse) {}
+    //生成下载文件开始
+    rpc BuildBegin (Download) returns (DownloadResponse) {}
+    //生成下载文件结束
     rpc BuildEnd (Download) returns (DownloadResponse) {}
+    //创建下载信息
     rpc Create (Download) returns (DownloadResponse) {}
+    //修改下载信息
     rpc Update (Download) returns (DownloadResponse) {}
+    //删除下载信息
     rpc Delete (Download) returns (DownloadResponse) {}
+    //获得下载信息
     rpc Get (Download) returns (DownloadResponse) {}
+    //生成下载地址
+    rpc MakeUrl (Download) returns (DownloadUrlResponse) {}
+    //查询下载信息
     rpc Search (DownloadRequest) returns (DownloadResponse) {}
 }
 
@@ -18,20 +28,22 @@ message Download {
     int64 id =1;
     string hash =2;
     string title =3;
-    string type	 =4;
+    string type =4;
     string file_name =5;
     string raw_name =6;
-    string path	 =7;
-    string url	 =8;
+    string save_path =7;
+    string url =8;
     string mime_type =9;
-    int32 size	 =10;
-    string memo	 =11;
-    int64 user_id	=12;
-    string status	=13;
-    string built_at =14;
-    string created_at =15;
-    string updated_at =16;
-    repeated int64 ids =17;
+    int32 size =10;
+    string memo =11;
+    string private_download_url =12;
+    int64 private_download_deadline =13;
+    string user_type	=14;
+    int64 user_id	=15;
+    string status	=16;
+    string built_at =17;
+    string created_at =18;
+    string updated_at =19;
 }
 
 message DownloadRequest {
@@ -48,6 +60,16 @@ message DownloadRequest {
     string created_at =11;
     string updated_at =12;
     repeated int64 ids = 13;
+}
+
+message DownloadUrlData {
+    string  url = 1;
+    int64 deadline = 2;
+}
+
+message DownloadUrlResponse {
+    DownloadUrlData data = 1;
+    common.Error error = 2;
 }
 
 message DownloadData {

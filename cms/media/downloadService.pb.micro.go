@@ -43,12 +43,21 @@ func NewDownloadServiceEndpoints() []*api.Endpoint {
 // Client API for DownloadService service
 
 type DownloadService interface {
-	BuildStart(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
+	//生成下载文件开始
+	BuildBegin(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
+	//生成下载文件结束
 	BuildEnd(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
+	//创建下载信息
 	Create(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
+	//修改下载信息
 	Update(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
+	//删除下载信息
 	Delete(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
+	//获得下载信息
 	Get(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error)
+	//生成下载地址
+	MakeUrl(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadUrlResponse, error)
+	//查询下载信息
 	Search(ctx context.Context, in *DownloadRequest, opts ...client.CallOption) (*DownloadResponse, error)
 }
 
@@ -64,8 +73,8 @@ func NewDownloadService(name string, c client.Client) DownloadService {
 	}
 }
 
-func (c *downloadService) BuildStart(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error) {
-	req := c.c.NewRequest(c.name, "DownloadService.BuildStart", in)
+func (c *downloadService) BuildBegin(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadResponse, error) {
+	req := c.c.NewRequest(c.name, "DownloadService.BuildBegin", in)
 	out := new(DownloadResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -124,6 +133,16 @@ func (c *downloadService) Get(ctx context.Context, in *Download, opts ...client.
 	return out, nil
 }
 
+func (c *downloadService) MakeUrl(ctx context.Context, in *Download, opts ...client.CallOption) (*DownloadUrlResponse, error) {
+	req := c.c.NewRequest(c.name, "DownloadService.MakeUrl", in)
+	out := new(DownloadUrlResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *downloadService) Search(ctx context.Context, in *DownloadRequest, opts ...client.CallOption) (*DownloadResponse, error) {
 	req := c.c.NewRequest(c.name, "DownloadService.Search", in)
 	out := new(DownloadResponse)
@@ -137,23 +156,33 @@ func (c *downloadService) Search(ctx context.Context, in *DownloadRequest, opts 
 // Server API for DownloadService service
 
 type DownloadServiceHandler interface {
-	BuildStart(context.Context, *Download, *DownloadResponse) error
+	//生成下载文件开始
+	BuildBegin(context.Context, *Download, *DownloadResponse) error
+	//生成下载文件结束
 	BuildEnd(context.Context, *Download, *DownloadResponse) error
+	//创建下载信息
 	Create(context.Context, *Download, *DownloadResponse) error
+	//修改下载信息
 	Update(context.Context, *Download, *DownloadResponse) error
+	//删除下载信息
 	Delete(context.Context, *Download, *DownloadResponse) error
+	//获得下载信息
 	Get(context.Context, *Download, *DownloadResponse) error
+	//生成下载地址
+	MakeUrl(context.Context, *Download, *DownloadUrlResponse) error
+	//查询下载信息
 	Search(context.Context, *DownloadRequest, *DownloadResponse) error
 }
 
 func RegisterDownloadServiceHandler(s server.Server, hdlr DownloadServiceHandler, opts ...server.HandlerOption) error {
 	type downloadService interface {
-		BuildStart(ctx context.Context, in *Download, out *DownloadResponse) error
+		BuildBegin(ctx context.Context, in *Download, out *DownloadResponse) error
 		BuildEnd(ctx context.Context, in *Download, out *DownloadResponse) error
 		Create(ctx context.Context, in *Download, out *DownloadResponse) error
 		Update(ctx context.Context, in *Download, out *DownloadResponse) error
 		Delete(ctx context.Context, in *Download, out *DownloadResponse) error
 		Get(ctx context.Context, in *Download, out *DownloadResponse) error
+		MakeUrl(ctx context.Context, in *Download, out *DownloadUrlResponse) error
 		Search(ctx context.Context, in *DownloadRequest, out *DownloadResponse) error
 	}
 	type DownloadService struct {
@@ -167,8 +196,8 @@ type downloadServiceHandler struct {
 	DownloadServiceHandler
 }
 
-func (h *downloadServiceHandler) BuildStart(ctx context.Context, in *Download, out *DownloadResponse) error {
-	return h.DownloadServiceHandler.BuildStart(ctx, in, out)
+func (h *downloadServiceHandler) BuildBegin(ctx context.Context, in *Download, out *DownloadResponse) error {
+	return h.DownloadServiceHandler.BuildBegin(ctx, in, out)
 }
 
 func (h *downloadServiceHandler) BuildEnd(ctx context.Context, in *Download, out *DownloadResponse) error {
@@ -189,6 +218,10 @@ func (h *downloadServiceHandler) Delete(ctx context.Context, in *Download, out *
 
 func (h *downloadServiceHandler) Get(ctx context.Context, in *Download, out *DownloadResponse) error {
 	return h.DownloadServiceHandler.Get(ctx, in, out)
+}
+
+func (h *downloadServiceHandler) MakeUrl(ctx context.Context, in *Download, out *DownloadUrlResponse) error {
+	return h.DownloadServiceHandler.MakeUrl(ctx, in, out)
 }
 
 func (h *downloadServiceHandler) Search(ctx context.Context, in *DownloadRequest, out *DownloadResponse) error {
