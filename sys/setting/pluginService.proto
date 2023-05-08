@@ -3,10 +3,10 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 
-//应用插件
+//应用管理
 service PluginService {
-    //创建插件
-    rpc Create (Plugin) returns (PluginResponse) {}
+    //安装插件
+    rpc Install (Plugin) returns (PluginResponse) {}
     //移除插件
     rpc Remove (Plugin) returns (PluginResponse) {}
     //插件详情
@@ -17,33 +17,44 @@ service PluginService {
     rpc SavePluginData (Plugin) returns (PluginResponse) {}
     //插件查询
     rpc Search (PluginRequest) returns (PluginResponse) {}
+    //应用商店
+    rpc AppStore (PluginRequest) returns (PluginResponse) {}
 }
 
 message Plugin {
     int32  id =1;//ID
     string code =2;//唯一标记
     string name =3;//插件名称
-    string data =4;//应用数据
-    string is_enable =5;//是否启用（0否，1是）
-    string icon_url =6; //插件图标
-    string desc =7;//插件描述
-    int32  sort =8;//排序
-    string created_at =9;
-    string updated_at =10;
+    string type =4;//插件类型
+    string icon_url =5; //插件图标
+    string desc =6;//插件描述
+    string config =7;//配置
+    string author_id =8;//作者ID
+    string author_name =9;//作者名称
+    string version =10;//版本
+    string url =11;//版本
+    int32  weight =12;//权重
+    int32  sort =13;//排序
+    string data =14;//应用数据
+    string is_enable =15;//是否启用（0否，1是）
+    string is_install =16;//是否已安装（0否，1是）
+    string created_at =17;
+    string updated_at =18;
 }
 
 
 message PluginRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
-    int32 sorting = 3;
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
     //base params
-    int64 id = 4;
+    int32 id = 4;
     string name = 5;
     string code = 6;
     string is_enable = 7;
-    string keywords = 8;
-    repeated int64 ids = 10;
+    string is_install =8;//是否已安装（0否，1是）
+    string keywords = 9;
+    repeated int32 ids = 10;
 }
 
 //

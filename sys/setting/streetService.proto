@@ -15,8 +15,8 @@ service StreetService {
 }
 
 message StreetRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
+    int64 paged = 1;
+    int64 page_size = 2;
     string sorting = 3;
     string keywords = 4;
     int64 id = 5;

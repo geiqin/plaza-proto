@@ -43,8 +43,8 @@ func NewPluginServiceEndpoints() []*api.Endpoint {
 // Client API for PluginService service
 
 type PluginService interface {
-	//创建插件
-	Create(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
+	//安装插件
+	Install(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
 	//移除插件
 	Remove(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
 	//插件详情
@@ -55,6 +55,8 @@ type PluginService interface {
 	SavePluginData(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
 	//插件查询
 	Search(ctx context.Context, in *PluginRequest, opts ...client.CallOption) (*PluginResponse, error)
+	//应用商店
+	AppStore(ctx context.Context, in *PluginRequest, opts ...client.CallOption) (*PluginResponse, error)
 }
 
 type pluginService struct {
@@ -69,8 +71,8 @@ func NewPluginService(name string, c client.Client) PluginService {
 	}
 }
 
-func (c *pluginService) Create(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error) {
-	req := c.c.NewRequest(c.name, "PluginService.Create", in)
+func (c *pluginService) Install(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error) {
+	req := c.c.NewRequest(c.name, "PluginService.Install", in)
 	out := new(PluginResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -129,11 +131,21 @@ func (c *pluginService) Search(ctx context.Context, in *PluginRequest, opts ...c
 	return out, nil
 }
 
+func (c *pluginService) AppStore(ctx context.Context, in *PluginRequest, opts ...client.CallOption) (*PluginResponse, error) {
+	req := c.c.NewRequest(c.name, "PluginService.AppStore", in)
+	out := new(PluginResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for PluginService service
 
 type PluginServiceHandler interface {
-	//创建插件
-	Create(context.Context, *Plugin, *PluginResponse) error
+	//安装插件
+	Install(context.Context, *Plugin, *PluginResponse) error
 	//移除插件
 	Remove(context.Context, *Plugin, *PluginResponse) error
 	//插件详情
@@ -144,16 +156,19 @@ type PluginServiceHandler interface {
 	SavePluginData(context.Context, *Plugin, *PluginResponse) error
 	//插件查询
 	Search(context.Context, *PluginRequest, *PluginResponse) error
+	//应用商店
+	AppStore(context.Context, *PluginRequest, *PluginResponse) error
 }
 
 func RegisterPluginServiceHandler(s server.Server, hdlr PluginServiceHandler, opts ...server.HandlerOption) error {
 	type pluginService interface {
-		Create(ctx context.Context, in *Plugin, out *PluginResponse) error
+		Install(ctx context.Context, in *Plugin, out *PluginResponse) error
 		Remove(ctx context.Context, in *Plugin, out *PluginResponse) error
 		Detail(ctx context.Context, in *Plugin, out *PluginResponse) error
 		GetPluginData(ctx context.Context, in *Plugin, out *PluginResponse) error
 		SavePluginData(ctx context.Context, in *Plugin, out *PluginResponse) error
 		Search(ctx context.Context, in *PluginRequest, out *PluginResponse) error
+		AppStore(ctx context.Context, in *PluginRequest, out *PluginResponse) error
 	}
 	type PluginService struct {
 		pluginService
@@ -166,8 +181,8 @@ type pluginServiceHandler struct {
 	PluginServiceHandler
 }
 
-func (h *pluginServiceHandler) Create(ctx context.Context, in *Plugin, out *PluginResponse) error {
-	return h.PluginServiceHandler.Create(ctx, in, out)
+func (h *pluginServiceHandler) Install(ctx context.Context, in *Plugin, out *PluginResponse) error {
+	return h.PluginServiceHandler.Install(ctx, in, out)
 }
 
 func (h *pluginServiceHandler) Remove(ctx context.Context, in *Plugin, out *PluginResponse) error {
@@ -188,4 +203,8 @@ func (h *pluginServiceHandler) SavePluginData(ctx context.Context, in *Plugin, o
 
 func (h *pluginServiceHandler) Search(ctx context.Context, in *PluginRequest, out *PluginResponse) error {
 	return h.PluginServiceHandler.Search(ctx, in, out)
+}
+
+func (h *pluginServiceHandler) AppStore(ctx context.Context, in *PluginRequest, out *PluginResponse) error {
+	return h.PluginServiceHandler.AppStore(ctx, in, out)
 }
