@@ -72,7 +72,7 @@ message Member {
     string mobile =14;//手机号
     int64  avatar_id =15;//会员头像ID
     string avatar_url =16;//会员头像url地址
-    int32  level_vip_id =17;//等级会员ID
+    int32  vip_level_id =17;//会员等级ID
     int64  integral =18;//会员积分（可兑换）
     int64  frozen_integral =19;//冻结积分
     int64  level_integral =20;//会员等级积分(升级专用)
@@ -86,16 +86,20 @@ message Member {
     string is_bind_email =28;//已绑定邮箱
     string is_bind_wx =29;//是否绑定微信
     string memo =30;//备注
-    string source_type =31;//来源类型
+    string client_type =31;//来源终端
     int64  create_fan_id =32;//注册来源粉丝ID
     string status =33;//状态：1正常，2锁定，3禁用，9注销
     string created_at =34;
     string updated_at =35;
     string deleted_at =36;
-    Vip level_vip =37;
+    Vip vip_level =37;
     Member referrer =38;
     repeated Tag tags = 39;
     repeated MemberAddress address_list = 40;
+    string status_name =41;
+    string gender_name =42;
+    string client_type_name =43;
+    int32  plugins_distribution_level_id =44;//插件分销等级ID
 }
 
 message RegisterMemberFan{
@@ -131,7 +135,7 @@ message MemberRequest {
     int32 vip_id =12;
     int32 card_id =13;
     int32 tag_id =14;
-    string source_type =15;
+    string client_type =15;
     int64 area_id =16;
     string status =17;
     string keywords =18;
