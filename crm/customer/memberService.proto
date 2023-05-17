@@ -152,6 +152,8 @@ message MemberRequest {
     string code =30;
     string referrer =31;
     repeated int64 ids = 32;
+    string client_type_name =33;
+    int32  plugins_distribution_level_id =34;//插件分销等级ID
 }
 
 message MemberData {
