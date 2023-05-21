@@ -25,8 +25,8 @@ message CommentReply {
 }
 
 message CommentReplyRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
+    int64 paged = 1;
+    int64 page_size = 2;
     string keywords = 3;
     int64 id = 4;
     int64 feedback_id = 5;
