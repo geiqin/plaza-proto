@@ -1,6 +1,6 @@
 syntax = "proto3";
 package services;
-option go_package =".;services";
+option go_package ="/.;services";
 import "common/base.proto";
 import "roleService.proto";
 import "deptService.proto";
@@ -50,8 +50,8 @@ message User {
 
 // 用户信息
 message UserRequest {
-    int32 paged =1;
-    int32 page_size=2;
+    int64 paged =1;
+    int64 page_size=2;
     string sorting =3;
     //----
     int64  id = 4;

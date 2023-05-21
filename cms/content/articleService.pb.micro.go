@@ -190,7 +190,7 @@ type FrontArticleService interface {
 	Get(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
 	Search(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
 	List(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
-	ListByCatSlugs(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*CatSlugsResponse, error)
+	ListByCat(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
 }
 
 type frontArticleService struct {
@@ -235,9 +235,9 @@ func (c *frontArticleService) List(ctx context.Context, in *ArticleRequest, opts
 	return out, nil
 }
 
-func (c *frontArticleService) ListByCatSlugs(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*CatSlugsResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontArticleService.ListByCatSlugs", in)
-	out := new(CatSlugsResponse)
+func (c *frontArticleService) ListByCat(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontArticleService.ListByCat", in)
+	out := new(ArticleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -251,7 +251,7 @@ type FrontArticleServiceHandler interface {
 	Get(context.Context, *ArticleRequest, *ArticleResponse) error
 	Search(context.Context, *ArticleRequest, *ArticleResponse) error
 	List(context.Context, *ArticleRequest, *ArticleResponse) error
-	ListByCatSlugs(context.Context, *ArticleRequest, *CatSlugsResponse) error
+	ListByCat(context.Context, *ArticleRequest, *ArticleResponse) error
 }
 
 func RegisterFrontArticleServiceHandler(s server.Server, hdlr FrontArticleServiceHandler, opts ...server.HandlerOption) error {
@@ -259,7 +259,7 @@ func RegisterFrontArticleServiceHandler(s server.Server, hdlr FrontArticleServic
 		Get(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
 		Search(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
 		List(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
-		ListByCatSlugs(ctx context.Context, in *ArticleRequest, out *CatSlugsResponse) error
+		ListByCat(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
 	}
 	type FrontArticleService struct {
 		frontArticleService
@@ -284,8 +284,8 @@ func (h *frontArticleServiceHandler) List(ctx context.Context, in *ArticleReques
 	return h.FrontArticleServiceHandler.List(ctx, in, out)
 }
 
-func (h *frontArticleServiceHandler) ListByCatSlugs(ctx context.Context, in *ArticleRequest, out *CatSlugsResponse) error {
-	return h.FrontArticleServiceHandler.ListByCatSlugs(ctx, in, out)
+func (h *frontArticleServiceHandler) ListByCat(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
+	return h.FrontArticleServiceHandler.ListByCat(ctx, in, out)
 }
 
 // Api Endpoints for PageService service

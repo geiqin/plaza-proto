@@ -1,6 +1,6 @@
 syntax = "proto3";
 package services;
-option go_package =".;services";
+option go_package ="/.;services";
 import "common/base.proto";
 import "catService.proto";
 import "tagService.proto";
@@ -22,7 +22,7 @@ service FrontArticleService {
     rpc Get (ArticleRequest) returns (ArticleResponse) {}
     rpc Search (ArticleRequest) returns (ArticleResponse) {}
     rpc List (ArticleRequest) returns (ArticleResponse) {}
-    rpc ListByCatSlugs (ArticleRequest) returns (CatSlugsResponse) {}
+    rpc ListByCat (ArticleRequest) returns (ArticleResponse) {}
 }
 
 //页面管理
@@ -80,43 +80,34 @@ message Article {
 
 //文章查询参数
 message ArticleRequest {
-    int32 paged =1;
-    int32 page_size =2;
-    int32 top = 3;
+    int64 paged =1;
+    int64 page_size =2;
+    int64 top = 3;
 
     int64 id = 4;
     string title = 5;
     string type	=6;
     string mine_type	=7;
-    int32 cat_id = 8;
-    string cat_slug	 = 9;
+    int64 cat_id = 8;
+    string cat_code	 = 9;
     repeated string names = 10;
     bool is_include = 11;// 是否包含上一篇、下一篇文章
     string status = 12;
     bool is_client = 13; // 是否客户端展示
-    repeated CatSlugs cat_slugs = 14;
-    repeated int32 ids = 15;
+    repeated int64 ids = 15;
+    repeated string cat_codes = 16;
 }
 
-message CatSlugs {
-    int32 cat_id = 1;
-    string cat_slug	 = 2;
-    int32 top = 3;
+message ArticleData {
+    Article entity = 1;
+    Cat current_cat = 2;
+    common.Pager pager =3;
     repeated Article items = 4;
+    common.Info info =5;
 }
 
 message ArticleResponse {
-    Article entity = 1;
-    common.Pager pager =2;
-    repeated Article items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    ArticleData data = 1;
+    common.Error error = 2;
 }
 
-message CatSlugsResponse {
-    CatSlugs entity = 1;
-    common.Pager pager =2;
-    repeated CatSlugs items = 3;
-    common.Error error = 4;
-    common.Info info =5;
-}

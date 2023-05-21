@@ -1,6 +1,6 @@
 syntax = "proto3";
 package services;
-option go_package =".;services";
+option go_package ="/.;services";
 import "common/base.proto";
 import "articleService.proto";
 
@@ -9,9 +9,9 @@ service ArticleCatService {
 }
 
 message ArticleCatWhere {
-    int32 paged =1;
-    int32 page_size =2;
-    int32 top = 3;
+    int64 paged =1;
+    int64 page_size =2;
+    int64 top = 3;
     string slug = 4;
     repeated string slugs = 5;
     // @inject_tag: gorm:"-"
