@@ -4,6 +4,7 @@
 package services
 
 import (
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	math "math"

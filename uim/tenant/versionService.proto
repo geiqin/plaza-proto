@@ -1,6 +1,6 @@
 syntax = "proto3";
 package services;
-option go_package =".;services";
+option go_package ="/.;services";
 import "common/base.proto";
 import "moduleService.proto";
 
@@ -32,8 +32,8 @@ message Version {
 }
 
 message VersionRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
+    int64 paged = 1;
+    int64 page_size = 2;
     string sorting = 3;
     string keywords = 4;
     int32 id = 5;
