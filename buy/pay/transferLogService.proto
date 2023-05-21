@@ -48,9 +48,9 @@ message TransferLog{
 }
 
 message TransferLogRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
-    int32 top = 3;
+    int64 paged = 1;
+    int64 page_size = 2;
+    int64 top = 3;
     //base params
     int64 id = 4;
     string currency = 5;

@@ -36,8 +36,6 @@ message Download {
     string mime_type =9;
     int64 size =10;
     string memo =11;
-    string private_download_url =12;
-    int64 private_download_deadline =13;
     string user_type	=14;
     int64 user_id	=15;
     string status	=16;
@@ -47,9 +45,9 @@ message Download {
 }
 
 message DownloadRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
-    int32 top = 3;
+    int64 paged = 1;
+    int64 page_size = 2;
+    int64 top = 3;
     //base params
     int64 id = 4;
     string name = 6;

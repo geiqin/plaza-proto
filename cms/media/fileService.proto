@@ -54,9 +54,9 @@ message File {
 
 // 修改文件请求信息
 message FileRequest {
-    int32 paged = 1;
-    int32 page_size = 2;
-    int32 top = 3;
+    int64 paged = 1;
+    int64 page_size = 2;
+    int64 top = 3;
     int32 keywords = 4;
     //file params
     int64 id =5;
