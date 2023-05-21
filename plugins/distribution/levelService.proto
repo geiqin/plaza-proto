@@ -11,7 +11,7 @@ service LevelService {
     //删除分销员等级
     rpc Delete (Level) returns (LevelResponse) {}
     //获取分销员等级
-    rpc Get (Level) returns (LevelResponse) {}
+    rpc Detail (Level) returns (LevelResponse) {}
     //获取分销员等级列表
     rpc List (LevelRequest) returns (LevelResponse) {}
     //查询分销员等级
@@ -33,18 +33,19 @@ message Level {
     string image_url =3;//图标
     int64  rules_min =4;//消费最小金额
     int64  rules_max =5;//消费最大金额
-    float  primary_rate =6;//一级返佣比例
-    float  second_rate =7;//二级返佣比例
-    float  three_rate =8;//三级返佣比例
-    float  down_return_rate =9;//向下返佣比例
-    float  self_buy_rate =10;//内购返佣比例
-    float  force_current_user_rate_one =11;//强制返佣至取货点返佣比例（一级）
-    float  force_current_user_rate_two =12;//强制返佣至取货点返佣比例（二级）
-    float  force_current_user_rate_three =13;//强制返佣至取货点返佣比例（三级）
+    int32  level_rate_one =6;//一级返佣比例
+    int32  level_rate_two =7;//二级返佣比例
+    int32  level_rate_three =8;//三级返佣比例
+    int32  down_return_rate =9;//向下返佣比例
+    int32  self_buy_rate =10;//内购返佣比例
+    int32  force_current_user_rate_one =11;//强制返佣至取货点返佣比例（一级）
+    int32  force_current_user_rate_two =12;//强制返佣至取货点返佣比例（二级）
+    int32  force_current_user_rate_three =13;//强制返佣至取货点返佣比例（三级）
     string is_level_auto =14;//是否自动分配等级（0否, 1是）
     string is_enable =15;//是否启用（0否, 1是）
     string created_at =16;
     string updated_at =17;
+    string rules_msg =28;
 }
 
 message LevelData{

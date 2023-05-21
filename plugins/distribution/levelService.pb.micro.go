@@ -4,8 +4,8 @@
 package services
 
 import (
-	_ "../common"
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -50,7 +50,7 @@ type LevelService interface {
 	//删除分销员等级
 	Delete(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	//获取分销员等级
-	Get(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
+	Detail(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	//获取分销员等级列表
 	List(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error)
 	//查询分销员等级
@@ -99,8 +99,8 @@ func (c *levelService) Delete(ctx context.Context, in *Level, opts ...client.Cal
 	return out, nil
 }
 
-func (c *levelService) Get(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error) {
-	req := c.c.NewRequest(c.name, "LevelService.Get", in)
+func (c *levelService) Detail(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error) {
+	req := c.c.NewRequest(c.name, "LevelService.Detail", in)
 	out := new(LevelResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -139,7 +139,7 @@ type LevelServiceHandler interface {
 	//删除分销员等级
 	Delete(context.Context, *Level, *LevelResponse) error
 	//获取分销员等级
-	Get(context.Context, *Level, *LevelResponse) error
+	Detail(context.Context, *Level, *LevelResponse) error
 	//获取分销员等级列表
 	List(context.Context, *LevelRequest, *LevelResponse) error
 	//查询分销员等级
@@ -151,7 +151,7 @@ func RegisterLevelServiceHandler(s server.Server, hdlr LevelServiceHandler, opts
 		Create(ctx context.Context, in *Level, out *LevelResponse) error
 		Update(ctx context.Context, in *Level, out *LevelResponse) error
 		Delete(ctx context.Context, in *Level, out *LevelResponse) error
-		Get(ctx context.Context, in *Level, out *LevelResponse) error
+		Detail(ctx context.Context, in *Level, out *LevelResponse) error
 		List(ctx context.Context, in *LevelRequest, out *LevelResponse) error
 		Search(ctx context.Context, in *LevelRequest, out *LevelResponse) error
 	}
@@ -178,8 +178,8 @@ func (h *levelServiceHandler) Delete(ctx context.Context, in *Level, out *LevelR
 	return h.LevelServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *levelServiceHandler) Get(ctx context.Context, in *Level, out *LevelResponse) error {
-	return h.LevelServiceHandler.Get(ctx, in, out)
+func (h *levelServiceHandler) Detail(ctx context.Context, in *Level, out *LevelResponse) error {
+	return h.LevelServiceHandler.Detail(ctx, in, out)
 }
 
 func (h *levelServiceHandler) List(ctx context.Context, in *LevelRequest, out *LevelResponse) error {

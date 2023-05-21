@@ -4,8 +4,8 @@
 package services
 
 import (
-	_ "../common"
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -44,9 +44,17 @@ func NewConfigureServiceEndpoints() []*api.Endpoint {
 
 type ConfigureService interface {
 	//获取分销配置信息
-	Get(ctx context.Context, in *BaseConfig, opts ...client.CallOption) (*ConfigureResponse, error)
-	//设置销分销配置信息
-	Set(ctx context.Context, in *BaseConfig, opts ...client.CallOption) (*ConfigureResponse, error)
+	GetConfig(ctx context.Context, in *DistributionConfig, opts ...client.CallOption) (*ConfigureResponse, error)
+	//保存分销配置信息
+	SaveConfig(ctx context.Context, in *DistributionConfig, opts ...client.CallOption) (*ConfigureResponse, error)
+	//保存推广海报数据
+	SavePosterData(ctx context.Context, in *PosterData, opts ...client.CallOption) (*ConfigureResponse, error)
+	//保存商品海报数据
+	SavePosterGoodsData(ctx context.Context, in *PosterGoodsData, opts ...client.CallOption) (*ConfigureResponse, error)
+	//清空推广海报生成数据
+	ClearPoster(ctx context.Context, in *PosterRequest, opts ...client.CallOption) (*ConfigureResponse, error)
+	//清空商品海报生成数据
+	ClearPosterGoods(ctx context.Context, in *PosterRequest, opts ...client.CallOption) (*ConfigureResponse, error)
 }
 
 type configureService struct {
@@ -61,8 +69,8 @@ func NewConfigureService(name string, c client.Client) ConfigureService {
 	}
 }
 
-func (c *configureService) Get(ctx context.Context, in *BaseConfig, opts ...client.CallOption) (*ConfigureResponse, error) {
-	req := c.c.NewRequest(c.name, "ConfigureService.Get", in)
+func (c *configureService) GetConfig(ctx context.Context, in *DistributionConfig, opts ...client.CallOption) (*ConfigureResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigureService.GetConfig", in)
 	out := new(ConfigureResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -71,8 +79,48 @@ func (c *configureService) Get(ctx context.Context, in *BaseConfig, opts ...clie
 	return out, nil
 }
 
-func (c *configureService) Set(ctx context.Context, in *BaseConfig, opts ...client.CallOption) (*ConfigureResponse, error) {
-	req := c.c.NewRequest(c.name, "ConfigureService.Set", in)
+func (c *configureService) SaveConfig(ctx context.Context, in *DistributionConfig, opts ...client.CallOption) (*ConfigureResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigureService.SaveConfig", in)
+	out := new(ConfigureResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configureService) SavePosterData(ctx context.Context, in *PosterData, opts ...client.CallOption) (*ConfigureResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigureService.SavePosterData", in)
+	out := new(ConfigureResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configureService) SavePosterGoodsData(ctx context.Context, in *PosterGoodsData, opts ...client.CallOption) (*ConfigureResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigureService.SavePosterGoodsData", in)
+	out := new(ConfigureResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configureService) ClearPoster(ctx context.Context, in *PosterRequest, opts ...client.CallOption) (*ConfigureResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigureService.ClearPoster", in)
+	out := new(ConfigureResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configureService) ClearPosterGoods(ctx context.Context, in *PosterRequest, opts ...client.CallOption) (*ConfigureResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigureService.ClearPosterGoods", in)
 	out := new(ConfigureResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -85,15 +133,27 @@ func (c *configureService) Set(ctx context.Context, in *BaseConfig, opts ...clie
 
 type ConfigureServiceHandler interface {
 	//获取分销配置信息
-	Get(context.Context, *BaseConfig, *ConfigureResponse) error
-	//设置销分销配置信息
-	Set(context.Context, *BaseConfig, *ConfigureResponse) error
+	GetConfig(context.Context, *DistributionConfig, *ConfigureResponse) error
+	//保存分销配置信息
+	SaveConfig(context.Context, *DistributionConfig, *ConfigureResponse) error
+	//保存推广海报数据
+	SavePosterData(context.Context, *PosterData, *ConfigureResponse) error
+	//保存商品海报数据
+	SavePosterGoodsData(context.Context, *PosterGoodsData, *ConfigureResponse) error
+	//清空推广海报生成数据
+	ClearPoster(context.Context, *PosterRequest, *ConfigureResponse) error
+	//清空商品海报生成数据
+	ClearPosterGoods(context.Context, *PosterRequest, *ConfigureResponse) error
 }
 
 func RegisterConfigureServiceHandler(s server.Server, hdlr ConfigureServiceHandler, opts ...server.HandlerOption) error {
 	type configureService interface {
-		Get(ctx context.Context, in *BaseConfig, out *ConfigureResponse) error
-		Set(ctx context.Context, in *BaseConfig, out *ConfigureResponse) error
+		GetConfig(ctx context.Context, in *DistributionConfig, out *ConfigureResponse) error
+		SaveConfig(ctx context.Context, in *DistributionConfig, out *ConfigureResponse) error
+		SavePosterData(ctx context.Context, in *PosterData, out *ConfigureResponse) error
+		SavePosterGoodsData(ctx context.Context, in *PosterGoodsData, out *ConfigureResponse) error
+		ClearPoster(ctx context.Context, in *PosterRequest, out *ConfigureResponse) error
+		ClearPosterGoods(ctx context.Context, in *PosterRequest, out *ConfigureResponse) error
 	}
 	type ConfigureService struct {
 		configureService
@@ -106,10 +166,26 @@ type configureServiceHandler struct {
 	ConfigureServiceHandler
 }
 
-func (h *configureServiceHandler) Get(ctx context.Context, in *BaseConfig, out *ConfigureResponse) error {
-	return h.ConfigureServiceHandler.Get(ctx, in, out)
+func (h *configureServiceHandler) GetConfig(ctx context.Context, in *DistributionConfig, out *ConfigureResponse) error {
+	return h.ConfigureServiceHandler.GetConfig(ctx, in, out)
 }
 
-func (h *configureServiceHandler) Set(ctx context.Context, in *BaseConfig, out *ConfigureResponse) error {
-	return h.ConfigureServiceHandler.Set(ctx, in, out)
+func (h *configureServiceHandler) SaveConfig(ctx context.Context, in *DistributionConfig, out *ConfigureResponse) error {
+	return h.ConfigureServiceHandler.SaveConfig(ctx, in, out)
+}
+
+func (h *configureServiceHandler) SavePosterData(ctx context.Context, in *PosterData, out *ConfigureResponse) error {
+	return h.ConfigureServiceHandler.SavePosterData(ctx, in, out)
+}
+
+func (h *configureServiceHandler) SavePosterGoodsData(ctx context.Context, in *PosterGoodsData, out *ConfigureResponse) error {
+	return h.ConfigureServiceHandler.SavePosterGoodsData(ctx, in, out)
+}
+
+func (h *configureServiceHandler) ClearPoster(ctx context.Context, in *PosterRequest, out *ConfigureResponse) error {
+	return h.ConfigureServiceHandler.ClearPoster(ctx, in, out)
+}
+
+func (h *configureServiceHandler) ClearPosterGoods(ctx context.Context, in *PosterRequest, out *ConfigureResponse) error {
+	return h.ConfigureServiceHandler.ClearPosterGoods(ctx, in, out)
 }

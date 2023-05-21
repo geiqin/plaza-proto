@@ -2,19 +2,20 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "baseInfoService.proto";
 
-service WalletCashLogService {
+service CashLogService {
   //提现提交 - 确认
-  rpc Create (WalletCashLog) returns (WalletCashLogResponse) {}
+  rpc Create (CashLog) returns (CashLogResponse) {}
   //获得提现信息
-  rpc Get (WalletCashLog) returns (WalletCashLogResponse) {}
+  rpc Get (CashLog) returns (CashLogResponse) {}
   //提现详情
-  rpc Detail (WalletCashLog) returns (WalletCashLogResponse) {}
+  rpc Detail (CashLog) returns (CashLogResponse) {}
   //查询提现信息
-  rpc Search (WalletCashLogRequest) returns (WalletCashLogResponse) {}
+  rpc Search (CashLogRequest) returns (CashLogResponse) {}
 }
 
-message WalletCashLog {
+message CashLog {
   int64  id =1;//ID
   string cash_no =2;//提现编号
   int64  member_id =3;//用户ID
@@ -29,10 +30,11 @@ message WalletCashLog {
   string status =12;//状态：0未打款，1已打款，2打款失败 
   string created_at =13;
   string updated_at =14;
-
+  string status_name =15;
+  MemberInfo member =16;
 }
 
-message WalletCashLogRequest {
+message CashLogRequest {
   int32 paged = 1;
   int32 page_size = 2;
   //以下为自定义参数
@@ -46,14 +48,14 @@ message WalletCashLogRequest {
   string status =11;
 }
 
-message WalletCashLogData {
-  WalletCashLog entity = 1;
+message CashLogData {
+  CashLog entity = 1;
   common.Pager pager =2;
-  repeated WalletCashLog items = 3;
+  repeated CashLog items = 3;
   common.Info info =4;
 }
 
-message WalletCashLogResponse {
-  WalletCashLogData data = 1;
+message CashLogResponse {
+  CashLogData data = 1;
   common.Error error = 2;
 }

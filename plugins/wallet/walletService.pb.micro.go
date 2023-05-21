@@ -43,14 +43,12 @@ func NewWalletServiceEndpoints() []*api.Endpoint {
 // Client API for WalletService service
 
 type WalletService interface {
-	//钱包中心
-	Index(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletIndexResponse, error)
 	//生成付款码
 	PaymentCode(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletPaymentCodeResponse, error)
-	//创建钱包
-	Create(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletResponse, error)
-	//提现申请 - 初始化
-	CashInit(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletResponse, error)
+	//提现创建初始化
+	CashCreateInit(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*CashCreateInitResponse, error)
+	//提现安全校验
+	CashAuth(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*CashAuthResponse, error)
 	//提现申请 - 验证码发送
 	VerifySend(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletResponse, error)
 	//提现申请 - 验证码验证
@@ -73,16 +71,6 @@ func NewWalletService(name string, c client.Client) WalletService {
 	}
 }
 
-func (c *walletService) Index(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletIndexResponse, error) {
-	req := c.c.NewRequest(c.name, "WalletService.Index", in)
-	out := new(WalletIndexResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *walletService) PaymentCode(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletPaymentCodeResponse, error) {
 	req := c.c.NewRequest(c.name, "WalletService.PaymentCode", in)
 	out := new(WalletPaymentCodeResponse)
@@ -93,9 +81,9 @@ func (c *walletService) PaymentCode(ctx context.Context, in *WalletRequest, opts
 	return out, nil
 }
 
-func (c *walletService) Create(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletResponse, error) {
-	req := c.c.NewRequest(c.name, "WalletService.Create", in)
-	out := new(WalletResponse)
+func (c *walletService) CashCreateInit(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*CashCreateInitResponse, error) {
+	req := c.c.NewRequest(c.name, "WalletService.CashCreateInit", in)
+	out := new(CashCreateInitResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -103,9 +91,9 @@ func (c *walletService) Create(ctx context.Context, in *WalletRequest, opts ...c
 	return out, nil
 }
 
-func (c *walletService) CashInit(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*WalletResponse, error) {
-	req := c.c.NewRequest(c.name, "WalletService.CashInit", in)
-	out := new(WalletResponse)
+func (c *walletService) CashAuth(ctx context.Context, in *WalletRequest, opts ...client.CallOption) (*CashAuthResponse, error) {
+	req := c.c.NewRequest(c.name, "WalletService.CashAuth", in)
+	out := new(CashAuthResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -156,14 +144,12 @@ func (c *walletService) Search(ctx context.Context, in *WalletRequest, opts ...c
 // Server API for WalletService service
 
 type WalletServiceHandler interface {
-	//钱包中心
-	Index(context.Context, *WalletRequest, *WalletIndexResponse) error
 	//生成付款码
 	PaymentCode(context.Context, *WalletRequest, *WalletPaymentCodeResponse) error
-	//创建钱包
-	Create(context.Context, *WalletRequest, *WalletResponse) error
-	//提现申请 - 初始化
-	CashInit(context.Context, *WalletRequest, *WalletResponse) error
+	//提现创建初始化
+	CashCreateInit(context.Context, *WalletRequest, *CashCreateInitResponse) error
+	//提现安全校验
+	CashAuth(context.Context, *WalletRequest, *CashAuthResponse) error
 	//提现申请 - 验证码发送
 	VerifySend(context.Context, *WalletRequest, *WalletResponse) error
 	//提现申请 - 验证码验证
@@ -176,10 +162,9 @@ type WalletServiceHandler interface {
 
 func RegisterWalletServiceHandler(s server.Server, hdlr WalletServiceHandler, opts ...server.HandlerOption) error {
 	type walletService interface {
-		Index(ctx context.Context, in *WalletRequest, out *WalletIndexResponse) error
 		PaymentCode(ctx context.Context, in *WalletRequest, out *WalletPaymentCodeResponse) error
-		Create(ctx context.Context, in *WalletRequest, out *WalletResponse) error
-		CashInit(ctx context.Context, in *WalletRequest, out *WalletResponse) error
+		CashCreateInit(ctx context.Context, in *WalletRequest, out *CashCreateInitResponse) error
+		CashAuth(ctx context.Context, in *WalletRequest, out *CashAuthResponse) error
 		VerifySend(ctx context.Context, in *WalletRequest, out *WalletResponse) error
 		VerifyCheck(ctx context.Context, in *WalletRequest, out *WalletResponse) error
 		Get(ctx context.Context, in *WalletRequest, out *WalletResponse) error
@@ -196,20 +181,16 @@ type walletServiceHandler struct {
 	WalletServiceHandler
 }
 
-func (h *walletServiceHandler) Index(ctx context.Context, in *WalletRequest, out *WalletIndexResponse) error {
-	return h.WalletServiceHandler.Index(ctx, in, out)
-}
-
 func (h *walletServiceHandler) PaymentCode(ctx context.Context, in *WalletRequest, out *WalletPaymentCodeResponse) error {
 	return h.WalletServiceHandler.PaymentCode(ctx, in, out)
 }
 
-func (h *walletServiceHandler) Create(ctx context.Context, in *WalletRequest, out *WalletResponse) error {
-	return h.WalletServiceHandler.Create(ctx, in, out)
+func (h *walletServiceHandler) CashCreateInit(ctx context.Context, in *WalletRequest, out *CashCreateInitResponse) error {
+	return h.WalletServiceHandler.CashCreateInit(ctx, in, out)
 }
 
-func (h *walletServiceHandler) CashInit(ctx context.Context, in *WalletRequest, out *WalletResponse) error {
-	return h.WalletServiceHandler.CashInit(ctx, in, out)
+func (h *walletServiceHandler) CashAuth(ctx context.Context, in *WalletRequest, out *CashAuthResponse) error {
+	return h.WalletServiceHandler.CashAuth(ctx, in, out)
 }
 
 func (h *walletServiceHandler) VerifySend(ctx context.Context, in *WalletRequest, out *WalletResponse) error {

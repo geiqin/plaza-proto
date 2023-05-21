@@ -43,10 +43,8 @@ func NewWalletLogServiceEndpoints() []*api.Endpoint {
 // Client API for WalletLogService service
 
 type WalletLogService interface {
-	//增加保证金（增加）
-	Income(ctx context.Context, in *WalletLog, opts ...client.CallOption) (*WalletLogResponse, error)
-	//扣除保证金(支出)
-	Expend(ctx context.Context, in *WalletLog, opts ...client.CallOption) (*WalletLogResponse, error)
+	//增加钱包日志（同时更新至钱包）【服务专用】
+	WalletLogInsert(ctx context.Context, in *WalletLog, opts ...client.CallOption) (*WalletLogResponse, error)
 	//获得保证金记录信息
 	Get(ctx context.Context, in *WalletLog, opts ...client.CallOption) (*WalletLogResponse, error)
 	//查询保证金记录信息
@@ -65,18 +63,8 @@ func NewWalletLogService(name string, c client.Client) WalletLogService {
 	}
 }
 
-func (c *walletLogService) Income(ctx context.Context, in *WalletLog, opts ...client.CallOption) (*WalletLogResponse, error) {
-	req := c.c.NewRequest(c.name, "WalletLogService.Income", in)
-	out := new(WalletLogResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *walletLogService) Expend(ctx context.Context, in *WalletLog, opts ...client.CallOption) (*WalletLogResponse, error) {
-	req := c.c.NewRequest(c.name, "WalletLogService.Expend", in)
+func (c *walletLogService) WalletLogInsert(ctx context.Context, in *WalletLog, opts ...client.CallOption) (*WalletLogResponse, error) {
+	req := c.c.NewRequest(c.name, "WalletLogService.WalletLogInsert", in)
 	out := new(WalletLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -108,10 +96,8 @@ func (c *walletLogService) Search(ctx context.Context, in *WalletLogRequest, opt
 // Server API for WalletLogService service
 
 type WalletLogServiceHandler interface {
-	//增加保证金（增加）
-	Income(context.Context, *WalletLog, *WalletLogResponse) error
-	//扣除保证金(支出)
-	Expend(context.Context, *WalletLog, *WalletLogResponse) error
+	//增加钱包日志（同时更新至钱包）【服务专用】
+	WalletLogInsert(context.Context, *WalletLog, *WalletLogResponse) error
 	//获得保证金记录信息
 	Get(context.Context, *WalletLog, *WalletLogResponse) error
 	//查询保证金记录信息
@@ -120,8 +106,7 @@ type WalletLogServiceHandler interface {
 
 func RegisterWalletLogServiceHandler(s server.Server, hdlr WalletLogServiceHandler, opts ...server.HandlerOption) error {
 	type walletLogService interface {
-		Income(ctx context.Context, in *WalletLog, out *WalletLogResponse) error
-		Expend(ctx context.Context, in *WalletLog, out *WalletLogResponse) error
+		WalletLogInsert(ctx context.Context, in *WalletLog, out *WalletLogResponse) error
 		Get(ctx context.Context, in *WalletLog, out *WalletLogResponse) error
 		Search(ctx context.Context, in *WalletLogRequest, out *WalletLogResponse) error
 	}
@@ -136,12 +121,8 @@ type walletLogServiceHandler struct {
 	WalletLogServiceHandler
 }
 
-func (h *walletLogServiceHandler) Income(ctx context.Context, in *WalletLog, out *WalletLogResponse) error {
-	return h.WalletLogServiceHandler.Income(ctx, in, out)
-}
-
-func (h *walletLogServiceHandler) Expend(ctx context.Context, in *WalletLog, out *WalletLogResponse) error {
-	return h.WalletLogServiceHandler.Expend(ctx, in, out)
+func (h *walletLogServiceHandler) WalletLogInsert(ctx context.Context, in *WalletLog, out *WalletLogResponse) error {
+	return h.WalletLogServiceHandler.WalletLogInsert(ctx, in, out)
 }
 
 func (h *walletLogServiceHandler) Get(ctx context.Context, in *WalletLog, out *WalletLogResponse) error {

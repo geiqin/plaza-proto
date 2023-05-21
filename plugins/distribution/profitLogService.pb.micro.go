@@ -4,8 +4,8 @@
 package services
 
 import (
-	_ "../common"
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -44,7 +44,7 @@ func NewProfitLogServiceEndpoints() []*api.Endpoint {
 
 type ProfitLogService interface {
 	// 获得佣金详情
-	Get(ctx context.Context, in *ProfitLog, opts ...client.CallOption) (*ProfitLogResponse, error)
+	Detail(ctx context.Context, in *ProfitLog, opts ...client.CallOption) (*ProfitLogResponse, error)
 	// 查询佣金列表
 	Search(ctx context.Context, in *ProfitLogRequest, opts ...client.CallOption) (*ProfitLogResponse, error)
 }
@@ -61,8 +61,8 @@ func NewProfitLogService(name string, c client.Client) ProfitLogService {
 	}
 }
 
-func (c *profitLogService) Get(ctx context.Context, in *ProfitLog, opts ...client.CallOption) (*ProfitLogResponse, error) {
-	req := c.c.NewRequest(c.name, "ProfitLogService.Get", in)
+func (c *profitLogService) Detail(ctx context.Context, in *ProfitLog, opts ...client.CallOption) (*ProfitLogResponse, error) {
+	req := c.c.NewRequest(c.name, "ProfitLogService.Detail", in)
 	out := new(ProfitLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -85,14 +85,14 @@ func (c *profitLogService) Search(ctx context.Context, in *ProfitLogRequest, opt
 
 type ProfitLogServiceHandler interface {
 	// 获得佣金详情
-	Get(context.Context, *ProfitLog, *ProfitLogResponse) error
+	Detail(context.Context, *ProfitLog, *ProfitLogResponse) error
 	// 查询佣金列表
 	Search(context.Context, *ProfitLogRequest, *ProfitLogResponse) error
 }
 
 func RegisterProfitLogServiceHandler(s server.Server, hdlr ProfitLogServiceHandler, opts ...server.HandlerOption) error {
 	type profitLogService interface {
-		Get(ctx context.Context, in *ProfitLog, out *ProfitLogResponse) error
+		Detail(ctx context.Context, in *ProfitLog, out *ProfitLogResponse) error
 		Search(ctx context.Context, in *ProfitLogRequest, out *ProfitLogResponse) error
 	}
 	type ProfitLogService struct {
@@ -106,8 +106,8 @@ type profitLogServiceHandler struct {
 	ProfitLogServiceHandler
 }
 
-func (h *profitLogServiceHandler) Get(ctx context.Context, in *ProfitLog, out *ProfitLogResponse) error {
-	return h.ProfitLogServiceHandler.Get(ctx, in, out)
+func (h *profitLogServiceHandler) Detail(ctx context.Context, in *ProfitLog, out *ProfitLogResponse) error {
+	return h.ProfitLogServiceHandler.Detail(ctx, in, out)
 }
 
 func (h *profitLogServiceHandler) Search(ctx context.Context, in *ProfitLogRequest, out *ProfitLogResponse) error {

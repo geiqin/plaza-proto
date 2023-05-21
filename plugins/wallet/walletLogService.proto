@@ -2,14 +2,12 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-import "memberService.proto";
+import "baseInfoService.proto";
 import "walletService.proto";
 
 service WalletLogService {
-  //增加保证金（增加）
-  rpc Income (WalletLog) returns (WalletLogResponse) {}
-  //扣除保证金(支出)
-  rpc Expend (WalletLog) returns (WalletLogResponse) {}
+  //增加钱包日志（同时更新至钱包）【服务专用】
+  rpc WalletLogInsert (WalletLog) returns (WalletLogResponse) {}
   //获得保证金记录信息
   rpc Get (WalletLog) returns (WalletLogResponse) {}
   //查询保证金记录信息
@@ -30,8 +28,11 @@ message WalletLog {
   string msg =11;//描述：如：账户充值 [ 赠送500.00元 ]
   string created_at =12;
   string updated_at =13;
-  Member member =14;
+  MemberInfo member =14;
   Wallet wallet =15;
+  string business_type_name =16;//业务类型名称
+  string money_type_name =17;//金额类型名称
+  string operation_type_name =18;//操作类型名称
 }
 
 

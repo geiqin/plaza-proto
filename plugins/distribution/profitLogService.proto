@@ -2,10 +2,11 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
+import "baseInfoService.proto";
 
 service ProfitLogService {
     // 获得佣金详情
-    rpc Get (ProfitLog) returns (ProfitLogResponse) {}
+    rpc Detail (ProfitLog) returns (ProfitLogResponse) {}
     // 查询佣金列表
     rpc Search (ProfitLogRequest) returns (ProfitLogResponse) {}
 }
@@ -25,6 +26,14 @@ message ProfitLog {
     string status =12;//结算状态（0待生效, 1待结算, 2已结算, 3已失效）
     string created_at =13;
     string updated_at =14;
+    string level_name =15; //级别名称
+    string status_name =16; //状态名称
+    string order_status_name =17; //订单状态名称
+    string order_pay_status_name =18; //订单支付状态名称
+    string order_client_type_name =19;//订单客户端
+    string order_no =20;//订单编号
+    int64 refund_price =21;//订单退款金额
+    MemberInfo member =22; //用户信息
 }
 
 message ProfitLogRequest {
