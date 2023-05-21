@@ -38,8 +38,8 @@ message VipOrderLog {
 
 //查询参数
 message VipOrderLogRequest {
-  int32 paged = 1;
-  int32 page_size = 2;
+  int64 paged = 1;
+  int64 page_size = 2;
   //以下为自定义参数
   int64 member_id =3;
   string type =4;

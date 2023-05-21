@@ -26,8 +26,8 @@ message MemberIdentity{
 }
 
 message MemberIdentityRequest{
-    int32 paged = 1;
-    int32 page_size = 2;
+    int64 paged = 1;
+    int64 page_size = 2;
     int64 id =3;
     int64 member_id =4;
     int64 real_name =5;
