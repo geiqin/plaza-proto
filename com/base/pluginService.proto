@@ -31,7 +31,7 @@ message Plugin {
     string version =9;//版本
     string url =10;//URL地址
     int32  weight =11;//权重
-    string is_enable =12;//是否启用（0否，1是）
+    string status =12;//状态(0 禁用，1 启用，2 暂停)
     string author_id =13;//作者ID
     string author_name =14;//作者名称
     string created_at =15;
@@ -48,10 +48,11 @@ message PluginRequest {
     string name = 5;
     string code = 6;
     string type = 7;
-    string is_enable = 8;
+    string status = 8;
     int64 author_id = 9;
     string keywords = 10;
-    repeated int32 ids = 11;
+    repeated string status_list = 11;
+    repeated int32 ids = 12;
 }
 
 //
