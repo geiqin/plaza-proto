@@ -16,19 +16,19 @@ service NavService {
 
 // 导航
 message Nav {
-    int32 id =1;
+    int64 id =1;
     string name	 =3;
     string title =4;
     string title_en	 =5;
     string icon	 =6;
     string type =7;
-    int32 nav_id =8;
-    int32 nav_type_id =9;
+    int64 parent_id =8;
+    int64 nav_type_id =9;
     string redirect_url  =10;
     string path =11;
     string component  =12;
-    bool nocache =13;
-    bool hidden =14;
+    string is_cache =13;
+    string is_hidden =14;
     string permission =15;
     string method  =16;
     int32 sort  =17;
@@ -36,7 +36,7 @@ message Nav {
     string status =19;
     string created_at =20;
     string updated_at =21;
-    map<string,string> metas  =22;
+    map<string,string> extends  =22;
     Nav parent = 23;
     repeated Nav children = 24;
 }
@@ -47,14 +47,14 @@ message NavRequest {
     int64 page_size = 2;
     string sorting = 3;
     //base params
-    int32 id = 4;
+    int64 id = 4;
     string name = 5;
     string title = 6;
     string status = 7;
-    int32 nav_id =8;
-    int32 nav_type_id =9;
+    int64 parent_id =8;
+    int64 nav_type_id =9;
     string type =10;
-    bool is_admin =11;
+    string is_admin =11;
     repeated int64 ids = 12;
 }
 

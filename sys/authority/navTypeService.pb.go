@@ -27,17 +27,17 @@ type NavType struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name      string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	Title     string `protobuf:"bytes,4,opt,name=title,proto3" json:"title"`
-	VersionId int32  `protobuf:"varint,5,opt,name=version_id,json=versionId,proto3" json:"version_id"`
-	Tag       string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag"`
-	Ver       int32  `protobuf:"varint,7,opt,name=ver,proto3" json:"ver"`
-	Memo      string `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo"`
-	Status    string `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
-	CreatedAt string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Navs      []*Nav `protobuf:"bytes,12,rep,name=navs,proto3" json:"navs"`
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name      string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Title     string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	VersionId int32  `protobuf:"varint,5,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	Tag       string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
+	Ver       int32  `protobuf:"varint,7,opt,name=ver,proto3" json:"ver,omitempty"`
+	Memo      string `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo,omitempty"`
+	Status    string `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Navs      []*Nav `protobuf:"bytes,12,rep,name=navs,proto3" json:"navs,omitempty"`
 }
 
 func (x *NavType) Reset() {
@@ -72,7 +72,7 @@ func (*NavType) Descriptor() ([]byte, []int) {
 	return file_navTypeService_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *NavType) GetId() int32 {
+func (x *NavType) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
@@ -154,18 +154,18 @@ type NavTypeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
 	//base params
-	Id        int32   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	Name      string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
-	Title     string  `protobuf:"bytes,6,opt,name=title,proto3" json:"title"`
-	Status    string  `protobuf:"bytes,7,opt,name=status,proto3" json:"status"`
-	VersionId int32   `protobuf:"varint,8,opt,name=version_id,json=versionId,proto3" json:"version_id"`
-	Tag       string  `protobuf:"bytes,9,opt,name=tag,proto3" json:"tag"`
-	Ver       int32   `protobuf:"varint,10,opt,name=ver,proto3" json:"ver"`
-	Ids       []int64 `protobuf:"varint,11,rep,packed,name=ids,proto3" json:"ids"`
+	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	Name      string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Title     string  `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
+	Status    string  `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	VersionId int32   `protobuf:"varint,8,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	Tag       string  `protobuf:"bytes,9,opt,name=tag,proto3" json:"tag,omitempty"`
+	Ver       int32   `protobuf:"varint,10,opt,name=ver,proto3" json:"ver,omitempty"`
+	Ids       []int64 `protobuf:"varint,11,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 }
 
 func (x *NavTypeRequest) Reset() {
@@ -221,7 +221,7 @@ func (x *NavTypeRequest) GetSorting() string {
 	return ""
 }
 
-func (x *NavTypeRequest) GetId() int32 {
+func (x *NavTypeRequest) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
@@ -282,10 +282,10 @@ type NavTypeData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *NavType      `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*NavType    `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Entity *NavType      `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*NavType    `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *NavTypeData) Reset() {
@@ -353,8 +353,8 @@ type NavTypeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *NavTypeData  `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *NavTypeData  `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *NavTypeResponse) Reset() {
@@ -411,7 +411,7 @@ var file_navTypeService_proto_rawDesc = []byte{
 	0x1a, 0x11, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x1a, 0x10, 0x6e, 0x61, 0x76, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x93, 0x02, 0x0a, 0x07, 0x4e, 0x61, 0x76, 0x54, 0x79, 0x70,
-	0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69,
+	0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69,
 	0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x04,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x76,
@@ -434,7 +434,7 @@ var file_navTypeService_proto_rawDesc = []byte{
 	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a,
 	0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x6f, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x07, 0x73, 0x6f, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e,
 	0x61, 0x6d, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
 	0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
 	0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,

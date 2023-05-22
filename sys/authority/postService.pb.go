@@ -26,15 +26,15 @@ type Post struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Code        string `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
-	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	DeptId      int32  `protobuf:"varint,4,opt,name=dept_id,json=deptId,proto3" json:"dept_id"`
-	Level       string `protobuf:"bytes,5,opt,name=level,proto3" json:"level"`
-	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description"`
-	Dept        *Dept  `protobuf:"bytes,7,opt,name=dept,proto3" json:"dept"`
-	CreatedAt   string `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt   string `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id          int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Code        string `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	DeptId      int32  `protobuf:"varint,4,opt,name=dept_id,json=deptId,proto3" json:"dept_id,omitempty"`
+	Level       string `protobuf:"bytes,5,opt,name=level,proto3" json:"level,omitempty"`
+	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Dept        *Dept  `protobuf:"bytes,7,opt,name=dept,proto3" json:"dept,omitempty"`
+	CreatedAt   string `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt   string `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
 
 func (x *Post) Reset() {
@@ -137,16 +137,16 @@ type PostRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
+	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
 	//my self
-	Id     int32   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	Code   string  `protobuf:"bytes,5,opt,name=code,proto3" json:"code"`
-	Name   string  `protobuf:"bytes,6,opt,name=name,proto3" json:"name"`
-	Type   string  `protobuf:"bytes,7,opt,name=type,proto3" json:"type"`
-	DeptId int32   `protobuf:"varint,8,opt,name=dept_id,json=deptId,proto3" json:"dept_id"`
-	Ids    []int32 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids"`
+	Id     int32   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	Code   string  `protobuf:"bytes,5,opt,name=code,proto3" json:"code,omitempty"`
+	Name   string  `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	Type   string  `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
+	DeptId int32   `protobuf:"varint,8,opt,name=dept_id,json=deptId,proto3" json:"dept_id,omitempty"`
+	Ids    []int32 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 }
 
 func (x *PostRequest) Reset() {
@@ -249,11 +249,11 @@ type PostData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Post             `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*Post           `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Params map[string]string `protobuf:"bytes,4,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Info   *common.Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity *Post             `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*Post           `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Params map[string]string `protobuf:"bytes,4,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Info   *common.Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *PostData) Reset() {
@@ -328,8 +328,8 @@ type PostResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Error *common.Error `protobuf:"bytes,1,opt,name=error,proto3" json:"error"`
-	Data  *PostData     `protobuf:"bytes,2,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *PostData     `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 }
 
 func (x *PostResponse) Reset() {
