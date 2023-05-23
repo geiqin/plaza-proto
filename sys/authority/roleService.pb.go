@@ -27,15 +27,15 @@ type Role struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name      string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	IsAdmin   string  `protobuf:"bytes,3,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
-	DataScope string  `protobuf:"bytes,4,opt,name=data_scope,json=dataScope,proto3" json:"data_scope,omitempty"`
-	Memo      string  `protobuf:"bytes,5,opt,name=memo,proto3" json:"memo,omitempty"`
-	CreatedAt string  `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt string  `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Navs      []*Nav  `protobuf:"bytes,8,rep,name=navs,proto3" json:"navs,omitempty"`
-	NavIds    []int64 `protobuf:"varint,9,rep,packed,name=nav_ids,json=navIds,proto3" json:"nav_ids,omitempty"`
+	Id        int32   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name      string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	IsAdmin   string  `protobuf:"bytes,3,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin"`
+	DataScope string  `protobuf:"bytes,4,opt,name=data_scope,json=dataScope,proto3" json:"data_scope"`
+	Memo      string  `protobuf:"bytes,5,opt,name=memo,proto3" json:"memo"`
+	CreatedAt string  `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt string  `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Navs      []*Nav  `protobuf:"bytes,8,rep,name=navs,proto3" json:"navs"`
+	NavIds    []int64 `protobuf:"varint,9,rep,packed,name=nav_ids,json=navIds,proto3" json:"nav_ids"`
 }
 
 func (x *Role) Reset() {
@@ -138,14 +138,14 @@ type RoleRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//base params
-	Id      int32   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name    string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	IsAdmin string  `protobuf:"bytes,6,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
-	Ids     []int64 `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id      int32   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Name    string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
+	IsAdmin string  `protobuf:"bytes,6,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin"`
+	Ids     []int64 `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *RoleRequest) Reset() {
@@ -234,11 +234,11 @@ type RoleResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Role         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Role       `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Role         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Role       `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error  *common.Error `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info   *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *RoleResponse) Reset() {

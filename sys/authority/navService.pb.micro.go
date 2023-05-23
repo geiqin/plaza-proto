@@ -51,6 +51,10 @@ type NavService interface {
 	Search(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error)
 	List(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error)
 	Tree(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error)
+	//插件导航创建
+	PluginNavCreate(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error)
+	//插件导航删除
+	PluginNavDelete(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error)
 }
 
 type navService struct {
@@ -145,6 +149,26 @@ func (c *navService) Tree(ctx context.Context, in *NavRequest, opts ...client.Ca
 	return out, nil
 }
 
+func (c *navService) PluginNavCreate(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error) {
+	req := c.c.NewRequest(c.name, "NavService.PluginNavCreate", in)
+	out := new(NavResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *navService) PluginNavDelete(ctx context.Context, in *NavRequest, opts ...client.CallOption) (*NavResponse, error) {
+	req := c.c.NewRequest(c.name, "NavService.PluginNavDelete", in)
+	out := new(NavResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for NavService service
 
 type NavServiceHandler interface {
@@ -156,6 +180,10 @@ type NavServiceHandler interface {
 	Search(context.Context, *NavRequest, *NavResponse) error
 	List(context.Context, *NavRequest, *NavResponse) error
 	Tree(context.Context, *NavRequest, *NavResponse) error
+	//插件导航创建
+	PluginNavCreate(context.Context, *NavRequest, *NavResponse) error
+	//插件导航删除
+	PluginNavDelete(context.Context, *NavRequest, *NavResponse) error
 }
 
 func RegisterNavServiceHandler(s server.Server, hdlr NavServiceHandler, opts ...server.HandlerOption) error {
@@ -168,6 +196,8 @@ func RegisterNavServiceHandler(s server.Server, hdlr NavServiceHandler, opts ...
 		Search(ctx context.Context, in *NavRequest, out *NavResponse) error
 		List(ctx context.Context, in *NavRequest, out *NavResponse) error
 		Tree(ctx context.Context, in *NavRequest, out *NavResponse) error
+		PluginNavCreate(ctx context.Context, in *NavRequest, out *NavResponse) error
+		PluginNavDelete(ctx context.Context, in *NavRequest, out *NavResponse) error
 	}
 	type NavService struct {
 		navService
@@ -210,4 +240,12 @@ func (h *navServiceHandler) List(ctx context.Context, in *NavRequest, out *NavRe
 
 func (h *navServiceHandler) Tree(ctx context.Context, in *NavRequest, out *NavResponse) error {
 	return h.NavServiceHandler.Tree(ctx, in, out)
+}
+
+func (h *navServiceHandler) PluginNavCreate(ctx context.Context, in *NavRequest, out *NavResponse) error {
+	return h.NavServiceHandler.PluginNavCreate(ctx, in, out)
+}
+
+func (h *navServiceHandler) PluginNavDelete(ctx context.Context, in *NavRequest, out *NavResponse) error {
+	return h.NavServiceHandler.PluginNavDelete(ctx, in, out)
 }

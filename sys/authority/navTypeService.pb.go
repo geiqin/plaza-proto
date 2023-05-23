@@ -27,17 +27,17 @@ type NavType struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name      string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Title     string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
-	VersionId int32  `protobuf:"varint,5,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	Tag       string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
-	Ver       int32  `protobuf:"varint,7,opt,name=ver,proto3" json:"ver,omitempty"`
-	Memo      string `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo,omitempty"`
-	Status    string `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Navs      []*Nav `protobuf:"bytes,12,rep,name=navs,proto3" json:"navs,omitempty"`
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name      string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	Title     string `protobuf:"bytes,4,opt,name=title,proto3" json:"title"`
+	VersionId int32  `protobuf:"varint,5,opt,name=version_id,json=versionId,proto3" json:"version_id"`
+	Tag       string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag"`
+	Ver       int32  `protobuf:"varint,7,opt,name=ver,proto3" json:"ver"`
+	Memo      string `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo"`
+	Status    string `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
+	CreatedAt string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Navs      []*Nav `protobuf:"bytes,12,rep,name=navs,proto3" json:"navs"`
 }
 
 func (x *NavType) Reset() {
@@ -154,18 +154,18 @@ type NavTypeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//base params
-	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name      string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	Title     string  `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
-	Status    string  `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
-	VersionId int32   `protobuf:"varint,8,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	Tag       string  `protobuf:"bytes,9,opt,name=tag,proto3" json:"tag,omitempty"`
-	Ver       int32   `protobuf:"varint,10,opt,name=ver,proto3" json:"ver,omitempty"`
-	Ids       []int64 `protobuf:"varint,11,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Name      string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
+	Title     string  `protobuf:"bytes,6,opt,name=title,proto3" json:"title"`
+	Status    string  `protobuf:"bytes,7,opt,name=status,proto3" json:"status"`
+	VersionId int32   `protobuf:"varint,8,opt,name=version_id,json=versionId,proto3" json:"version_id"`
+	Tag       string  `protobuf:"bytes,9,opt,name=tag,proto3" json:"tag"`
+	Ver       int32   `protobuf:"varint,10,opt,name=ver,proto3" json:"ver"`
+	Ids       []int64 `protobuf:"varint,11,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *NavTypeRequest) Reset() {
@@ -282,10 +282,10 @@ type NavTypeData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *NavType      `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*NavType    `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *NavType      `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*NavType    `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *NavTypeData) Reset() {
@@ -353,8 +353,8 @@ type NavTypeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *NavTypeData  `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *NavTypeData  `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *NavTypeResponse) Reset() {

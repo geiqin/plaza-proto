@@ -27,26 +27,26 @@ type User struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type            string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	Username        string `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	DisplayName     string `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	RealName        string `protobuf:"bytes,5,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`
-	AvatarId        int64  `protobuf:"varint,6,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id,omitempty"`
-	AvatarUrl       string `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Gender          string `protobuf:"bytes,8,opt,name=gender,proto3" json:"gender,omitempty"`
-	DeptId          int32  `protobuf:"varint,9,opt,name=dept_id,json=deptId,proto3" json:"dept_id,omitempty"`
-	PostId          int32  `protobuf:"varint,10,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
-	RoleId          int32  `protobuf:"varint,11,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	SourceManagerId int64  `protobuf:"varint,12,opt,name=source_manager_id,json=sourceManagerId,proto3" json:"source_manager_id,omitempty"`
-	Status          string `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
-	Memo            string `protobuf:"bytes,14,opt,name=memo,proto3" json:"memo,omitempty"`
-	CreatedAt       string `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt       string `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	DataPermission  string `protobuf:"bytes,17,opt,name=data_permission,json=dataPermission,proto3" json:"data_permission,omitempty"`
-	Dept            *Dept  `protobuf:"bytes,18,opt,name=dept,proto3" json:"dept,omitempty"`
-	Post            *Post  `protobuf:"bytes,19,opt,name=post,proto3" json:"post,omitempty"`
-	Role            *Role  `protobuf:"bytes,20,opt,name=role,proto3" json:"role,omitempty"`
+	Id              int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Type            string `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`
+	Username        string `protobuf:"bytes,3,opt,name=username,proto3" json:"username"`
+	DisplayName     string `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name"`
+	RealName        string `protobuf:"bytes,5,opt,name=real_name,json=realName,proto3" json:"real_name"`
+	AvatarId        int64  `protobuf:"varint,6,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id"`
+	AvatarUrl       string `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
+	Gender          string `protobuf:"bytes,8,opt,name=gender,proto3" json:"gender"`
+	DeptId          int32  `protobuf:"varint,9,opt,name=dept_id,json=deptId,proto3" json:"dept_id"`
+	PostId          int32  `protobuf:"varint,10,opt,name=post_id,json=postId,proto3" json:"post_id"`
+	RoleId          int32  `protobuf:"varint,11,opt,name=role_id,json=roleId,proto3" json:"role_id"`
+	SourceManagerId int64  `protobuf:"varint,12,opt,name=source_manager_id,json=sourceManagerId,proto3" json:"source_manager_id"`
+	Status          string `protobuf:"bytes,13,opt,name=status,proto3" json:"status"`
+	Memo            string `protobuf:"bytes,14,opt,name=memo,proto3" json:"memo"`
+	CreatedAt       string `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt       string `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	DataPermission  string `protobuf:"bytes,17,opt,name=data_permission,json=dataPermission,proto3" json:"data_permission"`
+	Dept            *Dept  `protobuf:"bytes,18,opt,name=dept,proto3" json:"dept"`
+	Post            *Post  `protobuf:"bytes,19,opt,name=post,proto3" json:"post"`
+	Role            *Role  `protobuf:"bytes,20,opt,name=role,proto3" json:"role"`
 }
 
 func (x *User) Reset() {
@@ -227,27 +227,27 @@ type UserRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//----
-	Id              int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Type            string  `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
-	Username        string  `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
-	DisplayName     string  `protobuf:"bytes,7,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	RealName        string  `protobuf:"bytes,8,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`
-	Gender          string  `protobuf:"bytes,9,opt,name=gender,proto3" json:"gender,omitempty"`
-	DeptId          int32   `protobuf:"varint,10,opt,name=dept_id,json=deptId,proto3" json:"dept_id,omitempty"`
-	PostId          int32   `protobuf:"varint,11,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
-	RoleId          int32   `protobuf:"varint,12,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	AvatarId        int64   `protobuf:"varint,13,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id,omitempty"`
-	AvatarUrl       string  `protobuf:"bytes,14,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Status          string  `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"`
-	Email           string  `protobuf:"bytes,16,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile          string  `protobuf:"bytes,17,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Password        string  `protobuf:"bytes,18,opt,name=password,proto3" json:"password,omitempty"`
-	SourceManagerId int64   `protobuf:"varint,19,opt,name=source_manager_id,json=sourceManagerId,proto3" json:"source_manager_id,omitempty"`
-	Ids             []int64 `protobuf:"varint,20,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id              int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Type            string  `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`
+	Username        string  `protobuf:"bytes,6,opt,name=username,proto3" json:"username"`
+	DisplayName     string  `protobuf:"bytes,7,opt,name=display_name,json=displayName,proto3" json:"display_name"`
+	RealName        string  `protobuf:"bytes,8,opt,name=real_name,json=realName,proto3" json:"real_name"`
+	Gender          string  `protobuf:"bytes,9,opt,name=gender,proto3" json:"gender"`
+	DeptId          int32   `protobuf:"varint,10,opt,name=dept_id,json=deptId,proto3" json:"dept_id"`
+	PostId          int32   `protobuf:"varint,11,opt,name=post_id,json=postId,proto3" json:"post_id"`
+	RoleId          int32   `protobuf:"varint,12,opt,name=role_id,json=roleId,proto3" json:"role_id"`
+	AvatarId        int64   `protobuf:"varint,13,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id"`
+	AvatarUrl       string  `protobuf:"bytes,14,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
+	Status          string  `protobuf:"bytes,15,opt,name=status,proto3" json:"status"`
+	Email           string  `protobuf:"bytes,16,opt,name=email,proto3" json:"email"`
+	Mobile          string  `protobuf:"bytes,17,opt,name=mobile,proto3" json:"mobile"`
+	Password        string  `protobuf:"bytes,18,opt,name=password,proto3" json:"password"`
+	SourceManagerId int64   `protobuf:"varint,19,opt,name=source_manager_id,json=sourceManagerId,proto3" json:"source_manager_id"`
+	Ids             []int64 `protobuf:"varint,20,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *UserRequest) Reset() {
@@ -427,10 +427,10 @@ type UserData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *User         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*User       `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *User         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*User       `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *UserData) Reset() {
@@ -498,8 +498,8 @@ type UserResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *UserData     `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *UserData     `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *UserResponse) Reset() {

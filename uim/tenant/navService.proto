@@ -31,14 +31,15 @@ message Nav {
     string is_hidden =14;
     string permission =15;
     string method  =16;
-    int32 sort  =17;
-    string memo  =18;
-    string status =19;
-    string created_at =20;
-    string updated_at =21;
-    map<string,string> extends  =22;
-    Nav parent = 23;
-    repeated Nav children = 24;
+    int32 plugin_id  =17;
+    int32 sort  =18;
+    string memo  =19;
+    string status =20;
+    string created_at =21;
+    string updated_at =22;
+    map<string,string> extends  =23;
+    Nav parent = 24;
+    repeated Nav children = 25;
 }
 
 
@@ -55,7 +56,10 @@ message NavRequest {
     int64 nav_type_id =9;
     string type =10;
     string is_admin =11;
-    repeated int64 ids = 12;
+    int32 plugin_id =12;
+    repeated int32 plugin_ids = 13;
+    repeated int64 nav_type_ids = 14;
+    repeated int64 ids = 15;
 }
 
 message NavData {
