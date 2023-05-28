@@ -3,6 +3,7 @@ package services;
 option go_package = "/.;services";
 import "common/base.proto";
 import "termService.proto";
+import "baseInfoService.proto";
 
 //前端展示页面专用
 service PageService {
@@ -82,31 +83,6 @@ message GoodsDetailSku  {
     string spec_indexes =12;//规格索引
 }
 
-message GoodsSpecBase{
-    string title =1;
-    repeated string values = 2;
-}
-
-message GoodsSpecification{
-   repeated GoodsSpecChoose choose =1;
-}
-
-message GoodsSpecChoose{
-    int64 id =1;
-    string name =2;
-    int64 goods_id =3;
-    repeated GoodsSpecChooseValue value =4;
-}
-
-message GoodsSpecChooseValue{
-    string name =1;
-    string image_url =2;
-}
-
-message GoodsParameter{
-    string title =1;
-    repeated string values = 2;
-}
 
 message SpecDetailData{
     SpecDetailDataBase spec_base =1;

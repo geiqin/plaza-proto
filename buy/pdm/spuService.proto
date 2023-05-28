@@ -8,6 +8,7 @@ import "termService.proto";
 import "tagService.proto";
 import "spuPhotoService.proto";
 import "spuPresaleService.proto";
+import "baseInfoService.proto";
 
 //操作编辑为主
 service SpuService {
@@ -112,7 +113,7 @@ message Sku  {
     string created_at = 13;
     string updated_at = 14;
     Spu spu =15;
-    repeated SpecificationProperty specification_data =16; //规格信息列表
+    repeated SpecificationData specification_data =16; //规格信息列表
 }
 
 //虚拟商品数据
@@ -184,27 +185,10 @@ message FormSku  {
     int64 volume =11;//体积
     string specification =12;//规格信息
     string spec_indexes =13;//规格索引
-    repeated SpecificationProperty specification_data =14; //规格信息列表
+    repeated SpecificationData specification_data =14; //规格信息列表
 
 }
 
-message SpecTypeProperty{
-    int64 spec_id = 1;
-    string spec_name =2;
-    repeated value values =3;
-    message value {
-        string name =1;
-        int64 image_id =2;
-        string image_url =3;
-    }
-}
-
-message SpecificationProperty{
-    int32 spec_id = 1;
-    string spec_name =2;
-    string spec_value =3;
-    string image_url =4;
-}
 
 message SpuRequest {
     int64 paged = 1;
@@ -218,7 +202,7 @@ message SpuRequest {
     string type = 9;
     int64 taxonomy_id = 10;
     int64 category_id = 11;
-    int32 term_id = 12;
+    int64 term_id = 12;
     string term_name = 13;
     int32 brand_id = 14;
     int64 shop_id = 15;
@@ -236,6 +220,7 @@ message SpuRequest {
     repeated int64 brand_ids = 27;
     repeated int64 tag_ids = 28;
     repeated int64 term_ids = 29;
+    int32 top = 30;
 }
 
 message SpuDetailData {
