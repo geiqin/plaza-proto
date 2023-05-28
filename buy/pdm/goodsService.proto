@@ -37,6 +37,10 @@ message Goods {
     string virtual_data = 20; //虚拟商品扩展数据
     int64 taxonomy_id = 22;//
     int64 category_id  =23;
+    int64  min_original_price =25;//最低原价
+    int64  max_original_price =26;//最大原价
+    int64  min_price =27;//最低价格
+    int64  max_price =28;//最高价格
     int64 give_integral  = 36;
     int32 buy_min_number  = 37;
     int32 buy_max_number  = 38;
