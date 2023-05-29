@@ -3,7 +3,7 @@ package services;
 option go_package = "/.;services";
 import "common/base.proto";
 import "termService.proto";
-import "baseInfoService.proto";
+import "goodsService.proto";
 
 //前端展示页面专用
 service PageService {
@@ -17,70 +17,6 @@ service PageService {
     rpc SpecDetail(PageRequest) returns (PageSpecDetailResponse);
     //规格类型数据
     rpc SpecType(PageRequest) returns (PageSpecTypeResponse);
-}
-
-//前端商品详情
-message GoodsDetail {
-    int64 id = 1;
-    string type = 5; //类型
-    string title = 6; //标题
-    string title_color = 7; //标题颜色
-    string simple_desc = 8; //简单描述
-    int32 inventory = 9; //库存数量
-    string inventory_unit = 10; //库存单位
-    string thumb_url = 11;
-    string image_url = 12; //封面URL
-    string video_url = 13; //视频URL
-    bool is_many_spec = 14;//是否多规格商品
-    bool is_deduction_inventory = 15; //是否扣减库存
-    bool is_listed = 16; //是否上架
-    bool is_favor = 17; //是否已收藏
-    int64 shop_id = 18; //分店ID
-    int32 brand_id = 19;//品牌ID
-    string brand_name = 20; //品牌名称
-    string barcode = 21; //条码
-    int64 taxonomy_id = 22;//
-    int64 category_id  =23;
-    string content_web =24; //web内容
-    string content_app =25; //app内容
-    string original_price  = 30;
-    int64 min_original_price  = 31;
-    int64 max_original_price  = 32;
-    string price  = 33;
-    int64 min_price  = 34;
-    int64 max_price  = 35;
-    int64 give_integral  = 36;
-    int32 buy_min_number  = 37;
-    int32 buy_max_number  = 38;
-    int32 photo_count =39; //相册数量
-    int32 sale_count =40; //销售量
-    int32 access_count =41;  //访问量
-    string show_field_original_price_text =42;
-    string show_field_price_text =43;
-    string goods_url =44;
-    repeated string category_names =45;
-    repeated GoodsSpecBase spec_base =46;
-    GoodsSpecification specifications =47;
-    repeated GoodsPhoto photos = 48;
-    int32 comments_count =50;
-    CommentScore comments_score =51;
-    repeated CommentInfo comments_data =52;
-    GoodsDetailSku sku_info =53; //单规格商品
-    repeated GoodsDetailSku sku_list =54;//多规格商品
-}
-
-message GoodsDetailSku  {
-    int64 id =1;//ID
-    int64 spu_id =2;//SpuID
-    int64 original_price =3;//划线价
-    int64 price =5;//销售价
-    int32 inventory =6;//库存
-    string md5_key =7;//唯一标识
-    string coding =8;//编号
-    string barcode =9;//条码
-    int64 weight =10;//重量：克
-    int64 volume =11;//体积
-    string spec_indexes =12;//规格索引
 }
 
 
@@ -106,41 +42,9 @@ message SpecDetailDataExtends{
     string name =1;
 }
 
-message GoodsPhoto{
-    int64 id =1;
-    string image_url =2;
-    string image_old_url =3;
-}
-
-message CommentScore{
-    float avg =1;
-    int64 rate =2;
-    repeated rate_info rating =3;
-    message rate_info{
-        string name =1;
-        int32 count =2;
-        int32 portion =3;
-    }
-}
-
-message CommentInfo{
-    int64 id =1;
-    int64 order_id =2;
-    int64 user_id =3;
-    string business_type =4;
-    string content =5;
-    string reply =6;
-    string is_reply =7;
-    int32 rating =8;
-    string image_url =9;
-    string is_anonymous =10;
-    string reply_time =11;
-    string created_at =12;
-    string updated_at =13;
-}
 
 //参与的活动
-message PluginsPromotion  {
+message PluginsPromotionData  {
     int64 id = 1; //活动ID
     string code = 2; //活动编码:如：coupon_20210101212
     string title = 3; //活动标题
@@ -189,7 +93,7 @@ message MoreListNav{
 
 
 
-message PluginCoupon{
+message PluginCouponData{
     base_info base =1;
     data_info data =2;
     message base_info{
@@ -224,7 +128,7 @@ message PluginCoupon{
 }
 
 
-message PluginIntellectTools {
+message PluginIntellectToolsData {
     IntellectBaseBottom base_bottom =1;
     IntellectContentTop content_top =2;
 }
@@ -238,7 +142,7 @@ message IntellectContentTop{
     repeated string msg_list =2;
 }
 
-message PluginSeckill {
+message PluginSeckillData {
     string icon =1;
     string title =2;
     bool is_valid =3;
@@ -254,15 +158,15 @@ message PluginSeckill {
 }
 
 message PageDetailData {
-    GoodsDetail goods = 1;
+    Goods goods = 1;
     CartTotalInfo cart_total =2;
     BuyButton buy_button = 3;
     repeated MiddleTabNav middle_tab_navs = 4;
     repeated MoreListNav more_list_navs =5;
-    PluginCoupon plugins_coupon_data =6;
-    PluginSeckill Plugins_seckill_data =7;
-    PluginsPromotion  Plugins_promotion_data =8;
-    PluginIntellectTools plugins_intellect_tools_data =9;
+    PluginCouponData plugins_coupon_data =6;
+    PluginSeckillData Plugins_seckill_data =7;
+    PluginsPromotionData  Plugins_promotion_data =8;
+    PluginIntellectToolsData plugins_intellect_tools_data =9;
 }
 
 message PageDetailResponse {
@@ -273,7 +177,7 @@ message PageDetailResponse {
 
 message PageSearchData {
     common.Pager pager = 1;
-    repeated GoodsDetail items = 2;
+    repeated Goods  items = 2;
 }
 
 message PageSearchResponse {
