@@ -1,0 +1,39 @@
+syntax = "proto3";
+package services;
+option go_package = ".;services";
+import "common/base.proto";
+
+service QrcodeService {
+    //微信普通二维码（公众号二维码支持批量生成）
+    rpc Base (QrcodeRequest) returns (QrcodeResponse) {}
+    //微信小程序码
+    rpc Mini (QrcodeRequest) returns (QrcodeResponse) {}
+
+}
+
+//微信请求数据
+message QrcodeRequest {
+    string signature =1;
+    string code =2;
+    string raw_data =3;
+    string encrypted_data =4;
+    string iv =5;
+    string scene =6;
+    int64 member_id =7;
+}
+
+//微信数据
+message Qrcode {
+    string type =1;
+    int32 size =2;
+    string content =3; //base64
+}
+
+message QrcodeResponse {
+    Qrcode entity = 1;
+    common.Pager pager = 2;
+    repeated Qrcode items = 3;
+    common.Error error = 4;
+    common.Info info = 5;
+    map<string,string> params =6;
+}
