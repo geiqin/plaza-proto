@@ -4,6 +4,7 @@ option go_package ="/.;services";
 import "common/base.proto";
 import "appNavService.proto";
 import "slideService.proto";
+import "baseInfoService.proto";
 
 //前端页面数据
 service FrontpageService {
@@ -32,12 +33,6 @@ message FrontpageRequest {
     repeated int64 ids = 10;
 }
 
-message AdInfo {
-    string image	 =1;
-    string url	 =2;
-    string bg_color	 =3;
-}
-
 
 //站点配置信息
 message SiteConfigInfo {
@@ -58,6 +53,7 @@ message SiteConfigInfo {
     string common_app_is_head_vice_nav =11;//是否开启用户中心副导航
     string common_app_is_enable_quick_nav =12;//是否开启快捷导航
     string common_app_is_use_mobile_detail =13;//
+    int32 common_show_goods_category_level =14; //
 
     // 基础-站点域名和CDN
     string common_domain_host =15;//站点域名主机
@@ -166,124 +162,16 @@ message FrontpageInitResponse {
     common.Error error = 2;
 }
 
-message CartTotalInfo{
-    int32 buy_number =1;
-    int64 total_price =2;
-}
-
-message HomeFloorChild{
-    int64 id =1;
-    int64 parent_id =2;
-    string icon =3;
-    string name =4;
-    string vice_name =5;
-    string bg_color =7;
-    string color =8;
-}
-
-message HomeFloorInfo{
-    int64 id =1;
-    int64 parent_id =2;
-    string icon =3;
-    string name =4;
-    string vice_name =5;
-    string describe =6;
-    string bg_color =7;
-    string color =8;
-    string is_home_recommended =9;
-    string seo_title =10;
-    string seo_keywords =11;
-    string seo_desc =12;
-    string more_url =13;
-    string style_type =14;
-    int32 sort =15;
-    string home_data_location =16;
-    string list_type =17;
-    repeated SpuInfo goods_list =18;
-    repeated ArticleInfo blog_list =19;
-    repeated HomeFloorChild items =20;
-    repeated string keywords_arr =21;
-}
-
-
-message SpuInfo {
-    int64 id =1;
-    string title =2;
-    string unit =3;
-    string image_url =5;
-    string video_url =6;
-    int32 inventory = 7;
-    int64 min_original_price  = 8;
-    int64 max_original_price  = 9;
-    int64 min_price  = 10;
-    int64 max_price  = 11;
-    int64 give_integral  = 12;
-}
-
-message ArticleInfo{
-    int64 id =1;
-    string title =2;
-    string title_color =3;
-    string cover_url =4;
-    string video_url =5;
-    int64 category_id =6;
-    string category_name =7;
-    string category_url =8;
-    string url =9;
-    string created_at =10;
-    string updated_at =11;
-}
-
-message PluginSortInfo{
-    int64 id =1;
-    string name =2;
-    string plugins =3;
-}
-
-message PluginSeckill {
-    config_info config =1;
-    time_info time =2;
-    SpuInfo goods =3;
-    bool is_valid =4;
-    message config_info {
-        string application_name =1;
-        string time_start =2;
-        string time_end =3;
-        repeated string content_notice =4;
-        string is_home_auto_play =5;
-        string is_shop_seckill =6;
-        string system_type =7;
-    }
-    message time_info {
-        int64 hours =1;
-        int64 minutes =2;
-        int64 seconds =3;
-        string status =4;
-        string msg =5;
-    }
-}
-
-message PluginsActivityData {
-    base_info base =1;
-    repeated HomeFloorInfo data =2;
-    message base_info {
-        string application_name =1;
-        string seo_title =2;
-        string seo_keywords =3;
-        string seo_desc =4;
-        string is_home_auto_play =5;
-    }
-}
 
 message FrontpageHomeData {
     repeated AppNav navigation = 1;
     repeated Slide banner_list = 2;
     CartTotalInfo cart_total =3;
     int32 message_total =4;
-    repeated HomeFloorInfo data_list =5;
+    repeated HomeFloorData data_list =5;
     repeated ArticleInfo article_list =6;
     repeated PluginSortInfo plugins_sort_list =7;
-    PluginSeckill plugins_seckill_data =8;
+    PluginSeckillData plugins_seckill_data =8;
     PluginsActivityData plugins_activity_data =9;
 }
 

@@ -1,0 +1,172 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "orderAddressService.proto";
+import "baseInfoService.proto";
+//结账台
+service BuyService {
+    //确认信息
+    rpc Confirm (BuyRequest) returns (BuyResponse) {}
+    //提交订单
+    rpc Submit (BuyRequest) returns (BuySubmitResponse) {}
+}
+
+//账单信息
+message BillInfo {
+    int64 id = 1;
+    string name = 2;
+    string alias = 3;
+    string icon_url = 4;
+    string lng = 5;
+    string lat = 6;
+    int64 area_id = 7;
+    string address = 8;
+    string province_name = 9;
+    string city_name = 10;
+    string county_name = 11;
+    OrderBase order_base =12;//订单基本信息
+    repeated GoodsInfo goods_items = 13; //商品清单
+}
+
+//订单基础信息
+message OrderBase {
+    string checkout_id =1; //货币类型
+    string currency =2; //货币类型
+    int32  buy_number_count =3; //购买商品总数量
+    int64  increase_price =4; //增加的金额
+    int64  preferential_price =5; //优惠金额
+    int64  total_price =6; //订单总价(订单最终价格)
+    int64  actual_price =7; //订单实际支付金额
+    int64 pay_money =8;//支付现金
+    int64 freight_fee =9; //运费
+    int64 insure_fee =10; //保险费
+    int64 pack_fee =11; //包装费
+    int64 surplus =12;//使用账户余额
+    int64 coupon_id = 13;//使用优惠劵ID
+    int64 coupon_money =14; //使用优惠劵金额
+    int64 integral =15; //积分数量
+    int64 integral_money =16;//积分金额
+    int64 paid_money =17;//已支付现金
+    int64 member_id =18;//会员ID
+    int64 address_id =19; //地址ID
+    bool is_shipment =20;//是否物流
+    repeated GoodsInfo goods_items = 21; //购买商品列表
+    repeated ExtensionData extension_data = 22; //扩展数据
+}
+
+
+message ExtensionData {
+    string name =1;//名称
+    int64  price =2;//价格
+    string type =3;//类型
+    string business =4;//业务名称
+    string tips =5;//提示信息
+}
+
+//确认信息请求参数
+message BuyRequest {
+    string buy_type = 1; //购买类型
+    int64 address_id = 2; //收货地址ID
+    string postscript = 3; //买家留言(50字以内)
+    int32 shipment_id = 4; //选中的配送方式
+    int32 payment_id = 5; //选中的支付方式
+    int64 coupon_id = 6; //选中的优惠劵凭证ID
+    int64 use_integral = 7; //使用的积分数
+    int64 use_surplus = 8; //使用的余额数
+    int64 agent_member_id = 9; //代理的客户ID（操作员代客下单）
+    int64 spu_id =10; //直接购买SpuId
+    int64 sku_id =11; //直接购买SkuId
+    int32 number =12; //直接购买数量
+    repeated SpecificationData spec =13; //规格信息
+    repeated int64 sku_ids = 14; //商品Ids
+    repeated sku skus = 15; //商品清单
+    BuyGoodsData goods_data =16;
+    message sku {
+        int64 sku_id = 1; //商品ID
+        int32 num = 2; //数量
+    }
+}
+
+message BuyGoodsData {
+    int64 goods_id = 1; //商品ID
+    int32 stock = 2; //数量
+    repeated SpecificationData spec =3; //规格
+}
+
+//自提点地址(待完善)
+message ExtractionAddress{
+    int64 id =1;
+    string address =2;
+}
+
+//插件积分数据
+message PluginsIntegralData{
+    int64 user_integral = 1; //用户积分
+    int64 use_integral = 2; //使用积分
+    string discount_type =3; //优惠类型
+    int64 discount_price =4; //抵扣金额
+    bool is_support_goods_exchange =5;//是否支持商品兑换
+    bool is_checked =6; //是否已选中
+    //group_integral
+}
+
+//结算信息
+message BuyBase {
+    int64 total_price = 1; //订单总价(订单最终价格)
+    int64 actual_price = 2; //实际支付金额
+    int64 preferential_price = 3; //总优惠金额
+    int64 increase_price = 4; //总增加金额
+    int32 goods_count = 5; //商品种类数
+    int32 buy_count = 6; //购买数量
+    int64 spec_weight_total = 7; //规格总重量
+    int64 spec_volume_total = 8; //规格总体积
+    string common_site_type =9;//站点类型
+    OrderAddress address =11;//收件地址
+    repeated ExtractionAddress extraction_address =12; //自提点地址
+
+}
+
+message BuyData {
+    BuyBase base = 1;//结算信息
+    repeated BillInfo bill_list =2; //账单列表
+    repeated PaymentInfo payment_list =3; //支付方式列表
+    BuyRequest request_data =4;//提交信息反馈
+    int32 default_payment_id =7;//默认支付ID
+    string common_site_type =8;//站点类型
+    map<string,string> extension_data =9; //
+    PluginsIntegralData plugins_points_data =10;//积分信息
+    map<string,string> plugins_coupon_data =11;//优惠劵数据
+    map<string,string> plugins_realstore_data =12;//门店数据
+}
+
+
+message BuyResponse {
+    BuyData data = 1;
+    common.Error error = 2;
+}
+
+message BuySubmitData {
+    int32 order_status =1;
+    repeated string order_ids =2;
+    int32 payment_id =3;
+}
+
+message BuySubmitResponse {
+    BuySubmitData data = 1;
+    common.Error error = 2;
+}
+
+/*
+ repeated CouponInfo coupons = 22; //可获得的优惠
+    repeated PromotionInfo promotions = 23; //参与的活动
+    repeated Adjustment  adjustments =24;//变动记录
+    repeated SkuInfo presents =25; //可获得的赠品
+    //available
+    int64 available_surplus =26;//可使用的余额
+    int64 available_integral =27;//可使用的积分
+    CouponInfo available_coupons = 28;//可使用的优惠劵集合
+    OrderAddress shipping_address =29;//订单收货地址
+    Shipment shipment_list =30;//订单收货地址
+    Payment payment_list =31;//订单收货地址
+ */

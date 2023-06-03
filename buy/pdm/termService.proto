@@ -23,7 +23,6 @@ message Term {
     int64 parent_id = 5;
     string describe = 6;
     string icon_url = 7;
-    string image_url = 8;
     string bg_color = 9;
     string is_home_recommended = 10;
     string style_type =11;

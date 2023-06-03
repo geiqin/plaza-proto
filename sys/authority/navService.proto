@@ -61,9 +61,10 @@ message NavRequest {
     string type =10;
     string is_admin =11;
     int32 plugin_id =12;
-    repeated int32 plugin_ids = 13;
-    repeated int64 nav_type_ids = 14;
-    repeated int64 ids = 15;
+    int64 Store_id =13;
+    repeated int32 plugin_ids = 14;
+    repeated int64 nav_type_ids = 15;
+    repeated int64 ids = 16;
 }
 
 //

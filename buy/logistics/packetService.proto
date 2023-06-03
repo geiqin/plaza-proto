@@ -1,0 +1,94 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "shipperService.proto";
+import "skuInfoService.proto";
+import "fetchService.proto";
+
+service PacketService {
+    rpc Create (Packet) returns (PacketResponse) {}
+    rpc Update (Packet) returns (PacketResponse) {}
+    rpc Get (PacketRequest) returns (PacketResponse) {}
+    rpc List (PacketRequest) returns (PacketResponse) {}
+}
+
+
+message Packet {
+    int64 id = 1;
+    string code = 2;
+    int64 order_id = 3;
+    string shipment_code = 4;
+    string type = 5;
+    int64 freight = 6;
+    bool protected = 7;
+    bool is_delivery = 8;
+    bool is_auto_surface = 9;
+    int32 shipper_id = 10;
+    string logistics_no = 11;
+    string fetch_code = 12;
+    int64 location_id = 13;
+    string fetch_at = 14;
+    string delivery_at = 15;
+    string delivery_type = 16;
+    int64 member_id = 17;
+    string receiver_name = 18;
+    int64 receiver_area_id = 19;
+    string receiver_addr = 20;
+    string receiver_zip = 21;
+    string receiver_tel = 22;
+    string receiver_mobile = 23;
+    string receiver_email = 24;
+    int64 creator_id = 25;
+    string creator_name = 26;
+    string status = 27;
+    string memo = 28;
+    string arrived_at = 29;
+    string created_at = 30;
+    string updated_at = 31;
+    repeated PacketDetail details = 32;
+    string start_time = 33;
+    string end_time = 34;
+    string shipped_at = 35;
+    Shipper shipper = 36;
+    Fetch location = 37;
+}
+
+message PacketDetail {
+    int64 id = 1;
+    int64 ship_order_id = 2;
+    int64 order_detail_id = 3;
+    int64 item_id = 4;
+    int64 sku_id = 5;
+    int32 num = 6;
+    string created_at = 7;
+    string updated_at = 8;
+    SkuInfo sku = 9;
+}
+
+message PacketRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
+    string keywords = 4;
+    int64 id = 5;
+    string type = 7;
+    string method = 8;
+    int64 order_id = 9;
+    string delivery_type = 10;
+    repeated int64 ids = 6;
+}
+
+message PacketData {
+    Packet entity = 1;
+    common.Pager pager =2;
+    repeated Packet items = 3;
+    common.Info info =4;
+}
+
+
+message PacketResponse {
+    PacketData data = 1;
+    common.Error error = 2;
+}
+

@@ -45,6 +45,8 @@ func NewPluginServiceEndpoints() []*api.Endpoint {
 type PluginService interface {
 	//安装插件
 	Install(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
+	//升级插件
+	Upgrade(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
 	//移除插件
 	Remove(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
 	//插件详情
@@ -73,6 +75,16 @@ func NewPluginService(name string, c client.Client) PluginService {
 
 func (c *pluginService) Install(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error) {
 	req := c.c.NewRequest(c.name, "PluginService.Install", in)
+	out := new(PluginResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pluginService) Upgrade(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error) {
+	req := c.c.NewRequest(c.name, "PluginService.Upgrade", in)
 	out := new(PluginResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -146,6 +158,8 @@ func (c *pluginService) AppStore(ctx context.Context, in *PluginRequest, opts ..
 type PluginServiceHandler interface {
 	//安装插件
 	Install(context.Context, *Plugin, *PluginResponse) error
+	//升级插件
+	Upgrade(context.Context, *Plugin, *PluginResponse) error
 	//移除插件
 	Remove(context.Context, *Plugin, *PluginResponse) error
 	//插件详情
@@ -163,6 +177,7 @@ type PluginServiceHandler interface {
 func RegisterPluginServiceHandler(s server.Server, hdlr PluginServiceHandler, opts ...server.HandlerOption) error {
 	type pluginService interface {
 		Install(ctx context.Context, in *Plugin, out *PluginResponse) error
+		Upgrade(ctx context.Context, in *Plugin, out *PluginResponse) error
 		Remove(ctx context.Context, in *Plugin, out *PluginResponse) error
 		Detail(ctx context.Context, in *Plugin, out *PluginResponse) error
 		GetPluginData(ctx context.Context, in *Plugin, out *PluginResponse) error
@@ -183,6 +198,10 @@ type pluginServiceHandler struct {
 
 func (h *pluginServiceHandler) Install(ctx context.Context, in *Plugin, out *PluginResponse) error {
 	return h.PluginServiceHandler.Install(ctx, in, out)
+}
+
+func (h *pluginServiceHandler) Upgrade(ctx context.Context, in *Plugin, out *PluginResponse) error {
+	return h.PluginServiceHandler.Upgrade(ctx, in, out)
 }
 
 func (h *pluginServiceHandler) Remove(ctx context.Context, in *Plugin, out *PluginResponse) error {

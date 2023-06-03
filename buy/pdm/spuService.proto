@@ -221,6 +221,7 @@ message SpuRequest {
     repeated int64 tag_ids = 28;
     repeated int64 term_ids = 29;
     int32 top = 30;
+    string is_many_spec =31;//是否多规格商品,否则为单品
 }
 
 message SpuDetailData {

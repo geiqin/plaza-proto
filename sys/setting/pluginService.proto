@@ -7,6 +7,8 @@ import "common/base.proto";
 service PluginService {
     //安装插件
     rpc Install (Plugin) returns (PluginResponse) {}
+    //升级插件
+    rpc Upgrade (Plugin) returns (PluginResponse) {}
     //移除插件
     rpc Remove (Plugin) returns (PluginResponse) {}
     //插件详情
@@ -28,7 +30,7 @@ message Plugin {
     string type =4;//插件类型
     string icon_url =5; //插件图标
     string desc =6;//插件描述
-    string config =7;//配置
+    string config =7;//应用配置
     string author_id =8;//作者ID
     string author_name =9;//作者名称
     string version =10;//版本
@@ -36,10 +38,11 @@ message Plugin {
     int32  weight =12;//权重
     int32  sort =13;//排序
     string data =14;//应用数据
-    string is_enable =15;//是否启用（0否，1是）
-    string is_install =16;//是否已安装（0否，1是）
-    string created_at =17;
-    string updated_at =18;
+    string status =15;//插件状态
+    string is_enable =16;//是否启用（0否，1是）
+    string is_install =17;//是否已安装（0否，1是）
+    string created_at =18;
+    string updated_at =19;
 }
 
 

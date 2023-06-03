@@ -1,0 +1,183 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+
+//内部商品信息(基于SKU的商品)
+message GoodsInfo {
+    int64 id = 1;
+    int64 sku_id = 2;
+    int64 spu_id = 3;
+    string type = 4; //类型
+    string title = 5; //标题
+    string title_color = 6; //标题颜色
+    string simple_desc = 7; //简单描述
+    int32 inventory = 8; //库存数量
+    string unit = 9; //库存单位
+    string image_url = 10; //封面URL
+    string video_url = 11; //视频URL
+    string is_many_spec = 12;//是否多规格商品（0否，1是）
+    string is_deduction_inventory = 13; //是否扣减库存
+    string is_listed = 14; //是否上架（0否，1是）
+    string is_virtual = 15; //是否虚拟商品（0否，1是）
+    int64 shop_id = 16; //多店铺ID
+    int32 brand_id = 17;//品牌ID
+    string brand_name = 18; //品牌名称
+    string virtual_type = 19; //虚拟商品类型
+    string virtual_data = 20; //虚拟商品扩展数据
+    int64 taxonomy_id = 22;//
+    int64 category_id  =23;
+    int64  min_original_price =25;//最低原价
+    int64  max_original_price =26;//最大原价
+    int64  min_price =27;//最低价格
+    int64  max_price =28;//最高价格
+    int64 give_integral  = 36;
+    int32 buy_min_number  = 37;
+    int32 buy_max_number  = 38;
+    int32 photo_count =39; //相册数量
+    int32 sale_count =40; //销售量
+    int32 access_count =41; //访问量
+    int64 place_origin_id =42; //原产地ID
+    int64 weight = 45;
+    int64 volume = 46;
+    string coding = 47;
+    string barcode = 48;
+    int64 price = 49;
+    int64 original_price = 50;
+    int64 cost_price = 51;
+    string spec_desc =53;
+    GoodsSpec  spec  =54;
+    string status =55;
+    string created_at = 56;
+    string updated_at = 57;
+    repeated GoodsSpecBase spec_base =58;
+    GoodsSpecification specifications =59;
+}
+
+
+message GoodsSpecBase{
+    string title =1;
+    repeated string values = 2;
+}
+
+message GoodsSpecification{
+    repeated GoodsSpecChoose choose =1;
+}
+
+message GoodsSpecChoose{
+    int64 id =1;
+    string name =2;
+    int64 goods_id =3;
+    repeated GoodsSpecChooseValue value =4;
+}
+
+message GoodsSpecChooseValue{
+    string name =1;
+    string image_url =2;
+}
+
+message GoodsSpec {
+    string spec_name =1;
+    string spec_value =2;
+}
+
+message CartTotalInfo{
+    int32 buy_number =1;
+    int64 total_price =2;
+}
+
+message HomeFloorChild{
+    int64 id =1;
+    int64 parent_id =2;
+    string icon =3;
+    string name =4;
+    string vice_name =5;
+    string bg_color =7;
+    string color =8;
+    string style_type =9;
+}
+
+message HomeFloorData{
+    int64 id =1;
+    int64 parent_id =2;
+    string icon =3;
+    string name =4;
+    string vice_name =5;
+    string describe =6;
+    string bg_color =7;
+    string color =8;
+    string is_home_recommended =9;
+    string seo_title =10;
+    string seo_keywords =11;
+    string seo_desc =12;
+    string more_url =13;
+    string style_type =14;
+    string list_type =17;
+    repeated GoodsInfo goods_list =18;
+    repeated ArticleInfo blog_list =19;
+    repeated HomeFloorChild items =20;
+    repeated string keywords_arr =21;
+}
+
+
+message AdInfo {
+    string image	 =1;
+    string url	 =2;
+    string bg_color	 =3;
+}
+
+
+message ArticleInfo{
+    int64 id =1;
+    string title =2;
+    string title_color =3;
+    string cover_url =4;
+    string video_url =5;
+    int64 category_id =6;
+    string category_name =7;
+    string category_url =8;
+    string url =9;
+    string created_at =10;
+    string updated_at =11;
+}
+
+message PluginSortInfo{
+    int64 id =1;
+    string name =2;
+    string plugins =3;
+}
+
+message PluginSeckillData {
+    config_info config =1;
+    time_info time =2;
+    GoodsInfo goods =3;
+    bool is_valid =4;
+    message config_info {
+        string application_name =1;
+        string time_start =2;
+        string time_end =3;
+        repeated string content_notice =4;
+        string is_home_auto_play =5;
+        string is_shop_seckill =6;
+        string system_type =7;
+    }
+    message time_info {
+        int64 hours =1;
+        int64 minutes =2;
+        int64 seconds =3;
+        string status =4;
+        string msg =5;
+    }
+}
+
+message PluginsActivityData {
+    base_info base =1;
+    repeated HomeFloorData data =2;
+    message base_info {
+        string application_name =1;
+        string seo_title =2;
+        string seo_keywords =3;
+        string seo_desc =4;
+        string is_home_auto_play =5;
+    }
+}

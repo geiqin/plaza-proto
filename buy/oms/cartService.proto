@@ -6,19 +6,19 @@ import "baseInfoService.proto";
 
 service CartService {
     //加入购物车
-    rpc Save (CartRequest) returns (CartResponse) {}
+    rpc Add (CartRequest) returns (CartResponse) {}
     //删除购物车商品
-    rpc Remove (CartRequest) returns (CartDetailResponse){}
+    rpc Remove (CartRequest) returns (CartResponse){}
     //清除购物车
-    rpc Clear (CartRequest) returns (CartDetailResponse) {}
+    rpc Clear (CartRequest) returns (CartResponse) {}
     //购物车详情
-    rpc Detail (CartRequest) returns (CartDetailResponse) {}
+    rpc Detail (CartRequest) returns (CartResponse) {}
     //更新购物车数量（根据cartId）
     rpc Stock (CartRequest) returns (CartStockResponse) {}
     //获得统计数量(服务调的多)
-    rpc Count (CartRequest) returns (CartDetailResponse) {}
+    rpc Count (CartRequest) returns (CartResponse) {}
     //选中商品计算
-    rpc Checked (CartRequest) returns (CartDetailResponse) {}
+    rpc Checked (CartRequest) returns (CartResponse) {}
 }
 
 message Cart  {
@@ -55,16 +55,11 @@ message CartRequest {
 }
 
 
-
 message CartResponse {
-    Cart data = 1;
-    common.Error error = 2;
-}
-
-message CartDetailResponse {
     CartData data = 1;
     common.Error error = 2;
 }
+
 message CartStockResponse {
     Cart data = 1;
     common.Error error = 2;

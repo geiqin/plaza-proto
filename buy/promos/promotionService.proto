@@ -1,0 +1,96 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "promotionActionConfigService.proto";
+import "promotionRuleConfigService.proto";
+import "promotionVariantService.proto";
+
+service PromotionService {
+    //创建促销活动
+    rpc Create (Promotion) returns (PromotionResponse) {}
+    // 编辑促销活动
+    rpc Update (Promotion) returns (PromotionResponse) {}
+    //修改已报名数
+    rpc UpdateAssignCount (Promotion) returns (PromotionResponse) {}
+    //修改已使用数
+    rpc UpdateUsedCount (Promotion) returns (PromotionResponse) {}
+    // 删除促销活动
+    rpc Delete (Promotion) returns (PromotionResponse) {}
+    //启动活动
+    rpc Start (Promotion) returns (PromotionResponse) {}
+    //终止活动
+    rpc Stop (Promotion) returns (PromotionResponse) {}
+    // 获取活动详情
+    rpc Get (Promotion) returns (PromotionResponse) {}
+    //获取活动列表
+    rpc List (PromotionRequest) returns (PromotionResponse) {}
+    //查询活动
+    rpc Search (PromotionRequest) returns (PromotionResponse) {}
+}
+
+//营销活动
+message Promotion {
+    int64 id = 1; //活动ID
+    string code =2; //活动编码:如：coupon_20210101212
+    string title = 3; //活动标题
+    string type = 4; //活动类型:Coupon优惠劵/满减送/限时折扣/秒杀/拼团/通用
+    string subtype = 5; //活动子类型
+    string began_at = 6; //活动生效时间
+    string ended_at = 7; //活动结束时间
+    int64 cover_id = 8; //促销封面ID
+    string cover_url = 9; //促销封面url
+    string tag = 10; //标签
+    string description = 11; //活动描述
+    int32 level = 12; //促销级别：1 商品级，2订单级，3特殊级
+    string variant_type = 13;  //变体商品类型: spu,sku
+    string variant_range = 14;  //变体商品范围: 0-全部，1-部分参与，2-部分不参与
+    string config_data = 15; //自定义配置数据json
+    string asset_url = 16;  //促销详情链接
+    int32 total_count = 17; //发放总量 【备选项】
+    int32 assign_count = 18; //已发放数量 【备选项】
+    int32 used_count = 19; //已使用数量 【备选项】
+    int32 failed_count = 20; //失败，失效数量 【备选项】
+    string status =21; //活动状态：0未开始 1进行中 2已结束 3已失效
+    string created_at = 22; //创建时间
+    string updated_at = 23; //修改时间
+    PromotionActionConfig action_config = 24; //限制规则配置
+    PromotionRuleConfig rule_config = 25; //优惠策略配置
+    repeated PromotionVariant variant_spu_list =26; //参与活动商品SPU列表
+    repeated PromotionVariant variant_sku_list =27; //参与活动商品SKU列表
+}
+
+
+message PromotionRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string keywords = 3;
+    //以下为自定义参数
+    int64 id = 4;
+    string code =5;
+    string title =6;
+    string type  = 7;
+    string subtype  = 8;
+    string began_at = 9;
+    string ended_at = 10;
+    string tag = 11;
+    string variant_type = 12;
+    string variant_range = 13;
+    int32 level  = 14;
+    string status =15;
+    repeated string types = 16;
+    repeated int64 ids = 17;
+}
+
+
+message PromotionData {
+    Promotion entity = 1;
+    common.Pager pager =2;
+    repeated Promotion items = 3;
+    common.Info info =4;
+}
+
+message PromotionResponse {
+    PromotionData data = 1;
+    common.Error error = 2;
+}
