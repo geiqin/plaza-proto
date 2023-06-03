@@ -1,0 +1,56 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//营销、通知等短信（非验证码）
+service MessageService {
+    //发送信息
+    rpc Send (Message) returns (MessageResponse) {}
+    rpc Get (Message) returns (MessageResponse) {}
+    rpc Search (MessageRequest) returns (MessageResponse) {}
+
+}
+
+message Message {
+    int64	id	=4;
+    string	channel	=5;
+    string	type	=6;
+    string	mobile	=7;
+    string	code	=8;
+    string	mobile_list	=9;
+    string	params	=10;
+    string	template_id	=11;
+    string	signature_id	=12;
+    string	job_id	=13;
+    bool	succeed	=14;
+    string	succeed_at	=15;
+    string	created_at	=16;
+    string	updated_at	=17;
+}
+
+message MessageRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    int64 top = 3;
+    int64	id	=5;
+    string	type	=6;
+    string	mobile	=7;
+    string	code	=8;
+    int32	template_id	=9;
+    string	content	=10;
+    string	mobile_list	=11;
+    string	params	=12;
+}
+
+message MessageData{
+    Message entity = 1;
+    common.Pager pager =2;
+    repeated Message items = 3;
+    common.Info info =4;
+}
+
+message MessageResponse {
+    MessageData data = 1;
+    common.Error error = 2;
+}
