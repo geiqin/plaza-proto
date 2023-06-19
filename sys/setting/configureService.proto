@@ -115,6 +115,9 @@ message SiteExtendsConfig {
     string home_user_address_map_status =8;//用户地址地图(0关闭，1开启)
     string home_user_address_idcard_status =9;//用户地址身份证(0关闭，1开启)
     string home_extraction_address_position =10;//自提选择地理位置(0关闭，1开启)
+    //风格样式
+    string home_app_ucenter_head_text_color =11;//用户中心头部文本颜色
+    string home_app_ucenter_head_border_color =12;//用户中心头部文本边框颜色
 }
 
 //-------------手机配置--------------

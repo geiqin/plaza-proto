@@ -141,6 +141,9 @@ message SiteConfigInfo {
     // 密码找回
     repeated AdInfo home_user_forget_pwd_ad_images =85;//
 
+    //风格样式
+    string home_app_ucenter_head_text_color =90;//用户中心头部文本颜色
+    string home_app_ucenter_head_border_color =91;//用户中心头部文本边框颜色
 }
 
 //

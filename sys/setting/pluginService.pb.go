@@ -32,7 +32,7 @@ type Plugin struct {
 	Type       string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`                               //插件类型
 	IconUrl    string `protobuf:"bytes,5,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`          //插件图标
 	Desc       string `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc"`                               //插件描述
-	Config     string `protobuf:"bytes,7,opt,name=config,proto3" json:"config"`                           //配置
+	Config     string `protobuf:"bytes,7,opt,name=config,proto3" json:"config"`                           //应用配置
 	AuthorId   string `protobuf:"bytes,8,opt,name=author_id,json=authorId,proto3" json:"author_id"`       //作者ID
 	AuthorName string `protobuf:"bytes,9,opt,name=author_name,json=authorName,proto3" json:"author_name"` //作者名称
 	Version    string `protobuf:"bytes,10,opt,name=version,proto3" json:"version"`                        //版本
