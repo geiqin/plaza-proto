@@ -24,10 +24,11 @@ message Dept {
     string  leader = 6;
     string  phone = 7;
     string  email = 8;
-    string  status = 9;
-    string	created_at	=10;
-    string	updated_at	=11;
-    repeated Dept children	=12;
+    int64	area_id	=9;
+    string  status = 10;
+    string	created_at	=11;
+    string	updated_at	=12;
+    repeated Dept children	=13;
 }
 
 
@@ -40,7 +41,8 @@ message DeptRequest {
     string	name	=5;
     int32	parent_id	=6;
     string  status = 7;
-    repeated  int32	 ids	=8;
+    int64	area_id	=8;
+    repeated  int32	 ids	=9;
 }
 
 message DeptData{
