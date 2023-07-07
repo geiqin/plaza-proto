@@ -1,0 +1,45 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//短信
+service SmsService { 
+    //短信发送
+    rpc SendMsg (Sms) returns (SmsResponse) {}
+    //短信获取
+    rpc Get (Sms) returns (SmsResponse) {}
+    //短信查询
+    rpc Search (Sms) returns (SmsResponse) {}
+}
+
+//验证码
+message Sms {
+    int64   id =1; //ID
+    string	created_at	=14;
+    string	updated_at	=15;
+}
+
+message SmsRequest {
+    int64 paged =1;
+    int64 page_size =2;
+    string sorting	=3;
+    int64 id = 4;
+    string type	=5;
+    string mobile	=6;
+    string code	=7;
+    int32	template_id	=8;
+    string is_check	=9;
+    string status	=10;
+    int64 user_id	=11;
+    string user_type	=12;
+}
+
+
+message SmsResponse {
+    Sms entity = 1;
+    common.Pager pager =2;
+    repeated Sms items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}

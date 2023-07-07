@@ -1,0 +1,60 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//验证码（短信/邮箱）
+service VerifyCodeService { 
+    //发送短信验证码
+    rpc SendSms (VerifyCode) returns (VerifyCodeResponse) {}
+    //检验短信验证码
+    rpc CheckSms (VerifyCode) returns (VerifyCodeResponse) {}
+
+    //发送邮件验证码
+    rpc SendEmail (VerifyCode) returns (VerifyCodeResponse) {}
+    //检验邮件验证码
+    rpc CheckEmail (VerifyCode) returns (VerifyCodeResponse) {}
+}
+
+//验证码
+message VerifyCode {
+    int64   id =1; //ID
+    string  code =2;//验证码
+    string  type =3;//发送类型：sms 短信方式，email 邮箱方式
+    string  module =4;//所属模块:register 注册验证码，login 登录验证码，forget 忘记密码
+    string  mobile =5;//接收手机号码
+    string  email =6;//接收邮件地址
+    int32   read_num =7;//已读取次数（比如最多不超过3次）
+    string  is_used =8;//是否已使用
+    string	used_time =9;//已使用时间
+    int64   user_id =10;//关联用户ID
+    string  user_type =11;//关联用户类型
+    map<string,string> params =12;//附加参数
+    string  status =13;//状态: 0待验证，1验证通过，2验证失败
+    string	created_at	=14;
+    string	updated_at	=15;
+}
+
+message VerifyCodeRequest {
+    int64 paged =1;
+    int64 page_size =2;
+    string sorting	=3;
+    int64 id = 4;
+    string	type	=5;
+    string	mobile	=6;
+    string	code	=7;
+    int32	template_id	=8;
+    string 	is_used	=9;
+    string	status	=10;
+    int64 user_id	=11;
+    string	user_type	=12;
+}
+
+
+message VerifyCodeResponse {
+    VerifyCode entity = 1;
+    common.Pager pager =2;
+    repeated VerifyCode items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}

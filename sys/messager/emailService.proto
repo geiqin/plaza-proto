@@ -1,0 +1,45 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//邮件
+service EmailService { 
+    //邮件发送
+    rpc SendMsg (Email) returns (EmailResponse) {}
+    //邮件获取
+    rpc Get (Email) returns (EmailResponse) {}
+    //邮件查询
+    rpc Search (Email) returns (EmailResponse) {}
+}
+
+//验证码
+message Email {
+    int64   id =1; //ID
+    string	created_at	=14;
+    string	updated_at	=15;
+}
+
+message EmailRequest {
+    int64 paged =1;
+    int64 page_size =2;
+    string sorting	=3;
+    int64 id = 4;
+    string	type	=5;
+    string	mobile	=6;
+    string	code	=7;
+    int32	template_id	=8;
+    string 	is_check	=9;
+    string	status	=10;
+    int64 user_id	=11;
+    string	user_type	=12;
+}
+
+
+message EmailResponse {
+    Email entity = 1;
+    common.Pager pager =2;
+    repeated Email items = 3;
+    common.Error error = 4;
+    common.Info info =5;
+}

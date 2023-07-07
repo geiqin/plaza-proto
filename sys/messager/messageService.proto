@@ -3,30 +3,35 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 
-//营销、通知等短信（非验证码）
+//消息通知
 service MessageService {
-    //发送信息
-    rpc Send (Message) returns (MessageResponse) {}
-    rpc Get (Message) returns (MessageResponse) {}
+    //消息增加
+    rpc Create (Message) returns (MessageResponse) {}
+    //消息删除
+    rpc Delete (MessageRequest) returns (MessageResponse) {}
+    //消息已读
+    rpc Read (MessageRequest) returns (MessageResponse) {}
+    //消息获取
+    rpc Get (MessageRequest) returns (MessageResponse) {}
+    //消息查询
     rpc Search (MessageRequest) returns (MessageResponse) {}
 
 }
 
 message Message {
-    int64	id	=4;
-    string	channel	=5;
-    string	type	=6;
-    string	mobile	=7;
-    string	code	=8;
-    string	mobile_list	=9;
-    string	params	=10;
-    string	template_id	=11;
-    string	signature_id	=12;
-    string	job_id	=13;
-    bool	succeed	=14;
-    string	succeed_at	=15;
-    string	created_at	=16;
-    string	updated_at	=17;
+    int64  id =1;//ID
+    int64  user_id =2;//用户ID
+    string user_type =3;//用户类型
+    string system_type =4;//系统类型（默认 default, 其他按照SYSTEM_TYPE常量类型）
+    string title =5;//类型：验证码，营销短信
+    string detail =6;//详情
+    int64  business_id =7;//业务id
+    string business_type =8;//业务类型，字符串（如：订单、充值、提现、等...）
+    string type =9;//消息类型（0普通通知, ...）
+    string is_read =10;//是否已读（0否, 1是）
+    string created_at	=11;
+    string updated_at	=12;
+    string deleted_at	=13;
 }
 
 message MessageRequest {
@@ -34,13 +39,14 @@ message MessageRequest {
     int64 page_size = 2;
     int64 top = 3;
     int64	id	=5;
-    string	type	=6;
-    string	mobile	=7;
-    string	code	=8;
-    int32	template_id	=9;
-    string	content	=10;
-    string	mobile_list	=11;
-    string	params	=12;
+    int64  user_id =6;//用户ID
+    string user_type =7;//用户类型
+    string system_type =8;//系统类型
+    int64  business_id =9;//业务id
+    string business_type =10;//业务类型，字符串（如：订单、充值、提现、等...）
+    string type =11;//消息类型（0普通通知, ...）
+    string is_read =12;//是否已读（0否, 1是）
+    repeated int64 ids =13;
 }
 
 message MessageData{

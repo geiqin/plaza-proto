@@ -4,8 +4,8 @@
 package services
 
 import (
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -43,9 +43,15 @@ func NewMessageServiceEndpoints() []*api.Endpoint {
 // Client API for MessageService service
 
 type MessageService interface {
-	//发送信息
-	Send(ctx context.Context, in *Message, opts ...client.CallOption) (*MessageResponse, error)
-	Get(ctx context.Context, in *Message, opts ...client.CallOption) (*MessageResponse, error)
+	//消息增加
+	Create(ctx context.Context, in *Message, opts ...client.CallOption) (*MessageResponse, error)
+	//消息删除
+	Delete(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
+	//消息已读
+	Read(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
+	//消息获取
+	Get(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
+	//消息查询
 	Search(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
 }
 
@@ -61,8 +67,8 @@ func NewMessageService(name string, c client.Client) MessageService {
 	}
 }
 
-func (c *messageService) Send(ctx context.Context, in *Message, opts ...client.CallOption) (*MessageResponse, error) {
-	req := c.c.NewRequest(c.name, "MessageService.Send", in)
+func (c *messageService) Create(ctx context.Context, in *Message, opts ...client.CallOption) (*MessageResponse, error) {
+	req := c.c.NewRequest(c.name, "MessageService.Create", in)
 	out := new(MessageResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -71,7 +77,27 @@ func (c *messageService) Send(ctx context.Context, in *Message, opts ...client.C
 	return out, nil
 }
 
-func (c *messageService) Get(ctx context.Context, in *Message, opts ...client.CallOption) (*MessageResponse, error) {
+func (c *messageService) Delete(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error) {
+	req := c.c.NewRequest(c.name, "MessageService.Delete", in)
+	out := new(MessageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageService) Read(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error) {
+	req := c.c.NewRequest(c.name, "MessageService.Read", in)
+	out := new(MessageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageService) Get(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error) {
 	req := c.c.NewRequest(c.name, "MessageService.Get", in)
 	out := new(MessageResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -94,16 +120,24 @@ func (c *messageService) Search(ctx context.Context, in *MessageRequest, opts ..
 // Server API for MessageService service
 
 type MessageServiceHandler interface {
-	//发送信息
-	Send(context.Context, *Message, *MessageResponse) error
-	Get(context.Context, *Message, *MessageResponse) error
+	//消息增加
+	Create(context.Context, *Message, *MessageResponse) error
+	//消息删除
+	Delete(context.Context, *MessageRequest, *MessageResponse) error
+	//消息已读
+	Read(context.Context, *MessageRequest, *MessageResponse) error
+	//消息获取
+	Get(context.Context, *MessageRequest, *MessageResponse) error
+	//消息查询
 	Search(context.Context, *MessageRequest, *MessageResponse) error
 }
 
 func RegisterMessageServiceHandler(s server.Server, hdlr MessageServiceHandler, opts ...server.HandlerOption) error {
 	type messageService interface {
-		Send(ctx context.Context, in *Message, out *MessageResponse) error
-		Get(ctx context.Context, in *Message, out *MessageResponse) error
+		Create(ctx context.Context, in *Message, out *MessageResponse) error
+		Delete(ctx context.Context, in *MessageRequest, out *MessageResponse) error
+		Read(ctx context.Context, in *MessageRequest, out *MessageResponse) error
+		Get(ctx context.Context, in *MessageRequest, out *MessageResponse) error
 		Search(ctx context.Context, in *MessageRequest, out *MessageResponse) error
 	}
 	type MessageService struct {
@@ -117,11 +151,19 @@ type messageServiceHandler struct {
 	MessageServiceHandler
 }
 
-func (h *messageServiceHandler) Send(ctx context.Context, in *Message, out *MessageResponse) error {
-	return h.MessageServiceHandler.Send(ctx, in, out)
+func (h *messageServiceHandler) Create(ctx context.Context, in *Message, out *MessageResponse) error {
+	return h.MessageServiceHandler.Create(ctx, in, out)
 }
 
-func (h *messageServiceHandler) Get(ctx context.Context, in *Message, out *MessageResponse) error {
+func (h *messageServiceHandler) Delete(ctx context.Context, in *MessageRequest, out *MessageResponse) error {
+	return h.MessageServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *messageServiceHandler) Read(ctx context.Context, in *MessageRequest, out *MessageResponse) error {
+	return h.MessageServiceHandler.Read(ctx, in, out)
+}
+
+func (h *messageServiceHandler) Get(ctx context.Context, in *MessageRequest, out *MessageResponse) error {
 	return h.MessageServiceHandler.Get(ctx, in, out)
 }
 
