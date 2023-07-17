@@ -43,7 +43,7 @@ func NewConfigureServiceEndpoints() []*api.Endpoint {
 // Client API for ConfigureService service
 
 type ConfigureService interface {
-	SetConfig(ctx context.Context, in *ConfigureData, opts ...client.CallOption) (*ConfigureResponse, error)
+	SetConfig(ctx context.Context, in *GlobalConfig, opts ...client.CallOption) (*ConfigureResponse, error)
 	GetConfig(ctx context.Context, in *ConfigureRequest, opts ...client.CallOption) (*ConfigureResponse, error)
 	GetDict(ctx context.Context, in *ConfigureRequest, opts ...client.CallOption) (*ConfigureDictResponse, error)
 }
@@ -60,7 +60,7 @@ func NewConfigureService(name string, c client.Client) ConfigureService {
 	}
 }
 
-func (c *configureService) SetConfig(ctx context.Context, in *ConfigureData, opts ...client.CallOption) (*ConfigureResponse, error) {
+func (c *configureService) SetConfig(ctx context.Context, in *GlobalConfig, opts ...client.CallOption) (*ConfigureResponse, error) {
 	req := c.c.NewRequest(c.name, "ConfigureService.SetConfig", in)
 	out := new(ConfigureResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -93,14 +93,14 @@ func (c *configureService) GetDict(ctx context.Context, in *ConfigureRequest, op
 // Server API for ConfigureService service
 
 type ConfigureServiceHandler interface {
-	SetConfig(context.Context, *ConfigureData, *ConfigureResponse) error
+	SetConfig(context.Context, *GlobalConfig, *ConfigureResponse) error
 	GetConfig(context.Context, *ConfigureRequest, *ConfigureResponse) error
 	GetDict(context.Context, *ConfigureRequest, *ConfigureDictResponse) error
 }
 
 func RegisterConfigureServiceHandler(s server.Server, hdlr ConfigureServiceHandler, opts ...server.HandlerOption) error {
 	type configureService interface {
-		SetConfig(ctx context.Context, in *ConfigureData, out *ConfigureResponse) error
+		SetConfig(ctx context.Context, in *GlobalConfig, out *ConfigureResponse) error
 		GetConfig(ctx context.Context, in *ConfigureRequest, out *ConfigureResponse) error
 		GetDict(ctx context.Context, in *ConfigureRequest, out *ConfigureDictResponse) error
 	}
@@ -115,7 +115,7 @@ type configureServiceHandler struct {
 	ConfigureServiceHandler
 }
 
-func (h *configureServiceHandler) SetConfig(ctx context.Context, in *ConfigureData, out *ConfigureResponse) error {
+func (h *configureServiceHandler) SetConfig(ctx context.Context, in *GlobalConfig, out *ConfigureResponse) error {
 	return h.ConfigureServiceHandler.SetConfig(ctx, in, out)
 }
 

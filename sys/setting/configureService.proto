@@ -6,7 +6,7 @@ import "baseInfoService.proto";
 
 //配置中心
 service ConfigureService {
-    rpc SetConfig (ConfigureData) returns (ConfigureResponse) {}
+    rpc SetConfig (GlobalConfig) returns (ConfigureResponse) {}
     rpc GetConfig (ConfigureRequest) returns (ConfigureResponse) {}
     rpc GetDict (ConfigureRequest) returns (ConfigureDictResponse) {}
 }
@@ -254,19 +254,8 @@ message StoreConfig {
     string common_store_customer_qrcode =5;//店铺二维码
 }
 
-
-message ConfigureRequest {
-    int64 id = 1;
-    string is_pull_const =2;//是否拉取常量数据（0否，1是）
-    string name =3;//名称
-    string type = 4;//类型：admin后台，home前台，common公共
-    string group = 5;
-    repeated string groups = 6;
-    repeated string names = 7;
-    repeated int64 ids = 8;
-}
-
-message ConfigureData {
+//全局配置
+message GlobalConfig  {
     //站点配置
     SiteBaseConfig site_base =1;
     SiteStateConfig site_state =2;
@@ -302,8 +291,19 @@ message ConfigureData {
     repeated ConstListData const_data =33;//常量数据
 }
 
+message ConfigureRequest {
+    int64 id = 1;
+    string is_pull_const =2;//是否拉取常量数据（0否，1是）
+    string name =3;//名称
+    string type = 4;//类型：admin后台，home前台，common公共
+    string group = 5;
+    repeated string groups = 6;
+    repeated string names = 7;
+    repeated int64 ids = 8;
+}
+
 message ConfigureResponse {
-    ConfigureData data = 1;
+    GlobalConfig data = 1;
     common.Error error = 2;
 }
 
