@@ -1,0 +1,67 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "spuService.proto";
+import "warehouseService.proto";
+
+service WarehouseGoodsService {
+    rpc Create (WarehouseGoods) returns (WarehouseGoodsResponse) {}
+    rpc Update (WarehouseGoods) returns (WarehouseGoodsResponse) {}
+    rpc Delete (WarehouseGoods) returns (WarehouseGoodsResponse) {}
+    rpc Get (WarehouseGoods) returns (WarehouseGoodsResponse) {}
+    rpc List (WarehouseGoodsRequest) returns (WarehouseGoodsResponse) {}
+    rpc Search (WarehouseGoodsRequest) returns (WarehouseGoodsResponse) {}
+}
+
+message WarehouseGoods {
+    int64  id =1;//ID
+    int64 warehouse_id =2;//仓库id
+    int64 spu_id =3;//商品id
+    int32  inventory =4;//总库存
+    string is_enable =5;//是否启用（0否，1是）
+    string created_at = 7;
+    string updated_at = 8;
+    Warehouse warehouse = 9;
+    Spu spu = 10;
+    repeated WarehouseGoodsSpec spec_list =11;
+}
+
+message WarehouseGoodsSpec {
+    int64  id =1;//ID
+    int64 warehouse_goods_id =2;//仓库商品id
+    int64 warehouse_id =3;//仓库id
+    int64 spu_id =4;//商品id
+    string md5_key =45;//MD5Key
+    repeated GoodsSpecValueItem spec =5;//规格值
+    string created_at = 7;
+    string updated_at = 8;
+}
+
+message GoodsSpecValueItem{
+    string type =1;
+    string value =2;
+}
+
+message WarehouseGoodsRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
+    int64 id = 4;
+    int64 warehouse_id =5;//仓库id
+    int64 spu_id =6;//商品id
+    int32  inventory =7;//总库存
+    string is_enable =8;//是否启用（0否，1是）
+    repeated int64 ids = 9;
+}
+
+message WarehouseGoodsData {
+    WarehouseGoods entity = 1;
+    common.Pager pager =2;
+    repeated WarehouseGoods items = 3;
+    common.Info info =4;
+}
+message WarehouseGoodsResponse {
+    WarehouseGoodsData data = 1;
+    common.Error error = 2;
+}

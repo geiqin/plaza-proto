@@ -26,12 +26,12 @@ type SpuBrowse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	MemberId  int64  `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id"`
-	SpuId     int64  `protobuf:"varint,3,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
-	CreatedAt string `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt string `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Spu       *Spu   `protobuf:"bytes,6,opt,name=spu,proto3" json:"spu"`
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	MemberId  int64  `protobuf:"varint,2,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
+	SpuId     int64  `protobuf:"varint,3,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`
+	CreatedAt string `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt string `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Spu       *Spu   `protobuf:"bytes,6,opt,name=spu,proto3" json:"spu,omitempty"`
 }
 
 func (x *SpuBrowse) Reset() {
@@ -113,11 +113,11 @@ type SpuBrowseRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
-	Id       int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	MemberId int64  `protobuf:"varint,5,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Id       int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	MemberId int64  `protobuf:"varint,5,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
 }
 
 func (x *SpuBrowseRequest) Reset() {
@@ -192,10 +192,10 @@ type SpuBrowseData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Count int64         `protobuf:"varint,1,opt,name=count,proto3" json:"count"`
-	Pager *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items []*SpuBrowse  `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info  *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Count int64         `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	Pager *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items []*SpuBrowse  `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info  *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *SpuBrowseData) Reset() {
@@ -263,8 +263,8 @@ type SpuBrowseResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *SpuBrowseData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *SpuBrowseData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *SpuBrowseResponse) Reset() {

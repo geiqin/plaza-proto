@@ -26,15 +26,15 @@ type CommentReply struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64         `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	FeedbackId  int64         `protobuf:"varint,2,opt,name=feedback_id,json=feedbackId,proto3" json:"feedback_id"`
-	Content     string        `protobuf:"bytes,3,opt,name=content,proto3" json:"content"`
-	CreatorId   int64         `protobuf:"varint,4,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`
-	CreatorName string        `protobuf:"bytes,5,opt,name=creator_name,json=creatorName,proto3" json:"creator_name"`
-	CreatorType string        `protobuf:"bytes,6,opt,name=creator_type,json=creatorType,proto3" json:"creator_type"`
-	CreatedAt   string        `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt   string        `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Attachments []*Attachment `protobuf:"bytes,9,rep,name=attachments,proto3" json:"attachments"`
+	Id          int64         `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	FeedbackId  int64         `protobuf:"varint,2,opt,name=feedback_id,json=feedbackId,proto3" json:"feedback_id,omitempty"`
+	Content     string        `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	CreatorId   int64         `protobuf:"varint,4,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
+	CreatorName string        `protobuf:"bytes,5,opt,name=creator_name,json=creatorName,proto3" json:"creator_name,omitempty"`
+	CreatorType string        `protobuf:"bytes,6,opt,name=creator_type,json=creatorType,proto3" json:"creator_type,omitempty"`
+	CreatedAt   string        `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt   string        `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Attachments []*Attachment `protobuf:"bytes,9,rep,name=attachments,proto3" json:"attachments,omitempty"`
 }
 
 func (x *CommentReply) Reset() {
@@ -137,19 +137,19 @@ type CommentReplyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged       int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize    int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Keywords    string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
-	Id          int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	FeedbackId  int64   `protobuf:"varint,5,opt,name=feedback_id,json=feedbackId,proto3" json:"feedback_id"`
-	Content     string  `protobuf:"bytes,6,opt,name=content,proto3" json:"content"`
-	Contact     string  `protobuf:"bytes,7,opt,name=contact,proto3" json:"contact"`
-	CreatorId   int64   `protobuf:"varint,8,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`
-	CreatorName string  `protobuf:"bytes,9,opt,name=creator_name,json=creatorName,proto3" json:"creator_name"`
-	CreatorType string  `protobuf:"bytes,10,opt,name=creator_type,json=creatorType,proto3" json:"creator_type"`
-	StartDate   string  `protobuf:"bytes,11,opt,name=start_date,json=startDate,proto3" json:"start_date"`
-	EndDate     string  `protobuf:"bytes,12,opt,name=end_date,json=endDate,proto3" json:"end_date"`
-	Ids         []int64 `protobuf:"varint,13,rep,packed,name=ids,proto3" json:"ids"`
+	Paged       int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize    int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Keywords    string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Id          int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	FeedbackId  int64   `protobuf:"varint,5,opt,name=feedback_id,json=feedbackId,proto3" json:"feedback_id,omitempty"`
+	Content     string  `protobuf:"bytes,6,opt,name=content,proto3" json:"content,omitempty"`
+	Contact     string  `protobuf:"bytes,7,opt,name=contact,proto3" json:"contact,omitempty"`
+	CreatorId   int64   `protobuf:"varint,8,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
+	CreatorName string  `protobuf:"bytes,9,opt,name=creator_name,json=creatorName,proto3" json:"creator_name,omitempty"`
+	CreatorType string  `protobuf:"bytes,10,opt,name=creator_type,json=creatorType,proto3" json:"creator_type,omitempty"`
+	StartDate   string  `protobuf:"bytes,11,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
+	EndDate     string  `protobuf:"bytes,12,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	Ids         []int64 `protobuf:"varint,13,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 }
 
 func (x *CommentReplyRequest) Reset() {
@@ -280,10 +280,10 @@ type CommentReplyData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *CommentReply   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*CommentReply `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   *common.Info    `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Entity *CommentReply   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*CommentReply `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   *common.Info    `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *CommentReplyData) Reset() {
@@ -351,8 +351,8 @@ type CommentReplyResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *CommentReplyData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error     `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *CommentReplyData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error     `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *CommentReplyResponse) Reset() {

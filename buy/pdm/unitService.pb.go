@@ -26,16 +26,16 @@ type Unit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	Type        string `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
-	Source      string `protobuf:"bytes,4,opt,name=source,proto3" json:"source"`
-	Sort        int32  `protobuf:"varint,5,opt,name=sort,proto3" json:"sort"`
-	CreatorId   int64  `protobuf:"varint,6,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`
-	CreatorName string `protobuf:"bytes,7,opt,name=creator_name,json=creatorName,proto3" json:"creator_name"`
-	Status      string `protobuf:"bytes,8,opt,name=status,proto3" json:"status"`
-	CreatedAt   string `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt   string `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id          int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Type        string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Source      string `protobuf:"bytes,4,opt,name=source,proto3" json:"source,omitempty"`
+	Sort        int32  `protobuf:"varint,5,opt,name=sort,proto3" json:"sort,omitempty"`
+	CreatorId   int64  `protobuf:"varint,6,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
+	CreatorName string `protobuf:"bytes,7,opt,name=creator_name,json=creatorName,proto3" json:"creator_name,omitempty"`
+	Status      string `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt   string `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt   string `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
 
 func (x *Unit) Reset() {
@@ -145,15 +145,15 @@ type UnitRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged     int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Keywords  string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
-	Id        int32  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	Name      string `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
-	Type      string `protobuf:"bytes,6,opt,name=type,proto3" json:"type"`
-	Source    string `protobuf:"bytes,7,opt,name=source,proto3" json:"source"`
-	CreatorId string `protobuf:"bytes,8,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`
-	Status    string `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
+	Paged     int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Keywords  string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Id        int32  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	Name      string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Type      string `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
+	Source    string `protobuf:"bytes,7,opt,name=source,proto3" json:"source,omitempty"`
+	CreatorId string `protobuf:"bytes,8,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
+	Status    string `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
 }
 
 func (x *UnitRequest) Reset() {
@@ -256,10 +256,10 @@ type UnitData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Unit         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*Unit       `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Entity *Unit         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*Unit       `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *UnitData) Reset() {
@@ -327,8 +327,8 @@ type UnitResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *UnitData     `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *UnitData     `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *UnitResponse) Reset() {

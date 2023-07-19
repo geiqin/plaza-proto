@@ -26,8 +26,8 @@ type SpecDetailData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SpecBase       *SpecDetailDataBase      `protobuf:"bytes,1,opt,name=spec_base,json=specBase,proto3" json:"spec_base"`
-	ExtendElements []*SpecDetailDataExtends `protobuf:"bytes,2,rep,name=extend_elements,json=extendElements,proto3" json:"extend_elements"`
+	SpecBase       *SpecDetailDataBase      `protobuf:"bytes,1,opt,name=spec_base,json=specBase,proto3" json:"spec_base,omitempty"`
+	ExtendElements []*SpecDetailDataExtends `protobuf:"bytes,2,rep,name=extend_elements,json=extendElements,proto3" json:"extend_elements,omitempty"`
 }
 
 func (x *SpecDetailData) Reset() {
@@ -81,16 +81,16 @@ type SpecDetailDataBase struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	GoodsId       int64  `protobuf:"varint,2,opt,name=goods_id,json=goodsId,proto3" json:"goods_id"`
-	SkuId         int64  `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	Price         int64  `protobuf:"varint,4,opt,name=price,proto3" json:"price"`
-	Inventory     int32  `protobuf:"varint,5,opt,name=inventory,proto3" json:"inventory"`
-	Weight        int64  `protobuf:"varint,6,opt,name=weight,proto3" json:"weight"`
-	Volume        int64  `protobuf:"varint,7,opt,name=volume,proto3" json:"volume"`
-	Coding        string `protobuf:"bytes,8,opt,name=coding,proto3" json:"coding"`
-	Barcode       string `protobuf:"bytes,9,opt,name=barcode,proto3" json:"barcode"`
-	OriginalPrice int64  `protobuf:"varint,10,opt,name=original_price,json=originalPrice,proto3" json:"original_price"`
+	Id            int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	GoodsId       int64  `protobuf:"varint,2,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
+	SkuId         int64  `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Price         int64  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
+	Inventory     int32  `protobuf:"varint,5,opt,name=inventory,proto3" json:"inventory,omitempty"`
+	Weight        int64  `protobuf:"varint,6,opt,name=weight,proto3" json:"weight,omitempty"`
+	Volume        int64  `protobuf:"varint,7,opt,name=volume,proto3" json:"volume,omitempty"`
+	Coding        string `protobuf:"bytes,8,opt,name=coding,proto3" json:"coding,omitempty"`
+	Barcode       string `protobuf:"bytes,9,opt,name=barcode,proto3" json:"barcode,omitempty"`
+	OriginalPrice int64  `protobuf:"varint,10,opt,name=original_price,json=originalPrice,proto3" json:"original_price,omitempty"`
 }
 
 func (x *SpecDetailDataBase) Reset() {
@@ -200,7 +200,7 @@ type SpecDetailDataExtends struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
 
 func (x *SpecDetailDataExtends) Reset() {
@@ -248,13 +248,13 @@ type PluginsPromotionData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                       //活动ID
-	Code              string   `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`                                                    //活动编码:如：coupon_20210101212
-	Title             string   `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`                                                  //活动标题
-	Type              string   `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`                                                    //活动类型:Coupon优惠劵/满减送/限时折扣/秒杀/拼团/通用
-	Subtype           string   `protobuf:"bytes,5,opt,name=subtype,proto3" json:"subtype"`                                              //活动子类型
-	Tag               string   `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag"`                                                      //标签
-	PreferentialItems []string `protobuf:"bytes,7,rep,name=preferential_items,json=preferentialItems,proto3" json:"preferential_items"` //优惠项目描述
+	Id                int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                       //活动ID
+	Code              string   `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`                                                    //活动编码:如：coupon_20210101212
+	Title             string   `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`                                                  //活动标题
+	Type              string   `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`                                                    //活动类型:Coupon优惠劵/满减送/限时折扣/秒杀/拼团/通用
+	Subtype           string   `protobuf:"bytes,5,opt,name=subtype,proto3" json:"subtype,omitempty"`                                              //活动子类型
+	Tag               string   `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`                                                      //标签
+	PreferentialItems []string `protobuf:"bytes,7,rep,name=preferential_items,json=preferentialItems,proto3" json:"preferential_items,omitempty"` //优惠项目描述
 }
 
 func (x *PluginsPromotionData) Reset() {
@@ -343,8 +343,8 @@ type CartTotalInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BuyNumber  int32 `protobuf:"varint,1,opt,name=buy_number,json=buyNumber,proto3" json:"buy_number"`
-	TotalPrice int64 `protobuf:"varint,2,opt,name=total_price,json=totalPrice,proto3" json:"total_price"`
+	BuyNumber  int32 `protobuf:"varint,1,opt,name=buy_number,json=buyNumber,proto3" json:"buy_number,omitempty"`
+	TotalPrice int64 `protobuf:"varint,2,opt,name=total_price,json=totalPrice,proto3" json:"total_price,omitempty"`
 }
 
 func (x *CartTotalInfo) Reset() {
@@ -398,12 +398,12 @@ type BuyButton struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Count  int32                `protobuf:"varint,1,opt,name=count,proto3" json:"count"`
-	Error  string               `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
-	IsBuy  bool                 `protobuf:"varint,3,opt,name=is_buy,json=isBuy,proto3" json:"is_buy"`
-	IsShow bool                 `protobuf:"varint,4,opt,name=is_show,json=isShow,proto3" json:"is_show"`
-	IsCart bool                 `protobuf:"varint,5,opt,name=is_cart,json=isCart,proto3" json:"is_cart"`
-	Data   []*BuyButtonDataList `protobuf:"bytes,6,rep,name=data,proto3" json:"data"`
+	Count  int32                `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	Error  string               `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	IsBuy  bool                 `protobuf:"varint,3,opt,name=is_buy,json=isBuy,proto3" json:"is_buy,omitempty"`
+	IsShow bool                 `protobuf:"varint,4,opt,name=is_show,json=isShow,proto3" json:"is_show,omitempty"`
+	IsCart bool                 `protobuf:"varint,5,opt,name=is_cart,json=isCart,proto3" json:"is_cart,omitempty"`
+	Data   []*BuyButtonDataList `protobuf:"bytes,6,rep,name=data,proto3" json:"data,omitempty"`
 }
 
 func (x *BuyButton) Reset() {
@@ -486,8 +486,8 @@ type MiddleTabsNav struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name  string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
-	Event string `protobuf:"bytes,2,opt,name=event,proto3" json:"event"`
+	Name  string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Event string `protobuf:"bytes,2,opt,name=event,proto3" json:"event,omitempty"`
 }
 
 func (x *MiddleTabsNav) Reset() {
@@ -542,9 +542,9 @@ type NavMoreList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
-	Url  string `protobuf:"bytes,2,opt,name=url,proto3" json:"url"`
-	Icon string `protobuf:"bytes,3,opt,name=icon,proto3" json:"icon"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Url  string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	Icon string `protobuf:"bytes,3,opt,name=icon,proto3" json:"icon,omitempty"`
 }
 
 func (x *NavMoreList) Reset() {
@@ -605,8 +605,8 @@ type PluginCouponData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Base *PluginCouponDataBaseInfo `protobuf:"bytes,1,opt,name=base,proto3" json:"base"`
-	Data *PluginCouponDataDataInfo `protobuf:"bytes,2,opt,name=data,proto3" json:"data"`
+	Base *PluginCouponDataBaseInfo `protobuf:"bytes,1,opt,name=base,proto3" json:"base,omitempty"`
+	Data *PluginCouponDataDataInfo `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 }
 
 func (x *PluginCouponData) Reset() {
@@ -660,8 +660,8 @@ type PluginIntellectToolsData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BaseBottom *IntellectBaseBottom `protobuf:"bytes,1,opt,name=base_bottom,json=baseBottom,proto3" json:"base_bottom"`
-	ContentTop *IntellectContentTop `protobuf:"bytes,2,opt,name=content_top,json=contentTop,proto3" json:"content_top"`
+	BaseBottom *IntellectBaseBottom `protobuf:"bytes,1,opt,name=base_bottom,json=baseBottom,proto3" json:"base_bottom,omitempty"`
+	ContentTop *IntellectContentTop `protobuf:"bytes,2,opt,name=content_top,json=contentTop,proto3" json:"content_top,omitempty"`
 }
 
 func (x *PluginIntellectToolsData) Reset() {
@@ -715,8 +715,8 @@ type IntellectBaseBottom struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Title string `protobuf:"bytes,1,opt,name=title,proto3" json:"title"`
-	Msg   string `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg"`
+	Title string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	Msg   string `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 }
 
 func (x *IntellectBaseBottom) Reset() {
@@ -770,8 +770,8 @@ type IntellectContentTop struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Title   string   `protobuf:"bytes,1,opt,name=title,proto3" json:"title"`
-	MsgList []string `protobuf:"bytes,2,rep,name=msg_list,json=msgList,proto3" json:"msg_list"`
+	Title   string   `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	MsgList []string `protobuf:"bytes,2,rep,name=msg_list,json=msgList,proto3" json:"msg_list,omitempty"`
 }
 
 func (x *IntellectContentTop) Reset() {
@@ -825,11 +825,11 @@ type PluginSeckillData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Icon       string                     `protobuf:"bytes,1,opt,name=icon,proto3" json:"icon"`
-	Title      string                     `protobuf:"bytes,2,opt,name=title,proto3" json:"title"`
-	IsValid    bool                       `protobuf:"varint,3,opt,name=is_valid,json=isValid,proto3" json:"is_valid"`
-	BgImageUrl string                     `protobuf:"bytes,4,opt,name=bg_image_url,json=bgImageUrl,proto3" json:"bg_image_url"`
-	Time       *PluginSeckillDataTimeInfo `protobuf:"bytes,5,opt,name=time,proto3" json:"time"`
+	Icon       string                     `protobuf:"bytes,1,opt,name=icon,proto3" json:"icon,omitempty"`
+	Title      string                     `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	IsValid    bool                       `protobuf:"varint,3,opt,name=is_valid,json=isValid,proto3" json:"is_valid,omitempty"`
+	BgImageUrl string                     `protobuf:"bytes,4,opt,name=bg_image_url,json=bgImageUrl,proto3" json:"bg_image_url,omitempty"`
+	Time       *PluginSeckillDataTimeInfo `protobuf:"bytes,5,opt,name=time,proto3" json:"time,omitempty"`
 }
 
 func (x *PluginSeckillData) Reset() {
@@ -904,15 +904,15 @@ type SearchDetailData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Goods                     *Goods                    `protobuf:"bytes,1,opt,name=goods,proto3" json:"goods"`
-	CartTotal                 *CartTotalInfo            `protobuf:"bytes,2,opt,name=cart_total,json=cartTotal,proto3" json:"cart_total"`
-	BuyButton                 *BuyButton                `protobuf:"bytes,3,opt,name=buy_button,json=buyButton,proto3" json:"buy_button"`
-	MiddleTabsNav             []*MiddleTabsNav          `protobuf:"bytes,4,rep,name=middle_tabs_nav,json=middleTabsNav,proto3" json:"middle_tabs_nav"`
-	NavMoreList               []*NavMoreList            `protobuf:"bytes,5,rep,name=nav_more_list,json=navMoreList,proto3" json:"nav_more_list"`
-	PluginsCouponData         *PluginCouponData         `protobuf:"bytes,6,opt,name=plugins_coupon_data,json=pluginsCouponData,proto3" json:"plugins_coupon_data"`
-	PluginsSeckillData        *PluginSeckillData        `protobuf:"bytes,7,opt,name=Plugins_seckill_data,json=PluginsSeckillData,proto3" json:"Plugins_seckill_data"`
-	PluginsPromotionData      *PluginsPromotionData     `protobuf:"bytes,8,opt,name=Plugins_promotion_data,json=PluginsPromotionData,proto3" json:"Plugins_promotion_data"`
-	PluginsIntellectToolsData *PluginIntellectToolsData `protobuf:"bytes,9,opt,name=plugins_intellect_tools_data,json=pluginsIntellectToolsData,proto3" json:"plugins_intellect_tools_data"`
+	Goods                     *Goods                    `protobuf:"bytes,1,opt,name=goods,proto3" json:"goods,omitempty"`
+	CartTotal                 *CartTotalInfo            `protobuf:"bytes,2,opt,name=cart_total,json=cartTotal,proto3" json:"cart_total,omitempty"`
+	BuyButton                 *BuyButton                `protobuf:"bytes,3,opt,name=buy_button,json=buyButton,proto3" json:"buy_button,omitempty"`
+	MiddleTabsNav             []*MiddleTabsNav          `protobuf:"bytes,4,rep,name=middle_tabs_nav,json=middleTabsNav,proto3" json:"middle_tabs_nav,omitempty"`
+	NavMoreList               []*NavMoreList            `protobuf:"bytes,5,rep,name=nav_more_list,json=navMoreList,proto3" json:"nav_more_list,omitempty"`
+	PluginsCouponData         *PluginCouponData         `protobuf:"bytes,6,opt,name=plugins_coupon_data,json=pluginsCouponData,proto3" json:"plugins_coupon_data,omitempty"`
+	PluginsSeckillData        *PluginSeckillData        `protobuf:"bytes,7,opt,name=Plugins_seckill_data,json=PluginsSeckillData,proto3" json:"Plugins_seckill_data,omitempty"`
+	PluginsPromotionData      *PluginsPromotionData     `protobuf:"bytes,8,opt,name=Plugins_promotion_data,json=PluginsPromotionData,proto3" json:"Plugins_promotion_data,omitempty"`
+	PluginsIntellectToolsData *PluginIntellectToolsData `protobuf:"bytes,9,opt,name=plugins_intellect_tools_data,json=pluginsIntellectToolsData,proto3" json:"plugins_intellect_tools_data,omitempty"`
 }
 
 func (x *SearchDetailData) Reset() {
@@ -1015,8 +1015,8 @@ type SearchDetailResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *SearchDetailData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error     `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *SearchDetailData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error     `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *SearchDetailResponse) Reset() {
@@ -1070,8 +1070,8 @@ type SearchMapInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Category map[string]string `protobuf:"bytes,1,rep,name=category,proto3" json:"category" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Brand    map[string]string `protobuf:"bytes,5,rep,name=brand,proto3" json:"brand" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Category map[string]string `protobuf:"bytes,1,rep,name=category,proto3" json:"category,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Brand    map[string]string `protobuf:"bytes,5,rep,name=brand,proto3" json:"brand,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *SearchMapInfo) Reset() {
@@ -1125,12 +1125,12 @@ type SearchIndexData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SearchMapInfo      *SearchMapInfo    `protobuf:"bytes,1,opt,name=search_map_info,json=searchMapInfo,proto3" json:"search_map_info"`
-	BrandList          []*Brand          `protobuf:"bytes,2,rep,name=brand_list,json=brandList,proto3" json:"brand_list"`
-	CategoryList       []*Term           `protobuf:"bytes,3,rep,name=category_list,json=categoryList,proto3" json:"category_list"`
-	ScreeningPriceList []*ScreeningPrice `protobuf:"bytes,4,rep,name=screening_price_list,json=screeningPriceList,proto3" json:"screening_price_list"`
-	GoodsParamsList    []string          `protobuf:"bytes,5,rep,name=goods_params_list,json=goodsParamsList,proto3" json:"goods_params_list"`
-	GoodsSpecList      map[string]string `protobuf:"bytes,6,rep,name=goods_spec_list,json=goodsSpecList,proto3" json:"goods_spec_list" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	SearchMapInfo      *SearchMapInfo    `protobuf:"bytes,1,opt,name=search_map_info,json=searchMapInfo,proto3" json:"search_map_info,omitempty"`
+	BrandList          []*Brand          `protobuf:"bytes,2,rep,name=brand_list,json=brandList,proto3" json:"brand_list,omitempty"`
+	CategoryList       []*Term           `protobuf:"bytes,3,rep,name=category_list,json=categoryList,proto3" json:"category_list,omitempty"`
+	ScreeningPriceList []*ScreeningPrice `protobuf:"bytes,4,rep,name=screening_price_list,json=screeningPriceList,proto3" json:"screening_price_list,omitempty"`
+	GoodsParamsList    []string          `protobuf:"bytes,5,rep,name=goods_params_list,json=goodsParamsList,proto3" json:"goods_params_list,omitempty"`
+	GoodsSpecList      map[string]string `protobuf:"bytes,6,rep,name=goods_spec_list,json=goodsSpecList,proto3" json:"goods_spec_list,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *SearchIndexData) Reset() {
@@ -1212,8 +1212,8 @@ type SearchIndexResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *SearchIndexData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error    `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *SearchIndexData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error    `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *SearchIndexResponse) Reset() {
@@ -1267,8 +1267,8 @@ type SearchListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Pager *common.Pager `protobuf:"bytes,1,opt,name=pager,proto3" json:"pager"`
-	Items []*Goods      `protobuf:"bytes,2,rep,name=items,proto3" json:"items"`
+	Pager *common.Pager `protobuf:"bytes,1,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items []*Goods      `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 }
 
 func (x *SearchListData) Reset() {
@@ -1322,8 +1322,8 @@ type SearchListResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *SearchListData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *SearchListData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *SearchListResponse) Reset() {
@@ -1377,7 +1377,7 @@ type SearchCategoryData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Category []*Term `protobuf:"bytes,1,rep,name=category,proto3" json:"category"`
+	Category []*Term `protobuf:"bytes,1,rep,name=category,proto3" json:"category,omitempty"`
 }
 
 func (x *SearchCategoryData) Reset() {
@@ -1424,8 +1424,8 @@ type SearchCategoryResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *SearchCategoryData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error       `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *SearchCategoryData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error       `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *SearchCategoryResponse) Reset() {
@@ -1479,8 +1479,8 @@ type SearchSpecDetailResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *SpecDetailData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *SpecDetailData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *SearchSpecDetailResponse) Reset() {
@@ -1534,8 +1534,8 @@ type SearchSpecTypeData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SpecType             []string              `protobuf:"bytes,1,rep,name=spec_type,json=specType,proto3" json:"spec_type"`
-	PluginsWholesaleData *PluginsWholesaleData `protobuf:"bytes,2,opt,name=plugins_wholesale_data,json=pluginsWholesaleData,proto3" json:"plugins_wholesale_data"`
+	SpecType             []string              `protobuf:"bytes,1,rep,name=spec_type,json=specType,proto3" json:"spec_type,omitempty"`
+	PluginsWholesaleData *PluginsWholesaleData `protobuf:"bytes,2,opt,name=plugins_wholesale_data,json=pluginsWholesaleData,proto3" json:"plugins_wholesale_data,omitempty"`
 }
 
 func (x *SearchSpecTypeData) Reset() {
@@ -1589,7 +1589,7 @@ type PluginsWholesaleData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
 
 func (x *PluginsWholesaleData) Reset() {
@@ -1636,8 +1636,8 @@ type SearchSpecTypeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *SearchSpecTypeData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error       `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *SearchSpecTypeData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error       `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *SearchSpecTypeResponse) Reset() {
@@ -1691,35 +1691,35 @@ type SearchRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged                int64          `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize             int64          `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Keywords             string         `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
-	SkuId                int64          `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	SkuSn                string         `protobuf:"bytes,5,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn"`
-	SpuId                int64          `protobuf:"varint,6,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
-	Code                 string         `protobuf:"bytes,7,opt,name=code,proto3" json:"code"`
-	Title                string         `protobuf:"bytes,8,opt,name=title,proto3" json:"title"`
-	Type                 string         `protobuf:"bytes,9,opt,name=type,proto3" json:"type"`
-	ParentId             int64          `protobuf:"varint,10,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
-	CategoryId           int64          `protobuf:"varint,11,opt,name=category_id,json=categoryId,proto3" json:"category_id"`
-	TermId               int64          `protobuf:"varint,12,opt,name=term_id,json=termId,proto3" json:"term_id"`
-	TermName             string         `protobuf:"bytes,13,opt,name=term_name,json=termName,proto3" json:"term_name"`
-	BrandId              int32          `protobuf:"varint,14,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`
-	ShopId               int64          `protobuf:"varint,15,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`
-	Status               string         `protobuf:"bytes,16,opt,name=status,proto3" json:"status"`
-	StartDate            string         `protobuf:"bytes,17,opt,name=start_date,json=startDate,proto3" json:"start_date"`
-	EndDate              string         `protobuf:"bytes,18,opt,name=end_date,json=endDate,proto3" json:"end_date"`
-	ParamId              int32          `protobuf:"varint,19,opt,name=param_id,json=paramId,proto3" json:"param_id"`
-	ParamValue           string         `protobuf:"bytes,20,opt,name=param_value,json=paramValue,proto3" json:"param_value"`
-	TagId                int32          `protobuf:"varint,21,opt,name=tag_id,json=tagId,proto3" json:"tag_id"`
-	TagName              string         `protobuf:"bytes,22,opt,name=tag_name,json=tagName,proto3" json:"tag_name"`
-	Subtype              string         `protobuf:"bytes,23,opt,name=subtype,proto3" json:"subtype"`
-	Specs                []*SpecReqInfo `protobuf:"bytes,24,rep,name=specs,proto3" json:"specs"`
-	BrandIds             []int32        `protobuf:"varint,25,rep,packed,name=brand_ids,json=brandIds,proto3" json:"brand_ids"`
-	CategoryIds          []int64        `protobuf:"varint,26,rep,packed,name=category_ids,json=categoryIds,proto3" json:"category_ids"`
-	OrderByField         string         `protobuf:"bytes,27,opt,name=order_by_field,json=orderByField,proto3" json:"order_by_field"`
-	OrderByType          string         `protobuf:"bytes,28,opt,name=order_by_type,json=orderByType,proto3" json:"order_by_type"`
-	ScreeningPriceValues []string       `protobuf:"bytes,29,rep,name=screening_price_values,json=screeningPriceValues,proto3" json:"screening_price_values"`
+	Paged                int64          `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize             int64          `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Keywords             string         `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	SkuId                int64          `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	SkuSn                string         `protobuf:"bytes,5,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn,omitempty"`
+	SpuId                int64          `protobuf:"varint,6,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`
+	Code                 string         `protobuf:"bytes,7,opt,name=code,proto3" json:"code,omitempty"`
+	Title                string         `protobuf:"bytes,8,opt,name=title,proto3" json:"title,omitempty"`
+	Type                 string         `protobuf:"bytes,9,opt,name=type,proto3" json:"type,omitempty"`
+	ParentId             int64          `protobuf:"varint,10,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	CategoryId           int64          `protobuf:"varint,11,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	TermId               int64          `protobuf:"varint,12,opt,name=term_id,json=termId,proto3" json:"term_id,omitempty"`
+	TermName             string         `protobuf:"bytes,13,opt,name=term_name,json=termName,proto3" json:"term_name,omitempty"`
+	BrandId              int32          `protobuf:"varint,14,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
+	ShopId               int64          `protobuf:"varint,15,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	Status               string         `protobuf:"bytes,16,opt,name=status,proto3" json:"status,omitempty"`
+	StartDate            string         `protobuf:"bytes,17,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
+	EndDate              string         `protobuf:"bytes,18,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	ParamId              int32          `protobuf:"varint,19,opt,name=param_id,json=paramId,proto3" json:"param_id,omitempty"`
+	ParamValue           string         `protobuf:"bytes,20,opt,name=param_value,json=paramValue,proto3" json:"param_value,omitempty"`
+	TagId                int32          `protobuf:"varint,21,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
+	TagName              string         `protobuf:"bytes,22,opt,name=tag_name,json=tagName,proto3" json:"tag_name,omitempty"`
+	Subtype              string         `protobuf:"bytes,23,opt,name=subtype,proto3" json:"subtype,omitempty"`
+	Specs                []*SpecReqInfo `protobuf:"bytes,24,rep,name=specs,proto3" json:"specs,omitempty"`
+	BrandIds             []int32        `protobuf:"varint,25,rep,packed,name=brand_ids,json=brandIds,proto3" json:"brand_ids,omitempty"`
+	CategoryIds          []int64        `protobuf:"varint,26,rep,packed,name=category_ids,json=categoryIds,proto3" json:"category_ids,omitempty"`
+	OrderByField         string         `protobuf:"bytes,27,opt,name=order_by_field,json=orderByField,proto3" json:"order_by_field,omitempty"`
+	OrderByType          string         `protobuf:"bytes,28,opt,name=order_by_type,json=orderByType,proto3" json:"order_by_type,omitempty"`
+	ScreeningPriceValues []string       `protobuf:"bytes,29,rep,name=screening_price_values,json=screeningPriceValues,proto3" json:"screening_price_values,omitempty"`
 }
 
 func (x *SearchRequest) Reset() {
@@ -1962,8 +1962,8 @@ type SpecReqInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type  string `protobuf:"bytes,1,opt,name=type,proto3" json:"type"`
-	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value"`
+	Type  string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *SpecReqInfo) Reset() {
@@ -2017,12 +2017,12 @@ type BuyButtonDataList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Color string `protobuf:"bytes,1,opt,name=color,proto3" json:"color"`
-	Type  string `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`
-	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
-	Name  string `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
-	Class string `protobuf:"bytes,5,opt,name=class,proto3" json:"class"`
-	Icon  string `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon"`
+	Color string `protobuf:"bytes,1,opt,name=color,proto3" json:"color,omitempty"`
+	Type  string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Name  string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Class string `protobuf:"bytes,5,opt,name=class,proto3" json:"class,omitempty"`
+	Icon  string `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
 }
 
 func (x *BuyButtonDataList) Reset() {
@@ -2104,14 +2104,14 @@ type PluginCouponDataBaseInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ApplicationName     string `protobuf:"bytes,1,opt,name=application_name,json=applicationName,proto3" json:"application_name"`
-	BannerImageUrl      string `protobuf:"bytes,2,opt,name=banner_image_url,json=bannerImageUrl,proto3" json:"banner_image_url"`
-	BannerBgColor       string `protobuf:"bytes,3,opt,name=banner_bg_color,json=bannerBgColor,proto3" json:"banner_bg_color"`
-	ShopApplicationName string `protobuf:"bytes,4,opt,name=shop_application_name,json=shopApplicationName,proto3" json:"shop_application_name"`
-	IsRepeatReceive     bool   `protobuf:"varint,5,opt,name=is_repeat_receive,json=isRepeatReceive,proto3" json:"is_repeat_receive"`
-	IsShopCoupon        bool   `protobuf:"varint,6,opt,name=is_shop_coupon,json=isShopCoupon,proto3" json:"is_shop_coupon"`
-	IsShopNavCoupon     bool   `protobuf:"varint,7,opt,name=is_shop_nav_coupon,json=isShopNavCoupon,proto3" json:"is_shop_nav_coupon"`
-	Url                 string `protobuf:"bytes,8,opt,name=url,proto3" json:"url"`
+	ApplicationName     string `protobuf:"bytes,1,opt,name=application_name,json=applicationName,proto3" json:"application_name,omitempty"`
+	BannerImageUrl      string `protobuf:"bytes,2,opt,name=banner_image_url,json=bannerImageUrl,proto3" json:"banner_image_url,omitempty"`
+	BannerBgColor       string `protobuf:"bytes,3,opt,name=banner_bg_color,json=bannerBgColor,proto3" json:"banner_bg_color,omitempty"`
+	ShopApplicationName string `protobuf:"bytes,4,opt,name=shop_application_name,json=shopApplicationName,proto3" json:"shop_application_name,omitempty"`
+	IsRepeatReceive     bool   `protobuf:"varint,5,opt,name=is_repeat_receive,json=isRepeatReceive,proto3" json:"is_repeat_receive,omitempty"`
+	IsShopCoupon        bool   `protobuf:"varint,6,opt,name=is_shop_coupon,json=isShopCoupon,proto3" json:"is_shop_coupon,omitempty"`
+	IsShopNavCoupon     bool   `protobuf:"varint,7,opt,name=is_shop_nav_coupon,json=isShopNavCoupon,proto3" json:"is_shop_nav_coupon,omitempty"`
+	Url                 string `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
 }
 
 func (x *PluginCouponDataBaseInfo) Reset() {
@@ -2207,23 +2207,23 @@ type PluginCouponDataDataInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	ShopId           int64  `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`
-	Name             string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	Desc             string `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc"`
-	BgColor          string `protobuf:"bytes,5,opt,name=bg_color,json=bgColor,proto3" json:"bg_color"`
-	Type             string `protobuf:"bytes,6,opt,name=type,proto3" json:"type"`
-	DiscountValue    string `protobuf:"bytes,7,opt,name=discount_value,json=discountValue,proto3" json:"discount_value"`
-	IsUserReceive    bool   `protobuf:"varint,8,opt,name=is_user_receive,json=isUserReceive,proto3" json:"is_user_receive"`
-	IsRegisterSend   bool   `protobuf:"varint,9,opt,name=is_register_send,json=isRegisterSend,proto3" json:"is_register_send"`
-	IsOperable       bool   `protobuf:"varint,10,opt,name=is_operable,json=isOperable,proto3" json:"is_operable"`
-	IsOperableName   bool   `protobuf:"varint,11,opt,name=is_operable_name,json=isOperableName,proto3" json:"is_operable_name"`
-	TypeName         string `protobuf:"bytes,12,opt,name=type_name,json=typeName,proto3" json:"type_name"`
-	TypeUnit         string `protobuf:"bytes,13,opt,name=type_unit,json=typeUnit,proto3" json:"type_unit"`
-	BgColorName      string `protobuf:"bytes,14,opt,name=bg_color_name,json=bgColorName,proto3" json:"bg_color_name"`
-	BgColorValue     string `protobuf:"bytes,15,opt,name=bg_color_value,json=bgColorValue,proto3" json:"bg_color_value"`
-	ExpireTypeName   string `protobuf:"bytes,16,opt,name=expire_type_name,json=expireTypeName,proto3" json:"expire_type_name"`
-	UseLimitTypeName string `protobuf:"bytes,17,opt,name=use_limit_type_name,json=useLimitTypeName,proto3" json:"use_limit_type_name"`
+	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ShopId           int64  `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	Name             string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Desc             string `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
+	BgColor          string `protobuf:"bytes,5,opt,name=bg_color,json=bgColor,proto3" json:"bg_color,omitempty"`
+	Type             string `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
+	DiscountValue    string `protobuf:"bytes,7,opt,name=discount_value,json=discountValue,proto3" json:"discount_value,omitempty"`
+	IsUserReceive    bool   `protobuf:"varint,8,opt,name=is_user_receive,json=isUserReceive,proto3" json:"is_user_receive,omitempty"`
+	IsRegisterSend   bool   `protobuf:"varint,9,opt,name=is_register_send,json=isRegisterSend,proto3" json:"is_register_send,omitempty"`
+	IsOperable       bool   `protobuf:"varint,10,opt,name=is_operable,json=isOperable,proto3" json:"is_operable,omitempty"`
+	IsOperableName   bool   `protobuf:"varint,11,opt,name=is_operable_name,json=isOperableName,proto3" json:"is_operable_name,omitempty"`
+	TypeName         string `protobuf:"bytes,12,opt,name=type_name,json=typeName,proto3" json:"type_name,omitempty"`
+	TypeUnit         string `protobuf:"bytes,13,opt,name=type_unit,json=typeUnit,proto3" json:"type_unit,omitempty"`
+	BgColorName      string `protobuf:"bytes,14,opt,name=bg_color_name,json=bgColorName,proto3" json:"bg_color_name,omitempty"`
+	BgColorValue     string `protobuf:"bytes,15,opt,name=bg_color_value,json=bgColorValue,proto3" json:"bg_color_value,omitempty"`
+	ExpireTypeName   string `protobuf:"bytes,16,opt,name=expire_type_name,json=expireTypeName,proto3" json:"expire_type_name,omitempty"`
+	UseLimitTypeName string `protobuf:"bytes,17,opt,name=use_limit_type_name,json=useLimitTypeName,proto3" json:"use_limit_type_name,omitempty"`
 }
 
 func (x *PluginCouponDataDataInfo) Reset() {
@@ -2382,11 +2382,11 @@ type PluginSeckillDataTimeInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Hours   int64  `protobuf:"varint,1,opt,name=hours,proto3" json:"hours"`
-	Minutes int64  `protobuf:"varint,2,opt,name=minutes,proto3" json:"minutes"`
-	Seconds int64  `protobuf:"varint,3,opt,name=seconds,proto3" json:"seconds"`
-	Status  string `protobuf:"bytes,4,opt,name=status,proto3" json:"status"`
-	Msg     string `protobuf:"bytes,5,opt,name=msg,proto3" json:"msg"`
+	Hours   int64  `protobuf:"varint,1,opt,name=hours,proto3" json:"hours,omitempty"`
+	Minutes int64  `protobuf:"varint,2,opt,name=minutes,proto3" json:"minutes,omitempty"`
+	Seconds int64  `protobuf:"varint,3,opt,name=seconds,proto3" json:"seconds,omitempty"`
+	Status  string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	Msg     string `protobuf:"bytes,5,opt,name=msg,proto3" json:"msg,omitempty"`
 }
 
 func (x *PluginSeckillDataTimeInfo) Reset() {

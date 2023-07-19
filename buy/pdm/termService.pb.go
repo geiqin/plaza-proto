@@ -26,28 +26,28 @@ type Term struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Coding            string   `protobuf:"bytes,2,opt,name=coding,proto3" json:"coding"`
-	Name              string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	ViceName          string   `protobuf:"bytes,4,opt,name=vice_name,json=viceName,proto3" json:"vice_name"`
-	ParentId          int64    `protobuf:"varint,5,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
-	Describe          string   `protobuf:"bytes,6,opt,name=describe,proto3" json:"describe"`
-	IconUrl           string   `protobuf:"bytes,7,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`
-	BgColor           string   `protobuf:"bytes,9,opt,name=bg_color,json=bgColor,proto3" json:"bg_color"`
-	IsHomeRecommended string   `protobuf:"bytes,10,opt,name=is_home_recommended,json=isHomeRecommended,proto3" json:"is_home_recommended"`
-	StyleType         string   `protobuf:"bytes,11,opt,name=style_type,json=styleType,proto3" json:"style_type"`
-	ShowLimit         int32    `protobuf:"varint,12,opt,name=show_limit,json=showLimit,proto3" json:"show_limit"`
-	SeoTitle          string   `protobuf:"bytes,13,opt,name=seo_title,json=seoTitle,proto3" json:"seo_title"`
-	SeoKeywords       string   `protobuf:"bytes,14,opt,name=seo_keywords,json=seoKeywords,proto3" json:"seo_keywords"`
-	SeoDesc           string   `protobuf:"bytes,15,opt,name=seo_desc,json=seoDesc,proto3" json:"seo_desc"`
-	DeptPath          string   `protobuf:"bytes,16,opt,name=dept_path,json=deptPath,proto3" json:"dept_path"`
-	Sort              int32    `protobuf:"varint,17,opt,name=sort,proto3" json:"sort"`
-	Status            string   `protobuf:"bytes,18,opt,name=status,proto3" json:"status"`
-	CreatedAt         string   `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt         string   `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Parent            *Term    `protobuf:"bytes,21,opt,name=parent,proto3" json:"parent"`
-	Children          []*Term  `protobuf:"bytes,22,rep,name=children,proto3" json:"children"`
-	GoodsList         []*Goods `protobuf:"bytes,23,rep,name=goods_list,json=goodsList,proto3" json:"goods_list"`
+	Id                int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Coding            string   `protobuf:"bytes,2,opt,name=coding,proto3" json:"coding,omitempty"`
+	Name              string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	ViceName          string   `protobuf:"bytes,4,opt,name=vice_name,json=viceName,proto3" json:"vice_name,omitempty"`
+	ParentId          int64    `protobuf:"varint,5,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	Describe          string   `protobuf:"bytes,6,opt,name=describe,proto3" json:"describe,omitempty"`
+	IconUrl           string   `protobuf:"bytes,7,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url,omitempty"`
+	BgColor           string   `protobuf:"bytes,9,opt,name=bg_color,json=bgColor,proto3" json:"bg_color,omitempty"`
+	IsHomeRecommended string   `protobuf:"bytes,10,opt,name=is_home_recommended,json=isHomeRecommended,proto3" json:"is_home_recommended,omitempty"`
+	StyleType         string   `protobuf:"bytes,11,opt,name=style_type,json=styleType,proto3" json:"style_type,omitempty"`
+	ShowLimit         int32    `protobuf:"varint,12,opt,name=show_limit,json=showLimit,proto3" json:"show_limit,omitempty"`
+	SeoTitle          string   `protobuf:"bytes,13,opt,name=seo_title,json=seoTitle,proto3" json:"seo_title,omitempty"`
+	SeoKeywords       string   `protobuf:"bytes,14,opt,name=seo_keywords,json=seoKeywords,proto3" json:"seo_keywords,omitempty"`
+	SeoDesc           string   `protobuf:"bytes,15,opt,name=seo_desc,json=seoDesc,proto3" json:"seo_desc,omitempty"`
+	DeptPath          string   `protobuf:"bytes,16,opt,name=dept_path,json=deptPath,proto3" json:"dept_path,omitempty"`
+	Sort              int32    `protobuf:"varint,17,opt,name=sort,proto3" json:"sort,omitempty"`
+	Status            string   `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt         string   `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt         string   `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Parent            *Term    `protobuf:"bytes,21,opt,name=parent,proto3" json:"parent,omitempty"`
+	Children          []*Term  `protobuf:"bytes,22,rep,name=children,proto3" json:"children,omitempty"`
+	GoodsList         []*Goods `protobuf:"bytes,23,rep,name=goods_list,json=goodsList,proto3" json:"goods_list,omitempty"`
 }
 
 func (x *Term) Reset() {
@@ -241,17 +241,17 @@ type TermRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged             int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize          int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Keywords          string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
-	Id                int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	ParentId          int64   `protobuf:"varint,5,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
-	Coding            string  `protobuf:"bytes,6,opt,name=coding,proto3" json:"coding"`
-	Name              string  `protobuf:"bytes,7,opt,name=name,proto3" json:"name"`
-	IsHomeRecommended string  `protobuf:"bytes,8,opt,name=is_home_recommended,json=isHomeRecommended,proto3" json:"is_home_recommended"`
-	Status            string  `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
-	Top               int32   `protobuf:"varint,10,opt,name=top,proto3" json:"top"`
-	Ids               []int64 `protobuf:"varint,11,rep,packed,name=ids,proto3" json:"ids"`
+	Paged             int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize          int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Keywords          string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Id                int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	ParentId          int64   `protobuf:"varint,5,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	Coding            string  `protobuf:"bytes,6,opt,name=coding,proto3" json:"coding,omitempty"`
+	Name              string  `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
+	IsHomeRecommended string  `protobuf:"bytes,8,opt,name=is_home_recommended,json=isHomeRecommended,proto3" json:"is_home_recommended,omitempty"`
+	Status            string  `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
+	Top               int32   `protobuf:"varint,10,opt,name=top,proto3" json:"top,omitempty"`
+	Ids               []int64 `protobuf:"varint,11,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 }
 
 func (x *TermRequest) Reset() {
@@ -368,10 +368,10 @@ type TermData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Term         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*Term       `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Entity *Term         `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*Term       `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *TermData) Reset() {
@@ -439,8 +439,8 @@ type TermResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *TermData     `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *TermData     `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *TermResponse) Reset() {

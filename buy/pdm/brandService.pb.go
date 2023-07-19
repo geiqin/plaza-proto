@@ -26,17 +26,17 @@ type Brand struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	LogoId    int64  `protobuf:"varint,3,opt,name=logo_id,json=logoId,proto3" json:"logo_id"`
-	LogoUrl   string `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url"`
-	Letter    string `protobuf:"bytes,5,opt,name=letter,proto3" json:"letter"`
-	Website   string `protobuf:"bytes,6,opt,name=website,proto3" json:"website"`
-	Desc      string `protobuf:"bytes,7,opt,name=desc,proto3" json:"desc"`
-	Sort      int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort"`
-	SpuNum    int32  `protobuf:"varint,9,opt,name=spu_num,json=spuNum,proto3" json:"spu_num"`
-	CreatedAt string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id        int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	LogoId    int64  `protobuf:"varint,3,opt,name=logo_id,json=logoId,proto3" json:"logo_id,omitempty"`
+	LogoUrl   string `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
+	Letter    string `protobuf:"bytes,5,opt,name=letter,proto3" json:"letter,omitempty"`
+	Website   string `protobuf:"bytes,6,opt,name=website,proto3" json:"website,omitempty"`
+	Desc      string `protobuf:"bytes,7,opt,name=desc,proto3" json:"desc,omitempty"`
+	Sort      int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort,omitempty"`
+	SpuNum    int32  `protobuf:"varint,9,opt,name=spu_num,json=spuNum,proto3" json:"spu_num,omitempty"`
+	CreatedAt string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
 
 func (x *Brand) Reset() {
@@ -153,11 +153,11 @@ type BrandRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
-	Id       int32  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	Name     string `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Id       int32  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	Name     string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 }
 
 func (x *BrandRequest) Reset() {
@@ -232,10 +232,10 @@ type BrandData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Brand        `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*Brand      `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Entity *Brand        `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*Brand      `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *BrandData) Reset() {
@@ -303,8 +303,8 @@ type BrandResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *BrandData    `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Data  *BrandData    `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *BrandResponse) Reset() {

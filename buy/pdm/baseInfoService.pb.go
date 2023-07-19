@@ -25,8 +25,8 @@ type GoodsSpecBase struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Title  string   `protobuf:"bytes,1,opt,name=title,proto3" json:"title"`
-	Values []string `protobuf:"bytes,2,rep,name=values,proto3" json:"values"`
+	Title  string   `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	Values []string `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`
 }
 
 func (x *GoodsSpecBase) Reset() {
@@ -80,7 +80,7 @@ type GoodsSpecification struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Choose []*GoodsSpecChoose `protobuf:"bytes,1,rep,name=choose,proto3" json:"choose"`
+	Choose []*GoodsSpecChoose `protobuf:"bytes,1,rep,name=choose,proto3" json:"choose,omitempty"`
 }
 
 func (x *GoodsSpecification) Reset() {
@@ -127,10 +127,10 @@ type GoodsSpecChoose struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id      int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name    string                  `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	GoodsId int64                   `protobuf:"varint,3,opt,name=goods_id,json=goodsId,proto3" json:"goods_id"`
-	Value   []*GoodsSpecChooseValue `protobuf:"bytes,4,rep,name=value,proto3" json:"value"`
+	Id      int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name    string                  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	GoodsId int64                   `protobuf:"varint,3,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
+	Value   []*GoodsSpecChooseValue `protobuf:"bytes,4,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *GoodsSpecChoose) Reset() {
@@ -198,8 +198,8 @@ type GoodsSpecChooseValue struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name     string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
-	ImageUrl string `protobuf:"bytes,2,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
+	Name     string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	ImageUrl string `protobuf:"bytes,2,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 }
 
 func (x *GoodsSpecChooseValue) Reset() {
@@ -253,8 +253,8 @@ type GoodsParameter struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Title  string   `protobuf:"bytes,1,opt,name=title,proto3" json:"title"`
-	Values []string `protobuf:"bytes,2,rep,name=values,proto3" json:"values"`
+	Title  string   `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	Values []string `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`
 }
 
 func (x *GoodsParameter) Reset() {
@@ -308,9 +308,9 @@ type SpecTypeProperty struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SpecId   int64                    `protobuf:"varint,1,opt,name=spec_id,json=specId,proto3" json:"spec_id"`
-	SpecName string                   `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3" json:"spec_name"`
-	Values   []*SpecTypePropertyValue `protobuf:"bytes,3,rep,name=values,proto3" json:"values"`
+	SpecId   int64                    `protobuf:"varint,1,opt,name=spec_id,json=specId,proto3" json:"spec_id,omitempty"`
+	SpecName string                   `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3" json:"spec_name,omitempty"`
+	Values   []*SpecTypePropertyValue `protobuf:"bytes,3,rep,name=values,proto3" json:"values,omitempty"`
 }
 
 func (x *SpecTypeProperty) Reset() {
@@ -371,10 +371,10 @@ type SpecificationData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SpecId    int32  `protobuf:"varint,1,opt,name=spec_id,json=specId,proto3" json:"spec_id"`
-	SpecName  string `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3" json:"spec_name"`
-	SpecValue string `protobuf:"bytes,3,opt,name=spec_value,json=specValue,proto3" json:"spec_value"`
-	ImageUrl  string `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
+	SpecId    int32  `protobuf:"varint,1,opt,name=spec_id,json=specId,proto3" json:"spec_id,omitempty"`
+	SpecName  string `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3" json:"spec_name,omitempty"`
+	SpecValue string `protobuf:"bytes,3,opt,name=spec_value,json=specValue,proto3" json:"spec_value,omitempty"`
+	ImageUrl  string `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 }
 
 func (x *SpecificationData) Reset() {
@@ -442,9 +442,9 @@ type SpecTypePropertyValue struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name     string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
-	ImageId  int64  `protobuf:"varint,2,opt,name=image_id,json=imageId,proto3" json:"image_id"`
-	ImageUrl string `protobuf:"bytes,3,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
+	Name     string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	ImageId  int64  `protobuf:"varint,2,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	ImageUrl string `protobuf:"bytes,3,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 }
 
 func (x *SpecTypePropertyValue) Reset() {
