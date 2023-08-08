@@ -26,25 +26,25 @@ type Warehouse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                     //ID
-	Name         string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                  //名称
-	Alias        string `protobuf:"bytes,3,opt,name=alias,proto3" json:"alias,omitempty"`                                //别名
-	Level        int32  `protobuf:"varint,4,opt,name=level,proto3" json:"level,omitempty"`                               //权重（数字越大权重越高）
-	ContactName  string `protobuf:"bytes,5,opt,name=contact_name,json=contactName,proto3" json:"contact_name,omitempty"` //联系人姓名
-	ContactTel   string `protobuf:"bytes,6,opt,name=contact_tel,json=contactTel,proto3" json:"contact_tel,omitempty"`    //联系电话
-	ProvinceId   int64  `protobuf:"varint,7,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"`   //所在省
-	CityId       int64  `protobuf:"varint,8,opt,name=city_id,json=cityId,proto3" json:"city_id,omitempty"`               //所在市
-	CountyId     int64  `protobuf:"varint,9,opt,name=county_id,json=countyId,proto3" json:"county_id,omitempty"`         //所在县/区
-	Address      string `protobuf:"bytes,10,opt,name=address,proto3" json:"address,omitempty"`                           //详细地址
-	Lng          string `protobuf:"bytes,11,opt,name=lng,proto3" json:"lng,omitempty"`                                   //经度
-	Lat          string `protobuf:"bytes,12,opt,name=lat,proto3" json:"lat,omitempty"`                                   //纬度
-	IsEnable     string `protobuf:"bytes,13,opt,name=is_enable,json=isEnable,proto3" json:"is_enable,omitempty"`         //是否启用（0否，1是）
-	IsDefault    string `protobuf:"bytes,14,opt,name=is_default,json=isDefault,proto3" json:"is_default,omitempty"`      //是否默认（0否，1是）
-	CreatedAt    string `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt    string `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	ProvinceName string `protobuf:"bytes,17,opt,name=province_name,json=provinceName,proto3" json:"province_name,omitempty"`
-	CityName     string `protobuf:"bytes,18,opt,name=city_name,json=cityName,proto3" json:"city_name,omitempty"`
-	CountyName   string `protobuf:"bytes,19,opt,name=county_name,json=countyName,proto3" json:"county_name,omitempty"`
+	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                     //ID
+	Name         string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`                                  //名称
+	Alias        string `protobuf:"bytes,3,opt,name=alias,proto3" json:"alias"`                                //别名
+	Level        int32  `protobuf:"varint,4,opt,name=level,proto3" json:"level"`                               //权重（数字越大权重越高）
+	ContactName  string `protobuf:"bytes,5,opt,name=contact_name,json=contactName,proto3" json:"contact_name"` //联系人姓名
+	ContactTel   string `protobuf:"bytes,6,opt,name=contact_tel,json=contactTel,proto3" json:"contact_tel"`    //联系电话
+	ProvinceId   int64  `protobuf:"varint,7,opt,name=province_id,json=provinceId,proto3" json:"province_id"`   //所在省
+	CityId       int64  `protobuf:"varint,8,opt,name=city_id,json=cityId,proto3" json:"city_id"`               //所在市
+	CountyId     int64  `protobuf:"varint,9,opt,name=county_id,json=countyId,proto3" json:"county_id"`         //所在县/区
+	Address      string `protobuf:"bytes,10,opt,name=address,proto3" json:"address"`                           //详细地址
+	Lng          string `protobuf:"bytes,11,opt,name=lng,proto3" json:"lng"`                                   //经度
+	Lat          string `protobuf:"bytes,12,opt,name=lat,proto3" json:"lat"`                                   //纬度
+	IsEnable     string `protobuf:"bytes,13,opt,name=is_enable,json=isEnable,proto3" json:"is_enable"`         //是否启用（0否，1是）
+	IsDefault    string `protobuf:"bytes,14,opt,name=is_default,json=isDefault,proto3" json:"is_default"`      //是否默认（0否，1是）
+	CreatedAt    string `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt    string `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	ProvinceName string `protobuf:"bytes,17,opt,name=province_name,json=provinceName,proto3" json:"province_name"`
+	CityName     string `protobuf:"bytes,18,opt,name=city_name,json=cityName,proto3" json:"city_name"`
+	CountyName   string `protobuf:"bytes,19,opt,name=county_name,json=countyName,proto3" json:"county_name"`
 }
 
 func (x *Warehouse) Reset() {
@@ -217,15 +217,15 @@ type WarehouseRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged     int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting   string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Alias     string  `protobuf:"bytes,5,opt,name=alias,proto3" json:"alias,omitempty"`
-	Name      string  `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	IsEnable  string  `protobuf:"bytes,7,opt,name=is_enable,json=isEnable,proto3" json:"is_enable,omitempty"`
-	IsDefault string  `protobuf:"bytes,8,opt,name=is_default,json=isDefault,proto3" json:"is_default,omitempty"`
-	Ids       []int64 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Paged     int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize  int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting   string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Alias     string  `protobuf:"bytes,5,opt,name=alias,proto3" json:"alias"`
+	Name      string  `protobuf:"bytes,6,opt,name=name,proto3" json:"name"`
+	IsEnable  string  `protobuf:"bytes,7,opt,name=is_enable,json=isEnable,proto3" json:"is_enable"`
+	IsDefault string  `protobuf:"bytes,8,opt,name=is_default,json=isDefault,proto3" json:"is_default"`
+	Ids       []int64 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *WarehouseRequest) Reset() {
@@ -328,10 +328,10 @@ type WarehouseData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Warehouse    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Warehouse  `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Warehouse    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Warehouse  `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *WarehouseData) Reset() {
@@ -399,8 +399,8 @@ type WarehouseResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *WarehouseData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *WarehouseData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *WarehouseResponse) Reset() {

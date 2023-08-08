@@ -24,6 +24,10 @@ service SpuService {
     rpc GetBase (Spu) returns (SpuResponse);
     //商品详情（后台编辑显示）
     rpc Detail (Spu) returns (SpuResponse);
+    //规格详情
+    rpc SpecDetailInfo(SpuRequest) returns (SkuResponse);
+    //规格详情列表
+    rpc SpecDetailList(SpuRequest) returns (SkuResponse);
     //商品上下架
     rpc SetSale (SpuRequest) returns (SpuResponse);
     //商品排序
@@ -78,8 +82,8 @@ message Spu {
     string freight_type =42;//运费模式：1统一邮费，2运费模板
     int64  freight_uniform_fee =43;//统一运费
     int64  freight_express_id =44;//运费模板ID
-    string is_virtual =45;//是否虚拟商品（0否, 1是）
-    string virtual_type =46;//虚拟类型
+    string is_fictitious =45;//是否虚拟商品（0否, 1是）
+    map<string,string> fictitious_value =46;//虚拟商品展示数据
     string spec_base =47;//规格基础数据
     string seo_title =48;//SEO标题
     string seo_keywords =49;//SEO关键字
@@ -89,7 +93,6 @@ message Spu {
     Brand brand = 55;
     Category category = 56;
     SpuPresale presale = 57;
-    SpuVirtual virtual = 58;
     repeated SpuPhoto photos = 59;
     repeated Term terms = 60;
     repeated Tag tags = 61;
@@ -110,18 +113,13 @@ message Sku  {
     int64 weight =10;//重量：克
     int64 volume =11;//体积
     string spec_indexes =12;//规格索引
-    string created_at = 13;
-    string updated_at = 14;
-    Spu spu =15;
-    repeated SpecificationData specification_data =16; //规格信息列表
+    map<string,string> extends =13;//扩展数据
+    string created_at = 14;
+    string updated_at = 15;
+    Spu spu =16;
+    repeated SpecificationData specification_data =17; //规格信息列表
 }
 
-//虚拟商品数据
-message SpuVirtual  {
-    int64 id = 1;
-    int64 spu_id = 2;
-    string Data = 3;
-}
 
 //表单商品
 message FormSpu {
@@ -197,7 +195,7 @@ message SpuRequest {
     int64 sku_id = 4;
     string is_listed = 5;
     int64 spu_id = 6;
-    string code = 7;
+    string coding = 7;
     string title =8;
     string type = 9;
     int64 taxonomy_id = 10;
@@ -221,7 +219,9 @@ message SpuRequest {
     repeated int64 tag_ids = 28;
     repeated int64 term_ids = 29;
     int32 top = 30;
-    string is_many_spec =31;//是否多规格商品,否则为单品
+    string is_many_spec =31;//是否多规格商品,否则为单品(0否，1是)
+    string md5_key =32;
+    repeated string md5_key_list = 33;
 }
 
 message SpuDetailData {
@@ -242,9 +242,21 @@ message SpuData {
     repeated Spu items = 4;
     common.Info info = 5;
 }
+
 message SpuResponse {
     SpuData data = 1;
     common.Error error = 2;
 }
 
+message SkuData {
+    Sku entity = 1;
+    common.Pager pager = 3;
+    repeated Sku items = 4;
+    common.Info info = 5;
+}
+
+message SkuResponse {
+    SkuData data = 1;
+    common.Error error = 2;
+}
 

@@ -26,15 +26,15 @@ type AttrGroup struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         int32     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name       string    `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	CategoryId int64     `protobuf:"varint,3,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
-	Sort       int32     `protobuf:"varint,4,opt,name=sort,proto3" json:"sort,omitempty"`
-	ParamCount int32     `protobuf:"varint,5,opt,name=param_count,json=paramCount,proto3" json:"param_count,omitempty"`
-	Status     string    `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt  string    `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt  string    `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Category   *Category `protobuf:"bytes,9,opt,name=category,proto3" json:"category,omitempty"`
+	Id         int32     `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name       string    `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	CategoryId int64     `protobuf:"varint,3,opt,name=category_id,json=categoryId,proto3" json:"category_id"`
+	Sort       int32     `protobuf:"varint,4,opt,name=sort,proto3" json:"sort"`
+	ParamCount int32     `protobuf:"varint,5,opt,name=param_count,json=paramCount,proto3" json:"param_count"`
+	Status     string    `protobuf:"bytes,6,opt,name=status,proto3" json:"status"`
+	CreatedAt  string    `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt  string    `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Category   *Category `protobuf:"bytes,9,opt,name=category,proto3" json:"category"`
 }
 
 func (x *AttrGroup) Reset() {
@@ -137,11 +137,11 @@ type AttrGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged      int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize   int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Id         int32  `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
-	Name       string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	CategoryId int64  `protobuf:"varint,5,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	Paged      int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize   int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Id         int32  `protobuf:"varint,3,opt,name=id,proto3" json:"id"`
+	Name       string `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
+	CategoryId int64  `protobuf:"varint,5,opt,name=category_id,json=categoryId,proto3" json:"category_id"`
 }
 
 func (x *AttrGroupRequest) Reset() {
@@ -216,10 +216,10 @@ type AttrGroupData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *AttrGroup    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*AttrGroup  `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *AttrGroup    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*AttrGroup  `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *AttrGroupData) Reset() {
@@ -287,8 +287,8 @@ type AttrGroupResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *AttrGroupData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *AttrGroupData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *AttrGroupResponse) Reset() {

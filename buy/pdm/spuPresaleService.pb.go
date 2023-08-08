@@ -25,23 +25,23 @@ type SpuPresale struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	SpuId            int64  `protobuf:"varint,2,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`
-	PresaleType      int32  `protobuf:"varint,3,opt,name=presale_type,json=presaleType,proto3" json:"presale_type,omitempty"`
-	PayedDate        string `protobuf:"bytes,4,opt,name=payed_date,json=payedDate,proto3" json:"payed_date,omitempty"`
-	AdvanceStartDate string `protobuf:"bytes,5,opt,name=advance_start_date,json=advanceStartDate,proto3" json:"advance_start_date,omitempty"`
-	AdvanceEndDate   string `protobuf:"bytes,6,opt,name=advance_end_date,json=advanceEndDate,proto3" json:"advance_end_date,omitempty"`
-	BalanceStartDate string `protobuf:"bytes,7,opt,name=balance_start_date,json=balanceStartDate,proto3" json:"balance_start_date,omitempty"`
-	BalanceEndDate   string `protobuf:"bytes,8,opt,name=balance_end_date,json=balanceEndDate,proto3" json:"balance_end_date,omitempty"`
-	AdvanceType      string `protobuf:"bytes,9,opt,name=advance_type,json=advanceType,proto3" json:"advance_type,omitempty"`
-	AdvanceRate      int32  `protobuf:"varint,10,opt,name=advance_rate,json=advanceRate,proto3" json:"advance_rate,omitempty"`
-	AdvanceMoney     int64  `protobuf:"varint,11,opt,name=advance_money,json=advanceMoney,proto3" json:"advance_money,omitempty"`
-	BalanceMoney     int64  `protobuf:"varint,12,opt,name=balance_money,json=balanceMoney,proto3" json:"balance_money,omitempty"`
-	DeliveryType     string `protobuf:"bytes,13,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type,omitempty"`
-	DeliveryDate     string `protobuf:"bytes,14,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date,omitempty"`
-	DeliveryDays     int32  `protobuf:"varint,15,opt,name=delivery_days,json=deliveryDays,proto3" json:"delivery_days,omitempty"`
-	CreatedAt        string `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt        string `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	SpuId            int64  `protobuf:"varint,2,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
+	PresaleType      int32  `protobuf:"varint,3,opt,name=presale_type,json=presaleType,proto3" json:"presale_type"`
+	PayedDate        string `protobuf:"bytes,4,opt,name=payed_date,json=payedDate,proto3" json:"payed_date"`
+	AdvanceStartDate string `protobuf:"bytes,5,opt,name=advance_start_date,json=advanceStartDate,proto3" json:"advance_start_date"`
+	AdvanceEndDate   string `protobuf:"bytes,6,opt,name=advance_end_date,json=advanceEndDate,proto3" json:"advance_end_date"`
+	BalanceStartDate string `protobuf:"bytes,7,opt,name=balance_start_date,json=balanceStartDate,proto3" json:"balance_start_date"`
+	BalanceEndDate   string `protobuf:"bytes,8,opt,name=balance_end_date,json=balanceEndDate,proto3" json:"balance_end_date"`
+	AdvanceType      string `protobuf:"bytes,9,opt,name=advance_type,json=advanceType,proto3" json:"advance_type"`
+	AdvanceRate      int32  `protobuf:"varint,10,opt,name=advance_rate,json=advanceRate,proto3" json:"advance_rate"`
+	AdvanceMoney     int64  `protobuf:"varint,11,opt,name=advance_money,json=advanceMoney,proto3" json:"advance_money"`
+	BalanceMoney     int64  `protobuf:"varint,12,opt,name=balance_money,json=balanceMoney,proto3" json:"balance_money"`
+	DeliveryType     string `protobuf:"bytes,13,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type"`
+	DeliveryDate     string `protobuf:"bytes,14,opt,name=delivery_date,json=deliveryDate,proto3" json:"delivery_date"`
+	DeliveryDays     int32  `protobuf:"varint,15,opt,name=delivery_days,json=deliveryDays,proto3" json:"delivery_days"`
+	CreatedAt        string `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt        string `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *SpuPresale) Reset() {

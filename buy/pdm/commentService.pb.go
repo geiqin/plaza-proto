@@ -26,26 +26,26 @@ type Comment struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64           `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	SkuId         int64           `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	SpuId         int64           `protobuf:"varint,3,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`
-	SpuName       string          `protobuf:"bytes,4,opt,name=spu_name,json=spuName,proto3" json:"spu_name,omitempty"`
-	SpuAttributes string          `protobuf:"bytes,5,opt,name=spu_attributes,json=spuAttributes,proto3" json:"spu_attributes,omitempty"`
-	ParentId      int32           `protobuf:"varint,6,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	MemberId      int64           `protobuf:"varint,7,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	MemberName    string          `protobuf:"bytes,8,opt,name=member_name,json=memberName,proto3" json:"member_name,omitempty"`
-	MemberAvatar  string          `protobuf:"bytes,9,opt,name=member_avatar,json=memberAvatar,proto3" json:"member_avatar,omitempty"`
-	MemberIp      string          `protobuf:"bytes,10,opt,name=member_ip,json=memberIp,proto3" json:"member_ip,omitempty"`
-	IsDisplay     bool            `protobuf:"varint,11,opt,name=is_display,json=isDisplay,proto3" json:"is_display,omitempty"`
-	Content       string          `protobuf:"bytes,12,opt,name=content,proto3" json:"content,omitempty"`
-	LikesCount    int32           `protobuf:"varint,13,opt,name=likes_count,json=likesCount,proto3" json:"likes_count,omitempty"`
-	ReplyCount    int32           `protobuf:"varint,14,opt,name=reply_count,json=replyCount,proto3" json:"reply_count,omitempty"`
-	CreatorId     int64           `protobuf:"varint,15,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
-	CreatorName   string          `protobuf:"bytes,16,opt,name=creator_name,json=creatorName,proto3" json:"creator_name,omitempty"`
-	CreatedAt     string          `protobuf:"bytes,17,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string          `protobuf:"bytes,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Attachments   []*Attachment   `protobuf:"bytes,19,rep,name=attachments,proto3" json:"attachments,omitempty"`
-	Replies       []*CommentReply `protobuf:"bytes,20,rep,name=replies,proto3" json:"replies,omitempty"`
+	Id            int64           `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	SkuId         int64           `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	SpuId         int64           `protobuf:"varint,3,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
+	SpuName       string          `protobuf:"bytes,4,opt,name=spu_name,json=spuName,proto3" json:"spu_name"`
+	SpuAttributes string          `protobuf:"bytes,5,opt,name=spu_attributes,json=spuAttributes,proto3" json:"spu_attributes"`
+	ParentId      int32           `protobuf:"varint,6,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
+	MemberId      int64           `protobuf:"varint,7,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	MemberName    string          `protobuf:"bytes,8,opt,name=member_name,json=memberName,proto3" json:"member_name"`
+	MemberAvatar  string          `protobuf:"bytes,9,opt,name=member_avatar,json=memberAvatar,proto3" json:"member_avatar"`
+	MemberIp      string          `protobuf:"bytes,10,opt,name=member_ip,json=memberIp,proto3" json:"member_ip"`
+	IsDisplay     bool            `protobuf:"varint,11,opt,name=is_display,json=isDisplay,proto3" json:"is_display"`
+	Content       string          `protobuf:"bytes,12,opt,name=content,proto3" json:"content"`
+	LikesCount    int32           `protobuf:"varint,13,opt,name=likes_count,json=likesCount,proto3" json:"likes_count"`
+	ReplyCount    int32           `protobuf:"varint,14,opt,name=reply_count,json=replyCount,proto3" json:"reply_count"`
+	CreatorId     int64           `protobuf:"varint,15,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`
+	CreatorName   string          `protobuf:"bytes,16,opt,name=creator_name,json=creatorName,proto3" json:"creator_name"`
+	CreatedAt     string          `protobuf:"bytes,17,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     string          `protobuf:"bytes,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Attachments   []*Attachment   `protobuf:"bytes,19,rep,name=attachments,proto3" json:"attachments"`
+	Replies       []*CommentReply `protobuf:"bytes,20,rep,name=replies,proto3" json:"replies"`
 }
 
 func (x *Comment) Reset() {
@@ -225,14 +225,14 @@ type CommentRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged     int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords  string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	SpuName   string  `protobuf:"bytes,5,opt,name=spu_name,json=spuName,proto3" json:"spu_name,omitempty"`
-	StartDate string  `protobuf:"bytes,6,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
-	EndDate   string  `protobuf:"bytes,7,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
-	Ids       []int64 `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Paged     int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize  int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords  string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
+	Id        int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	SpuName   string  `protobuf:"bytes,5,opt,name=spu_name,json=spuName,proto3" json:"spu_name"`
+	StartDate string  `protobuf:"bytes,6,opt,name=start_date,json=startDate,proto3" json:"start_date"`
+	EndDate   string  `protobuf:"bytes,7,opt,name=end_date,json=endDate,proto3" json:"end_date"`
+	Ids       []int64 `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *CommentRequest) Reset() {
@@ -328,10 +328,10 @@ type CommentData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Comment      `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Comment    `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Comment      `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Comment    `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *CommentData) Reset() {
@@ -399,8 +399,8 @@ type CommentResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *CommentData  `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *CommentData  `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *CommentResponse) Reset() {

@@ -26,16 +26,16 @@ type ScreeningPrice struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	ParentId  int64  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	LogoUrl   string `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
-	MinPrice  int64  `protobuf:"varint,5,opt,name=min_price,json=minPrice,proto3" json:"min_price,omitempty"`
-	MaxPrice  int64  `protobuf:"varint,6,opt,name=max_price,json=maxPrice,proto3" json:"max_price,omitempty"`
-	IsEnable  string `protobuf:"bytes,7,opt,name=is_enable,json=isEnable,proto3" json:"is_enable,omitempty"`
-	Sort      int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort,omitempty"`
-	CreatedAt string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	ParentId  int64  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
+	LogoUrl   string `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url"`
+	MinPrice  int64  `protobuf:"varint,5,opt,name=min_price,json=minPrice,proto3" json:"min_price"`
+	MaxPrice  int64  `protobuf:"varint,6,opt,name=max_price,json=maxPrice,proto3" json:"max_price"`
+	IsEnable  string `protobuf:"bytes,7,opt,name=is_enable,json=isEnable,proto3" json:"is_enable"`
+	Sort      int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort"`
+	CreatedAt string `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt string `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *ScreeningPrice) Reset() {
@@ -145,11 +145,11 @@ type ScreeningPriceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Id       int32  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name     string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
+	Id       int32  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Name     string `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
 }
 
 func (x *ScreeningPriceRequest) Reset() {
@@ -224,10 +224,10 @@ type ScreeningPriceData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *ScreeningPrice   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*ScreeningPrice `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *ScreeningPrice   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*ScreeningPrice `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *ScreeningPriceData) Reset() {
@@ -295,8 +295,8 @@ type ScreeningPriceResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *ScreeningPriceData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error       `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *ScreeningPriceData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error       `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *ScreeningPriceResponse) Reset() {

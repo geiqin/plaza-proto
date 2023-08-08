@@ -26,21 +26,21 @@ type Category struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code      string      `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name      string      `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	ParentId  int64       `protobuf:"varint,4,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	Path      string      `protobuf:"bytes,5,opt,name=path,proto3" json:"path,omitempty"`
-	CoverId   int64       `protobuf:"varint,7,opt,name=cover_id,json=coverId,proto3" json:"cover_id,omitempty"`
-	CoverUrl  string      `protobuf:"bytes,8,opt,name=cover_url,json=coverUrl,proto3" json:"cover_url,omitempty"`
-	Letter    string      `protobuf:"bytes,9,opt,name=letter,proto3" json:"letter,omitempty"`
-	Memo      string      `protobuf:"bytes,10,opt,name=memo,proto3" json:"memo,omitempty"`
-	Sort      int32       `protobuf:"varint,11,opt,name=sort,proto3" json:"sort,omitempty"`
-	Status    string      `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt string      `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt string      `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Parent    *Category   `protobuf:"bytes,15,opt,name=parent,proto3" json:"parent,omitempty"`
-	Children  []*Category `protobuf:"bytes,16,rep,name=children,proto3" json:"children,omitempty"`
+	Id        int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Code      string      `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
+	Name      string      `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	ParentId  int64       `protobuf:"varint,4,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
+	Path      string      `protobuf:"bytes,5,opt,name=path,proto3" json:"path"`
+	CoverId   int64       `protobuf:"varint,7,opt,name=cover_id,json=coverId,proto3" json:"cover_id"`
+	CoverUrl  string      `protobuf:"bytes,8,opt,name=cover_url,json=coverUrl,proto3" json:"cover_url"`
+	Letter    string      `protobuf:"bytes,9,opt,name=letter,proto3" json:"letter"`
+	Memo      string      `protobuf:"bytes,10,opt,name=memo,proto3" json:"memo"`
+	Sort      int32       `protobuf:"varint,11,opt,name=sort,proto3" json:"sort"`
+	Status    string      `protobuf:"bytes,12,opt,name=status,proto3" json:"status"`
+	CreatedAt string      `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt string      `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Parent    *Category   `protobuf:"bytes,15,opt,name=parent,proto3" json:"parent"`
+	Children  []*Category `protobuf:"bytes,16,rep,name=children,proto3" json:"children"`
 }
 
 func (x *Category) Reset() {
@@ -185,15 +185,15 @@ type CategoryRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Id       int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name     string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	Code     string `protobuf:"bytes,6,opt,name=code,proto3" json:"code,omitempty"`
-	Letter   string `protobuf:"bytes,7,opt,name=letter,proto3" json:"letter,omitempty"`
-	ParentId int64  `protobuf:"varint,12,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	Status   string `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
+	Id       int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Name     string `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
+	Code     string `protobuf:"bytes,6,opt,name=code,proto3" json:"code"`
+	Letter   string `protobuf:"bytes,7,opt,name=letter,proto3" json:"letter"`
+	ParentId int64  `protobuf:"varint,12,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
+	Status   string `protobuf:"bytes,13,opt,name=status,proto3" json:"status"`
 }
 
 func (x *CategoryRequest) Reset() {
@@ -296,10 +296,10 @@ type CategoryData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Category     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Category   `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Category     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Category   `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *CategoryData) Reset() {
@@ -367,8 +367,8 @@ type CategoryResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *CategoryData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *CategoryData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *CategoryResponse) Reset() {

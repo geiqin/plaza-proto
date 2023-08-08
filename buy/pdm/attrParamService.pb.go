@@ -26,30 +26,30 @@ type AttrParam struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int32                    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	CategoryId    int64                    `protobuf:"varint,3,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
-	GroupId       int32                    `protobuf:"varint,4,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	Type          string                   `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
-	InputType     string                   `protobuf:"bytes,6,opt,name=input_type,json=inputType,proto3" json:"input_type,omitempty"`
-	IsAllowAlias  bool                     `protobuf:"varint,7,opt,name=is_allow_alias,json=isAllowAlias,proto3" json:"is_allow_alias,omitempty"`
-	IsSale        bool                     `protobuf:"varint,8,opt,name=is_sale,json=isSale,proto3" json:"is_sale,omitempty"`
-	IsNumeric     bool                     `protobuf:"varint,9,opt,name=is_numeric,json=isNumeric,proto3" json:"is_numeric,omitempty"`
-	IsKey         bool                     `protobuf:"varint,10,opt,name=is_key,json=isKey,proto3" json:"is_key,omitempty"`
-	IsSearch      bool                     `protobuf:"varint,11,opt,name=is_search,json=isSearch,proto3" json:"is_search,omitempty"`
-	IsDisplay     bool                     `protobuf:"varint,12,opt,name=is_display,json=isDisplay,proto3" json:"is_display,omitempty"`
-	IsMust        bool                     `protobuf:"varint,13,opt,name=is_must,json=isMust,proto3" json:"is_must,omitempty"`
-	IsMulti       bool                     `protobuf:"varint,14,opt,name=is_multi,json=isMulti,proto3" json:"is_multi,omitempty"`
-	Unit          string                   `protobuf:"bytes,15,opt,name=unit,proto3" json:"unit,omitempty"`
-	Sort          int32                    `protobuf:"varint,16,opt,name=sort,proto3" json:"sort,omitempty"`
-	GoodsCount    int32                    `protobuf:"varint,17,opt,name=goods_count,json=goodsCount,proto3" json:"goods_count,omitempty"`
-	Status        string                   `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt     string                   `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                   `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Group         *AttrGroup               `protobuf:"bytes,21,opt,name=group,proto3" json:"group,omitempty"`
-	Category      *Category                `protobuf:"bytes,22,opt,name=category,proto3" json:"category,omitempty"`
-	Values        []string                 `protobuf:"bytes,23,rep,name=values,proto3" json:"values,omitempty"`
-	ServiceValues []*AttrParamServiceValue `protobuf:"bytes,24,rep,name=service_values,json=serviceValues,proto3" json:"service_values,omitempty"`
+	Id            int32                    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name          string                   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	CategoryId    int64                    `protobuf:"varint,3,opt,name=category_id,json=categoryId,proto3" json:"category_id"`
+	GroupId       int32                    `protobuf:"varint,4,opt,name=group_id,json=groupId,proto3" json:"group_id"`
+	Type          string                   `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`
+	InputType     string                   `protobuf:"bytes,6,opt,name=input_type,json=inputType,proto3" json:"input_type"`
+	IsAllowAlias  bool                     `protobuf:"varint,7,opt,name=is_allow_alias,json=isAllowAlias,proto3" json:"is_allow_alias"`
+	IsSale        bool                     `protobuf:"varint,8,opt,name=is_sale,json=isSale,proto3" json:"is_sale"`
+	IsNumeric     bool                     `protobuf:"varint,9,opt,name=is_numeric,json=isNumeric,proto3" json:"is_numeric"`
+	IsKey         bool                     `protobuf:"varint,10,opt,name=is_key,json=isKey,proto3" json:"is_key"`
+	IsSearch      bool                     `protobuf:"varint,11,opt,name=is_search,json=isSearch,proto3" json:"is_search"`
+	IsDisplay     bool                     `protobuf:"varint,12,opt,name=is_display,json=isDisplay,proto3" json:"is_display"`
+	IsMust        bool                     `protobuf:"varint,13,opt,name=is_must,json=isMust,proto3" json:"is_must"`
+	IsMulti       bool                     `protobuf:"varint,14,opt,name=is_multi,json=isMulti,proto3" json:"is_multi"`
+	Unit          string                   `protobuf:"bytes,15,opt,name=unit,proto3" json:"unit"`
+	Sort          int32                    `protobuf:"varint,16,opt,name=sort,proto3" json:"sort"`
+	GoodsCount    int32                    `protobuf:"varint,17,opt,name=goods_count,json=goodsCount,proto3" json:"goods_count"`
+	Status        string                   `protobuf:"bytes,18,opt,name=status,proto3" json:"status"`
+	CreatedAt     string                   `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     string                   `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Group         *AttrGroup               `protobuf:"bytes,21,opt,name=group,proto3" json:"group"`
+	Category      *Category                `protobuf:"bytes,22,opt,name=category,proto3" json:"category"`
+	Values        []string                 `protobuf:"bytes,23,rep,name=values,proto3" json:"values"`
+	ServiceValues []*AttrParamServiceValue `protobuf:"bytes,24,rep,name=service_values,json=serviceValues,proto3" json:"service_values"`
 }
 
 func (x *AttrParam) Reset() {
@@ -257,18 +257,18 @@ type AttrParamRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged      int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize   int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords   string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Id         int32   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name       string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	CategoryId int32   `protobuf:"varint,6,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
-	GroupId    int32   `protobuf:"varint,7,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	Type       string  `protobuf:"bytes,8,opt,name=type,proto3" json:"type,omitempty"`
-	ParamId    int32   `protobuf:"varint,9,opt,name=param_id,json=paramId,proto3" json:"param_id,omitempty"`
-	ParamValue string  `protobuf:"bytes,10,opt,name=param_value,json=paramValue,proto3" json:"param_value,omitempty"`
-	ValuePrice float32 `protobuf:"fixed32,11,opt,name=value_price,json=valuePrice,proto3" json:"value_price,omitempty"`
-	Ids        []int32 `protobuf:"varint,12,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Paged      int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize   int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords   string  `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
+	Id         int32   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Name       string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
+	CategoryId int32   `protobuf:"varint,6,opt,name=category_id,json=categoryId,proto3" json:"category_id"`
+	GroupId    int32   `protobuf:"varint,7,opt,name=group_id,json=groupId,proto3" json:"group_id"`
+	Type       string  `protobuf:"bytes,8,opt,name=type,proto3" json:"type"`
+	ParamId    int32   `protobuf:"varint,9,opt,name=param_id,json=paramId,proto3" json:"param_id"`
+	ParamValue string  `protobuf:"bytes,10,opt,name=param_value,json=paramValue,proto3" json:"param_value"`
+	ValuePrice float32 `protobuf:"fixed32,11,opt,name=value_price,json=valuePrice,proto3" json:"value_price"`
+	Ids        []int32 `protobuf:"varint,12,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *AttrParamRequest) Reset() {
@@ -392,11 +392,11 @@ type AttrParamData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity     *AttrParam    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	ParamValue string        `protobuf:"bytes,2,opt,name=param_value,json=paramValue,proto3" json:"param_value,omitempty"`
-	Pager      *common.Pager `protobuf:"bytes,3,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items      []*AttrParam  `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
-	Info       *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity     *AttrParam    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	ParamValue string        `protobuf:"bytes,2,opt,name=param_value,json=paramValue,proto3" json:"param_value"`
+	Pager      *common.Pager `protobuf:"bytes,3,opt,name=pager,proto3" json:"pager"`
+	Items      []*AttrParam  `protobuf:"bytes,4,rep,name=items,proto3" json:"items"`
+	Info       *common.Info  `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *AttrParamData) Reset() {
@@ -471,8 +471,8 @@ type AttrParamResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *AttrParamData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *AttrParamData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *AttrParamResponse) Reset() {
@@ -526,8 +526,8 @@ type AttrParamServiceValue struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ValueText string  `protobuf:"bytes,1,opt,name=value_text,json=valueText,proto3" json:"value_text,omitempty"`
-	Price     float32 `protobuf:"fixed32,2,opt,name=price,proto3" json:"price,omitempty"`
+	ValueText string  `protobuf:"bytes,1,opt,name=value_text,json=valueText,proto3" json:"value_text"`
+	Price     float32 `protobuf:"fixed32,2,opt,name=price,proto3" json:"price"`
 }
 
 func (x *AttrParamServiceValue) Reset() {

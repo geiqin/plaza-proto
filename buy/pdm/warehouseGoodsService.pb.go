@@ -26,16 +26,16 @@ type WarehouseGoods struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                      //ID
-	WarehouseId int64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"` //仓库id
-	SpuId       int64                 `protobuf:"varint,3,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`                   //商品id
-	Inventory   int32                 `protobuf:"varint,4,opt,name=inventory,proto3" json:"inventory,omitempty"`                        //总库存
-	IsEnable    string                `protobuf:"bytes,5,opt,name=is_enable,json=isEnable,proto3" json:"is_enable,omitempty"`           //是否启用（0否，1是）
-	CreatedAt   string                `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt   string                `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Warehouse   *Warehouse            `protobuf:"bytes,9,opt,name=warehouse,proto3" json:"warehouse,omitempty"`
-	Spu         *Spu                  `protobuf:"bytes,10,opt,name=spu,proto3" json:"spu,omitempty"`
-	SpecList    []*WarehouseGoodsSpec `protobuf:"bytes,11,rep,name=spec_list,json=specList,proto3" json:"spec_list,omitempty"`
+	Id          int64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                      //ID
+	WarehouseId int64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id"` //仓库id
+	SpuId       int64                 `protobuf:"varint,3,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`                   //商品id
+	Inventory   int32                 `protobuf:"varint,4,opt,name=inventory,proto3" json:"inventory"`                        //总库存
+	IsEnable    string                `protobuf:"bytes,5,opt,name=is_enable,json=isEnable,proto3" json:"is_enable"`           //是否启用（0否，1是）
+	CreatedAt   string                `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt   string                `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Warehouse   *Warehouse            `protobuf:"bytes,9,opt,name=warehouse,proto3" json:"warehouse"`
+	Spu         *Spu                  `protobuf:"bytes,10,opt,name=spu,proto3" json:"spu"`
+	SpecList    []*WarehouseGoodsSpec `protobuf:"bytes,11,rep,name=spec_list,json=specList,proto3" json:"spec_list"`
 }
 
 func (x *WarehouseGoods) Reset() {
@@ -145,14 +145,14 @@ type WarehouseGoodsSpec struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                       //ID
-	WarehouseGoodsId int64                 `protobuf:"varint,2,opt,name=warehouse_goods_id,json=warehouseGoodsId,proto3" json:"warehouse_goods_id,omitempty"` //仓库商品id
-	WarehouseId      int64                 `protobuf:"varint,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`                  //仓库id
-	SpuId            int64                 `protobuf:"varint,4,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`                                    //商品id
-	Md5Key           string                `protobuf:"bytes,45,opt,name=md5_key,json=md5Key,proto3" json:"md5_key,omitempty"`                                 //MD5Key
-	Spec             []*GoodsSpecValueItem `protobuf:"bytes,5,rep,name=spec,proto3" json:"spec,omitempty"`                                                    //规格值
-	CreatedAt        string                `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt        string                `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id               int64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                       //ID
+	WarehouseGoodsId int64                 `protobuf:"varint,2,opt,name=warehouse_goods_id,json=warehouseGoodsId,proto3" json:"warehouse_goods_id"` //仓库商品id
+	WarehouseId      int64                 `protobuf:"varint,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id"`                  //仓库id
+	SpuId            int64                 `protobuf:"varint,4,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`                                    //商品id
+	Md5Key           string                `protobuf:"bytes,45,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`                                 //MD5Key
+	Spec             []*GoodsSpecValueItem `protobuf:"bytes,5,rep,name=spec,proto3" json:"spec"`                                                    //规格值
+	CreatedAt        string                `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt        string                `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *WarehouseGoodsSpec) Reset() {
@@ -248,8 +248,8 @@ type GoodsSpecValueItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type  string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Type  string `protobuf:"bytes,1,opt,name=type,proto3" json:"type"`
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value"`
 }
 
 func (x *GoodsSpecValueItem) Reset() {
@@ -303,15 +303,15 @@ type WarehouseGoodsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged       int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize    int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting     string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	Id          int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	WarehouseId int64   `protobuf:"varint,5,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"` //仓库id
-	SpuId       int64   `protobuf:"varint,6,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`                   //商品id
-	Inventory   int32   `protobuf:"varint,7,opt,name=inventory,proto3" json:"inventory,omitempty"`                        //总库存
-	IsEnable    string  `protobuf:"bytes,8,opt,name=is_enable,json=isEnable,proto3" json:"is_enable,omitempty"`           //是否启用（0否，1是）
-	Ids         []int64 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Paged       int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize    int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting     string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Id          int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	WarehouseId int64   `protobuf:"varint,5,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id"` //仓库id
+	SpuId       int64   `protobuf:"varint,6,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`                   //商品id
+	Inventory   int32   `protobuf:"varint,7,opt,name=inventory,proto3" json:"inventory"`                        //总库存
+	IsEnable    string  `protobuf:"bytes,8,opt,name=is_enable,json=isEnable,proto3" json:"is_enable"`           //是否启用（0否，1是）
+	Ids         []int64 `protobuf:"varint,9,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *WarehouseGoodsRequest) Reset() {
@@ -414,10 +414,10 @@ type WarehouseGoodsData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *WarehouseGoods   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*WarehouseGoods `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *WarehouseGoods   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*WarehouseGoods `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info      `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *WarehouseGoodsData) Reset() {
@@ -485,8 +485,8 @@ type WarehouseGoodsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *WarehouseGoodsData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error       `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *WarehouseGoodsData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error       `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *WarehouseGoodsResponse) Reset() {

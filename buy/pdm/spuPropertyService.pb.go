@@ -26,8 +26,8 @@ type GenericProperty struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Params []*GenericPropertyParam `protobuf:"bytes,1,rep,name=params,proto3" json:"params,omitempty"`
-	Groups []*GenericPropertyGroup `protobuf:"bytes,2,rep,name=groups,proto3" json:"groups,omitempty"`
+	Params []*GenericPropertyParam `protobuf:"bytes,1,rep,name=params,proto3" json:"params"`
+	Groups []*GenericPropertyGroup `protobuf:"bytes,2,rep,name=groups,proto3" json:"groups"`
 }
 
 func (x *GenericProperty) Reset() {
@@ -82,8 +82,8 @@ type GenericPropertyGroup struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupId   int32  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	GroupName string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
+	GroupId   int32  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id"`
+	GroupName string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name"`
 }
 
 func (x *GenericPropertyGroup) Reset() {
@@ -138,11 +138,11 @@ type GenericPropertyParam struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupId    int32  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	ParamId    int32  `protobuf:"varint,2,opt,name=param_id,json=paramId,proto3" json:"param_id,omitempty"`
-	ParamName  string `protobuf:"bytes,3,opt,name=param_name,json=paramName,proto3" json:"param_name,omitempty"`
-	ParamValue string `protobuf:"bytes,4,opt,name=param_value,json=paramValue,proto3" json:"param_value,omitempty"`
-	ParamUnit  string `protobuf:"bytes,5,opt,name=param_unit,json=paramUnit,proto3" json:"param_unit,omitempty"`
+	GroupId    int32  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id"`
+	ParamId    int32  `protobuf:"varint,2,opt,name=param_id,json=paramId,proto3" json:"param_id"`
+	ParamName  string `protobuf:"bytes,3,opt,name=param_name,json=paramName,proto3" json:"param_name"`
+	ParamValue string `protobuf:"bytes,4,opt,name=param_value,json=paramValue,proto3" json:"param_value"`
+	ParamUnit  string `protobuf:"bytes,5,opt,name=param_unit,json=paramUnit,proto3" json:"param_unit"`
 }
 
 func (x *GenericPropertyParam) Reset() {
@@ -218,9 +218,9 @@ type ServiceProperty struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ParamId   int32                       `protobuf:"varint,1,opt,name=param_id,json=paramId,proto3" json:"param_id,omitempty"`
-	ParamName string                      `protobuf:"bytes,2,opt,name=param_name,json=paramName,proto3" json:"param_name,omitempty"`
-	Values    []*ServicePropertyValueInfo `protobuf:"bytes,3,rep,name=values,proto3" json:"values,omitempty"`
+	ParamId   int32                       `protobuf:"varint,1,opt,name=param_id,json=paramId,proto3" json:"param_id"`
+	ParamName string                      `protobuf:"bytes,2,opt,name=param_name,json=paramName,proto3" json:"param_name"`
+	Values    []*ServicePropertyValueInfo `protobuf:"bytes,3,rep,name=values,proto3" json:"values"`
 }
 
 func (x *ServiceProperty) Reset() {
@@ -282,9 +282,9 @@ type SaleProperty struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SpecId   int32                    `protobuf:"varint,1,opt,name=spec_id,json=specId,proto3" json:"spec_id,omitempty"`
-	SpecName string                   `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3" json:"spec_name,omitempty"`
-	Values   []*SalePropertyValueInfo `protobuf:"bytes,3,rep,name=values,proto3" json:"values,omitempty"`
+	SpecId   int32                    `protobuf:"varint,1,opt,name=spec_id,json=specId,proto3" json:"spec_id"`
+	SpecName string                   `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3" json:"spec_name"`
+	Values   []*SalePropertyValueInfo `protobuf:"bytes,3,rep,name=values,proto3" json:"values"`
 }
 
 func (x *SaleProperty) Reset() {
@@ -346,11 +346,11 @@ type OwnProperty struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SpecId    int32  `protobuf:"varint,1,opt,name=spec_id,json=specId,proto3" json:"spec_id,omitempty"`
-	SpecName  string `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3" json:"spec_name,omitempty"`
-	SpecValue string `protobuf:"bytes,3,opt,name=spec_value,json=specValue,proto3" json:"spec_value,omitempty"`
-	ImageId   int64  `protobuf:"varint,4,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
-	ImageUrl  string `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	SpecId    int32  `protobuf:"varint,1,opt,name=spec_id,json=specId,proto3" json:"spec_id"`
+	SpecName  string `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3" json:"spec_name"`
+	SpecValue string `protobuf:"bytes,3,opt,name=spec_value,json=specValue,proto3" json:"spec_value"`
+	ImageId   int64  `protobuf:"varint,4,opt,name=image_id,json=imageId,proto3" json:"image_id"`
+	ImageUrl  string `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
 }
 
 func (x *OwnProperty) Reset() {
@@ -425,8 +425,8 @@ type ServicePropertyValueInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ValueText string  `protobuf:"bytes,1,opt,name=value_text,json=valueText,proto3" json:"value_text,omitempty"`
-	Price     float32 `protobuf:"fixed32,2,opt,name=price,proto3" json:"price,omitempty"`
+	ValueText string  `protobuf:"bytes,1,opt,name=value_text,json=valueText,proto3" json:"value_text"`
+	Price     float32 `protobuf:"fixed32,2,opt,name=price,proto3" json:"price"`
 }
 
 func (x *ServicePropertyValueInfo) Reset() {
@@ -480,9 +480,9 @@ type SalePropertyValueInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ValueText string `protobuf:"bytes,1,opt,name=value_text,json=valueText,proto3" json:"value_text,omitempty"`
-	ImageId   int64  `protobuf:"varint,2,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
-	ImageUrl  string `protobuf:"bytes,3,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	ValueText string `protobuf:"bytes,1,opt,name=value_text,json=valueText,proto3" json:"value_text"`
+	ImageId   int64  `protobuf:"varint,2,opt,name=image_id,json=imageId,proto3" json:"image_id"`
+	ImageUrl  string `protobuf:"bytes,3,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
 }
 
 func (x *SalePropertyValueInfo) Reset() {

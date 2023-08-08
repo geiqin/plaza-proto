@@ -26,15 +26,15 @@ type MemberPrice struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	OwnerType     string  `protobuf:"bytes,2,opt,name=owner_type,json=ownerType,proto3" json:"owner_type,omitempty"`
-	OwnerId       int64   `protobuf:"varint,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
-	SkuId         int64   `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	Method        string  `protobuf:"bytes,5,opt,name=method,proto3" json:"method,omitempty"`
-	DiscountRate  float32 `protobuf:"fixed32,6,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`
-	DiscountPrice int64   `protobuf:"varint,7,opt,name=discount_price,json=discountPrice,proto3" json:"discount_price,omitempty"`
-	CreatedAt     string  `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string  `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id            int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	OwnerType     string  `protobuf:"bytes,2,opt,name=owner_type,json=ownerType,proto3" json:"owner_type"`
+	OwnerId       int64   `protobuf:"varint,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id"`
+	SkuId         int64   `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	Method        string  `protobuf:"bytes,5,opt,name=method,proto3" json:"method"`
+	DiscountRate  float32 `protobuf:"fixed32,6,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate"`
+	DiscountPrice int64   `protobuf:"varint,7,opt,name=discount_price,json=discountPrice,proto3" json:"discount_price"`
+	CreatedAt     string  `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     string  `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *MemberPrice) Reset() {
@@ -137,9 +137,9 @@ type MemberPriceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SpuId   int64          `protobuf:"varint,1,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`
-	Method  string         `protobuf:"bytes,2,opt,name=method,proto3" json:"method,omitempty"`
-	Details []*MemberPrice `protobuf:"bytes,3,rep,name=details,proto3" json:"details,omitempty"`
+	SpuId   int64          `protobuf:"varint,1,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
+	Method  string         `protobuf:"bytes,2,opt,name=method,proto3" json:"method"`
+	Details []*MemberPrice `protobuf:"bytes,3,rep,name=details,proto3" json:"details"`
 }
 
 func (x *MemberPriceRequest) Reset() {
@@ -200,11 +200,11 @@ type MemberPriceData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *MemberPrice   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*MemberPrice `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info   `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
-	Spu    *Spu           `protobuf:"bytes,5,opt,name=spu,proto3" json:"spu,omitempty"`
+	Entity *MemberPrice   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*MemberPrice `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info   `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Spu    *Spu           `protobuf:"bytes,5,opt,name=spu,proto3" json:"spu"`
 }
 
 func (x *MemberPriceData) Reset() {
@@ -279,8 +279,8 @@ type MemberPriceResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *MemberPriceData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error    `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *MemberPriceData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error    `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *MemberPriceResponse) Reset() {

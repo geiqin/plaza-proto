@@ -26,19 +26,19 @@ type Attachment struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	MediaId     int64  `protobuf:"varint,2,opt,name=media_id,json=mediaId,proto3" json:"media_id,omitempty"`
-	Title       string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	Type        string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Url         string `protobuf:"bytes,5,opt,name=url,proto3" json:"url,omitempty"`
-	MimeType    string `protobuf:"bytes,6,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
-	Size        int64  `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`
-	OwnerId     int64  `protobuf:"varint,8,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
-	OwnerType   string `protobuf:"bytes,9,opt,name=owner_type,json=ownerType,proto3" json:"owner_type,omitempty"`
-	CreatorId   int64  `protobuf:"varint,10,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
-	CreatorName string `protobuf:"bytes,11,opt,name=creator_name,json=creatorName,proto3" json:"creator_name,omitempty"`
-	CreatedAt   string `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt   string `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	MediaId     int64  `protobuf:"varint,2,opt,name=media_id,json=mediaId,proto3" json:"media_id"`
+	Title       string `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
+	Type        string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`
+	Url         string `protobuf:"bytes,5,opt,name=url,proto3" json:"url"`
+	MimeType    string `protobuf:"bytes,6,opt,name=mime_type,json=mimeType,proto3" json:"mime_type"`
+	Size        int64  `protobuf:"varint,7,opt,name=size,proto3" json:"size"`
+	OwnerId     int64  `protobuf:"varint,8,opt,name=owner_id,json=ownerId,proto3" json:"owner_id"`
+	OwnerType   string `protobuf:"bytes,9,opt,name=owner_type,json=ownerType,proto3" json:"owner_type"`
+	CreatorId   int64  `protobuf:"varint,10,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`
+	CreatorName string `protobuf:"bytes,11,opt,name=creator_name,json=creatorName,proto3" json:"creator_name"`
+	CreatedAt   string `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt   string `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *Attachment) Reset() {
@@ -169,19 +169,19 @@ type AttachmentRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
+	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
 	//my self
-	Id        int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	MediaId   int64  `protobuf:"varint,5,opt,name=media_id,json=mediaId,proto3" json:"media_id,omitempty"`
-	Title     string `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
-	Type      string `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
-	CatId     int32  `protobuf:"varint,8,opt,name=cat_id,json=catId,proto3" json:"cat_id,omitempty"`
-	OwnerId   int64  `protobuf:"varint,9,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
-	OwnerType string `protobuf:"bytes,10,opt,name=owner_type,json=ownerType,proto3" json:"owner_type,omitempty"`
-	Params    string `protobuf:"bytes,11,opt,name=params,proto3" json:"params,omitempty"`
-	CreatorId int64  `protobuf:"varint,12,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
+	Id        int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	MediaId   int64  `protobuf:"varint,5,opt,name=media_id,json=mediaId,proto3" json:"media_id"`
+	Title     string `protobuf:"bytes,6,opt,name=title,proto3" json:"title"`
+	Type      string `protobuf:"bytes,7,opt,name=type,proto3" json:"type"`
+	CatId     int32  `protobuf:"varint,8,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
+	OwnerId   int64  `protobuf:"varint,9,opt,name=owner_id,json=ownerId,proto3" json:"owner_id"`
+	OwnerType string `protobuf:"bytes,10,opt,name=owner_type,json=ownerType,proto3" json:"owner_type"`
+	Params    string `protobuf:"bytes,11,opt,name=params,proto3" json:"params"`
+	CreatorId int64  `protobuf:"varint,12,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`
 }
 
 func (x *AttachmentRequest) Reset() {
@@ -305,10 +305,10 @@ type AttachmentData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Attachment   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Attachment `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Attachment   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Attachment `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *AttachmentData) Reset() {
@@ -376,8 +376,8 @@ type AttachmentResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data  *AttachmentData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	Data  *AttachmentData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
+	Error *common.Error   `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
 }
 
 func (x *AttachmentResponse) Reset() {

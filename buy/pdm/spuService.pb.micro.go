@@ -55,6 +55,10 @@ type SpuService interface {
 	GetBase(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
 	//商品详情（后台编辑显示）
 	Detail(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
+	//规格详情
+	SpecDetailInfo(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error)
+	//规格详情列表
+	SpecDetailList(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error)
 	//商品上下架
 	SetSale(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//商品排序
@@ -137,6 +141,26 @@ func (c *spuService) Detail(ctx context.Context, in *Spu, opts ...client.CallOpt
 	return out, nil
 }
 
+func (c *spuService) SpecDetailInfo(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuService.SpecDetailInfo", in)
+	out := new(SkuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *spuService) SpecDetailList(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuService.SpecDetailList", in)
+	out := new(SkuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *spuService) SetSale(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuService.SetSale", in)
 	out := new(SpuResponse)
@@ -192,6 +216,10 @@ type SpuServiceHandler interface {
 	GetBase(context.Context, *Spu, *SpuResponse) error
 	//商品详情（后台编辑显示）
 	Detail(context.Context, *Spu, *SpuResponse) error
+	//规格详情
+	SpecDetailInfo(context.Context, *SpuRequest, *SkuResponse) error
+	//规格详情列表
+	SpecDetailList(context.Context, *SpuRequest, *SkuResponse) error
 	//商品上下架
 	SetSale(context.Context, *SpuRequest, *SpuResponse) error
 	//商品排序
@@ -210,6 +238,8 @@ func RegisterSpuServiceHandler(s server.Server, hdlr SpuServiceHandler, opts ...
 		Get(ctx context.Context, in *Spu, out *SpuResponse) error
 		GetBase(ctx context.Context, in *Spu, out *SpuResponse) error
 		Detail(ctx context.Context, in *Spu, out *SpuResponse) error
+		SpecDetailInfo(ctx context.Context, in *SpuRequest, out *SkuResponse) error
+		SpecDetailList(ctx context.Context, in *SpuRequest, out *SkuResponse) error
 		SetSale(ctx context.Context, in *SpuRequest, out *SpuResponse) error
 		SetSort(ctx context.Context, in *SpuRequest, out *SpuResponse) error
 		List(ctx context.Context, in *SpuRequest, out *SpuResponse) error
@@ -248,6 +278,14 @@ func (h *spuServiceHandler) GetBase(ctx context.Context, in *Spu, out *SpuRespon
 
 func (h *spuServiceHandler) Detail(ctx context.Context, in *Spu, out *SpuResponse) error {
 	return h.SpuServiceHandler.Detail(ctx, in, out)
+}
+
+func (h *spuServiceHandler) SpecDetailInfo(ctx context.Context, in *SpuRequest, out *SkuResponse) error {
+	return h.SpuServiceHandler.SpecDetailInfo(ctx, in, out)
+}
+
+func (h *spuServiceHandler) SpecDetailList(ctx context.Context, in *SpuRequest, out *SkuResponse) error {
+	return h.SpuServiceHandler.SpecDetailList(ctx, in, out)
 }
 
 func (h *spuServiceHandler) SetSale(ctx context.Context, in *SpuRequest, out *SpuResponse) error {
