@@ -32,10 +32,11 @@ message WarehouseGoodsSpec {
     int64 warehouse_goods_id =2;//仓库商品id
     int64 warehouse_id =3;//仓库id
     int64 spu_id =4;//商品id
-    string md5_key =45;//MD5Key
-    repeated GoodsSpecValueItem spec =5;//规格值
-    string created_at = 7;
-    string updated_at = 8;
+    string md5_key =5;//MD5Key
+    int32  inventory =6;//库存
+    repeated GoodsSpecValueItem spec =7;//规格值
+    string created_at = 8;
+    string updated_at = 9;
 }
 
 message GoodsSpecValueItem{
