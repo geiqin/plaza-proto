@@ -261,7 +261,7 @@ message SearchRequest {
     int32 tag_id = 21;
     string tag_name = 22;
     string subtype =23;
-    repeated SpecReqInfo specs =24;
+    repeated SpecReqInfo spec =24;
     repeated int32 brand_ids =25;
     repeated int64 category_ids =26;
     string order_by_field =27;

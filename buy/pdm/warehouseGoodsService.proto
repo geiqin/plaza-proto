@@ -7,11 +7,12 @@ import "warehouseService.proto";
 
 service WarehouseGoodsService {
     rpc Create (WarehouseGoods) returns (WarehouseGoodsResponse) {}
-    rpc Update (WarehouseGoods) returns (WarehouseGoodsResponse) {}
+    rpc UpdateInventory (WarehouseGoods) returns (WarehouseGoodsResponse) {}
     rpc Delete (WarehouseGoods) returns (WarehouseGoodsResponse) {}
-    rpc Get (WarehouseGoods) returns (WarehouseGoodsResponse) {}
+    rpc Detail (WarehouseGoods) returns (WarehouseGoodsResponse) {}
     rpc List (WarehouseGoodsRequest) returns (WarehouseGoodsResponse) {}
     rpc Search (WarehouseGoodsRequest) returns (WarehouseGoodsResponse) {}
+    rpc SelectGoods (WarehouseGoodsRequest) returns (WarehouseGoodsSelectResponse) {}
 }
 
 message WarehouseGoods {
@@ -37,6 +38,7 @@ message WarehouseGoodsSpec {
     repeated GoodsSpecValueItem spec =7;//规格值
     string created_at = 8;
     string updated_at = 9;
+    string spec_text =10;
 }
 
 message GoodsSpecValueItem{
@@ -53,7 +55,13 @@ message WarehouseGoodsRequest {
     int64 spu_id =6;//商品id
     int32  inventory =7;//总库存
     string is_enable =8;//是否启用（0否，1是）
-    repeated int64 ids = 9;
+    int64 category_id =9;//商品分类ID
+    int32 brand_id =10;//品牌ID
+    int64 shop_id =11;//分店ID
+    string title =12;//商品标题
+    repeated int64 ids = 13;
+    repeated int64 spu_ids = 14;
+    repeated int64 term_ids = 15;
 }
 
 message WarehouseGoodsData {
@@ -64,5 +72,16 @@ message WarehouseGoodsData {
 }
 message WarehouseGoodsResponse {
     WarehouseGoodsData data = 1;
+    common.Error error = 2;
+}
+
+message WarehouseGoodsSelectData {
+    common.Pager pager =2;
+    repeated Spu items = 3;
+    common.Info info =4;
+}
+
+message WarehouseGoodsSelectResponse {
+    WarehouseGoodsSelectData data = 1;
     common.Error error = 2;
 }

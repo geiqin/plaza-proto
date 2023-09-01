@@ -5,14 +5,14 @@ import "common/base.proto";
 import "baseInfoService.proto";
 
 service CartService {
+    //购物车信息
+    rpc Index (CartRequest) returns (CartResponse) {}
     //加入购物车
     rpc Add (CartRequest) returns (CartResponse) {}
     //删除购物车商品
     rpc Remove (CartRequest) returns (CartResponse){}
     //清除购物车
     rpc Clear (CartRequest) returns (CartResponse) {}
-    //购物车详情
-    rpc Detail (CartRequest) returns (CartResponse) {}
     //更新购物车数量（根据cartId）
     rpc Stock (CartRequest) returns (CartStockResponse) {}
     //获得统计数量(服务调的多)
@@ -21,18 +21,32 @@ service CartService {
     rpc Checked (CartRequest) returns (CartResponse) {}
 }
 
-message Cart  {
-    int64  id =1; //ID
-    int64  member_id =2; //会员ID
-    int64  sku_id =3; //商品skuId
-    int64  spu_id =4; //商品spuId
-    string title =5; //标题
-    string image_url =6; //封面图片
-    int64  original_price =7; //原价
-    int64  price =8; //销售价格
-    int32  number =9; //购买数量
-    int32  inventory =11; //库存量
-    repeated SpecificationData spec =10; //规格描述
+message CartGoods  {
+    int64  id =1;//ID
+    string title =2;//标题
+    string image_url =3;//封面图片
+    int64  spu_id =4;//商品spuId
+    string md5_key =5;//商品规格md5_key
+    int32  inventory =6;//库存数量
+    int64  original_price =7;//原价
+    int64  price =8;//销售价格
+    int32  spec_buy_min_number =9; //购买数量
+    int32  spec_buy_max_number =10;//购买数量
+    int64  spec_weight =11;//规格重量
+    int64  spec_volume =12; //规格体积
+    string spec_coding =13; //规格编码
+    string spec_barcode =14;//规格条码
+    string unit =15;//库存单位
+    map<string,string> extends =16;//扩展数据
+    string is_invalid =17;//是否无效（0否，1是）
+    string is_error =18;//是否错误（0否，1是）
+    string error_msg =19;//错误信息
+    int32 stock =20;//购买数量
+    int64 subtotal_price =21;//商品小计
+    repeated SpecificationData spec =22; //规格描述
+    string spec_text =23;
+    string brand_name =24;
+    string goods_url =25;
 }
 
 //购物车数据
@@ -40,7 +54,7 @@ message CartData {
     int32 buy_number =1;
     int64 total_price =2;
     int64 address_id = 3;
-    repeated GoodsInfo items =4;
+    repeated CartGoods cart_list =4;
     repeated PromotionInfo promotions_data =5;
 }
 
@@ -48,8 +62,7 @@ message CartRequest {
     string type =1;
     int64 id =2;
     int64 spu_id =3;
-    int64 sku_id =4;
-    int32 number =5;
+    int32 stock =5;
     repeated SpecificationData spec =6;
     repeated int64 ids =9;
 }
@@ -61,6 +74,6 @@ message CartResponse {
 }
 
 message CartStockResponse {
-    Cart data = 1;
+    CartGoods data = 1;
     common.Error error = 2;
 }

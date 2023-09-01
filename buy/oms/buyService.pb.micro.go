@@ -46,7 +46,7 @@ type BuyService interface {
 	//确认信息
 	Confirm(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error)
 	//提交订单
-	Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuySubmitResponse, error)
+	Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error)
 }
 
 type buyService struct {
@@ -71,9 +71,9 @@ func (c *buyService) Confirm(ctx context.Context, in *BuyRequest, opts ...client
 	return out, nil
 }
 
-func (c *buyService) Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuySubmitResponse, error) {
+func (c *buyService) Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error) {
 	req := c.c.NewRequest(c.name, "BuyService.Submit", in)
-	out := new(BuySubmitResponse)
+	out := new(BuyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -87,13 +87,13 @@ type BuyServiceHandler interface {
 	//确认信息
 	Confirm(context.Context, *BuyRequest, *BuyResponse) error
 	//提交订单
-	Submit(context.Context, *BuyRequest, *BuySubmitResponse) error
+	Submit(context.Context, *BuyRequest, *BuyResponse) error
 }
 
 func RegisterBuyServiceHandler(s server.Server, hdlr BuyServiceHandler, opts ...server.HandlerOption) error {
 	type buyService interface {
 		Confirm(ctx context.Context, in *BuyRequest, out *BuyResponse) error
-		Submit(ctx context.Context, in *BuyRequest, out *BuySubmitResponse) error
+		Submit(ctx context.Context, in *BuyRequest, out *BuyResponse) error
 	}
 	type BuyService struct {
 		buyService
@@ -110,6 +110,6 @@ func (h *buyServiceHandler) Confirm(ctx context.Context, in *BuyRequest, out *Bu
 	return h.BuyServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *buyServiceHandler) Submit(ctx context.Context, in *BuyRequest, out *BuySubmitResponse) error {
+func (h *buyServiceHandler) Submit(ctx context.Context, in *BuyRequest, out *BuyResponse) error {
 	return h.BuyServiceHandler.Submit(ctx, in, out)
 }

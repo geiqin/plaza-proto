@@ -98,6 +98,7 @@ message Spu {
     repeated Tag tags = 61;
     repeated Sku skus = 62;
     repeated SpecTypeProperty spec_type_data = 63;//规格类型数据
+    bool selected = 64;
 }
 
 message Sku  {

@@ -112,7 +112,8 @@ message Order {
     string status_name =44; //状态名称
     string status_color =45; //状态颜色
     string pay_status_name =46; //状态名称
-
+    string express_code =47; //物流编码
+    string express_name =48; //物流名称
     OrderCurrency  currency=50;
     OrderAddress address =51;
     MemberInfo member = 52;
