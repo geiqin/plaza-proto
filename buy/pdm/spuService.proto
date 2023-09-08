@@ -84,7 +84,6 @@ message Spu {
     int64  freight_express_id =44;//运费模板ID
     string is_fictitious =45;//是否虚拟商品（0否, 1是）
     map<string,string> fictitious_value =46;//虚拟商品展示数据
-    string spec_base =47;//规格基础数据
     string seo_title =48;//SEO标题
     string seo_keywords =49;//SEO关键字
     string status = 50;
@@ -98,7 +97,20 @@ message Spu {
     repeated Tag tags = 61;
     repeated Sku skus = 62;
     repeated SpecTypeProperty spec_type_data = 63;//规格类型数据
-    bool selected = 64;
+    repeated GoodsSpecBase spec_base =64;
+    GoodsSpecification specifications =65;
+    string show_field_original_price_text =66;
+    string show_field_price_text =67;
+    CommentScore comments_score =68;
+    repeated CommentInfo comments_data =69;
+    int32 comments_count =70;
+    string goods_url =71;
+    string is_favor = 72; //是否已收藏(0否，1是)
+    string content_web =73; //web内容
+    string content_app =74; //app内容
+    string brand_name =75;
+    bool selected = 76;
+
 }
 
 message Sku  {
@@ -118,8 +130,9 @@ message Sku  {
     string created_at = 14;
     string updated_at = 15;
     Spu spu =16;
-    repeated SpecificationData specification_data =17; //规格信息列表
+    repeated SkuSpec spec =17; //规格信息列表
 }
+
 
 
 //表单商品
@@ -184,7 +197,7 @@ message FormSku  {
     int64 volume =11;//体积
     string specification =12;//规格信息
     string spec_indexes =13;//规格索引
-    repeated SpecificationData specification_data =14; //规格信息列表
+    repeated SkuSpec spec =14; //规格信息列表
 
 }
 

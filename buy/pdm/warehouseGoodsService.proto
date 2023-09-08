@@ -58,10 +58,12 @@ message WarehouseGoodsRequest {
     int64 category_id =9;//商品分类ID
     int32 brand_id =10;//品牌ID
     int64 shop_id =11;//分店ID
-    string title =12;//商品标题
-    repeated int64 ids = 13;
-    repeated int64 spu_ids = 14;
-    repeated int64 term_ids = 15;
+    int64 term_id =12;
+    string title =13;//商品标题
+    string keywords =14;//商品标题
+    repeated int64 ids = 15;
+    repeated int64 spu_ids = 16;
+    repeated int64 term_ids = 17;
 }
 
 message WarehouseGoodsData {

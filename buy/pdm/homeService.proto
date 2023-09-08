@@ -2,17 +2,14 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
+import "spuService.proto";
 
-service TermService {
-    rpc Create(Term) returns (TermResponse);
-    rpc Update(Term) returns (TermResponse);
-    rpc Delete (Term) returns (TermResponse);
-    rpc Get (Term) returns (TermResponse);
-    rpc Tree (TermRequest) returns (TermResponse);
-    rpc Search (TermRequest) returns (TermResponse);
+service HomeService {
+    //首页楼层数据
+    rpc HomeFloorData (FloorDataRequest) returns (FloorDataResponse);
 }
 
-message Term {
+message FloorData {
     int64 id = 1;
     string coding = 2;
     string name = 3;
@@ -29,19 +26,15 @@ message Term {
     string seo_desc = 15;
     string dept_path = 16;
     int32 sort = 17;
-    string status = 18;
-    string created_at = 19;
-    string updated_at = 20;
-    Term parent = 21;
-    repeated Term children = 22;
+    repeated Spu goods_list =23;
 }
 
-message TermRequest {
+message FloorDataRequest {
     int64 paged = 1;
     int64 page_size = 2;
     string keywords = 3;
     int64 id = 4;
-    int64 parent_id = 5;
+    int64 term_id = 5;
     string coding = 6;
     string name = 7;
     string is_home_recommended = 8;
@@ -50,15 +43,15 @@ message TermRequest {
     repeated int64 ids = 11;
 }
 
-message TermData {
-    Term  entity = 1;
+message FloorDataData {
+    FloorData  entity = 1;
     common.Pager pager = 2;
-    repeated Term items = 3;
+    repeated FloorData items = 3;
     common.Info info = 4;
 }
 
-message TermResponse {
-    TermData data = 1;
+message FloorDataResponse {
+    FloorDataData data = 1;
     common.Error error = 2;
 }
 

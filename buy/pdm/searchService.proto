@@ -4,7 +4,7 @@ option go_package = "/.;services";
 import "common/base.proto";
 import "termService.proto";
 import "brandService.proto";
-import "goodsService.proto";
+import "spuService.proto";
 import "screeningPriceService.proto";
 
 //前端展示页面专用
@@ -162,7 +162,7 @@ message PluginSeckillData {
 }
 
 message SearchDetailData {
-    Goods goods = 1;
+    Spu goods = 1;
     CartTotalInfo cart_total =2;
     BuyButton buy_button = 3;
     repeated MiddleTabsNav middle_tabs_nav = 4;
@@ -200,7 +200,7 @@ message SearchIndexResponse {
 
 message SearchListData {
     common.Pager pager = 1;
-    repeated Goods  items = 2;
+    repeated Spu  items = 2;
 }
 
 message SearchListResponse {

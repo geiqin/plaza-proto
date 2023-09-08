@@ -49,8 +49,6 @@ type TermService interface {
 	Get(ctx context.Context, in *Term, opts ...client.CallOption) (*TermResponse, error)
 	Tree(ctx context.Context, in *TermRequest, opts ...client.CallOption) (*TermResponse, error)
 	Search(ctx context.Context, in *TermRequest, opts ...client.CallOption) (*TermResponse, error)
-	//首页楼层数据
-	HomeFloorData(ctx context.Context, in *TermRequest, opts ...client.CallOption) (*TermResponse, error)
 }
 
 type termService struct {
@@ -125,16 +123,6 @@ func (c *termService) Search(ctx context.Context, in *TermRequest, opts ...clien
 	return out, nil
 }
 
-func (c *termService) HomeFloorData(ctx context.Context, in *TermRequest, opts ...client.CallOption) (*TermResponse, error) {
-	req := c.c.NewRequest(c.name, "TermService.HomeFloorData", in)
-	out := new(TermResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for TermService service
 
 type TermServiceHandler interface {
@@ -144,8 +132,6 @@ type TermServiceHandler interface {
 	Get(context.Context, *Term, *TermResponse) error
 	Tree(context.Context, *TermRequest, *TermResponse) error
 	Search(context.Context, *TermRequest, *TermResponse) error
-	//首页楼层数据
-	HomeFloorData(context.Context, *TermRequest, *TermResponse) error
 }
 
 func RegisterTermServiceHandler(s server.Server, hdlr TermServiceHandler, opts ...server.HandlerOption) error {
@@ -156,7 +142,6 @@ func RegisterTermServiceHandler(s server.Server, hdlr TermServiceHandler, opts .
 		Get(ctx context.Context, in *Term, out *TermResponse) error
 		Tree(ctx context.Context, in *TermRequest, out *TermResponse) error
 		Search(ctx context.Context, in *TermRequest, out *TermResponse) error
-		HomeFloorData(ctx context.Context, in *TermRequest, out *TermResponse) error
 	}
 	type TermService struct {
 		termService
@@ -191,8 +176,4 @@ func (h *termServiceHandler) Tree(ctx context.Context, in *TermRequest, out *Ter
 
 func (h *termServiceHandler) Search(ctx context.Context, in *TermRequest, out *TermResponse) error {
 	return h.TermServiceHandler.Search(ctx, in, out)
-}
-
-func (h *termServiceHandler) HomeFloorData(ctx context.Context, in *TermRequest, out *TermResponse) error {
-	return h.TermServiceHandler.HomeFloorData(ctx, in, out)
 }
