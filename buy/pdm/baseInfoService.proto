@@ -22,6 +22,8 @@ message GoodsSpecChoose{
 message GoodsSpecChooseValue{
     string name =1;
     string image_url =2;
+    int32 inventory =3;
+    string is_only_level_one =4;
 }
 
 message GoodsParameter{

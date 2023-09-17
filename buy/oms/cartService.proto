@@ -62,7 +62,8 @@ message CartRequest {
     string type =1;
     int64 id =2;
     int64 spu_id =3;
-    int32 stock =5;
+    int32 stock =4;
+    string buy_event_type =5;
     repeated SpecificationData spec =6;
     repeated int64 ids =9;
 }

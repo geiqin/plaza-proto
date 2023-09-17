@@ -2,6 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
+import "baseInfoService.proto";
 import "termService.proto";
 import "brandService.proto";
 import "spuService.proto";
@@ -31,8 +32,8 @@ message SpecDetailData{
 
 message SpecDetailDataBase{
     int64 id =1;
-    int64 goods_id =2;
-    int64 sku_id =3;
+    int64 spu_id =2;
+    string md5_key =3;
     int64 price =4;
     int32 inventory =5;
     int64 weight =6;
@@ -40,6 +41,8 @@ message SpecDetailDataBase{
     string coding =8;
     string barcode =9;
     int64 original_price =10;
+    string image_url =11;
+    repeated SkuSpec spec =12;
 }
 
 message SpecDetailDataExtends{

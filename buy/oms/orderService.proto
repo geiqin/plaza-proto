@@ -86,7 +86,7 @@ message Order {
     string cover_url =18;//订单商品封面URL（默认取商品明细里数量最多的商品主图）
     string user_note =19;//订单附言,由用户提交订单前填写
     string seller_note =20;//商家留言,当该字段值时可以在订单查询看到
-    int64  express_id =21;//快递id
+    int32  express_id =21;//快递id
     string express_number =22;//快递单号
     string is_under_line =23;//是否线下支付（0否，1是）(如果多次支付以第一次为准)
     string is_cod =24;//是否货到付款
@@ -164,7 +164,7 @@ message OrderRequest {
     string is_invoiced = 14;
     string is_modified = 15;
     string is_paid = 16;
-    int64  express_id =17;//快递id
+    int32  express_id =17;//快递id
     string express_number =18;//快递单号
     int32 shipping_id = 19;
     string shipping_name =20;

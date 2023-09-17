@@ -55,9 +55,9 @@ type SpuService interface {
 	GetBase(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
 	//商品详情（后台编辑显示）
 	Detail(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
-	//规格详情
+	//规格详情(准备弃用)
 	SpecDetailInfo(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error)
-	//规格详情列表
+	//规格详情列表(准备弃用)
 	SpecDetailList(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error)
 	//商品上下架
 	SetSale(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
@@ -216,9 +216,9 @@ type SpuServiceHandler interface {
 	GetBase(context.Context, *Spu, *SpuResponse) error
 	//商品详情（后台编辑显示）
 	Detail(context.Context, *Spu, *SpuResponse) error
-	//规格详情
+	//规格详情(准备弃用)
 	SpecDetailInfo(context.Context, *SpuRequest, *SkuResponse) error
-	//规格详情列表
+	//规格详情列表(准备弃用)
 	SpecDetailList(context.Context, *SpuRequest, *SkuResponse) error
 	//商品上下架
 	SetSale(context.Context, *SpuRequest, *SpuResponse) error

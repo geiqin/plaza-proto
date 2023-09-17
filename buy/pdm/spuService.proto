@@ -24,9 +24,9 @@ service SpuService {
     rpc GetBase (Spu) returns (SpuResponse);
     //商品详情（后台编辑显示）
     rpc Detail (Spu) returns (SpuResponse);
-    //规格详情
+    //规格详情(准备弃用)
     rpc SpecDetailInfo(SpuRequest) returns (SkuResponse);
-    //规格详情列表
+    //规格详情列表(准备弃用)
     rpc SpecDetailList(SpuRequest) returns (SkuResponse);
     //商品上下架
     rpc SetSale (SpuRequest) returns (SpuResponse);
