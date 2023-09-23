@@ -72,7 +72,7 @@ message OrderBase {
     string site_model =9; //当前使用的站点模式
     string common_site_type =10; //公共站点模式
     OrderAddress address =11;//收件地址
-    repeated ExtractionAddress extraction_address =12; //自提点地址
+    repeated OrderAddress extraction_address =12; //自提点地址
     // 仓库组扩展展示数据
     // name 名称
     // price 金额
@@ -128,23 +128,6 @@ message BuyGoodsData {
     string md5_key =4;//商品规格md5_key
 }
 
-//自提点地址(待完善)
-message ExtractionAddress{
-    int64 id =1;
-    string address =2;
-}
-
-//插件积分数据
-message PluginsIntegralData{
-    int64 user_integral = 1; //用户积分
-    int64 use_integral = 2; //使用积分
-    string discount_type =3; //优惠类型
-    int64 discount_price =4; //抵扣金额
-    bool is_support_goods_exchange =5;//是否支持商品兑换
-    bool is_checked =6; //是否已选中
-    //group_integral
-}
-
 
 message BuyData {
     BuyConfirmData confirm = 1;//购买确认信息
@@ -161,9 +144,7 @@ message BuyConfirmData {
     int32 default_payment_id =7;//默认支付ID
     string common_site_type =8;//站点类型
     map<string,string> extension_data =9; //扩展数据
-    PluginsIntegralData plugins_points_data =10;//积分信息
-    map<string,string> plugins_coupon_data =11;//优惠劵数据
-    map<string,string> plugins_realstore_data =12;//门店数据
+    map<string,string> plugins_data =10;//插件数据
 }
 
 //购买提交数据
