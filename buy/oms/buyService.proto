@@ -73,34 +73,9 @@ message OrderBase {
     string common_site_type =10; //公共站点模式
     OrderAddress address =11;//收件地址
     repeated OrderAddress extraction_address =12; //自提点地址
-    // 仓库组扩展展示数据
-    // name 名称
-    // price 金额
-    // type 类型（0减少, 1增加）
-    // tips 提示信息
-    // business 业务类型（内容格式不限）
-    // ext 扩展数据（内容格式不限）
-    // $extension_data = [
-    // [
-    //     'name'       => '感恩节9折',
-    //     'price'      => 23,
-    //     'type'       => 0,
-    //     'tips'       => '-￥23元',
-    //     'business'   => null,
-    //     'ext'        => null,
-    // ],
-    // ];
-    repeated ExtensionData extension_data = 13; //扩展数据
+    repeated OrderExtension extension_data = 13; //扩展数据
 }
 
-//扩展展示数据
-message ExtensionData {
-    string name =1;//名称
-    int64  price =2;//价格
-    string type =3;//类型
-    string business =4;//业务名称
-    string tips =5;//提示信息
-}
 
 //确认信息请求参数
 message BuyRequest {

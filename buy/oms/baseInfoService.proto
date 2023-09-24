@@ -204,6 +204,27 @@ message WarehouseInfo {
 }
 
 
+message OrderCurrency{
+	int64 id =1;
+	int64 order_id =2;
+	int64 user_id =3;
+	string currency_name =4;
+	string currency_code =5;
+	string currency_symbol =6;
+	float currency_rate =7;
+	string created_at =8;
+	string updated_at =9;
+}
+
+message OrderExtension {
+	int64 id = 1;// ID
+	string name = 2;// 名称
+	string type = 3;// 类型（0减少, 1增加）
+	int64 price = 4;// 金额
+	string business = 5;// 业务类型
+	string tips = 6; //提示信息
+	string origin_data =7; //原始数据（内容格式不限）
+}
 
 //订单详情步骤
 message OrderFlow  {
