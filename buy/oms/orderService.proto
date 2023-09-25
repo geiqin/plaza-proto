@@ -63,6 +63,8 @@ service OrderService {
     //订单列表【service】
     rpc List (OrderRequest) returns (OrderResponse) {}
 
+    //扩展列表【service】
+    rpc OrderExtensionList (OrderRequest) returns (OrderExtensionResponse) {}
 }
 
 message Order {
@@ -221,5 +223,15 @@ message OrderPayResponse {
 
 message OrderStatusStepTotalResponse {
     OrderStatusStepTotalData data = 1;
+    common.Error error = 2;
+}
+
+message OrderExtensionData {
+    OrderExtension entity = 1;
+    repeated OrderExtension items =2;
+}
+
+message OrderExtensionResponse {
+    OrderExtensionData data = 1;
     common.Error error = 2;
 }

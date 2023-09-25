@@ -94,6 +94,7 @@ message BuyRequest {
     repeated SpecificationData spec =13; //规格信息
     repeated int64 ids = 14; ///购物车ids
     BuyGoodsData goods_data =17;
+    map<int64,int64> choice_coupon_ids =18;//选中优惠劵 <仓库ID,用户优惠劵ID>
 }
 
 message BuyGoodsData {
