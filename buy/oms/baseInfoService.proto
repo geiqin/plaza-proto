@@ -218,12 +218,13 @@ message OrderCurrency{
 
 message OrderExtension {
 	int64 id = 1;// ID
-	string name = 2;// 名称
-	string type = 3;// 类型（0减少, 1增加）
-	int64 price = 4;// 金额
-	string business = 5;// 业务类型
-	string tips = 6; //提示信息
-	string origin_data =7; //原始数据（内容格式不限）
+	int64 order_id = 2;// OrderID
+	string name = 3;// 名称
+	string type = 4;// 类型（0减少, 1增加）
+	int64 price = 5;// 金额
+	string business = 6;// 业务类型
+	string tips = 7; //提示信息
+	string origin_data =8; //原始数据（内容格式不限）
 }
 
 //订单详情步骤
