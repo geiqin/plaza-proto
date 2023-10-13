@@ -6,18 +6,18 @@ import "common/base.proto";
 import "userService.proto";
 import "navService.proto";
 
-//授权管理
-service AuthorizeService {
-    rpc Info (AuthorizeRequest) returns (AuthorizeResponse) {}
-    rpc UserInfo (AuthorizeRequest) returns (AuthorizeResponse) {}
-    rpc PermissionInfo (AuthorizeRequest) returns (AuthorizeResponse) {}
+//当前用户管理
+service CurrentUserService {
+    rpc Info (CurrentUserRequest) returns (CurrentUserResponse) {}
+    rpc UserInfo (CurrentUserRequest) returns (CurrentUserResponse) {}
+    rpc PermissionInfo (CurrentUserRequest) returns (CurrentUserResponse) {}
     rpc ModifyMobile (User) returns (UserResponse) {}
     rpc ModifyAvatar (User) returns (UserResponse) {}
-    rpc ModifyPwd (AuthorizeRequest) returns (UserResponse) {}
+    rpc ModifyPwd (CurrentUserRequest) returns (UserResponse) {}
 }
 
 //授权请求信息
-message AuthorizeRequest {
+message CurrentUserRequest {
     int64  id = 1;
     string name = 2;
     string username = 3;
@@ -28,7 +28,7 @@ message AuthorizeRequest {
     string tag =8;
 }
 
-message AuthorizeData {
+message CurrentUserData {
     User user = 1;
     repeated Nav navs = 2;
     repeated string permissions = 3;
@@ -38,8 +38,8 @@ message AuthorizeData {
 }
 
 
-message AuthorizeResponse{
-    AuthorizeData data = 1;
+message CurrentUserResponse{
+    CurrentUserData data = 1;
     common.Error error = 2;
 }
 
