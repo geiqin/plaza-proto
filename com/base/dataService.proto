@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service DataService {
+    rpc Create (Data) returns (DataResponse) {}
+    rpc Update (Data) returns (DataResponse) {}
+    rpc Delete (Data) returns (DataResponse) {}
+    rpc Search (DataRequest) returns (DataResponse) {}
+    rpc Get (DataRequest) returns (DataResponse) {}
+    rpc List (DataRequest) returns (DataResponse) {}
+}
+
+// 区域信息
+message Data {
+    int64  id =1;//ID
+    string type =2;//类型
+    string code =3;//唯一编码
+    string name =4;//数据名称
+    string content =5;//JSON内容
+    string is_init =6;//是否初始化
+    string status =7;//状态：0禁用，1可用
+    string created_at = 9;
+    string updated_at = 10;
+}
+
+
+//查询参数
+message DataRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string keywords =3;
+    //以下为自定义参数
+    int64 id = 4;
+    string name =5;
+    string type = 6;
+    string status = 7;
+    repeated int64 ids =8;
+    int64 parent_id = 9;
+}
+
+
+message DataData {
+    Data entity = 1;
+    common.Pager pager =2;
+    repeated Data items = 3;
+}
+
+
+message DataResponse {
+    DataData data = 1;
+    common.Error error =2;
+}
