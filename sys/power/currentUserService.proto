@@ -8,9 +8,8 @@ import "navService.proto";
 
 //当前用户管理
 service CurrentUserService {
-    rpc Info (CurrentUserRequest) returns (CurrentUserResponse) {}
-    rpc UserInfo (CurrentUserRequest) returns (CurrentUserResponse) {}
-    rpc PermissionInfo (CurrentUserRequest) returns (CurrentUserResponse) {}
+    rpc Index (CurrentUserRequest) returns (CurrentUserResponse) {}
+    rpc BaseInfo (CurrentUserRequest) returns (CurrentUserResponse) {}
     rpc ModifyMobile (User) returns (UserResponse) {}
     rpc ModifyAvatar (User) returns (UserResponse) {}
     rpc ModifyPwd (CurrentUserRequest) returns (UserResponse) {}

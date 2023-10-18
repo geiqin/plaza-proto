@@ -3,24 +3,26 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 import "tagService.proto";
-import "vipService.proto";
+import "levelService.proto";
+import "memberPayLevelService.proto";
 import "memberAddressService.proto";
 import "baseInfoService.proto";
+import "memberPlatformService.proto";
 
 service MemberService {
-    //通过账号注册用户
-    rpc Register (MemberRequest) returns (MemberResponse) {}
-    //从粉丝添加用户
-    rpc RegisterByFan (RegisterMemberFan) returns (MemberResponse) {}
-    //通过手机注册用户
-    rpc RegisterByMobile (MemberRequest) returns (MemberResponse) {}
-    //通过邮箱注册用户
-    rpc RegisterByEmail (MemberRequest) returns (MemberResponse) {}
-    //验证账户信息
-    rpc ToLogin (MemberRequest) returns (MemberResponse) {}
+    //用户注册
+    rpc Reg (MemberRequest) returns (MemberResponse) {}
+    //小程序用户授权
+    rpc AppMiniAuth (MemberRequest) returns (MemberResponse) {}
+    //通过手机号授权
+    rpc MobileAuth (MemberRequest) returns (MemberResponse) {}
+    //通过邮箱授权
+    rpc EmailAuth (MemberRequest) returns (MemberResponse) {}
+    //通过账户授权
+    rpc AccountAuth (MemberRequest) returns (MemberResponse) {}
 
     //个人中心
-    rpc Index (Member) returns (MemberIndexResponse) {}
+    rpc Index (MemberRequest) returns (MemberIndexResponse) {}
 
     rpc Create (Member) returns (MemberResponse) {}
     //手动添加单位用户
@@ -48,10 +50,12 @@ service MemberService {
     rpc Search (MemberRequest) returns (MemberResponse) {}
     //设置会员标签
     rpc SetTags (Member) returns (MemberResponse) {}
-    //获取已绑定手机用户(SRV专用)
-    rpc GetByBindMobile (MemberRequest) returns (MemberResponse) {}
-    //获取已绑定邮箱用户(SRV专用)
-    rpc GetByBindEmail (MemberRequest) returns (MemberResponse) {}
+    //获取用户通过已绑定手机(SRV专用)
+    rpc GetByMobile (MemberRequest) returns (MemberResponse) {}
+    //获取用户通过已绑定邮箱(SRV专用)
+    rpc GetByEmail (MemberRequest) returns (MemberResponse) {}
+    //获取用户通过身份证(SRV专用)
+    rpc GetByIdCard (MemberRequest) returns (MemberResponse) {}
 }
 
 
@@ -63,60 +67,45 @@ message Member {
     string nickname =5;//用户昵称
     string gender =6;//性别:0=未知,1=男,2=女
     string birthday =7;//会员生日
-    int64  area_id =8;//区域ID
-    string province_name =9;//所在省
-    string city_name =10;//所在市
-    string county_name =11;//所在区/县
-    string address =12;//详细地址
-    string email =13;//邮箱
-    string mobile =14;//手机号
-    int64  avatar_id =15;//会员头像ID
-    string avatar_url =16;//会员头像url地址
-    int32  vip_level_id =17;//会员等级ID
-    int64  integral =18;//会员积分（可兑换）
-    int64  frozen_integral =19;//冻结积分
-    int64  level_integral =20;//会员等级积分(升级专用)
-    int32  total_order_num =21;//成交订单笔数
-    int64  total_order_money =22;//成交订单总额,单位:元
-    int32  comment_num =23;//评价总数
-    int32  collect_num =24;//商品收藏总数
-    int64  referrer_id =25;//推荐人ID
-    string is_trusted =26;//已实名认证
-    string is_bind_mobile =27;//已绑定手机
-    string is_bind_email =28;//已绑定邮箱
-    string is_bind_wx =29;//是否绑定微信
-    string memo =30;//备注
-    string client_type =31;//来源终端
-    int64  create_fan_id =32;//注册来源粉丝ID
+    int64  province_id =8;//区域ID
+    int64  city_id =9;//区域ID
+    int64  county_id =10;//区域ID
+    string province_name =11;//所在省
+    string city_name =12;//所在市
+    string county_name =13;//所在区/县
+    string address =14;//详细地址
+    string email =15;//绑定邮箱
+    string mobile =16;//绑定手机
+    string avatar_url =17;//会员头像url地址
+    int32  free_level_id =18;//会员等级ID
+    int64  integral =19;//会员积分（可兑换）
+    int64  frozen_integral =20;//冻结积分
+    int64  level_integral =21;//会员等级积分(升级专用)
+    int32  total_order_num =22;//成交订单笔数
+    int64  total_order_money =23;//成交订单总额,单位:元
+    int32  comment_count =24;//评价总数
+    int32  collect_count =25;//商品收藏总数
+    int64  referrer_id =26;//推荐人ID
+    string client_type =27;//来源终端
+    string contact_tel =28;//联系电话
+    string is_trusted =30;//是否已实名认证
+    string memo =31;//备注
     string status =33;//状态：1正常，2锁定，3禁用，9注销
     string created_at =34;
     string updated_at =35;
     string deleted_at =36;
-    Vip vip_level =37;
-    Member referrer =38;
-    repeated Tag tags = 39;
-    repeated MemberAddress address_list = 40;
-    string status_name =41;
-    string gender_name =42;
-    string client_type_name =43;
-    int32  plugins_distribution_level_id =44;//插件分销等级ID
+    Level free_level =37;
+    MemberPayLevel pay_level =38;
+    Member referrer =39;
+    repeated Tag tags = 40;
+    repeated MemberAddress address_list = 41;
+    string type_name =42;
+    string status_name =43;
+    string gender_name =44;
+    string client_type_name =45;
+    int32  plugins_distribution_level_id =46;//插件分销等级ID
 }
 
-message RegisterMemberFan{
-    string open_id = 1;//openId
-    string union_id = 2;//unionId
-    string platform = 3; //所属平台
-    string original_data = 4; //平台原始数据
-    string type =5;//类型：0个人,1企业
-    string username =6;//用户名称
-    string nickname =7;//用户昵称
-    string avatar_url =8;//会员头像url地址
-    int64  referrer_id =9;//推荐人ID
-    string province_name =10;//所在省
-    string city_name =11;//所在市
-    string county_name =12;//所在区/县
-    string address =13;//详细地址
-}
 
 //客户查询参数
 message MemberRequest {
@@ -125,35 +114,37 @@ message MemberRequest {
     string sorting = 3;
     //以下为自定义参数
     int64 id = 4;
-    string type = 5;
+    string type = 5;//类型：1个人,2企业
     string number_code = 6;
     string username = 7;
     string nickname =8;
     string gender =9;
     string mobile =10;
     string email =11;
-    int32 vip_id =12;
-    int32 card_id =13;
+    int32 free_level_id =12;
+    int32 pay_level_id =13;
     int32 tag_id =14;
     string client_type =15;
-    int64 area_id =16;
-    string status =17;
-    string keywords =18;
-    int64 member_id = 19;
-    string is_bind_mobile =20;
-    string is_bind_email =21;
-    string is_bind_wx =22;
+
+    int64 member_id = 16;
+    int64 province_id =17;
+    int64 city_id =18;
+    string county_id =19;
+    string province_name =20;//所在省
+    string city_name =21;//所在市
+    string county_name =22;//所在区/县
     int64 referrer_id =23;
-    int64 avatar_id =24;
-    string avatar_url =25;
+    string status =24;
+    string keywords =25;
     string refer_url =26;
-    string wx_open_id =27;
     string password =29;
     string code =30;
     string referrer =31;
     repeated int64 ids = 32;
     string client_type_name =33;
     int32  plugins_distribution_level_id =34;//插件分销等级ID
+    string platform = 35;//来源平台
+    MemberPlatform platform_data = 36; //平台数据
 }
 
 message MemberData {
@@ -168,12 +159,30 @@ message MemberResponse {
     common.Error error = 2;
 }
 
+
+
+
 message MemberIndexData {
-    Member member =1;
-    repeated DictInfo gender_list =2;
+    LevelBaseInfo base = 1;
+    MemberPayLevel pay_level =2;
+    repeated NavInfo nav_list = 3;
 }
 
 message MemberIndexResponse {
     MemberIndexData data = 1;
     common.Error error = 2;
+}
+
+//等级配置
+message LevelBaseInfo {
+    string is_enable_buy = 1; //开启购买会员,默认否(0否、1是)
+    string default_level_image_url =2;//默认等级图标,建议50像素X50像素
+    string user_poster_share_image_url = 3;//用户分享封面图片
+    string user_poster_share_title = 4;//用户分享标题,空则读取站点页面名称
+    string user_poster_share_desc = 5;//用户分享描述,空则读取站点页面描述
+    string banner_top_title = 6; //首页banner大标题空则不显示
+    string banner_middle_name = 7;//首页banner按钮文字,默认 开通会员
+    string banner_bottom_content =8;//首页banner背景图片,建议1920像素X475像素查看;默认背景图片
+    string not_opening_vip_desc = 9; //未开通会员介绍
+    string user_vip_center_notice = 10; //会员中心公告位于用户会员中心，空则不显示
 }

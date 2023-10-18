@@ -1,0 +1,68 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+service MemberPlatformService {
+    rpc Update (MemberPlatform) returns (MemberPlatformResponse) {}
+    rpc Delete (MemberPlatform) returns (MemberPlatformResponse) {}
+    rpc Get (MemberPlatform) returns (MemberPlatformResponse) {}
+    rpc List (MemberPlatformRequest) returns (MemberPlatformResponse) {}
+    rpc Search (MemberPlatformRequest) returns (MemberPlatformResponse) {}
+}
+
+message MemberPlatform {
+    int64  id =1;//ID
+    int64  member_id =2;//会员ID
+    string platform =3;//所属平台（pc PC网站, h5 H5手机网站, ios 苹果APP, android 安卓APP, alipay 支付宝小程序, weixin 微信小程序, baidu 百度小程序, toutiao 头条小程序, qq QQ小程序, kuaishou 快手小程序）
+    string token =4;//token
+    string alipay_openid =5;//支付宝openid
+    string weixin_openid =6;//微信openid
+    string weixin_unionid =7;//微信unionid
+    string weixin_web_openid =8;//微信web用户openid
+    string baidu_openid =9;//百度openid
+    string toutiao_openid =10;//头条openid
+    string toutiao_unionid =11;//头条unionid
+    string qq_openid =12;//QQ openid
+    string qq_unionid =13;//QQ unionid
+    string kuaishou_openid =14;//快手openid
+    string created_at = 50;
+    string updated_at = 51;
+}
+
+
+message MemberPlatformRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
+    //以下为自定义参数
+    int64 id = 4;
+    string platform =5;
+    int64 member_id=6;
+    int64 referrer_id = 7;
+    string alipay_openid =8;//支付宝openid
+    string weixin_openid =9;//微信openid
+    string weixin_unionid =10;//微信unionid
+    string weixin_web_openid =11;//微信web用户openid
+    string baidu_openid =12;//百度openid
+    string toutiao_openid =13;//头条openid
+    string toutiao_unionid =14;//头条unionid
+    string qq_openid =15;//QQ openid
+    string qq_unionid =16;//QQ unionid
+    string kuaishou_openid =17;//快手openid
+    string code =18;
+    repeated int64 ids = 19;
+}
+
+message MemberPlatformData {
+    MemberPlatform entity = 1;
+    common.Pager pager =2;
+    repeated MemberPlatform items = 3;
+    common.Info info =4;
+}
+
+//
+message MemberPlatformResponse {
+    MemberPlatformData data = 1;
+    common.Error error = 2;
+}

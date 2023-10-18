@@ -1,0 +1,66 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "levelService.proto";
+
+service MemberPayLevelService {
+    //分享海报
+    rpc Poster (MemberPayLevel) returns (MemberPayLevelPosterResponse) {}
+    rpc Get (MemberPayLevel) returns (MemberPayLevelResponse) {}
+    rpc Search (MemberPayLevelRequest) returns (MemberPayLevelResponse) {}
+    rpc List (MemberPayLevelRequest) returns (MemberPayLevelResponse) {}
+}
+
+message MemberPayLevel {
+    int64  id =1;//ID
+    int64  member_id =2;//用户ID
+    int32  level_id =3;//等级ID
+    string begin_time =4;//开始时间
+    string end_time =5;//结束时间
+    int32  order_trade_num =6;//成交订单笔数
+    int64  order_trade_money =7;//成交订单总额
+    int32  renew_num =8;//续展次数
+    int32  surplus_time_number =9;//剩余时间值
+    string surplus_time_unit =10;//剩余时间单位
+    string is_forever =11;//是否永久会员(0否，1是)
+    string status =12;//状态：0失效，1正常
+    string created_at =13;
+    string updated_at =14;
+    Level level =15;
+}
+
+message MemberPayLevelRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    //以下为自定义参数
+    int32 id =3;
+    int32 level_id = 4;
+    int64 member_id =5;
+    string status =6;
+}
+
+
+message MemberPayLevelData {
+    MemberPayLevel entity = 1;
+    common.Pager pager =2;
+    repeated MemberPayLevel items = 3;
+    common.Info info =4;
+}
+
+message MemberPayLevelResponse {
+    MemberPayLevelData data = 1;
+    common.Error error = 2;
+}
+
+
+
+message MemberPayLevelPosterData {
+    string user_share_qrcode =1;
+    string user_share_url =2;
+}
+
+message MemberPayLevelPosterResponse {
+    MemberPayLevelPosterData data = 1;
+    common.Error error = 2;
+}

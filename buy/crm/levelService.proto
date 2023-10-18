@@ -4,27 +4,25 @@ option go_package ="/.;services";
 import "common/base.proto";
 import "benefitService.proto";
 
-service VipService {
-    rpc Create (Vip) returns (VipResponse) {}
-    rpc Update (Vip) returns (VipResponse) {}
-    rpc Delete (Vip) returns (VipResponse) {}
-    rpc Get (Vip) returns (VipResponse) {}
-    rpc Search (VipRequest) returns (VipResponse) {}
-    rpc List (VipRequest) returns (VipResponse) {}
+service LevelService {
+    rpc Create (Level) returns (LevelResponse) {}
+    rpc Update (Level) returns (LevelResponse) {}
+    rpc Delete (Level) returns (LevelResponse) {}
+    rpc Get (Level) returns (LevelResponse) {}
+    rpc Search (LevelRequest) returns (LevelResponse) {}
+    rpc List (LevelRequest) returns (LevelResponse) {}
 }
 
-message Vip {
+message Level {
     int32   id =1;//ID
     string  type =2;//类型：free免费会员，pay付费会员
     string  name =3;//等级名称
-    int64   icon_id =4;//图标ID
     string  icon_url =5;//图标URL
     int32   bg_mode =6;//背景模式：1背景颜色，2背景图片
     string  bg_color =7;//卡面背景颜色
-    int64   bg_image_id =8;//背景图ID
     string  bg_image_url =9;//背景图URL
-    int64   min_level_integral =10;//需要最低积分
-    int64   max_level_integral =11;//需要最大积分
+    int64   min_integral =10;//需要最低积分
+    int64   max_integral =11;//需要最大积分
     string  description =12;//等级描述/使用须知
     string  is_free_postage =13;//是否会员包邮(会员权益)(0否，1是)
     string  is_member_discount =14;//是否会员折扣(会员权益)(0否，1是)
@@ -38,32 +36,33 @@ message Vip {
     string  status =22;//状态：启用，禁用
     string created_at =23;
     string updated_at =24;
-    VipPackage upgrade_package =25;
+    LevelPackage upgrade_package =25;
     repeated Benefit benefits =26;
 }
 
-message VipPackage {
-    string is_give_integral =1;//是否送积分(0否，1是)
-    string is_give_coupon =2;//是否会员折扣(会员权益)(0否，1是)
-    string is_give_gift =3;//是否会员价(会员权益)：单独设置会员价活动的商品，不享受消费折扣(0否，1是)
-    int64 give_integral =4;//送积积分
-    repeated give_coupon give_coupon_data =5;//赠送优惠劵数据
-    repeated give_gift give_gift_data =6;//赠送赠品数据
-    message give_coupon {
-        int64 batch_id =1;
+message LevelPackage {
+    string is_send_integral =1;//是否赠送积分(0否，1是)
+    string is_send_coupon =2;//是否赠送优惠劵(会员权益)(0否，1是)
+    string is_send_gift =3;//是否赠送礼品(会员权益)(0否，1是)
+    int64 send_integral =4;//赠送积分数
+    repeated send_coupon send_coupon_data =5;//赠送优惠劵数据
+    repeated send_gift send_gift_data =6;//赠送礼品数据
+    message send_coupon {
+        int64 coupon_id =1;
         string title =2;
         int32 number =3;
     }
-    message give_gift  {
-        int64 sku_id =1;
-        string title =2;
-        string unit =3;
-        string image_url =4;
-        int32 number =5;
+    message send_gift  {
+        int64 spu_id =1;
+        string md5_key =2;
+        string title =3;
+        string unit =4;
+        string image_url =5;
+        int32 number =6;
     }
 }
 
-message VipRequest {
+message LevelRequest {
     int64 paged = 1;
     int64 page_size = 2;
     //以下为自定义参数
@@ -73,15 +72,15 @@ message VipRequest {
     string status =6;
 }
 
-message VipData {
-    Vip entity = 1;
+message LevelData {
+    Level entity = 1;
     common.Pager pager =2;
-    repeated Vip items = 3;
+    repeated Level items = 3;
     common.Info info =4;
 }
 
-message VipResponse {
-    VipData data = 1;
+message LevelResponse {
+    LevelData data = 1;
     common.Error error = 2;
 }
 

@@ -4,22 +4,22 @@ option go_package ="/.;services";
 import "common/base.proto";
 import "memberService.proto";
 
-service VipOrderLogService {
+service LevelOrderLogService {
   //增加余额（增加）
-  rpc Income (VipOrderLog) returns (VipOrderLogResponse) {}
+  rpc Income (LevelOrderLog) returns (LevelOrderLogResponse) {}
   //扣除余额(支出)
-  rpc Expend (VipOrderLog) returns (VipOrderLogResponse) {}
+  rpc Expend (LevelOrderLog) returns (LevelOrderLogResponse) {}
   //获得余额记录信息
-  rpc Get (VipOrderLog) returns (VipOrderLogResponse) {}
+  rpc Get (LevelOrderLog) returns (LevelOrderLogResponse) {}
   //查询余额记录信息
-  rpc Search (VipOrderLogRequest) returns (VipOrderLogResponse) {}
+  rpc Search (LevelOrderLogRequest) returns (LevelOrderLogResponse) {}
 }
 
-message VipOrderLog {
+message LevelOrderLog {
   int64  id =1;//ID
-  string vip_order_no =2;//支付订单编号
+  string log_no =2;//支付订单编号
   int64  member_id =3;//用户ID
-  int64  vip_id =4;//VipID
+  int64  level_id =4;//LevelID
   int64  money =5;//销售价
   int64  pay_money =6;//支付金额
   string type =7;//类型：buy正常购买,give赠送
@@ -37,30 +37,30 @@ message VipOrderLog {
 
 
 //查询参数
-message VipOrderLogRequest {
+message LevelOrderLogRequest {
   int64 paged = 1;
   int64 page_size = 2;
   //以下为自定义参数
   int64 member_id =3;
   string type =4;
-  int64 vip_id =5;
+  int32 level_id =5;
   int64 money =6;
   int32 payment_id =7;
-  int64 vip_order_no =8;
+  int64 log_no =8;
   string period_unit =9;
   string memo =10;
   string start_date = 11;
   string end_date = 12;
 }
 
-message VipOrderLogData {
-  VipOrderLog entity = 1;
+message LevelOrderLogData {
+  LevelOrderLog entity = 1;
   common.Pager pager =2;
-  repeated VipOrderLog items = 3;
+  repeated LevelOrderLog items = 3;
   common.Info info =4;
 }
 
-message VipOrderLogResponse {
-  VipOrderLogData data = 1;
+message LevelOrderLogResponse {
+  LevelOrderLogData data = 1;
   common.Error error = 2;
 }

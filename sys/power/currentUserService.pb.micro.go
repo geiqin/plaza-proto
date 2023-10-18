@@ -4,8 +4,8 @@
 package services
 
 import (
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -43,9 +43,8 @@ func NewCurrentUserServiceEndpoints() []*api.Endpoint {
 // Client API for CurrentUserService service
 
 type CurrentUserService interface {
-	Info(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error)
-	UserInfo(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error)
-	PermissionInfo(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error)
+	Index(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error)
+	BaseInfo(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error)
 	ModifyMobile(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
 	ModifyAvatar(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
 	ModifyPwd(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*UserResponse, error)
@@ -63,8 +62,8 @@ func NewCurrentUserService(name string, c client.Client) CurrentUserService {
 	}
 }
 
-func (c *currentUserService) Info(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error) {
-	req := c.c.NewRequest(c.name, "CurrentUserService.Info", in)
+func (c *currentUserService) Index(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error) {
+	req := c.c.NewRequest(c.name, "CurrentUserService.Index", in)
 	out := new(CurrentUserResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -73,18 +72,8 @@ func (c *currentUserService) Info(ctx context.Context, in *CurrentUserRequest, o
 	return out, nil
 }
 
-func (c *currentUserService) UserInfo(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error) {
-	req := c.c.NewRequest(c.name, "CurrentUserService.UserInfo", in)
-	out := new(CurrentUserResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *currentUserService) PermissionInfo(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error) {
-	req := c.c.NewRequest(c.name, "CurrentUserService.PermissionInfo", in)
+func (c *currentUserService) BaseInfo(ctx context.Context, in *CurrentUserRequest, opts ...client.CallOption) (*CurrentUserResponse, error) {
+	req := c.c.NewRequest(c.name, "CurrentUserService.BaseInfo", in)
 	out := new(CurrentUserResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -126,9 +115,8 @@ func (c *currentUserService) ModifyPwd(ctx context.Context, in *CurrentUserReque
 // Server API for CurrentUserService service
 
 type CurrentUserServiceHandler interface {
-	Info(context.Context, *CurrentUserRequest, *CurrentUserResponse) error
-	UserInfo(context.Context, *CurrentUserRequest, *CurrentUserResponse) error
-	PermissionInfo(context.Context, *CurrentUserRequest, *CurrentUserResponse) error
+	Index(context.Context, *CurrentUserRequest, *CurrentUserResponse) error
+	BaseInfo(context.Context, *CurrentUserRequest, *CurrentUserResponse) error
 	ModifyMobile(context.Context, *User, *UserResponse) error
 	ModifyAvatar(context.Context, *User, *UserResponse) error
 	ModifyPwd(context.Context, *CurrentUserRequest, *UserResponse) error
@@ -136,9 +124,8 @@ type CurrentUserServiceHandler interface {
 
 func RegisterCurrentUserServiceHandler(s server.Server, hdlr CurrentUserServiceHandler, opts ...server.HandlerOption) error {
 	type currentUserService interface {
-		Info(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error
-		UserInfo(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error
-		PermissionInfo(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error
+		Index(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error
+		BaseInfo(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error
 		ModifyMobile(ctx context.Context, in *User, out *UserResponse) error
 		ModifyAvatar(ctx context.Context, in *User, out *UserResponse) error
 		ModifyPwd(ctx context.Context, in *CurrentUserRequest, out *UserResponse) error
@@ -154,16 +141,12 @@ type currentUserServiceHandler struct {
 	CurrentUserServiceHandler
 }
 
-func (h *currentUserServiceHandler) Info(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error {
-	return h.CurrentUserServiceHandler.Info(ctx, in, out)
+func (h *currentUserServiceHandler) Index(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error {
+	return h.CurrentUserServiceHandler.Index(ctx, in, out)
 }
 
-func (h *currentUserServiceHandler) UserInfo(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error {
-	return h.CurrentUserServiceHandler.UserInfo(ctx, in, out)
-}
-
-func (h *currentUserServiceHandler) PermissionInfo(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error {
-	return h.CurrentUserServiceHandler.PermissionInfo(ctx, in, out)
+func (h *currentUserServiceHandler) BaseInfo(ctx context.Context, in *CurrentUserRequest, out *CurrentUserResponse) error {
+	return h.CurrentUserServiceHandler.BaseInfo(ctx, in, out)
 }
 
 func (h *currentUserServiceHandler) ModifyMobile(ctx context.Context, in *User, out *UserResponse) error {

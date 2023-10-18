@@ -3,22 +3,17 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 import "memberService.proto";
+import "baseInfoService.proto";
 
-service AuthorizeService {
-    //获得当前客户
-    rpc Info (AuthorizeRequest) returns (AuthorizeResponse) {}
-    //绑定手机
-    rpc BindMobile (AuthorizeRequest) returns (AuthorizeResponse) {}
-    //绑定邮箱
-    rpc BindEmail (AuthorizeRequest) returns (AuthorizeResponse) {}
-    //微信小程序邀请码
-   // rpc BindWxByMini (AuthorizeRequest) returns (AuthorizeResponse) {}
-    //APP邀请二维码
-   // rpc BindWxByApp (AuthorizeRequest) returns (AuthorizeResponse) {}
+service CurrentMemberService {
+    //个人信息中心
+    rpc Index (CurrentMemberRequest) returns (CurrentMemberIndexResponse) {}
+    //客户基本信息
+    rpc BaseInfo (CurrentMemberRequest) returns (CurrentMemberResponse) {}
 }
 
 
-message Authorize{
+message CurrentMember{
     int64 id =1;
     int64 member_id =2;
     string username = 3;
@@ -27,7 +22,7 @@ message Authorize{
     string mobile = 6;
 }
 
-message AuthorizeRequest{
+message CurrentMemberRequest{
     int64 member_id =1;
     string name = 2;
     string mobile =3;
@@ -41,17 +36,28 @@ message AuthorizeRequest{
     string iv = 11;
 }
 
-message AuthorizeData {
-    Authorize entity = 1;
+message CurrentMemberData {
+    CurrentMember entity = 1;
     Member member = 2;
     common.Pager pager =3;
-    repeated Authorize items = 4;
+    repeated CurrentMember items = 4;
     common.Info info =5;
     map<string,string> params =6;
 }
 
 
-message AuthorizeResponse {
-    AuthorizeData data = 1;
+message CurrentMemberResponse {
+    CurrentMemberData data = 1;
+    common.Error error = 2;
+}
+
+
+message CurrentMemberIndexData {
+    Member member =1;
+    repeated DictInfo gender_list =2;
+}
+
+message CurrentMemberIndexResponse {
+    CurrentMemberIndexData data = 1;
     common.Error error = 2;
 }
