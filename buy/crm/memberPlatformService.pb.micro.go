@@ -43,8 +43,6 @@ func NewMemberPlatformServiceEndpoints() []*api.Endpoint {
 // Client API for MemberPlatformService service
 
 type MemberPlatformService interface {
-	Update(ctx context.Context, in *MemberPlatform, opts ...client.CallOption) (*MemberPlatformResponse, error)
-	Delete(ctx context.Context, in *MemberPlatform, opts ...client.CallOption) (*MemberPlatformResponse, error)
 	Get(ctx context.Context, in *MemberPlatform, opts ...client.CallOption) (*MemberPlatformResponse, error)
 	List(ctx context.Context, in *MemberPlatformRequest, opts ...client.CallOption) (*MemberPlatformResponse, error)
 	Search(ctx context.Context, in *MemberPlatformRequest, opts ...client.CallOption) (*MemberPlatformResponse, error)
@@ -60,26 +58,6 @@ func NewMemberPlatformService(name string, c client.Client) MemberPlatformServic
 		c:    c,
 		name: name,
 	}
-}
-
-func (c *memberPlatformService) Update(ctx context.Context, in *MemberPlatform, opts ...client.CallOption) (*MemberPlatformResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberPlatformService.Update", in)
-	out := new(MemberPlatformResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberPlatformService) Delete(ctx context.Context, in *MemberPlatform, opts ...client.CallOption) (*MemberPlatformResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberPlatformService.Delete", in)
-	out := new(MemberPlatformResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *memberPlatformService) Get(ctx context.Context, in *MemberPlatform, opts ...client.CallOption) (*MemberPlatformResponse, error) {
@@ -115,8 +93,6 @@ func (c *memberPlatformService) Search(ctx context.Context, in *MemberPlatformRe
 // Server API for MemberPlatformService service
 
 type MemberPlatformServiceHandler interface {
-	Update(context.Context, *MemberPlatform, *MemberPlatformResponse) error
-	Delete(context.Context, *MemberPlatform, *MemberPlatformResponse) error
 	Get(context.Context, *MemberPlatform, *MemberPlatformResponse) error
 	List(context.Context, *MemberPlatformRequest, *MemberPlatformResponse) error
 	Search(context.Context, *MemberPlatformRequest, *MemberPlatformResponse) error
@@ -124,8 +100,6 @@ type MemberPlatformServiceHandler interface {
 
 func RegisterMemberPlatformServiceHandler(s server.Server, hdlr MemberPlatformServiceHandler, opts ...server.HandlerOption) error {
 	type memberPlatformService interface {
-		Update(ctx context.Context, in *MemberPlatform, out *MemberPlatformResponse) error
-		Delete(ctx context.Context, in *MemberPlatform, out *MemberPlatformResponse) error
 		Get(ctx context.Context, in *MemberPlatform, out *MemberPlatformResponse) error
 		List(ctx context.Context, in *MemberPlatformRequest, out *MemberPlatformResponse) error
 		Search(ctx context.Context, in *MemberPlatformRequest, out *MemberPlatformResponse) error
@@ -139,14 +113,6 @@ func RegisterMemberPlatformServiceHandler(s server.Server, hdlr MemberPlatformSe
 
 type memberPlatformServiceHandler struct {
 	MemberPlatformServiceHandler
-}
-
-func (h *memberPlatformServiceHandler) Update(ctx context.Context, in *MemberPlatform, out *MemberPlatformResponse) error {
-	return h.MemberPlatformServiceHandler.Update(ctx, in, out)
-}
-
-func (h *memberPlatformServiceHandler) Delete(ctx context.Context, in *MemberPlatform, out *MemberPlatformResponse) error {
-	return h.MemberPlatformServiceHandler.Delete(ctx, in, out)
 }
 
 func (h *memberPlatformServiceHandler) Get(ctx context.Context, in *MemberPlatform, out *MemberPlatformResponse) error {

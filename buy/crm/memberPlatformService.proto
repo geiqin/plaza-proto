@@ -4,8 +4,6 @@ option go_package = "/.;services";
 import "common/base.proto";
 
 service MemberPlatformService {
-    rpc Update (MemberPlatform) returns (MemberPlatformResponse) {}
-    rpc Delete (MemberPlatform) returns (MemberPlatformResponse) {}
     rpc Get (MemberPlatform) returns (MemberPlatformResponse) {}
     rpc List (MemberPlatformRequest) returns (MemberPlatformResponse) {}
     rpc Search (MemberPlatformRequest) returns (MemberPlatformResponse) {}
@@ -14,8 +12,6 @@ service MemberPlatformService {
 message MemberPlatform {
     int64  id =1;//ID
     int64  member_id =2;//会员ID
-    string platform =3;//所属平台（pc PC网站, h5 H5手机网站, ios 苹果APP, android 安卓APP, alipay 支付宝小程序, weixin 微信小程序, baidu 百度小程序, toutiao 头条小程序, qq QQ小程序, kuaishou 快手小程序）
-    string token =4;//token
     string alipay_openid =5;//支付宝openid
     string weixin_openid =6;//微信openid
     string weixin_unionid =7;//微信unionid
