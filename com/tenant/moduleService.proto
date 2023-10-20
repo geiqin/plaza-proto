@@ -17,7 +17,6 @@ message Module {
     string name = 2;
     string title = 3;
     string type = 4;
-    int64 icon_id = 5;
     string icon_url =6;
     bool required = 7;
     string dependents = 8;

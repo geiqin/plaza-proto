@@ -8,8 +8,8 @@ service DataService {
     rpc Create (Data) returns (DataResponse) {}
     rpc Update (Data) returns (DataResponse) {}
     rpc Delete (Data) returns (DataResponse) {}
+    rpc Get (Data ) returns (DataResponse) {}
     rpc Search (DataRequest) returns (DataResponse) {}
-    rpc Get (DataRequest) returns (DataResponse) {}
     rpc List (DataRequest) returns (DataResponse) {}
 }
 
@@ -46,6 +46,7 @@ message DataData {
     Data entity = 1;
     common.Pager pager =2;
     repeated Data items = 3;
+    string msg = 4;
 }
 
 

@@ -36,7 +36,6 @@ message Store {
     int64	id	=1;
     string	name	=2;
     string	title	=3;
-    int64	logo_id	=4;
     string	logo_url	=5;
     int32	version_id	=6;
     int64	company_id	=7;
@@ -48,13 +47,15 @@ message Store {
     string	lat	=13;
     string	region	=14;
     string	custom_domain	=15;
-    bool	trusted	=16;
+    string	is_trusted	=16;
     string	status	=17;
     int64	creator_id	=18;
     string	expired_at	=19;
     string	created_at	=20;
     string	updated_at	=21;
     Version version =22;
+    string	status_name	=23;
+    int32 valid_days =24;
 }
 
 message StoreRequest{

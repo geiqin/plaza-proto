@@ -19,7 +19,6 @@ message Version {
     int32	id =1;
     string	name =2;
     string	type =3;
-    int64	icon_id =4;
     string	icon_url =5;
     string	icon_css =6;
     string	url =7;

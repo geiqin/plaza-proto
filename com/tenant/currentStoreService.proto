@@ -1,0 +1,28 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "storeService.proto";
+
+service CurrentStoreService {
+    //获取当前店铺(简单信息)
+    rpc Info (CurrentStoreRequest) returns (CurrentStoreResponse) {}
+    //获取当前店铺(详细信息)
+    rpc Detail (CurrentStoreRequest) returns (CurrentStoreResponse) {}
+}
+
+message CurrentStoreRequest{
+    string store_id = 1;
+}
+
+
+message CurrentStoreData {
+    Store store = 1;
+    string msg =4;
+    repeated string Modules = 5;
+}
+
+message CurrentStoreResponse {
+    CurrentStoreData data = 1;
+    common.Error error = 2;
+}

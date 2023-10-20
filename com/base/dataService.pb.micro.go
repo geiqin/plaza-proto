@@ -46,8 +46,8 @@ type DataService interface {
 	Create(ctx context.Context, in *Data, opts ...client.CallOption) (*DataResponse, error)
 	Update(ctx context.Context, in *Data, opts ...client.CallOption) (*DataResponse, error)
 	Delete(ctx context.Context, in *Data, opts ...client.CallOption) (*DataResponse, error)
+	Get(ctx context.Context, in *Data, opts ...client.CallOption) (*DataResponse, error)
 	Search(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error)
-	Get(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error)
 	List(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error)
 }
 
@@ -93,8 +93,8 @@ func (c *dataService) Delete(ctx context.Context, in *Data, opts ...client.CallO
 	return out, nil
 }
 
-func (c *dataService) Search(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error) {
-	req := c.c.NewRequest(c.name, "DataService.Search", in)
+func (c *dataService) Get(ctx context.Context, in *Data, opts ...client.CallOption) (*DataResponse, error) {
+	req := c.c.NewRequest(c.name, "DataService.Get", in)
 	out := new(DataResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -103,8 +103,8 @@ func (c *dataService) Search(ctx context.Context, in *DataRequest, opts ...clien
 	return out, nil
 }
 
-func (c *dataService) Get(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error) {
-	req := c.c.NewRequest(c.name, "DataService.Get", in)
+func (c *dataService) Search(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error) {
+	req := c.c.NewRequest(c.name, "DataService.Search", in)
 	out := new(DataResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -129,8 +129,8 @@ type DataServiceHandler interface {
 	Create(context.Context, *Data, *DataResponse) error
 	Update(context.Context, *Data, *DataResponse) error
 	Delete(context.Context, *Data, *DataResponse) error
+	Get(context.Context, *Data, *DataResponse) error
 	Search(context.Context, *DataRequest, *DataResponse) error
-	Get(context.Context, *DataRequest, *DataResponse) error
 	List(context.Context, *DataRequest, *DataResponse) error
 }
 
@@ -139,8 +139,8 @@ func RegisterDataServiceHandler(s server.Server, hdlr DataServiceHandler, opts .
 		Create(ctx context.Context, in *Data, out *DataResponse) error
 		Update(ctx context.Context, in *Data, out *DataResponse) error
 		Delete(ctx context.Context, in *Data, out *DataResponse) error
+		Get(ctx context.Context, in *Data, out *DataResponse) error
 		Search(ctx context.Context, in *DataRequest, out *DataResponse) error
-		Get(ctx context.Context, in *DataRequest, out *DataResponse) error
 		List(ctx context.Context, in *DataRequest, out *DataResponse) error
 	}
 	type DataService struct {
@@ -166,12 +166,12 @@ func (h *dataServiceHandler) Delete(ctx context.Context, in *Data, out *DataResp
 	return h.DataServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *dataServiceHandler) Search(ctx context.Context, in *DataRequest, out *DataResponse) error {
-	return h.DataServiceHandler.Search(ctx, in, out)
+func (h *dataServiceHandler) Get(ctx context.Context, in *Data, out *DataResponse) error {
+	return h.DataServiceHandler.Get(ctx, in, out)
 }
 
-func (h *dataServiceHandler) Get(ctx context.Context, in *DataRequest, out *DataResponse) error {
-	return h.DataServiceHandler.Get(ctx, in, out)
+func (h *dataServiceHandler) Search(ctx context.Context, in *DataRequest, out *DataResponse) error {
+	return h.DataServiceHandler.Search(ctx, in, out)
 }
 
 func (h *dataServiceHandler) List(ctx context.Context, in *DataRequest, out *DataResponse) error {
