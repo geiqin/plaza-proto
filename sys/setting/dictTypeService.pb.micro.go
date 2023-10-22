@@ -49,8 +49,6 @@ type DictTypeService interface {
 	Get(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
 	Search(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
 	List(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
-	Dictionary(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
-	SetStatus(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error)
 }
 
 type dictTypeService struct {
@@ -125,26 +123,6 @@ func (c *dictTypeService) List(ctx context.Context, in *DictTypeRequest, opts ..
 	return out, nil
 }
 
-func (c *dictTypeService) Dictionary(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error) {
-	req := c.c.NewRequest(c.name, "DictTypeService.Dictionary", in)
-	out := new(DictTypeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dictTypeService) SetStatus(ctx context.Context, in *DictTypeRequest, opts ...client.CallOption) (*DictTypeResponse, error) {
-	req := c.c.NewRequest(c.name, "DictTypeService.SetStatus", in)
-	out := new(DictTypeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for DictTypeService service
 
 type DictTypeServiceHandler interface {
@@ -154,8 +132,6 @@ type DictTypeServiceHandler interface {
 	Get(context.Context, *DictTypeRequest, *DictTypeResponse) error
 	Search(context.Context, *DictTypeRequest, *DictTypeResponse) error
 	List(context.Context, *DictTypeRequest, *DictTypeResponse) error
-	Dictionary(context.Context, *DictTypeRequest, *DictTypeResponse) error
-	SetStatus(context.Context, *DictTypeRequest, *DictTypeResponse) error
 }
 
 func RegisterDictTypeServiceHandler(s server.Server, hdlr DictTypeServiceHandler, opts ...server.HandlerOption) error {
@@ -166,8 +142,6 @@ func RegisterDictTypeServiceHandler(s server.Server, hdlr DictTypeServiceHandler
 		Get(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
 		Search(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
 		List(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
-		Dictionary(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
-		SetStatus(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error
 	}
 	type DictTypeService struct {
 		dictTypeService
@@ -202,12 +176,4 @@ func (h *dictTypeServiceHandler) Search(ctx context.Context, in *DictTypeRequest
 
 func (h *dictTypeServiceHandler) List(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error {
 	return h.DictTypeServiceHandler.List(ctx, in, out)
-}
-
-func (h *dictTypeServiceHandler) Dictionary(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error {
-	return h.DictTypeServiceHandler.Dictionary(ctx, in, out)
-}
-
-func (h *dictTypeServiceHandler) SetStatus(ctx context.Context, in *DictTypeRequest, out *DictTypeResponse) error {
-	return h.DictTypeServiceHandler.SetStatus(ctx, in, out)
 }

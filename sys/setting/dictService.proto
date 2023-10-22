@@ -33,9 +33,8 @@ message Dict {
     string value =3;
     string text	=4;
     string term	=5;
-    string tag	=6;
     string color	=7;
-    string memo	=8;
+    string desc	=8;
     int32 sort	=9;
     string status = 10;
     string created_at = 11;

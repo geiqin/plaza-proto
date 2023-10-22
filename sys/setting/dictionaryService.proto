@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service DictionaryService {
+    //字典数据
+    rpc List (DictionaryRequest) returns (DictionaryResponse) {}
+}
+
+//字典信息(兼容字典和常量数据)
+message Dictionary {
+    string text	=1;
+    string value =2;
+    string icon	=3;
+    string class =4;
+    string color =5;
+    string term	=6;
+    string desc	=7;
+    bool checked =8;
+}
+
+message DictionaryType {
+    string name	=1;
+    string title =2;
+    repeated Dictionary list =3;
+}
+
+
+message DictionaryRequest {
+    repeated string const_keys = 1; //常量键名
+    repeated string dict_keys = 2;//字典键名
+    repeated string keys = 3; //混合键名（常量+字典）
+}
+
+
+//字典数据
+message DictionaryData {
+    repeated DictionaryType items =1;
+    string msg =2;
+}
+
+
+message DictionaryResponse {
+    DictionaryData data = 1;
+    common.Error error = 2;
+}

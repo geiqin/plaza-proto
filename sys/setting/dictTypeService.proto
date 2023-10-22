@@ -12,8 +12,6 @@ service DictTypeService {
     rpc Get (DictTypeRequest) returns (DictTypeResponse) {}
     rpc Search (DictTypeRequest) returns (DictTypeResponse) {}
     rpc List (DictTypeRequest) returns (DictTypeResponse) {}
-    rpc Dictionary (DictTypeRequest) returns (DictTypeResponse) {}
-    rpc SetStatus (DictTypeRequest) returns (DictTypeResponse) {}
 }
 
 message DictTypeRequest {
