@@ -49,7 +49,7 @@ type Aftersale struct {
 	CancelTime     string            `protobuf:"bytes,22,opt,name=cancel_time,json=cancelTime,proto3" json:"cancel_time"`              //取消时间
 	RefundTime     string            `protobuf:"bytes,23,opt,name=refund_time,json=refundTime,proto3" json:"refund_time"`              //退款时间
 	RefundStatus   string            `protobuf:"bytes,24,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status"`        //退款状态（0待退货, 1已退货, 2退款失败）
-	Status         string            `protobuf:"bytes,25,opt,name=status,proto3" json:"status"`                                        //状态（0待确认, 1待退货, 2待审核, 3已完成, 4已拒绝, 5已取消）
+	Status         string            `protobuf:"bytes,25,opt,name=status,proto3" json:"status"`                                        //状态（0待确认, 1待退货, 2待审核, 3退款中, 4已完成, 5已拒绝, 6已取消）
 	CreatedAt      string            `protobuf:"bytes,26,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
 	UpdatedAt      string            `protobuf:"bytes,27,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	Order          *Order            `protobuf:"bytes,29,opt,name=order,proto3" json:"order"`

@@ -28,8 +28,8 @@ type OrderStatusLog struct {
 
 	Id             int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                              //ID
 	OrderId        int64  `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`                     //订单ID
-	OriginalStatus string `protobuf:"bytes,3,opt,name=original_status,json=originalStatus,proto3" json:"original_status"` //原始状态
-	NewStatus      string `protobuf:"bytes,4,opt,name=new_status,json=newStatus,proto3" json:"new_status"`                //最新状态
+	OriginalStatus string `protobuf:"bytes,3,opt,name=original_status,json=originalStatus,proto3" json:"original_status"` //原始状态 （0待确认, 1已确认/待支付, 2已支付/待发货, 3已发货/待收货, 4已完成, 5已取消, 6已关闭）
+	NewStatus      string `protobuf:"bytes,4,opt,name=new_status,json=newStatus,proto3" json:"new_status"`                //最新状态  （0待确认, 1已确认/待支付, 2已支付/待发货, 3已发货/待收货, 4已完成, 5已取消, 6已关闭）
 	Desc           string `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc"`                                           //操作描述
 	CreatorId      int64  `protobuf:"varint,6,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`               //创建人id
 	CreatorType    string `protobuf:"bytes,7,opt,name=creator_type,json=creatorType,proto3" json:"creator_type"`          //创建人类型

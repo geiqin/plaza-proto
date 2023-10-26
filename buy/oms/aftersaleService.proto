@@ -78,7 +78,7 @@ message Aftersale {
     string cancel_time =22; //取消时间
     string refund_time =23; //退款时间
     string refund_status =24; //退款状态（0待退货, 1已退货, 2退款失败）
-    string status =25; //状态（0待确认, 1待退货, 2待审核, 3已完成, 4已拒绝, 5已取消）
+    string status =25; //状态（0待确认, 1待退货, 2待审核, 3退款中, 4已完成, 5已拒绝, 6已取消）
     string created_at = 26;
     string updated_at = 27;
     Order order = 29;
