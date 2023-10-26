@@ -81,7 +81,7 @@ message Spu {
     string button_custom =41;//按钮自定义名称,英文最多15个字符
     string freight_type =42;//运费模式：1统一邮费，2运费模板
     int64  freight_uniform_fee =43;//统一运费
-    int64  freight_express_id =44;//运费模板ID
+    int64  freight_template_id =44;//运费模板ID
     string is_fictitious =45;//是否虚拟商品（0否, 1是）
     map<string,string> fictitious_value =46;//虚拟商品展示数据
     string seo_title =48;//SEO标题

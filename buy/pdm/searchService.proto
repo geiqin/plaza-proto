@@ -170,10 +170,11 @@ message SearchDetailData {
     BuyButton buy_button = 3;
     repeated MiddleTabsNav middle_tabs_nav = 4;
     repeated NavMoreList nav_more_list =5;
-    PluginCouponData plugins_coupon_data =6;
-    PluginSeckillData Plugins_seckill_data =7;
-    PluginsPromotionData  Plugins_promotion_data =8;
-    PluginIntellectToolsData plugins_intellect_tools_data =9;
+   // PluginCouponData plugins_coupon_data =6;
+    //PluginSeckillData Plugins_seckill_data =7;
+    //PluginsPromotionData  Plugins_promotion_data =8;
+   // PluginIntellectToolsData plugins_intellect_tools_data =9;
+    map<string,string> plugins_data = 6;
 }
 
 message SearchDetailResponse {
