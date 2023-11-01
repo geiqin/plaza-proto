@@ -3,27 +3,34 @@ package services;
 option go_package = "/.;services";
 import "common/base.proto";
 import "spuService.proto";
+
 service MemberPriceService {
-    rpc Set (MemberPriceRequest) returns (MemberPriceResponse) {}
-    rpc Get (MemberPriceRequest) returns (MemberPriceResponse) {}
+    rpc SetPrice (MemberPriceRequest) returns (MemberPriceResponse) {}
+    rpc List (MemberPriceRequest) returns (MemberPriceResponse) {}
+    rpc Detail (MemberPriceRequest) returns (MemberPriceDetailResponse) {}
 }
 
 message MemberPrice {
-    int64	id	=1;
-    string	owner_type	=2;
-    int64	owner_id	=3;
-    int64	sku_id	=4;
-    string	method	=5;
-    float	discount_rate	=6;
-    int64	discount_price	=7;
-    string created_at = 8;
-    string updated_at = 9;
+    int64 id = 1;//ID
+    int64 level_id = 2;//会员等级id
+    int64 spu_id = 3;//SpuId
+    string md5_key = 4;//md5key
+    string method = 5;//优惠方式：0 指定价，1 打折,2 减价
+    int64 price = 6;//优惠价
+    float discount_rate = 7;//优惠折扣
+    int64 reduce_price = 8;//减少金额
+    string created_at = 9;
+    string updated_at = 10;
 }
 
 message MemberPriceRequest {
-    int64	spu_id	=1;
-    string	method	=2;
-    repeated MemberPrice details =3;
+    int64 id = 1;//ID
+    int64 level_id = 2;//会员等级id
+    int64 spu_id = 3;//SpuId
+    string md5_key = 4;//md5key
+    string method = 5;//优惠方式：0 指定价，1 打折,2 减价
+    repeated  int64  ids= 6;
+    repeated MemberPrice details = 7;
 }
 
 message MemberPriceData {
@@ -36,5 +43,17 @@ message MemberPriceData {
 
 message MemberPriceResponse {
     MemberPriceData data = 1;
+    common.Error error = 2;
+}
+
+message MemberPriceDetailData {
+    string method = 1;//优惠方式：0 指定价，1 打折,2 减价
+    Spu spu =2;
+    repeated MemberPrice price_list =3;
+}
+
+
+message MemberPriceDetailResponse {
+    MemberPriceDetailData data = 1;
     common.Error error = 2;
 }

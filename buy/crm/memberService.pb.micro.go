@@ -80,6 +80,8 @@ type MemberService interface {
 	Search(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//设置会员标签
 	SetTags(ctx context.Context, in *Member, opts ...client.CallOption) (*MemberResponse, error)
+	//设置会员免费等级
+	SetFreeLevel(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//获取用户通过已绑定手机(SRV专用)
 	GetByMobile(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//获取用户通过已绑定邮箱(SRV专用)
@@ -290,6 +292,16 @@ func (c *memberService) SetTags(ctx context.Context, in *Member, opts ...client.
 	return out, nil
 }
 
+func (c *memberService) SetFreeLevel(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberService.SetFreeLevel", in)
+	out := new(MemberResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *memberService) GetByMobile(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
 	req := c.c.NewRequest(c.name, "MemberService.GetByMobile", in)
 	out := new(MemberResponse)
@@ -360,6 +372,8 @@ type MemberServiceHandler interface {
 	Search(context.Context, *MemberRequest, *MemberResponse) error
 	//设置会员标签
 	SetTags(context.Context, *Member, *MemberResponse) error
+	//设置会员免费等级
+	SetFreeLevel(context.Context, *MemberRequest, *MemberResponse) error
 	//获取用户通过已绑定手机(SRV专用)
 	GetByMobile(context.Context, *MemberRequest, *MemberResponse) error
 	//获取用户通过已绑定邮箱(SRV专用)
@@ -389,6 +403,7 @@ func RegisterMemberServiceHandler(s server.Server, hdlr MemberServiceHandler, op
 		List(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		Search(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		SetTags(ctx context.Context, in *Member, out *MemberResponse) error
+		SetFreeLevel(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		GetByMobile(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		GetByEmail(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		GetByIdCard(ctx context.Context, in *MemberRequest, out *MemberResponse) error
@@ -478,6 +493,10 @@ func (h *memberServiceHandler) Search(ctx context.Context, in *MemberRequest, ou
 
 func (h *memberServiceHandler) SetTags(ctx context.Context, in *Member, out *MemberResponse) error {
 	return h.MemberServiceHandler.SetTags(ctx, in, out)
+}
+
+func (h *memberServiceHandler) SetFreeLevel(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
+	return h.MemberServiceHandler.SetFreeLevel(ctx, in, out)
 }
 
 func (h *memberServiceHandler) GetByMobile(ctx context.Context, in *MemberRequest, out *MemberResponse) error {

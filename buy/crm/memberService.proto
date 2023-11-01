@@ -49,6 +49,8 @@ service MemberService {
     rpc Search (MemberRequest) returns (MemberResponse) {}
     //设置会员标签
     rpc SetTags (Member) returns (MemberResponse) {}
+    //设置会员免费等级
+    rpc SetFreeLevel (MemberRequest) returns (MemberResponse) {}
     //获取用户通过已绑定手机(SRV专用)
     rpc GetByMobile (MemberRequest) returns (MemberResponse) {}
     //获取用户通过已绑定邮箱(SRV专用)

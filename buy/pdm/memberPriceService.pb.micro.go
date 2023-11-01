@@ -43,8 +43,9 @@ func NewMemberPriceServiceEndpoints() []*api.Endpoint {
 // Client API for MemberPriceService service
 
 type MemberPriceService interface {
-	Set(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceResponse, error)
-	Get(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceResponse, error)
+	SetPrice(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceResponse, error)
+	List(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceResponse, error)
+	Detail(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceDetailResponse, error)
 }
 
 type memberPriceService struct {
@@ -59,8 +60,8 @@ func NewMemberPriceService(name string, c client.Client) MemberPriceService {
 	}
 }
 
-func (c *memberPriceService) Set(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberPriceService.Set", in)
+func (c *memberPriceService) SetPrice(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberPriceService.SetPrice", in)
 	out := new(MemberPriceResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -69,9 +70,19 @@ func (c *memberPriceService) Set(ctx context.Context, in *MemberPriceRequest, op
 	return out, nil
 }
 
-func (c *memberPriceService) Get(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberPriceService.Get", in)
+func (c *memberPriceService) List(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberPriceService.List", in)
 	out := new(MemberPriceResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberPriceService) Detail(ctx context.Context, in *MemberPriceRequest, opts ...client.CallOption) (*MemberPriceDetailResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberPriceService.Detail", in)
+	out := new(MemberPriceDetailResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -82,14 +93,16 @@ func (c *memberPriceService) Get(ctx context.Context, in *MemberPriceRequest, op
 // Server API for MemberPriceService service
 
 type MemberPriceServiceHandler interface {
-	Set(context.Context, *MemberPriceRequest, *MemberPriceResponse) error
-	Get(context.Context, *MemberPriceRequest, *MemberPriceResponse) error
+	SetPrice(context.Context, *MemberPriceRequest, *MemberPriceResponse) error
+	List(context.Context, *MemberPriceRequest, *MemberPriceResponse) error
+	Detail(context.Context, *MemberPriceRequest, *MemberPriceDetailResponse) error
 }
 
 func RegisterMemberPriceServiceHandler(s server.Server, hdlr MemberPriceServiceHandler, opts ...server.HandlerOption) error {
 	type memberPriceService interface {
-		Set(ctx context.Context, in *MemberPriceRequest, out *MemberPriceResponse) error
-		Get(ctx context.Context, in *MemberPriceRequest, out *MemberPriceResponse) error
+		SetPrice(ctx context.Context, in *MemberPriceRequest, out *MemberPriceResponse) error
+		List(ctx context.Context, in *MemberPriceRequest, out *MemberPriceResponse) error
+		Detail(ctx context.Context, in *MemberPriceRequest, out *MemberPriceDetailResponse) error
 	}
 	type MemberPriceService struct {
 		memberPriceService
@@ -102,10 +115,14 @@ type memberPriceServiceHandler struct {
 	MemberPriceServiceHandler
 }
 
-func (h *memberPriceServiceHandler) Set(ctx context.Context, in *MemberPriceRequest, out *MemberPriceResponse) error {
-	return h.MemberPriceServiceHandler.Set(ctx, in, out)
+func (h *memberPriceServiceHandler) SetPrice(ctx context.Context, in *MemberPriceRequest, out *MemberPriceResponse) error {
+	return h.MemberPriceServiceHandler.SetPrice(ctx, in, out)
 }
 
-func (h *memberPriceServiceHandler) Get(ctx context.Context, in *MemberPriceRequest, out *MemberPriceResponse) error {
-	return h.MemberPriceServiceHandler.Get(ctx, in, out)
+func (h *memberPriceServiceHandler) List(ctx context.Context, in *MemberPriceRequest, out *MemberPriceResponse) error {
+	return h.MemberPriceServiceHandler.List(ctx, in, out)
+}
+
+func (h *memberPriceServiceHandler) Detail(ctx context.Context, in *MemberPriceRequest, out *MemberPriceDetailResponse) error {
+	return h.MemberPriceServiceHandler.Detail(ctx, in, out)
 }
