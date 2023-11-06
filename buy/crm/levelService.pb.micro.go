@@ -49,6 +49,8 @@ type LevelService interface {
 	Get(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	Search(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error)
 	List(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error)
+	//会员有效等级
+	MemberValidLevels(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error)
 }
 
 type levelService struct {
@@ -123,6 +125,16 @@ func (c *levelService) List(ctx context.Context, in *LevelRequest, opts ...clien
 	return out, nil
 }
 
+func (c *levelService) MemberValidLevels(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error) {
+	req := c.c.NewRequest(c.name, "LevelService.MemberValidLevels", in)
+	out := new(LevelResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for LevelService service
 
 type LevelServiceHandler interface {
@@ -132,6 +144,8 @@ type LevelServiceHandler interface {
 	Get(context.Context, *Level, *LevelResponse) error
 	Search(context.Context, *LevelRequest, *LevelResponse) error
 	List(context.Context, *LevelRequest, *LevelResponse) error
+	//会员有效等级
+	MemberValidLevels(context.Context, *LevelRequest, *LevelResponse) error
 }
 
 func RegisterLevelServiceHandler(s server.Server, hdlr LevelServiceHandler, opts ...server.HandlerOption) error {
@@ -142,6 +156,7 @@ func RegisterLevelServiceHandler(s server.Server, hdlr LevelServiceHandler, opts
 		Get(ctx context.Context, in *Level, out *LevelResponse) error
 		Search(ctx context.Context, in *LevelRequest, out *LevelResponse) error
 		List(ctx context.Context, in *LevelRequest, out *LevelResponse) error
+		MemberValidLevels(ctx context.Context, in *LevelRequest, out *LevelResponse) error
 	}
 	type LevelService struct {
 		levelService
@@ -176,4 +191,8 @@ func (h *levelServiceHandler) Search(ctx context.Context, in *LevelRequest, out 
 
 func (h *levelServiceHandler) List(ctx context.Context, in *LevelRequest, out *LevelResponse) error {
 	return h.LevelServiceHandler.List(ctx, in, out)
+}
+
+func (h *levelServiceHandler) MemberValidLevels(ctx context.Context, in *LevelRequest, out *LevelResponse) error {
+	return h.LevelServiceHandler.MemberValidLevels(ctx, in, out)
 }

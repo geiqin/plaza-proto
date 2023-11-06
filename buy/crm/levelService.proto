@@ -11,6 +11,8 @@ service LevelService {
     rpc Get (Level) returns (LevelResponse) {}
     rpc Search (LevelRequest) returns (LevelResponse) {}
     rpc List (LevelRequest) returns (LevelResponse) {}
+    //当前有效会员等级
+    rpc MemberValidLevels (LevelRequest) returns (LevelResponse) {}
 }
 
 message Level {
@@ -82,6 +84,7 @@ message LevelRequest {
     string name = 4;
     string type =5;
     string status =6;
+    int64 member_id = 7;
 }
 
 message LevelData {

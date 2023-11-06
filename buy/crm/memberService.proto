@@ -96,7 +96,7 @@ message Member {
     string updated_at =35;
     string deleted_at =36;
     Level free_level =37;
-    MemberPayLevel pay_level =38;
+    repeated MemberPayLevel pay_levels =38;
     Member referrer =39;
     repeated Tag tags = 40;
     repeated MemberAddress address_list = 41;
