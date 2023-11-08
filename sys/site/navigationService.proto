@@ -20,30 +20,36 @@ message NavigationRequest {
     string keywords = 4;
     int64 id = 5;
     int64 parent_id = 6;
-    int64 area_id = 7;
+    string code = 7;
     string name = 8;
-    repeated int64 ids = 9;
+    string data_type = 9;
+    string type = 10;
+    string template = 11;
+    string data_value = 12;
+    string is_show = 13;
+    string is_new_window_open = 14;
+    repeated int64 ids = 15;
 }
 
 
 message Navigation {
     int64 id = 1;
-    int64 parent_id = 2;
+    string type = 2;
     string name = 3;
-    string url = 4;
-    string value = 5;
-    string data_type = 6;
-    string nav_type = 7;
-    string is_footer = 8;
-    string is_header = 9;
-    string is_show = 10;
-    string is_new_window_open = 11;
-    int32 sort = 12;
-    string status = 13;
+    string code = 4;
+    int64 parent_id = 5;
+    string dept_path = 6;
+    string data_type = 7;
+    string data_value = 8;
+    string image_url = 10;
+    string is_show = 11;
+    string is_new_window_open = 12;
+    int32 sort = 13;
     string created_at = 14;
     string updated_at = 15;
     Navigation parent = 16;
-    repeated Navigation children = 17;
+    map<string,string> extends = 17;
+    repeated Navigation children = 18;
 }
 
 message NavigationData {

@@ -54,96 +54,98 @@ message SiteConfigInfo {
     string common_app_is_enable_quick_nav =12;//是否开启快捷导航
     string common_app_is_use_mobile_detail =13;//
     int32 common_show_goods_category_level =14; //
+    string common_is_goods_detail_show_photo =15;//商品详情页展示相册(0否，1是)
+    string common_is_show_goods_comments =16;//展示商品评价(0否，1是)
 
     // 基础-站点域名和CDN
-    string common_domain_host =15;//站点域名主机
-    string common_cdn_attachment_host =16;//CDN附件主机
-    string common_cdn_public_host =17;//CDN公共素材主机
+    string common_domain_host =20;//站点域名主机
+    string common_cdn_attachment_host =21;//CDN附件主机
+    string common_cdn_public_host =22;//CDN公共素材主机
 
     // 扩展项-留言、问答
-    string common_is_login_answer =18;//留言是否需要登录
+    string common_is_login_answer =23;//留言是否需要登录
 
     // 站点信息
-    string home_site_name =19;//站点名称
-    string home_site_logo =20;//站点logo
-    string home_site_logo_wap =21;//站点logo(wap)
-    string home_site_logo_square =22;//站点logo(正方型)
-    string home_site_state =23;//站点状态
-    string home_site_web_home_state =24;//
-    string home_site_web_pc_state =25;//
-    string home_site_close_reason =26;//站点关闭原因
+    string home_site_name =30;//站点名称
+    string home_site_logo =31;//站点logo
+    string home_site_logo_wap =32;//站点logo(wap)
+    string home_site_logo_square =33;//站点logo(正方型)
+    string home_site_state =34;//站点状态
+    string home_site_web_home_state =35;//
+    string home_site_web_pc_state =36;//
+    string home_site_close_reason =37;//站点关闭原因
     //备案信息
-    string home_site_icp =27;//工信部备案
-    string home_site_security_record_name =28;//公安备案名称
-    string home_site_security_record_url =29;//公安备案URL
-    string home_site_company_license =30;//公司统一信用代码
-    string home_site_telecom_license =31;//电信许可证
+    string home_site_icp =38;//工信部备案
+    string home_site_security_record_name =39;//公安备案名称
+    string home_site_security_record_url =40;//公安备案URL
+    string home_site_company_license =41;//公司统一信用代码
+    string home_site_telecom_license =42;//电信许可证
 
     // 搜索相关
-    int32 home_search_limit_number =34;//
-    string home_search_is_brand =35;//
-    string home_search_is_category =36;//
-    string home_search_is_price =37;//
-    string home_search_is_params =38;//
-    string home_search_is_spec =39;//
+    int32 home_search_limit_number =45;//
+    string home_search_is_brand =46;//
+    string home_search_is_category =47;//
+    string home_search_is_price =48;//
+    string home_search_is_params =49;//
+    string home_search_is_spec =50;//
 
     // 底部代码
-    string home_footer_info =40;//
+    string home_footer_info =51;//
 
     // SEO信息
-    string home_seo_site_title =41;//
-    string home_seo_site_keywords =42;//
-    string home_seo_site_description =43;//
+    string home_seo_site_title =52;//
+    string home_seo_site_keywords =53;//
+    string home_seo_site_description =54;//
 
     // 地图密钥
-    string common_map_type =44;//地图类型：baidu百度地图,amap高德地图,tencent腾讯地图,tianditu天地图
-    string common_baidu_map_ak =45;//百度地图
-    string common_amap_map_ak =46;//高德地图AK
-    string common_amap_map_safety_ak =47;//高德地图safety_ak
-    string common_tencent_map_ak =48;//腾讯地图AK
-    string common_tianditu_map_ak =49;//天地图AK
+    string common_map_type =60;//地图类型：baidu百度地图,amap高德地图,tencent腾讯地图,tianditu天地图
+    string common_baidu_map_ak =61;//百度地图
+    string common_amap_map_ak =62;//高德地图AK
+    string common_amap_map_safety_ak =63;//高德地图safety_ak
+    string common_tencent_map_ak =64;//腾讯地图AK
+    string common_tianditu_map_ak =65;//天地图AK
 
-    string common_user_center_notice =50;//用户中心公告
-    string common_order_is_booking =51; //订单预约模式开启后用户提交订单需要管理员确认
+    string common_user_center_notice =66;//用户中心公告
+    string common_order_is_booking =67; //订单预约模式开启后用户提交订单需要管理员确认
 
     // 小程序基础信息
-    string common_app_mini_weixin_title =52;//微信小程序标题
-    string common_app_mini_weixin_describe =53;//微信小程序描述
-    string common_app_mini_alipay_title =54;//支付宝小程序标题
-    string common_app_mini_alipay_describe =55;//支付宝小程序描述
-    string common_app_mini_baidu_title =56;//百度小程序标题
-    string common_app_mini_baidu_describe =57;//百度小程序描述
-    string common_app_mini_toutiao_title =58;//头条小程序标题
-    string common_app_mini_toutiao_describe =59;//头条小程序描述
-    string common_app_mini_qq_title =60;//QQ小程序标题
-    string common_app_mini_qq_describe =61;//QQ小程序描述
-    string common_app_mini_kuaishou_title =62;//快手小程序标题
-    string common_app_mini_kuaishou_describe =63;//快手小程序描述
+    string common_app_mini_weixin_title =70;//微信小程序标题
+    string common_app_mini_weixin_describe =71;//微信小程序描述
+    string common_app_mini_alipay_title =72;//支付宝小程序标题
+    string common_app_mini_alipay_describe =73;//支付宝小程序描述
+    string common_app_mini_baidu_title =74;//百度小程序标题
+    string common_app_mini_baidu_describe =75;//百度小程序描述
+    string common_app_mini_toutiao_title =76;//头条小程序标题
+    string common_app_mini_toutiao_describe =77;//头条小程序描述
+    string common_app_mini_qq_title =78;//QQ小程序标题
+    string common_app_mini_qq_describe =79;//QQ小程序描述
+    string common_app_mini_kuaishou_title =80;//快手小程序标题
+    string common_app_mini_kuaishou_describe =81;//快手小程序描述
 
     // 验证码
-    int32 common_verify_expire_time =64;//
-    int32 common_verify_interval_time =65;//
-    string common_verify_img_state =66;//
-    string common_is_enable_wallet =67;//是否开启钱包
-    string common_is_enable_vip =68;//是否开启vip
+    int32 common_verify_expire_time =82;//
+    int32 common_verify_interval_time =83;//
+    string common_verify_img_state =84;//
+    string common_is_enable_wallet =85;//是否开启钱包
+    string common_is_enable_vip =86;//是否开启vip
     // 注册
-    repeated string home_user_register_type =77;//用户注册类型
-    string home_user_register_img_verify_state =78;//
-    string home_user_register_is_enable_audit =79;//
-    string home_user_register_is_enable_agreement =80;//
-    repeated AdInfo home_user_register_bg_images =81;//
+    repeated string home_user_register_type =87;//用户注册类型
+    string home_user_register_img_verify_state =88;//
+    string home_user_register_is_enable_audit =89;//
+    string home_user_register_is_enable_agreement =90;//
+    repeated AdInfo home_user_register_bg_images =91;//
 
     // 用户登录
-    repeated string home_user_login_type =82;//用户登录类型
-    string home_user_login_img_verify_state =83;//
-    repeated AdInfo home_user_login_ad_images =84;//
+    repeated string home_user_login_type =92;//用户登录类型
+    string home_user_login_img_verify_state =93;//
+    repeated AdInfo home_user_login_ad_images =94;//
 
     // 密码找回
-    repeated AdInfo home_user_forget_pwd_ad_images =85;//
+    repeated AdInfo home_user_forget_pwd_ad_images =95;//
 
     //风格样式
-    string home_app_ucenter_head_text_color =90;//用户中心头部文本颜色
-    string home_app_ucenter_head_border_color =91;//用户中心头部文本边框颜色
+    string home_app_ucenter_head_text_color =96;//用户中心头部文本颜色
+    string home_app_ucenter_head_border_color =97;//用户中心头部文本边框颜色
 }
 
 //

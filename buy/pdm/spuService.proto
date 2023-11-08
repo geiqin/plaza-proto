@@ -110,7 +110,8 @@ message Spu {
     string content_app =74; //app内容
     string brand_name =75;
     bool selected = 76;
-
+    string is_error =77;//是否错误（0否，1是）
+    string error_msg =78;//错误信息
 }
 
 message Sku  {
@@ -131,6 +132,8 @@ message Sku  {
     string updated_at = 15;
     Spu spu =16;
     repeated SkuSpec spec =17; //规格信息列表
+    int64 promotion_price =18;//促销价
+    string promotion_type =19;//促销类型
 }
 
 
@@ -168,7 +171,7 @@ message FormSpu {
     string button_custom =39;//按钮自定义名称,英文最多15个字符
     string freight_type =40;//运费模式：1统一邮费，2运费模板
     int64  freight_uniform_fee =41;//统一运费
-    int64  freight_express_id =42;//运费模板ID
+    int64  freight_template_id =42;//运费模板ID
     int32  sort =43;//排序值
     string seo_title =44;//SEO标题
     string seo_keywords =45;//SEO关键字
