@@ -88,9 +88,7 @@ message BuyRequest {
     int64 use_integral = 7; //使用的积分数
     int64 use_surplus = 8; //使用的余额数
     int64 buy_member_id = 9; //代理的客户ID（操作员代客下单）
-    int64 spu_id =10; //直接购买SpuId
-    int64 sku_id =11; //直接购买SkuId
-    int32 stock =12; //直接购买数量
+    string delivery_method =11; //配送方式
     repeated SpecificationData spec =13; //规格信息
     repeated int64 ids = 14; ///购物车ids
     BuyGoodsData goods_data =17;
@@ -99,9 +97,9 @@ message BuyRequest {
 
 message BuyGoodsData {
     int64 spu_id = 1; //商品ID
-    int32 stock = 2; //数量
-    repeated SpecificationData spec =3; //规格
-    string md5_key =4;//商品规格md5_key
+    string md5_key =2;//商品规格md5_key
+    int32 stock = 3; //数量
+    repeated SpecificationData spec =4; //规格
 }
 
 
