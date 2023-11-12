@@ -1,0 +1,71 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+//订单发货包裹
+service OrderPacketService {
+    rpc Detail (OrderPacket) returns (OrderPacketResponse) {}
+    rpc Search (OrderPacketRequest) returns (OrderPacketResponse) {}
+}
+
+//订单发货包裹
+message OrderPacket{
+    int64  id =1;//ID
+    int64  order_id =2;//订单ID
+    string delivery_method =3; //配送方式：0-无须配送，1-快递发货，2-即时配送，3-上门自提
+    int32  express_id =4;//快递id
+    string express_code =5;//快递编号
+    string express_name =6;//快递名称
+    string express_number =7;//快递单号
+    string extension_code =8;//取货码
+    int32  goods_count =9;//商品数量
+    repeated OrderPacketGoods goods_list =10;//商品内容
+    string is_no_logistic =11;//是否无需要物流
+    string created_at =12;
+    string updated_at =13;
+    string delivery_method_name =14;
+    string is_no_logistic_name =15;
+}
+
+//订单发货包裹商品
+message OrderPacketGoods{
+    int64  detail_id =1;//订单明细ID
+    int64  spu_id =2;//商品ID
+    string md5_key =4;//货品MD5KEY
+    int32  number =7;//商品数量
+    string title =8;//商品名称
+    string unit =9;//商品单位
+    string image_url =10; //商品图片
+    string spec_desc =11; //商品规格描述
+}
+
+message OrderPacketRequest {
+    int64 paged =1;
+    int64 page_size =2;
+    string	keywords =3;
+    //----------
+    int64 id = 4;
+    int64  order_id =5;//订单ID
+    string delivery_method =6; //配送方式：0-无须配送，1-快递发货，2-即时配送，3-上门自提
+    int32  express_id =7;//快递id
+    string express_code =8;//快递编号
+    string express_name =9;//快递名称
+    string express_number =10;//快递单号
+    string extension_code =11;//取货码
+    string is_no_logistic =12;//是否无需要物流
+    repeated int64 ids = 13;
+}
+
+
+message OrderPacketData {
+    OrderPacket entity = 1;
+    common.Pager pager =2;
+    repeated OrderPacket items = 3;
+    string msg=4;
+}
+
+message OrderPacketResponse {
+    OrderPacketData data = 1;
+    common.Error error = 2;
+}

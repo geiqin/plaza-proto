@@ -4,6 +4,7 @@ option go_package = "/.;services";
 import "common/base.proto";
 import "orderDetailService.proto";
 import "orderAddressService.proto";
+import "orderPacketService.proto";
 import "baseInfoService.proto";
 
 //订单服务
@@ -162,34 +163,6 @@ message OrderRequest {
     string is_no_logistic =35;//是否无需物流（0否，1是）
 }
 
-//订单发货包裹
-message OrderPacket{
-    int64  id =1;//ID
-    int64  order_id =2;//订单ID
-    string delivery_method =3; //配送方式：0-无须配送，1-快递发货，2-即时配送，3-上门自提
-    int32  express_id =4;//快递id
-    string express_code =5;//快递编号
-    string express_name =6;//快递名称
-    string express_number =7;//快递单号
-    string extension_code =8;//取货码
-    int32  goods_count =9;//商品数量
-    repeated OrderPacketGoods goods_list =10;//商品内容
-    string is_no_logistic =11;//是否无需要物流
-    string created_at =12;
-    string updated_at =13;
-}
-
-//订单发货包裹商品
-message OrderPacketGoods{
-    int64  detail_id =1;//订单明细ID
-    int64  spu_id =2;//商品ID
-    string md5_key =4;//货品MD5KEY
-    int32  number =7;//商品数量
-    string title =8;//商品名称
-    string unit =9;//商品单位
-    string image_url =10; //商品图片
-    string spec_desc =11; //商品规格描述
-}
 
 //订单统计数据
 message OrderStatusStepTotalData{
