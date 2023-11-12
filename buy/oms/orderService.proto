@@ -16,7 +16,7 @@ service OrderService {
     rpc OrderUnderLinePay (OrderRequest) returns (OrderResponse) {}
 
     //订单发货【admin】
-    rpc OrderDelivery(OrderRequest) returns (OrderResponse) {}
+    rpc OrderDelivery(OrderPacket) returns (OrderResponse) {}
 
     //订单取消【admin/user】
     rpc OrderCancel (OrderRequest) returns (OrderResponse) {}
@@ -81,15 +81,15 @@ message Order {
     int64  preferential_price =11;//优惠金额
     int64  paid_money =12;//已支付金额
     int64  refunded_money =13;//已退款金额
-    int32  returned_quantity =14;//已退货数量
-    string client_type =15;//客户端类型（pc, h5, ios, android, alipay, weixin, baidu）取APPLICATION_CLIENT_TYPE常量值
-    string order_model =16;//订单模式（0销售型, 1展示型, 2自提点, 3虚拟销售）
-    string subject =17;//订单标题(为支付提供标题)。
-    string cover_url =18;//订单商品封面URL（默认取商品明细里数量最多的商品主图）
-    string user_note =19;//订单附言,由用户提交订单前填写
-    string seller_note =20;//商家留言,当该字段值时可以在订单查询看到
-    int32  express_id =21;//快递id
-    string express_number =22;//快递单号
+    int32  returned_number =14;//已退货数量
+    int32  delivered_number =15;//已发货数量
+    string client_type =16;//客户端类型（pc, h5, ios, android, alipay, weixin, baidu）取APPLICATION_CLIENT_TYPE常量值
+    string order_model =17;//订单模式（0销售型, 1展示型, 2自提点, 3虚拟销售）
+    string subject =18;//订单标题(为支付提供标题)。
+    string cover_url =19;//订单商品封面URL（默认取商品明细里数量最多的商品主图）
+    string user_note =20;//订单附言,由用户提交订单前填写
+    string seller_note =21;//商家留言,当该字段值时可以在订单查询看到
+    string delivery_method =22; //配送方式：0-无须配送，1-快递发货，2-即时配送，3-上门自提
     string is_under_line =23;//是否线下支付（0否，1是）(如果多次支付以第一次为准)
     string is_cod =24;//是否货到付款
     string is_invoiced =25;//是否已过开票
@@ -114,8 +114,7 @@ message Order {
     string status_name =44; //状态名称
     string status_color =45; //状态颜色
     string pay_status_name =46; //状态名称
-    string express_code =47; //物流编码
-    string express_name =48; //物流名称
+    string delivery_method_name =47; //配送方式名称
     OrderCurrency  currency=50;
     OrderAddress address =51;
     MemberInfo member = 52;
@@ -125,7 +124,7 @@ message Order {
     map<string,string> metas =56;
     WarehouseInfo warehouse_data =57;
     map<string,string> operate_data =58;
-
+    repeated OrderPacket packets =59;
 }
 
 
@@ -145,10 +144,7 @@ message OrderRequest {
     string is_invoiced = 14;
     string is_modified = 15;
     string is_paid = 16;
-    int32  express_id =17;//快递id
-    string express_number =18;//快递单号
-    int32 shipping_id = 19;
-    string shipping_name =20;
+    string delivery_method =20; //配送方式：0-无须配送，1-快递发货，2-即时配送，3-上门自提
     int32 payment_id =21;
     string channel_type =22;
     int64 realstore_id =23;
@@ -163,6 +159,36 @@ message OrderRequest {
     string end_date = 32;
     string str_ids = 33;
     repeated int64 ids = 34;
+    string is_no_logistic =35;//是否无需物流（0否，1是）
+}
+
+//订单发货包裹
+message OrderPacket{
+    int64  id =1;//ID
+    int64  order_id =2;//订单ID
+    string delivery_method =3; //配送方式：0-无须配送，1-快递发货，2-即时配送，3-上门自提
+    int32  express_id =4;//快递id
+    string express_code =5;//快递编号
+    string express_name =6;//快递名称
+    string express_number =7;//快递单号
+    string extension_code =8;//取货码
+    int32  goods_count =9;//商品数量
+    repeated OrderPacketGoods goods_list =10;//商品内容
+    string is_no_logistic =11;//是否无需要物流
+    string created_at =12;
+    string updated_at =13;
+}
+
+//订单发货包裹商品
+message OrderPacketGoods{
+    int64  detail_id =1;//订单明细ID
+    int64  spu_id =2;//商品ID
+    string md5_key =4;//货品MD5KEY
+    int32  number =7;//商品数量
+    string title =8;//商品名称
+    string unit =9;//商品单位
+    string image_url =10; //商品图片
+    string spec_desc =11; //商品规格描述
 }
 
 //订单统计数据

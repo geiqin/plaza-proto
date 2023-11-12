@@ -48,7 +48,7 @@ type OrderService interface {
 	//订单线下支付【admin】
 	OrderUnderLinePay(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单发货【admin】
-	OrderDelivery(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	OrderDelivery(ctx context.Context, in *OrderPacket, opts ...client.CallOption) (*OrderResponse, error)
 	//订单取消【admin/user】
 	OrderCancel(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单删除【admin/user】
@@ -115,7 +115,7 @@ func (c *orderService) OrderUnderLinePay(ctx context.Context, in *OrderRequest, 
 	return out, nil
 }
 
-func (c *orderService) OrderDelivery(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+func (c *orderService) OrderDelivery(ctx context.Context, in *OrderPacket, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.OrderDelivery", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -293,7 +293,7 @@ type OrderServiceHandler interface {
 	//订单线下支付【admin】
 	OrderUnderLinePay(context.Context, *OrderRequest, *OrderResponse) error
 	//订单发货【admin】
-	OrderDelivery(context.Context, *OrderRequest, *OrderResponse) error
+	OrderDelivery(context.Context, *OrderPacket, *OrderResponse) error
 	//订单取消【admin/user】
 	OrderCancel(context.Context, *OrderRequest, *OrderResponse) error
 	//订单删除【admin/user】
@@ -332,7 +332,7 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 	type orderService interface {
 		OrderPay(ctx context.Context, in *OrderRequest, out *OrderPayResponse) error
 		OrderUnderLinePay(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		OrderDelivery(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error
 		OrderCancel(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderDelete(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderConfirm(ctx context.Context, in *OrderRequest, out *OrderResponse) error
@@ -369,7 +369,7 @@ func (h *orderServiceHandler) OrderUnderLinePay(ctx context.Context, in *OrderRe
 	return h.OrderServiceHandler.OrderUnderLinePay(ctx, in, out)
 }
 
-func (h *orderServiceHandler) OrderDelivery(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+func (h *orderServiceHandler) OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error {
 	return h.OrderServiceHandler.OrderDelivery(ctx, in, out)
 }
 
