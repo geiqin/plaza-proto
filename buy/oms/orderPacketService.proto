@@ -14,7 +14,8 @@ service OrderPacketService {
 message OrderPacket{
     int64  id =1;//ID
     int64  order_id =2;//订单ID
-    string delivery_method =3; //配送方式：0-无须配送，1-快递发货，2-即时配送，3-上门自提
+    string logistics_type =22;//物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
+    string method =11;//发货方式【快递发货：0-无需物流 1-自己联系物流，2-在线下单】
     int32  express_id =4;//快递id
     string express_code =5;//快递编号
     string express_name =6;//快递名称
@@ -22,12 +23,11 @@ message OrderPacket{
     string extension_code =8;//取货码
     int32  goods_count =9;//商品数量
     repeated OrderPacketGoods goods_list =10;//商品内容
-    string is_no_logistic =11;//是否无需要物流
     string created_at =12;
     string updated_at =13;
     OrderAddress address_data =14;
-    string delivery_method_name =15;
-    string is_no_logistic_name =16;
+    string logistics_type_name =15;
+    string method_name =16;
 }
 
 //订单发货包裹商品
@@ -55,7 +55,7 @@ message OrderPacketRequest {
     string express_name =9;//快递名称
     string express_number =10;//快递单号
     string extension_code =11;//取货码
-    string is_no_logistic =12;//是否无需要物流
+    string send_type =12;//发货方式【快递发货：0-无需物流 1-自己联系物流，2-在线下单】
     repeated int64 ids = 13;
 }
 

@@ -24,7 +24,7 @@ message OrderDetail {
     int64  refunded_money =18;//已退款金额
     int32  returned_number =19;//已退货数量
     int32  delivered_number =20;//已发货数量
-    string is_give =21; //是否为赠品，礼物等赠送
+    string is_all_delivered =21; //是否已全部发货(0否，1是)
     repeated SpecificationData spec =22;//规格
     string spec_desc =23;//描述
     string extend_data =25;//扩展数据 json

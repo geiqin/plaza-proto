@@ -88,7 +88,7 @@ message BuyRequest {
     int64 use_integral = 7; //使用的积分数
     int64 use_surplus = 8; //使用的余额数
     int64 buy_member_id = 9; //代理的客户ID（操作员代客下单）
-    string delivery_method =11; //配送方式
+    string logistics_type =22;//物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
     repeated SpecificationData spec =13; //规格信息
     repeated int64 ids = 14; ///购物车ids
     BuyGoodsData goods_data =17;

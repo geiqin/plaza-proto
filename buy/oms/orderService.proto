@@ -90,42 +90,45 @@ message Order {
     string cover_url =19;//订单商品封面URL（默认取商品明细里数量最多的商品主图）
     string user_note =20;//订单附言,由用户提交订单前填写
     string seller_note =21;//商家留言,当该字段值时可以在订单查询看到
-    string delivery_method =22; //配送方式：0-无须配送，1-快递发货，2-即时配送，3-上门自提
-    string is_under_line =23;//是否线下支付（0否，1是）(如果多次支付以第一次为准)
-    string is_cod =24;//是否货到付款
-    string is_invoiced =25;//是否已过开票
-    string is_refunded =26;//是否已产生退款
-    string is_modify_address =27;//是否手动修改过订单地址
-    string is_modify_price =28;//是否手动修改过订单价
-    int32  payment_id =29;//用户选择的支付方式的id,取值表payment
-    string pay_status =30;//支付状态（0未支付, 1已支付, 2已退款, 3部分退款）
-    string status =31;//订单状态（0待确认, 1已确认/待支付, 2已支付/待发货, 3已发货/待收货, 4已完成, 5已取消, 6已关闭）
-    string pay_time =32;//支付时间
-    string confirm_time =33;//订单确认时间
-    string delivery_time =34;//发货时间
-    string cancel_time =35;//取消时间
-    string collect_time =36;//收货时间
-    string close_time =37;//退款完成时间
-    string finished_time =38;//订单完成时间
-    string created_at =40;
-    string updated_at =41;
+    string logistics_type =22;//物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
+    string delivery_mode =23;//发货模式：1-统一发货，2-分拆发货
+    string is_all_delivered =24;//是否已全部发货(发货模式为2时有效)（0否，1是）
+    string is_under_line =25;//是否线下支付（0否，1是）(如果多次支付以第一次为准)
+    string is_cod =26;//是否货到付款
+    string is_invoiced =27;//是否已过开票（0否，1是）
+    string is_refunded =28;//是否已产生退款（0否，1是）
+    string is_modify_address =29;//是否手动修改过订单地址（0否，1是）
+    string is_modify_price =30;//是否手动修改过订单价（0否，1是）
+    int32  payment_id =31;//用户选择的支付方式的id,取值表payment
+    string pay_status =32;//支付状态（0未支付, 1已支付, 2已退款, 3部分退款）
+    string status =33;//订单状态（0待确认, 1已确认/待支付, 2已支付/待发货, 3已发货/待收货, 4已完成, 5已取消, 6已关闭）
+    string pay_time =34;//支付时间
+    string confirm_time =35;//订单确认时间
+    string delivery_time =36;//发货时间
+    string cancel_time =37;//取消时间
+    string collect_time =38;//收货时间
+    string close_time =39;//退款完成时间
+    string finished_time =40;//订单完成时间
+    string created_at =41;
+    string updated_at =42;
     //--ext---
-    bool is_can_launch_aftersale =42; //是否启动售后服务
-    string client_type_name =43; //来源终端
-    string status_name =44; //状态名称
-    string status_color =45; //状态颜色
-    string pay_status_name =46; //状态名称
-    string delivery_method_name =47; //配送方式名称
-    OrderCurrency  currency=50;
-    OrderAddress address =51;
-    MemberInfo member = 52;
-    PaymentInfo payment = 53;
-    repeated OrderDetail details = 54;
-    repeated OrderExtension extension_data = 55;
-    map<string,string> metas =56;
-    WarehouseInfo warehouse_data =57;
-    map<string,string> operate_data =58;
-    repeated OrderPacket packets =59;
+    bool is_can_launch_aftersale =44; //是否启动售后服务
+    string client_type_name =45; //来源终端
+    string status_name =46; //状态名称
+    string status_color =47; //状态颜色
+    string pay_status_name =48; //状态名称
+    string logistics_type_name =49; //物流模式名称
+    string delivery_mode_name =50; //发货模式名称
+    OrderCurrency  currency=51;
+    OrderAddress address =52;
+    MemberInfo member = 53;
+    PaymentInfo payment = 54;
+    repeated OrderDetail details = 55;
+    repeated OrderExtension extension_data = 56;
+    map<string,string> metas =57;
+    WarehouseInfo warehouse_data =58;
+    map<string,string> operate_data =59;
+    repeated OrderPacket packets =60;
 }
 
 
@@ -145,7 +148,7 @@ message OrderRequest {
     string is_invoiced = 14;
     string is_modified = 15;
     string is_paid = 16;
-    string delivery_method =20; //配送方式：0-无须配送，1-快递发货，2-即时配送，3-上门自提
+    string logistics_type =20;
     int32 payment_id =21;
     string channel_type =22;
     int64 realstore_id =23;
@@ -160,7 +163,8 @@ message OrderRequest {
     string end_date = 32;
     string str_ids = 33;
     repeated int64 ids = 34;
-    string is_no_logistic =35;//是否无需物流（0否，1是）
+    string delivery_mode =35;
+    string is_all_delivered =36;//是否已全部发货（0否，1是）
 }
 
 
