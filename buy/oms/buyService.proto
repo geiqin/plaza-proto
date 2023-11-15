@@ -81,7 +81,7 @@ message OrderBase {
 message BuyRequest {
     string buy_type = 1; //购买类型
     int64 address_id = 2; //收货地址ID
-    string postscript = 3; //买家留言(50字以内)
+    string user_note = 3; //买家留言(50字以内)
     int32 shipment_id = 4; //选中的配送方式
     int32 payment_id = 5; //选中的支付方式
     int64 coupon_id = 6; //选中的优惠劵凭证ID
