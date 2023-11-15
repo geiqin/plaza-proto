@@ -29,6 +29,7 @@ message OrderPacket{
     OrderAddress address_data =15;
     string logistics_type_name =16;
     string method_name =17;
+    string status_name =18;
 }
 
 //订单发货包裹商品
