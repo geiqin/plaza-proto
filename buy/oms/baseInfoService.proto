@@ -11,57 +11,6 @@ message PaymentInfo {
 	string is_under_line =5;//是否线下支付（0否，1是）
 }
 
-message MemberAddressInfo {
-	int64 id =1;
-	int64 member_id =2; //会员ID
-	string name =3; //姓名
-	string alias =4;//别名
-	string tel =5;//电话
-	int64 area_id =6;//所属区域ID
-	int64 province_id =7;//所在省
-	int64 cite_id =8;//所在市
-	int64 county_id =9;//所在县/区
-	string address =10;//详细地址
-	string lng =11; //经度
-	string lat =12;  //纬度
-	string idcard_name =13;//身份证姓名
-	string idcard_number =14;//身份证号码
-	string idcard_front =15;//身份证人像面图片
-	string idcard_back =16;//身份证国微面图片
-	string is_default =17;//是否默认地址（0否, 1是）
-	string tag =18;   //标签
-	string created_at =19;
-	string updated_at =20;
-	AreaInfo area =21;
-}
-
-message AreaInfo {
-	int64 id = 1;
-	int64 area_id = 2;
-	string level_type = 3;
-	string name = 4;
-	string shortname = 5;
-	string parent_path = 6;
-	string province = 7;
-	string city = 8;
-	string district = 9;
-	string province_shortname = 11;
-	string city_shortname = 12;
-	string district_shortname = 13;
-	string province_pinyin = 14;
-	string city_pinyin = 15;
-	string district_pinyin = 16;
-	string pinyin = 17;
-	string jianpin = 18;
-	string first_char = 19;
-	string city_code = 20;
-	string zip_code = 21;
-	string lng = 22;
-	string lat = 23;
-	string remark1 = 24;
-	string remark2 = 25;
-}
-
 //商品信息
 message GoodsInfo {
 	int64 id = 1; //比如购物车ID

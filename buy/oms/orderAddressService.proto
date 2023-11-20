@@ -2,7 +2,6 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "baseInfoService.proto";
 
 service OrderAddressService {
     rpc Create (OrderAddress) returns (OrderAddressResponse) {}
@@ -13,27 +12,30 @@ service OrderAddressService {
 }
 
 message OrderAddress {
-    int64  id =1;//ID
-    int64  order_id =2;//区域ID
-    int64  address_id =3;//引用客户地址ID
-    string name =4;//姓名
-    string alias =5;//别名
-    string tel =6;//电话
-    string address =7;//地址
-    int64  area_id =8;//区域ID
-    string province_name =9;//收件人-省-名称
-    string city_name =10;//收件人-市-名称
-    string county_name =11;//收件人-县/区-名称
-    string lng =12;//经度
-    string lat =13;//纬度
-    string idcard_name =14;//身份证姓名
-    string idcard_number =15;//身份证号码
-    string idcard_front =16;//身份证人像面图片
-    string idcard_back =17;//身份证国微面图片
-    int64  street_id =18;//街道ID
-    string created_at = 19;
-    string updated_at = 20;
-    AreaInfo area = 21;
+    int64 id =1;//ID
+    int64 order_id =2;//区域ID
+    int64 address_id =3;//客户地址ID
+    int64 extraction_id =4;//取货地址ID
+    string name =6;//姓名
+    string alias =7;//别名
+    string tel =8;//电话
+    int64 province_id =9;//所在省ID
+    int64 city_id =10;//所在市ID
+    int64 county_id =11;//所在县/区ID
+    string province_name =12;//收件人-省-名称
+    string city_name =13;//收件人-市-名称
+    string county_name =14;//收件人-县/区-名称
+    string address =15;//地址
+    float lng =16;//经度
+    float lat =17;//纬度
+    string idcard_name =18;//身份证姓名
+    string idcard_number =19;//身份证号码
+    string idcard_front =20;//身份证人像面图片
+    string idcard_back =21;//身份证国微面图片
+    int64  street_id =22;//街道ID
+    string street_name = 23;//街道名称
+    string created_at = 24;
+    string updated_at = 25;
 }
 
 

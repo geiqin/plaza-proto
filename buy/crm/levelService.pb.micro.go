@@ -49,7 +49,7 @@ type LevelService interface {
 	Get(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	Search(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error)
 	List(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error)
-	//会员有效等级
+	//当前有效会员等级
 	MemberValidLevels(ctx context.Context, in *LevelRequest, opts ...client.CallOption) (*LevelResponse, error)
 }
 
@@ -144,7 +144,7 @@ type LevelServiceHandler interface {
 	Get(context.Context, *Level, *LevelResponse) error
 	Search(context.Context, *LevelRequest, *LevelResponse) error
 	List(context.Context, *LevelRequest, *LevelResponse) error
-	//会员有效等级
+	//当前有效会员等级
 	MemberValidLevels(context.Context, *LevelRequest, *LevelResponse) error
 }
 
