@@ -12,6 +12,7 @@ service NavService {
     rpc Search (NavRequest) returns (NavResponse) {}
     rpc List (NavRequest) returns (NavResponse) {}
     rpc Tree (NavRequest) returns (NavResponse) {}
+    rpc StoreNavList (NavRequest) returns (NavResponse) {}
 }
 
 // 导航
@@ -57,9 +58,10 @@ message NavRequest {
     string type =10;
     string is_admin =11;
     int32 plugin_id =12;
-    repeated int32 plugin_ids = 13;
-    repeated int64 nav_type_ids = 14;
-    repeated int64 ids = 15;
+    int64 store_id =13;
+    repeated int32 plugin_ids = 14;
+    repeated int64 nav_type_ids = 15;
+    repeated int64 ids = 16;
 }
 
 message NavData {
