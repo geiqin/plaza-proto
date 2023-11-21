@@ -12,7 +12,7 @@ service NavTypeService {
     rpc Delete (NavType) returns (NavTypeResponse) {}
     rpc Search (NavTypeRequest) returns (NavTypeResponse) {}
     rpc List (NavTypeRequest) returns (NavTypeResponse) {}
-    rpc StoreNavs (NavTypeRequest) returns (NavTypeResponse) {}
+    rpc StoreNavs (NavTypeRequest) returns (StoreNavsResponse) {}
 }
 
 // 导航
