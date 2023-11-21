@@ -21,13 +21,13 @@ message MemberPayLevel {
     int32  order_trade_num =6;//成交订单笔数
     int64  order_trade_money =7;//成交订单总额
     int32  renew_num =8;//续展次数
-    int32  surplus_time_number =9;//剩余时间值
-    string surplus_time_unit =10;//剩余时间单位
-    string is_forever =11;//是否永久会员(0否，1是)
-    string status =12;//状态：0失效，1正常
-    string created_at =13;
-    string updated_at =14;
-    Level level =15;
+    string is_forever =9;//是否永久会员(0否，1是)
+    string status =10;//状态：0失效，1正常
+    string created_at =11;
+    string updated_at =12;
+    Level level =13;
+    string status_name =14;//状态名称
+    int32 valid_days =15;//剩余天数
 }
 
 message MemberPayLevelRequest {

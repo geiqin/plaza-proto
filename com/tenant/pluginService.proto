@@ -12,7 +12,7 @@ service PluginService {
     //移除插件
     rpc Delete (Plugin) returns (PluginResponse) {}
     //插件详情
-    rpc Get (Plugin) returns (PluginResponse) {}
+    rpc Detail (Plugin) returns (PluginResponse) {}
     //获取插件列表
     rpc List (PluginRequest) returns (PluginResponse) {}
     //插件查询
@@ -26,16 +26,18 @@ message Plugin {
     string type =4;//插件类型
     string icon_url =5; //插件图标
     string desc =6;//插件描述
-    string config =7;//配置
+    string intro =7;//插件介绍
     string data =8;//初始数据
-    string version =9;//版本
+    int32 ver  =9;//版本号
     string url =10;//URL地址
     int32  weight =11;//权重
-    string status =12;//状态(0 禁用，1 启用，2 暂停)
+    string status =12;//状态(0 禁用，1 启用)
     string author_id =13;//作者ID
     string author_name =14;//作者名称
     string created_at =15;
     string updated_at =16;
+    string ver_text =17; //版本文本（版本号美化）
+    string is_install =18; //当前店铺是否已安装(0否，1是)
 }
 
 

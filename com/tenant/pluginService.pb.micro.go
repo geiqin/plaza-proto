@@ -50,7 +50,7 @@ type PluginService interface {
 	//移除插件
 	Delete(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
 	//插件详情
-	Get(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
+	Detail(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error)
 	//获取插件列表
 	List(ctx context.Context, in *PluginRequest, opts ...client.CallOption) (*PluginResponse, error)
 	//插件查询
@@ -99,8 +99,8 @@ func (c *pluginService) Delete(ctx context.Context, in *Plugin, opts ...client.C
 	return out, nil
 }
 
-func (c *pluginService) Get(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error) {
-	req := c.c.NewRequest(c.name, "PluginService.Get", in)
+func (c *pluginService) Detail(ctx context.Context, in *Plugin, opts ...client.CallOption) (*PluginResponse, error) {
+	req := c.c.NewRequest(c.name, "PluginService.Detail", in)
 	out := new(PluginResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -139,7 +139,7 @@ type PluginServiceHandler interface {
 	//移除插件
 	Delete(context.Context, *Plugin, *PluginResponse) error
 	//插件详情
-	Get(context.Context, *Plugin, *PluginResponse) error
+	Detail(context.Context, *Plugin, *PluginResponse) error
 	//获取插件列表
 	List(context.Context, *PluginRequest, *PluginResponse) error
 	//插件查询
@@ -151,7 +151,7 @@ func RegisterPluginServiceHandler(s server.Server, hdlr PluginServiceHandler, op
 		Create(ctx context.Context, in *Plugin, out *PluginResponse) error
 		Update(ctx context.Context, in *Plugin, out *PluginResponse) error
 		Delete(ctx context.Context, in *Plugin, out *PluginResponse) error
-		Get(ctx context.Context, in *Plugin, out *PluginResponse) error
+		Detail(ctx context.Context, in *Plugin, out *PluginResponse) error
 		List(ctx context.Context, in *PluginRequest, out *PluginResponse) error
 		Search(ctx context.Context, in *PluginRequest, out *PluginResponse) error
 	}
@@ -178,8 +178,8 @@ func (h *pluginServiceHandler) Delete(ctx context.Context, in *Plugin, out *Plug
 	return h.PluginServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *pluginServiceHandler) Get(ctx context.Context, in *Plugin, out *PluginResponse) error {
-	return h.PluginServiceHandler.Get(ctx, in, out)
+func (h *pluginServiceHandler) Detail(ctx context.Context, in *Plugin, out *PluginResponse) error {
+	return h.PluginServiceHandler.Detail(ctx, in, out)
 }
 
 func (h *pluginServiceHandler) List(ctx context.Context, in *PluginRequest, out *PluginResponse) error {
