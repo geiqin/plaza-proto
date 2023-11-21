@@ -49,6 +49,7 @@ type NavTypeService interface {
 	Delete(ctx context.Context, in *NavType, opts ...client.CallOption) (*NavTypeResponse, error)
 	Search(ctx context.Context, in *NavTypeRequest, opts ...client.CallOption) (*NavTypeResponse, error)
 	List(ctx context.Context, in *NavTypeRequest, opts ...client.CallOption) (*NavTypeResponse, error)
+	StoreNavs(ctx context.Context, in *NavTypeRequest, opts ...client.CallOption) (*NavTypeResponse, error)
 }
 
 type navTypeService struct {
@@ -123,6 +124,16 @@ func (c *navTypeService) List(ctx context.Context, in *NavTypeRequest, opts ...c
 	return out, nil
 }
 
+func (c *navTypeService) StoreNavs(ctx context.Context, in *NavTypeRequest, opts ...client.CallOption) (*NavTypeResponse, error) {
+	req := c.c.NewRequest(c.name, "NavTypeService.StoreNavs", in)
+	out := new(NavTypeResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for NavTypeService service
 
 type NavTypeServiceHandler interface {
@@ -132,6 +143,7 @@ type NavTypeServiceHandler interface {
 	Delete(context.Context, *NavType, *NavTypeResponse) error
 	Search(context.Context, *NavTypeRequest, *NavTypeResponse) error
 	List(context.Context, *NavTypeRequest, *NavTypeResponse) error
+	StoreNavs(context.Context, *NavTypeRequest, *NavTypeResponse) error
 }
 
 func RegisterNavTypeServiceHandler(s server.Server, hdlr NavTypeServiceHandler, opts ...server.HandlerOption) error {
@@ -142,6 +154,7 @@ func RegisterNavTypeServiceHandler(s server.Server, hdlr NavTypeServiceHandler, 
 		Delete(ctx context.Context, in *NavType, out *NavTypeResponse) error
 		Search(ctx context.Context, in *NavTypeRequest, out *NavTypeResponse) error
 		List(ctx context.Context, in *NavTypeRequest, out *NavTypeResponse) error
+		StoreNavs(ctx context.Context, in *NavTypeRequest, out *NavTypeResponse) error
 	}
 	type NavTypeService struct {
 		navTypeService
@@ -176,4 +189,8 @@ func (h *navTypeServiceHandler) Search(ctx context.Context, in *NavTypeRequest, 
 
 func (h *navTypeServiceHandler) List(ctx context.Context, in *NavTypeRequest, out *NavTypeResponse) error {
 	return h.NavTypeServiceHandler.List(ctx, in, out)
+}
+
+func (h *navTypeServiceHandler) StoreNavs(ctx context.Context, in *NavTypeRequest, out *NavTypeResponse) error {
+	return h.NavTypeServiceHandler.StoreNavs(ctx, in, out)
 }

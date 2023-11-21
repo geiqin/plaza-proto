@@ -12,7 +12,6 @@ service NavService {
     rpc Search (NavRequest) returns (NavResponse) {}
     rpc List (NavRequest) returns (NavResponse) {}
     rpc Tree (NavRequest) returns (NavResponse) {}
-    rpc StoreNavList (NavRequest) returns (NavResponse) {}
 }
 
 // 导航

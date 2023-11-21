@@ -12,6 +12,7 @@ service NavTypeService {
     rpc Delete (NavType) returns (NavTypeResponse) {}
     rpc Search (NavTypeRequest) returns (NavTypeResponse) {}
     rpc List (NavTypeRequest) returns (NavTypeResponse) {}
+    rpc StoreNavs (NavTypeRequest) returns (NavTypeResponse) {}
 }
 
 // 导航
@@ -56,5 +57,16 @@ message NavTypeData {
 
 message NavTypeResponse {
     NavTypeData data = 1;
+    common.Error error = 2;
+}
+
+message StoreNavsData {
+    repeated Nav navs = 1;
+    repeated NavType nav_types = 2;
+    repeated int64 nav_type_ids = 3;
+}
+
+message StoreNavsResponse {
+    StoreNavsData data = 1;
     common.Error error = 2;
 }
