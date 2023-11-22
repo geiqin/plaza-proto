@@ -80,8 +80,8 @@ message StorePluginData {
 message ConfigListData {
     string mode =1;
     repeated StorePlugin items = 2;
-    string plugin_base =3;
-    string plugin_data =4;
+    string plugins_base =3;
+    string plugins_data =4;
     string msg =5;
 }
 
