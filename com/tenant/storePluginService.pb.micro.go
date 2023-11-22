@@ -62,7 +62,7 @@ type StorePluginService interface {
 	//应用配置保存
 	ConfigSave(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error)
 	//应用配置列表
-	ConfigList(ctx context.Context, in *StorePluginRequest, opts ...client.CallOption) (*StorePluginResponse, error)
+	ConfigListData(ctx context.Context, in *StorePluginRequest, opts ...client.CallOption) (*ConfigListDataResponse, error)
 }
 
 type storePluginService struct {
@@ -167,9 +167,9 @@ func (c *storePluginService) ConfigSave(ctx context.Context, in *StorePlugin, op
 	return out, nil
 }
 
-func (c *storePluginService) ConfigList(ctx context.Context, in *StorePluginRequest, opts ...client.CallOption) (*StorePluginResponse, error) {
-	req := c.c.NewRequest(c.name, "StorePluginService.ConfigList", in)
-	out := new(StorePluginResponse)
+func (c *storePluginService) ConfigListData(ctx context.Context, in *StorePluginRequest, opts ...client.CallOption) (*ConfigListDataResponse, error) {
+	req := c.c.NewRequest(c.name, "StorePluginService.ConfigListData", in)
+	out := new(ConfigListDataResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -199,7 +199,7 @@ type StorePluginServiceHandler interface {
 	//应用配置保存
 	ConfigSave(context.Context, *StorePlugin, *StorePluginResponse) error
 	//应用配置列表
-	ConfigList(context.Context, *StorePluginRequest, *StorePluginResponse) error
+	ConfigListData(context.Context, *StorePluginRequest, *ConfigListDataResponse) error
 }
 
 func RegisterStorePluginServiceHandler(s server.Server, hdlr StorePluginServiceHandler, opts ...server.HandlerOption) error {
@@ -213,7 +213,7 @@ func RegisterStorePluginServiceHandler(s server.Server, hdlr StorePluginServiceH
 		List(ctx context.Context, in *StorePluginRequest, out *StorePluginResponse) error
 		Search(ctx context.Context, in *StorePluginRequest, out *StorePluginResponse) error
 		ConfigSave(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
-		ConfigList(ctx context.Context, in *StorePluginRequest, out *StorePluginResponse) error
+		ConfigListData(ctx context.Context, in *StorePluginRequest, out *ConfigListDataResponse) error
 	}
 	type StorePluginService struct {
 		storePluginService
@@ -262,6 +262,6 @@ func (h *storePluginServiceHandler) ConfigSave(ctx context.Context, in *StorePlu
 	return h.StorePluginServiceHandler.ConfigSave(ctx, in, out)
 }
 
-func (h *storePluginServiceHandler) ConfigList(ctx context.Context, in *StorePluginRequest, out *StorePluginResponse) error {
-	return h.StorePluginServiceHandler.ConfigList(ctx, in, out)
+func (h *storePluginServiceHandler) ConfigListData(ctx context.Context, in *StorePluginRequest, out *ConfigListDataResponse) error {
+	return h.StorePluginServiceHandler.ConfigListData(ctx, in, out)
 }
