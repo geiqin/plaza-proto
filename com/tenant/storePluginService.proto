@@ -61,7 +61,7 @@ message StorePluginRequest {
     string keywords = 7;
     string is_enabled = 8;
     string is_error = 10;
-    string mode = 11; //ConfigList 数据模式: 1-plugin_base模式,2-plugin_data 模式， 0/无 -对象列表
+    string mode = 11; //ConfigList 数据模式: 1-plugin_base模式,2-plugin_data 模式，3-maps模式，无-对象列表
     repeated string status_list = 13;
     repeated int64 ids = 14;
     repeated int32 plugin_ids = 15;
@@ -80,9 +80,10 @@ message StorePluginData {
 message ConfigListData {
     string mode =1;
     repeated StorePlugin items = 2;
-    string plugins_base =3;
-    string plugins_data =4;
-    string msg =5;
+    map<string,StorePlugin> maps = 3;
+    string plugins_base =4;
+    string plugins_data =5;
+    string msg =6;
 }
 
 message ConfigListDataResponse {
