@@ -45,16 +45,12 @@ func NewStoreServiceEndpoints() []*api.Endpoint {
 type StoreService interface {
 	//创建店铺
 	Create(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//修改店铺
-	Update(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//修改店铺Logo
-	UpdateLogo(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//修改店铺名称
-	UpdateName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//修改店铺版本（超级管理员可用）
+	UpdateVersion(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//修改店铺信息
+	UpdateProfile(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//设置状态
 	UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//设置店铺地址
-	SetAddress(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//删除店铺
 	Delete(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺信息
@@ -91,8 +87,8 @@ func (c *storeService) Create(ctx context.Context, in *Store, opts ...client.Cal
 	return out, nil
 }
 
-func (c *storeService) Update(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.Update", in)
+func (c *storeService) UpdateVersion(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.UpdateVersion", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -101,18 +97,8 @@ func (c *storeService) Update(ctx context.Context, in *Store, opts ...client.Cal
 	return out, nil
 }
 
-func (c *storeService) UpdateLogo(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.UpdateLogo", in)
-	out := new(StoreResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *storeService) UpdateName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.UpdateName", in)
+func (c *storeService) UpdateProfile(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.UpdateProfile", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -123,16 +109,6 @@ func (c *storeService) UpdateName(ctx context.Context, in *Store, opts ...client
 
 func (c *storeService) UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.UpdateStatus", in)
-	out := new(StoreResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *storeService) SetAddress(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.SetAddress", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -206,16 +182,12 @@ func (c *storeService) GetModules(ctx context.Context, in *StoreRequest, opts ..
 type StoreServiceHandler interface {
 	//创建店铺
 	Create(context.Context, *Store, *StoreResponse) error
-	//修改店铺
-	Update(context.Context, *Store, *StoreResponse) error
-	//修改店铺Logo
-	UpdateLogo(context.Context, *Store, *StoreResponse) error
-	//修改店铺名称
-	UpdateName(context.Context, *Store, *StoreResponse) error
+	//修改店铺版本（超级管理员可用）
+	UpdateVersion(context.Context, *Store, *StoreResponse) error
+	//修改店铺信息
+	UpdateProfile(context.Context, *Store, *StoreResponse) error
 	//设置状态
 	UpdateStatus(context.Context, *Store, *StoreResponse) error
-	//设置店铺地址
-	SetAddress(context.Context, *Store, *StoreResponse) error
 	//删除店铺
 	Delete(context.Context, *StoreRequest, *StoreResponse) error
 	//获取店铺信息
@@ -233,11 +205,9 @@ type StoreServiceHandler interface {
 func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts ...server.HandlerOption) error {
 	type storeService interface {
 		Create(ctx context.Context, in *Store, out *StoreResponse) error
-		Update(ctx context.Context, in *Store, out *StoreResponse) error
-		UpdateLogo(ctx context.Context, in *Store, out *StoreResponse) error
-		UpdateName(ctx context.Context, in *Store, out *StoreResponse) error
+		UpdateVersion(ctx context.Context, in *Store, out *StoreResponse) error
+		UpdateProfile(ctx context.Context, in *Store, out *StoreResponse) error
 		UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error
-		SetAddress(ctx context.Context, in *Store, out *StoreResponse) error
 		Delete(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 		Get(ctx context.Context, in *Store, out *StoreResponse) error
 		GetByName(ctx context.Context, in *Store, out *StoreResponse) error
@@ -260,24 +230,16 @@ func (h *storeServiceHandler) Create(ctx context.Context, in *Store, out *StoreR
 	return h.StoreServiceHandler.Create(ctx, in, out)
 }
 
-func (h *storeServiceHandler) Update(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.Update(ctx, in, out)
+func (h *storeServiceHandler) UpdateVersion(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.UpdateVersion(ctx, in, out)
 }
 
-func (h *storeServiceHandler) UpdateLogo(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.UpdateLogo(ctx, in, out)
-}
-
-func (h *storeServiceHandler) UpdateName(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.UpdateName(ctx, in, out)
+func (h *storeServiceHandler) UpdateProfile(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.UpdateProfile(ctx, in, out)
 }
 
 func (h *storeServiceHandler) UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error {
 	return h.StoreServiceHandler.UpdateStatus(ctx, in, out)
-}
-
-func (h *storeServiceHandler) SetAddress(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.SetAddress(ctx, in, out)
 }
 
 func (h *storeServiceHandler) Delete(ctx context.Context, in *StoreRequest, out *StoreResponse) error {

@@ -7,16 +7,12 @@ import "versionService.proto";
 service StoreService {
     //创建店铺
     rpc Create (Store) returns (StoreResponse) {}
-    //修改店铺
-    rpc Update (Store) returns (StoreResponse) {}
-    //修改店铺Logo
-    rpc UpdateLogo (Store) returns (StoreResponse) {}
-    //修改店铺名称
-    rpc UpdateName (Store) returns (StoreResponse) {}
+    //修改店铺版本（超级管理员可用）
+    rpc UpdateVersion (Store) returns (StoreResponse) {}
+    //修改店铺信息
+    rpc UpdateProfile (Store) returns (StoreResponse) {}
     //设置状态
     rpc UpdateStatus (Store) returns (StoreResponse) {}
-    //设置店铺地址
-    rpc SetAddress (Store) returns (StoreResponse) {}
     //删除店铺
     rpc Delete (StoreRequest) returns (StoreResponse) {}
 
@@ -41,21 +37,27 @@ message Store {
     int64	company_id	=7;
     string 	company_name	=8;
     string	industry	=9;
-    int64	area_id	=10;
-    string	address	=11;
-    string	lng	=12;
-    string	lat	=13;
-    string	region	=14;
-    string	custom_domain	=15;
-    string	is_trusted	=16;
-    string	status	=17;
-    int64	creator_id	=18;
-    string	expired_at	=19;
-    string	created_at	=20;
-    string	updated_at	=21;
-    Version version =22;
-    string	status_name	=23;
-    int32 valid_days =24;
+    int64	province_id	=10;
+    int64	city_id	=11;
+    int64	county_id	=12;
+    string	address	=13;
+    float lng	=14;
+    float	lat	=15;
+    string	region	=16;
+    StoreConfig	config	=17;
+    string	is_trusted	=18;
+    string	status	=19;
+    int64	creator_id	=20;
+    string	expired_at	=21;
+    string	created_at	=22;
+    string	updated_at	=23;
+    Version version =24;
+    string	status_name	=25;
+    int32 valid_days =26;
+}
+
+message StoreConfig{
+    string custom_domain	=1;
 }
 
 message StoreRequest{
