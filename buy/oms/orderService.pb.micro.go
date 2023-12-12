@@ -79,6 +79,8 @@ type OrderService interface {
 	Get(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//订单列表【service】
 	List(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	//新订单通知数据
+	NewOrderNotice(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//扩展列表【service】
 	OrderExtensionList(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderExtensionResponse, error)
 }
@@ -275,6 +277,16 @@ func (c *orderService) List(ctx context.Context, in *OrderRequest, opts ...clien
 	return out, nil
 }
 
+func (c *orderService) NewOrderNotice(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.NewOrderNotice", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderService) OrderExtensionList(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderExtensionResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.OrderExtensionList", in)
 	out := new(OrderExtensionResponse)
@@ -324,6 +336,8 @@ type OrderServiceHandler interface {
 	Get(context.Context, *Order, *OrderResponse) error
 	//订单列表【service】
 	List(context.Context, *OrderRequest, *OrderResponse) error
+	//新订单通知数据
+	NewOrderNotice(context.Context, *OrderRequest, *OrderResponse) error
 	//扩展列表【service】
 	OrderExtensionList(context.Context, *OrderRequest, *OrderExtensionResponse) error
 }
@@ -348,6 +362,7 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		Notify(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		Get(ctx context.Context, in *Order, out *OrderResponse) error
 		List(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		NewOrderNotice(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderExtensionList(ctx context.Context, in *OrderRequest, out *OrderExtensionResponse) error
 	}
 	type OrderService struct {
@@ -431,6 +446,10 @@ func (h *orderServiceHandler) Get(ctx context.Context, in *Order, out *OrderResp
 
 func (h *orderServiceHandler) List(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
 	return h.OrderServiceHandler.List(ctx, in, out)
+}
+
+func (h *orderServiceHandler) NewOrderNotice(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.NewOrderNotice(ctx, in, out)
 }
 
 func (h *orderServiceHandler) OrderExtensionList(ctx context.Context, in *OrderRequest, out *OrderExtensionResponse) error {

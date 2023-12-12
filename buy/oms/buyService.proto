@@ -119,7 +119,31 @@ message BuyConfirmData {
     string common_site_type =8;//站点类型
     map<string,string> extension_data =9; //扩展数据
     map<string,string> plugins_data =10;//插件数据
+    DeliveryChoose delivery_choose =11;//配送选择数据
 }
+
+//配送选择数据
+message DeliveryChoose{
+    repeated string flags =1; //物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
+    repeated item buy_header_nav =2; //购买头部导航
+    repeated item buy_dropdown_list =3; //购买下拉选择
+    string is_header_nav =4; //是否显示头部导航(0否，1是)
+    string is_dropdown_list =5;//是否显示下拉选择(0否，1是)
+    string is_express_delivery =6;//是否支持快递发货(0否，1是)
+    string is_timely_delivery =7;//是否支持同城配送(0否，1是)
+    string is_pickup_delivery =8;//是否支持上门自提(0否，1是)
+    string current_logistics_type =9;//当前选中的配送方式值
+    string current_logistics_type_name =10; //当前选中的配送方式名称
+    string is_error =11; //是否有错误 0否，1是
+    string error_msg =12; //错误信息
+    //配送选择项
+    message item{
+        string name =1; //选项名称
+        string value =2; //选项值
+        int64 price =3; //选项价格
+    }
+}
+
 
 //购买提交数据
 message BuySubmitData {

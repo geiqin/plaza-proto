@@ -64,6 +64,9 @@ service OrderService {
     //订单列表【service】
     rpc List (OrderRequest) returns (OrderResponse) {}
 
+    //新订单通知数据
+    rpc NewOrderNotice (OrderRequest) returns (OrderResponse) {}
+
     //扩展列表【service】
     rpc OrderExtensionList (OrderRequest) returns (OrderExtensionResponse) {}
 }
@@ -73,7 +76,6 @@ message Order {
     string order_no =2;//单号
     int64  member_id =3;//客户ID
     int64  shop_id =4;//多商户ID(依赖多商户插件)
-    int64  realstore_id =5;//多门店ID(依赖多门店插件)
     int64  warehouse_id =6;//仓库ID
     int32  buy_number_count =7;//购买商品总数量
     int64  total_price =8;//订单单价

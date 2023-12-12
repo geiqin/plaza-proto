@@ -24,15 +24,16 @@ message Warehouse {
     int64  city_id =8;//所在市
     int64  county_id =9;//所在县/区
     string address =10;//详细地址
-    string lng =11;//经度
-    string lat =12;//纬度
+    float  lng =11;//经度
+    float  lat =12;//纬度
     string is_enable =13;//是否启用（0否，1是）
     string is_default =14;//是否默认（0否，1是）
-    string created_at = 15;
-    string updated_at = 16;
-    string province_name = 17;
-    string city_name = 18;
-    string county_name = 19;
+    int64  realstore_id =15;//门店ID
+    string created_at = 16;
+    string updated_at = 17;
+    string province_name = 18;
+    string city_name = 19;
+    string county_name = 20;
 }
 
 message WarehouseRequest {
@@ -44,7 +45,8 @@ message WarehouseRequest {
     string name = 6;
     string is_enable = 7;
     string is_default = 8;
-    repeated int64 ids = 9;
+    int64 realstore_id = 9;
+    repeated int64 ids = 10;
 }
 
 message WarehouseData {
