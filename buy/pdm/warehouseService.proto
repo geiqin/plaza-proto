@@ -7,6 +7,7 @@ service WarehouseService {
     rpc Create (Warehouse) returns (WarehouseResponse) {}
     rpc Update (Warehouse) returns (WarehouseResponse) {}
     rpc Delete (Warehouse) returns (WarehouseResponse) {}
+    rpc DeleteByRealstore (WarehouseRequest) returns (WarehouseResponse) {}
     rpc Get (Warehouse) returns (WarehouseResponse) {}
     rpc GetDefault (Warehouse) returns (WarehouseResponse) {}
     rpc List (WarehouseRequest) returns (WarehouseResponse) {}
@@ -47,6 +48,7 @@ message WarehouseRequest {
     string is_default = 8;
     int64 realstore_id = 9;
     repeated int64 ids = 10;
+    repeated int64 realstore_ids = 11;
 }
 
 message WarehouseData {

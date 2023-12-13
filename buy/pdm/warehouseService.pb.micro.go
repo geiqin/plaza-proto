@@ -46,6 +46,7 @@ type WarehouseService interface {
 	Create(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
 	Update(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
 	Delete(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
+	DeleteByRealstore(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error)
 	Get(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
 	GetDefault(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
 	List(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error)
@@ -86,6 +87,16 @@ func (c *warehouseService) Update(ctx context.Context, in *Warehouse, opts ...cl
 
 func (c *warehouseService) Delete(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error) {
 	req := c.c.NewRequest(c.name, "WarehouseService.Delete", in)
+	out := new(WarehouseResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *warehouseService) DeleteByRealstore(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error) {
+	req := c.c.NewRequest(c.name, "WarehouseService.DeleteByRealstore", in)
 	out := new(WarehouseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -140,6 +151,7 @@ type WarehouseServiceHandler interface {
 	Create(context.Context, *Warehouse, *WarehouseResponse) error
 	Update(context.Context, *Warehouse, *WarehouseResponse) error
 	Delete(context.Context, *Warehouse, *WarehouseResponse) error
+	DeleteByRealstore(context.Context, *WarehouseRequest, *WarehouseResponse) error
 	Get(context.Context, *Warehouse, *WarehouseResponse) error
 	GetDefault(context.Context, *Warehouse, *WarehouseResponse) error
 	List(context.Context, *WarehouseRequest, *WarehouseResponse) error
@@ -151,6 +163,7 @@ func RegisterWarehouseServiceHandler(s server.Server, hdlr WarehouseServiceHandl
 		Create(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		Update(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		Delete(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
+		DeleteByRealstore(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error
 		Get(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		GetDefault(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		List(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error
@@ -177,6 +190,10 @@ func (h *warehouseServiceHandler) Update(ctx context.Context, in *Warehouse, out
 
 func (h *warehouseServiceHandler) Delete(ctx context.Context, in *Warehouse, out *WarehouseResponse) error {
 	return h.WarehouseServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *warehouseServiceHandler) DeleteByRealstore(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error {
+	return h.WarehouseServiceHandler.DeleteByRealstore(ctx, in, out)
 }
 
 func (h *warehouseServiceHandler) Get(ctx context.Context, in *Warehouse, out *WarehouseResponse) error {
