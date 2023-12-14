@@ -4,13 +4,19 @@ option go_package = "/.;services";
 import "common/base.proto";
 
 service WarehouseService {
+    //仓库仓库
     rpc Create (Warehouse) returns (WarehouseResponse) {}
+    //仓库修改（可根据id和realstoreId来修改）
     rpc Update (Warehouse) returns (WarehouseResponse) {}
+    //仓库删除（可根据id和realstoreId来删除）
     rpc Delete (Warehouse) returns (WarehouseResponse) {}
-    rpc DeleteByRealstore (WarehouseRequest) returns (WarehouseResponse) {}
+    //仓库获取（可根据id和realstoreId来获取）
     rpc Get (Warehouse) returns (WarehouseResponse) {}
+    //获取默认仓库
     rpc GetDefault (Warehouse) returns (WarehouseResponse) {}
+    //仓库列表
     rpc List (WarehouseRequest) returns (WarehouseResponse) {}
+    //仓库查询
     rpc Search (WarehouseRequest) returns (WarehouseResponse) {}
 }
 
@@ -55,7 +61,7 @@ message WarehouseData {
     Warehouse entity = 1;
     common.Pager pager =2;
     repeated Warehouse items = 3;
-    common.Info info =4;
+    string msg =4;
 }
 message WarehouseResponse {
     WarehouseData data = 1;

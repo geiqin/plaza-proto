@@ -43,13 +43,19 @@ func NewWarehouseServiceEndpoints() []*api.Endpoint {
 // Client API for WarehouseService service
 
 type WarehouseService interface {
+	//仓库仓库
 	Create(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
+	//仓库修改（可根据id和realstoreId来修改）
 	Update(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
+	//仓库删除（可根据id和realstoreId来删除）
 	Delete(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
-	DeleteByRealstore(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error)
+	//仓库获取（可根据id和realstoreId来获取）
 	Get(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
+	//获取默认仓库
 	GetDefault(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
+	//仓库列表
 	List(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error)
+	//仓库查询
 	Search(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error)
 }
 
@@ -87,16 +93,6 @@ func (c *warehouseService) Update(ctx context.Context, in *Warehouse, opts ...cl
 
 func (c *warehouseService) Delete(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error) {
 	req := c.c.NewRequest(c.name, "WarehouseService.Delete", in)
-	out := new(WarehouseResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *warehouseService) DeleteByRealstore(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error) {
-	req := c.c.NewRequest(c.name, "WarehouseService.DeleteByRealstore", in)
 	out := new(WarehouseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -148,13 +144,19 @@ func (c *warehouseService) Search(ctx context.Context, in *WarehouseRequest, opt
 // Server API for WarehouseService service
 
 type WarehouseServiceHandler interface {
+	//仓库仓库
 	Create(context.Context, *Warehouse, *WarehouseResponse) error
+	//仓库修改（可根据id和realstoreId来修改）
 	Update(context.Context, *Warehouse, *WarehouseResponse) error
+	//仓库删除（可根据id和realstoreId来删除）
 	Delete(context.Context, *Warehouse, *WarehouseResponse) error
-	DeleteByRealstore(context.Context, *WarehouseRequest, *WarehouseResponse) error
+	//仓库获取（可根据id和realstoreId来获取）
 	Get(context.Context, *Warehouse, *WarehouseResponse) error
+	//获取默认仓库
 	GetDefault(context.Context, *Warehouse, *WarehouseResponse) error
+	//仓库列表
 	List(context.Context, *WarehouseRequest, *WarehouseResponse) error
+	//仓库查询
 	Search(context.Context, *WarehouseRequest, *WarehouseResponse) error
 }
 
@@ -163,7 +165,6 @@ func RegisterWarehouseServiceHandler(s server.Server, hdlr WarehouseServiceHandl
 		Create(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		Update(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		Delete(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
-		DeleteByRealstore(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error
 		Get(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		GetDefault(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		List(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error
@@ -190,10 +191,6 @@ func (h *warehouseServiceHandler) Update(ctx context.Context, in *Warehouse, out
 
 func (h *warehouseServiceHandler) Delete(ctx context.Context, in *Warehouse, out *WarehouseResponse) error {
 	return h.WarehouseServiceHandler.Delete(ctx, in, out)
-}
-
-func (h *warehouseServiceHandler) DeleteByRealstore(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error {
-	return h.WarehouseServiceHandler.DeleteByRealstore(ctx, in, out)
 }
 
 func (h *warehouseServiceHandler) Get(ctx context.Context, in *Warehouse, out *WarehouseResponse) error {
