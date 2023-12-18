@@ -44,9 +44,13 @@ func NewBuyServiceEndpoints() []*api.Endpoint {
 
 type BuyService interface {
 	//确认信息
-	Confirm(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error)
+	Confirm(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error)
 	//提交订单
-	Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error)
+	Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuySubmitResponse, error)
+	//订单拆分处理【service】
+	OrderSplitHandle(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error)
+	//购买商品服务验证【service】
+	BuyGoodsCheck(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error)
 }
 
 type buyService struct {
@@ -61,9 +65,9 @@ func NewBuyService(name string, c client.Client) BuyService {
 	}
 }
 
-func (c *buyService) Confirm(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error) {
+func (c *buyService) Confirm(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error) {
 	req := c.c.NewRequest(c.name, "BuyService.Confirm", in)
-	out := new(BuyResponse)
+	out := new(BuyConfirmResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -71,9 +75,29 @@ func (c *buyService) Confirm(ctx context.Context, in *BuyRequest, opts ...client
 	return out, nil
 }
 
-func (c *buyService) Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error) {
+func (c *buyService) Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuySubmitResponse, error) {
 	req := c.c.NewRequest(c.name, "BuyService.Submit", in)
-	out := new(BuyResponse)
+	out := new(BuySubmitResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *buyService) OrderSplitHandle(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error) {
+	req := c.c.NewRequest(c.name, "BuyService.OrderSplitHandle", in)
+	out := new(BuyConfirmResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *buyService) BuyGoodsCheck(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error) {
+	req := c.c.NewRequest(c.name, "BuyService.BuyGoodsCheck", in)
+	out := new(BuyConfirmResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -85,15 +109,21 @@ func (c *buyService) Submit(ctx context.Context, in *BuyRequest, opts ...client.
 
 type BuyServiceHandler interface {
 	//确认信息
-	Confirm(context.Context, *BuyRequest, *BuyResponse) error
+	Confirm(context.Context, *BuyRequest, *BuyConfirmResponse) error
 	//提交订单
-	Submit(context.Context, *BuyRequest, *BuyResponse) error
+	Submit(context.Context, *BuyRequest, *BuySubmitResponse) error
+	//订单拆分处理【service】
+	OrderSplitHandle(context.Context, *BuyRequest, *BuyConfirmResponse) error
+	//购买商品服务验证【service】
+	BuyGoodsCheck(context.Context, *BuyRequest, *BuyConfirmResponse) error
 }
 
 func RegisterBuyServiceHandler(s server.Server, hdlr BuyServiceHandler, opts ...server.HandlerOption) error {
 	type buyService interface {
-		Confirm(ctx context.Context, in *BuyRequest, out *BuyResponse) error
-		Submit(ctx context.Context, in *BuyRequest, out *BuyResponse) error
+		Confirm(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error
+		Submit(ctx context.Context, in *BuyRequest, out *BuySubmitResponse) error
+		OrderSplitHandle(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error
+		BuyGoodsCheck(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error
 	}
 	type BuyService struct {
 		buyService
@@ -106,10 +136,18 @@ type buyServiceHandler struct {
 	BuyServiceHandler
 }
 
-func (h *buyServiceHandler) Confirm(ctx context.Context, in *BuyRequest, out *BuyResponse) error {
+func (h *buyServiceHandler) Confirm(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error {
 	return h.BuyServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *buyServiceHandler) Submit(ctx context.Context, in *BuyRequest, out *BuyResponse) error {
+func (h *buyServiceHandler) Submit(ctx context.Context, in *BuyRequest, out *BuySubmitResponse) error {
 	return h.BuyServiceHandler.Submit(ctx, in, out)
+}
+
+func (h *buyServiceHandler) OrderSplitHandle(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error {
+	return h.BuyServiceHandler.OrderSplitHandle(ctx, in, out)
+}
+
+func (h *buyServiceHandler) BuyGoodsCheck(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error {
+	return h.BuyServiceHandler.BuyGoodsCheck(ctx, in, out)
 }

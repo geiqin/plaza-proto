@@ -7,9 +7,13 @@ import "baseInfoService.proto";
 //结账台
 service BuyService {
     //确认信息
-    rpc Confirm (BuyRequest) returns (BuyResponse) {}
+    rpc Confirm (BuyRequest) returns (BuyConfirmResponse) {}
     //提交订单
-    rpc Submit (BuyRequest) returns (BuyResponse) {}
+    rpc Submit (BuyRequest) returns (BuySubmitResponse) {}
+    //订单拆分处理【service】
+    rpc OrderSplitHandle (BuyRequest) returns (BuyConfirmResponse) {}
+    //购买商品服务验证【service】
+    rpc BuyGoodsCheck (BuyRequest) returns (BuyConfirmResponse) {}
 }
 
 //购买分组
@@ -88,6 +92,8 @@ message BuyRequest {
     int64 use_integral = 7; //使用的积分数
     int64 use_surplus = 8; //使用的余额数
     int64 buy_member_id = 9; //代理的客户ID（操作员代客下单）
+    int64 realstore_id = 10; //多门店Id
+    int64 shop_id = 11; //多商户Id
     string logistics_type =22;//物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
     repeated SpecificationData spec =13; //规格信息
     repeated int64 ids = 14; ///购物车ids
@@ -100,26 +106,6 @@ message BuyGoodsData {
     string md5_key =2;//商品规格md5_key
     int32 stock = 3; //数量
     repeated SpecificationData spec =4; //规格
-}
-
-
-message BuyData {
-    BuyConfirmData confirm = 1;//购买确认信息
-    BuySubmitData submit = 2;//购买提交信息
-    string is_order_submit = 3; //是否订单已提交 0否，1是
-}
-
-//购买确认数据
-message BuyConfirmData {
-    OrderBase base = 1;//结算信息(汇总)
-    repeated BuyGroup group_list =2; //分组商品列表
-    repeated PaymentInfo payment_list =3; //支付方式列表
-    BuyRequest request_data =4;//提交信息反馈
-    int32 default_payment_id =7;//默认支付ID
-    string common_site_type =8;//站点类型
-    map<string,string> extension_data =9; //扩展数据
-    map<string,string> plugins_data =10;//插件数据
-    DeliveryChoose delivery_choose =11;//配送选择数据
 }
 
 //配送选择数据
@@ -144,6 +130,24 @@ message DeliveryChoose{
     }
 }
 
+//购买确认数据
+message BuyConfirmData {
+    OrderBase base = 1;//结算信息(汇总)
+    repeated BuyGroup group_list =2; //分组商品列表
+    repeated PaymentInfo payment_list =3; //支付方式列表
+    BuyRequest request_data =4;//提交信息反馈
+    int32 default_payment_id =7;//默认支付ID
+    string common_site_type =8;//站点类型
+    map<string,string> extension_data =9; //扩展数据
+    map<string,string> plugins_data =10;//插件数据
+    DeliveryChoose delivery_choose =11;//配送选择数据
+    string is_order_submit = 12; //是否订单已提交 0否，1是
+}
+
+message BuyConfirmResponse {
+    BuyConfirmData data = 1;
+    common.Error error = 2;
+}
 
 //购买提交数据
 message BuySubmitData {
@@ -153,7 +157,8 @@ message BuySubmitData {
     string jump_url =4;
 }
 
-message BuyResponse {
-    BuyData data = 1;
+message BuySubmitResponse {
+    BuySubmitData data = 1;
     common.Error error = 2;
 }
+

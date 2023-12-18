@@ -10,6 +10,9 @@ import "baseInfoService.proto";
 //订单服务
 service OrderService {
 
+    //订单插入【service】
+    rpc OrderInsertHandle (Order) returns (OrderResponse) {}
+
     //订单支付【user】
     rpc OrderPay (OrderRequest) returns (OrderPayResponse) {}
 
@@ -69,6 +72,7 @@ service OrderService {
 
     //扩展列表【service】
     rpc OrderExtensionList (OrderRequest) returns (OrderExtensionResponse) {}
+
 }
 
 message Order {
@@ -188,9 +192,10 @@ message OrderData {
     Order entity = 1;
     common.Pager pager =2;
     repeated Order items = 3;
-    common.Info info =4;
+    repeated int64 order_ids =4;
     OrderFlow order_flow = 5;
     repeated PaymentInfo payment_list =6;
+    string msg =7;
 }
 
 message OrderDetailData {
