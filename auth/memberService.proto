@@ -1,0 +1,97 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+service MemberService {
+    //用户登录
+    rpc Login (AuthRequest) returns (AuthResponse) {}
+    //用户登录-验证码发送
+    rpc LoginVerifySend (MemberRequest) returns (MemberResponse) {}
+    //用户-验证码显示
+    rpc VerifyEntry (MemberRequest) returns (MemberResponse) {}
+    //密码找回
+    rpc ForgetPwd (MemberRequest) returns (MemberResponse) {}
+    //密码找回-验证码发送
+    rpc ForgetPwdVerifySend (MemberRequest) returns (MemberResponse) {}
+    //小程序用户授权
+    rpc AppMiniAuth (AuthRequest) returns (AuthResponse) {}
+    //app用户手机绑定
+    rpc AppMobileBind (MemberRequest) returns (MemberResponse) {}
+    //小程序用户手机一键绑定
+    rpc OnekeyMobileBind (MemberRequest) returns (MemberResponse) {}
+    //安全退出
+    rpc Logout (MemberRequest) returns (MemberResponse) {}
+}
+
+
+message Member {
+    int64  id =1;//ID
+    string type =2;//类型：0个人,1企业
+    string number_code =3;//会员编号
+    string username =4;//用户名称
+    string nickname =5;//用户昵称
+    string gender =6;//性别:0=未知,1=男,2=女
+    string birthday =7;//会员生日
+    int64  province_id =8;//区域ID
+    int64  city_id =9;//区域ID
+    int64  county_id =10;//区域ID
+    string province_name =11;//所在省
+    string city_name =12;//所在市
+    string county_name =13;//所在区/县
+    string address =14;//详细地址
+    string email =15;//绑定邮箱
+    string mobile =16;//绑定手机
+    string avatar_url =17;//会员头像url地址
+    int32  free_level_id =18;//会员等级ID
+    int64  integral =19;//会员积分（可兑换）
+    int64  frozen_integral =20;//冻结积分
+    int64  level_integral =21;//会员等级积分(升级专用)
+    int32  total_order_num =22;//成交订单笔数
+    int64  total_order_money =23;//成交订单总额,单位:元
+    int32  comment_count =24;//评价总数
+    int32  collect_count =25;//商品收藏总数
+    int64  referrer_id =26;//推荐人ID
+    string client_type =27;//来源终端
+    string contact_tel =28;//联系电话
+    string is_trusted =30;//是否已实名认证
+    string memo =31;//备注
+    string status =33;//状态：1正常，2锁定，3禁用，9注销
+    string created_at =34;
+    string updated_at =35;
+}
+
+
+//客户查询参数
+message MemberRequest {
+    string client_id =1;
+    string client_secret =2;
+    string type = 3;//类型： username/mobile/email
+    string username = 4;
+    string password =5;
+    string code =6;
+    string mobile =7;
+    string email =8;
+    string redirect_uri = 9;
+    string refresh_token =10;
+    string store_id =11;
+    string store_name = 12;
+    string scope =13;
+    string state =14;
+    string grant_type =15;
+    int64 referrer_id =16;
+    map<string,string> extends =17;
+}
+
+message MemberData {
+    Member entity = 1;
+    common.Pager pager =2;
+    repeated Member items = 3;
+    string msg =4;
+}
+
+message MemberResponse {
+    MemberData data = 1;
+    common.Error error = 2;
+}

@@ -1,0 +1,98 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+service UserService {
+    //用户登录
+    rpc Login (AuthRequest) returns (AuthResponse) {}
+    //切换用户【service】
+    rpc SwitchHandle (SwitchRequest) returns (AuthResponse) {}
+    //用户登录-验证码发送
+    rpc LoginVerifySend (UserRequest) returns (UserResponse) {}
+    //用户-验证码显示
+    rpc VerifyEntry (UserRequest) returns (UserResponse) {}
+    //密码找回
+    rpc ForgetPwd (UserRequest) returns (UserResponse) {}
+    //密码找回-验证码发送
+    rpc ForgetPwdVerifySend (UserRequest) returns (UserResponse) {}
+    //app用户手机绑定
+    rpc AppMobileBind (UserRequest) returns (UserResponse) {}
+    //安全退出
+    rpc Logout (UserRequest) returns (UserResponse) {}
+}
+
+
+
+message User {
+    int32  id =1;//ID
+    string type =2;//类型：free免费等级，1付费等级
+    string name =3;//等级名称
+    string bg_mode =4;//背景模式：0背景色，1背景图
+    string bg_color =5;//卡面背景颜色
+    string bg_image_url =6;//背景图URL
+    string icon_url =7;//图标URL
+    int32  grade =8;//会员等级级别
+    int32  growth_value =9;//需要成长值【免费会员】
+    string description =10;//等级描述/使用须知
+    string is_free_shipping =11;//是否会员包邮(0否，1是)【会员权益】
+    string is_discount =12;//是否会员折扣(0否，1是)【会员权益】
+    string is_point_feedback =13;//是否积分回馈(0否，1是)【会员权益】
+    float  discount_rate =14;//会员折扣率(折扣率取0到10之间)
+    float  point_feedback_rate =15;//积分回馈倍率(积分倍率不能大于 50)
+    string is_auto_upgrade =16;//是否开启自动升级【免费会员】
+    string is_auto_renewal =17;//是否开启自动续费【付费会员】
+    string status =18;//状态：启用，禁用
+    string created_at =19;
+    string updated_at =20;
+}
+
+
+message UserRequest {
+    string client_id =1;
+    string client_secret =2;
+    string type = 3;//类型： username/mobile/email
+    string username = 4;
+    string password =5;
+    string code =6;
+    string mobile =7;
+    string email =8;
+    string redirect_uri = 9;
+    string refresh_token =10;
+    string store_id =11;
+    string store_name = 12;
+    string scope =13;
+    string state =14;
+    string grant_type =15;
+    int64 referrer_id =16;
+    map<string,string> extends =17;
+}
+
+//用户切换请求【必须是服务调用】
+message SwitchRequest {
+    string mode = 1; //授权模式
+    string session_key =2;//会话Key
+    int64 user_id =3;//用户ID
+    int64 store_id =4;//平台ID
+    int64 realstore_id =5;//多门店ID
+    int64 shop_id =6;//多商户ID
+    int64 platform_id =7;//平台ID
+    string client_id =8;//ClientID
+    string nickname =9;//用户昵称
+    map<string,string> extends =10; //附加信息
+}
+
+message UserData {
+    map<string,string> entity = 1;
+    common.Pager pager =2;
+    repeated User items = 3;
+    string msg =4;
+}
+
+
+message UserResponse {
+    UserData data = 1;
+    common.Error error = 2;
+}
+

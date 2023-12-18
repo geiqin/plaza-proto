@@ -1,0 +1,8 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "baseInfoService.proto";
+
+service SiteService {
+  rpc Auth (AuthRequest) returns (AuthResponse) {}
+}
