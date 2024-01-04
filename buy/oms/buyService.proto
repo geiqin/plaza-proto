@@ -95,7 +95,6 @@ message BuyRequest {
     int64 realstore_id = 10; //多门店Id
     int64 shop_id = 11; //多商户Id
     string logistics_type =22;//物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
-    repeated SpecificationData spec =13; //规格信息
     map<int64,int64> choice_coupon_ids =15;//选中优惠劵 <仓库ID,用户优惠劵ID>
     repeated int64 buy_cart_ids = 16; ///购物车ids
     BuyCommodity buy_commodity =17; //直接购买商品【单个商品】
