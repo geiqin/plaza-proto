@@ -170,7 +170,7 @@ type BuyGoodsItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64                `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                                                                   //ID
+	CartRowId     int64                `protobuf:"varint,1,opt,name=cart_row_id,json=cartRowId,proto3" json:"cart_row_id"`                                                                  //ID
 	Title         string               `protobuf:"bytes,2,opt,name=title,proto3" json:"title"`                                                                                              //标题
 	ImageUrl      string               `protobuf:"bytes,3,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`                                                                        //封面图片
 	SpuId         int64                `protobuf:"varint,4,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`                                                                                //商品spuId
@@ -230,9 +230,9 @@ func (*BuyGoodsItem) Descriptor() ([]byte, []int) {
 	return file_buyService_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *BuyGoodsItem) GetId() int64 {
+func (x *BuyGoodsItem) GetCartRowId() int64 {
 	if x != nil {
-		return x.Id
+		return x.CartRowId
 	}
 	return 0
 }
@@ -562,22 +562,23 @@ type BuyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BuyType         string               `protobuf:"bytes,1,opt,name=buy_type,json=buyType,proto3" json:"buy_type"`                    //购买类型
-	AddressId       int64                `protobuf:"varint,2,opt,name=address_id,json=addressId,proto3" json:"address_id"`             //收货地址ID
-	UserNote        string               `protobuf:"bytes,3,opt,name=user_note,json=userNote,proto3" json:"user_note"`                 //买家留言(50字以内)
-	ShipmentId      int32                `protobuf:"varint,4,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id"`          //选中的配送方式
-	PaymentId       int32                `protobuf:"varint,5,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`             //选中的支付方式
-	CouponId        int64                `protobuf:"varint,6,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`                //选中的优惠劵凭证ID
-	UseIntegral     int64                `protobuf:"varint,7,opt,name=use_integral,json=useIntegral,proto3" json:"use_integral"`       //使用的积分数
-	UseSurplus      int64                `protobuf:"varint,8,opt,name=use_surplus,json=useSurplus,proto3" json:"use_surplus"`          //使用的余额数
-	BuyMemberId     int64                `protobuf:"varint,9,opt,name=buy_member_id,json=buyMemberId,proto3" json:"buy_member_id"`     //代理的客户ID（操作员代客下单）
-	RealstoreId     int64                `protobuf:"varint,10,opt,name=realstore_id,json=realstoreId,proto3" json:"realstore_id"`      //多门店Id
-	ShopId          int64                `protobuf:"varint,11,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`                     //多商户Id
-	LogisticsType   string               `protobuf:"bytes,22,opt,name=logistics_type,json=logisticsType,proto3" json:"logistics_type"` //物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
-	Spec            []*SpecificationData `protobuf:"bytes,13,rep,name=spec,proto3" json:"spec"`                                        //规格信息
-	Ids             []int64              `protobuf:"varint,14,rep,packed,name=ids,proto3" json:"ids"`                                  ///购物车ids
-	GoodsData       *BuyGoodsData        `protobuf:"bytes,17,opt,name=goods_data,json=goodsData,proto3" json:"goods_data"`
-	ChoiceCouponIds map[int64]int64      `protobuf:"bytes,18,rep,name=choice_coupon_ids,json=choiceCouponIds,proto3" json:"choice_coupon_ids" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"` //选中优惠劵 <仓库ID,用户优惠劵ID>
+	BuyType         string               `protobuf:"bytes,1,opt,name=buy_type,json=buyType,proto3" json:"buy_type"`                                                                                                                      //购买类型
+	AddressId       int64                `protobuf:"varint,2,opt,name=address_id,json=addressId,proto3" json:"address_id"`                                                                                                               //收货地址ID
+	UserNote        string               `protobuf:"bytes,3,opt,name=user_note,json=userNote,proto3" json:"user_note"`                                                                                                                   //买家留言(50字以内)
+	ShipmentId      int32                `protobuf:"varint,4,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id"`                                                                                                            //选中的配送方式
+	PaymentId       int32                `protobuf:"varint,5,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`                                                                                                               //选中的支付方式
+	CouponId        int64                `protobuf:"varint,6,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`                                                                                                                  //选中的优惠劵凭证ID
+	UseIntegral     int64                `protobuf:"varint,7,opt,name=use_integral,json=useIntegral,proto3" json:"use_integral"`                                                                                                         //使用的积分数
+	UseSurplus      int64                `protobuf:"varint,8,opt,name=use_surplus,json=useSurplus,proto3" json:"use_surplus"`                                                                                                            //使用的余额数
+	BuyMemberId     int64                `protobuf:"varint,9,opt,name=buy_member_id,json=buyMemberId,proto3" json:"buy_member_id"`                                                                                                       //代理的客户ID（操作员代客下单）
+	RealstoreId     int64                `protobuf:"varint,10,opt,name=realstore_id,json=realstoreId,proto3" json:"realstore_id"`                                                                                                        //多门店Id
+	ShopId          int64                `protobuf:"varint,11,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`                                                                                                                       //多商户Id
+	LogisticsType   string               `protobuf:"bytes,22,opt,name=logistics_type,json=logisticsType,proto3" json:"logistics_type"`                                                                                                   //物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
+	Spec            []*SpecificationData `protobuf:"bytes,13,rep,name=spec,proto3" json:"spec"`                                                                                                                                          //规格信息
+	ChoiceCouponIds map[int64]int64      `protobuf:"bytes,15,rep,name=choice_coupon_ids,json=choiceCouponIds,proto3" json:"choice_coupon_ids" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"` //选中优惠劵 <仓库ID,用户优惠劵ID>
+	BuyCartIds      []int64              `protobuf:"varint,16,rep,packed,name=buy_cart_ids,json=buyCartIds,proto3" json:"buy_cart_ids"`                                                                                                  ///购物车ids
+	BuyCommodity    *BuyCommodity        `protobuf:"bytes,17,opt,name=buy_commodity,json=buyCommodity,proto3" json:"buy_commodity"`                                                                                                      //直接购买商品【单个商品】
+	BuyCommodities  []*BuyCommodity      `protobuf:"bytes,18,rep,name=buy_commodities,json=buyCommodities,proto3" json:"buy_commodities"`                                                                                                //购买商品清单【多个商品】
 }
 
 func (x *BuyRequest) Reset() {
@@ -703,20 +704,6 @@ func (x *BuyRequest) GetSpec() []*SpecificationData {
 	return nil
 }
 
-func (x *BuyRequest) GetIds() []int64 {
-	if x != nil {
-		return x.Ids
-	}
-	return nil
-}
-
-func (x *BuyRequest) GetGoodsData() *BuyGoodsData {
-	if x != nil {
-		return x.GoodsData
-	}
-	return nil
-}
-
 func (x *BuyRequest) GetChoiceCouponIds() map[int64]int64 {
 	if x != nil {
 		return x.ChoiceCouponIds
@@ -724,19 +711,42 @@ func (x *BuyRequest) GetChoiceCouponIds() map[int64]int64 {
 	return nil
 }
 
-type BuyGoodsData struct {
+func (x *BuyRequest) GetBuyCartIds() []int64 {
+	if x != nil {
+		return x.BuyCartIds
+	}
+	return nil
+}
+
+func (x *BuyRequest) GetBuyCommodity() *BuyCommodity {
+	if x != nil {
+		return x.BuyCommodity
+	}
+	return nil
+}
+
+func (x *BuyRequest) GetBuyCommodities() []*BuyCommodity {
+	if x != nil {
+		return x.BuyCommodities
+	}
+	return nil
+}
+
+//购买商品信息
+type BuyCommodity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SpuId  int64                `protobuf:"varint,1,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`   //商品ID
-	Md5Key string               `protobuf:"bytes,2,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"` //商品规格md5_key
-	Stock  int32                `protobuf:"varint,3,opt,name=stock,proto3" json:"stock"`                //数量
-	Spec   []*SpecificationData `protobuf:"bytes,4,rep,name=spec,proto3" json:"spec"`                   //规格
+	SpuId  int64                `protobuf:"varint,1,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`    //商品ID
+	Md5Key string               `protobuf:"bytes,2,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`  //规格md5_key
+	Stock  int32                `protobuf:"varint,3,opt,name=stock,proto3" json:"stock"`                 //数量
+	CartId int64                `protobuf:"varint,4,opt,name=cart_id,json=cartId,proto3" json:"cart_id"` //购物车行id【购物车专用】
+	Spec   []*SpecificationData `protobuf:"bytes,5,rep,name=spec,proto3" json:"spec"`                    //规格【待弃用：为兼容旧版小程序】
 }
 
-func (x *BuyGoodsData) Reset() {
-	*x = BuyGoodsData{}
+func (x *BuyCommodity) Reset() {
+	*x = BuyCommodity{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_buyService_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -744,13 +754,13 @@ func (x *BuyGoodsData) Reset() {
 	}
 }
 
-func (x *BuyGoodsData) String() string {
+func (x *BuyCommodity) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BuyGoodsData) ProtoMessage() {}
+func (*BuyCommodity) ProtoMessage() {}
 
-func (x *BuyGoodsData) ProtoReflect() protoreflect.Message {
+func (x *BuyCommodity) ProtoReflect() protoreflect.Message {
 	mi := &file_buyService_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -762,33 +772,40 @@ func (x *BuyGoodsData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BuyGoodsData.ProtoReflect.Descriptor instead.
-func (*BuyGoodsData) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuyCommodity.ProtoReflect.Descriptor instead.
+func (*BuyCommodity) Descriptor() ([]byte, []int) {
 	return file_buyService_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *BuyGoodsData) GetSpuId() int64 {
+func (x *BuyCommodity) GetSpuId() int64 {
 	if x != nil {
 		return x.SpuId
 	}
 	return 0
 }
 
-func (x *BuyGoodsData) GetMd5Key() string {
+func (x *BuyCommodity) GetMd5Key() string {
 	if x != nil {
 		return x.Md5Key
 	}
 	return ""
 }
 
-func (x *BuyGoodsData) GetStock() int32 {
+func (x *BuyCommodity) GetStock() int32 {
 	if x != nil {
 		return x.Stock
 	}
 	return 0
 }
 
-func (x *BuyGoodsData) GetSpec() []*SpecificationData {
+func (x *BuyCommodity) GetCartId() int64 {
+	if x != nil {
+		return x.CartId
+	}
+	return 0
+}
+
+func (x *BuyCommodity) GetSpec() []*SpecificationData {
 	if x != nil {
 		return x.Spec
 	}
@@ -1330,9 +1347,10 @@ var file_buyService_proto_rawDesc = []byte{
 	0x65, 0x12, 0x37, 0x0a, 0x0b, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x5f, 0x69, 0x74, 0x65, 0x6d, 0x73,
 	0x18, 0x0d, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x73, 0x2e, 0x42, 0x75, 0x79, 0x47, 0x6f, 0x6f, 0x64, 0x73, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x0a,
-	0x67, 0x6f, 0x6f, 0x64, 0x73, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x22, 0xf8, 0x06, 0x0a, 0x0c, 0x42,
-	0x75, 0x79, 0x47, 0x6f, 0x6f, 0x64, 0x73, 0x49, 0x74, 0x65, 0x6d, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x74,
+	0x67, 0x6f, 0x6f, 0x64, 0x73, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x22, 0x88, 0x07, 0x0a, 0x0c, 0x42,
+	0x75, 0x79, 0x47, 0x6f, 0x6f, 0x64, 0x73, 0x49, 0x74, 0x65, 0x6d, 0x12, 0x1e, 0x0a, 0x0b, 0x63,
+	0x61, 0x72, 0x74, 0x5f, 0x72, 0x6f, 0x77, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x09, 0x63, 0x61, 0x72, 0x74, 0x52, 0x6f, 0x77, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x74,
 	0x69, 0x74, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c,
 	0x65, 0x12, 0x1b, 0x0a, 0x09, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x03,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72, 0x6c, 0x12, 0x15,
@@ -1422,7 +1440,7 @@ var file_buyService_proto_rawDesc = []byte{
 	0x6f, 0x6e, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x0d, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e,
 	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x45, 0x78,
 	0x74, 0x65, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x0d, 0x65, 0x78, 0x74, 0x65, 0x6e, 0x73, 0x69,
-	0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x22, 0xa0, 0x05, 0x0a, 0x0a, 0x42, 0x75, 0x79, 0x52, 0x65,
+	0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x22, 0xf7, 0x05, 0x0a, 0x0a, 0x42, 0x75, 0x79, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x62, 0x75, 0x79, 0x5f, 0x74, 0x79, 0x70,
 	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x62, 0x75, 0x79, 0x54, 0x79, 0x70, 0x65,
 	0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x5f, 0x69, 0x64, 0x18, 0x02,
@@ -1450,27 +1468,34 @@ var file_buyService_proto_rawDesc = []byte{
 	0x54, 0x79, 0x70, 0x65, 0x12, 0x2f, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x0d, 0x20, 0x03,
 	0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53, 0x70,
 	0x65, 0x63, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x52,
-	0x04, 0x73, 0x70, 0x65, 0x63, 0x12, 0x10, 0x0a, 0x03, 0x69, 0x64, 0x73, 0x18, 0x0e, 0x20, 0x03,
-	0x28, 0x03, 0x52, 0x03, 0x69, 0x64, 0x73, 0x12, 0x35, 0x0a, 0x0a, 0x67, 0x6f, 0x6f, 0x64, 0x73,
-	0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x11, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x73, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x42, 0x75, 0x79, 0x47, 0x6f, 0x6f, 0x64, 0x73, 0x44,
-	0x61, 0x74, 0x61, 0x52, 0x09, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x44, 0x61, 0x74, 0x61, 0x12, 0x55,
-	0x0a, 0x11, 0x63, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x5f, 0x63, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x5f,
-	0x69, 0x64, 0x73, 0x18, 0x12, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x29, 0x2e, 0x73, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x73, 0x2e, 0x42, 0x75, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e,
+	0x04, 0x73, 0x70, 0x65, 0x63, 0x12, 0x55, 0x0a, 0x11, 0x63, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x5f,
+	0x63, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x0f, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x29, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x42, 0x75, 0x79, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x43, 0x6f, 0x75,
+	0x70, 0x6f, 0x6e, 0x49, 0x64, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0f, 0x63, 0x68, 0x6f,
+	0x69, 0x63, 0x65, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x49, 0x64, 0x73, 0x12, 0x20, 0x0a, 0x0c,
+	0x62, 0x75, 0x79, 0x5f, 0x63, 0x61, 0x72, 0x74, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x10, 0x20, 0x03,
+	0x28, 0x03, 0x52, 0x0a, 0x62, 0x75, 0x79, 0x43, 0x61, 0x72, 0x74, 0x49, 0x64, 0x73, 0x12, 0x3b,
+	0x0a, 0x0d, 0x62, 0x75, 0x79, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x64, 0x69, 0x74, 0x79, 0x18,
+	0x11, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73,
+	0x2e, 0x42, 0x75, 0x79, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x64, 0x69, 0x74, 0x79, 0x52, 0x0c, 0x62,
+	0x75, 0x79, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x64, 0x69, 0x74, 0x79, 0x12, 0x3f, 0x0a, 0x0f, 0x62,
+	0x75, 0x79, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x64, 0x69, 0x74, 0x69, 0x65, 0x73, 0x18, 0x12,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e,
+	0x42, 0x75, 0x79, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x64, 0x69, 0x74, 0x79, 0x52, 0x0e, 0x62, 0x75,
+	0x79, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x64, 0x69, 0x74, 0x69, 0x65, 0x73, 0x1a, 0x42, 0x0a, 0x14,
 	0x43, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x49, 0x64, 0x73, 0x45,
-	0x6e, 0x74, 0x72, 0x79, 0x52, 0x0f, 0x63, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x43, 0x6f, 0x75, 0x70,
-	0x6f, 0x6e, 0x49, 0x64, 0x73, 0x1a, 0x42, 0x0a, 0x14, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x43,
-	0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x49, 0x64, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a,
-	0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12,
-	0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05,
-	0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x85, 0x01, 0x0a, 0x0c, 0x42, 0x75,
-	0x79, 0x47, 0x6f, 0x6f, 0x64, 0x73, 0x44, 0x61, 0x74, 0x61, 0x12, 0x15, 0x0a, 0x06, 0x73, 0x70,
-	0x75, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x73, 0x70, 0x75, 0x49,
-	0x64, 0x12, 0x17, 0x0a, 0x07, 0x6d, 0x64, 0x35, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x06, 0x6d, 0x64, 0x35, 0x4b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74,
-	0x6f, 0x63, 0x6b, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x73, 0x74, 0x6f, 0x63, 0x6b,
-	0x12, 0x2f, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1b,
+	0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01,
+	0x22, 0x9e, 0x01, 0x0a, 0x0c, 0x42, 0x75, 0x79, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x64, 0x69, 0x74,
+	0x79, 0x12, 0x15, 0x0a, 0x06, 0x73, 0x70, 0x75, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x05, 0x73, 0x70, 0x75, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x6d, 0x64, 0x35, 0x5f,
+	0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6d, 0x64, 0x35, 0x4b, 0x65,
+	0x79, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x6f, 0x63, 0x6b, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x05, 0x73, 0x74, 0x6f, 0x63, 0x6b, 0x12, 0x17, 0x0a, 0x07, 0x63, 0x61, 0x72, 0x74, 0x5f,
+	0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x63, 0x61, 0x72, 0x74, 0x49, 0x64,
+	0x12, 0x2f, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1b,
 	0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53, 0x70, 0x65, 0x63, 0x69, 0x66,
 	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x73, 0x70, 0x65,
 	0x63, 0x22, 0x85, 0x05, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x43, 0x68,
@@ -1620,7 +1645,7 @@ var file_buyService_proto_goTypes = []interface{}{
 	(*BuyGoodsItem)(nil),       // 1: services.BuyGoodsItem
 	(*OrderBase)(nil),          // 2: services.OrderBase
 	(*BuyRequest)(nil),         // 3: services.BuyRequest
-	(*BuyGoodsData)(nil),       // 4: services.BuyGoodsData
+	(*BuyCommodity)(nil),       // 4: services.BuyCommodity
 	(*DeliveryChoose)(nil),     // 5: services.DeliveryChoose
 	(*BuyConfirmData)(nil),     // 6: services.BuyConfirmData
 	(*BuyConfirmResponse)(nil), // 7: services.BuyConfirmResponse
@@ -1646,35 +1671,36 @@ var file_buyService_proto_depIdxs = []int32{
 	16, // 5: services.OrderBase.extraction_address:type_name -> services.OrderAddress
 	17, // 6: services.OrderBase.extension_data:type_name -> services.OrderExtension
 	15, // 7: services.BuyRequest.spec:type_name -> services.SpecificationData
-	4,  // 8: services.BuyRequest.goods_data:type_name -> services.BuyGoodsData
-	11, // 9: services.BuyRequest.choice_coupon_ids:type_name -> services.BuyRequest.ChoiceCouponIdsEntry
-	15, // 10: services.BuyGoodsData.spec:type_name -> services.SpecificationData
-	12, // 11: services.DeliveryChoose.buy_header_nav:type_name -> services.DeliveryChoose.item
-	12, // 12: services.DeliveryChoose.buy_dropdown_list:type_name -> services.DeliveryChoose.item
-	2,  // 13: services.BuyConfirmData.base:type_name -> services.OrderBase
-	0,  // 14: services.BuyConfirmData.group_list:type_name -> services.BuyGroup
-	18, // 15: services.BuyConfirmData.payment_list:type_name -> services.PaymentInfo
-	3,  // 16: services.BuyConfirmData.request_data:type_name -> services.BuyRequest
-	13, // 17: services.BuyConfirmData.extension_data:type_name -> services.BuyConfirmData.ExtensionDataEntry
-	14, // 18: services.BuyConfirmData.plugins_data:type_name -> services.BuyConfirmData.PluginsDataEntry
-	5,  // 19: services.BuyConfirmData.delivery_choose:type_name -> services.DeliveryChoose
-	6,  // 20: services.BuyConfirmResponse.data:type_name -> services.BuyConfirmData
-	19, // 21: services.BuyConfirmResponse.error:type_name -> common.Error
-	8,  // 22: services.BuySubmitResponse.data:type_name -> services.BuySubmitData
-	19, // 23: services.BuySubmitResponse.error:type_name -> common.Error
-	3,  // 24: services.BuyService.Confirm:input_type -> services.BuyRequest
-	3,  // 25: services.BuyService.Submit:input_type -> services.BuyRequest
-	3,  // 26: services.BuyService.OrderSplitHandle:input_type -> services.BuyRequest
-	3,  // 27: services.BuyService.BuyGoodsCheck:input_type -> services.BuyRequest
-	7,  // 28: services.BuyService.Confirm:output_type -> services.BuyConfirmResponse
-	9,  // 29: services.BuyService.Submit:output_type -> services.BuySubmitResponse
-	7,  // 30: services.BuyService.OrderSplitHandle:output_type -> services.BuyConfirmResponse
-	7,  // 31: services.BuyService.BuyGoodsCheck:output_type -> services.BuyConfirmResponse
-	28, // [28:32] is the sub-list for method output_type
-	24, // [24:28] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	11, // 8: services.BuyRequest.choice_coupon_ids:type_name -> services.BuyRequest.ChoiceCouponIdsEntry
+	4,  // 9: services.BuyRequest.buy_commodity:type_name -> services.BuyCommodity
+	4,  // 10: services.BuyRequest.buy_commodities:type_name -> services.BuyCommodity
+	15, // 11: services.BuyCommodity.spec:type_name -> services.SpecificationData
+	12, // 12: services.DeliveryChoose.buy_header_nav:type_name -> services.DeliveryChoose.item
+	12, // 13: services.DeliveryChoose.buy_dropdown_list:type_name -> services.DeliveryChoose.item
+	2,  // 14: services.BuyConfirmData.base:type_name -> services.OrderBase
+	0,  // 15: services.BuyConfirmData.group_list:type_name -> services.BuyGroup
+	18, // 16: services.BuyConfirmData.payment_list:type_name -> services.PaymentInfo
+	3,  // 17: services.BuyConfirmData.request_data:type_name -> services.BuyRequest
+	13, // 18: services.BuyConfirmData.extension_data:type_name -> services.BuyConfirmData.ExtensionDataEntry
+	14, // 19: services.BuyConfirmData.plugins_data:type_name -> services.BuyConfirmData.PluginsDataEntry
+	5,  // 20: services.BuyConfirmData.delivery_choose:type_name -> services.DeliveryChoose
+	6,  // 21: services.BuyConfirmResponse.data:type_name -> services.BuyConfirmData
+	19, // 22: services.BuyConfirmResponse.error:type_name -> common.Error
+	8,  // 23: services.BuySubmitResponse.data:type_name -> services.BuySubmitData
+	19, // 24: services.BuySubmitResponse.error:type_name -> common.Error
+	3,  // 25: services.BuyService.Confirm:input_type -> services.BuyRequest
+	3,  // 26: services.BuyService.Submit:input_type -> services.BuyRequest
+	3,  // 27: services.BuyService.OrderSplitHandle:input_type -> services.BuyRequest
+	3,  // 28: services.BuyService.BuyGoodsCheck:input_type -> services.BuyRequest
+	7,  // 29: services.BuyService.Confirm:output_type -> services.BuyConfirmResponse
+	9,  // 30: services.BuyService.Submit:output_type -> services.BuySubmitResponse
+	7,  // 31: services.BuyService.OrderSplitHandle:output_type -> services.BuyConfirmResponse
+	7,  // 32: services.BuyService.BuyGoodsCheck:output_type -> services.BuyConfirmResponse
+	29, // [29:33] is the sub-list for method output_type
+	25, // [25:29] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_buyService_proto_init() }
@@ -1734,7 +1760,7 @@ func file_buyService_proto_init() {
 			}
 		}
 		file_buyService_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BuyGoodsData); i {
+			switch v := v.(*BuyCommodity); i {
 			case 0:
 				return &v.state
 			case 1:

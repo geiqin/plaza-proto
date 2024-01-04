@@ -34,7 +34,7 @@ message BuyGroup {
 }
 
 message BuyGoodsItem  {
-    int64  id =1;//ID
+    int64  cart_row_id =1;//ID
     string title =2;//标题
     string image_url =3;//封面图片
     int64  spu_id =4;//商品spuId
@@ -96,16 +96,19 @@ message BuyRequest {
     int64 shop_id = 11; //多商户Id
     string logistics_type =22;//物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
     repeated SpecificationData spec =13; //规格信息
-    repeated int64 ids = 14; ///购物车ids
-    BuyGoodsData goods_data =17;
-    map<int64,int64> choice_coupon_ids =18;//选中优惠劵 <仓库ID,用户优惠劵ID>
+    map<int64,int64> choice_coupon_ids =15;//选中优惠劵 <仓库ID,用户优惠劵ID>
+    repeated int64 buy_cart_ids = 16; ///购物车ids
+    BuyCommodity buy_commodity =17; //直接购买商品【单个商品】
+    repeated BuyCommodity buy_commodities =18; //购买商品清单【多个商品】
 }
 
-message BuyGoodsData {
+//购买商品信息
+message BuyCommodity {
     int64 spu_id = 1; //商品ID
-    string md5_key =2;//商品规格md5_key
+    string md5_key =2;//规格md5_key
     int32 stock = 3; //数量
-    repeated SpecificationData spec =4; //规格
+    int64 cart_id =4;//购物车行id【购物车专用】
+    repeated SpecificationData spec =5; //规格【待弃用：为兼容旧版小程序】
 }
 
 //配送选择数据
