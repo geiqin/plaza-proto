@@ -34,7 +34,7 @@ message BuyGroup {
 }
 
 message BuyGoodsItem  {
-    int64  cart_row_id =1;//ID
+    int64  cart_id =1;//购物车ID
     string title =2;//标题
     string image_url =3;//封面图片
     int64  spu_id =4;//商品spuId

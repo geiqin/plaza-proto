@@ -192,10 +192,11 @@ message OrderData {
     Order entity = 1;
     common.Pager pager =2;
     repeated Order items = 3;
-    repeated int64 order_ids =4;
-    OrderFlow order_flow = 5;
-    repeated PaymentInfo payment_list =6;
-    string msg =7;
+    int64 order_id =4;
+    repeated int64 order_ids =5;
+    OrderFlow order_flow = 6;
+    repeated PaymentInfo payment_list =7;
+    string msg =8;
 }
 
 message OrderDetailData {
