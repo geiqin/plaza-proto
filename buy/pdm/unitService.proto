@@ -18,12 +18,13 @@ message Unit {
     string name = 2;
     string type = 3;
     string source = 4;
-    int32 sort = 5;
-    int64 creator_id = 6;
-    string creator_name = 7;
-    string status = 8;
-    string created_at = 9;
-    string updated_at = 10;
+    float rate = 5;
+    int32 sort = 6;
+    int64 creator_id = 7;
+    string creator_name = 8;
+    string status = 9;
+    string created_at = 10;
+    string updated_at = 11;
 }
 
 message UnitRequest {

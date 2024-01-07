@@ -19,7 +19,7 @@ message WarehouseGoods {
     int64  id =1;//ID
     int64 warehouse_id =2;//仓库id
     int64 spu_id =3;//商品id
-    int32  inventory =4;//总库存
+    int64  inventory =4;//总库存
     string is_enable =5;//是否启用（0否，1是）
     string created_at = 7;
     string updated_at = 8;
@@ -34,7 +34,7 @@ message WarehouseGoodsSpec {
     int64 warehouse_id =3;//仓库id
     int64 spu_id =4;//商品id
     string md5_key =5;//MD5Key
-    int32  inventory =6;//库存
+    int64  inventory =6;//库存
     repeated GoodsSpecValueItem spec =7;//规格值
     string created_at = 8;
     string updated_at = 9;
@@ -53,7 +53,7 @@ message WarehouseGoodsRequest {
     int64 id = 4;
     int64 warehouse_id =5;//仓库id
     int64 spu_id =6;//商品id
-    int32  inventory =7;//总库存
+    int64  inventory =7;//总库存
     string is_enable =8;//是否启用（0否，1是）
     int64 category_id =9;//商品分类ID
     int32 brand_id =10;//品牌ID

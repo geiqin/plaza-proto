@@ -27,11 +27,11 @@ message CartGoods  {
     string image_url =3;//封面图片
     int64  spu_id =4;//商品spuId
     string md5_key =5;//商品规格md5_key
-    int32  inventory =6;//库存数量
+    int64  inventory =6;//库存数量
     int64  original_price =7;//原价
     int64  price =8;//销售价格
-    int32  spec_buy_min_number =9; //购买数量
-    int32  spec_buy_max_number =10;//购买数量
+    int64  spec_buy_min_number =9; //购买数量
+    int64  spec_buy_max_number =10;//购买数量
     int64  spec_weight =11;//规格重量
     int64  spec_volume =12; //规格体积
     string spec_coding =13; //规格编码
@@ -41,7 +41,7 @@ message CartGoods  {
     string is_invalid =17;//是否无效（0否，1是）
     string is_error =18;//是否错误（0否，1是）
     string error_msg =19;//错误信息
-    int32 stock =20;//购买数量
+    int64 stock =20;//购买数量
     int64 subtotal_price =21;//商品小计
     repeated SpecificationData spec =22; //规格描述
     string spec_text =23;
@@ -51,7 +51,7 @@ message CartGoods  {
 
 //购物车数据
 message CartData {
-    int32 buy_number =1;
+    int64 buy_number =1;
     int64 total_price =2;
     int64 address_id = 3;
     repeated CartGoods cart_list =4;
@@ -62,7 +62,7 @@ message CartRequest {
     string type =1;
     int64 id =2;
     int64 spu_id =3;
-    int32 stock =4;
+    int64 stock =4;
     string buy_event_type =5;
     repeated SpecificationData spec =6;
     repeated int64 ids =9;

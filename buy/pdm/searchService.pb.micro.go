@@ -51,7 +51,7 @@ type SearchService interface {
 	Detail(ctx context.Context, in *SearchRequest, opts ...client.CallOption) (*SearchDetailResponse, error)
 	//分类导航页
 	Category(ctx context.Context, in *SearchRequest, opts ...client.CallOption) (*SearchCategoryResponse, error)
-	//规格详情数据
+	//规格详情数据(单规格和多规格)
 	SpecDetail(ctx context.Context, in *SearchRequest, opts ...client.CallOption) (*SearchSpecDetailResponse, error)
 	//规格类型数据
 	SpecType(ctx context.Context, in *SearchRequest, opts ...client.CallOption) (*SearchSpecTypeResponse, error)
@@ -140,7 +140,7 @@ type SearchServiceHandler interface {
 	Detail(context.Context, *SearchRequest, *SearchDetailResponse) error
 	//分类导航页
 	Category(context.Context, *SearchRequest, *SearchCategoryResponse) error
-	//规格详情数据
+	//规格详情数据(单规格和多规格)
 	SpecDetail(context.Context, *SearchRequest, *SearchSpecDetailResponse) error
 	//规格类型数据
 	SpecType(context.Context, *SearchRequest, *SearchSpecTypeResponse) error
