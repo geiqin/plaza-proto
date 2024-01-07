@@ -662,7 +662,7 @@ type Sku struct {
 	OriginalPrice  int64             `protobuf:"varint,3,opt,name=original_price,json=originalPrice,proto3" json:"original_price"`                                                        //划线价
 	CostPrice      int64             `protobuf:"varint,4,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`                                                                    //成本价
 	Price          int64             `protobuf:"varint,5,opt,name=price,proto3" json:"price"`                                                                                             //销售价
-	Inventory      int32             `protobuf:"varint,6,opt,name=inventory,proto3" json:"inventory"`                                                                                     //库存
+	Inventory      int64             `protobuf:"varint,6,opt,name=inventory,proto3" json:"inventory"`                                                                                     //库存
 	Md5Key         string            `protobuf:"bytes,7,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`                                                                              //唯一标识
 	Coding         string            `protobuf:"bytes,8,opt,name=coding,proto3" json:"coding"`                                                                                            //编号
 	Barcode        string            `protobuf:"bytes,9,opt,name=barcode,proto3" json:"barcode"`                                                                                          //条码
@@ -745,7 +745,7 @@ func (x *Sku) GetPrice() int64 {
 	return 0
 }
 
-func (x *Sku) GetInventory() int32 {
+func (x *Sku) GetInventory() int64 {
 	if x != nil {
 		return x.Inventory
 	}
@@ -2221,7 +2221,7 @@ var file_spuService_proto_rawDesc = []byte{
 	0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x6f, 0x73, 0x74, 0x50, 0x72, 0x69,
 	0x63, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28,
 	0x03, 0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x69, 0x6e, 0x76, 0x65,
-	0x6e, 0x74, 0x6f, 0x72, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x69, 0x6e, 0x76,
+	0x6e, 0x74, 0x6f, 0x72, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x69, 0x6e, 0x76,
 	0x65, 0x6e, 0x74, 0x6f, 0x72, 0x79, 0x12, 0x17, 0x0a, 0x07, 0x6d, 0x64, 0x35, 0x5f, 0x6b, 0x65,
 	0x79, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6d, 0x64, 0x35, 0x4b, 0x65, 0x79, 0x12,
 	0x16, 0x0a, 0x06, 0x63, 0x6f, 0x64, 0x69, 0x6e, 0x67, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,

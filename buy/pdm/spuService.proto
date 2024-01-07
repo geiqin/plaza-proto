@@ -121,7 +121,7 @@ message Sku  {
     int64 original_price =3;//划线价
     int64 cost_price =4;//成本价
     int64 price =5;//销售价
-    int32 inventory =6;//库存
+    int64 inventory =6;//库存
     string md5_key =7;//唯一标识
     string coding =8;//编号
     string barcode =9;//条码
