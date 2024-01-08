@@ -63,7 +63,7 @@ message Aftersale {
     string type =7; //业务类型（0仅退款, 1退货退款）
     string refundment =8; //退款类型（0原路退回, 1退至钱包, 2手动处理）
     string reason =9; //申请原因
-    int32  number =10; //退货数量
+    int64  number =10; //退货数量
     int64  price =11; //退款金额
     int64  freight_subsidy =12; //运费补贴金
     string msg =13; //退款说明
@@ -154,7 +154,7 @@ message AftersaleStepData{
     repeated AftersaleStepInfo step1 =2;
 }
 message AftersaleReturnedData{
-    int32 returned_quantity =1;
+    int64 returned_quantity =1;
     int64 refund_price =2;
 }
 
