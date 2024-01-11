@@ -40,8 +40,8 @@ message BuyGoodsItem  {
     int64  spu_id =4;//商品spuId
     string md5_key =5;//商品规格md5_key
     int32  inventory =6;//库存数量
-    int64  original_price =7;//原价
-    int64  price =8;//销售价格
+    int64  sale_price =7;//销售价
+    int64  price =8;//购买价
     int64  buy_min_number =9; //购买数量
     int64  buy_max_number =10;//购买数量
     int64  spec_weight =11;//规格重量
@@ -58,7 +58,7 @@ message BuyGoodsItem  {
     int64 stock =22;//购买数量
     int64 subtotal_price =23;//商品小计
     repeated SpecificationData spec =24; //规格描述
-    string spec_text =25;
+    string spec_desc =25;
     string brand_name =26;
     string goods_url =27;
     string site_type =28;
