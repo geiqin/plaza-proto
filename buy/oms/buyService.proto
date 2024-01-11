@@ -67,19 +67,21 @@ message BuyGoodsItem  {
 
 //订单基础信息
 message OrderBase {
-    int64  total_price =1; //订单总价
-    int64  actual_price =2; //订单实际支付金额(已减去优惠金额, 已加上增加金额)
-    int64  increase_price =3; //增加金额
-    int64  preferential_price =4; //优惠金额
-    int64  goods_count =5; //商品总数
+    int64 total_price =1; //订单总价
+    int64 actual_price =2; //订单实际支付金额(已减去优惠金额, 已加上增加金额)
+    int64 increase_price =3; //增加金额
+    int64 preferential_price =4; //优惠金额
     int64 spec_weight_total =6;//规格重量总计
     int64 spec_volume_total =7; //规格体积总计
-    int64  buy_number_count =8; //购买总数
-    string site_model =9; //当前使用的站点模式
-    string common_site_type =10; //公共站点模式
-    OrderAddress address =11;//收件地址
-    repeated OrderAddress extraction_address =12; //自提点地址
-    repeated OrderExtension extension_data = 13; //扩展数据
+    float buy_count =8;//购买商品总数量(总件数+总称重（千克）)
+    int64 buy_number_count =9;//购买商品总件数（非称重商品）
+    int64 buy_weight_count =10;//购买商品总称重（称重商品.克）
+    int64 goods_count =11; //商品总数
+    string site_model =12; //当前使用的站点模式
+    string common_site_type =13; //公共站点模式
+    OrderAddress address =14;//收件地址
+    repeated OrderAddress extraction_address =15; //自提点地址
+    repeated OrderExtension extension_data = 16; //扩展数据
 }
 
 

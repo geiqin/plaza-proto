@@ -18,17 +18,15 @@ message OrderDetail {
     string spec_coding =12;//编码
     string spec_barcode =13;//编码
     int64  buy_number =14;//购买数量
-    int64  price =15;//销售价
-    int64  original_price =16;//划线价
-    int64  subtotal_price =17;//当前总价(单价*数量)
-    int64  preferential_total =18;//优惠金额合计
-    int64  preferential_allocation_money =19;//优惠分摊金额（分摊到每个商品上）
-    int64  last_one_allocation_money =20;//最后一个商品的优惠分摊，0为不是最后个
-    int64  refunded_money =21;//已退款金额
-    int64  returned_number =22;//已退货数量
-    int64  delivered_number =23;//已发货数量
-    string is_all_delivered =24; //是否已全部发货(0否，1是)
-    string model =25;//型号
+    int64  price =15;//成交价
+    int64  sale_price =16;//销售价
+    int64  subtotal_price =17;//小计(成交价*数量)
+    int64  refunded_money =20;//已退款金额
+    int64  returned_number =21;//已退货数量
+    int64  delivered_number =22;//已发货数量
+    string is_all_delivered =23; //是否已全部发货(0否，1是)
+    string model =24;//型号
+    DiscountAllocation DiscountAllocation =25; //优惠分摊
     repeated SpecificationData spec =26;//规格
     string spec_desc =27;//描述
     string extend_data =28;//扩展数据 json
@@ -36,6 +34,13 @@ message OrderDetail {
     string updated_at  = 30;
     string orderaftersale_btn_text =31;//订单售后服务按钮文本
     LastAftersale orderaftersale =32;//最新一条售后单
+}
+
+//优惠分摊
+message DiscountAllocation{
+    int64  preferential_total =1;//优惠金额合计
+    int64  preferential_allocation_money =2;//优惠分摊金额（分摊到每个商品上）
+    int64  last_one_allocation_money =3;//最后一个商品的优惠分摊，0为不是最后个
 }
 
 //最后条售后

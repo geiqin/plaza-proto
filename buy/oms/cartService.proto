@@ -22,7 +22,7 @@ service CartService {
 }
 
 message CartGoods  {
-    int64  id =1;//ID
+    int64  cart_id =1;//ID
     string title =2;//标题
     string image_url =3;//封面图片
     int64  spu_id =4;//商品spuId
@@ -44,7 +44,7 @@ message CartGoods  {
     int64 stock =20;//购买数量
     int64 subtotal_price =21;//商品小计
     repeated SpecificationData spec =22; //规格描述
-    string spec_text =23;
+    string spec_desc =23;
     string brand_name =24;
     string goods_url =25;
 }
