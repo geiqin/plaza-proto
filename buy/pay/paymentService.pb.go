@@ -172,7 +172,7 @@ func (x *Payment) GetUpdatedAt() string {
 	return ""
 }
 
-//支付方式请求
+// 支付方式请求
 type PaymentRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

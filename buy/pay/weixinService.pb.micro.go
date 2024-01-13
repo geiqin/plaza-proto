@@ -43,10 +43,20 @@ func NewWeixinServiceEndpoints() []*api.Endpoint {
 // Client API for WeixinService service
 
 type WeixinService interface {
-	//发起微信支付
-	Pay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinPayResponse, error)
-	//发起微信退款
-	Refund(ctx context.Context, in *WeixinRefundRequest, opts ...client.CallOption) (*WeixinRefundResponse, error)
+	//APP支付【微信】
+	AppPay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinResponse, error)
+	//小程序支付【微信】
+	MiniPay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinResponse, error)
+	//付款码支付【微信】
+	MicroPay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinResponse, error)
+	//扫码支付【微信】
+	NativePay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinResponse, error)
+	//查询订单【微信】
+	QueryOrder(ctx context.Context, in *WeixinOrderRequest, opts ...client.CallOption) (*WeixinResponse, error)
+	//关闭订单【微信】
+	CloseOrder(ctx context.Context, in *WeixinOrderRequest, opts ...client.CallOption) (*WeixinResponse, error)
+	//发起退款【微信】
+	Refund(ctx context.Context, in *WeixinRefundRequest, opts ...client.CallOption) (*WeixinResponse, error)
 }
 
 type weixinService struct {
@@ -61,9 +71,9 @@ func NewWeixinService(name string, c client.Client) WeixinService {
 	}
 }
 
-func (c *weixinService) Pay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinPayResponse, error) {
-	req := c.c.NewRequest(c.name, "WeixinService.Pay", in)
-	out := new(WeixinPayResponse)
+func (c *weixinService) AppPay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinResponse, error) {
+	req := c.c.NewRequest(c.name, "WeixinService.AppPay", in)
+	out := new(WeixinResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -71,9 +81,59 @@ func (c *weixinService) Pay(ctx context.Context, in *WeixinPayRequest, opts ...c
 	return out, nil
 }
 
-func (c *weixinService) Refund(ctx context.Context, in *WeixinRefundRequest, opts ...client.CallOption) (*WeixinRefundResponse, error) {
+func (c *weixinService) MiniPay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinResponse, error) {
+	req := c.c.NewRequest(c.name, "WeixinService.MiniPay", in)
+	out := new(WeixinResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *weixinService) MicroPay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinResponse, error) {
+	req := c.c.NewRequest(c.name, "WeixinService.MicroPay", in)
+	out := new(WeixinResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *weixinService) NativePay(ctx context.Context, in *WeixinPayRequest, opts ...client.CallOption) (*WeixinResponse, error) {
+	req := c.c.NewRequest(c.name, "WeixinService.NativePay", in)
+	out := new(WeixinResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *weixinService) QueryOrder(ctx context.Context, in *WeixinOrderRequest, opts ...client.CallOption) (*WeixinResponse, error) {
+	req := c.c.NewRequest(c.name, "WeixinService.QueryOrder", in)
+	out := new(WeixinResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *weixinService) CloseOrder(ctx context.Context, in *WeixinOrderRequest, opts ...client.CallOption) (*WeixinResponse, error) {
+	req := c.c.NewRequest(c.name, "WeixinService.CloseOrder", in)
+	out := new(WeixinResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *weixinService) Refund(ctx context.Context, in *WeixinRefundRequest, opts ...client.CallOption) (*WeixinResponse, error) {
 	req := c.c.NewRequest(c.name, "WeixinService.Refund", in)
-	out := new(WeixinRefundResponse)
+	out := new(WeixinResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -84,16 +144,31 @@ func (c *weixinService) Refund(ctx context.Context, in *WeixinRefundRequest, opt
 // Server API for WeixinService service
 
 type WeixinServiceHandler interface {
-	//发起微信支付
-	Pay(context.Context, *WeixinPayRequest, *WeixinPayResponse) error
-	//发起微信退款
-	Refund(context.Context, *WeixinRefundRequest, *WeixinRefundResponse) error
+	//APP支付【微信】
+	AppPay(context.Context, *WeixinPayRequest, *WeixinResponse) error
+	//小程序支付【微信】
+	MiniPay(context.Context, *WeixinPayRequest, *WeixinResponse) error
+	//付款码支付【微信】
+	MicroPay(context.Context, *WeixinPayRequest, *WeixinResponse) error
+	//扫码支付【微信】
+	NativePay(context.Context, *WeixinPayRequest, *WeixinResponse) error
+	//查询订单【微信】
+	QueryOrder(context.Context, *WeixinOrderRequest, *WeixinResponse) error
+	//关闭订单【微信】
+	CloseOrder(context.Context, *WeixinOrderRequest, *WeixinResponse) error
+	//发起退款【微信】
+	Refund(context.Context, *WeixinRefundRequest, *WeixinResponse) error
 }
 
 func RegisterWeixinServiceHandler(s server.Server, hdlr WeixinServiceHandler, opts ...server.HandlerOption) error {
 	type weixinService interface {
-		Pay(ctx context.Context, in *WeixinPayRequest, out *WeixinPayResponse) error
-		Refund(ctx context.Context, in *WeixinRefundRequest, out *WeixinRefundResponse) error
+		AppPay(ctx context.Context, in *WeixinPayRequest, out *WeixinResponse) error
+		MiniPay(ctx context.Context, in *WeixinPayRequest, out *WeixinResponse) error
+		MicroPay(ctx context.Context, in *WeixinPayRequest, out *WeixinResponse) error
+		NativePay(ctx context.Context, in *WeixinPayRequest, out *WeixinResponse) error
+		QueryOrder(ctx context.Context, in *WeixinOrderRequest, out *WeixinResponse) error
+		CloseOrder(ctx context.Context, in *WeixinOrderRequest, out *WeixinResponse) error
+		Refund(ctx context.Context, in *WeixinRefundRequest, out *WeixinResponse) error
 	}
 	type WeixinService struct {
 		weixinService
@@ -106,10 +181,30 @@ type weixinServiceHandler struct {
 	WeixinServiceHandler
 }
 
-func (h *weixinServiceHandler) Pay(ctx context.Context, in *WeixinPayRequest, out *WeixinPayResponse) error {
-	return h.WeixinServiceHandler.Pay(ctx, in, out)
+func (h *weixinServiceHandler) AppPay(ctx context.Context, in *WeixinPayRequest, out *WeixinResponse) error {
+	return h.WeixinServiceHandler.AppPay(ctx, in, out)
 }
 
-func (h *weixinServiceHandler) Refund(ctx context.Context, in *WeixinRefundRequest, out *WeixinRefundResponse) error {
+func (h *weixinServiceHandler) MiniPay(ctx context.Context, in *WeixinPayRequest, out *WeixinResponse) error {
+	return h.WeixinServiceHandler.MiniPay(ctx, in, out)
+}
+
+func (h *weixinServiceHandler) MicroPay(ctx context.Context, in *WeixinPayRequest, out *WeixinResponse) error {
+	return h.WeixinServiceHandler.MicroPay(ctx, in, out)
+}
+
+func (h *weixinServiceHandler) NativePay(ctx context.Context, in *WeixinPayRequest, out *WeixinResponse) error {
+	return h.WeixinServiceHandler.NativePay(ctx, in, out)
+}
+
+func (h *weixinServiceHandler) QueryOrder(ctx context.Context, in *WeixinOrderRequest, out *WeixinResponse) error {
+	return h.WeixinServiceHandler.QueryOrder(ctx, in, out)
+}
+
+func (h *weixinServiceHandler) CloseOrder(ctx context.Context, in *WeixinOrderRequest, out *WeixinResponse) error {
+	return h.WeixinServiceHandler.CloseOrder(ctx, in, out)
+}
+
+func (h *weixinServiceHandler) Refund(ctx context.Context, in *WeixinRefundRequest, out *WeixinResponse) error {
 	return h.WeixinServiceHandler.Refund(ctx, in, out)
 }

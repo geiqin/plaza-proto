@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//支付请求日志
+// 支付请求日志
 type PayRequestLog struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

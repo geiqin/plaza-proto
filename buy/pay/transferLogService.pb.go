@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//转账
+// 转账
 type TransferLog struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//支付日志
+// 支付日志
 type PayLog struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -229,7 +229,7 @@ func (x *PayLog) GetValues() []*PayLogValue {
 	return nil
 }
 
-//支付日志关联业务数据
+// 支付日志关联业务数据
 type PayLogValue struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

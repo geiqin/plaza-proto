@@ -4,12 +4,22 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 
-//微信支付
+//微信支付【服务专用】
 service WeixinService {
-    //发起微信支付
-    rpc  Pay (WeixinPayRequest) returns (WeixinPayResponse) {}
-    //发起微信退款
-    rpc  Refund (WeixinRefundRequest) returns (WeixinRefundResponse) {}
+    //APP支付【微信】
+    rpc  AppPay (WeixinPayRequest) returns (WeixinResponse) {}
+    //小程序支付【微信】
+    rpc  MiniPay (WeixinPayRequest) returns (WeixinResponse) {}
+    //付款码支付【微信】
+    rpc  MicroPay (WeixinPayRequest) returns (WeixinResponse) {}
+    //扫码支付【微信】
+    rpc  NativePay (WeixinPayRequest) returns (WeixinResponse) {}
+    //查询订单【微信】
+    rpc  QueryOrder (WeixinOrderRequest) returns (WeixinResponse) {}
+    //关闭订单【微信】
+    rpc  CloseOrder (WeixinOrderRequest) returns (WeixinResponse) {}
+    //发起退款【微信】
+    rpc  Refund (WeixinRefundRequest) returns (WeixinResponse) {}
 }
 
 //微信退款信息
@@ -18,13 +28,21 @@ message WeixinRefundRequest{
     string client_type =2; //客户端类型
 }
 
-//微信支付
+//微信支付请求
 message WeixinPayRequest{
     string pay_log_no =1; //支付单号
     string client_type =2; //客户端类型
-    WeixinPayerInfo payer_info =3; //微信买家信息
-    WeixinSceneInfo scene_info =4;//微信支付场景
-    SettleInfo settle_info =5;//微信结算信息
+    string auth_code =3; //授权码
+    WeixinPayerInfo payer_info =10; //微信买家信息
+    WeixinSceneInfo scene_info =11;//微信支付场景
+    SettleInfo settle_info =12;//微信结算信息
+}
+
+//微信订单请求
+message WeixinOrderRequest{
+    string pay_log_no =1; //支付单号
+    string client_type =2; //客户端类型
+    string auth_code =3; //授权码
 }
 
 //微信买家信息
@@ -49,12 +67,37 @@ message WeixinPayData {
     map<string,string> params =2;
 }
 
-
-message WeixinPayResponse {
-    WeixinPayData data =1;
-    common.Error error = 2;
+message WeixinMicroPayData {
+    string result_code =1; //业务结果：	SUCCESS/FAIL
+    string err_code =2; //错误代码
+    string err_code_desc =3; //错误代码描述
+    string trade_type =4; //交易类型: 取值如下：JSAPI，NATIVE，APP，MICROPAY
+    string action_suggest =5 ;//操作建议：again 重新支付 / wait 等待确认 / close 关闭支付（选择其他支付方式）
+    map<string,string> additional =6; //附加信息
 }
 
+message WeixinQueryOrderData {
+    string state =1; //状态：0成功
+    map<string,string> params =2;
+}
+
+message WeixinCloseOrderData {
+    string state =1; //状态：0成功
+    map<string,string> params =2;
+}
+
+message WeixinData {
+    WeixinPayData app_pay_data =1; //App支付数据
+    WeixinPayData mini_pay_data =2; //小程序支付数据
+    WeixinMicroPayData micro_pay_data =3; //付款码支付数据
+    WeixinPayData native_pay_data =4; //扫码支付数据
+    WeixinRefundData refund_data =5; //退款数据
+    WeixinQueryOrderData query_order_data =6; //产订单数据
+    WeixinCloseOrderData close_order_data =7; //关闭订单数据
+    string msg= 8;
+}
+
+//微信退款数据
 message WeixinRefundData {
     string refund_id =1;
     string out_refund_no =2;
@@ -69,7 +112,8 @@ message WeixinRefundData {
 }
 
 
-message WeixinRefundResponse {
-    WeixinRefundData data =1;
+message WeixinResponse {
+    WeixinData data =1;
     common.Error error = 2;
 }
+

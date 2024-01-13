@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//支付宝
+// 支付宝
 type Alipay struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

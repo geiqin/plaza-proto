@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//退款日志
+// 退款日志
 type RefundLog struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
