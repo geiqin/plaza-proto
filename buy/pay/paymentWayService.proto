@@ -1,0 +1,47 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+//支付通道
+service PaymentWayService {
+    rpc Create (PaymentWay) returns (PaymentWayResponse) {}
+    rpc Delete (PaymentWay) returns (PaymentWayResponse) {}
+    rpc Get (PaymentWay) returns (PaymentWayResponse) {}
+    rpc Search (PaymentWayRequest) returns (PaymentWayResponse) {}
+}
+
+message PaymentWay {
+    int32  id =1;//ID
+    string way_code =2;//唯一标记
+    string way_name =3;//支付方式名称
+    string payment_type =4;//支付类型
+    string icon_url =5;//图标URL
+    string desc =6;//支付描述
+    int32  sort =7;//顺序
+    string created_at = 8;
+    string updated_at = 9;
+    string payment_type_name =10;
+}
+
+message PaymentWayRequest{
+    int64 paged =1;
+    int64 page_size =2;
+    string keywords =3;
+    int32	id =5;
+    int32 way_code =6;
+    string way_name =7;
+    string payment_type	=8;
+}
+
+message PaymentWayData {
+    PaymentWay entity = 1;
+    common.Pager pager =2;
+    repeated PaymentWay items = 3;
+    string msg =4;
+}
+
+message PaymentWayResponse {
+    PaymentWayData data = 1;
+    common.Error error = 2;
+}

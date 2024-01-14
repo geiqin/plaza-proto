@@ -1,0 +1,82 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+//支付账号
+service PaymentAccountService {
+    rpc Create (PaymentAccount) returns (PaymentAccountResponse) {}
+    rpc Update (PaymentAccount) returns (PaymentAccountResponse) {}
+    rpc Delete (PaymentAccount) returns (PaymentAccountResponse) {}
+    rpc Get (PaymentAccount) returns (PaymentAccountResponse) {}
+    rpc Search (PaymentAccountRequest) returns (PaymentAccountResponse) {}
+}
+
+message PaymentAccount {
+    int32	id =1;
+    string account_no =2;
+    string account_name =3;
+    string payment_type	=4;
+    string is_provider =5;
+    string public_cert = 7;
+    string private_cert = 8;
+    string is_enabled	=10;
+    string created_at = 11;
+    string updated_at = 12;
+    AccountWeixinConfig weixin_config = 13;
+    AccountAlipayConfig alipay_config = 14;
+    string is_provider_name	=15;
+    string is_enabled_name	=16;
+    string payment_type_name =17;
+}
+
+//支付账户微信配置
+message AccountWeixinConfig{
+    string mch_id =2;
+    string sign_type =3;
+    string md5_key =4;
+    string cert_serial_no =5;
+    string public_cert =6;
+    string v2_private_key =7;
+    string v2_api_key =8;
+    string v3_api_key =9;
+    string v3_private_key =10;
+    string api_client_cert_file =11;
+    string api_client_key_file =12;
+    string api_client_p12_file =13;
+}
+
+//支付账户支付宝配置
+message AccountAlipayConfig{
+    string mch_id =2;
+    string sign_type =3;
+    string md5_key =4;
+    string cert_serial_no =5;
+    string v2_private_key =6;
+    string v2_api_key =7;
+}
+
+
+message PaymentAccountRequest{
+    int64 paged =1;
+    int64 page_size =2;
+    string keywords =3;
+    int32	id =5;
+    string account_no =6;
+    string account_name =7;
+    string payment_type	=8;
+    string is_provider = 9;
+    string is_enabled = 10;
+}
+
+message PaymentAccountData {
+    PaymentAccount entity = 1;
+    common.Pager pager =2;
+    repeated PaymentAccount items = 3;
+    string msg =4;
+}
+
+message PaymentAccountResponse {
+    PaymentAccountData data = 1;
+    common.Error error = 2;
+}

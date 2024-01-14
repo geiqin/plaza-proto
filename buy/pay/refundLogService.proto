@@ -35,7 +35,7 @@ message RefundLog{
     int32  payment_id =12;//支付方式ID
     string payment_code =13;//支付方式标识
     string payment_name =14;//支付方式名称
-    string pay_account_no =15;//支付结算账户编号
+    string payment_account_no =15;//支付结算账户编号
     string refundment =16;//退款类型（0原路退回, 1退至钱包, 2手动处理）
     string request_params =17;//支付平台返回参数（以json存储）
     string status =18;//退款状态：0待退款，1退款成功，2退款失败
@@ -54,8 +54,8 @@ message RefundLogRequest{
     string trade_no =7;//支付平台交易号
     string buyer_user =8;//支付平台用户帐号
     int32  payment_id =9;//支付方式ID
-    string payment_code =10;//支付方式标识
-    string payment_name =11;//支付方式名称
+    string payment_way_code =10;//支付方式标识
+    string payment_type =11;//支付类型
     string refundment = 12;//退款类型（0原路退回, 1退至钱包, 2手动处理）
     string log_no =13;//退款日志编号
     string status =14;//状态

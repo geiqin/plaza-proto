@@ -2,36 +2,42 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
+import "paymentWayService.proto";
+import "paymentAccountService.proto";
 
 //支付方式
 service PaymentService {
+  //支付方式创建
+  rpc Create (Payment) returns (PaymentResponse) {}
   //支付方式修改
-  rpc Update (PaymentRequest) returns (PaymentResponse) {}
-  //获取支付方式
-  rpc Get (PaymentRequest) returns (PaymentResponse) {}
-  //选择支付方式
-  rpc List (PaymentRequest) returns (PaymentResponse) {}
+  rpc Update (Payment) returns (PaymentResponse) {}
+  //支付方式删除
+  rpc Delete (Payment) returns (PaymentResponse) {}
   //支付方式开关
-  rpc Switch (PaymentRequest) returns (PaymentResponse) {}
+  rpc Switch (Payment) returns (PaymentResponse) {}
+  //获取支付方式
+  rpc Detail (Payment) returns (PaymentResponse) {}
+  //支付方式列表
+  rpc List (PaymentRequest) returns (PaymentResponse) {}
   //支付方式查询
   rpc Search (PaymentRequest) returns (PaymentResponse) {}
 }
 
 message Payment {
   int32  id =1;//ID
-  string code =2;//唯一标记
-  string name =3;//支付名称
-  int64  icon_id =4;//图标ID
-  string icon_url =5;//图标URL
-  string is_cod =6;//是否货到付款（0否，1是）
-  string is_under_line =7;//是否为线下支付（0否，1是）
-  repeated string apply_terminal =8;//适用终端 一维数组json字符串存储（pc, h5, ios, android, alipay, weixin, baidu, toutiao, qq）
-  string account_type =9;//支付账户类型
-  string desc =10;//描述
-  int32  sort =11;//显示顺序
-  string status =12;//状态: 1启用，0 禁用
-  string created_at = 13;
-  string updated_at = 14;
+  string payment_type =2;//支付类型
+  string client_type =3;//客户端类型:app/pc/h5/cashier/appmini_weixin
+  int32  way_id =4;//支付通道ID（支付类型为weixin,alipay该项必填）
+  int32  account_id =5;//支付账户ID（支付类型为weixin,alipay该项必填）
+  string app_id =6;//终端AppId
+  string is_enabled =7;//是否启用: 1启用，0 禁用
+  string created_at = 8;
+  string updated_at = 9;
+  string payment_type_name =10;
+  string client_type_name =11;
+  string is_enabled_name =12;
+  PaymentWay way =13;
+  PaymentAccount account =14;
 }
 
 //支付方式请求
@@ -41,20 +47,19 @@ message PaymentRequest {
   int64 top = 3;
   //base params
   int32 id =5;
-  string code =6;
-  string name =7;
-  string apply_terminal =8;
-  string status =9;
-  string is_cod	=10;
-  string is_under_line	=11;
-  string account_type =12;
+  string payment_type =6;//支付类型
+  string client_type =7;//客户端类型:app/pc/h5/cashier/appmini_weixin
+  int32  way_id =8;//支付通道ID（支付类型为weixin,alipay该项必填）
+  int32  account_id =9;//支付账户ID（支付类型为weixin,alipay该项必填）
+  string is_enabled =10;//是否启用: 1启用，0 禁用
+  string channel_code =11; //支付通道Code
 }
 
 message PaymentData{
   Payment entity = 1;
   repeated Payment items =2;
   common.Pager pager =3;
-  common.Info info =4;
+  string msg =4;
 }
 
 message PaymentResponse {
