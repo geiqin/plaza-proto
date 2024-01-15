@@ -33,8 +33,8 @@ message RefundLog{
     int64  pay_price =10;//订单实际支付金额
     string reason =11;//原因描述
     int32  payment_id =12;//支付方式ID
-    string payment_code =13;//支付方式标识
-    string payment_name =14;//支付方式名称
+    string payment_way_code =13;//支付方式标识
+    string payment_type =14;//支付类型
     string payment_account_no =15;//支付结算账户编号
     string refundment =16;//退款类型（0原路退回, 1退至钱包, 2手动处理）
     string request_params =17;//支付平台返回参数（以json存储）
