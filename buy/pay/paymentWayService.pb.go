@@ -26,14 +26,14 @@ type PaymentWay struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                 //ID
-	WayCode         string `protobuf:"bytes,2,opt,name=way_code,json=wayCode,proto3" json:"way_code"`                         //唯一标记
-	WayName         string `protobuf:"bytes,3,opt,name=way_name,json=wayName,proto3" json:"way_name"`                         //支付方式名称
-	PaymentType     string `protobuf:"bytes,4,opt,name=payment_type,json=paymentType,proto3" json:"payment_type"`             //支付类型
-	IconUrl         string `protobuf:"bytes,5,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`                         //图标URL
-	Desc            string `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc"`                                              //支付描述
-	UniAppProvider  int32  `protobuf:"varint,7,opt,name=uni_app_provider,json=uniAppProvider,proto3" json:"uni_app_provider"` //UniApp支付标识
-	Sort            int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort"`                                             //顺序
+	Id              int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                //ID
+	WayCode         string `protobuf:"bytes,2,opt,name=way_code,json=wayCode,proto3" json:"way_code"`                        //唯一标记
+	WayName         string `protobuf:"bytes,3,opt,name=way_name,json=wayName,proto3" json:"way_name"`                        //支付方式名称
+	PaymentType     string `protobuf:"bytes,4,opt,name=payment_type,json=paymentType,proto3" json:"payment_type"`            //支付类型
+	IconUrl         string `protobuf:"bytes,5,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`                        //图标URL
+	Desc            string `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc"`                                             //支付描述
+	UniAppProvider  string `protobuf:"bytes,7,opt,name=uni_app_provider,json=uniAppProvider,proto3" json:"uni_app_provider"` //UniApp支付标识
+	Sort            int32  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort"`                                            //顺序
 	CreatedAt       string `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
 	UpdatedAt       string `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	PaymentTypeName string `protobuf:"bytes,11,opt,name=payment_type_name,json=paymentTypeName,proto3" json:"payment_type_name"`
@@ -113,11 +113,11 @@ func (x *PaymentWay) GetDesc() string {
 	return ""
 }
 
-func (x *PaymentWay) GetUniAppProvider() int32 {
+func (x *PaymentWay) GetUniAppProvider() string {
 	if x != nil {
 		return x.UniAppProvider
 	}
-	return 0
+	return ""
 }
 
 func (x *PaymentWay) GetSort() int32 {
@@ -387,7 +387,7 @@ var file_paymentWayService_proto_rawDesc = []byte{
 	0x52, 0x07, 0x69, 0x63, 0x6f, 0x6e, 0x55, 0x72, 0x6c, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x65, 0x73,
 	0x63, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73, 0x63, 0x12, 0x28, 0x0a,
 	0x10, 0x75, 0x6e, 0x69, 0x5f, 0x61, 0x70, 0x70, 0x5f, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65,
-	0x72, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e, 0x75, 0x6e, 0x69, 0x41, 0x70, 0x70, 0x50,
+	0x72, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x75, 0x6e, 0x69, 0x41, 0x70, 0x70, 0x50,
 	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x18,
 	0x08, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52,

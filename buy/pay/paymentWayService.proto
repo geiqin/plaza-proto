@@ -18,7 +18,7 @@ message PaymentWay {
     string payment_type =4;//支付类型
     string icon_url =5;//图标URL
     string desc =6;//支付描述
-    int32  uni_app_provider =7;//UniApp支付标识
+    string uni_app_provider =7;//UniApp支付标识
     int32  sort =8;//顺序
     string created_at = 9;
     string updated_at = 10;

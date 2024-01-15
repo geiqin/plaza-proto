@@ -2,13 +2,19 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 
-
+//支付方式
 message PaymentInfo {
-	int32  id =1;//ID
-	string name =2;//支付名称
-	string icon_url =3;//图标URL
-	string payment =4;//支付标识
-	string is_under_line =5;//是否线下支付（0否，1是）
+	int32  id =1;//支付方式ID
+	string name =2;//支付类型名称
+	string payment_type =3;//支付类型
+	string client_type =4;//客户端类型:app/pc/h5/cashier
+	int32  way_id =5;//支付通道ID（支付类型为weixin,alipay该项必填）
+	int32  account_id =6;//支付账户ID（支付类型为weixin,alipay该项必填）
+	string is_enabled =7;//是否启用: 1启用，0 禁用
+	string way_name = 8; //支付通道名称
+	string way_code = 9;//支付通道编码
+	string uni_app_provider =10; //UniApp支付标识
+	string icon_url =11;//支付类型图标
 }
 
 //商品信息
