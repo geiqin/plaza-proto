@@ -101,7 +101,7 @@ message Order {
     string logistics_type =23;//物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
     string delivery_mode =24;//发货模式：1-统一发货，2-分拆发货
     string is_all_delivered =25;//是否已全部发货(发货模式为2时有效)（0否，1是）
-    string is_under_line =26;//是否线下支付（0否，1是）(如果多次支付以第一次为准)
+    string is_underline_pay =26;//是否线下支付（0否，1是）(如果多次支付以第一次为准)
     string is_cod =27;//是否货到付款
     string is_invoiced =28;//是否已过开票（0否，1是）
     string is_refunded =29;//是否已产生退款（0否，1是）
@@ -180,6 +180,7 @@ message OrderRequest {
     string client_type =37;
     string payment_type =38;
     string payment_way_code =39;
+    string is_underline_pay =40;
 }
 
 
@@ -218,7 +219,6 @@ message OrderDetailData {
 message OrderPayData {
     int64 order_id =1;
     string order_no =2;
-    string payment_type =3;
     string is_success =4;
     map<string,string> params = 5;
     PaymentInfo payment  =6;

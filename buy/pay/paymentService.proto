@@ -31,7 +31,7 @@ message Payment {
   int32  account_id =5;//支付账户ID（支付类型为weixin,alipay该项必填）
   string app_id =6;//终端AppId
   string is_enabled =7;//是否启用:0否，1是
-  string is_online_pay =8;//是否线上支付: 0否，1是
+  string is_platform_pay =8;//是否第三方平台支付: 0否，1是
   string created_at = 9;
   string updated_at = 10;
   string payment_type_name =11;
@@ -51,9 +51,10 @@ message PaymentRequest {
   string payment_type =6;//支付类型
   string client_type =7;//客户端类型:app/pc/h5/cashier/appmini_weixin
   int32  way_id =8;//支付通道ID（支付类型为weixin,alipay该项必填）
-  int32  account_id =9;//支付账户ID（支付类型为weixin,alipay该项必填）
-  string is_enabled =10;//是否启用: 1启用，0 禁用
-  string channel_code =11; //支付通道Code
+  string way_code =9; //支付通道Code
+  int32  account_id =10;//支付账户ID（支付类型为weixin,alipay该项必填）
+  string is_enabled =11;//是否启用: 1启用，0 禁用
+  string is_platform_pay =12;//是否第三方平台支付: 0否，1是
 }
 
 message PaymentData{
