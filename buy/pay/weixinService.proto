@@ -9,7 +9,7 @@ service WeixinService {
     //APP支付【微信】
     rpc  AppPay (WeixinPayRequest) returns (WeixinResponse) {}
     //小程序支付【微信】
-    rpc  MiniPay (WeixinPayRequest) returns (WeixinResponse) {}
+    rpc  MiniPay (WeixinMiniPayRequest) returns (WeixinResponse) {}
     //付款码支付【微信】
     rpc  MicroPay (WeixinPayRequest) returns (WeixinResponse) {}
     //扫码支付【微信】
@@ -28,14 +28,23 @@ message WeixinRefundRequest{
     string client_type =2; //客户端类型
 }
 
-//微信支付请求
-message WeixinPayRequest{
+//微信小程序支付请求
+message WeixinMiniPayRequest{
     string pay_log_no =1; //支付单号
     string client_type =2; //客户端类型
     string auth_code =3; //授权码
     WeixinPayerInfo payer_info =10; //微信买家信息
     WeixinSceneInfo scene_info =11;//微信支付场景
-    SettleInfo settle_info =12;//微信结算信息
+    WeixinSettleInfo settle_info =12;//微信结算信息
+}
+
+message WeixinMicroPayRequest{
+    string pay_log_no =1; //支付单号
+    string client_type =2; //客户端类型
+    string auth_code =3; //授权码
+    WeixinPayerInfo payer_info =10; //微信买家信息
+    WeixinSceneInfo scene_info =11;//微信支付场景
+    WeixinSettleInfo settle_info =12;//微信结算信息
 }
 
 //微信订单请求
@@ -57,7 +66,7 @@ message WeixinSceneInfo{
 }
 
 //微信结算信息
-message SettleInfo{
+message WeixinSettleInfo{
   bool profit_sharing =1; //是否指定分账
 }
 

@@ -6,15 +6,16 @@ import "orderDetailService.proto";
 import "orderAddressService.proto";
 import "orderPacketService.proto";
 import "baseInfoService.proto";
+import "orderPayService.proto";
 
 //订单服务
 service OrderService {
 
+    //订单支付【user】
+    rpc OrderPay (OrderPayRequest) returns (OrderPayResponse) {}
+
     //订单插入【service】
     rpc OrderInsertHandle (Order) returns (OrderResponse) {}
-
-    //订单支付【user】
-    rpc OrderPay (OrderRequest) returns (OrderPayResponse) {}
 
     //订单线下支付【admin】
     rpc OrderUnderLinePay (OrderRequest) returns (OrderResponse) {}
@@ -216,15 +217,6 @@ message OrderDetailData {
     repeated PaymentInfo payment_list =4;
 }
 
-message OrderPayData {
-    int64 order_id =1;
-    string order_no =2;
-    string is_success =4;
-    map<string,string> params = 5;
-    PaymentInfo payment  =6;
-    string is_html =7;
-    string html_text =8;
-}
 
 message OrderResponse {
     OrderData data = 1;
@@ -236,10 +228,6 @@ message OrderDetailResponse {
     common.Error error = 2;
 }
 
-message OrderPayResponse {
-    OrderPayData data = 1;
-    common.Error error = 2;
-}
 
 message OrderStatusStepTotalResponse {
     OrderStatusStepTotalData data = 1;

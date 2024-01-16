@@ -14,7 +14,7 @@ message PaymentInfo {
 	string way_name = 8; //支付通道名称
 	string way_code = 9;//支付通道编码
 	string uni_app_provider =10; //UniApp支付标识
-	string icon_url =11;//支付类型图标
+	string logo_url =11;//支付lOGO图标
 	string is_platform_pay =12;//是否第三方平台支付 (0否，1是)
 }
 

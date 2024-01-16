@@ -1,0 +1,55 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+message OrderPayData {
+    int64 order_id =1;
+    string order_no =2;
+    string is_success =4;
+    string column = 5;
+    PaymentInfo payment =6;
+    OrderPayUnderline underline =7;
+    OrderPayWallet wallet =8;
+    map<string,string> WechatMini =10;
+    OrderPayWechatMicro WechatMicro =11;
+    string msg = 12;
+}
+
+message OrderPayUnderline{
+    string is_html =7;
+    string html_text =8;
+}
+
+message OrderPayWallet{
+    int64 member_id =7;
+    int64 balance =8;
+}
+
+message OrderPayWechatMicro{
+    string result_code =1; //业务结果：	SUCCESS/FAIL
+    string err_code =2; //错误代码
+    string err_code_desc =3; //错误代码描述
+    string trade_type =4; //交易类型: 取值如下：JSAPI，NATIVE，APP，MICROPAY
+    string action_suggest =5 ;//操作建议：again 重新支付 / wait 等待确认 / close 关闭支付（选择其他支付方式）
+    map<string,string> additional =6; //附加信息
+}
+
+message OrderPayRequest {
+    int64 id = 1;
+    string order_no = 2;
+    string str_ids = 3;
+    string client_type =4;
+    int32 payment_id =5;
+    string payment_type =6;
+    string payment_way_code =7;
+    string auth_code =8; //付款码
+    int64 member_id =9;
+    repeated int64 ids = 12;
+}
+
+message OrderPayResponse {
+    OrderPayData data = 1;
+    common.Error error = 2;
+}

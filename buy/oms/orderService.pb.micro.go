@@ -43,10 +43,10 @@ func NewOrderServiceEndpoints() []*api.Endpoint {
 // Client API for OrderService service
 
 type OrderService interface {
+	//订单支付【user】
+	OrderPay(ctx context.Context, in *OrderPayRequest, opts ...client.CallOption) (*OrderPayResponse, error)
 	//订单插入【service】
 	OrderInsertHandle(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//订单支付【user】
-	OrderPay(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderPayResponse, error)
 	//订单线下支付【admin】
 	OrderUnderLinePay(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单发货【admin】
@@ -99,9 +99,9 @@ func NewOrderService(name string, c client.Client) OrderService {
 	}
 }
 
-func (c *orderService) OrderInsertHandle(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderInsertHandle", in)
-	out := new(OrderResponse)
+func (c *orderService) OrderPay(ctx context.Context, in *OrderPayRequest, opts ...client.CallOption) (*OrderPayResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.OrderPay", in)
+	out := new(OrderPayResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -109,9 +109,9 @@ func (c *orderService) OrderInsertHandle(ctx context.Context, in *Order, opts ..
 	return out, nil
 }
 
-func (c *orderService) OrderPay(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderPayResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderPay", in)
-	out := new(OrderPayResponse)
+func (c *orderService) OrderInsertHandle(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.OrderInsertHandle", in)
+	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -312,10 +312,10 @@ func (c *orderService) OrderExtensionList(ctx context.Context, in *OrderRequest,
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
+	//订单支付【user】
+	OrderPay(context.Context, *OrderPayRequest, *OrderPayResponse) error
 	//订单插入【service】
 	OrderInsertHandle(context.Context, *Order, *OrderResponse) error
-	//订单支付【user】
-	OrderPay(context.Context, *OrderRequest, *OrderPayResponse) error
 	//订单线下支付【admin】
 	OrderUnderLinePay(context.Context, *OrderRequest, *OrderResponse) error
 	//订单发货【admin】
@@ -358,8 +358,8 @@ type OrderServiceHandler interface {
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
 	type orderService interface {
+		OrderPay(ctx context.Context, in *OrderPayRequest, out *OrderPayResponse) error
 		OrderInsertHandle(ctx context.Context, in *Order, out *OrderResponse) error
-		OrderPay(ctx context.Context, in *OrderRequest, out *OrderPayResponse) error
 		OrderUnderLinePay(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error
 		OrderCancel(ctx context.Context, in *OrderRequest, out *OrderResponse) error
@@ -391,12 +391,12 @@ type orderServiceHandler struct {
 	OrderServiceHandler
 }
 
-func (h *orderServiceHandler) OrderInsertHandle(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.OrderServiceHandler.OrderInsertHandle(ctx, in, out)
+func (h *orderServiceHandler) OrderPay(ctx context.Context, in *OrderPayRequest, out *OrderPayResponse) error {
+	return h.OrderServiceHandler.OrderPay(ctx, in, out)
 }
 
-func (h *orderServiceHandler) OrderPay(ctx context.Context, in *OrderRequest, out *OrderPayResponse) error {
-	return h.OrderServiceHandler.OrderPay(ctx, in, out)
+func (h *orderServiceHandler) OrderInsertHandle(ctx context.Context, in *Order, out *OrderResponse) error {
+	return h.OrderServiceHandler.OrderInsertHandle(ctx, in, out)
 }
 
 func (h *orderServiceHandler) OrderUnderLinePay(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
