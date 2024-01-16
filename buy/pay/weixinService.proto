@@ -3,13 +3,15 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "payLogService.proto";
+import "refundLogService.proto";
 
 //微信支付【服务专用】
 service WeixinService {
     //APP支付【微信】
     rpc  AppPay (WeixinPayRequest) returns (WeixinResponse) {}
     //小程序支付【微信】
-    rpc  MiniPay (WeixinMiniPayRequest) returns (WeixinResponse) {}
+    rpc  MiniPay (WeixinPayRequest) returns (WeixinResponse) {}
     //付款码支付【微信】
     rpc  MicroPay (WeixinPayRequest) returns (WeixinResponse) {}
     //扫码支付【微信】
@@ -29,7 +31,7 @@ message WeixinRefundRequest{
 }
 
 //微信小程序支付请求
-message WeixinMiniPayRequest{
+message WeixinPayRequest{
     string pay_log_no =1; //支付单号
     string client_type =2; //客户端类型
     string auth_code =3; //授权码
@@ -38,14 +40,6 @@ message WeixinMiniPayRequest{
     WeixinSettleInfo settle_info =12;//微信结算信息
 }
 
-message WeixinMicroPayRequest{
-    string pay_log_no =1; //支付单号
-    string client_type =2; //客户端类型
-    string auth_code =3; //授权码
-    WeixinPayerInfo payer_info =10; //微信买家信息
-    WeixinSceneInfo scene_info =11;//微信支付场景
-    WeixinSettleInfo settle_info =12;//微信结算信息
-}
 
 //微信订单请求
 message WeixinOrderRequest{
@@ -81,8 +75,17 @@ message WeixinMicroPayData {
     string err_code =2; //错误代码
     string err_code_desc =3; //错误代码描述
     string trade_type =4; //交易类型: 取值如下：JSAPI，NATIVE，APP，MICROPAY
-    string action_suggest =5 ;//操作建议：again 重新支付 / wait 等待确认 / close 关闭支付（选择其他支付方式）
-    map<string,string> additional =6; //附加信息
+    string openid =6;
+    string fee_type =7 ;
+    int64 cash_fee =8 ;
+    string is_subscribe =9 ; //是否订阅app(0否，1是)
+    string sub_openid =10 ;
+    string transaction_id =11 ;
+    string out_trade_no =12 ;
+    int64 total_fee =13;
+    string sub_is_subscribe =14;//是否订阅子APP(0否，1是)
+    string bank_type =15;
+    string time_end =16;
 }
 
 message WeixinQueryOrderData {
@@ -96,14 +99,19 @@ message WeixinCloseOrderData {
 }
 
 message WeixinData {
-    WeixinPayData app_pay_data =1; //App支付数据
-    WeixinPayData mini_pay_data =2; //小程序支付数据
-    WeixinMicroPayData micro_pay_data =3; //付款码支付数据
-    WeixinPayData native_pay_data =4; //扫码支付数据
-    WeixinRefundData refund_data =5; //退款数据
-    WeixinQueryOrderData query_order_data =6; //产订单数据
-    WeixinCloseOrderData close_order_data =7; //关闭订单数据
-    string msg= 8;
+    string is_direct_succeed = 1; //是否直接成功(0否，1是)【支付/退款/转账/提现】
+    string is_need_callback = 2; //是否需要通知确认(0否，1是)
+    PayLog pay_log =3; //支付日志
+    RefundLog refund_log =4; //退款日志
+    string action_suggest =5 ;//操作建议：again 重新支付 / wait 等待确认 / close 关闭支付（选择其他支付方式）
+    WeixinPayData app_pay_data =10; //App支付数据
+    WeixinPayData mini_pay_data =11; //小程序支付数据
+    WeixinMicroPayData micro_pay_data =12; //付款码支付数据
+    WeixinPayData native_pay_data =13; //扫码支付数据
+    WeixinRefundData refund_data =14; //退款数据
+    WeixinQueryOrderData query_order_data =15; //产订单数据
+    WeixinCloseOrderData close_order_data =16; //关闭订单数据
+    string msg= 17;
 }
 
 //微信退款数据
