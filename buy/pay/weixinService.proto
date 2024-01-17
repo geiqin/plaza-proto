@@ -35,6 +35,7 @@ message WeixinPayRequest{
     string pay_log_no =1; //支付单号
     string client_type =2; //客户端类型
     string auth_code =3; //授权码
+    string is_close_pubsub =4; //直接支付成功关闭消息通知（0否，1是）
     WeixinPayerInfo payer_info =10; //微信买家信息
     WeixinSceneInfo scene_info =11;//微信支付场景
     WeixinSettleInfo settle_info =12;//微信结算信息
