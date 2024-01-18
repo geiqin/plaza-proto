@@ -299,7 +299,7 @@ func (x *OrderDetail) GetOrderaftersale() *LastAftersale {
 	return nil
 }
 
-//优惠分摊
+// 优惠分摊
 type DiscountAllocation struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -363,7 +363,7 @@ func (x *DiscountAllocation) GetLastOneAllocationMoney() int64 {
 	return 0
 }
 
-//最后条售后
+// 最后条售后
 type LastAftersale struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

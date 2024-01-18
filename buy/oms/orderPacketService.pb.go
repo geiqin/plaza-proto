@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//订单发货包裹
+// 订单发货包裹
 type OrderPacket struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -205,7 +205,7 @@ func (x *OrderPacket) GetStatusName() string {
 	return ""
 }
 
-//订单发货包裹商品
+// 订单发货包裹商品
 type OrderPacketGoods struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

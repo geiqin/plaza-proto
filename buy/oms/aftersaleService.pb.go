@@ -395,7 +395,7 @@ func (x *AftersaleImage) GetImageUrl() string {
 	return ""
 }
 
-//商家收货地址
+// 商家收货地址
 type AftersaleAddress struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

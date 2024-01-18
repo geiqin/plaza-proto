@@ -140,7 +140,7 @@ func (x *OrderStatusLog) GetUpdatedAt() string {
 	return ""
 }
 
-//配送请求参数
+// 配送请求参数
 type OrderStatusLogRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

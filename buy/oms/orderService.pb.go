@@ -893,7 +893,7 @@ func (x *OrderRequest) GetIsUnderlinePay() string {
 	return ""
 }
 
-//订单统计数据
+// 订单统计数据
 type OrderStatusStepTotalData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

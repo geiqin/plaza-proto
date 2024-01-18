@@ -260,7 +260,7 @@ func (x *CartGoods) GetGoodsUrl() string {
 	return ""
 }
 
-//购物车数据
+// 购物车数据
 type CartData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

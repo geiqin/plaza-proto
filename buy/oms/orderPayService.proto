@@ -7,13 +7,14 @@ import "baseInfoService.proto";
 message OrderPayData {
     int64 order_id =1;
     string order_no =2;
-    string is_success =4;
-    string column = 5;
-    PaymentInfo payment =6;
-    OrderPayUnderline underline =7;
-    OrderPayWallet wallet =8;
+    string pay_status =3; //支付状态：success 成功,fail 失败, unknown 未知（需要查询确认）
+    string err_code =4; //错误代码
+    string err_code_desc =5; //错误代码描述
+    string column = 6;
+    PaymentInfo payment =7;
+    OrderPayUnderline underline =8;
+    OrderPayWallet wallet =9;
     map<string,string> WechatMini =10;
-    OrderPayWechatMicro WechatMicro =11;
     string msg = 12;
 }
 
@@ -27,14 +28,6 @@ message OrderPayWallet{
     int64 balance =8;
 }
 
-message OrderPayWechatMicro{
-    string result_code =1; //业务结果：	SUCCESS/FAIL
-    string err_code =2; //错误代码
-    string err_code_desc =3; //错误代码描述
-    string trade_type =4; //交易类型: 取值如下：JSAPI，NATIVE，APP，MICROPAY
-    string action_suggest =5 ;//操作建议：again 重新支付 / wait 等待确认 / close 关闭支付（选择其他支付方式）
-    map<string,string> additional =6; //附加信息
-}
 
 message OrderPayRequest {
     int64 id = 1;

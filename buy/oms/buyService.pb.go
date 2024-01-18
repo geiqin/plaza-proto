@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//购买分组
+// 购买分组
 type BuyGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -428,7 +428,7 @@ func (x *BuyGoodsItem) GetSiteType() string {
 	return ""
 }
 
-//订单基础信息
+// 订单基础信息
 type OrderBase struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -588,7 +588,7 @@ func (x *OrderBase) GetExtensionData() []*OrderExtension {
 	return nil
 }
 
-//确认信息请求参数
+// 确认信息请求参数
 type BuyRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -756,7 +756,7 @@ func (x *BuyRequest) GetBuyCommodities() []*BuyCommodity {
 	return nil
 }
 
-//购买商品信息
+// 购买商品信息
 type BuyCommodity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -836,7 +836,7 @@ func (x *BuyCommodity) GetSpec() []*SpecificationData {
 	return nil
 }
 
-//配送选择数据
+// 配送选择数据
 type DeliveryChoose struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -972,7 +972,7 @@ func (x *DeliveryChoose) GetErrorMsg() string {
 	return ""
 }
 
-//购买确认数据
+// 购买确认数据
 type BuyConfirmData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1147,7 +1147,7 @@ func (x *BuyConfirmResponse) GetError() *common.Error {
 	return nil
 }
 
-//购买提交数据
+// 购买提交数据
 type BuySubmitData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1274,7 +1274,7 @@ func (x *BuySubmitResponse) GetError() *common.Error {
 	return nil
 }
 
-//配送选择项
+// 配送选择项
 type DeliveryChooseItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
