@@ -1,0 +1,85 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "memberIntegralLogService.proto";
+import "integralLockChangeLogService.proto";
+
+//积分服务
+service IntegralService {
+  //积分增加【有效积分增加】
+  rpc IntegralAdd (IntegralInfo) returns (IntegralResponse) {}
+  //积分使用【有效积分减少】
+  rpc IntegralUse (IntegralInfo) returns (IntegralResponse) {}
+
+  //锁定积分增加
+  rpc LockingIntegralInsert (LockingIntegralInfo) returns (LockingIntegralResponse) {}
+  //锁定积分释放
+  rpc LockingIntegralRollback (LockingIntegralRollbackInfo) returns (LockingIntegralResponse) {}
+  //锁定积分生效
+  rpc LockingIntegralEffect  (LockingIntegralEffectInfo) returns (LockingIntegralResponse) {}
+
+}
+
+//锁定积分信息
+message LockingIntegralInfo {
+  int64  order_id =2;//订单id
+  int64  member_id =3;//用户id
+  int64  business_id =4;//业务ID
+  string business_type =5;//业务类型
+  int64  refund_integral =6;//退还积分
+  int64  integral =7;//积分
+  string desc =8;//描述
+}
+
+//锁定积分退还
+message LockingIntegralRollbackInfo {
+  int64  integral_locking_log_id =1;//积分锁定日志id
+  int64  integral =2;//退还积分
+  string reason =3;//退还原因
+}
+
+//锁定积分生效
+message LockingIntegralEffectInfo {
+  int64  integral_locking_log_id =1;//积分锁定日志id
+}
+
+//积分信息
+message IntegralInfo {
+  int64  member_id =1;//用户ID
+  int64  integral =2;//积分
+  string msg =3;//操作原因
+  int64  operator_id =4;//操作员ID
+  string operator_name =5;//操作员名称
+}
+
+message IntegralRequest {
+  int64  id =1;//ID
+  int64  member_id =2;//用户ID
+  int64  integral =4;//积分
+  string msg =7;//操作原因
+  int64  operator_id =8;//操作员ID
+  string operator_name =9;//操作员名称
+}
+
+message IntegralData {
+  MemberIntegralLog entity = 1;
+  string msg =4;
+}
+
+
+message IntegralResponse {
+  IntegralData data = 1;
+  common.Error error = 2;
+}
+
+message LockingIntegralData {
+  IntegralLockChangeLog entity = 1;
+  string msg =4;
+}
+
+
+message LockingIntegralResponse {
+  LockingIntegralData data = 1;
+  common.Error error = 2;
+}

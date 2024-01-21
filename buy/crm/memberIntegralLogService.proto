@@ -5,9 +5,7 @@ import "common/base.proto";
 import "memberService.proto";
 
 service MemberIntegralLogService {
-  rpc Create (MemberIntegralLog) returns (MemberIntegralLogResponse) {}
-  rpc Delete (MemberIntegralLog) returns (MemberIntegralLogResponse) {}
-  rpc Get (MemberIntegralLog) returns (MemberIntegralLogResponse) {}
+  rpc Detail (MemberIntegralLog) returns (MemberIntegralLogResponse) {}
   rpc List (MemberIntegralLogRequest) returns (MemberIntegralLogResponse) {}
   rpc Search (MemberIntegralLogRequest) returns (MemberIntegralLogResponse) {}
 }
@@ -20,9 +18,11 @@ message MemberIntegralLog {
   int64  new_integral =5;//最新积分
   int64  operation_integral =6;//操作积分
   string msg =7;//操作原因
-  string created_at =9;
-  string updated_at =10;
-  Member member = 11;
+  int64  operator_id =8;//操作员ID
+  string operator_name =9;//操作员名称
+  string created_at =10;
+  string updated_at =11;
+  Member member = 12;
 }
 
 message MemberIntegralLogRequest {

@@ -43,9 +43,7 @@ func NewMemberIntegralLogServiceEndpoints() []*api.Endpoint {
 // Client API for MemberIntegralLogService service
 
 type MemberIntegralLogService interface {
-	Create(ctx context.Context, in *MemberIntegralLog, opts ...client.CallOption) (*MemberIntegralLogResponse, error)
-	Delete(ctx context.Context, in *MemberIntegralLog, opts ...client.CallOption) (*MemberIntegralLogResponse, error)
-	Get(ctx context.Context, in *MemberIntegralLog, opts ...client.CallOption) (*MemberIntegralLogResponse, error)
+	Detail(ctx context.Context, in *MemberIntegralLog, opts ...client.CallOption) (*MemberIntegralLogResponse, error)
 	List(ctx context.Context, in *MemberIntegralLogRequest, opts ...client.CallOption) (*MemberIntegralLogResponse, error)
 	Search(ctx context.Context, in *MemberIntegralLogRequest, opts ...client.CallOption) (*MemberIntegralLogResponse, error)
 }
@@ -62,28 +60,8 @@ func NewMemberIntegralLogService(name string, c client.Client) MemberIntegralLog
 	}
 }
 
-func (c *memberIntegralLogService) Create(ctx context.Context, in *MemberIntegralLog, opts ...client.CallOption) (*MemberIntegralLogResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberIntegralLogService.Create", in)
-	out := new(MemberIntegralLogResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberIntegralLogService) Delete(ctx context.Context, in *MemberIntegralLog, opts ...client.CallOption) (*MemberIntegralLogResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberIntegralLogService.Delete", in)
-	out := new(MemberIntegralLogResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberIntegralLogService) Get(ctx context.Context, in *MemberIntegralLog, opts ...client.CallOption) (*MemberIntegralLogResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberIntegralLogService.Get", in)
+func (c *memberIntegralLogService) Detail(ctx context.Context, in *MemberIntegralLog, opts ...client.CallOption) (*MemberIntegralLogResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberIntegralLogService.Detail", in)
 	out := new(MemberIntegralLogResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -115,18 +93,14 @@ func (c *memberIntegralLogService) Search(ctx context.Context, in *MemberIntegra
 // Server API for MemberIntegralLogService service
 
 type MemberIntegralLogServiceHandler interface {
-	Create(context.Context, *MemberIntegralLog, *MemberIntegralLogResponse) error
-	Delete(context.Context, *MemberIntegralLog, *MemberIntegralLogResponse) error
-	Get(context.Context, *MemberIntegralLog, *MemberIntegralLogResponse) error
+	Detail(context.Context, *MemberIntegralLog, *MemberIntegralLogResponse) error
 	List(context.Context, *MemberIntegralLogRequest, *MemberIntegralLogResponse) error
 	Search(context.Context, *MemberIntegralLogRequest, *MemberIntegralLogResponse) error
 }
 
 func RegisterMemberIntegralLogServiceHandler(s server.Server, hdlr MemberIntegralLogServiceHandler, opts ...server.HandlerOption) error {
 	type memberIntegralLogService interface {
-		Create(ctx context.Context, in *MemberIntegralLog, out *MemberIntegralLogResponse) error
-		Delete(ctx context.Context, in *MemberIntegralLog, out *MemberIntegralLogResponse) error
-		Get(ctx context.Context, in *MemberIntegralLog, out *MemberIntegralLogResponse) error
+		Detail(ctx context.Context, in *MemberIntegralLog, out *MemberIntegralLogResponse) error
 		List(ctx context.Context, in *MemberIntegralLogRequest, out *MemberIntegralLogResponse) error
 		Search(ctx context.Context, in *MemberIntegralLogRequest, out *MemberIntegralLogResponse) error
 	}
@@ -141,16 +115,8 @@ type memberIntegralLogServiceHandler struct {
 	MemberIntegralLogServiceHandler
 }
 
-func (h *memberIntegralLogServiceHandler) Create(ctx context.Context, in *MemberIntegralLog, out *MemberIntegralLogResponse) error {
-	return h.MemberIntegralLogServiceHandler.Create(ctx, in, out)
-}
-
-func (h *memberIntegralLogServiceHandler) Delete(ctx context.Context, in *MemberIntegralLog, out *MemberIntegralLogResponse) error {
-	return h.MemberIntegralLogServiceHandler.Delete(ctx, in, out)
-}
-
-func (h *memberIntegralLogServiceHandler) Get(ctx context.Context, in *MemberIntegralLog, out *MemberIntegralLogResponse) error {
-	return h.MemberIntegralLogServiceHandler.Get(ctx, in, out)
+func (h *memberIntegralLogServiceHandler) Detail(ctx context.Context, in *MemberIntegralLog, out *MemberIntegralLogResponse) error {
+	return h.MemberIntegralLogServiceHandler.Detail(ctx, in, out)
 }
 
 func (h *memberIntegralLogServiceHandler) List(ctx context.Context, in *MemberIntegralLogRequest, out *MemberIntegralLogResponse) error {
