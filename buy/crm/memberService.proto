@@ -89,6 +89,7 @@ message Member {
     int64  referrer_id =26;//推荐人ID
     string client_type =27;//来源终端
     string contact_tel =28;//联系电话
+    string is_scatter =29;//是否为散客（0否，1是）
     string is_trusted =30;//是否已实名认证（0否，1是）
     string memo =31;//备注
     string status =33;//状态：1正常，2锁定，3禁用，9注销
@@ -144,7 +145,7 @@ message MemberRequest {
     int64 referrer_id =23;
     string status =24;
     string keywords =25;
-    string refer_url =26;
+    string is_scatter =26;
     string open_id =27;
     string union_id =28;
     string password =29;
