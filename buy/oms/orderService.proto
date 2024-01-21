@@ -56,6 +56,11 @@ service OrderService {
     //订单详情【admin/user】
     rpc OrderDetail (OrderRequest) returns (OrderDetailResponse) {}
 
+    //订单主信息列表(服务专用)
+    rpc OrderMainInfo (OrderRequest) returns (OrderResponse) {}
+    //订单主信息(服务专用)
+    rpc OrderMainList (OrderRequest) returns (OrderResponse) {}
+
     //支付同步处理
     rpc Respond (OrderRequest) returns (OrderResponse) {}
 

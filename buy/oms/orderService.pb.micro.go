@@ -73,6 +73,10 @@ type OrderService interface {
 	OrderSearch(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单详情【admin/user】
 	OrderDetail(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderDetailResponse, error)
+	//订单主信息列表(服务专用)
+	OrderMainInfo(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	//订单主信息(服务专用)
+	OrderMainList(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//支付同步处理
 	Respond(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//支付异步处理
@@ -249,6 +253,26 @@ func (c *orderService) OrderDetail(ctx context.Context, in *OrderRequest, opts .
 	return out, nil
 }
 
+func (c *orderService) OrderMainInfo(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.OrderMainInfo", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) OrderMainList(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.OrderMainList", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderService) Respond(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.Respond", in)
 	out := new(OrderResponse)
@@ -342,6 +366,10 @@ type OrderServiceHandler interface {
 	OrderSearch(context.Context, *OrderRequest, *OrderResponse) error
 	//订单详情【admin/user】
 	OrderDetail(context.Context, *OrderRequest, *OrderDetailResponse) error
+	//订单主信息列表(服务专用)
+	OrderMainInfo(context.Context, *OrderRequest, *OrderResponse) error
+	//订单主信息(服务专用)
+	OrderMainList(context.Context, *OrderRequest, *OrderResponse) error
 	//支付同步处理
 	Respond(context.Context, *OrderRequest, *OrderResponse) error
 	//支付异步处理
@@ -373,6 +401,8 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		OrderTotal(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderSearch(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderDetail(ctx context.Context, in *OrderRequest, out *OrderDetailResponse) error
+		OrderMainInfo(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		OrderMainList(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		Respond(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		Notify(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		Get(ctx context.Context, in *Order, out *OrderResponse) error
@@ -449,6 +479,14 @@ func (h *orderServiceHandler) OrderSearch(ctx context.Context, in *OrderRequest,
 
 func (h *orderServiceHandler) OrderDetail(ctx context.Context, in *OrderRequest, out *OrderDetailResponse) error {
 	return h.OrderServiceHandler.OrderDetail(ctx, in, out)
+}
+
+func (h *orderServiceHandler) OrderMainInfo(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.OrderMainInfo(ctx, in, out)
+}
+
+func (h *orderServiceHandler) OrderMainList(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.OrderMainList(ctx, in, out)
 }
 
 func (h *orderServiceHandler) Respond(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
