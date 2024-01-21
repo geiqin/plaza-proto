@@ -9,17 +9,18 @@ service IntegralLockChangeLogService {
 }
 
 message IntegralLockChangeLog {
-  int64  id =1;//ID
+  string uuid =1;//ID
   int64  order_id =2;//订单id
   int64  member_id =3;//用户id
   int64  business_id =4;//业务ID
   string business_type =5;//业务类型
-  int64  refund_integral =6;//退还积分
-  int64  integral =7;//积分
-  string desc =8;//描述
-  string status =9;//状态（0待生效, 1已生效, 2已失效）
-  string created_at = 10;
-  string updated_at = 11;
+  string business_type_name =6;//业务类型名称
+  int64  refund_integral =7;//退还积分
+  int64  integral =8;//积分
+  string desc =9;//描述
+  string status =10;//状态（0待生效, 1已生效, 2已失效）
+  string created_at = 11;
+  string updated_at = 12;
   repeated IntegralLockChangeLogReason refund_reasons =13;
 }
 
@@ -33,7 +34,7 @@ message IntegralLockChangeLogRequest {
   int64 page_size = 2;
   string sorting = 3;
   string keywords = 4;
-  int64 id = 5;
+  string uuid = 5;
   int64 order_id = 6;
   int64  business_id =7;//业务ID
   string business_type =8;//业务类型
