@@ -254,6 +254,22 @@ message StoreConfig {
     string common_store_customer_qrcode =5;//店铺二维码
 }
 
+//积分配置
+message IntegralConfig {
+    string common_integral_custom_name =1;//自定义的积分名称
+    string common_integral_is_deduction =2;//是否开启积分抵现【积分抵现设置】
+    int64 common_integral_deduction_rate =3;//抵扣比例：多少积分兑换1元
+    string common_integral_deduction_range =4;//积分抵现商品范围：0全部参与，1部分参与
+    string common_integral_use_limit_type =5;//使用限制类型：0-不限制，1-单次消费最多使用，2-单次消费最少使用，3单次消费最多使用订单金额比例1~99【使用数量限制】
+    int64 common_integral_use_limit_value =6;//使用限制数量
+    string common_integral_clear_type =7;//积分清零：0-不清零，1-自然年清零上一年获得积分，2-自然年清零所有积分【积分清零规则】
+    int64 common_integral_after_years_clear =8;//积分在多少年后[清零]
+    int64 common_integral_after_months_clear =9;//积分在多少月后[清零]
+    int64 common_integral_at_month_clear =10;//积分在几月[清零]
+    int64 common_integral_at_day_clear =11;//积分在几日[清零]
+    repeated int64 common_integral_deduction_spu_ids =12;//积分抵现参与商品 SpuIds
+}
+
 //全局配置
 message GlobalConfig  {
     //站点配置
@@ -268,6 +284,9 @@ message GlobalConfig  {
     TradeGoodsConfig trade_goods =9;
     TradeOrderConfig trade_order =10;
     TradeAftersaleConfig trade_aftersale =11;
+
+    //积分规则配置
+    IntegralConfig integral_conf =12;
 
     //邮件配置
     EmailBaseConfig email_base =15;//邮件基础设置

@@ -38,7 +38,7 @@ message DictType {
     string status = 7;
     string created_at = 8;
     string updated_at = 9;
-    repeated Dict dicts =10;
+    repeated Dict list =10;
 }
 
 message DictTypeResponse {
