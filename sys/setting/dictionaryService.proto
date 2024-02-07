@@ -16,7 +16,7 @@ message Dictionary {
     string icon	=3;
     string class =4;
     string color =5;
-    string term	=6;
+    string flag	=6;
     string desc	=7;
     bool checked =8;
 }

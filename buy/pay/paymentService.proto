@@ -32,13 +32,14 @@ message Payment {
   string app_id =6;//终端AppId
   string is_enabled =7;//是否启用:0否，1是
   string is_platform_pay =8;//是否第三方平台支付: 0否，1是
-  string created_at = 9;
-  string updated_at = 10;
-  string payment_type_name =11;
-  string client_type_name =12;
-  string is_enabled_name =13;
-  PaymentWay way =14;
-  PaymentAccount account =15;
+  int32 sort = 9;
+  string created_at = 10;
+  string updated_at = 11;
+  string payment_type_name =12;
+  string client_type_name =13;
+  string is_enabled_name =14;
+  PaymentWay way =15;
+  PaymentAccount account =16;
 }
 
 //支付方式请求
