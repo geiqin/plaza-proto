@@ -49,14 +49,10 @@ message MessageRequest {
     repeated int64 ids =13;
 }
 
-message MessageData{
+message MessageResponse{
     Message entity = 1;
     common.Pager pager =2;
     repeated Message items = 3;
-    common.Info info =4;
+    string info =4;
 }
 
-message MessageResponse {
-    MessageData data = 1;
-    common.Error error = 2;
-}

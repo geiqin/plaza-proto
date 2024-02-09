@@ -40,6 +40,5 @@ message SmsResponse {
     Sms entity = 1;
     common.Pager pager =2;
     repeated Sms items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    string info =4;
 }

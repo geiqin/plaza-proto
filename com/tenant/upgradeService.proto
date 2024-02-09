@@ -1,7 +1,6 @@
 syntax = "proto3";
 package services;
 option go_package ="/.;services";
-import "common/base.proto";
 
 //升级数据库
 service UpgradeService {
@@ -23,11 +22,6 @@ message UpgradeRequest{
     repeated int64 ids = 7;
 }
 
-message UpgradeData {
-    common.Info info =1;
-}
-
 message UpgradeResponse {
-    UpgradeData data = 1;
-    common.Error error = 2;
+    string info =1;
 }

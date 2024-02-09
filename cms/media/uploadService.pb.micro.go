@@ -5,7 +5,6 @@ package services
 
 import (
 	fmt "fmt"
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -43,8 +42,10 @@ func NewUploadServiceEndpoints() []*api.Endpoint {
 // Client API for UploadService service
 
 type UploadService interface {
-	//字节数据上传
-	UploadBytes(ctx context.Context, in *UploadBytesInfo, opts ...client.CallOption) (*UploadResponse, error)
+	//获取上传凭证
+	GetToken(ctx context.Context, in *UploadRequest, opts ...client.CallOption) (*UploadTokenResponse, error)
+	//上传回调
+	Callback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*UploadResponse, error)
 }
 
 type uploadService struct {
@@ -59,8 +60,18 @@ func NewUploadService(name string, c client.Client) UploadService {
 	}
 }
 
-func (c *uploadService) UploadBytes(ctx context.Context, in *UploadBytesInfo, opts ...client.CallOption) (*UploadResponse, error) {
-	req := c.c.NewRequest(c.name, "UploadService.UploadBytes", in)
+func (c *uploadService) GetToken(ctx context.Context, in *UploadRequest, opts ...client.CallOption) (*UploadTokenResponse, error) {
+	req := c.c.NewRequest(c.name, "UploadService.GetToken", in)
+	out := new(UploadTokenResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *uploadService) Callback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*UploadResponse, error) {
+	req := c.c.NewRequest(c.name, "UploadService.Callback", in)
 	out := new(UploadResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -72,13 +83,16 @@ func (c *uploadService) UploadBytes(ctx context.Context, in *UploadBytesInfo, op
 // Server API for UploadService service
 
 type UploadServiceHandler interface {
-	//字节数据上传
-	UploadBytes(context.Context, *UploadBytesInfo, *UploadResponse) error
+	//获取上传凭证
+	GetToken(context.Context, *UploadRequest, *UploadTokenResponse) error
+	//上传回调
+	Callback(context.Context, *CallbackInfo, *UploadResponse) error
 }
 
 func RegisterUploadServiceHandler(s server.Server, hdlr UploadServiceHandler, opts ...server.HandlerOption) error {
 	type uploadService interface {
-		UploadBytes(ctx context.Context, in *UploadBytesInfo, out *UploadResponse) error
+		GetToken(ctx context.Context, in *UploadRequest, out *UploadTokenResponse) error
+		Callback(ctx context.Context, in *CallbackInfo, out *UploadResponse) error
 	}
 	type UploadService struct {
 		uploadService
@@ -91,6 +105,10 @@ type uploadServiceHandler struct {
 	UploadServiceHandler
 }
 
-func (h *uploadServiceHandler) UploadBytes(ctx context.Context, in *UploadBytesInfo, out *UploadResponse) error {
-	return h.UploadServiceHandler.UploadBytes(ctx, in, out)
+func (h *uploadServiceHandler) GetToken(ctx context.Context, in *UploadRequest, out *UploadTokenResponse) error {
+	return h.UploadServiceHandler.GetToken(ctx, in, out)
+}
+
+func (h *uploadServiceHandler) Callback(ctx context.Context, in *CallbackInfo, out *UploadResponse) error {
+	return h.UploadServiceHandler.Callback(ctx, in, out)
 }

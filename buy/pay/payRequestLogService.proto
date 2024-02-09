@@ -55,15 +55,9 @@ message PayRequestLogRequest{
     string end_time = 17; //结束时间
 }
 
-message PayRequestLogData {
+message PayRequestLogResponse {
     PayRequestLog entity = 1;
     common.Pager pager =2;
     repeated PayRequestLog items = 3;
-    common.Info info =4;
-}
-
-
-message PayRequestLogResponse {
-    PayRequestLogData data = 1;
-    common.Error error = 2;
+    string info =4;
 }

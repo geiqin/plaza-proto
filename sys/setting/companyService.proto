@@ -63,15 +63,9 @@ message CompanyRequest {
 }
 
 //
-message CompanyData {
+message CompanyResponse {
     Company entity = 1;
     common.Pager pager =2;
     repeated Company items = 3;
-    common.Info info =5;
-}
-
-//
-message CompanyResponse {
-    CompanyData data = 1;
-    common.Error error = 2;
+    string info =5;
 }

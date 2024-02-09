@@ -5,16 +5,15 @@ import "common/base.proto";
 import "articleService.proto";
 
 service ArticleCatService {
-    rpc ArticleList (ArticleCatWhere) returns (ArticleCatResponse) {}
+    rpc ArticleList (ArticleCatRequest) returns (ArticleCatResponse) {}
 }
 
-message ArticleCatWhere {
+message ArticleCatRequest {
     int64 paged =1;
     int64 page_size =2;
     int64 top = 3;
     string slug = 4;
     repeated string slugs = 5;
-    // @inject_tag: gorm:"-"
     repeated int32 ids = 6;
 }
 
@@ -33,9 +32,7 @@ message ArticleCat {
     int32 article_count =10;
     string created_at =11;
     string updated_at =12;
-    // @inject_tag: gorm:"-"
     repeated ArticleCat children = 13;
-    // @inject_tag: gorm:"-"
     repeated Article articles = 15;
 }
 
@@ -44,6 +41,5 @@ message ArticleCatResponse {
     ArticleCat entity = 1;
     common.Pager pager =2;
     repeated ArticleCat items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    string info =4;
 }

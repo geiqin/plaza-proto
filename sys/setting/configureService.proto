@@ -1,7 +1,6 @@
 syntax = "proto3";
 package services;
 option go_package ="/.;services";
-import "common/base.proto";
 import "baseInfoService.proto";
 
 //配置中心
@@ -323,15 +322,10 @@ message ConfigureRequest {
 
 message ConfigureResponse {
     GlobalConfig data = 1;
-    common.Error error = 2;
-}
-
-message ConfigureDictData {
-    map<string,string> data_list = 1;
-    map<string,string> convert_list = 2;
+    string info = 2;
 }
 
 message ConfigureDictResponse {
-    ConfigureDictData data = 1;
-    common.Error error = 2;
+    map<string,string> data_list = 1;
+    map<string,string> convert_list = 2;
 }

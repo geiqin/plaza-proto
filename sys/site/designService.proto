@@ -45,15 +45,9 @@ message DesignRequest {
 }
 
 //
-message DesignData {
+message DesignResponse {
     Design entity = 1;
     common.Pager pager =2;
     repeated Design items = 3;
-    common.Info info =5;
-}
-
-//
-message DesignResponse {
-    DesignData data = 1;
-    common.Error error = 2;
+    string info =5;
 }

@@ -1,13 +1,82 @@
 syntax = "proto3";
 package services;
 option go_package ="/.;services";
-import "common/base.proto";
 import "fileService.proto";
 
 service UploadService {
+    //获取上传凭证
+    rpc GetToken (UploadRequest) returns (UploadTokenResponse) {}
+    //上传回调
+    rpc Callback (CallbackInfo) returns (UploadResponse) {}
     //字节数据上传
-    rpc UploadBytes (UploadBytesInfo) returns (UploadResponse) {}
+   // rpc UploadBytes (UploadBytesInfo) returns (UploadResponse) {}
 }
+
+//上传回调数据
+message CallbackInfo {
+    string bucket =1;
+    string endUser =2;
+    string key =3;
+    string hash =4;
+    string fileName =5;
+    int64 size =6;
+    string etag =7;
+    string ext =8;
+    string mimeType =9;
+    string persistentId =10;
+    string uuid =12;
+    string catId =14;
+    string channel =15;
+    string batchCode =16; //上传批次，自定义【x:batch】
+    ImageInfo imageInfo =17;
+    AvInfo avInfo =18;
+}
+
+//回调图片信息
+message ImageInfo{
+    string format =1;
+    int64 width =2;
+    int64 height =3;
+}
+
+//回调音视频信息
+message AvInfo{
+    AudioInfo audio =1;
+    VideoInfo video =2;
+    FormatInfo format =3;
+}
+
+message AudioInfo {
+    string bit_rate =1; //BIT率
+    string codec_name =2; //编码名称
+    string codec_type =3; //编码类型
+    string duration =4; //时长
+    string start_time =8; //视频开始时间
+    int32 channels =9; //音频通道数
+}
+
+message VideoInfo {
+    string bit_rate =1; //BIT率
+    string codec_name =2; //编码名称
+    string codec_type =3; //编码类型
+    string duration =4; //时长
+    string display_aspect_ratio =5;
+    int64 height =6; //视频高
+    int64 width =7;//视频宽
+    string start_time =8; //视频开始时间
+    int32 channels =9; //音频通道数
+}
+
+message FormatInfo {
+    string bit_rate =1; //BIT率
+    string duration =2; //时长
+    string format_long_name =3;
+    string format_name =4;
+    string nb_streams =5;
+    string size =6;
+    string start_time =7;
+}
+
 
 //上传数据
 message UploadBytesInfo {
@@ -28,43 +97,30 @@ message UploadBytesInfo {
     string creator_name	=15;
 }
 
+
 // 修改文件请求信息
 message UploadRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    int64 top = 3;
-    int32 keywords = 4;
-    //file params
-    int64 id =5;
-    string title =6;
-    int64 cat_id =7;
-    string type =8;
-    string mime_type =9;
-    string file_name =10;
-    string raw_name =11;
-    string hash =12;
-    string flag	 =13;
-    bool is_big_file =14;
-    bool is_not_cat =15;
-    bool is_private	 =16;
-    string creator_type	 =17;
-    int64 creator_id	 =18;
-    string memo	 =19;
-    int64 cover_id =20;
-    string cover_url =21;
-    string code =22;
-    string cat_slug =23;
-    repeated string types =24;
-    repeated string codes =25;
-    repeated int64 ids =26;
-}
-
-message UploadData {
-    File entity = 1;
-    map<string,string> params =5;
+    string channel =1; //常用的有：common 公共媒体库, avatar 用户头像，attachment 附件 ,private 私密文件, plugins 插件应用
+    string type =2;
+    int64 cat_id =3;
+    string key = 4;
+    string tag =5;
+    string filename =6;
+    string source_type =9;
+    int64 source_id	 =10;
+    map<string,string> params =11;
 }
 
 message UploadResponse {
-    UploadData data = 1;
-    common.Error error = 2;
+    File file = 1;
+    map<string,string> params =3;
 }
+
+message UploadTokenResponse {
+    string key =1;
+    string token =2;
+    string batch =3;
+    map<string,string> extends =4;
+    string info =5;
+}
+

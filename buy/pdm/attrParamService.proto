@@ -59,16 +59,10 @@ message AttrParamRequest {
     repeated int32 ids =12;
 }
 
-message AttrParamData {
+message AttrParamResponse {
     AttrParam  entity = 1;
     string  param_value = 2;
     common.Pager pager = 3;
     repeated AttrParam items = 4;
-    common.Info info = 5;
+    string info = 5;
 }
-
-message AttrParamResponse {
-    AttrParamData data = 1;
-    common.Error error = 2;
-}
-

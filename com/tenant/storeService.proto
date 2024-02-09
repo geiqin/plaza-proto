@@ -54,6 +54,9 @@ message Store {
     Version version =24;
     string	status_name	=25;
     int32 valid_days =26;
+    string	province_name	=27;
+    string	city_name	=28;
+    string	county_name	=29;
 }
 
 message StoreConfig{
@@ -81,15 +84,10 @@ message StoreRequest{
     repeated int64 ids = 17;
 }
 
-message StoreData {
+message StoreResponse {
     Store entity = 1;
     common.Pager pager =2;
     repeated Store items = 3;
-    common.Info info =4;
+    string info =4;
     repeated string Modules = 5;
-}
-
-message StoreResponse {
-    StoreData data = 1;
-    common.Error error = 2;
 }

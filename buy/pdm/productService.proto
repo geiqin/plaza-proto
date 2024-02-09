@@ -118,15 +118,9 @@ message ProductRequest {
     repeated string md5_key_list = 34;
 }
 
-message ProductData {
+message ProductResponse {
     Product entity = 1;
     common.Pager pager = 3;
     repeated Product items = 4;
-    string msg= 5;
+    string info= 5;
 }
-
-message ProductResponse {
-    ProductData data = 1;
-    common.Error error = 2;
-}
-

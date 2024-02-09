@@ -42,6 +42,5 @@ message RoleResponse {
     Role entity = 1;
     common.Pager pager =2;
     repeated Role items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    string info =5;
 }

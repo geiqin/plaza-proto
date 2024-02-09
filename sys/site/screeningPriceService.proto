@@ -39,15 +39,9 @@ message ScreeningPriceRequest {
 }
 
 //
-message ScreeningPriceData {
+message ScreeningPriceResponse {
     ScreeningPrice entity = 1;
     common.Pager pager =2;
     repeated ScreeningPrice items = 3;
-    common.Info info =5;
-}
-
-//
-message ScreeningPriceResponse {
-    ScreeningPriceData data = 1;
-    common.Error error = 2;
+    string info =5;
 }

@@ -18,8 +18,6 @@ service FrontpageService {
     rpc UserCenter (FrontpageRequest) returns (FrontpageUserCenterResponse) {}
 }
 
-
-
 message FrontpageRequest {
     int64 paged = 1;
     int64 page_size = 2;
@@ -146,29 +144,30 @@ message SiteConfigInfo {
     //风格样式
     string home_app_ucenter_head_text_color =96;//用户中心头部文本颜色
     string home_app_ucenter_head_border_color =97;//用户中心头部文本边框颜色
-}
 
-//
-message FrontpageInitData {
-    SiteConfigInfo config = 1; //配置
-    string currency_symbol =2; //货币符号
-    repeated AppNav quick_nav =3; //快捷入口信息
-}
-
-//
-message FrontpageData {
-    common.Pager pager =2;
-    common.Info info =5;
+    //用户地址
+    string home_user_address_map_status =98;//用户地址地图(0关闭，1开启)
+    string home_user_address_idcard_status =99;//用户地址身份证(0关闭，1开启)
+    string home_extraction_address_position =100;//自提选择地理位置(0关闭，1开启)
 }
 
 //
 message FrontpageInitResponse {
-    FrontpageInitData data = 1;
-    common.Error error = 2;
+    SiteConfigInfo config = 1; //配置
+    string currency_symbol =2; //货币符号
+    repeated AppNav quick_nav =3; //快捷入口信息
+    string plugins_base =4;
 }
 
 
-message FrontpageHomeData {
+//
+message FrontpageResponse {
+    common.Pager pager =2;
+    string info =5;
+}
+
+
+message FrontpageHomeResponse {
     repeated AppNav navigation = 1;
     repeated Slide banner_list = 2;
     CartTotalInfo cart_total =3;
@@ -180,12 +179,6 @@ message FrontpageHomeData {
     PluginsActivityData plugins_activity_data =9;
 }
 
-//
-message FrontpageHomeResponse {
-    FrontpageHomeData data = 1;
-    common.Error error = 2;
-}
-
 message UserOrderStatus{
     string name =1;
     string status =2;
@@ -193,7 +186,7 @@ message UserOrderStatus{
 }
 
 //用户中心数据
-message FrontpageUserCenterData{
+message FrontpageUserCenterResponse{
     int64 user_id =1;
     string username =2;
     string nickname =3;
@@ -208,15 +201,4 @@ message FrontpageUserCenterData{
     repeated AppNav navigation = 13;
     repeated UserOrderStatus user_order_status =14;
     CartTotalInfo cart_total =15;
-}
-
-//用户中心响应
-message FrontpageUserCenterResponse {
-    FrontpageUserCenterData data = 1;
-    common.Error error = 2;
-}
-
-message FrontpageResponse {
-    FrontpageData data = 1;
-    common.Error error = 2;
 }

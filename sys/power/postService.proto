@@ -41,15 +41,10 @@ message PostRequest {
     repeated  int32	 ids	=9;
 }
 
-message PostData{
+message PostResponse{
     Post entity = 1;
     common.Pager pager =2;
     repeated Post items = 3;
     map<string,string> params = 4;
-    common.Info info =5;
-}
-
-message PostResponse {
-    common.Error error = 1;
-    PostData data =2;
+    string info =5;
 }

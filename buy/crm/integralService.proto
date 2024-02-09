@@ -1,7 +1,6 @@
 syntax = "proto3";
 package services;
 option go_package ="/.;services";
-import "common/base.proto";
 import "memberIntegralLogService.proto";
 import "integralLockChangeLogService.proto";
 
@@ -64,24 +63,12 @@ message IntegralRequest {
   string operator_name =9;//操作员名称
 }
 
-message IntegralData {
-  MemberIntegralLog entity = 1;
-  string msg =4;
-}
-
-
 message IntegralResponse {
-  IntegralData data = 1;
-  common.Error error = 2;
+  MemberIntegralLog entity = 1;
+  string info =4;
 }
-
-message LockingIntegralData {
-  IntegralLockChangeLog entity = 1;
-  string msg =4;
-}
-
 
 message LockingIntegralResponse {
-  LockingIntegralData data = 1;
-  common.Error error = 2;
+  IntegralLockChangeLog entity = 1;
+  string info =4;
 }

@@ -69,14 +69,9 @@ message PaymentAccountRequest{
     string is_enabled = 10;
 }
 
-message PaymentAccountData {
+message PaymentAccountResponse {
     PaymentAccount entity = 1;
     common.Pager pager =2;
     repeated PaymentAccount items = 3;
-    string msg =4;
-}
-
-message PaymentAccountResponse {
-    PaymentAccountData data = 1;
-    common.Error error = 2;
+    string info =4;
 }

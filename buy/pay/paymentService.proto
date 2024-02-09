@@ -58,14 +58,9 @@ message PaymentRequest {
   string is_platform_pay =12;//是否第三方平台支付: 0否，1是
 }
 
-message PaymentData{
+message PaymentResponse{
   Payment entity = 1;
   repeated Payment items =2;
   common.Pager pager =3;
-  string msg =4;
-}
-
-message PaymentResponse {
-  PaymentData data = 1;
-  common.Error error = 2;
+  string info =4;
 }

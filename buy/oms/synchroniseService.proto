@@ -1,7 +1,6 @@
 syntax = "proto3";
 package services;
 option go_package = "/.;services";
-import "common/base.proto";
 
 //同步操作
 service SynchroniseService {
@@ -21,6 +20,5 @@ message SynchroniseRequest {
 }
 
 message SynchroniseResponse {
-    common.Error error = 1;
-    common.Info info =2;
+    string info =1;
 }

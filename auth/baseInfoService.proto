@@ -1,9 +1,8 @@
 syntax = "proto3";
 package services;
 option go_package ="/.;services";
-import "common/base.proto";
 
-message AuthData {
+message AuthResponse {
     string access_token =1;
     string refresh_token =3;
     string scope =4;
@@ -31,9 +30,4 @@ message AuthRequest {
     int64 referrer_id =17;
     map<string,string> extends =18;
     map<string,string> header =19;
-}
-
-message AuthResponse {
-    AuthData data = 1;
-    common.Error error = 2;
 }

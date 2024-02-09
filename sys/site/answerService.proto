@@ -40,16 +40,9 @@ message AnswerRequest {
     repeated int64 ids = 10;
 }
 
-//
-message AnswerData {
+message AnswerResponse {
     Answer entity = 1;
     common.Pager pager =2;
     repeated Answer items = 3;
-    common.Info info =5;
-}
-
-//
-message AnswerResponse {
-    AnswerData data = 1;
-    common.Error error = 2;
+    string info =5;
 }

@@ -61,15 +61,10 @@ message RefundLogRequest{
     string status =14;//状态
 }
 
-message RefundLogData {
+message RefundLogResponse {
     RefundLog entity = 1;
     common.Pager pager =2;
     repeated RefundLog items = 3;
-    common.Info info =5;
+    string info =5;
 }
 
-
-message RefundLogResponse {
-    RefundLogData data = 1;
-    common.Error error = 2;
-}

@@ -56,14 +56,9 @@ message AreaRequest {
 }
 
 
-message AreaData {
+message AreaResponse {
     Area entity = 1;
     common.Pager pager =2;
     repeated Area items = 3;
 }
 
-
-message AreaResponse {
-    AreaData data = 1;
-    common.Error error =2;
-}

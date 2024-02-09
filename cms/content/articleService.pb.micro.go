@@ -43,11 +43,19 @@ func NewArticleServiceEndpoints() []*api.Endpoint {
 // Client API for ArticleService service
 
 type ArticleService interface {
+	//文章创建
 	Create(ctx context.Context, in *Article, opts ...client.CallOption) (*ArticleResponse, error)
+	//文章修改
 	Update(ctx context.Context, in *Article, opts ...client.CallOption) (*ArticleResponse, error)
+	//文章删除
 	Delete(ctx context.Context, in *Article, opts ...client.CallOption) (*ArticleResponse, error)
+	//文章获取
 	Get(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
+	//文章详情
+	Detail(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
+	//文章搜索
 	Search(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
+	//文章列表
 	List(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
 }
 
@@ -103,6 +111,16 @@ func (c *articleService) Get(ctx context.Context, in *ArticleRequest, opts ...cl
 	return out, nil
 }
 
+func (c *articleService) Detail(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
+	req := c.c.NewRequest(c.name, "ArticleService.Detail", in)
+	out := new(ArticleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *articleService) Search(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
 	req := c.c.NewRequest(c.name, "ArticleService.Search", in)
 	out := new(ArticleResponse)
@@ -126,11 +144,19 @@ func (c *articleService) List(ctx context.Context, in *ArticleRequest, opts ...c
 // Server API for ArticleService service
 
 type ArticleServiceHandler interface {
+	//文章创建
 	Create(context.Context, *Article, *ArticleResponse) error
+	//文章修改
 	Update(context.Context, *Article, *ArticleResponse) error
+	//文章删除
 	Delete(context.Context, *Article, *ArticleResponse) error
+	//文章获取
 	Get(context.Context, *ArticleRequest, *ArticleResponse) error
+	//文章详情
+	Detail(context.Context, *ArticleRequest, *ArticleResponse) error
+	//文章搜索
 	Search(context.Context, *ArticleRequest, *ArticleResponse) error
+	//文章列表
 	List(context.Context, *ArticleRequest, *ArticleResponse) error
 }
 
@@ -140,6 +166,7 @@ func RegisterArticleServiceHandler(s server.Server, hdlr ArticleServiceHandler, 
 		Update(ctx context.Context, in *Article, out *ArticleResponse) error
 		Delete(ctx context.Context, in *Article, out *ArticleResponse) error
 		Get(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
+		Detail(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
 		Search(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
 		List(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
 	}
@@ -170,306 +197,14 @@ func (h *articleServiceHandler) Get(ctx context.Context, in *ArticleRequest, out
 	return h.ArticleServiceHandler.Get(ctx, in, out)
 }
 
+func (h *articleServiceHandler) Detail(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
+	return h.ArticleServiceHandler.Detail(ctx, in, out)
+}
+
 func (h *articleServiceHandler) Search(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
 	return h.ArticleServiceHandler.Search(ctx, in, out)
 }
 
 func (h *articleServiceHandler) List(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
 	return h.ArticleServiceHandler.List(ctx, in, out)
-}
-
-// Api Endpoints for FrontArticleService service
-
-func NewFrontArticleServiceEndpoints() []*api.Endpoint {
-	return []*api.Endpoint{}
-}
-
-// Client API for FrontArticleService service
-
-type FrontArticleService interface {
-	Get(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
-	Search(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
-	List(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
-	ListByCat(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
-}
-
-type frontArticleService struct {
-	c    client.Client
-	name string
-}
-
-func NewFrontArticleService(name string, c client.Client) FrontArticleService {
-	return &frontArticleService{
-		c:    c,
-		name: name,
-	}
-}
-
-func (c *frontArticleService) Get(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontArticleService.Get", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *frontArticleService) Search(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontArticleService.Search", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *frontArticleService) List(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontArticleService.List", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *frontArticleService) ListByCat(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontArticleService.ListByCat", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for FrontArticleService service
-
-type FrontArticleServiceHandler interface {
-	Get(context.Context, *ArticleRequest, *ArticleResponse) error
-	Search(context.Context, *ArticleRequest, *ArticleResponse) error
-	List(context.Context, *ArticleRequest, *ArticleResponse) error
-	ListByCat(context.Context, *ArticleRequest, *ArticleResponse) error
-}
-
-func RegisterFrontArticleServiceHandler(s server.Server, hdlr FrontArticleServiceHandler, opts ...server.HandlerOption) error {
-	type frontArticleService interface {
-		Get(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
-		Search(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
-		List(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
-		ListByCat(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
-	}
-	type FrontArticleService struct {
-		frontArticleService
-	}
-	h := &frontArticleServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&FrontArticleService{h}, opts...))
-}
-
-type frontArticleServiceHandler struct {
-	FrontArticleServiceHandler
-}
-
-func (h *frontArticleServiceHandler) Get(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
-	return h.FrontArticleServiceHandler.Get(ctx, in, out)
-}
-
-func (h *frontArticleServiceHandler) Search(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
-	return h.FrontArticleServiceHandler.Search(ctx, in, out)
-}
-
-func (h *frontArticleServiceHandler) List(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
-	return h.FrontArticleServiceHandler.List(ctx, in, out)
-}
-
-func (h *frontArticleServiceHandler) ListByCat(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
-	return h.FrontArticleServiceHandler.ListByCat(ctx, in, out)
-}
-
-// Api Endpoints for PageService service
-
-func NewPageServiceEndpoints() []*api.Endpoint {
-	return []*api.Endpoint{}
-}
-
-// Client API for PageService service
-
-type PageService interface {
-	Get(ctx context.Context, in *Article, opts ...client.CallOption) (*ArticleResponse, error)
-	Search(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
-	List(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
-}
-
-type pageService struct {
-	c    client.Client
-	name string
-}
-
-func NewPageService(name string, c client.Client) PageService {
-	return &pageService{
-		c:    c,
-		name: name,
-	}
-}
-
-func (c *pageService) Get(ctx context.Context, in *Article, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "PageService.Get", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pageService) Search(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "PageService.Search", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pageService) List(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "PageService.List", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for PageService service
-
-type PageServiceHandler interface {
-	Get(context.Context, *Article, *ArticleResponse) error
-	Search(context.Context, *ArticleRequest, *ArticleResponse) error
-	List(context.Context, *ArticleRequest, *ArticleResponse) error
-}
-
-func RegisterPageServiceHandler(s server.Server, hdlr PageServiceHandler, opts ...server.HandlerOption) error {
-	type pageService interface {
-		Get(ctx context.Context, in *Article, out *ArticleResponse) error
-		Search(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
-		List(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
-	}
-	type PageService struct {
-		pageService
-	}
-	h := &pageServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&PageService{h}, opts...))
-}
-
-type pageServiceHandler struct {
-	PageServiceHandler
-}
-
-func (h *pageServiceHandler) Get(ctx context.Context, in *Article, out *ArticleResponse) error {
-	return h.PageServiceHandler.Get(ctx, in, out)
-}
-
-func (h *pageServiceHandler) Search(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
-	return h.PageServiceHandler.Search(ctx, in, out)
-}
-
-func (h *pageServiceHandler) List(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
-	return h.PageServiceHandler.List(ctx, in, out)
-}
-
-// Api Endpoints for FrontPageService service
-
-func NewFrontPageServiceEndpoints() []*api.Endpoint {
-	return []*api.Endpoint{}
-}
-
-// Client API for FrontPageService service
-
-type FrontPageService interface {
-	Get(ctx context.Context, in *Article, opts ...client.CallOption) (*ArticleResponse, error)
-	Search(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
-	List(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error)
-}
-
-type frontPageService struct {
-	c    client.Client
-	name string
-}
-
-func NewFrontPageService(name string, c client.Client) FrontPageService {
-	return &frontPageService{
-		c:    c,
-		name: name,
-	}
-}
-
-func (c *frontPageService) Get(ctx context.Context, in *Article, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontPageService.Get", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *frontPageService) Search(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontPageService.Search", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *frontPageService) List(ctx context.Context, in *ArticleRequest, opts ...client.CallOption) (*ArticleResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontPageService.List", in)
-	out := new(ArticleResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for FrontPageService service
-
-type FrontPageServiceHandler interface {
-	Get(context.Context, *Article, *ArticleResponse) error
-	Search(context.Context, *ArticleRequest, *ArticleResponse) error
-	List(context.Context, *ArticleRequest, *ArticleResponse) error
-}
-
-func RegisterFrontPageServiceHandler(s server.Server, hdlr FrontPageServiceHandler, opts ...server.HandlerOption) error {
-	type frontPageService interface {
-		Get(ctx context.Context, in *Article, out *ArticleResponse) error
-		Search(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
-		List(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error
-	}
-	type FrontPageService struct {
-		frontPageService
-	}
-	h := &frontPageServiceHandler{hdlr}
-	return s.Handle(s.NewHandler(&FrontPageService{h}, opts...))
-}
-
-type frontPageServiceHandler struct {
-	FrontPageServiceHandler
-}
-
-func (h *frontPageServiceHandler) Get(ctx context.Context, in *Article, out *ArticleResponse) error {
-	return h.FrontPageServiceHandler.Get(ctx, in, out)
-}
-
-func (h *frontPageServiceHandler) Search(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
-	return h.FrontPageServiceHandler.Search(ctx, in, out)
-}
-
-func (h *frontPageServiceHandler) List(ctx context.Context, in *ArticleRequest, out *ArticleResponse) error {
-	return h.FrontPageServiceHandler.List(ctx, in, out)
 }

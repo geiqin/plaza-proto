@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package services;
 option go_package ="/.;services";
-import "common/base.proto";
+
 import "payLogService.proto";
 import "refundLogService.proto";
 
@@ -99,22 +99,6 @@ message WeixinCloseOrderData {
     map<string,string> params =2;
 }
 
-message WeixinData {
-    string is_direct_succeed = 1; //是否直接成功(0否，1是)【支付/退款/转账/提现】
-    string is_need_callback = 2; //是否需要通知确认(0否，1是)
-    PayLog pay_log =3; //支付日志
-    RefundLog refund_log =4; //退款日志
-    string action_suggest =5 ;//操作建议：again 重新支付 / wait 等待确认 / close 关闭支付（选择其他支付方式）
-    WeixinPayData app_pay_data =10; //App支付数据
-    WeixinPayData mini_pay_data =11; //小程序支付数据
-    WeixinMicroPayData micro_pay_data =12; //付款码支付数据
-    WeixinPayData native_pay_data =13; //扫码支付数据
-    WeixinRefundData refund_data =14; //退款数据
-    WeixinQueryOrderData query_order_data =15; //产订单数据
-    WeixinCloseOrderData close_order_data =16; //关闭订单数据
-    string msg= 17;
-}
-
 //微信退款数据
 message WeixinRefundData {
     string refund_id =1;
@@ -129,9 +113,19 @@ message WeixinRefundData {
     string return_params =10; //平台返回数据JSON
 }
 
-
 message WeixinResponse {
-    WeixinData data =1;
-    common.Error error = 2;
+    string is_direct_succeed = 1; //是否直接成功(0否，1是)【支付/退款/转账/提现】
+    string is_need_callback = 2; //是否需要通知确认(0否，1是)
+    PayLog pay_log =3; //支付日志
+    RefundLog refund_log =4; //退款日志
+    string action_suggest =5 ;//操作建议：again 重新支付 / wait 等待确认 / close 关闭支付（选择其他支付方式）
+    WeixinPayData app_pay_data =10; //App支付数据
+    WeixinPayData mini_pay_data =11; //小程序支付数据
+    WeixinMicroPayData micro_pay_data =12; //付款码支付数据
+    WeixinPayData native_pay_data =13; //扫码支付数据
+    WeixinRefundData refund_data =14; //退款数据
+    WeixinQueryOrderData query_order_data =15; //产订单数据
+    WeixinCloseOrderData close_order_data =16; //关闭订单数据
+    string info= 17;
 }
 

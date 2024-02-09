@@ -5,7 +5,6 @@ package services
 
 import (
 	fmt "fmt"
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -44,13 +43,13 @@ func NewBuyServiceEndpoints() []*api.Endpoint {
 
 type BuyService interface {
 	//确认信息
-	Confirm(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error)
+	Confirm(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error)
 	//提交订单
-	Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuySubmitResponse, error)
+	Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error)
 	//订单拆分处理【service】
-	OrderSplitHandle(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error)
+	OrderSplitHandle(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error)
 	//购买商品服务验证【service】
-	BuyGoodsCheck(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error)
+	BuyGoodsCheck(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error)
 }
 
 type buyService struct {
@@ -65,9 +64,9 @@ func NewBuyService(name string, c client.Client) BuyService {
 	}
 }
 
-func (c *buyService) Confirm(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error) {
+func (c *buyService) Confirm(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error) {
 	req := c.c.NewRequest(c.name, "BuyService.Confirm", in)
-	out := new(BuyConfirmResponse)
+	out := new(BuyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -75,9 +74,9 @@ func (c *buyService) Confirm(ctx context.Context, in *BuyRequest, opts ...client
 	return out, nil
 }
 
-func (c *buyService) Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuySubmitResponse, error) {
+func (c *buyService) Submit(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error) {
 	req := c.c.NewRequest(c.name, "BuyService.Submit", in)
-	out := new(BuySubmitResponse)
+	out := new(BuyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -85,9 +84,9 @@ func (c *buyService) Submit(ctx context.Context, in *BuyRequest, opts ...client.
 	return out, nil
 }
 
-func (c *buyService) OrderSplitHandle(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error) {
+func (c *buyService) OrderSplitHandle(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error) {
 	req := c.c.NewRequest(c.name, "BuyService.OrderSplitHandle", in)
-	out := new(BuyConfirmResponse)
+	out := new(BuyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -95,9 +94,9 @@ func (c *buyService) OrderSplitHandle(ctx context.Context, in *BuyRequest, opts 
 	return out, nil
 }
 
-func (c *buyService) BuyGoodsCheck(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyConfirmResponse, error) {
+func (c *buyService) BuyGoodsCheck(ctx context.Context, in *BuyRequest, opts ...client.CallOption) (*BuyResponse, error) {
 	req := c.c.NewRequest(c.name, "BuyService.BuyGoodsCheck", in)
-	out := new(BuyConfirmResponse)
+	out := new(BuyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -109,21 +108,21 @@ func (c *buyService) BuyGoodsCheck(ctx context.Context, in *BuyRequest, opts ...
 
 type BuyServiceHandler interface {
 	//确认信息
-	Confirm(context.Context, *BuyRequest, *BuyConfirmResponse) error
+	Confirm(context.Context, *BuyRequest, *BuyResponse) error
 	//提交订单
-	Submit(context.Context, *BuyRequest, *BuySubmitResponse) error
+	Submit(context.Context, *BuyRequest, *BuyResponse) error
 	//订单拆分处理【service】
-	OrderSplitHandle(context.Context, *BuyRequest, *BuyConfirmResponse) error
+	OrderSplitHandle(context.Context, *BuyRequest, *BuyResponse) error
 	//购买商品服务验证【service】
-	BuyGoodsCheck(context.Context, *BuyRequest, *BuyConfirmResponse) error
+	BuyGoodsCheck(context.Context, *BuyRequest, *BuyResponse) error
 }
 
 func RegisterBuyServiceHandler(s server.Server, hdlr BuyServiceHandler, opts ...server.HandlerOption) error {
 	type buyService interface {
-		Confirm(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error
-		Submit(ctx context.Context, in *BuyRequest, out *BuySubmitResponse) error
-		OrderSplitHandle(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error
-		BuyGoodsCheck(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error
+		Confirm(ctx context.Context, in *BuyRequest, out *BuyResponse) error
+		Submit(ctx context.Context, in *BuyRequest, out *BuyResponse) error
+		OrderSplitHandle(ctx context.Context, in *BuyRequest, out *BuyResponse) error
+		BuyGoodsCheck(ctx context.Context, in *BuyRequest, out *BuyResponse) error
 	}
 	type BuyService struct {
 		buyService
@@ -136,18 +135,18 @@ type buyServiceHandler struct {
 	BuyServiceHandler
 }
 
-func (h *buyServiceHandler) Confirm(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error {
+func (h *buyServiceHandler) Confirm(ctx context.Context, in *BuyRequest, out *BuyResponse) error {
 	return h.BuyServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *buyServiceHandler) Submit(ctx context.Context, in *BuyRequest, out *BuySubmitResponse) error {
+func (h *buyServiceHandler) Submit(ctx context.Context, in *BuyRequest, out *BuyResponse) error {
 	return h.BuyServiceHandler.Submit(ctx, in, out)
 }
 
-func (h *buyServiceHandler) OrderSplitHandle(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error {
+func (h *buyServiceHandler) OrderSplitHandle(ctx context.Context, in *BuyRequest, out *BuyResponse) error {
 	return h.BuyServiceHandler.OrderSplitHandle(ctx, in, out)
 }
 
-func (h *buyServiceHandler) BuyGoodsCheck(ctx context.Context, in *BuyRequest, out *BuyConfirmResponse) error {
+func (h *buyServiceHandler) BuyGoodsCheck(ctx context.Context, in *BuyRequest, out *BuyResponse) error {
 	return h.BuyServiceHandler.BuyGoodsCheck(ctx, in, out)
 }

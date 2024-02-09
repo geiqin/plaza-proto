@@ -1,10 +1,9 @@
 syntax = "proto3";
 package services;
 option go_package = "/.;services";
-import "common/base.proto";
 import "baseInfoService.proto";
 
-message OrderPayData {
+message OrderPayResponse {
     int64 order_id =1;
     string order_no =2;
     string pay_status =3; //支付状态：success 成功,fail 失败, unknown 未知（需要查询确认）
@@ -15,7 +14,7 @@ message OrderPayData {
     OrderPayUnderline underline =8;
     OrderPayWallet wallet =9;
     map<string,string> WechatMini =10;
-    string msg = 12;
+    string info = 12;
 }
 
 message OrderPayUnderline{
@@ -40,9 +39,4 @@ message OrderPayRequest {
     string auth_code =8; //付款码
     int64 member_id =9;
     repeated int64 ids = 12;
-}
-
-message OrderPayResponse {
-    OrderPayData data = 1;
-    common.Error error = 2;
 }

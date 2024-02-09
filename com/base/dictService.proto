@@ -45,7 +45,6 @@ message DictResponse {
     Dict entity = 1;
     common.Pager pager =2;
     repeated Dict items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    string info =5;
     map<string,Dict> maps =6;
 }

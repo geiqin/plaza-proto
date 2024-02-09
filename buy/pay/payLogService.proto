@@ -80,15 +80,10 @@ message PayLogRequest{
     string client_type =19;//应用客户端类型
 }
 
-message PayLogData {
+message PayLogResponse {
     PayLog entity = 1;
     common.Pager pager =2;
     repeated PayLog items = 3;
-    common.Info info =4;
+    string info =4;
 }
 
-
-message PayLogResponse {
-    PayLogData data = 1;
-    common.Error error = 2;
-}

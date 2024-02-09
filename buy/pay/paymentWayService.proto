@@ -35,14 +35,9 @@ message PaymentWayRequest{
     string payment_type	=8;
 }
 
-message PaymentWayData {
+message PaymentWayResponse {
     PaymentWay entity = 1;
     common.Pager pager =2;
     repeated PaymentWay items = 3;
-    string msg =4;
-}
-
-message PaymentWayResponse {
-    PaymentWayData data = 1;
-    common.Error error = 2;
+    string info =4;
 }

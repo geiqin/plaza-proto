@@ -36,28 +36,16 @@ message CurrentMemberRequest{
     string iv = 11;
 }
 
-message CurrentMemberData {
+message CurrentMemberResponse {
     CurrentMember entity = 1;
     Member member = 2;
     common.Pager pager =3;
     repeated CurrentMember items = 4;
-    common.Info info =5;
+    string info =5;
     map<string,string> params =6;
 }
 
-
-message CurrentMemberResponse {
-    CurrentMemberData data = 1;
-    common.Error error = 2;
-}
-
-
-message CurrentMemberIndexData {
+message CurrentMemberIndexResponse {
     Member member =1;
     repeated DictInfo gender_list =2;
-}
-
-message CurrentMemberIndexResponse {
-    CurrentMemberIndexData data = 1;
-    common.Error error = 2;
 }

@@ -25,11 +25,6 @@ service SearchService {
 }
 
 
-message SpecDetailData{
-    SpecDetailDataBase spec_base =1;
-    repeated SpecDetailDataExtends extend_elements =2;
-}
-
 message SpecDetailDataBase{
     int64 id =1;
     int64 spu_id =2;
@@ -49,6 +44,7 @@ message SpecDetailDataBase{
 message SpecDetailDataExtends{
     string name =1;
 }
+
 
 
 //参与的活动
@@ -165,7 +161,7 @@ message PluginSeckillData {
     }
 }
 
-message SearchDetailData {
+message SearchDetailResponse {
     Spu goods = 1;
     CartTotalInfo cart_total =2;
     BuyButton buy_button = 3;
@@ -178,18 +174,13 @@ message SearchDetailData {
     map<string,string> plugins_data = 6;
 }
 
-message SearchDetailResponse {
-    SearchDetailData data = 1;
-    common.Error error = 2;
-}
-
 
 message SearchMapInfo {
     map<string,string> category =1;
     map<string,string> brand =5;
 }
 
-message SearchIndexData {
+message SearchIndexResponse {
     SearchMapInfo search_map_info =1;
     repeated Brand brand_list =2;
     repeated Term category_list =3;
@@ -198,37 +189,24 @@ message SearchIndexData {
     map<string,string>  goods_spec_list =6;
 }
 
-message SearchIndexResponse {
-    SearchIndexData data =1;
-    common.Error error = 2;
-}
 
-message SearchListData {
+message SearchListResponse {
     common.Pager pager = 1;
     repeated Spu  items = 2;
 }
 
-message SearchListResponse {
-    SearchListData data = 1;
-    common.Error error = 2;
-}
 
-message SearchCategoryData {
+message SearchCategoryResponse {
     repeated Term category = 1;
 }
 
-message SearchCategoryResponse {
-    SearchCategoryData data = 1;
-    common.Error error = 2;
+
+message SearchSpecDetailResponse{
+    SpecDetailDataBase spec_base =1;
+    repeated SpecDetailDataExtends extend_elements =2;
 }
 
-message SearchSpecDetailResponse {
-    SpecDetailData data = 1;
-    common.Error error = 2;
-}
-
-
-message SearchSpecTypeData {
+message SearchSpecTypeResponse {
     repeated string spec_type = 1;
     PluginsWholesaleData plugins_wholesale_data =2;
 
@@ -238,10 +216,6 @@ message PluginsWholesaleData{
     string name =1;
 }
 
-message SearchSpecTypeResponse {
-    SearchSpecTypeData data = 1;
-    common.Error error = 2;
-}
 message SearchRequest {
     int64 paged = 1;
     int64 page_size = 2;

@@ -48,15 +48,9 @@ message AppNavRequest {
 }
 
 //
-message AppNavData {
+message AppNavResponse {
     AppNav entity = 1;
     common.Pager pager =2;
     repeated AppNav items = 3;
-    common.Info info =5;
-}
-
-//
-message AppNavResponse {
-    AppNavData data = 1;
-    common.Error error = 2;
+    string info =5;
 }

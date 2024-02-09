@@ -42,15 +42,9 @@ message CustomViewRequest {
 }
 
 //
-message CustomViewData {
+message CustomViewResponse {
     CustomView entity = 1;
     common.Pager pager =2;
     repeated CustomView items = 3;
-    common.Info info =5;
-}
-
-//
-message CustomViewResponse {
-    CustomViewData data = 1;
-    common.Error error = 2;
+    string info =5;
 }

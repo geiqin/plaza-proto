@@ -43,7 +43,7 @@ func NewArticleCatServiceEndpoints() []*api.Endpoint {
 // Client API for ArticleCatService service
 
 type ArticleCatService interface {
-	ArticleList(ctx context.Context, in *ArticleCatWhere, opts ...client.CallOption) (*ArticleCatResponse, error)
+	ArticleList(ctx context.Context, in *ArticleCatRequest, opts ...client.CallOption) (*ArticleCatResponse, error)
 }
 
 type articleCatService struct {
@@ -58,7 +58,7 @@ func NewArticleCatService(name string, c client.Client) ArticleCatService {
 	}
 }
 
-func (c *articleCatService) ArticleList(ctx context.Context, in *ArticleCatWhere, opts ...client.CallOption) (*ArticleCatResponse, error) {
+func (c *articleCatService) ArticleList(ctx context.Context, in *ArticleCatRequest, opts ...client.CallOption) (*ArticleCatResponse, error) {
 	req := c.c.NewRequest(c.name, "ArticleCatService.ArticleList", in)
 	out := new(ArticleCatResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -71,12 +71,12 @@ func (c *articleCatService) ArticleList(ctx context.Context, in *ArticleCatWhere
 // Server API for ArticleCatService service
 
 type ArticleCatServiceHandler interface {
-	ArticleList(context.Context, *ArticleCatWhere, *ArticleCatResponse) error
+	ArticleList(context.Context, *ArticleCatRequest, *ArticleCatResponse) error
 }
 
 func RegisterArticleCatServiceHandler(s server.Server, hdlr ArticleCatServiceHandler, opts ...server.HandlerOption) error {
 	type articleCatService interface {
-		ArticleList(ctx context.Context, in *ArticleCatWhere, out *ArticleCatResponse) error
+		ArticleList(ctx context.Context, in *ArticleCatRequest, out *ArticleCatResponse) error
 	}
 	type ArticleCatService struct {
 		articleCatService
@@ -89,6 +89,6 @@ type articleCatServiceHandler struct {
 	ArticleCatServiceHandler
 }
 
-func (h *articleCatServiceHandler) ArticleList(ctx context.Context, in *ArticleCatWhere, out *ArticleCatResponse) error {
+func (h *articleCatServiceHandler) ArticleList(ctx context.Context, in *ArticleCatRequest, out *ArticleCatResponse) error {
 	return h.ArticleCatServiceHandler.ArticleList(ctx, in, out)
 }

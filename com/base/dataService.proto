@@ -42,15 +42,11 @@ message DataRequest {
 }
 
 
-message DataData {
+message DataResponse {
     Data entity = 1;
     common.Pager pager =2;
     repeated Data items = 3;
-    string msg = 4;
+    string info = 4;
 }
 
 
-message DataResponse {
-    DataData data = 1;
-    common.Error error =2;
-}

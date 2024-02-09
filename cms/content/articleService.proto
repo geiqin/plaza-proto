@@ -4,110 +4,95 @@ option go_package ="/.;services";
 import "common/base.proto";
 import "catService.proto";
 import "tagService.proto";
-import "articleGalleryService.proto";
+
 
 
 //文章管理
 service ArticleService {
+    //文章创建
     rpc Create (Article) returns (ArticleResponse) {}
+    //文章修改
     rpc Update (Article) returns (ArticleResponse) {}
+    //文章删除
     rpc Delete (Article) returns (ArticleResponse) {}
+    //文章获取
     rpc Get (ArticleRequest) returns (ArticleResponse) {}
+    //文章详情
+    rpc Detail (ArticleRequest) returns (ArticleResponse) {}
+    //文章搜索
     rpc Search (ArticleRequest) returns (ArticleResponse) {}
+    //文章列表
     rpc List (ArticleRequest) returns (ArticleResponse) {}
 }
 
-//文章使用
-service FrontArticleService {
-    rpc Get (ArticleRequest) returns (ArticleResponse) {}
-    rpc Search (ArticleRequest) returns (ArticleResponse) {}
-    rpc List (ArticleRequest) returns (ArticleResponse) {}
-    rpc ListByCat (ArticleRequest) returns (ArticleResponse) {}
-}
-
-//页面管理
-service PageService {
-    rpc Get (Article) returns (ArticleResponse) {}
-    rpc Search (ArticleRequest) returns (ArticleResponse) {}
-    rpc List (ArticleRequest) returns (ArticleResponse) {}
-}
-
-//页面使用
-service FrontPageService {
-    rpc Get (Article) returns (ArticleResponse) {}
-    rpc Search (ArticleRequest) returns (ArticleResponse) {}
-    rpc List (ArticleRequest) returns (ArticleResponse) {}
-}
 
 //文章信息
 message Article {
-    int64 id =1;
-    string title =2;
-    string name =3;
-    string type	=4;
-    string mime_type =5;
-    string content	 =6;
-    string excerpt	=7;
-    string keywords	=8;
-    string memo	=9;
-    int64 thumb_id	=10;
-    string thumb_url	=11;
-    int64 parent_id	=12;
-    bool allow_comment  =13;
-    int32 comment_count	=14;
-    int32 view_count	=15;
-    bool is_system	 =16;
-    int32 sort =17;
-    int64 user_id	=18;
-    int64 area_id	=19;
-    int64 ext11 =20;
-    int32 ext21 =21;
-    int32 ext22 =22;
-    string ext31 =23;
-    string ext32 =24;
-    string ext33 =25;
-    string status	=26;
-    string published_at =27;
-    string created_at =28;
-    string updated_at =29;
-    map<string,string> metas =30;
-    repeated Cat cats = 31;
-    repeated Tag tags = 32;
-    repeated ArticleGallery galleries = 33;
-    Article pre_article = 34;
-    Article next_article = 35;
+    int64  id =1;//ID
+    string title =2;//标题
+    string code =3;//代码标识
+    string type =4;//类型: article 文章 page 页面
+    string mime_type =5;//Mine类型:imgtxt图文，link链接，video视频，photo相册
+    string title_color =6;//标题颜色
+    string content =7;//文章内容
+    string excerpt =8;//摘要
+    string jump_url =9;//跳转url地址
+    string cover_url =10;//封面图URL
+    string video_url =11;//短视频url
+    int64  parent_id =12;//父级ID
+    int64  shop_id =13;//分店ID
+    int64  realstore_id =14;//门店ID
+    int64  area_id =15;//区域ID(预留专用)
+    int32  images_count =16;//图片数量
+    int32  comment_count =17;//评论数量
+    int32  access_count =18;//访问次数
+    int32  sort =19;//排序值
+    string seo_title =20;//SEO标题
+    string seo_keywords =21;//SEO关键字
+    string seo_desc =22;//SEO描述
+    string author_type =23;//发布者类型
+    int64  author_id =24;//发布者ID
+    string status =25;//状态:0隐藏，1显示，2草稿
+    string published_at =26;//发布时间
+    repeated string images =27;//文章相册
+    map<string,string>  extends =28;//扩展元素
+    string created_at =29;
+    string updated_at =30;
+    Article pre_article =31;//前一篇
+    Article next_article =32;//后一篇
+    repeated Cat cats = 33;
+    repeated Tag tags = 34;
+    string type_name =35;
+    string mime_type_name =36;
+    string status_name =37;
 }
 
 //文章查询参数
 message ArticleRequest {
     int64 paged =1;
     int64 page_size =2;
-    int64 top = 3;
+    int32 top = 3;
 
     int64 id = 4;
     string title = 5;
     string type	=6;
-    string mine_type	=7;
-    int64 cat_id = 8;
-    string cat_code	 = 9;
-    repeated string names = 10;
-    bool is_include = 11;// 是否包含上一篇、下一篇文章
-    string status = 12;
-    bool is_client = 13; // 是否客户端展示
+    string mime_type	=7;
+    string code	 = 9;
+    int64 cat_id = 10;
+    string cat_code	 = 11;
+    repeated string codes = 12;
+    string is_include = 13;// 是否包含上一篇、下一篇文章
+    string status = 14;
     repeated int64 ids = 15;
     repeated string cat_codes = 16;
+
 }
 
-message ArticleData {
+message ArticleResponse {
     Article entity = 1;
     Cat current_cat = 2;
     common.Pager pager =3;
     repeated Article items = 4;
-    common.Info info =5;
-}
-
-message ArticleResponse {
-    ArticleData data = 1;
-    common.Error error = 2;
+    string info =5;
 }
 

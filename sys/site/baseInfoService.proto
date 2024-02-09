@@ -86,7 +86,7 @@ message GoodsSpec {
 }
 
 message CartTotalInfo{
-    int32 buy_number =1;
+    int64 buy_number =1;
     int64 total_price =2;
 }
 

@@ -20,17 +20,16 @@ message Cat {
     string code	 =2;
     string name	 =3;
     int64 parent_id =4;
-    int64 thumb_id	 =5;
+    string dept_path  =5;
     string thumb_url  =6;
-    string path  =7;
     string description =8;
-    bool system	 =9;
+    string is_show =9;
     int32 sort =10;
-    int32 article_count =11;
     string created_at =12;
     string updated_at =13;
     Cat parent = 14;
     repeated Cat children = 15;
+    string is_show_name =16;
 }
 
 
@@ -42,18 +41,15 @@ message CatRequest {
     string code = 5;
     string name = 6;
     int64 parent_id = 7;
-    repeated string codes = 8;
-    repeated int64 ids = 9;
-}
-
-message CatData {
-    Cat entity = 1;
-    common.Pager pager =2;
-    repeated Cat items = 3;
-    common.Info info =4;
+    string parent_code = 8;
+    string is_show = 9;
+    repeated string codes = 10;
+    repeated int64 ids = 11;
 }
 
 message CatResponse {
-    CatData data = 1;
-    common.Error error = 2;
+    Cat entity = 1;
+    common.Pager pager =2;
+    repeated Cat items = 3;
+   string info =4;
 }

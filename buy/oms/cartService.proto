@@ -1,7 +1,6 @@
 syntax = "proto3";
 package services;
 option go_package = "/.;services";
-import "common/base.proto";
 import "baseInfoService.proto";
 
 service CartService {
@@ -50,7 +49,7 @@ message CartGoods  {
 }
 
 //购物车数据
-message CartData {
+message CartResponse {
     int64 buy_number =1;
     int64 total_price =2;
     int64 address_id = 3;
@@ -70,12 +69,7 @@ message CartRequest {
 }
 
 
-message CartResponse {
-    CartData data = 1;
-    common.Error error = 2;
-}
-
 message CartStockResponse {
     CartGoods data = 1;
-    common.Error error = 2;
+    string info = 2;
 }

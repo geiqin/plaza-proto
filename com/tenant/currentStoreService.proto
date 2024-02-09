@@ -1,7 +1,6 @@
 syntax = "proto3";
 package services;
 option go_package ="/.;services";
-import "common/base.proto";
 import "storeService.proto";
 
 service CurrentStoreService {
@@ -16,13 +15,8 @@ message CurrentStoreRequest{
 }
 
 
-message CurrentStoreData {
-    Store store = 1;
-    string msg =4;
-    repeated string Modules = 5;
-}
-
 message CurrentStoreResponse {
-    CurrentStoreData data = 1;
-    common.Error error = 2;
+    Store store = 1;
+    string info =4;
+    repeated string Modules = 5;
 }

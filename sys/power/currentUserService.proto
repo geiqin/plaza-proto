@@ -27,18 +27,13 @@ message CurrentUserRequest {
     string tag =8;
 }
 
-message CurrentUserData {
+message CurrentUserResponse {
     User user = 1;
     repeated Nav navs = 2;
     repeated string permissions = 3;
     common.Pager pager =4;
     repeated User items = 5;
-    common.Info info =6;
+    string info =6;
 }
 
-
-message CurrentUserResponse{
-    CurrentUserData data = 1;
-    common.Error error = 2;
-}
 

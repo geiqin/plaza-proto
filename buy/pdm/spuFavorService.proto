@@ -28,25 +28,14 @@ message SpuFavorRequest {
     int64 member_id = 5;
 }
 
-message SpuFavorData {
+message SpuFavorResponse {
     int64 count = 1;
     common.Pager pager = 2;
     repeated SpuFavor items = 3;
 }
 
-message SpuFavorResponse {
-    SpuFavorData data = 1;
-    common.Error error = 2;
-}
-
-message SpuFavorCollectData {
+message SpuFavorCollectResponse {
     int32 count = 1;
     string status = 2;
     string text = 3;
-}
-
-message SpuFavorCollectResponse {
-    SpuFavorCollectData data = 1;
-    common.Error error = 2;
-    string msg =3;
 }

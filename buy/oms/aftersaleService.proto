@@ -127,17 +127,13 @@ message AftersaleRequest {
     repeated int64 ids = 19;
 }
 
-message AftersaleData {
+message AftersaleResponse {
     Aftersale aftersale = 1;
     common.Pager pager = 4;
     repeated Aftersale items = 5;
-    common.Info info = 6;
+    string info = 6;
 }
 
-message AftersaleResponse {
-    AftersaleData data = 1;
-    common.Error error = 2;
-}
 
 message AftersaleStepInfo{
     int32 number =1;
@@ -166,7 +162,7 @@ message AftersaleTypeInfo {
     string class =5;
 }
 
-message AftersaleServiceData {
+message AftersaleServiceResponse {
     Order order_data = 1;
     Aftersale new_aftersale_data = 2;
     AftersaleStepData step_data =3;
@@ -176,9 +172,4 @@ message AftersaleServiceData {
     string return_goods_address =7;
     repeated AftersaleTypeInfo aftersale_type_list =8;
     string editor_path_type =9;
-}
-
-message AftersaleServiceResponse {
-    AftersaleServiceData data = 1;
-    common.Error error = 2;
 }

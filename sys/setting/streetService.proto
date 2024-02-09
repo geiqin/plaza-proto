@@ -49,16 +49,11 @@ message Street {
     repeated Street children = 14;
 }
 
-message StreetData {
+message StreetResponse {
     Street entity = 1;
     common.Pager pager =2;
     repeated Street items = 3;
-    common.Info info =4;
+    string info =4;
     int32 new_index =5;
-}
-
-message StreetResponse {
-    StreetData data = 1;
-    common.Error error = 4;
 }
 

@@ -2,7 +2,6 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "addressTypeService.proto";
 import "baseInfoService.proto";
 
 service AddressService {
@@ -38,16 +37,21 @@ message Address {
     string mobile = 8;
     string created_at = 9;
     string updated_at = 10;
-    // @inject_tag: gorm:"-"
     AreaInfo area = 11;
     repeated AddressType address_types = 12;
+}
+
+message AddressType {
+    int64 id = 1;
+    int64 address_id = 2;
+    int32 type = 3;
+    bool is_default = 4;
 }
 
 message AddressResponse {
     Address entity = 1;
     common.Pager pager =2;
     repeated Address items = 3;
-    common.Error error = 4;
-    common.Info info =5;
+    string info =5;
 }
 

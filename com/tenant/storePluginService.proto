@@ -69,29 +69,19 @@ message StorePluginRequest {
 
 }
 
-message StorePluginData {
+message StorePluginResponse {
     StorePlugin entity = 1;
     common.Pager pager =2;
     repeated StorePlugin items = 3;
-    string msg =4;
+    string info =4;
 }
 
 //
-message ConfigListData {
+message ConfigListDataResponse {
     string mode =1;
     repeated StorePlugin items = 2;
     map<string,StorePlugin> maps = 3;
     string plugins_base =4;
     string plugins_data =5;
-    string msg =6;
-}
-
-message ConfigListDataResponse {
-    ConfigListData data = 1;
-    common.Error error = 2;
-}
-
-message StorePluginResponse {
-    StorePluginData data = 1;
-    common.Error error = 2;
+    string info =6;
 }

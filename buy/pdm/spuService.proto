@@ -203,9 +203,7 @@ message FormSku  {
     string specification =12;//规格信息
     string spec_indexes =13;//规格索引
     repeated SkuSpec spec =14; //规格信息列表
-
 }
-
 
 message SpuRequest {
     int64 paged = 1;
@@ -243,34 +241,16 @@ message SpuRequest {
     repeated string md5_key_list = 33;
 }
 
-message SpuDetailData {
-    Spu goods = 1;
-    common.Pager pager = 3;
-    repeated Spu items = 4;
-    common.Info info = 5;
-}
-
-message SpuData {
+message SpuResponse {
     Spu entity = 1;
     common.Pager pager = 3;
     repeated Spu items = 4;
-    common.Info info = 5;
-}
-
-message SpuResponse {
-    SpuData data = 1;
-    common.Error error = 2;
-}
-
-message SkuData {
-    Sku entity = 1;
-    common.Pager pager = 3;
-    repeated Sku items = 4;
-    common.Info info = 5;
+    string info = 5;
 }
 
 message SkuResponse {
-    SkuData data = 1;
-    common.Error error = 2;
+    Sku entity = 1;
+    common.Pager pager = 3;
+    repeated Sku items = 4;
+    string info = 5;
 }
-

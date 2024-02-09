@@ -37,16 +37,9 @@ message LinkRequest {
     repeated int64 ids = 10;
 }
 
-//
-message LinkData {
+message LinkResponse {
     Link entity = 1;
     common.Pager pager =2;
     repeated Link items = 3;
-    common.Info info =5;
-}
-
-//
-message LinkResponse {
-    LinkData data = 1;
-    common.Error error = 2;
+    string info =5;
 }

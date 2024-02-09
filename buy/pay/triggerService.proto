@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package services;
 option go_package ="/.;services";
-import "common/base.proto";
+
 
 //触发器
 service TriggerService {
@@ -25,12 +25,7 @@ message TriggerRequest {
     repeated int64 safeguard_ids = 4;
 }
 
-message TriggerData{
+message TriggerResponse{
     map<string,string> params=1;
-    common.Info info =2;
-}
-
-message TriggerResponse {
-    TriggerData data =1;
-    common.Error error = 2;
+   string info =2;
 }

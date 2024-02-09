@@ -301,7 +301,7 @@ func (x *NavTypeRequest) GetIds() []int64 {
 	return nil
 }
 
-type NavTypeData struct {
+type NavTypeResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -309,82 +309,13 @@ type NavTypeData struct {
 	Entity *NavType      `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
 	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
 	Items  []*NavType    `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   *common.Info  `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
-}
-
-func (x *NavTypeData) Reset() {
-	*x = NavTypeData{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_navTypeService_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *NavTypeData) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*NavTypeData) ProtoMessage() {}
-
-func (x *NavTypeData) ProtoReflect() protoreflect.Message {
-	mi := &file_navTypeService_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use NavTypeData.ProtoReflect.Descriptor instead.
-func (*NavTypeData) Descriptor() ([]byte, []int) {
-	return file_navTypeService_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *NavTypeData) GetEntity() *NavType {
-	if x != nil {
-		return x.Entity
-	}
-	return nil
-}
-
-func (x *NavTypeData) GetPager() *common.Pager {
-	if x != nil {
-		return x.Pager
-	}
-	return nil
-}
-
-func (x *NavTypeData) GetItems() []*NavType {
-	if x != nil {
-		return x.Items
-	}
-	return nil
-}
-
-func (x *NavTypeData) GetInfo() *common.Info {
-	if x != nil {
-		return x.Info
-	}
-	return nil
-}
-
-type NavTypeResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Data  *NavTypeData  `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Info   string        `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *NavTypeResponse) Reset() {
 	*x = NavTypeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_navTypeService_proto_msgTypes[3]
+		mi := &file_navTypeService_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -397,7 +328,7 @@ func (x *NavTypeResponse) String() string {
 func (*NavTypeResponse) ProtoMessage() {}
 
 func (x *NavTypeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_navTypeService_proto_msgTypes[3]
+	mi := &file_navTypeService_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -410,24 +341,38 @@ func (x *NavTypeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NavTypeResponse.ProtoReflect.Descriptor instead.
 func (*NavTypeResponse) Descriptor() ([]byte, []int) {
-	return file_navTypeService_proto_rawDescGZIP(), []int{3}
+	return file_navTypeService_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *NavTypeResponse) GetData() *NavTypeData {
+func (x *NavTypeResponse) GetEntity() *NavType {
 	if x != nil {
-		return x.Data
+		return x.Entity
 	}
 	return nil
 }
 
-func (x *NavTypeResponse) GetError() *common.Error {
+func (x *NavTypeResponse) GetPager() *common.Pager {
 	if x != nil {
-		return x.Error
+		return x.Pager
 	}
 	return nil
 }
 
-type StoreNavsData struct {
+func (x *NavTypeResponse) GetItems() []*NavType {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *NavTypeResponse) GetInfo() string {
+	if x != nil {
+		return x.Info
+	}
+	return ""
+}
+
+type StoreNavsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -437,72 +382,10 @@ type StoreNavsData struct {
 	NavTypeIds []int64    `protobuf:"varint,3,rep,packed,name=nav_type_ids,json=navTypeIds,proto3" json:"nav_type_ids"`
 }
 
-func (x *StoreNavsData) Reset() {
-	*x = StoreNavsData{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_navTypeService_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *StoreNavsData) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StoreNavsData) ProtoMessage() {}
-
-func (x *StoreNavsData) ProtoReflect() protoreflect.Message {
-	mi := &file_navTypeService_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StoreNavsData.ProtoReflect.Descriptor instead.
-func (*StoreNavsData) Descriptor() ([]byte, []int) {
-	return file_navTypeService_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *StoreNavsData) GetNavs() []*Nav {
-	if x != nil {
-		return x.Navs
-	}
-	return nil
-}
-
-func (x *StoreNavsData) GetNavTypes() []*NavType {
-	if x != nil {
-		return x.NavTypes
-	}
-	return nil
-}
-
-func (x *StoreNavsData) GetNavTypeIds() []int64 {
-	if x != nil {
-		return x.NavTypeIds
-	}
-	return nil
-}
-
-type StoreNavsResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Data  *StoreNavsData `protobuf:"bytes,1,opt,name=data,proto3" json:"data"`
-	Error *common.Error  `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
-}
-
 func (x *StoreNavsResponse) Reset() {
 	*x = StoreNavsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_navTypeService_proto_msgTypes[5]
+		mi := &file_navTypeService_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -515,7 +398,7 @@ func (x *StoreNavsResponse) String() string {
 func (*StoreNavsResponse) ProtoMessage() {}
 
 func (x *StoreNavsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_navTypeService_proto_msgTypes[5]
+	mi := &file_navTypeService_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -528,19 +411,26 @@ func (x *StoreNavsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StoreNavsResponse.ProtoReflect.Descriptor instead.
 func (*StoreNavsResponse) Descriptor() ([]byte, []int) {
-	return file_navTypeService_proto_rawDescGZIP(), []int{5}
+	return file_navTypeService_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *StoreNavsResponse) GetData() *StoreNavsData {
+func (x *StoreNavsResponse) GetNavs() []*Nav {
 	if x != nil {
-		return x.Data
+		return x.Navs
 	}
 	return nil
 }
 
-func (x *StoreNavsResponse) GetError() *common.Error {
+func (x *StoreNavsResponse) GetNavTypes() []*NavType {
 	if x != nil {
-		return x.Error
+		return x.NavTypes
+	}
+	return nil
+}
+
+func (x *StoreNavsResponse) GetNavTypeIds() []int64 {
+	if x != nil {
+		return x.NavTypeIds
 	}
 	return nil
 }
@@ -593,39 +483,26 @@ var file_navTypeService_proto_rawDesc = []byte{
 	0x76, 0x65, 0x72, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x76, 0x65, 0x72, 0x12, 0x1b,
 	0x0a, 0x09, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28,
 	0x05, 0x52, 0x08, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x49, 0x64, 0x12, 0x10, 0x0a, 0x03, 0x69,
-	0x64, 0x73, 0x18, 0x0d, 0x20, 0x03, 0x28, 0x03, 0x52, 0x03, 0x69, 0x64, 0x73, 0x22, 0xa8, 0x01,
-	0x0a, 0x0b, 0x4e, 0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12, 0x29, 0x0a,
-	0x06, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e,
-	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e, 0x61, 0x76, 0x54, 0x79, 0x70, 0x65,
-	0x52, 0x06, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x12, 0x23, 0x0a, 0x05, 0x70, 0x61, 0x67, 0x65,
-	0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
-	0x2e, 0x50, 0x61, 0x67, 0x65, 0x72, 0x52, 0x05, 0x70, 0x61, 0x67, 0x65, 0x72, 0x12, 0x27, 0x0a,
-	0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x73,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e, 0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x52,
-	0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x12, 0x20, 0x0a, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x04,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x6e,
-	0x66, 0x6f, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x22, 0x61, 0x0a, 0x0f, 0x4e, 0x61, 0x76, 0x54,
-	0x79, 0x70, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x29, 0x0a, 0x04, 0x64,
-	0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x73, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e, 0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x44, 0x61, 0x74, 0x61,
-	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x23, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x45,
-	0x72, 0x72, 0x6f, 0x72, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x22, 0x84, 0x01, 0x0a, 0x0d,
-	0x53, 0x74, 0x6f, 0x72, 0x65, 0x4e, 0x61, 0x76, 0x73, 0x44, 0x61, 0x74, 0x61, 0x12, 0x21, 0x0a,
-	0x04, 0x6e, 0x61, 0x76, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x73, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e, 0x61, 0x76, 0x52, 0x04, 0x6e, 0x61, 0x76, 0x73,
-	0x12, 0x2e, 0x0a, 0x09, 0x6e, 0x61, 0x76, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x18, 0x02, 0x20,
-	0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e,
-	0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x52, 0x08, 0x6e, 0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x73,
-	0x12, 0x20, 0x0a, 0x0c, 0x6e, 0x61, 0x76, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x69, 0x64, 0x73,
-	0x18, 0x03, 0x20, 0x03, 0x28, 0x03, 0x52, 0x0a, 0x6e, 0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x49,
-	0x64, 0x73, 0x22, 0x65, 0x0a, 0x11, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x4e, 0x61, 0x76, 0x73, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2b, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73,
-	0x2e, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x4e, 0x61, 0x76, 0x73, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04,
-	0x64, 0x61, 0x74, 0x61, 0x12, 0x23, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x45, 0x72, 0x72,
-	0x6f, 0x72, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x32, 0xbb, 0x03, 0x0a, 0x0e, 0x4e, 0x61,
+	0x64, 0x73, 0x18, 0x0d, 0x20, 0x03, 0x28, 0x03, 0x52, 0x03, 0x69, 0x64, 0x73, 0x22, 0x9e, 0x01,
+	0x0a, 0x0f, 0x4e, 0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x29, 0x0a, 0x06, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x11, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e, 0x61, 0x76,
+	0x54, 0x79, 0x70, 0x65, 0x52, 0x06, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x12, 0x23, 0x0a, 0x05,
+	0x70, 0x61, 0x67, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x63, 0x6f,
+	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x72, 0x52, 0x05, 0x70, 0x61, 0x67, 0x65,
+	0x72, 0x12, 0x27, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x11, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e, 0x61, 0x76, 0x54,
+	0x79, 0x70, 0x65, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x69, 0x6e,
+	0x66, 0x6f, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x22, 0x88,
+	0x01, 0x0a, 0x11, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x4e, 0x61, 0x76, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a, 0x04, 0x6e, 0x61, 0x76, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e, 0x61,
+	0x76, 0x52, 0x04, 0x6e, 0x61, 0x76, 0x73, 0x12, 0x2e, 0x0a, 0x09, 0x6e, 0x61, 0x76, 0x5f, 0x74,
+	0x79, 0x70, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e, 0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x52, 0x08, 0x6e,
+	0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x73, 0x12, 0x20, 0x0a, 0x0c, 0x6e, 0x61, 0x76, 0x5f, 0x74,
+	0x79, 0x70, 0x65, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x03, 0x52, 0x0a, 0x6e,
+	0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x49, 0x64, 0x73, 0x32, 0xbb, 0x03, 0x0a, 0x0e, 0x4e, 0x61,
 	0x76, 0x54, 0x79, 0x70, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x35, 0x0a, 0x03,
 	0x47, 0x65, 0x74, 0x12, 0x11, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4e,
 	0x61, 0x76, 0x54, 0x79, 0x70, 0x65, 0x1a, 0x19, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
@@ -669,52 +546,43 @@ func file_navTypeService_proto_rawDescGZIP() []byte {
 	return file_navTypeService_proto_rawDescData
 }
 
-var file_navTypeService_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_navTypeService_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_navTypeService_proto_goTypes = []interface{}{
 	(*NavType)(nil),           // 0: services.NavType
 	(*NavTypeRequest)(nil),    // 1: services.NavTypeRequest
-	(*NavTypeData)(nil),       // 2: services.NavTypeData
-	(*NavTypeResponse)(nil),   // 3: services.NavTypeResponse
-	(*StoreNavsData)(nil),     // 4: services.StoreNavsData
-	(*StoreNavsResponse)(nil), // 5: services.StoreNavsResponse
-	(*Nav)(nil),               // 6: services.Nav
-	(*Version)(nil),           // 7: services.Version
-	(*common.Pager)(nil),      // 8: common.Pager
-	(*common.Info)(nil),       // 9: common.Info
-	(*common.Error)(nil),      // 10: common.Error
+	(*NavTypeResponse)(nil),   // 2: services.NavTypeResponse
+	(*StoreNavsResponse)(nil), // 3: services.StoreNavsResponse
+	(*Nav)(nil),               // 4: services.Nav
+	(*Version)(nil),           // 5: services.Version
+	(*common.Pager)(nil),      // 6: common.Pager
 }
 var file_navTypeService_proto_depIdxs = []int32{
-	6,  // 0: services.NavType.navs:type_name -> services.Nav
-	7,  // 1: services.NavType.version:type_name -> services.Version
-	0,  // 2: services.NavTypeData.entity:type_name -> services.NavType
-	8,  // 3: services.NavTypeData.pager:type_name -> common.Pager
-	0,  // 4: services.NavTypeData.items:type_name -> services.NavType
-	9,  // 5: services.NavTypeData.info:type_name -> common.Info
-	2,  // 6: services.NavTypeResponse.data:type_name -> services.NavTypeData
-	10, // 7: services.NavTypeResponse.error:type_name -> common.Error
-	6,  // 8: services.StoreNavsData.navs:type_name -> services.Nav
-	0,  // 9: services.StoreNavsData.nav_types:type_name -> services.NavType
-	4,  // 10: services.StoreNavsResponse.data:type_name -> services.StoreNavsData
-	10, // 11: services.StoreNavsResponse.error:type_name -> common.Error
-	0,  // 12: services.NavTypeService.Get:input_type -> services.NavType
-	0,  // 13: services.NavTypeService.Create:input_type -> services.NavType
-	0,  // 14: services.NavTypeService.Update:input_type -> services.NavType
-	0,  // 15: services.NavTypeService.Delete:input_type -> services.NavType
-	1,  // 16: services.NavTypeService.Search:input_type -> services.NavTypeRequest
-	1,  // 17: services.NavTypeService.List:input_type -> services.NavTypeRequest
-	1,  // 18: services.NavTypeService.StoreNavs:input_type -> services.NavTypeRequest
-	3,  // 19: services.NavTypeService.Get:output_type -> services.NavTypeResponse
-	3,  // 20: services.NavTypeService.Create:output_type -> services.NavTypeResponse
-	3,  // 21: services.NavTypeService.Update:output_type -> services.NavTypeResponse
-	3,  // 22: services.NavTypeService.Delete:output_type -> services.NavTypeResponse
-	3,  // 23: services.NavTypeService.Search:output_type -> services.NavTypeResponse
-	3,  // 24: services.NavTypeService.List:output_type -> services.NavTypeResponse
-	5,  // 25: services.NavTypeService.StoreNavs:output_type -> services.StoreNavsResponse
-	19, // [19:26] is the sub-list for method output_type
-	12, // [12:19] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	4,  // 0: services.NavType.navs:type_name -> services.Nav
+	5,  // 1: services.NavType.version:type_name -> services.Version
+	0,  // 2: services.NavTypeResponse.entity:type_name -> services.NavType
+	6,  // 3: services.NavTypeResponse.pager:type_name -> common.Pager
+	0,  // 4: services.NavTypeResponse.items:type_name -> services.NavType
+	4,  // 5: services.StoreNavsResponse.navs:type_name -> services.Nav
+	0,  // 6: services.StoreNavsResponse.nav_types:type_name -> services.NavType
+	0,  // 7: services.NavTypeService.Get:input_type -> services.NavType
+	0,  // 8: services.NavTypeService.Create:input_type -> services.NavType
+	0,  // 9: services.NavTypeService.Update:input_type -> services.NavType
+	0,  // 10: services.NavTypeService.Delete:input_type -> services.NavType
+	1,  // 11: services.NavTypeService.Search:input_type -> services.NavTypeRequest
+	1,  // 12: services.NavTypeService.List:input_type -> services.NavTypeRequest
+	1,  // 13: services.NavTypeService.StoreNavs:input_type -> services.NavTypeRequest
+	2,  // 14: services.NavTypeService.Get:output_type -> services.NavTypeResponse
+	2,  // 15: services.NavTypeService.Create:output_type -> services.NavTypeResponse
+	2,  // 16: services.NavTypeService.Update:output_type -> services.NavTypeResponse
+	2,  // 17: services.NavTypeService.Delete:output_type -> services.NavTypeResponse
+	2,  // 18: services.NavTypeService.Search:output_type -> services.NavTypeResponse
+	2,  // 19: services.NavTypeService.List:output_type -> services.NavTypeResponse
+	3,  // 20: services.NavTypeService.StoreNavs:output_type -> services.StoreNavsResponse
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_navTypeService_proto_init() }
@@ -750,18 +618,6 @@ func file_navTypeService_proto_init() {
 			}
 		}
 		file_navTypeService_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NavTypeData); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_navTypeService_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NavTypeResponse); i {
 			case 0:
 				return &v.state
@@ -773,19 +629,7 @@ func file_navTypeService_proto_init() {
 				return nil
 			}
 		}
-		file_navTypeService_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StoreNavsData); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_navTypeService_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_navTypeService_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StoreNavsResponse); i {
 			case 0:
 				return &v.state
@@ -804,7 +648,7 @@ func file_navTypeService_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_navTypeService_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

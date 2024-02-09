@@ -1,19 +1,18 @@
 syntax = "proto3";
 package services;
 option go_package = "/.;services";
-import "common/base.proto";
 import "orderAddressService.proto";
 import "baseInfoService.proto";
 //结账台
 service BuyService {
     //确认信息
-    rpc Confirm (BuyRequest) returns (BuyConfirmResponse) {}
+    rpc Confirm (BuyRequest) returns (BuyResponse) {}
     //提交订单
-    rpc Submit (BuyRequest) returns (BuySubmitResponse) {}
+    rpc Submit (BuyRequest) returns (BuyResponse) {}
     //订单拆分处理【service】
-    rpc OrderSplitHandle (BuyRequest) returns (BuyConfirmResponse) {}
+    rpc OrderSplitHandle (BuyRequest) returns (BuyResponse) {}
     //购买商品服务验证【service】
-    rpc BuyGoodsCheck (BuyRequest) returns (BuyConfirmResponse) {}
+    rpc BuyGoodsCheck (BuyRequest) returns (BuyResponse) {}
 }
 
 //购买分组
@@ -137,7 +136,7 @@ message DeliveryChoose{
 }
 
 //购买确认数据
-message BuyConfirmData {
+message BuyConfirmData{
     OrderBase base = 1;//结算信息(汇总)
     repeated BuyGroup group_list =2; //分组商品列表
     repeated PaymentInfo payment_list =3; //支付方式列表
@@ -150,11 +149,6 @@ message BuyConfirmData {
     string is_order_submit = 12; //是否订单已提交 0否，1是
 }
 
-message BuyConfirmResponse {
-    BuyConfirmData data = 1;
-    common.Error error = 2;
-}
-
 //购买提交数据
 message BuySubmitData {
     string order_status =1;
@@ -163,8 +157,9 @@ message BuySubmitData {
     string jump_url =4;
 }
 
-message BuySubmitResponse {
-    BuySubmitData data = 1;
-    common.Error error = 2;
+//购买提交数据
+message BuyResponse {
+    BuyConfirmData confirm_data =1;
+    BuySubmitData submit_data =2;
 }
 

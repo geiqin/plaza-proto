@@ -45,6 +45,5 @@ message DictTypeResponse {
     DictType entity = 1;
     common.Pager pager =2;
     repeated DictType items = 3;
-    common.Error error = 5;
-    common.Info info =6;
+    string info =6;
 }
