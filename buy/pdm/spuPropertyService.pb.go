@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//通用属性
+// 通用属性
 type GenericProperty struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -76,7 +76,7 @@ func (x *GenericProperty) GetGroups() []*GenericPropertyGroup {
 	return nil
 }
 
-//通用属性(分组)
+// 通用属性(分组)
 type GenericPropertyGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -132,7 +132,7 @@ func (x *GenericPropertyGroup) GetGroupName() string {
 	return ""
 }
 
-//通用属性(参数)
+// 通用属性(参数)
 type GenericPropertyParam struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -212,7 +212,7 @@ func (x *GenericPropertyParam) GetParamUnit() string {
 	return ""
 }
 
-//服务属性
+// 服务属性
 type ServiceProperty struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -276,7 +276,7 @@ func (x *ServiceProperty) GetValues() []*ServicePropertyValueInfo {
 	return nil
 }
 
-//销售属性
+// 销售属性
 type SaleProperty struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -340,7 +340,7 @@ func (x *SaleProperty) GetValues() []*SalePropertyValueInfo {
 	return nil
 }
 
-//SKU自己的属性
+// SKU自己的属性
 type OwnProperty struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

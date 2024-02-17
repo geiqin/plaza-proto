@@ -78,6 +78,7 @@ message Product {
     string spec_desc =89;//规格描述
     string spec_data =90; //规格信息JSON
     repeated SkuSpec spec =91; //规格信息列表
+    string goods_url =92;//商品URL
 }
  
 

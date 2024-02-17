@@ -211,7 +211,7 @@ func (x *SpecDetailDataExtends) GetName() string {
 	return ""
 }
 
-//参与的活动
+// 参与的活动
 type PluginsPromotionData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -449,7 +449,7 @@ func (x *BuyButton) GetData() []*BuyButtonDataList {
 	return nil
 }
 
-//中间切换导航
+// 中间切换导航
 type MiddleTabsNav struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -505,7 +505,7 @@ func (x *MiddleTabsNav) GetEvent() string {
 	return ""
 }
 
-//导航更多列表
+// 导航更多列表
 type NavMoreList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

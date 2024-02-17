@@ -843,7 +843,7 @@ func (x *Sku) GetPromotionType() string {
 	return ""
 }
 
-//表单商品
+// 表单商品
 type FormSpu struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
