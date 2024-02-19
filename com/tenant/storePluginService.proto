@@ -25,8 +25,8 @@ service StorePluginService {
 
     //应用配置保存
     rpc ConfigSave (StorePlugin) returns (StorePluginResponse) {}
-    //应用配置列表
-    rpc ConfigListData (StorePluginRequest) returns (ConfigListDataResponse) {}
+    //有效应用名称列表
+    rpc PluginsValidCodes (StorePluginRequest) returns (StorePluginResponse) {}
 }
 
 message StorePlugin {
@@ -66,22 +66,13 @@ message StorePluginRequest {
     repeated int64 ids = 14;
     repeated int32 plugin_ids = 15;
     repeated string plugin_codes = 16;
-
 }
+
 
 message StorePluginResponse {
     StorePlugin entity = 1;
     common.Pager pager =2;
     repeated StorePlugin items = 3;
-    string info =4;
-}
-
-//
-message ConfigListDataResponse {
-    string mode =1;
-    repeated StorePlugin items = 2;
-    map<string,StorePlugin> maps = 3;
-    string plugins_base =4;
-    string plugins_data =5;
-    string info =6;
+    repeated string plugins_valid_codes =4;
+    string info =5;
 }
