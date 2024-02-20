@@ -2,13 +2,6 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 
-message AuthResponse {
-    string access_token =1;
-    string refresh_token =3;
-    string scope =4;
-    string token_type =5;
-    int64 expires_in =2;
-}
 
 message AuthRequest {
     string client_id =1;
@@ -30,4 +23,18 @@ message AuthRequest {
     int64 referrer_id =17;
     map<string,string> extends =18;
     map<string,string> header =19;
+}
+
+message AuthToken {
+    string access_token =1;
+    string refresh_token =3;
+    string scope =4;
+    string token_type =5;
+    int64 expires_in =2;
+}
+
+
+message AuthResponse {
+    AuthToken token =1;
+    string info =2;
 }
