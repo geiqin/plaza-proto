@@ -56,13 +56,13 @@ type SpuService interface {
 	//商品详情（后台编辑显示）
 	Detail(ctx context.Context, in *Spu, opts ...client.CallOption) (*SpuResponse, error)
 	//规格详情(准备弃用)
-	SpecDetailInfo(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error)
+	// rpc SpecDetailInfo(SpuRequest) returns (SkuResponse);
 	//规格详情列表(准备弃用)
-	SpecDetailList(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error)
+	// rpc SpecDetailList(SpuRequest) returns (SkuResponse);
 	//商品上下架
-	SetSale(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
+	UpdateShelve(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//商品排序
-	SetSort(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
+	UpdateSort(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//获取列表(后台服务)
 	List(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//商品查询
@@ -141,28 +141,8 @@ func (c *spuService) Detail(ctx context.Context, in *Spu, opts ...client.CallOpt
 	return out, nil
 }
 
-func (c *spuService) SpecDetailInfo(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error) {
-	req := c.c.NewRequest(c.name, "SpuService.SpecDetailInfo", in)
-	out := new(SkuResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *spuService) SpecDetailList(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SkuResponse, error) {
-	req := c.c.NewRequest(c.name, "SpuService.SpecDetailList", in)
-	out := new(SkuResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *spuService) SetSale(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error) {
-	req := c.c.NewRequest(c.name, "SpuService.SetSale", in)
+func (c *spuService) UpdateShelve(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuService.UpdateShelve", in)
 	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -171,8 +151,8 @@ func (c *spuService) SetSale(ctx context.Context, in *SpuRequest, opts ...client
 	return out, nil
 }
 
-func (c *spuService) SetSort(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error) {
-	req := c.c.NewRequest(c.name, "SpuService.SetSort", in)
+func (c *spuService) UpdateSort(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuService.UpdateSort", in)
 	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -217,13 +197,13 @@ type SpuServiceHandler interface {
 	//商品详情（后台编辑显示）
 	Detail(context.Context, *Spu, *SpuResponse) error
 	//规格详情(准备弃用)
-	SpecDetailInfo(context.Context, *SpuRequest, *SkuResponse) error
+	// rpc SpecDetailInfo(SpuRequest) returns (SkuResponse);
 	//规格详情列表(准备弃用)
-	SpecDetailList(context.Context, *SpuRequest, *SkuResponse) error
+	// rpc SpecDetailList(SpuRequest) returns (SkuResponse);
 	//商品上下架
-	SetSale(context.Context, *SpuRequest, *SpuResponse) error
+	UpdateShelve(context.Context, *SpuRequest, *SpuResponse) error
 	//商品排序
-	SetSort(context.Context, *SpuRequest, *SpuResponse) error
+	UpdateSort(context.Context, *SpuRequest, *SpuResponse) error
 	//获取列表(后台服务)
 	List(context.Context, *SpuRequest, *SpuResponse) error
 	//商品查询
@@ -238,10 +218,8 @@ func RegisterSpuServiceHandler(s server.Server, hdlr SpuServiceHandler, opts ...
 		Get(ctx context.Context, in *Spu, out *SpuResponse) error
 		GetBase(ctx context.Context, in *Spu, out *SpuResponse) error
 		Detail(ctx context.Context, in *Spu, out *SpuResponse) error
-		SpecDetailInfo(ctx context.Context, in *SpuRequest, out *SkuResponse) error
-		SpecDetailList(ctx context.Context, in *SpuRequest, out *SkuResponse) error
-		SetSale(ctx context.Context, in *SpuRequest, out *SpuResponse) error
-		SetSort(ctx context.Context, in *SpuRequest, out *SpuResponse) error
+		UpdateShelve(ctx context.Context, in *SpuRequest, out *SpuResponse) error
+		UpdateSort(ctx context.Context, in *SpuRequest, out *SpuResponse) error
 		List(ctx context.Context, in *SpuRequest, out *SpuResponse) error
 		Search(ctx context.Context, in *SpuRequest, out *SpuResponse) error
 	}
@@ -280,20 +258,12 @@ func (h *spuServiceHandler) Detail(ctx context.Context, in *Spu, out *SpuRespons
 	return h.SpuServiceHandler.Detail(ctx, in, out)
 }
 
-func (h *spuServiceHandler) SpecDetailInfo(ctx context.Context, in *SpuRequest, out *SkuResponse) error {
-	return h.SpuServiceHandler.SpecDetailInfo(ctx, in, out)
+func (h *spuServiceHandler) UpdateShelve(ctx context.Context, in *SpuRequest, out *SpuResponse) error {
+	return h.SpuServiceHandler.UpdateShelve(ctx, in, out)
 }
 
-func (h *spuServiceHandler) SpecDetailList(ctx context.Context, in *SpuRequest, out *SkuResponse) error {
-	return h.SpuServiceHandler.SpecDetailList(ctx, in, out)
-}
-
-func (h *spuServiceHandler) SetSale(ctx context.Context, in *SpuRequest, out *SpuResponse) error {
-	return h.SpuServiceHandler.SetSale(ctx, in, out)
-}
-
-func (h *spuServiceHandler) SetSort(ctx context.Context, in *SpuRequest, out *SpuResponse) error {
-	return h.SpuServiceHandler.SetSort(ctx, in, out)
+func (h *spuServiceHandler) UpdateSort(ctx context.Context, in *SpuRequest, out *SpuResponse) error {
+	return h.SpuServiceHandler.UpdateSort(ctx, in, out)
 }
 
 func (h *spuServiceHandler) List(ctx context.Context, in *SpuRequest, out *SpuResponse) error {

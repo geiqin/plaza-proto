@@ -25,13 +25,13 @@ service SpuService {
     //商品详情（后台编辑显示）
     rpc Detail (Spu) returns (SpuResponse);
     //规格详情(准备弃用)
-    rpc SpecDetailInfo(SpuRequest) returns (SkuResponse);
+   // rpc SpecDetailInfo(SpuRequest) returns (SkuResponse);
     //规格详情列表(准备弃用)
-    rpc SpecDetailList(SpuRequest) returns (SkuResponse);
+   // rpc SpecDetailList(SpuRequest) returns (SkuResponse);
     //商品上下架
-    rpc SetSale (SpuRequest) returns (SpuResponse);
+    rpc UpdateShelve (SpuRequest) returns (SpuResponse);
     //商品排序
-    rpc SetSort(SpuRequest) returns (SpuResponse);
+    rpc UpdateSort(SpuRequest) returns (SpuResponse);
     //获取列表(后台服务)
     rpc List (SpuRequest) returns (SpuResponse);
     //商品查询
@@ -39,80 +39,85 @@ service SpuService {
 }
 
 message Spu {
-    int64 id =1;//ID
-    int64 taxonomy_id =2;//标准类目ID
-    int64 category_id =3;//商品分类ID
-    int32 brand_id =4;//品牌ID
-    int64 shop_id =5;//分店ID
+    int64  id =1;//ID
+    int64  shop_id =2;//多店铺ID
+    int64  taxonomy_id =3;//标准类目ID
+    int64  category_id =4;//商品分类ID
+    int32  brand_id =5;//品牌ID
     string title =6;//商品标题
     string title_color =7;//标题颜色
     string simple_desc =8;//简述
-    string type =9;//商品类型：product商品,material原料,assets资产
-    string site_type =10;//商品类型
-    string unit =11;//计量单位
-    float unit_rate =12;//计量单位换算率
-    string is_open_weight =13;//是否开启称重（称重商品不能是多规格）（0否, 1是）
-    string weight_plu_code =14;//称重PLU码
+    string type =9;//商品类型：goods实物商品,fictitious虚拟商品,combine组合商品
+    string is_virtual =10;//是否为虚拟商品（0否, 1是）
+    string is_many_spec =11;//是否多规格商品（0否, 1是）
+    string is_open_weight =12;//是否开启称重（0否, 1是）
+    string is_open_presale =13;//是否开启预售（0否, 1是）
+    string model =14;//型号
     int64  place_origin_id =15;//产地ID（地区省id）
-    int32  inventory =16;//库存（所有规格库存总和）
-    string image_url =17;//商品主图url
-    string video_url =18;//短视频url
-    string content =19;//商品内容
-    int32  template_id =20;//商品详情模板信息
-    string is_many_spec =21;//是否多规格商品,否则为单品
-    string is_deduction_inventory =22;//是否扣减库存（0否, 1是）
-    string is_listed =23;//是否上架（下架后用户不可见, 0否, 1是）
-    string is_member_right =24;//是否设置商品购买权限（0否, 1是）
-    string is_member_price =25;//是否参与会员折扣价（0否, 1是）
-    int64  min_original_price =26;//最低原价
-    int64  max_original_price =27;//最大原价
-    int64  min_price =28;//最低价格
-    int64  max_price =29;//最高价格
-    string show_original_price =30;//显示原价（单值:10, 区间:10.00-20.00）一般用于展示使用
-    string show_price =31;//显示销售价格（单值:10, 区间:10.00-20.00）一般用于展示使用
-    int64  buy_min_number =32;//最低起购数量（默认1）
-    int64  buy_max_number =33;//最大购买数量（最大数值 100000000, 小于等于0或空则不限）
-    int64  give_integral =34;//购买赠送积分比例
+    string unit =16;//计量单位
+    float  unit_rate =17;//计量单位换算率(称重商品需要)
+    string weight_plu_code =18;//称重PLU码
+    int64  inventory =19;//库存（所有规格库存总和）
+    string image_url =20;//商品主图url
+    string video_url =21;//短视频url
+    string content =22;//商品内容
+    string is_shelve =24;//是否上架（ 0否, 1是）
+    string is_disable_buy =25;//是否不允许直接购买
+    string is_deduction_inventory =26;//是否扣减库存（0否, 1是）
+    string is_member_right =27;//是否设置商品购买权限（0否, 1是）
+    string is_member_price =28;//是否参与会员折扣价（0否, 1是）
+    int64  min_original_price =29;//最低原价
+    int64  max_original_price =30;//最大原价
+    int64  min_price =31;//最低价格
+    int64  max_price =32;//最高价格
+    int64  buy_min_number =33;//最低起购数量（默认1）
+    int64  buy_max_number =34;//最大购买数量（最大数值 100000000, 小于等于0或空则不限）
     int32  photo_count =35;//相册图片数量
-    int32  sale_count =36;//销量
-    int32  access_count =37;//访问次数
-    int32  sort =38;//排序值
-    int32  fable_sale_count =39;//虚构销量（前端展示销量时会加上虚假销量）
-    string button_mode =40;//立即购买按钮：1默认名称，2自定义名称
-    string button_custom =41;//按钮自定义名称,英文最多15个字符
-    string freight_type =42;//运费模式：1统一邮费，2运费模板
-    int64  freight_uniform_fee =43;//统一运费
-    int64  freight_template_id =44;//运费模板ID
-    string is_fictitious =45;//是否虚拟商品（0否, 1是）
-    map<string,string> fictitious_value =46;//虚拟商品展示数据
-    string seo_title =48;//SEO标题
-    string seo_keywords =49;//SEO关键字
-    string status = 50;
-    string created_at = 51;
-    string updated_at = 52;
-    Brand brand = 55;
-    Category category = 56;
-    SpuPresale presale = 57;
-    repeated SpuPhoto photos = 59;
-    repeated Term terms = 60;
-    repeated Tag tags = 61;
-    repeated Sku skus = 62;
-    repeated SpecTypeProperty spec_type_data = 63;//规格类型数据
-    repeated GoodsSpecBase spec_base =64;
-    GoodsSpecification specifications =65;
-    string show_field_original_price_text =66;
-    string show_field_price_text =67;
-    CommentScore comments_score =68;
-    repeated CommentInfo comments_data =69;
-    int32 comments_count =70;
-    string goods_url =71;
-    string is_favor = 72; //是否已收藏(0否，1是)
-    string content_web =73; //web内容
-    string content_app =74; //app内容
-    string brand_name =75;
-    bool selected = 76;
-    string is_error =77;//是否错误（0否，1是）
-    string error_msg =78;//错误信息
+    int32  access_count =36;//访问次数
+    int32  sale_count =37;//实际销量
+    int32  initial_sale_count =38;//初始销售数量（前端展示销量=实际销量+初始销售数量）
+    string button_mode =41;//立即购买按钮：1默认名称，2自定义名称
+    string button_custom =42;//按钮自定义名称,英文最多15个字符
+    string freight_type =43;//运费模式：0统一邮费，1运费模板
+    int64  freight_uniform_fee =44;//统一运费
+    int64  freight_template_id =45;//运费模板ID
+    repeated string support_logistics =46;//支持的物流类型（1快递发货, 2同城配送, 3虚拟发货,4上门自提）
+    repeated string support_client_type =47;//支持的客户终端
+    map<string,string> fictitious_value =48;//虚拟商品展示数据
+    int64  detail_template_id =49;//展示详情模板ID
+    string seo_title =50;//SEO标题
+    string seo_keywords =51;//SEO关键字
+    string seo_desc =52;//SEO描述
+    int32  sort =53;//排序(数字越大显示越靠前)
+    string status =54;//商品状态。0创建 1新品 2正常 3清仓 4停售 5淘汰
+    string created_at = 55;
+    string updated_at = 56;
+    string show_original_price =60;//显示原价（单值:10, 区间:10.00-20.00）一般用于展示使用
+    string show_price =61;//显示销售价格（单值:10, 区间:10.00-20.00）一般用于展示使用
+    string show_field_original_price_text =62;
+    string show_field_price_text =63;
+    Brand brand = 64;
+    Category category = 65;
+    SpuPresale presale = 66;
+    repeated SpuPhoto photos = 67;
+    repeated Term terms = 68;
+    repeated Tag tags = 69;
+    repeated Sku skus = 70;
+    repeated SpecTypeProperty spec_type_data = 71;//规格类型数据
+    repeated GoodsSpecBase spec_base =72;
+    GoodsSpecification specifications =73;
+    CommentScore comments_score =74;
+    repeated CommentInfo comments_data =75;
+    int32 comments_count =76;
+    string goods_url =77;
+    string content_web =78; //web内容
+    string content_app =79; //app内容
+    string brand_name =80;
+    string status_name =81;
+    string is_error =82;//是否错误（0否，1是）
+    string error_msg =83;//错误信息
+    string is_favor = 84; //是否已收藏(0否，1是)
+    bool selected = 85;
 }
 
 message Sku  {
@@ -138,54 +143,64 @@ message Sku  {
 }
 
 
-
 //表单商品
 message FormSpu {
-    int64 id =1;//ID
-    int64 taxonomy_id =2;//标准类目ID
-    int64 category_id =3;//商品分类ID
-    int32 brand_id =4;//品牌ID
-    string site_type =5;//商品类型
+    int64  id =1;//ID
+    int64  shop_id =2;//多店铺ID
+    int64  taxonomy_id =3;//标准类目ID
+    int64  category_id =4;//商品分类ID
+    int32  brand_id =5;//品牌ID
     string title =6;//商品标题
     string title_color =7;//标题颜色
     string simple_desc =8;//简述
-    string type =9;//商品类型：product商品,material原料,assets资产
-    string subtype =10;//商品子类型：course,column, recharge, room, vip,food
-    string unit =11;//计量单位
-    float unit_rate =12;//计量单位换算率
-    string is_open_weight =13;//是否开启称重（称重商品不能是多规格）（0否, 1是）
-    string weight_plu_code =14;//称重PLU码
+    string type =9;//商品类型：goods实物商品,fictitious虚拟商品,combine组合商品
+    string is_virtual =10;//是否为虚拟商品（0否, 1是）
+    string is_many_spec =11;//是否多规格商品（0否, 1是）
+    string is_open_weight =12;//是否开启称重（0否, 1是）
+    string is_open_presale =13;//是否开启预售（0否, 1是）
+    string model =14;//型号
     int64  place_origin_id =15;//产地ID（地区省id）
-    string image_url =16;//商品主图url
-    string video_url =17;//短视频url
-    string content =18;//商品内容
-    int32  template_id =19;//商品详情模板信息
-    string is_many_spec =20;//是否多规格商品,否则为单品
-    string is_deduction_inventory =21;//是否扣减库存（0否, 1是）
-    string is_listed =22;//是否上架（下架后用户不可见, 0否, 1是）
-    string is_member_right =23;//是否设置商品购买权限（0否, 1是）
-    string is_member_price =24;//是否参与会员折扣价（0否, 1是）
-    int64  buy_min_number =31;//最低起购数量（默认1）
-    int64  buy_max_number =32;//最大购买数量（最大数值 100000000, 小于等于0或空则不限）
-    int64  give_integral =33;//购买赠送积分比例
-    int32  fable_sale_count =37;//虚构销量（前端展示销量时会加上虚假销量）
-    string button_mode =38;//立即购买按钮：1默认名称，2自定义名称
-    string button_custom =39;//按钮自定义名称,英文最多15个字符
-    string freight_type =40;//运费模式：1统一邮费，2运费模板
-    int64  freight_uniform_fee =41;//统一运费
-    int64  freight_template_id =42;//运费模板ID
-    int32  sort =43;//排序值
-    string seo_title =44;//SEO标题
-    string seo_keywords =45;//SEO关键字
-    SpuPresale presale = 52;
-    repeated SpuPhoto photos = 53;
-    repeated int64 term_ids = 54;
-    repeated int64 tag_ids = 55;
+    string unit =16;//计量单位
+    float  unit_rate =17;//计量单位换算率(称重商品需要)
+    string weight_plu_code =18;//称重PLU码
+    string image_url =20;//商品主图url
+    string video_url =21;//短视频url
+    string content =22;//商品内容
+    string is_shelve =24;//是否上架（ 0否, 1是）
+    string is_disable_buy =25;//是否不允许直接购买
+    string is_deduction_inventory =26;//是否扣减库存（0否, 1是）
+    string is_member_right =27;//是否设置商品购买权限（0否, 1是）
+    string is_member_price =28;//是否参与会员折扣价（0否, 1是）
+    int64  min_original_price =29;//最低原价
+    int64  max_original_price =30;//最大原价
+    int64  min_price =31;//最低价格
+    int64  max_price =32;//最高价格
+    int64  buy_min_number =33;//最低起购数量（默认1）
+    int64  buy_max_number =34;//最大购买数量（最大数值 100000000, 小于等于0或空则不限）
+    int32  initial_sale_count =38;//初始销售数量（前端展示销量=实际销量+初始销售数量）
+    string button_mode =41;//立即购买按钮：1默认名称，2自定义名称
+    string button_custom =42;//按钮自定义名称,英文最多15个字符
+    string freight_type =43;//运费模式：0统一邮费，1运费模板
+    int64  freight_uniform_fee =44;//统一运费
+    int64  freight_template_id =45;//运费模板ID
+    repeated string support_logistics =46;//支持的物流类型（1快递发货, 2同城配送, 3虚拟发货,4上门自提）
+    repeated string support_client_type =47;//支持的客户终端
+    map<string,string> fictitious_value =48;//虚拟商品展示数据
+    int64  detail_template_id =49;//展示详情模板ID
+    string seo_title =50;//SEO标题
+    string seo_keywords =51;//SEO关键字
+    string seo_desc =52;//SEO描述
+    int32  sort =53;//排序(数字越大显示越靠前)
+
+    SpuPresale presale = 54;
+    repeated SpuPhoto photos = 55;
+    repeated int64 term_ids = 56;
+    repeated int64 tag_ids = 57;
     repeated int64 photo_image_ids = 58;
-    FormSku sku  = 56;
-    repeated FormSku skus = 57;
-    repeated SpecTypeProperty spec_types = 59;//规格类型数据
-    repeated Term terms = 60;
+    FormSku sku  = 59;
+    repeated FormSku skus = 60;
+    repeated SpecTypeProperty spec_types = 61;//规格类型数据
+    repeated Term terms = 62;
 }
 
 message FormSku  {
@@ -210,7 +225,7 @@ message SpuRequest {
     int64 page_size = 2;
     string keywords = 3;
     int64 sku_id = 4;
-    string is_listed = 5;
+    string is_shelve = 5;
     int64 spu_id = 6;
     string coding = 7;
     string title =8;
