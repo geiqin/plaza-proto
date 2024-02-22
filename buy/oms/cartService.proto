@@ -42,7 +42,7 @@ message CartGoods  {
     string error_msg =19;//错误信息
     int64 stock =20;//购买数量
     int64 subtotal_price =21;//商品小计
-    repeated SpecificationData spec =22; //规格描述
+    repeated SkuSpecInfo spec =22; //规格描述
     string spec_desc =23;
     string brand_name =24;
     string goods_url =25;
@@ -63,7 +63,7 @@ message CartRequest {
     int64 spu_id =3;
     int64 stock =4;
     string buy_event_type =5;
-    repeated SpecificationData spec =6;
+    repeated SkuSpecInfo spec =6;
     repeated int64 ids =9;
     int64 member_id =10;
 }

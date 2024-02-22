@@ -56,7 +56,7 @@ message BuyGoodsItem  {
     string error_msg =21;//错误信息
     int64 stock =22;//购买数量
     int64 subtotal_price =23;//商品小计
-    repeated SpecificationData spec =24; //规格描述
+    repeated SkuSpecInfo spec =24; //规格描述
     string spec_desc =25;
     string brand_name =26;
     string goods_url =27;
@@ -110,7 +110,7 @@ message BuyCommodity {
     string md5_key =2;//规格md5_key
     int64 stock = 3; //数量
     int64 cart_id =4;//购物车行id【购物车专用】
-    repeated SpecificationData spec =5; //规格【待弃用：为兼容旧版小程序】
+    repeated SkuSpecInfo spec =5; //规格【待弃用：为兼容旧版小程序】
 }
 
 //配送选择数据

@@ -27,7 +27,7 @@ message OrderDetail {
     string is_all_delivered =23; //是否已全部发货(0否，1是)
     string model =24;//型号
     DiscountAllocation DiscountAllocation =25; //优惠分摊
-    repeated SpecificationData spec =26;//规格
+    repeated SkuSpecInfo spec =26;//规格
     string spec_desc =27;//描述
     string extend_data =28;//扩展数据 json
     string created_at  = 29;
