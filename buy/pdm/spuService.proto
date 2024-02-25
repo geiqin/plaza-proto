@@ -62,7 +62,7 @@ message Spu {
     string video_url =21;//短视频url
     string content =22;//商品内容
     string is_shelve =24;//是否上架（ 0否, 1是）
-    string is_disable_buy =25;//是否不允许直接购买
+    string is_only_display =25;//是否仅供展示
     string is_deduction_inventory =26;//是否扣减库存（0否, 1是）
     string is_member_right =27;//是否设置商品购买权限（0否, 1是）
     string is_member_price =28;//是否参与会员折扣价（0否, 1是）
@@ -167,7 +167,7 @@ message FormSpu {
     string video_url =21;//短视频url
     string content =22;//商品内容
     string is_shelve =24;//是否上架（ 0否, 1是）
-    string is_disable_buy =25;//是否不允许直接购买
+    string is_only_display =25;//是否仅供展示
     string is_deduction_inventory =26;//是否扣减库存（0否, 1是）
     string is_member_right =27;//是否设置商品购买权限（0否, 1是）
     string is_member_price =28;//是否参与会员折扣价（0否, 1是）

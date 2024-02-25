@@ -441,7 +441,7 @@ func (x *Member) GetPluginsDistributionLevelId() int32 {
 	return 0
 }
 
-//客户查询参数
+// 客户查询参数
 type MemberRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -904,7 +904,7 @@ func (x *MemberIndexResponse) GetNavList() []*NavInfo {
 	return nil
 }
 
-//等级配置
+// 等级配置
 type LevelBaseInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

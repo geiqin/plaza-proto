@@ -5,6 +5,7 @@ import "common/base.proto";
 import "memberService.proto";
 
 service MemberIntegralLogService {
+  rpc Create (MemberIntegralLogRequest) returns (MemberIntegralLogResponse) {}
   rpc Detail (MemberIntegralLog) returns (MemberIntegralLogResponse) {}
   rpc List (MemberIntegralLogRequest) returns (MemberIntegralLogResponse) {}
   rpc Search (MemberIntegralLogRequest) returns (MemberIntegralLogResponse) {}
@@ -32,6 +33,8 @@ message MemberIntegralLogRequest {
   //以下为自定义参数
   string type = 4;
   int64 member_id = 5;
+  int64 integral =6;
+  string reason =7;
 }
 
 message MemberIntegralLogResponse {

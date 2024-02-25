@@ -147,7 +147,34 @@ message BuyConfirmData{
     map<string,string> plugins_data =10;//插件数据
     DeliveryChoose delivery_choose =11;//配送选择数据
     string is_order_submit = 12; //是否订单已提交 0否，1是
+    IntegralDeductionData integral_deduction_data =13; //积分抵现数据
+    IntegralData integral_data =14; //积分兑换数据
 }
+
+//积分数据
+message IntegralData{
+    int64 actual_use_integral =1; //实际使用积分
+    int64 use_integral =2; //使用积分
+    int64 discount_price =3;//抵扣积分金额
+    int64 user_integral =4;//用户积分
+    string is_support_goods_exchange =5;//是否支持积分兑换（0否，1是）
+    string discount_type =6;//积分优惠类型（0抵现，1兑换）
+}
+
+//积分抵现数据
+message IntegralDeductionData{
+    string is_integral_deduction =1;//是否开启积分抵扣（0否，1是）
+    int64 use_integral =2; //使用积分
+    int64 discount_price =3;//抵扣积分金额
+    int64 actual_use_integral =4; //实际使用积分
+    goods deduction_list =5; //抵扣列表
+    message goods{
+        int64 spu_id =1;
+        string md5_key =2;
+        int64 discount_price =3;
+    }
+}
+
 
 //购买提交数据
 message BuySubmitData {

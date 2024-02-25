@@ -355,7 +355,7 @@ func (x *LevelPayRule) GetMonthName() string {
 	return ""
 }
 
-//等级礼包
+// 等级礼包
 type LevelPackage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

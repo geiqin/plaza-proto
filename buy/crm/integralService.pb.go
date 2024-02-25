@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//锁定积分信息
+// 锁定积分信息
 type LockingIntegralInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -132,7 +132,7 @@ func (x *LockingIntegralInfo) GetDesc() string {
 	return ""
 }
 
-//锁定积分退还
+// 锁定积分退还
 type LockingIntegralRollbackInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -196,7 +196,7 @@ func (x *LockingIntegralRollbackInfo) GetReason() string {
 	return ""
 }
 
-//锁定积分生效
+// 锁定积分生效
 type LockingIntegralEffectInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -244,7 +244,7 @@ func (x *LockingIntegralEffectInfo) GetUuid() string {
 	return ""
 }
 
-//积分信息
+// 积分信息
 type IntegralInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

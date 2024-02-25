@@ -196,7 +196,7 @@ func (x *LevelOrderLog) GetMember() *Member {
 	return nil
 }
 
-//查询参数
+// 查询参数
 type LevelOrderLogRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

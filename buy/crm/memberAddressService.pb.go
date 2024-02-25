@@ -236,7 +236,7 @@ func (x *MemberAddress) GetUpdatedAt() string {
 	return ""
 }
 
-//地址查询参数
+// 地址查询参数
 type MemberAddressRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -301,7 +301,6 @@ func (x *MemberAddressRequest) GetMemberId() int64 {
 	return 0
 }
 
-//
 type MemberAddressResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

@@ -180,7 +180,7 @@ func (x *Benefit) GetUpdatedAt() string {
 	return ""
 }
 
-//查询参数
+// 查询参数
 type BenefitRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
