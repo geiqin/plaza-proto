@@ -30,6 +30,8 @@ message BuyGroup {
     string county_name = 11;
     OrderBase order_base =12;//订单基本信息
     repeated BuyGoodsItem goods_items = 13; //商品列表
+    IntegralDeductionData integral_deduction_data =14; //积分抵现数据
+    IntegralExchangeData integral_exchange_data =15; //积分兑换数据
 }
 
 message BuyGoodsItem  {
@@ -92,8 +94,8 @@ message BuyRequest {
     int32 shipment_id = 4; //选中的配送方式
     int32 payment_id = 5; //选中的支付方式
     int64 coupon_id = 6; //选中的优惠劵凭证ID
-    int64 use_integral = 7; //使用的积分数
-    int64 use_surplus = 8; //使用的余额数
+    int64 use_integral = 7; //使用的积分
+    int64 use_surplus = 8; //使用的余额
     int64 buy_member_id = 9; //代理的客户ID（操作员代客下单）
     int64 realstore_id = 10; //多门店Id
     int64 shop_id = 11; //多商户Id
@@ -102,6 +104,8 @@ message BuyRequest {
     repeated int64 buy_cart_ids = 16; ///购物车ids
     BuyCommodity buy_commodity =17; //直接购买商品【单个商品】
     repeated BuyCommodity buy_commodities =18; //购买商品清单【多个商品】
+    string is_integral = 19; //是否使用积分(0否，1是)
+    string is_surplus = 20; //是否使用余额(0否，1是)
 }
 
 //购买商品信息
@@ -143,14 +147,16 @@ message BuyConfirmData{
     BuyRequest request_data =4;//提交信息反馈
     int32 default_payment_id =7;//默认支付ID
     string common_site_type =8;//站点类型
-    map<string,string> extension_data =9; //扩展数据
-    map<string,string> plugins_data =10;//插件数据
+    repeated OrderExtension extension_data =9; //扩展数据
+   // map<string,string> plugins_data =10;//插件数据
     DeliveryChoose delivery_choose =11;//配送选择数据
     string is_order_submit = 12; //是否订单已提交 0否，1是
     IntegralDeductionData integral_deduction_data =13; //积分抵现数据
-    IntegralData integral_data =14; //积分兑换数据
+    IntegralExchangeData integral_exchange_data =14; //积分兑换数据
+    //IntegralData integral_data =15; //积分兑换数据
 }
 
+/*
 //积分数据
 message IntegralData{
     int64 actual_use_integral =1; //实际使用积分
@@ -160,19 +166,24 @@ message IntegralData{
     string is_support_goods_exchange =5;//是否支持积分兑换（0否，1是）
     string discount_type =6;//积分优惠类型（0抵现，1兑换）
 }
+ */
 
 //积分抵现数据
 message IntegralDeductionData{
-    string is_integral_deduction =1;//是否开启积分抵扣（0否，1是）
+    int64 user_integral =1;//用户积分
     int64 use_integral =2; //使用积分
     int64 discount_price =3;//抵扣积分金额
     int64 actual_use_integral =4; //实际使用积分
-    goods deduction_list =5; //抵扣列表
-    message goods{
-        int64 spu_id =1;
-        string md5_key =2;
-        int64 discount_price =3;
-    }
+}
+
+//积分兑换数据
+message IntegralExchangeData {
+    string is_support_goods_exchange =1;//是否支持商品兑换（0否，1是）
+    string is_contain_only_exchange =2; //是否包含仅兑换商品
+    int64 use_integral = 3; //使用积分
+    int64 use_money = 4; //使用金额
+    int64 user_integral =5;//用户积分
+
 }
 
 
