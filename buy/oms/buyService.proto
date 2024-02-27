@@ -80,9 +80,11 @@ message OrderBase {
     int64 goods_count =11; //商品总数
     string site_model =12; //当前使用的站点模式
     string common_site_type =13; //公共站点模式
-    OrderAddress address =14;//收件地址
-    repeated OrderAddress extraction_address =15; //自提点地址
-    repeated OrderExtension extension_data = 16; //扩展数据
+    int64 use_integral = 14; //使用的积分
+    int64 use_surplus = 15; //使用的余额
+    OrderAddress address =16;//收件地址
+    repeated OrderAddress extraction_address =17; //自提点地址
+    repeated OrderExtension extension_data = 18; //扩展数据
 }
 
 

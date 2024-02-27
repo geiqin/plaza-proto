@@ -2,7 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "spuService.proto";
+import "baseInfoService.proto";
 
 service MemberPriceService {
     rpc SetPrice (MemberPriceRequest) returns (MemberPriceResponse) {}
@@ -38,12 +38,12 @@ message MemberPriceResponse {
     common.Pager pager = 2;
     repeated MemberPrice items = 3;
     string info = 4;
-    Spu spu =5;
+    SpuInfo spu =5;
 }
 
 
 message MemberPriceDetailResponse {
     string method = 1;//优惠方式：0 指定价，1 打折,2 减价
-    Spu spu =2;
+    SpuInfo spu =2;
     repeated MemberPrice price_list =3;
 }

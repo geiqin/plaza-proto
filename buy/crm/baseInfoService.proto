@@ -2,6 +2,86 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 
+
+message SpuInfo {
+    int64  id =1;//ID
+    int64  shop_id =2;//多店铺ID
+    int64  taxonomy_id =3;//标准类目ID
+    int64  category_id =4;//商品分类ID
+    int32  brand_id =5;//品牌ID
+    string title =6;//商品标题
+    string title_color =7;//标题颜色
+    string simple_desc =8;//简述
+    string type =9;//商品类型：goods实物商品,fictitious虚拟商品,combine组合商品
+    string is_virtual =10;//是否为虚拟商品（0否, 1是）
+    string is_many_spec =11;//是否多规格商品（0否, 1是）
+    string is_open_weight =12;//是否开启称重（0否, 1是）
+    string is_open_presale =13;//是否开启预售（0否, 1是）
+    string model =14;//型号
+    int64  place_origin_id =15;//产地ID（地区省id）
+    string unit =16;//计量单位
+    float  unit_rate =17;//计量单位换算率(称重商品需要)
+    string weight_plu_code =18;//称重PLU码
+    int64  inventory =19;//库存（所有规格库存总和）
+    string image_url =20;//商品主图url
+    string video_url =21;//短视频url
+    string content =22;//商品内容
+    string is_shelve =24;//是否上架（ 0否, 1是）
+    string is_only_display =25;//是否仅供展示
+    string is_deduction_inventory =26;//是否扣减库存（0否, 1是）
+    string is_member_right =27;//是否设置商品购买权限（0否, 1是）
+    string is_member_price =28;//是否参与会员折扣价（0否, 1是）
+    int64  min_original_price =29;//最低原价
+    int64  max_original_price =30;//最大原价
+    int64  min_price =31;//最低价格
+    int64  max_price =32;//最高价格
+    int64  buy_min_number =33;//最低起购数量（默认1）
+    int64  buy_max_number =34;//最大购买数量（最大数值 100000000, 小于等于0或空则不限）
+    int32  photo_count =35;//相册图片数量
+    int32  access_count =36;//访问次数
+    int32  sale_count =37;//实际销量
+    int32  initial_sale_count =38;//初始销售数量（前端展示销量=实际销量+初始销售数量）
+    string button_mode =41;//立即购买按钮：1默认名称，2自定义名称
+    string button_custom =42;//按钮自定义名称,英文最多15个字符
+    string freight_type =43;//运费模式：0统一邮费，1运费模板
+    int64  freight_uniform_fee =44;//统一运费
+    int64  freight_template_id =45;//运费模板ID
+    int32  sort =53;//排序(数字越大显示越靠前)
+    string status =54;//商品状态。0创建 1新品 2正常 3清仓 4停售 5淘汰
+    string created_at = 55;
+    string updated_at = 56;
+    repeated SkuInfo skus = 70;
+    string brand_name =80;
+    string status_name =81;
+    string is_error =82;//是否错误（0否，1是）
+    string error_msg =83;//错误信息
+}
+
+message SkuInfo  {
+    int64 id =1;//ID
+    int64 spu_id =2;//SpuID
+    int64 original_price =3;//划线价
+    int64 cost_price =4;//成本价
+    int64 price =5;//销售价
+    int64 inventory =6;//库存
+    string md5_key =7;//唯一标识
+    string coding =8;//编号
+    string barcode =9;//条码
+    int64 weight =10;//重量：克
+    int64 volume =11;//体积
+    string spec_indexes =12;//规格索引
+    string created_at = 14;
+    string updated_at = 15;
+    repeated SkuSpecInfo spec =17; //规格信息列表
+    int64 promotion_price =18;//促销价
+    string promotion_type =19;//促销类型
+}
+
+message SkuSpecInfo{
+    string type =1;
+    string value =2;
+}
+
 message NavInfo {
     string icon =1;
     string title =2;
