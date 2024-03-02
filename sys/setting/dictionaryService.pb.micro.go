@@ -5,6 +5,7 @@ package services
 
 import (
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -42,8 +43,13 @@ func NewDictionaryServiceEndpoints() []*api.Endpoint {
 // Client API for DictionaryService service
 
 type DictionaryService interface {
-	//字典数据
+	Create(ctx context.Context, in *Dictionary, opts ...client.CallOption) (*DictionaryResponse, error)
+	Update(ctx context.Context, in *Dictionary, opts ...client.CallOption) (*DictionaryResponse, error)
+	Delete(ctx context.Context, in *DictionaryRequest, opts ...client.CallOption) (*DictionaryResponse, error)
+	Get(ctx context.Context, in *DictionaryRequest, opts ...client.CallOption) (*DictionaryResponse, error)
+	Search(ctx context.Context, in *DictionaryRequest, opts ...client.CallOption) (*DictionaryResponse, error)
 	List(ctx context.Context, in *DictionaryRequest, opts ...client.CallOption) (*DictionaryResponse, error)
+	Dict(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictionaryResponse, error)
 }
 
 type dictionaryService struct {
@@ -58,8 +64,68 @@ func NewDictionaryService(name string, c client.Client) DictionaryService {
 	}
 }
 
+func (c *dictionaryService) Create(ctx context.Context, in *Dictionary, opts ...client.CallOption) (*DictionaryResponse, error) {
+	req := c.c.NewRequest(c.name, "DictionaryService.Create", in)
+	out := new(DictionaryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionaryService) Update(ctx context.Context, in *Dictionary, opts ...client.CallOption) (*DictionaryResponse, error) {
+	req := c.c.NewRequest(c.name, "DictionaryService.Update", in)
+	out := new(DictionaryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionaryService) Delete(ctx context.Context, in *DictionaryRequest, opts ...client.CallOption) (*DictionaryResponse, error) {
+	req := c.c.NewRequest(c.name, "DictionaryService.Delete", in)
+	out := new(DictionaryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionaryService) Get(ctx context.Context, in *DictionaryRequest, opts ...client.CallOption) (*DictionaryResponse, error) {
+	req := c.c.NewRequest(c.name, "DictionaryService.Get", in)
+	out := new(DictionaryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionaryService) Search(ctx context.Context, in *DictionaryRequest, opts ...client.CallOption) (*DictionaryResponse, error) {
+	req := c.c.NewRequest(c.name, "DictionaryService.Search", in)
+	out := new(DictionaryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *dictionaryService) List(ctx context.Context, in *DictionaryRequest, opts ...client.CallOption) (*DictionaryResponse, error) {
 	req := c.c.NewRequest(c.name, "DictionaryService.List", in)
+	out := new(DictionaryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionaryService) Dict(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictionaryResponse, error) {
+	req := c.c.NewRequest(c.name, "DictionaryService.Dict", in)
 	out := new(DictionaryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -71,13 +137,24 @@ func (c *dictionaryService) List(ctx context.Context, in *DictionaryRequest, opt
 // Server API for DictionaryService service
 
 type DictionaryServiceHandler interface {
-	//字典数据
+	Create(context.Context, *Dictionary, *DictionaryResponse) error
+	Update(context.Context, *Dictionary, *DictionaryResponse) error
+	Delete(context.Context, *DictionaryRequest, *DictionaryResponse) error
+	Get(context.Context, *DictionaryRequest, *DictionaryResponse) error
+	Search(context.Context, *DictionaryRequest, *DictionaryResponse) error
 	List(context.Context, *DictionaryRequest, *DictionaryResponse) error
+	Dict(context.Context, *DictRequest, *DictionaryResponse) error
 }
 
 func RegisterDictionaryServiceHandler(s server.Server, hdlr DictionaryServiceHandler, opts ...server.HandlerOption) error {
 	type dictionaryService interface {
+		Create(ctx context.Context, in *Dictionary, out *DictionaryResponse) error
+		Update(ctx context.Context, in *Dictionary, out *DictionaryResponse) error
+		Delete(ctx context.Context, in *DictionaryRequest, out *DictionaryResponse) error
+		Get(ctx context.Context, in *DictionaryRequest, out *DictionaryResponse) error
+		Search(ctx context.Context, in *DictionaryRequest, out *DictionaryResponse) error
 		List(ctx context.Context, in *DictionaryRequest, out *DictionaryResponse) error
+		Dict(ctx context.Context, in *DictRequest, out *DictionaryResponse) error
 	}
 	type DictionaryService struct {
 		dictionaryService
@@ -90,6 +167,30 @@ type dictionaryServiceHandler struct {
 	DictionaryServiceHandler
 }
 
+func (h *dictionaryServiceHandler) Create(ctx context.Context, in *Dictionary, out *DictionaryResponse) error {
+	return h.DictionaryServiceHandler.Create(ctx, in, out)
+}
+
+func (h *dictionaryServiceHandler) Update(ctx context.Context, in *Dictionary, out *DictionaryResponse) error {
+	return h.DictionaryServiceHandler.Update(ctx, in, out)
+}
+
+func (h *dictionaryServiceHandler) Delete(ctx context.Context, in *DictionaryRequest, out *DictionaryResponse) error {
+	return h.DictionaryServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *dictionaryServiceHandler) Get(ctx context.Context, in *DictionaryRequest, out *DictionaryResponse) error {
+	return h.DictionaryServiceHandler.Get(ctx, in, out)
+}
+
+func (h *dictionaryServiceHandler) Search(ctx context.Context, in *DictionaryRequest, out *DictionaryResponse) error {
+	return h.DictionaryServiceHandler.Search(ctx, in, out)
+}
+
 func (h *dictionaryServiceHandler) List(ctx context.Context, in *DictionaryRequest, out *DictionaryResponse) error {
 	return h.DictionaryServiceHandler.List(ctx, in, out)
+}
+
+func (h *dictionaryServiceHandler) Dict(ctx context.Context, in *DictRequest, out *DictionaryResponse) error {
+	return h.DictionaryServiceHandler.Dict(ctx, in, out)
 }

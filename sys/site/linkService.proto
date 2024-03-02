@@ -14,14 +14,16 @@ service LinkService {
 
 message Link {
     int64 id =1;
-    string name	 =2;
-    string url =3;
-    string describe =4;
-    string is_new_window_open  =5;
-    int64 sort =6;
-    string status =7;
-    string created_at =8;
-    string updated_at =9;
+    string type =2;
+    string name =3;
+    string url =4;
+    string LogoUrl =5;
+    string describe =6;
+    string is_new_window_open  =7;
+    int64 sort =8;
+    string status =9;
+    string created_at =10;
+    string updated_at =11;
 }
 
 message LinkRequest {
@@ -31,8 +33,8 @@ message LinkRequest {
     //base params
     int64 id = 4;
     string name = 5;
-    string code = 6;
-    int64 parent_id = 7;
+    string status = 6;
+    string type = 7;
     string keywords = 8;
     repeated int64 ids = 10;
 }
