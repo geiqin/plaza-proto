@@ -24,7 +24,7 @@ message NavigationRequest {
     string name = 8;
     string data_type = 9;
     string type = 10;
-    string template = 11;
+    string tag = 11;
     string data_value = 12;
     string is_show = 13;
     string is_new_window_open = 14;
@@ -39,8 +39,9 @@ message Navigation {
     string code = 4;
     int64 parent_id = 5;
     string dept_path = 6;
-    string data_type = 7;
-    string data_value = 8;
+    string route_type = 7;
+    string data_type = 8;
+    string data_value = 9;
     string image_url = 10;
     string is_show = 11;
     string is_new_window_open = 12;
@@ -48,8 +49,10 @@ message Navigation {
     string created_at = 14;
     string updated_at = 15;
     Navigation parent = 16;
-    map<string,string> extends = 17;
+    repeated string tags = 17;
     repeated Navigation children = 18;
+    string route_type_name = 19;
+    string data_type_name = 20;
 }
 
 message NavigationResponse {
