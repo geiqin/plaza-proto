@@ -53,6 +53,8 @@ message Navigation {
     repeated Navigation children = 18;
     string route_type_name = 19;
     string data_type_name = 20;
+    string is_show_name = 21;
+    string is_new_window_open_name = 22;
 }
 
 message NavigationResponse {

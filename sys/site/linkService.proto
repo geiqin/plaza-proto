@@ -37,6 +37,7 @@ message LinkRequest {
     string type = 7;
     string keywords = 8;
     repeated int64 ids = 10;
+    int32 top = 11;
 }
 
 message LinkResponse {

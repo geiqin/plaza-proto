@@ -135,7 +135,6 @@ message MemberRequest {
     int32 pay_level_id =13;
     int32 tag_id =14;
     string client_type =15;
-
     int64 member_id = 16;
     int64 province_id =17;
     int64 city_id =18;
@@ -156,7 +155,11 @@ message MemberRequest {
     string client_type_name =33;
     int32  plugins_distribution_level_id =34;//插件分销等级ID
     string platform = 35;//来源平台
-    bool allow_auto_reg = 37;//是否允许自动注册(主要针对手机用户)
+    bool allow_auto_reg = 36;//是否允许自动注册(主要针对手机用户)
+    string is_query_platform = 37; //是否查询来源平台信息（0否，1是）
+    string is_query_free_level = 38; //是否查询免费等级信息（0否，1是）
+    string is_query_referrer = 39; //是否查询推荐人信息（0否，1是）
+    string is_exist_referrer = 40;//是否查询只有推荐人（0否，1是）
 }
 
 message MemberResponse {
