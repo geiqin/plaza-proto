@@ -147,6 +147,7 @@ message BuyConfirmData{
     repeated BuyGroup group_list =2; //分组商品列表
     repeated PaymentInfo payment_list =3; //支付方式列表
     BuyRequest request_data =4;//提交信息反馈
+    string submit_button_text =5;//提交按钮文本
     int32 default_payment_id =7;//默认支付ID
     string common_site_type =8;//站点类型
     repeated OrderExtension extension_data =9; //扩展数据
@@ -155,7 +156,8 @@ message BuyConfirmData{
     string is_order_submit = 12; //是否订单已提交 0否，1是
     IntegralDeductionData integral_deduction_data =13; //积分抵现数据
     IntegralExchangeData integral_exchange_data =14; //积分兑换数据
-    //IntegralData integral_data =15; //积分兑换数据
+    string is_error =15;//是否有错误（0否，1是）
+    string error_msg =16;//错误信息
 }
 
 /*
@@ -180,12 +182,15 @@ message IntegralDeductionData{
 
 //积分兑换数据
 message IntegralExchangeData {
-    string is_support_goods_exchange =1;//是否支持商品兑换（0否，1是）
-    string is_contain_only_exchange =2; //是否包含仅兑换商品
-    int64 use_integral = 3; //使用积分
-    int64 use_money = 4; //使用金额
-    int64 user_integral =5;//用户积分
-
+    string is_support_exchange =1;//是否支持兑换（0否，1是）
+    string is_not_buy =2;//是否不允许购买（0否，1是）
+    string exchange_type =3;//兑换类型：0 纯积分兑换，1-积分+金额兑换
+    int64 use_integral = 4; //使用积分
+    int64 use_price = 5; //使用金额
+    int64 discount_price =6; //优惠金额
+    string is_error =7;//是否有错误（0否，1是）
+    string error_msg =8;//错误信息
+    int64 user_integral = 9; //用户积分
 }
 
 
