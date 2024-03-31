@@ -19,11 +19,16 @@ message MemberIntegralLog {
   int64  new_integral =5;//最新积分
   int64  operation_integral =6;//操作积分
   string msg =7;//操作原因
-  int64  operator_id =8;//操作员ID
-  string operator_name =9;//操作员名称
-  string created_at =10;
-  string updated_at =11;
-  Member member = 12;
+  int64  business_id =8;//业务ID
+  string business_type =9;//业务类型
+  string is_rollback =11;//是否为积分释放（0否, 1是）
+  int64  operator_id =12;//操作员ID
+  string created_at =13;
+  string updated_at =14;
+  string type_name =15;//操作类型名称
+  string business_type_name =16;//业务类型名称
+  string operator_name =17;//操作员名称
+  Member member = 18;
 }
 
 message MemberIntegralLogRequest {

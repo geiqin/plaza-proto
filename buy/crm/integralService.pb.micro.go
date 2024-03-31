@@ -42,16 +42,12 @@ func NewIntegralServiceEndpoints() []*api.Endpoint {
 // Client API for IntegralService service
 
 type IntegralService interface {
-	//积分增加【有效积分增加】
+	//积分增加
 	IntegralAdd(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error)
-	//积分使用【有效积分减少】
+	//积分使用
 	IntegralUse(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error)
-	//锁定积分增加
-	LockingIntegralInsert(ctx context.Context, in *LockingIntegralInfo, opts ...client.CallOption) (*LockingIntegralResponse, error)
-	//锁定积分释放
-	LockingIntegralRollback(ctx context.Context, in *LockingIntegralRollbackInfo, opts ...client.CallOption) (*LockingIntegralResponse, error)
-	//锁定积分生效
-	LockingIntegralEffect(ctx context.Context, in *LockingIntegralEffectInfo, opts ...client.CallOption) (*LockingIntegralResponse, error)
+	//积分释放
+	IntegralRollback(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error)
 }
 
 type integralService struct {
@@ -86,29 +82,9 @@ func (c *integralService) IntegralUse(ctx context.Context, in *IntegralInfo, opt
 	return out, nil
 }
 
-func (c *integralService) LockingIntegralInsert(ctx context.Context, in *LockingIntegralInfo, opts ...client.CallOption) (*LockingIntegralResponse, error) {
-	req := c.c.NewRequest(c.name, "IntegralService.LockingIntegralInsert", in)
-	out := new(LockingIntegralResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integralService) LockingIntegralRollback(ctx context.Context, in *LockingIntegralRollbackInfo, opts ...client.CallOption) (*LockingIntegralResponse, error) {
-	req := c.c.NewRequest(c.name, "IntegralService.LockingIntegralRollback", in)
-	out := new(LockingIntegralResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integralService) LockingIntegralEffect(ctx context.Context, in *LockingIntegralEffectInfo, opts ...client.CallOption) (*LockingIntegralResponse, error) {
-	req := c.c.NewRequest(c.name, "IntegralService.LockingIntegralEffect", in)
-	out := new(LockingIntegralResponse)
+func (c *integralService) IntegralRollback(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error) {
+	req := c.c.NewRequest(c.name, "IntegralService.IntegralRollback", in)
+	out := new(IntegralResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -119,25 +95,19 @@ func (c *integralService) LockingIntegralEffect(ctx context.Context, in *Locking
 // Server API for IntegralService service
 
 type IntegralServiceHandler interface {
-	//积分增加【有效积分增加】
+	//积分增加
 	IntegralAdd(context.Context, *IntegralInfo, *IntegralResponse) error
-	//积分使用【有效积分减少】
+	//积分使用
 	IntegralUse(context.Context, *IntegralInfo, *IntegralResponse) error
-	//锁定积分增加
-	LockingIntegralInsert(context.Context, *LockingIntegralInfo, *LockingIntegralResponse) error
-	//锁定积分释放
-	LockingIntegralRollback(context.Context, *LockingIntegralRollbackInfo, *LockingIntegralResponse) error
-	//锁定积分生效
-	LockingIntegralEffect(context.Context, *LockingIntegralEffectInfo, *LockingIntegralResponse) error
+	//积分释放
+	IntegralRollback(context.Context, *IntegralInfo, *IntegralResponse) error
 }
 
 func RegisterIntegralServiceHandler(s server.Server, hdlr IntegralServiceHandler, opts ...server.HandlerOption) error {
 	type integralService interface {
 		IntegralAdd(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error
 		IntegralUse(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error
-		LockingIntegralInsert(ctx context.Context, in *LockingIntegralInfo, out *LockingIntegralResponse) error
-		LockingIntegralRollback(ctx context.Context, in *LockingIntegralRollbackInfo, out *LockingIntegralResponse) error
-		LockingIntegralEffect(ctx context.Context, in *LockingIntegralEffectInfo, out *LockingIntegralResponse) error
+		IntegralRollback(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error
 	}
 	type IntegralService struct {
 		integralService
@@ -158,14 +128,6 @@ func (h *integralServiceHandler) IntegralUse(ctx context.Context, in *IntegralIn
 	return h.IntegralServiceHandler.IntegralUse(ctx, in, out)
 }
 
-func (h *integralServiceHandler) LockingIntegralInsert(ctx context.Context, in *LockingIntegralInfo, out *LockingIntegralResponse) error {
-	return h.IntegralServiceHandler.LockingIntegralInsert(ctx, in, out)
-}
-
-func (h *integralServiceHandler) LockingIntegralRollback(ctx context.Context, in *LockingIntegralRollbackInfo, out *LockingIntegralResponse) error {
-	return h.IntegralServiceHandler.LockingIntegralRollback(ctx, in, out)
-}
-
-func (h *integralServiceHandler) LockingIntegralEffect(ctx context.Context, in *LockingIntegralEffectInfo, out *LockingIntegralResponse) error {
-	return h.IntegralServiceHandler.LockingIntegralEffect(ctx, in, out)
+func (h *integralServiceHandler) IntegralRollback(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error {
+	return h.IntegralServiceHandler.IntegralRollback(ctx, in, out)
 }

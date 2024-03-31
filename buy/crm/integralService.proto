@@ -2,47 +2,15 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "memberIntegralLogService.proto";
-import "integralLockChangeLogService.proto";
 
 //积分服务
 service IntegralService {
-  //积分增加【有效积分增加】
+  //积分增加
   rpc IntegralAdd (IntegralInfo) returns (IntegralResponse) {}
-  //积分使用【有效积分减少】
+  //积分使用
   rpc IntegralUse (IntegralInfo) returns (IntegralResponse) {}
-
-  //锁定积分增加
-  rpc LockingIntegralInsert (LockingIntegralInfo) returns (LockingIntegralResponse) {}
-  //锁定积分释放
-  rpc LockingIntegralRollback (LockingIntegralRollbackInfo) returns (LockingIntegralResponse) {}
-  //锁定积分生效
-  rpc LockingIntegralEffect  (LockingIntegralEffectInfo) returns (LockingIntegralResponse) {}
-
-}
-
-//锁定积分信息
-message LockingIntegralInfo {
-  string uuid =1;//积分唯一标识
-  int64  order_id =2;//订单id
-  int64  member_id =3;//用户id
-  int64  business_id =4;//业务ID
-  string business_type =5;//业务类型
-  string business_type_name =6;//业务类型名称
-  int64  refund_integral =7;//退还积分
-  int64  integral =8;//积分
-  string desc =9;//描述
-}
-
-//锁定积分退还
-message LockingIntegralRollbackInfo {
-  string uuid =1;//积分唯一标识
-  int64  integral =2;//退还积分
-  string reason =3;//退还原因
-}
-
-//锁定积分生效
-message LockingIntegralEffectInfo {
-  string  uuid =1;//积分唯一标识
+  //积分释放
+  rpc IntegralRollback(IntegralInfo) returns (IntegralResponse) {}
 }
 
 //积分信息
@@ -52,6 +20,8 @@ message IntegralInfo {
   string msg =3;//操作原因
   int64  operator_id =4;//操作员ID
   string operator_name =5;//操作员名称
+  int64  business_id =6;//业务ID
+  string business_type =7;//业务类型
 }
 
 message IntegralRequest {
@@ -65,10 +35,5 @@ message IntegralRequest {
 
 message IntegralResponse {
   MemberIntegralLog entity = 1;
-  string info =4;
-}
-
-message LockingIntegralResponse {
-  IntegralLockChangeLog entity = 1;
   string info =4;
 }
