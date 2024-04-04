@@ -1,0 +1,43 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+service MemberQrcodeService {
+    rpc Get (MemberQrcode) returns (MemberQrcodeResponse) {}
+    rpc Save (MemberQrcode) returns (MemberQrcodeResponse) {}
+}
+
+message MemberQrcode {
+    int64 id =1;//ID
+    int64 member_id =2;//客户ID
+    string member_qrcode =3;//会员二维码
+    string weixin_mini_qrcode =4;//微信小程序二维码
+    string alipay_mini_qrcode =5;//支付宝小程序二维码
+    string douyin_mini_qrcode =6;//抖音小程序二维码
+    string toutiao_mini_qrcode =7;//头条小程序二维码
+    string baidu_mini_qrcode =8;//百度小程序二维码
+    string kuaishou_mini_qrcode =9;//快手小程序二维码
+    string created_at = 10;
+    string updated_at = 11;
+}
+
+
+message MemberQrcodeRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
+    //以下为自定义参数
+    int64 id = 4;
+    string platform =5;
+    int64 member_id =6;
+    repeated int64 member_ids = 7;
+    repeated int64 ids = 8;
+}
+
+message MemberQrcodeResponse {
+    MemberQrcode entity = 1;
+    common.Pager pager =2;
+    repeated MemberQrcode items = 3;
+    string info =4;
+}
