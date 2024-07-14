@@ -261,7 +261,7 @@ func (x *Area) GetChildren() []*Area {
 	return nil
 }
 
-//查询参数
+// 查询参数
 type AreaRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

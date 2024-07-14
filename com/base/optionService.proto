@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+//开放选项
+service OptionService {
+    rpc Create (Option) returns (OptionResponse) {}
+    rpc Update (Option) returns (OptionResponse) {}
+    rpc Delete (OptionRequest) returns (OptionResponse) {}
+    rpc List (OptionRequest) returns (OptionResponse) {}
+}
+
+message OptionRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    int64 id = 3;
+    string keywords = 5;
+    string category = 6;
+    string code = 7;
+    repeated int64 ids = 4;
+}
+
+// 字典信息
+message Option {
+    int64 id =1; //id
+    string category =2; //类别
+    string name =3; //名称
+    string code	=4; //键
+    string value	=5; //值
+    string default_value	=6; //默认值
+    string description 	=7;  //描述
+    string created_at = 9;
+    string updated_at = 10;
+}
+
+// 字典信息
+message OptionList {
+    string label =1; //标签
+    string value =2; //值
+    string disabled	=3; //默认值
+}
+
+
+message OptionResponse {
+    Option entity = 1;
+    common.Pager pager =2;
+    repeated Option items = 3;
+    repeated OptionList list = 4;
+    string info =5;
+}

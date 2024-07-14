@@ -46,7 +46,7 @@ type DictService interface {
 	Create(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error)
 	Update(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error)
 	Delete(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
-	Get(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
+	Get(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error)
 	Search(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
 	List(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
 }
@@ -93,7 +93,7 @@ func (c *dictService) Delete(ctx context.Context, in *DictRequest, opts ...clien
 	return out, nil
 }
 
-func (c *dictService) Get(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error) {
+func (c *dictService) Get(ctx context.Context, in *Dict, opts ...client.CallOption) (*DictResponse, error) {
 	req := c.c.NewRequest(c.name, "DictService.Get", in)
 	out := new(DictResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -129,7 +129,7 @@ type DictServiceHandler interface {
 	Create(context.Context, *Dict, *DictResponse) error
 	Update(context.Context, *Dict, *DictResponse) error
 	Delete(context.Context, *DictRequest, *DictResponse) error
-	Get(context.Context, *DictRequest, *DictResponse) error
+	Get(context.Context, *Dict, *DictResponse) error
 	Search(context.Context, *DictRequest, *DictResponse) error
 	List(context.Context, *DictRequest, *DictResponse) error
 }
@@ -139,7 +139,7 @@ func RegisterDictServiceHandler(s server.Server, hdlr DictServiceHandler, opts .
 		Create(ctx context.Context, in *Dict, out *DictResponse) error
 		Update(ctx context.Context, in *Dict, out *DictResponse) error
 		Delete(ctx context.Context, in *DictRequest, out *DictResponse) error
-		Get(ctx context.Context, in *DictRequest, out *DictResponse) error
+		Get(ctx context.Context, in *Dict, out *DictResponse) error
 		Search(ctx context.Context, in *DictRequest, out *DictResponse) error
 		List(ctx context.Context, in *DictRequest, out *DictResponse) error
 	}
@@ -166,7 +166,7 @@ func (h *dictServiceHandler) Delete(ctx context.Context, in *DictRequest, out *D
 	return h.DictServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *dictServiceHandler) Get(ctx context.Context, in *DictRequest, out *DictResponse) error {
+func (h *dictServiceHandler) Get(ctx context.Context, in *Dict, out *DictResponse) error {
 	return h.DictServiceHandler.Get(ctx, in, out)
 }
 

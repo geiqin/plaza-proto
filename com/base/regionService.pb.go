@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//字段类型
+// 字段类型
 type Region struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

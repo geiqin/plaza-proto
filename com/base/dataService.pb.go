@@ -133,7 +133,7 @@ func (x *Data) GetUpdatedAt() string {
 	return ""
 }
 
-//查询参数
+// 查询参数
 type DataRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

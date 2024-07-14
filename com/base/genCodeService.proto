@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service GenCodeService {
+    rpc Create (GenCode) returns (GenCodeResponse) {}
+    rpc Update (GenCode) returns (GenCodeResponse) {}
+    rpc Delete (GenCodeRequest) returns (GenCodeResponse) {}
+    rpc Get (GenCode) returns (GenCodeResponse) {}
+    rpc Search (GenCodeRequest) returns (GenCodeResponse) {}
+    //数据库列表
+    rpc Databases (GenCodeRequest) returns (GenCodeResponse) {}
+    //表列表
+    rpc Tables (GenCodeRequest) returns (GenCodeResponse) {}
+    //预览代码
+    rpc Preview (GenCodeRequest) returns (GenCodeResponse) {}
+    //生成代码
+    rpc Generate (GenCodeRequest) returns (GenCodeResponse) {}
+}
+
+// 生成代码
+message GenCode {
+    int64 id =1; //ID
+    string db_name =2;  //数据库名
+    string table_name =3;  //表名称
+    string module_name =4; //模块名称
+    string package_name	=5; //包名称
+    string business_name	=6; //业务名称
+    string author	=7; //作者
+    string table_prefix =8; //表前缀
+    string is_override = 9; //是否覆盖
+    string is_configed = 10; //
+    string engine = 11; //
+    string charset = 12; //
+    string comment = 13; //
+    string created_at = 14;
+    string updated_at = 15;
+    repeated GenCodeColumn columns =16;
+    bool disabled = 17; //
+}
+
+message GenCodeColumn {
+    int64 id =1; //ID
+    string table_name =2;  //表名称
+    string column_name =3;  //列名称
+    string column_type =4; //列类型
+    int64 column_size	=5; //列大小
+    string field_name	=6; //字段名称
+    string field_type	=7; //字段类型
+    string field_sort =8; //字段排序
+    string comment =9; //注释
+    bool is_required = 10; //是否必填
+    bool show_in_list = 11; //是否在列表中显示
+    bool show_in_form = 12; //是否在表单中显示
+    bool show_in_query = 13; //是否在查询中显示
+    int32 form_type	=14; //表单类型
+    int32 query_type	=15;  //查询方式
+    string go_type = 16;
+    string ts_type = 17;
+    string proto_type = 18;
+    string created_at = 19;
+    string updated_at = 20;
+}
+
+message GenDatabase {
+    string name = 1; //
+    string charset = 2; //
+}
+
+
+message GenTable {
+    int64 id =1; //ID
+    string db_name =2;  //数据库名
+    string table_name =3;  //表名称
+    string engine = 4; //
+    string charset = 5; //
+    string comment = 6; //
+    string created_at = 7;
+    string updated_at = 8;
+    bool selected = 9; //是否已选择
+}
+
+
+message GenPreview {
+    string name = 1;
+    string path = 2;
+    string file_name = 3;
+    string content = 4;
+}
+
+
+message GenCodeRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    int64 id = 3;
+    string db_name = 5;
+    int32 table_name = 6;
+    int32 status = 7;
+    repeated int64 ids = 4;
+}
+
+message GenCodeResponse {
+    GenCode entity = 1;
+    common.Pager pager =2;
+    repeated GenCode items = 3;
+    repeated GenDatabase databases =4;
+    repeated GenTable tables =5;
+    repeated GenPreview Preview =6;
+    string msg =7;
+}

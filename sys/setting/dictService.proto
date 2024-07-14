@@ -9,7 +9,7 @@ service DictService {
     rpc Create (Dict) returns (DictResponse) {}
     rpc Update (Dict) returns (DictResponse) {}
     rpc Delete (DictRequest) returns (DictResponse) {}
-    rpc Get (DictRequest) returns (DictResponse) {}
+    rpc Get (Dict) returns (DictResponse) {}
     rpc Search (DictRequest) returns (DictResponse) {}
     rpc List (DictRequest) returns (DictResponse) {}
 }
