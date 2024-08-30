@@ -1,0 +1,91 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service SuperMenuService {
+    rpc Get (SuperMenu) returns (SuperMenuResponse) {}
+    rpc Create (SuperMenu) returns (SuperMenuResponse) {}
+    rpc Update (SuperMenu) returns (SuperMenuResponse) {}
+    rpc UpdateHide (SuperMenu) returns (SuperMenuResponse) {}
+    rpc Delete (SuperMenu) returns (SuperMenuResponse) {}
+    rpc Search (SuperMenuRequest) returns (SuperMenuResponse) {}
+    rpc List (SuperMenuRequest) returns (SuperMenuResponse) {}
+    rpc Tree (SuperMenuRequest) returns (SuperMenuResponse) {}
+    rpc Routes (SuperMenuRequest) returns (SuperMenuResponse) {}
+}
+
+// 超级用户菜单
+message SuperMenu {
+    int64  id =1;//ID
+    int64  parent_id =2;//父ID
+    string title =3;//导航标题
+    string type =4;//类型 1目录 2菜单 3按钮
+    string path =5;//路由地址
+    string name =6;//导航名称
+    string component =7;//组件路径
+    string redirect =8;//路由重定向
+    string icon =9;//图标
+    string permission =10;//权限标识
+    string locale =11;//语言包键名
+    string is_cache =12;//是否缓存: 1是 0否
+    string is_hidden =13;//是否隐藏: 1是 0否
+    string is_external =14;//是否外链: 1是 0否
+    string is_require_auth =15;//是否需要登录鉴权: 1是 0否
+    int32  sort =16;//排序值
+    string status =17;//状态: （1：启用；2：禁用）
+    string created_at =23;
+    string updated_at =24;
+    SuperMenu parent = 25;
+    repeated SuperMenu children = 26;
+}
+
+
+message UserSuperMenu {
+    string name =1;//名称
+    string path =2;//路径
+    string redirect =3;//路由重定向
+    string component =4;//组件路径
+    UserSuperMenuMeta meta =5;//元素
+    repeated UserSuperMenu children = 6;
+}
+
+message UserSuperMenuMeta{
+    string icon =1;//菜单图标
+    string locale =2;//语言包键名
+    bool requiresAuth =3; //是否需要登录鉴权
+    bool hideInMenu =4; //是否在左侧菜单中隐藏该项
+    bool hideChildrenInMenu =5;//强制在左侧菜单中显示单项
+    bool noAffix =6; //如果设置为true，标签将不会添加到tab-bar中
+    bool ignoreCache =7; //如果设置为true页面将不会被缓存
+    string activeMenu =8; //高亮设置的菜单项
+    int32 order =9;//排序路由菜单项。如果设置该值，值越高，越靠前
+    repeated string roles =10;//配置能访问该页面的角色，如果不匹配，则会被禁止访问该路由页面
+}
+
+message SuperMenuRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    string title = 6;
+    int64 parent_id =8;
+    string is_admin =11;
+    repeated int64 ids = 16;
+}
+
+//
+message SuperMenuResponse{
+    SuperMenu entity = 1;
+    common.Pager pager =2;
+    repeated SuperMenu items = 3;
+    string info =4;
+}
+
+message UserSuperMenuResponse{
+    repeated UserSuperMenu menus = 1;
+    repeated string user_roles =2;
+    string info =3;
+}

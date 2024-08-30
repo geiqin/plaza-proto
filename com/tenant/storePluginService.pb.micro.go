@@ -4,8 +4,8 @@
 package services
 
 import (
+	_ "../common"
 	fmt "fmt"
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -45,8 +45,8 @@ func NewStorePluginServiceEndpoints() []*api.Endpoint {
 type StorePluginService interface {
 	//店铺应用安装
 	Install(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error)
-	//店铺应用续展(续费)
-	Renewal(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error)
+	//店铺应用升级
+	Upgrade(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error)
 	//店铺应用移除
 	Remove(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error)
 	//店铺应用开关（开启/关闭）
@@ -87,8 +87,8 @@ func (c *storePluginService) Install(ctx context.Context, in *StorePlugin, opts 
 	return out, nil
 }
 
-func (c *storePluginService) Renewal(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error) {
-	req := c.c.NewRequest(c.name, "StorePluginService.Renewal", in)
+func (c *storePluginService) Upgrade(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error) {
+	req := c.c.NewRequest(c.name, "StorePluginService.Upgrade", in)
 	out := new(StorePluginResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -182,8 +182,8 @@ func (c *storePluginService) PluginsValidCodes(ctx context.Context, in *StorePlu
 type StorePluginServiceHandler interface {
 	//店铺应用安装
 	Install(context.Context, *StorePlugin, *StorePluginResponse) error
-	//店铺应用续展(续费)
-	Renewal(context.Context, *StorePlugin, *StorePluginResponse) error
+	//店铺应用升级
+	Upgrade(context.Context, *StorePlugin, *StorePluginResponse) error
 	//店铺应用移除
 	Remove(context.Context, *StorePlugin, *StorePluginResponse) error
 	//店铺应用开关（开启/关闭）
@@ -205,7 +205,7 @@ type StorePluginServiceHandler interface {
 func RegisterStorePluginServiceHandler(s server.Server, hdlr StorePluginServiceHandler, opts ...server.HandlerOption) error {
 	type storePluginService interface {
 		Install(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
-		Renewal(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
+		Upgrade(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
 		Remove(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
 		Switch(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
 		Detail(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
@@ -230,8 +230,8 @@ func (h *storePluginServiceHandler) Install(ctx context.Context, in *StorePlugin
 	return h.StorePluginServiceHandler.Install(ctx, in, out)
 }
 
-func (h *storePluginServiceHandler) Renewal(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error {
-	return h.StorePluginServiceHandler.Renewal(ctx, in, out)
+func (h *storePluginServiceHandler) Upgrade(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error {
+	return h.StorePluginServiceHandler.Upgrade(ctx, in, out)
 }
 
 func (h *storePluginServiceHandler) Remove(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error {

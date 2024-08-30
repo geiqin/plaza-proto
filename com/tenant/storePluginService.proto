@@ -8,8 +8,8 @@ import "pluginService.proto";
 service StorePluginService {
     //店铺应用安装
     rpc Install (StorePlugin) returns (StorePluginResponse) {}
-    //店铺应用续展(续费)
-    rpc Renewal (StorePlugin) returns (StorePluginResponse) {}
+    //店铺应用升级
+    rpc Upgrade (StorePlugin) returns (StorePluginResponse) {}
     //店铺应用移除
     rpc Remove (StorePlugin) returns (StorePluginResponse) {}
     //店铺应用开关（开启/关闭）

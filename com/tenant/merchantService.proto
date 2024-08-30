@@ -1,0 +1,84 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 商户服务
+service MerchantService {
+  // 商户新增
+  rpc Create (Merchant) returns (MerchantResponse) {}
+  // 商户修改
+  rpc Update (Merchant) returns (MerchantResponse) {}
+  // 商户删除
+  rpc Delete (Merchant) returns (MerchantResponse) {}
+  // 商户获取
+  rpc Get (Merchant) returns (MerchantResponse) {}
+  // 商户查询
+  rpc Search (MerchantRequest) returns (MerchantResponse) {}
+  // 商户列表
+  rpc List (MerchantRequest) returns (MerchantResponse) {}
+}
+// 商户
+message Merchant {
+  int64 id = 1; //ID
+  string type = 2; //商户类型
+  string name = 3; //商户名称
+  string short_name = 4; //商户简称
+  string id_card = 5; //统一社会信用代码
+  string pinyin = 6; //拼音简码
+  string industry = 7; //所属行业
+  string legal_man = 8; //法定代表人
+  string registered_capital = 9; //注册资本
+  string registered_date = 10; //成立日期
+  int64 province_id = 11; //所属省
+  int64 city_id = 12; //所属市
+  int64 county_id = 13; //所属区
+  string address = 14; //详细地址
+  string contact_man = 15; //联系人
+  string contact_mobile = 16; //联系人电话
+  string contact_email = 17; //联系人邮件
+  string tel = 18; //公司电话
+  string memo = 19; //备注
+  string invoice_type = 20; //发票类型
+  string property = 21; //单位性质
+  string is_trusted = 22; //是否实名
+  int32 store_count = 23; //店铺数量
+  int64 creator_id = 24; //创建者
+  string status = 25; //状态
+  string created_at = 26; //
+  string updated_at = 27; //
+}
+// 商户请求参数
+message MerchantRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string type = 10; //商户类型
+  string name = 11; //商户名称
+  string short_name = 12; //商户简称
+  string id_card = 13; //统一社会信用代码
+  string pinyin = 14; //拼音简码
+  string industry = 15; //所属行业
+  string legal_man = 16; //法定代表人
+  int64 province_id = 17; //所属省
+  int64 city_id = 18; //所属市
+  int64 county_id = 19; //所属区
+  string address = 20; //详细地址
+  string contact_man = 21; //联系人
+  string contact_email = 22; //联系人邮件
+  string invoice_type = 23; //发票类型
+  string is_trusted = 24; //是否实名
+  string status = 25; //状态
+}
+// 商户响应数据
+message MerchantResponse {
+  Merchant entity = 1;
+  common.Pager pager = 2;
+  repeated Merchant items = 3;
+  string msg = 4;
+}

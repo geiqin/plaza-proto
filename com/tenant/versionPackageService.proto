@@ -1,0 +1,63 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "versionService.proto";
+import "storeConfigService.proto";
+
+// 版本套餐服务
+service VersionPackageService {
+  // 版本套餐新增
+  rpc Create (VersionPackage) returns (VersionPackageResponse) {}
+  // 版本套餐修改
+  rpc Update (VersionPackage) returns (VersionPackageResponse) {}
+  // 版本套餐删除
+  rpc Delete (VersionPackage) returns (VersionPackageResponse) {}
+  // 版本套餐获取
+  rpc Get (VersionPackage) returns (VersionPackageResponse) {}
+  // 版本套餐查询
+  rpc Search (VersionPackageRequest) returns (VersionPackageResponse) {}
+  // 版本套餐列表
+  rpc List (VersionPackageRequest) returns (VersionPackageResponse) {}
+}
+// 版本套餐
+message VersionPackage {
+  int32 id = 1; //ID
+  string code = 2; //套餐编码
+  string name = 3; //套餐名称
+  int32 version_id = 4; //所属版本
+  int64 market_price = 5; //市场价
+  int64 price = 6; //优惠价
+  string description = 7; //描述
+  string use_config = 8; //使用配置
+  string is_default = 9; //是否默认
+  string status = 10; //状态
+  string created_at = 11; //
+  string updated_at = 12; //
+  Version version =13;
+  StoreConfig config =14;
+}
+// 版本套餐请求参数
+message VersionPackageRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string code = 11; //套餐编码
+  string name = 12; //套餐名称
+  int32 version_id = 13; //所属版本
+  string is_default = 14; //是否默认
+  string status = 15; //状态
+}
+// 版本套餐响应数据
+message VersionPackageResponse {
+  VersionPackage entity = 1;
+  common.Pager pager = 2;
+  repeated VersionPackage items = 3;
+  string msg = 4;
+}

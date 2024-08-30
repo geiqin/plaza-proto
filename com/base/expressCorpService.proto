@@ -1,0 +1,62 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 快递公司服务
+service ExpressCorpService {
+  // 快递公司新增
+  rpc Create (ExpressCorp) returns (ExpressCorpResponse) {}
+  // 快递公司修改
+  rpc Update (ExpressCorp) returns (ExpressCorpResponse) {}
+  // 快递公司删除
+  rpc Delete (ExpressCorp) returns (ExpressCorpResponse) {}
+  // 快递公司获取
+  rpc Get (ExpressCorp) returns (ExpressCorpResponse) {}
+  // 快递公司查询
+  rpc Search (ExpressCorpRequest) returns (ExpressCorpResponse) {}
+  // 快递公司列表
+  rpc List (ExpressCorpRequest) returns (ExpressCorpResponse) {}
+}
+// 快递公司
+message ExpressCorp {
+  int32 id = 1; //ID
+  string code = 2; //编码
+  string name = 3; //名称
+  string logo_url = 4; //图标URL
+  string tel = 5; //联系电话
+  string memo = 6; //备注
+  string is_electronic = 7; //是否支持电子面单
+  string weixin_code = 8; //微信编码
+  string kdniao_code = 9; //快递鸟编码
+  string kd100_code = 10; //快递100编码
+  int32 sort = 11; //排序
+  string status = 12; //状态
+  string created_at = 13; //创建时间
+  string updated_at = 14; //修改时间
+}
+// 快递公司请求参数
+message ExpressCorpRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string code = 11; //编码
+  string name = 12; //名称
+  string is_electronic = 13; //是否支持电子面单
+  string weixin_code = 14; //微信编码
+  string kdniao_code = 15; //快递鸟编码
+  string kd100_code = 16; //快递100编码
+  string status = 17; //状态
+}
+// 快递公司响应数据
+message ExpressCorpResponse {
+  ExpressCorp entity = 1;
+  common.Pager pager = 2;
+  repeated ExpressCorp items = 3;
+  string msg = 4;
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 存储服务
+service StorageService {
+  // 存储新增
+  rpc Create (Storage) returns (StorageResponse) {}
+  // 存储修改
+  rpc Update (Storage) returns (StorageResponse) {}
+  // 存储删除
+  rpc Delete (Storage) returns (StorageResponse) {}
+  // 存储获取
+  rpc Get (Storage) returns (StorageResponse) {}
+  // 存储查询
+  rpc Search (StorageRequest) returns (StorageResponse) {}
+  // 存储列表
+  rpc List (StorageRequest) returns (StorageResponse) {}
+}
+// 存储
+message Storage {
+  int64 id = 1; //ID
+  string code = 2; //编码
+  string name = 3; //名称
+  string type = 4; //类型
+  string access_key = 5; //访问密钥
+  string secret_key = 6; //私有密钥
+  string bucket = 7; //桶名称
+  string endpoint = 8; //终端节点
+  string zone = 9; //储存区
+  string domain = 10; //访问域名
+  string host_url = 11; //主机地址
+  string is_default = 12; //是否默认
+  string is_private = 13; //是否私有
+  string description = 14; //描述
+  int32 sort = 15; //排序
+  string status = 16; //状态
+  string created_at = 17; //创建时间
+  string updated_at = 18; //修改时间
+}
+// 存储请求参数
+message StorageRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string code = 11; //编码
+  string name = 12; //名称
+  string type = 13; //类型
+  string bucket = 14; //桶名称
+  string is_default = 15; //是否默认
+  string is_private = 16; //是否私有
+  string status = 17; //状态
+}
+// 存储响应数据
+message StorageResponse {
+  Storage entity = 1;
+  common.Pager pager = 2;
+  repeated Storage items = 3;
+  string msg = 4;
+}

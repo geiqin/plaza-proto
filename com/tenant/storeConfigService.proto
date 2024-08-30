@@ -1,0 +1,65 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 店铺配置服务
+service StoreConfigService {
+  // 店铺配置新增
+  rpc Create (StoreConfig) returns (StoreConfigResponse) {}
+  // 店铺配置修改
+  rpc Update (StoreConfig) returns (StoreConfigResponse) {}
+  // 店铺配置删除
+  rpc Delete (StoreConfig) returns (StoreConfigResponse) {}
+  // 店铺配置获取
+  rpc Get (StoreConfig) returns (StoreConfigResponse) {}
+  // 店铺配置查询
+  rpc Search (StoreConfigRequest) returns (StoreConfigResponse) {}
+  // 店铺配置列表
+  rpc List (StoreConfigRequest) returns (StoreConfigResponse) {}
+}
+// 店铺配置
+message StoreConfig {
+  int64 id = 1; //ID
+  int64 store_id = 2; //店铺ID
+  string custom_domain = 3; //自定义域名
+  string storage_public = 4; //公共储存
+  string storage_private = 5; //私有储存
+  string sms_channel = 6; //短信通道
+  string email_channel = 7; //邮件通道
+  int32 shop_limit_count = 8; //商户限制数量
+  int32 realstore_limit_count = 9; //门店限制数量
+  int32 warehouse_limit_count = 10; //仓库限制数量
+  int32 manager_limit_count = 11; //管理员限制数量
+  int32 member_limit_count = 12; //会员限制数量
+  int32 spu_limit_count = 13; //商品限制数量
+  string order_free_type = 14; //订单成交免费类型
+  int32 order_free_total_limit = 15; //订单成交免费总限制
+  int32 order_free_year_limit = 16; //订单成交免费年度限制
+  int32 order_free_month_limit = 17; //订单成交免费月度限制
+  float order_commission_rate = 18; //订单成交抽成比例
+  int32 media_limit_count = 19; //媒体限制数量
+  int32 media_limit_volume = 20; //媒体限制容量
+  int32 article_limit_count = 21; //文章限制数量
+  string created_at = 22; //
+  string updated_at = 23; //
+}
+// 店铺配置请求参数
+message StoreConfigRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 store_id = 11; //店铺ID
+}
+// 店铺配置响应数据
+message StoreConfigResponse {
+  StoreConfig entity = 1;
+  common.Pager pager = 2;
+  repeated StoreConfig items = 3;
+  string msg = 4;
+}

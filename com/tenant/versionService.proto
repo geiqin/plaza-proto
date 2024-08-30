@@ -17,8 +17,9 @@ service VersionService {
 
 message Version {
     int32	id =1;
-    string	name =2;
-    string	type =3;
+    string	code =2;
+    string	name =3;
+    string	type =4;
     string	icon_url =5;
     string	icon_css =6;
     string	url =7;
@@ -36,12 +37,13 @@ message VersionRequest {
     string sorting = 3;
     string keywords = 4;
     int32 id = 5;
-    string name = 6;
-    string type = 7;
-    string status = 8;
-    int32 module_id = 9;
-    repeated int32 ids = 10;
-    repeated int32 module_ids = 11;
+    string code = 6;
+    string name = 7;
+    string type = 8;
+    string status = 9;
+    int32 module_id = 10;
+    repeated int32 ids = 11;
+    repeated int32 module_ids = 12;
 }
 
 message VersionResponse {

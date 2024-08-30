@@ -7,7 +7,7 @@
 package services
 
 import (
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	common "../common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,30 +27,30 @@ type Nav struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64             `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name        string            `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	Title       string            `protobuf:"bytes,4,opt,name=title,proto3" json:"title"`
-	TitleEn     string            `protobuf:"bytes,5,opt,name=title_en,json=titleEn,proto3" json:"title_en"`
-	Icon        string            `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon"`
-	Type        string            `protobuf:"bytes,7,opt,name=type,proto3" json:"type"`
-	ParentId    int64             `protobuf:"varint,8,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
-	NavTypeId   int64             `protobuf:"varint,9,opt,name=nav_type_id,json=navTypeId,proto3" json:"nav_type_id"`
-	RedirectUrl string            `protobuf:"bytes,10,opt,name=redirect_url,json=redirectUrl,proto3" json:"redirect_url"`
-	Path        string            `protobuf:"bytes,11,opt,name=path,proto3" json:"path"`
-	Component   string            `protobuf:"bytes,12,opt,name=component,proto3" json:"component"`
-	IsCache     string            `protobuf:"bytes,13,opt,name=is_cache,json=isCache,proto3" json:"is_cache"`
-	IsHidden    string            `protobuf:"bytes,14,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden"`
-	Permission  string            `protobuf:"bytes,15,opt,name=permission,proto3" json:"permission"`
-	Method      string            `protobuf:"bytes,16,opt,name=method,proto3" json:"method"`
-	PluginId    int32             `protobuf:"varint,17,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id"`
-	Sort        int32             `protobuf:"varint,18,opt,name=sort,proto3" json:"sort"`
-	Memo        string            `protobuf:"bytes,19,opt,name=memo,proto3" json:"memo"`
-	Status      string            `protobuf:"bytes,20,opt,name=status,proto3" json:"status"`
-	CreatedAt   string            `protobuf:"bytes,21,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt   string            `protobuf:"bytes,22,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Extends     map[string]string `protobuf:"bytes,23,rep,name=extends,proto3" json:"extends" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Parent      *Nav              `protobuf:"bytes,24,opt,name=parent,proto3" json:"parent"`
-	Children    []*Nav            `protobuf:"bytes,25,rep,name=children,proto3" json:"children"`
+	Id          int64             `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name        string            `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Title       string            `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	TitleEn     string            `protobuf:"bytes,5,opt,name=title_en,json=titleEn,proto3" json:"title_en,omitempty"`
+	Icon        string            `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
+	Type        string            `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
+	ParentId    int64             `protobuf:"varint,8,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	NavTypeId   int64             `protobuf:"varint,9,opt,name=nav_type_id,json=navTypeId,proto3" json:"nav_type_id,omitempty"`
+	RedirectUrl string            `protobuf:"bytes,10,opt,name=redirect_url,json=redirectUrl,proto3" json:"redirect_url,omitempty"`
+	Path        string            `protobuf:"bytes,11,opt,name=path,proto3" json:"path,omitempty"`
+	Component   string            `protobuf:"bytes,12,opt,name=component,proto3" json:"component,omitempty"`
+	IsCache     string            `protobuf:"bytes,13,opt,name=is_cache,json=isCache,proto3" json:"is_cache,omitempty"`
+	IsHidden    string            `protobuf:"bytes,14,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
+	Permission  string            `protobuf:"bytes,15,opt,name=permission,proto3" json:"permission,omitempty"`
+	Method      string            `protobuf:"bytes,16,opt,name=method,proto3" json:"method,omitempty"`
+	PluginId    int32             `protobuf:"varint,17,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
+	Sort        int32             `protobuf:"varint,18,opt,name=sort,proto3" json:"sort,omitempty"`
+	Memo        string            `protobuf:"bytes,19,opt,name=memo,proto3" json:"memo,omitempty"`
+	Status      string            `protobuf:"bytes,20,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt   string            `protobuf:"bytes,21,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt   string            `protobuf:"bytes,22,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Extends     map[string]string `protobuf:"bytes,23,rep,name=extends,proto3" json:"extends,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Parent      *Nav              `protobuf:"bytes,24,opt,name=parent,proto3" json:"parent,omitempty"`
+	Children    []*Nav            `protobuf:"bytes,25,rep,name=children,proto3" json:"children,omitempty"`
 }
 
 func (x *Nav) Reset() {
@@ -258,23 +258,23 @@ type NavRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
 	//base params
-	Id         int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	Name       string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
-	Title      string  `protobuf:"bytes,6,opt,name=title,proto3" json:"title"`
-	Status     string  `protobuf:"bytes,7,opt,name=status,proto3" json:"status"`
-	ParentId   int64   `protobuf:"varint,8,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
-	NavTypeId  int64   `protobuf:"varint,9,opt,name=nav_type_id,json=navTypeId,proto3" json:"nav_type_id"`
-	Type       string  `protobuf:"bytes,10,opt,name=type,proto3" json:"type"`
-	IsAdmin    string  `protobuf:"bytes,11,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin"`
-	PluginId   int32   `protobuf:"varint,12,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id"`
-	StoreId    int64   `protobuf:"varint,13,opt,name=store_id,json=storeId,proto3" json:"store_id"`
-	PluginIds  []int32 `protobuf:"varint,14,rep,packed,name=plugin_ids,json=pluginIds,proto3" json:"plugin_ids"`
-	NavTypeIds []int64 `protobuf:"varint,15,rep,packed,name=nav_type_ids,json=navTypeIds,proto3" json:"nav_type_ids"`
-	Ids        []int64 `protobuf:"varint,16,rep,packed,name=ids,proto3" json:"ids"`
+	Id         int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	Name       string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Title      string  `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
+	Status     string  `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	ParentId   int64   `protobuf:"varint,8,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	NavTypeId  int64   `protobuf:"varint,9,opt,name=nav_type_id,json=navTypeId,proto3" json:"nav_type_id,omitempty"`
+	Type       string  `protobuf:"bytes,10,opt,name=type,proto3" json:"type,omitempty"`
+	IsAdmin    string  `protobuf:"bytes,11,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
+	PluginId   int32   `protobuf:"varint,12,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
+	StoreId    int64   `protobuf:"varint,13,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	PluginIds  []int32 `protobuf:"varint,14,rep,packed,name=plugin_ids,json=pluginIds,proto3" json:"plugin_ids,omitempty"`
+	NavTypeIds []int64 `protobuf:"varint,15,rep,packed,name=nav_type_ids,json=navTypeIds,proto3" json:"nav_type_ids,omitempty"`
+	Ids        []int64 `protobuf:"varint,16,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 }
 
 func (x *NavRequest) Reset() {
@@ -426,10 +426,10 @@ type NavResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Nav          `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*Nav        `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   string        `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Entity *Nav          `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*Nav        `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   string        `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *NavResponse) Reset() {

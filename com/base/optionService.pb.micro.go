@@ -43,9 +43,17 @@ func NewOptionServiceEndpoints() []*api.Endpoint {
 // Client API for OptionService service
 
 type OptionService interface {
+	// 全局配置新增
 	Create(ctx context.Context, in *Option, opts ...client.CallOption) (*OptionResponse, error)
+	// 全局配置修改
 	Update(ctx context.Context, in *Option, opts ...client.CallOption) (*OptionResponse, error)
-	Delete(ctx context.Context, in *OptionRequest, opts ...client.CallOption) (*OptionResponse, error)
+	// 全局配置删除
+	Delete(ctx context.Context, in *Option, opts ...client.CallOption) (*OptionResponse, error)
+	// 全局配置获取
+	Get(ctx context.Context, in *Option, opts ...client.CallOption) (*OptionResponse, error)
+	// 全局配置查询
+	Search(ctx context.Context, in *OptionRequest, opts ...client.CallOption) (*OptionResponse, error)
+	// 全局配置列表
 	List(ctx context.Context, in *OptionRequest, opts ...client.CallOption) (*OptionResponse, error)
 }
 
@@ -81,8 +89,28 @@ func (c *optionService) Update(ctx context.Context, in *Option, opts ...client.C
 	return out, nil
 }
 
-func (c *optionService) Delete(ctx context.Context, in *OptionRequest, opts ...client.CallOption) (*OptionResponse, error) {
+func (c *optionService) Delete(ctx context.Context, in *Option, opts ...client.CallOption) (*OptionResponse, error) {
 	req := c.c.NewRequest(c.name, "OptionService.Delete", in)
+	out := new(OptionResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *optionService) Get(ctx context.Context, in *Option, opts ...client.CallOption) (*OptionResponse, error) {
+	req := c.c.NewRequest(c.name, "OptionService.Get", in)
+	out := new(OptionResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *optionService) Search(ctx context.Context, in *OptionRequest, opts ...client.CallOption) (*OptionResponse, error) {
+	req := c.c.NewRequest(c.name, "OptionService.Search", in)
 	out := new(OptionResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -104,9 +132,17 @@ func (c *optionService) List(ctx context.Context, in *OptionRequest, opts ...cli
 // Server API for OptionService service
 
 type OptionServiceHandler interface {
+	// 全局配置新增
 	Create(context.Context, *Option, *OptionResponse) error
+	// 全局配置修改
 	Update(context.Context, *Option, *OptionResponse) error
-	Delete(context.Context, *OptionRequest, *OptionResponse) error
+	// 全局配置删除
+	Delete(context.Context, *Option, *OptionResponse) error
+	// 全局配置获取
+	Get(context.Context, *Option, *OptionResponse) error
+	// 全局配置查询
+	Search(context.Context, *OptionRequest, *OptionResponse) error
+	// 全局配置列表
 	List(context.Context, *OptionRequest, *OptionResponse) error
 }
 
@@ -114,7 +150,9 @@ func RegisterOptionServiceHandler(s server.Server, hdlr OptionServiceHandler, op
 	type optionService interface {
 		Create(ctx context.Context, in *Option, out *OptionResponse) error
 		Update(ctx context.Context, in *Option, out *OptionResponse) error
-		Delete(ctx context.Context, in *OptionRequest, out *OptionResponse) error
+		Delete(ctx context.Context, in *Option, out *OptionResponse) error
+		Get(ctx context.Context, in *Option, out *OptionResponse) error
+		Search(ctx context.Context, in *OptionRequest, out *OptionResponse) error
 		List(ctx context.Context, in *OptionRequest, out *OptionResponse) error
 	}
 	type OptionService struct {
@@ -136,8 +174,16 @@ func (h *optionServiceHandler) Update(ctx context.Context, in *Option, out *Opti
 	return h.OptionServiceHandler.Update(ctx, in, out)
 }
 
-func (h *optionServiceHandler) Delete(ctx context.Context, in *OptionRequest, out *OptionResponse) error {
+func (h *optionServiceHandler) Delete(ctx context.Context, in *Option, out *OptionResponse) error {
 	return h.OptionServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *optionServiceHandler) Get(ctx context.Context, in *Option, out *OptionResponse) error {
+	return h.OptionServiceHandler.Get(ctx, in, out)
+}
+
+func (h *optionServiceHandler) Search(ctx context.Context, in *OptionRequest, out *OptionResponse) error {
+	return h.OptionServiceHandler.Search(ctx, in, out)
 }
 
 func (h *optionServiceHandler) List(ctx context.Context, in *OptionRequest, out *OptionResponse) error {

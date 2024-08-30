@@ -1,0 +1,61 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// VIP权益服务
+service VipBenefitService {
+  // VIP权益新增
+  rpc Create (VipBenefit) returns (VipBenefitResponse) {}
+  // VIP权益修改
+  rpc Update (VipBenefit) returns (VipBenefitResponse) {}
+  // VIP权益删除
+  rpc Delete (VipBenefit) returns (VipBenefitResponse) {}
+  // VIP权益获取
+  rpc Get (VipBenefit) returns (VipBenefitResponse) {}
+  // VIP权益查询
+  rpc Search (VipBenefitRequest) returns (VipBenefitResponse) {}
+  // VIP权益列表
+  rpc List (VipBenefitRequest) returns (VipBenefitResponse) {}
+}
+// VIP权益
+message VipBenefit {
+  int64 id = 1; //ID
+  string code = 2; //权益标识
+  string name = 3; //权益名称
+  string type = 4; //权益类型
+  string industry = 5; //所属行业
+  string icon_url = 6; //权益图标
+  int64 price_value = 7; //权益价值
+  string is_select = 8; //默认选中
+  string verify_method = 9; //核销方式
+  string desc = 10; //权益描述
+  string status = 11; //状态
+  string created_at = 12; //创建日期
+  string updated_at = 13; //修改日期
+}
+// VIP权益请求参数
+message VipBenefitRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string code = 11; //权益标识
+  string name = 12; //权益名称
+  string type = 13; //权益类型
+  string industry = 14; //所属行业
+  string is_select = 15; //默认选中
+  string verify_method = 16; //核销方式
+  string status = 17; //状态
+}
+// VIP权益响应数据
+message VipBenefitResponse {
+  VipBenefit entity = 1;
+  common.Pager pager = 2;
+  repeated VipBenefit items = 3;
+  string msg = 4;
+}

@@ -1,0 +1,54 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 支付通道服务
+service PaymentWayService {
+  // 支付通道新增
+  rpc Create (PaymentWay) returns (PaymentWayResponse) {}
+  // 支付通道修改
+  rpc Update (PaymentWay) returns (PaymentWayResponse) {}
+  // 支付通道删除
+  rpc Delete (PaymentWay) returns (PaymentWayResponse) {}
+  // 支付通道获取
+  rpc Get (PaymentWay) returns (PaymentWayResponse) {}
+  // 支付通道查询
+  rpc Search (PaymentWayRequest) returns (PaymentWayResponse) {}
+  // 支付通道列表
+  rpc List (PaymentWayRequest) returns (PaymentWayResponse) {}
+}
+// 支付通道
+message PaymentWay {
+  int32 id = 1; //ID
+  string way_code = 2; //唯一标记
+  string way_name = 3; //方式名称
+  string payment_type = 4; //支付类型
+  string icon_url = 5; //图标URL
+  string uni_app_provider = 6; //UniApp标识
+  string desc = 7; //支付描述
+  int32 sort = 8; //顺序
+  string created_at = 9; //创建时间
+  string updated_at = 10; //修改时间
+}
+// 支付通道请求参数
+message PaymentWayRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string way_code = 11; //唯一标记
+  string way_name = 12; //方式名称
+  string payment_type = 13; //支付类型
+}
+// 支付通道响应数据
+message PaymentWayResponse {
+  PaymentWay entity = 1;
+  common.Pager pager = 2;
+  repeated PaymentWay items = 3;
+  string msg = 4;
+}

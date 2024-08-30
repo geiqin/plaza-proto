@@ -7,7 +7,7 @@
 package services
 
 import (
-	common "github.com/geiqin/micro-kit/protobuf/common"
+	common "../common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -26,18 +26,18 @@ type Module struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name       string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	Title      string `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
-	Type       string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`
-	IconUrl    string `protobuf:"bytes,6,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`
-	Required   bool   `protobuf:"varint,7,opt,name=required,proto3" json:"required"`
-	Dependents string `protobuf:"bytes,8,opt,name=dependents,proto3" json:"dependents"`
-	Memo       string `protobuf:"bytes,9,opt,name=memo,proto3" json:"memo"`
-	Sort       int32  `protobuf:"varint,10,opt,name=sort,proto3" json:"sort"`
-	Status     string `protobuf:"bytes,11,opt,name=status,proto3" json:"status"`
-	CreatedAt  string `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt  string `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id         int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name       string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Title      string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Type       string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	IconUrl    string `protobuf:"bytes,6,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url,omitempty"`
+	Required   bool   `protobuf:"varint,7,opt,name=required,proto3" json:"required,omitempty"`
+	Dependents string `protobuf:"bytes,8,opt,name=dependents,proto3" json:"dependents,omitempty"`
+	Memo       string `protobuf:"bytes,9,opt,name=memo,proto3" json:"memo,omitempty"`
+	Sort       int32  `protobuf:"varint,10,opt,name=sort,proto3" json:"sort,omitempty"`
+	Status     string `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt  string `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt  string `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
 
 func (x *Module) Reset() {
@@ -161,16 +161,16 @@ type ModuleRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Sorting  string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
-	Keywords string  `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
-	Id       int32   `protobuf:"varint,5,opt,name=id,proto3" json:"id"`
-	Name     string  `protobuf:"bytes,6,opt,name=name,proto3" json:"name"`
-	Title    string  `protobuf:"bytes,7,opt,name=title,proto3" json:"title"`
-	Type     string  `protobuf:"bytes,8,opt,name=type,proto3" json:"type"`
-	Status   string  `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
-	Ids      []int64 `protobuf:"varint,10,rep,packed,name=ids,proto3" json:"ids"`
+	Paged    int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Sorting  string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Keywords string  `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Id       int32   `protobuf:"varint,5,opt,name=id,proto3" json:"id,omitempty"`
+	Name     string  `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	Title    string  `protobuf:"bytes,7,opt,name=title,proto3" json:"title,omitempty"`
+	Type     string  `protobuf:"bytes,8,opt,name=type,proto3" json:"type,omitempty"`
+	Status   string  `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
+	Ids      []int64 `protobuf:"varint,10,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 }
 
 func (x *ModuleRequest) Reset() {
@@ -280,10 +280,10 @@ type ModuleResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Module       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*Module     `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   string        `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Entity *Module       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*Module     `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   string        `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *ModuleResponse) Reset() {

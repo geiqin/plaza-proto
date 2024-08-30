@@ -1,0 +1,65 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service VersionMenuService {
+    rpc Get (VersionMenu) returns (VersionMenuResponse) {}
+    rpc Create (VersionMenu) returns (VersionMenuResponse) {}
+    rpc Update (VersionMenu) returns (VersionMenuResponse) {}
+    rpc UpdateHide (VersionMenu) returns (VersionMenuResponse) {}
+    rpc Delete (VersionMenu) returns (VersionMenuResponse) {}
+    rpc Search (VersionMenuRequest) returns (VersionMenuResponse) {}
+    rpc List (VersionMenuRequest) returns (VersionMenuResponse) {}
+    rpc Tree (VersionMenuRequest) returns (VersionMenuResponse) {}
+}
+
+// 超级用户菜单
+message VersionMenu {
+    int64  id =1;//ID
+    int32  version_id =2;//版本ID
+    int64  parent_id =3;//父ID
+    string title =4;//导航标题
+    string type =5;//类型 1目录 2菜单 3按钮
+    string path =6;//路由地址
+    string name =7;//导航名称
+    string component =8;//组件路径
+    string redirect =9;//路由重定向
+    string icon =10;//图标
+    string permission =11;//权限标识
+    string locale =12;//语言包键名
+    string is_cache =13;//是否缓存: 1是 0否
+    string is_hidden =14;//是否隐藏: 1是 0否
+    string is_external =15;//是否外链: 1是 0否
+    string is_require_auth =16;//是否需要登录鉴权: 1是 0否
+    int32  sort =17;//排序值
+    string status =18;//状态: （1：启用；2：禁用）
+    string created_at =23;
+    string updated_at =24;
+    VersionMenu parent = 25;
+    repeated VersionMenu children = 26;
+}
+
+
+message VersionMenuRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    string title = 6;
+    int32 version_id =7;
+    int64 parent_id =8;
+    string version_code = 9;
+    string is_admin =11;
+    repeated int64 ids = 16;
+}
+
+//
+message VersionMenuResponse{
+    VersionMenu entity = 1;
+    common.Pager pager =2;
+    repeated VersionMenu items = 3;
+    string info =4;
+}

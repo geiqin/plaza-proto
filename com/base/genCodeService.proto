@@ -13,7 +13,10 @@ service GenCodeService {
     //数据库列表
     rpc Databases (GenCodeRequest) returns (GenCodeResponse) {}
     //表列表
-    rpc Tables (GenCodeRequest) returns (GenCodeResponse) {}
+    rpc Tables (GenCodeRequest) returns (GenCodeTableResponse) {}
+    //同步
+    rpc sync (GenCodeRequest) returns (GenCodeResponse) {}
+
     //预览代码
     rpc Preview (GenCodeRequest) returns (GenCodeResponse) {}
     //生成代码
@@ -25,7 +28,7 @@ message GenCode {
     int64 id =1; //ID
     string db_name =2;  //数据库名
     string table_name =3;  //表名称
-    string module_name =4; //模块名称
+    string class_name =4; //类名称
     string package_name	=5; //包名称
     string business_name	=6; //业务名称
     string author	=7; //作者
@@ -55,8 +58,8 @@ message GenCodeColumn {
     bool show_in_list = 11; //是否在列表中显示
     bool show_in_form = 12; //是否在表单中显示
     bool show_in_query = 13; //是否在查询中显示
-    int32 form_type	=14; //表单类型
-    int32 query_type	=15;  //查询方式
+    string form_type	=14; //表单类型
+    string query_type	=15;  //查询方式
     string go_type = 16;
     string ts_type = 17;
     string proto_type = 18;
@@ -84,29 +87,45 @@ message GenTable {
 
 
 message GenPreview {
-    string name = 1;
-    string path = 2;
-    string file_name = 3;
-    string content = 4;
+    string key =1;
+    string name = 2;
+    string path = 3;
+    string file_name = 4;
+    string content = 5;
 }
 
-
+// 生成代码请求参数
 message GenCodeRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    int64 id = 3;
-    string db_name = 5;
-    int32 table_name = 6;
-    int32 status = 7;
-    repeated int64 ids = 4;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string db_name = 10; //
+    string table_name = 11; //
+    string is_override = 12; //
+    string is_configed = 13; //
+    string database = 15;
 }
+
 
 message GenCodeResponse {
     GenCode entity = 1;
     common.Pager pager =2;
     repeated GenCode items = 3;
     repeated GenDatabase databases =4;
-    repeated GenTable tables =5;
     repeated GenPreview Preview =6;
     string msg =7;
+}
+
+
+message GenCodeTableResponse {
+    GenCode entity = 1;
+    common.Pager pager =2;
+    repeated GenTable items = 3;
+    string msg =4;
 }

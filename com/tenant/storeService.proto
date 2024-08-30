@@ -3,6 +3,8 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 import "versionService.proto";
+import "versionPackageService.proto";
+import "merchantService.proto";
 
 service StoreService {
     //创建店铺
@@ -29,38 +31,33 @@ service StoreService {
 }
 
 message Store {
-    int64	id	=1;
-    string	name	=2;
-    string	title	=3;
-    string	logo_url	=5;
-    int32	version_id	=6;
-    int64	company_id	=7;
-    string 	company_name	=8;
-    string	industry	=9;
-    int64	province_id	=10;
-    int64	city_id	=11;
-    int64	county_id	=12;
-    string	address	=13;
-    float lng	=14;
-    float	lat	=15;
-    string	region	=16;
-    StoreConfig	config	=17;
-    string	is_trusted	=18;
-    string	status	=19;
-    int64	creator_id	=20;
-    string	expired_at	=21;
-    string	created_at	=22;
-    string	updated_at	=23;
-    Version version =24;
+    int64 id =1; //ID
+    string code =2; //店铺编码
+    string name =3; //店铺名称
+    int64 merchant_id =4; //商户ID
+    int64 platform_id =5; //平台ID
+    int32 version_id =6; //版本ID
+    int32 version_package_id =7; //版本套餐ID
+    string region =8; //分区
+    string logo_url =9; //logo路径
+    int64 province_id =10; //所属省
+    int64 city_id =11; //所属市
+    int64 county_id =12; //所属区
+    string address =13; //地址
+    float lng =14; //经度
+    float lat =15; //纬度
+    string status =16; //状态
+    string expired_at =17; //失效日期
+    string created_at =18; //
+    string updated_at =19; //
+    Version version =22;
+    VersionPackage version_package =23;
+    Merchant merchant =24;
     string	status_name	=25;
     int32 valid_days =26;
     string	province_name	=27;
     string	city_name	=28;
     string	county_name	=29;
-}
-
-message StoreConfig{
-    string custom_domain	=1;
 }
 
 message StoreRequest{
@@ -69,19 +66,22 @@ message StoreRequest{
     string sorting = 3;
 
     int64 id = 4;
-    string	name	=5;
-    string	store_key	=6;
-    string	store_secret	=7;
-    string industry = 8;
-    string status = 9;
-    string	start_date	=10;
-    string	end_date	=11;
-    string keywords = 12;
-    string region = 13;
-    int64	creator_id	=14;
-    int32	application_id =15;
-    int64	area_id	=16;
-    repeated int64 ids = 17;
+    string store_key	=6;
+    string store_secret	=7;
+    string code =8; //店铺编码
+    string name =9; //店铺名称
+    int64 merchant_id =10; //商户ID
+    int64 platform_id =11; //平台ID
+    int32 version_id =12; //版本ID
+    int64 province_id =14; //所属省
+    int64 city_id =15; //所属市
+    int64 county_id =16; //所属区
+    string status = 17;
+    string	start_date	=18;
+    string	end_date	=19;
+    string keywords = 20;
+    string region = 21;
+    repeated int64 ids = 22;
 }
 
 message StoreResponse {

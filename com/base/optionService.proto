@@ -1,52 +1,53 @@
 syntax = "proto3";
-
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-
-//开放选项
+// 全局配置服务
 service OptionService {
+    // 全局配置新增
     rpc Create (Option) returns (OptionResponse) {}
+    // 全局配置修改
     rpc Update (Option) returns (OptionResponse) {}
-    rpc Delete (OptionRequest) returns (OptionResponse) {}
+    // 全局配置删除
+    rpc Delete (Option) returns (OptionResponse) {}
+    // 全局配置获取
+    rpc Get (Option) returns (OptionResponse) {}
+    // 全局配置查询
+    rpc Search (OptionRequest) returns (OptionResponse) {}
+    // 全局配置列表
     rpc List (OptionRequest) returns (OptionResponse) {}
 }
-
-message OptionRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    int64 id = 3;
-    string keywords = 5;
-    string category = 6;
-    string code = 7;
-    repeated int64 ids = 4;
-}
-
-// 字典信息
+// 全局配置
 message Option {
-    int64 id =1; //id
-    string category =2; //类别
-    string name =3; //名称
-    string code	=4; //键
-    string value	=5; //值
-    string default_value	=6; //默认值
-    string description 	=7;  //描述
-    string created_at = 9;
-    string updated_at = 10;
+    int64 id = 1; //ID
+    string category = 2; //类别
+    string name = 3; //名称
+    string code = 4; //键
+    string value = 5; //值
+    string default_value = 6; //默认值
+    string description = 7; //描述
+    string created_at = 8; //创建日期
+    string updated_at = 9; //修改日期
 }
-
-// 字典信息
-message OptionList {
-    string label =1; //标签
-    string value =2; //值
-    string disabled	=3; //默认值
+// 全局配置请求参数
+message OptionRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string category = 11; //类别
+    string name = 12; //名称
+    string code = 13; //键
 }
-
-
+// 全局配置响应数据
 message OptionResponse {
     Option entity = 1;
-    common.Pager pager =2;
+    common.Pager pager = 2;
     repeated Option items = 3;
-    repeated OptionList list = 4;
-    string info =5;
+    string msg = 4;
 }

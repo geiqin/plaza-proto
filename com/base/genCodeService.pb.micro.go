@@ -51,7 +51,9 @@ type GenCodeService interface {
 	//数据库列表
 	Databases(ctx context.Context, in *GenCodeRequest, opts ...client.CallOption) (*GenCodeResponse, error)
 	//表列表
-	Tables(ctx context.Context, in *GenCodeRequest, opts ...client.CallOption) (*GenCodeResponse, error)
+	Tables(ctx context.Context, in *GenCodeRequest, opts ...client.CallOption) (*GenCodeTableResponse, error)
+	//同步
+	Sync(ctx context.Context, in *GenCodeRequest, opts ...client.CallOption) (*GenCodeResponse, error)
 	//预览代码
 	Preview(ctx context.Context, in *GenCodeRequest, opts ...client.CallOption) (*GenCodeResponse, error)
 	//生成代码
@@ -130,8 +132,18 @@ func (c *genCodeService) Databases(ctx context.Context, in *GenCodeRequest, opts
 	return out, nil
 }
 
-func (c *genCodeService) Tables(ctx context.Context, in *GenCodeRequest, opts ...client.CallOption) (*GenCodeResponse, error) {
+func (c *genCodeService) Tables(ctx context.Context, in *GenCodeRequest, opts ...client.CallOption) (*GenCodeTableResponse, error) {
 	req := c.c.NewRequest(c.name, "GenCodeService.Tables", in)
+	out := new(GenCodeTableResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *genCodeService) Sync(ctx context.Context, in *GenCodeRequest, opts ...client.CallOption) (*GenCodeResponse, error) {
+	req := c.c.NewRequest(c.name, "GenCodeService.sync", in)
 	out := new(GenCodeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -171,7 +183,9 @@ type GenCodeServiceHandler interface {
 	//数据库列表
 	Databases(context.Context, *GenCodeRequest, *GenCodeResponse) error
 	//表列表
-	Tables(context.Context, *GenCodeRequest, *GenCodeResponse) error
+	Tables(context.Context, *GenCodeRequest, *GenCodeTableResponse) error
+	//同步
+	Sync(context.Context, *GenCodeRequest, *GenCodeResponse) error
 	//预览代码
 	Preview(context.Context, *GenCodeRequest, *GenCodeResponse) error
 	//生成代码
@@ -186,7 +200,8 @@ func RegisterGenCodeServiceHandler(s server.Server, hdlr GenCodeServiceHandler, 
 		Get(ctx context.Context, in *GenCode, out *GenCodeResponse) error
 		Search(ctx context.Context, in *GenCodeRequest, out *GenCodeResponse) error
 		Databases(ctx context.Context, in *GenCodeRequest, out *GenCodeResponse) error
-		Tables(ctx context.Context, in *GenCodeRequest, out *GenCodeResponse) error
+		Tables(ctx context.Context, in *GenCodeRequest, out *GenCodeTableResponse) error
+		Sync(ctx context.Context, in *GenCodeRequest, out *GenCodeResponse) error
 		Preview(ctx context.Context, in *GenCodeRequest, out *GenCodeResponse) error
 		Generate(ctx context.Context, in *GenCodeRequest, out *GenCodeResponse) error
 	}
@@ -225,8 +240,12 @@ func (h *genCodeServiceHandler) Databases(ctx context.Context, in *GenCodeReques
 	return h.GenCodeServiceHandler.Databases(ctx, in, out)
 }
 
-func (h *genCodeServiceHandler) Tables(ctx context.Context, in *GenCodeRequest, out *GenCodeResponse) error {
+func (h *genCodeServiceHandler) Tables(ctx context.Context, in *GenCodeRequest, out *GenCodeTableResponse) error {
 	return h.GenCodeServiceHandler.Tables(ctx, in, out)
+}
+
+func (h *genCodeServiceHandler) Sync(ctx context.Context, in *GenCodeRequest, out *GenCodeResponse) error {
+	return h.GenCodeServiceHandler.Sync(ctx, in, out)
 }
 
 func (h *genCodeServiceHandler) Preview(ctx context.Context, in *GenCodeRequest, out *GenCodeResponse) error {
