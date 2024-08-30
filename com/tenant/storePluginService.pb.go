@@ -7,7 +7,7 @@
 package services
 
 import (
-	common "../common"
+	common "github.com/geiqin/micro-kit/protobuf/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -26,23 +26,23 @@ type StorePlugin struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                      //ID
-	StoreId       int64   `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`             //店铺ID
-	PluginId      int32   `protobuf:"varint,3,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`          //插件ID
-	PluginCode    string  `protobuf:"bytes,4,opt,name=plugin_code,json=pluginCode,proto3" json:"plugin_code,omitempty"`     //插件code
-	IsEnabled     string  `protobuf:"bytes,5,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`        //是否已启用
-	IsError       string  `protobuf:"bytes,6,opt,name=is_error,json=isError,proto3" json:"is_error,omitempty"`              //是否有异常
-	ErrorMsg      string  `protobuf:"bytes,7,opt,name=error_msg,json=errorMsg,proto3" json:"error_msg,omitempty"`           //错误信息
-	Config        string  `protobuf:"bytes,8,opt,name=config,proto3" json:"config,omitempty"`                               //配置信息
-	Sort          int32   `protobuf:"varint,9,opt,name=sort,proto3" json:"sort,omitempty"`                                  //排序
-	ExpiredTime   string  `protobuf:"bytes,10,opt,name=expired_time,json=expiredTime,proto3" json:"expired_time,omitempty"` //到期时间
-	Ver           int32   `protobuf:"varint,11,opt,name=ver,proto3" json:"ver,omitempty"`                                   //版本号
-	CreatedAt     string  `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string  `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Plugin        *Plugin `protobuf:"bytes,14,opt,name=plugin,proto3" json:"plugin,omitempty"`
-	ValidDays     int32   `protobuf:"varint,15,opt,name=valid_days,json=validDays,proto3" json:"valid_days,omitempty"`              //剩余天数
-	VerText       string  `protobuf:"bytes,16,opt,name=ver_text,json=verText,proto3" json:"ver_text,omitempty"`                     //版本文本（版本号美化）
-	IsEnabledName string  `protobuf:"bytes,17,opt,name=is_enabled_name,json=isEnabledName,proto3" json:"is_enabled_name,omitempty"` //是否已启用名称
+	Id            int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                      //ID
+	StoreId       int64   `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id"`             //店铺ID
+	PluginId      int32   `protobuf:"varint,3,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id"`          //插件ID
+	PluginCode    string  `protobuf:"bytes,4,opt,name=plugin_code,json=pluginCode,proto3" json:"plugin_code"`     //插件code
+	IsEnabled     string  `protobuf:"bytes,5,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled"`        //是否已启用
+	IsError       string  `protobuf:"bytes,6,opt,name=is_error,json=isError,proto3" json:"is_error"`              //是否有异常
+	ErrorMsg      string  `protobuf:"bytes,7,opt,name=error_msg,json=errorMsg,proto3" json:"error_msg"`           //错误信息
+	Config        string  `protobuf:"bytes,8,opt,name=config,proto3" json:"config"`                               //配置信息
+	Sort          int32   `protobuf:"varint,9,opt,name=sort,proto3" json:"sort"`                                  //排序
+	ExpiredTime   string  `protobuf:"bytes,10,opt,name=expired_time,json=expiredTime,proto3" json:"expired_time"` //到期时间
+	Ver           int32   `protobuf:"varint,11,opt,name=ver,proto3" json:"ver"`                                   //版本号
+	CreatedAt     string  `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     string  `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Plugin        *Plugin `protobuf:"bytes,14,opt,name=plugin,proto3" json:"plugin"`
+	ValidDays     int32   `protobuf:"varint,15,opt,name=valid_days,json=validDays,proto3" json:"valid_days"`              //剩余天数
+	VerText       string  `protobuf:"bytes,16,opt,name=ver_text,json=verText,proto3" json:"ver_text"`                     //版本文本（版本号美化）
+	IsEnabledName string  `protobuf:"bytes,17,opt,name=is_enabled_name,json=isEnabledName,proto3" json:"is_enabled_name"` //是否已启用名称
 }
 
 func (x *StorePlugin) Reset() {
@@ -201,22 +201,22 @@ type StorePluginRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//base params
-	Id          int32    `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	StoreId     int64    `protobuf:"varint,5,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
-	PluginId    int32    `protobuf:"varint,9,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
-	PluginCode  string   `protobuf:"bytes,6,opt,name=plugin_code,json=pluginCode,proto3" json:"plugin_code,omitempty"`
-	Keywords    string   `protobuf:"bytes,7,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	IsEnabled   string   `protobuf:"bytes,8,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
-	IsError     string   `protobuf:"bytes,10,opt,name=is_error,json=isError,proto3" json:"is_error,omitempty"`
-	Mode        string   `protobuf:"bytes,11,opt,name=mode,proto3" json:"mode,omitempty"` //ConfigList 数据模式: 1-plugin_base模式,2-plugin_data 模式，3-maps模式，无-对象列表
-	StatusList  []string `protobuf:"bytes,13,rep,name=status_list,json=statusList,proto3" json:"status_list,omitempty"`
-	Ids         []int64  `protobuf:"varint,14,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	PluginIds   []int32  `protobuf:"varint,15,rep,packed,name=plugin_ids,json=pluginIds,proto3" json:"plugin_ids,omitempty"`
-	PluginCodes []string `protobuf:"bytes,16,rep,name=plugin_codes,json=pluginCodes,proto3" json:"plugin_codes,omitempty"`
+	Id          int32    `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	StoreId     int64    `protobuf:"varint,5,opt,name=store_id,json=storeId,proto3" json:"store_id"`
+	PluginId    int32    `protobuf:"varint,9,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id"`
+	PluginCode  string   `protobuf:"bytes,6,opt,name=plugin_code,json=pluginCode,proto3" json:"plugin_code"`
+	Keywords    string   `protobuf:"bytes,7,opt,name=keywords,proto3" json:"keywords"`
+	IsEnabled   string   `protobuf:"bytes,8,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled"`
+	IsError     string   `protobuf:"bytes,10,opt,name=is_error,json=isError,proto3" json:"is_error"`
+	Mode        string   `protobuf:"bytes,11,opt,name=mode,proto3" json:"mode"` //ConfigList 数据模式: 1-plugin_base模式,2-plugin_data 模式，3-maps模式，无-对象列表
+	StatusList  []string `protobuf:"bytes,13,rep,name=status_list,json=statusList,proto3" json:"status_list"`
+	Ids         []int64  `protobuf:"varint,14,rep,packed,name=ids,proto3" json:"ids"`
+	PluginIds   []int32  `protobuf:"varint,15,rep,packed,name=plugin_ids,json=pluginIds,proto3" json:"plugin_ids"`
+	PluginCodes []string `protobuf:"bytes,16,rep,name=plugin_codes,json=pluginCodes,proto3" json:"plugin_codes"`
 }
 
 func (x *StorePluginRequest) Reset() {
@@ -361,11 +361,11 @@ type StorePluginResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity            *StorePlugin   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager             *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items             []*StorePlugin `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	PluginsValidCodes []string       `protobuf:"bytes,4,rep,name=plugins_valid_codes,json=pluginsValidCodes,proto3" json:"plugins_valid_codes,omitempty"`
-	Info              string         `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity            *StorePlugin   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager             *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items             []*StorePlugin `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	PluginsValidCodes []string       `protobuf:"bytes,4,rep,name=plugins_valid_codes,json=pluginsValidCodes,proto3" json:"plugins_valid_codes"`
+	Info              string         `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *StorePluginResponse) Reset() {

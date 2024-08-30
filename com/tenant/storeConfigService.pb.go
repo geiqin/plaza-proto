@@ -7,7 +7,7 @@
 package services
 
 import (
-	common "../common"
+	common "github.com/geiqin/micro-kit/protobuf/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,29 +27,29 @@ type StoreConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                  int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                                   //ID
-	StoreId             int64   `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`                                          //店铺ID
-	CustomDomain        string  `protobuf:"bytes,3,opt,name=custom_domain,json=customDomain,proto3" json:"custom_domain,omitempty"`                            //自定义域名
-	StoragePublic       string  `protobuf:"bytes,4,opt,name=storage_public,json=storagePublic,proto3" json:"storage_public,omitempty"`                         //公共储存
-	StoragePrivate      string  `protobuf:"bytes,5,opt,name=storage_private,json=storagePrivate,proto3" json:"storage_private,omitempty"`                      //私有储存
-	SmsChannel          string  `protobuf:"bytes,6,opt,name=sms_channel,json=smsChannel,proto3" json:"sms_channel,omitempty"`                                  //短信通道
-	EmailChannel        string  `protobuf:"bytes,7,opt,name=email_channel,json=emailChannel,proto3" json:"email_channel,omitempty"`                            //邮件通道
-	ShopLimitCount      int32   `protobuf:"varint,8,opt,name=shop_limit_count,json=shopLimitCount,proto3" json:"shop_limit_count,omitempty"`                   //商户限制数量
-	RealstoreLimitCount int32   `protobuf:"varint,9,opt,name=realstore_limit_count,json=realstoreLimitCount,proto3" json:"realstore_limit_count,omitempty"`    //门店限制数量
-	WarehouseLimitCount int32   `protobuf:"varint,10,opt,name=warehouse_limit_count,json=warehouseLimitCount,proto3" json:"warehouse_limit_count,omitempty"`   //仓库限制数量
-	ManagerLimitCount   int32   `protobuf:"varint,11,opt,name=manager_limit_count,json=managerLimitCount,proto3" json:"manager_limit_count,omitempty"`         //管理员限制数量
-	MemberLimitCount    int32   `protobuf:"varint,12,opt,name=member_limit_count,json=memberLimitCount,proto3" json:"member_limit_count,omitempty"`            //会员限制数量
-	SpuLimitCount       int32   `protobuf:"varint,13,opt,name=spu_limit_count,json=spuLimitCount,proto3" json:"spu_limit_count,omitempty"`                     //商品限制数量
-	OrderFreeType       string  `protobuf:"bytes,14,opt,name=order_free_type,json=orderFreeType,proto3" json:"order_free_type,omitempty"`                      //订单成交免费类型
-	OrderFreeTotalLimit int32   `protobuf:"varint,15,opt,name=order_free_total_limit,json=orderFreeTotalLimit,proto3" json:"order_free_total_limit,omitempty"` //订单成交免费总限制
-	OrderFreeYearLimit  int32   `protobuf:"varint,16,opt,name=order_free_year_limit,json=orderFreeYearLimit,proto3" json:"order_free_year_limit,omitempty"`    //订单成交免费年度限制
-	OrderFreeMonthLimit int32   `protobuf:"varint,17,opt,name=order_free_month_limit,json=orderFreeMonthLimit,proto3" json:"order_free_month_limit,omitempty"` //订单成交免费月度限制
-	OrderCommissionRate float32 `protobuf:"fixed32,18,opt,name=order_commission_rate,json=orderCommissionRate,proto3" json:"order_commission_rate,omitempty"`  //订单成交抽成比例
-	MediaLimitCount     int32   `protobuf:"varint,19,opt,name=media_limit_count,json=mediaLimitCount,proto3" json:"media_limit_count,omitempty"`               //媒体限制数量
-	MediaLimitVolume    int32   `protobuf:"varint,20,opt,name=media_limit_volume,json=mediaLimitVolume,proto3" json:"media_limit_volume,omitempty"`            //媒体限制容量
-	ArticleLimitCount   int32   `protobuf:"varint,21,opt,name=article_limit_count,json=articleLimitCount,proto3" json:"article_limit_count,omitempty"`         //文章限制数量
-	CreatedAt           string  `protobuf:"bytes,22,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                                    //
-	UpdatedAt           string  `protobuf:"bytes,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`                                    //
+	Id                  int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                                   //ID
+	StoreId             int64   `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id"`                                          //店铺ID
+	CustomDomain        string  `protobuf:"bytes,3,opt,name=custom_domain,json=customDomain,proto3" json:"custom_domain"`                            //自定义域名
+	StoragePublic       string  `protobuf:"bytes,4,opt,name=storage_public,json=storagePublic,proto3" json:"storage_public"`                         //公共储存
+	StoragePrivate      string  `protobuf:"bytes,5,opt,name=storage_private,json=storagePrivate,proto3" json:"storage_private"`                      //私有储存
+	SmsChannel          string  `protobuf:"bytes,6,opt,name=sms_channel,json=smsChannel,proto3" json:"sms_channel"`                                  //短信通道
+	EmailChannel        string  `protobuf:"bytes,7,opt,name=email_channel,json=emailChannel,proto3" json:"email_channel"`                            //邮件通道
+	ShopLimitCount      int32   `protobuf:"varint,8,opt,name=shop_limit_count,json=shopLimitCount,proto3" json:"shop_limit_count"`                   //商户限制数量
+	RealstoreLimitCount int32   `protobuf:"varint,9,opt,name=realstore_limit_count,json=realstoreLimitCount,proto3" json:"realstore_limit_count"`    //门店限制数量
+	WarehouseLimitCount int32   `protobuf:"varint,10,opt,name=warehouse_limit_count,json=warehouseLimitCount,proto3" json:"warehouse_limit_count"`   //仓库限制数量
+	ManagerLimitCount   int32   `protobuf:"varint,11,opt,name=manager_limit_count,json=managerLimitCount,proto3" json:"manager_limit_count"`         //管理员限制数量
+	MemberLimitCount    int32   `protobuf:"varint,12,opt,name=member_limit_count,json=memberLimitCount,proto3" json:"member_limit_count"`            //会员限制数量
+	SpuLimitCount       int32   `protobuf:"varint,13,opt,name=spu_limit_count,json=spuLimitCount,proto3" json:"spu_limit_count"`                     //商品限制数量
+	OrderFreeType       string  `protobuf:"bytes,14,opt,name=order_free_type,json=orderFreeType,proto3" json:"order_free_type"`                      //订单成交免费类型
+	OrderFreeTotalLimit int32   `protobuf:"varint,15,opt,name=order_free_total_limit,json=orderFreeTotalLimit,proto3" json:"order_free_total_limit"` //订单成交免费总限制
+	OrderFreeYearLimit  int32   `protobuf:"varint,16,opt,name=order_free_year_limit,json=orderFreeYearLimit,proto3" json:"order_free_year_limit"`    //订单成交免费年度限制
+	OrderFreeMonthLimit int32   `protobuf:"varint,17,opt,name=order_free_month_limit,json=orderFreeMonthLimit,proto3" json:"order_free_month_limit"` //订单成交免费月度限制
+	OrderCommissionRate float32 `protobuf:"fixed32,18,opt,name=order_commission_rate,json=orderCommissionRate,proto3" json:"order_commission_rate"`  //订单成交抽成比例
+	MediaLimitCount     int32   `protobuf:"varint,19,opt,name=media_limit_count,json=mediaLimitCount,proto3" json:"media_limit_count"`               //媒体限制数量
+	MediaLimitVolume    int32   `protobuf:"varint,20,opt,name=media_limit_volume,json=mediaLimitVolume,proto3" json:"media_limit_volume"`            //媒体限制容量
+	ArticleLimitCount   int32   `protobuf:"varint,21,opt,name=article_limit_count,json=articleLimitCount,proto3" json:"article_limit_count"`         //文章限制数量
+	CreatedAt           string  `protobuf:"bytes,22,opt,name=created_at,json=createdAt,proto3" json:"created_at"`                                    //
+	UpdatedAt           string  `protobuf:"bytes,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`                                    //
 }
 
 func (x *StoreConfig) Reset() {
@@ -251,16 +251,16 @@ type StoreConfigRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top,omitempty"`
-	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort,omitempty"`
-	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range,omitempty"`
-	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id,omitempty"`
+	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top"`
+	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged"`
+	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
+	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort"`
+	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range"`
+	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids"`
+	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id"`
 	//以下为自定义参数
-	StoreId int64 `protobuf:"varint,11,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"` //店铺ID
+	StoreId int64 `protobuf:"varint,11,opt,name=store_id,json=storeId,proto3" json:"store_id"` //店铺ID
 }
 
 func (x *StoreConfigRequest) Reset() {
@@ -364,10 +364,10 @@ type StoreConfigResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *StoreConfig   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*StoreConfig `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Msg    string         `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg,omitempty"`
+	Entity *StoreConfig   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*StoreConfig `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Msg    string         `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg"`
 }
 
 func (x *StoreConfigResponse) Reset() {

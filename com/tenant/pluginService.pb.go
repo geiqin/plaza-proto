@@ -7,7 +7,7 @@
 package services
 
 import (
-	common "../common"
+	common "github.com/geiqin/micro-kit/protobuf/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -26,24 +26,24 @@ type Plugin struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                   //ID
-	Code       string `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`                                //唯一标记
-	Name       string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                //插件名称
-	Type       string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`                                //插件类型
-	IconUrl    string `protobuf:"bytes,5,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url,omitempty"`           //插件图标
-	Desc       string `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc,omitempty"`                                //插件描述
-	Intro      string `protobuf:"bytes,7,opt,name=intro,proto3" json:"intro,omitempty"`                              //插件介绍
-	Data       string `protobuf:"bytes,8,opt,name=data,proto3" json:"data,omitempty"`                                //初始数据
-	Ver        int32  `protobuf:"varint,9,opt,name=ver,proto3" json:"ver,omitempty"`                                 //版本号
-	Url        string `protobuf:"bytes,10,opt,name=url,proto3" json:"url,omitempty"`                                 //URL地址
-	Weight     int32  `protobuf:"varint,11,opt,name=weight,proto3" json:"weight,omitempty"`                          //权重
-	Status     string `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"`                           //状态(0 禁用，1 启用)
-	AuthorId   string `protobuf:"bytes,13,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`       //作者ID
-	AuthorName string `protobuf:"bytes,14,opt,name=author_name,json=authorName,proto3" json:"author_name,omitempty"` //作者名称
-	CreatedAt  string `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt  string `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	VerText    string `protobuf:"bytes,17,opt,name=ver_text,json=verText,proto3" json:"ver_text,omitempty"`       //版本文本（版本号美化）
-	IsInstall  string `protobuf:"bytes,18,opt,name=is_install,json=isInstall,proto3" json:"is_install,omitempty"` //当前店铺是否已安装(0否，1是)
+	Id         int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                   //ID
+	Code       string `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`                                //唯一标记
+	Name       string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                                //插件名称
+	Type       string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`                                //插件类型
+	IconUrl    string `protobuf:"bytes,5,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`           //插件图标
+	Desc       string `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc"`                                //插件描述
+	Intro      string `protobuf:"bytes,7,opt,name=intro,proto3" json:"intro"`                              //插件介绍
+	Data       string `protobuf:"bytes,8,opt,name=data,proto3" json:"data"`                                //初始数据
+	Ver        int32  `protobuf:"varint,9,opt,name=ver,proto3" json:"ver"`                                 //版本号
+	Url        string `protobuf:"bytes,10,opt,name=url,proto3" json:"url"`                                 //URL地址
+	Weight     int32  `protobuf:"varint,11,opt,name=weight,proto3" json:"weight"`                          //权重
+	Status     string `protobuf:"bytes,12,opt,name=status,proto3" json:"status"`                           //状态(0 禁用，1 启用)
+	AuthorId   string `protobuf:"bytes,13,opt,name=author_id,json=authorId,proto3" json:"author_id"`       //作者ID
+	AuthorName string `protobuf:"bytes,14,opt,name=author_name,json=authorName,proto3" json:"author_name"` //作者名称
+	CreatedAt  string `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt  string `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	VerText    string `protobuf:"bytes,17,opt,name=ver_text,json=verText,proto3" json:"ver_text"`       //版本文本（版本号美化）
+	IsInstall  string `protobuf:"bytes,18,opt,name=is_install,json=isInstall,proto3" json:"is_install"` //当前店铺是否已安装(0否，1是)
 }
 
 func (x *Plugin) Reset() {
@@ -209,19 +209,19 @@ type PluginRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//base params
-	Id         int32    `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name       string   `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	Code       string   `protobuf:"bytes,6,opt,name=code,proto3" json:"code,omitempty"`
-	Type       string   `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
-	Status     string   `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
-	AuthorId   int64    `protobuf:"varint,9,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
-	Keywords   string   `protobuf:"bytes,10,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	StatusList []string `protobuf:"bytes,11,rep,name=status_list,json=statusList,proto3" json:"status_list,omitempty"`
-	Ids        []int32  `protobuf:"varint,12,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id         int32    `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Name       string   `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
+	Code       string   `protobuf:"bytes,6,opt,name=code,proto3" json:"code"`
+	Type       string   `protobuf:"bytes,7,opt,name=type,proto3" json:"type"`
+	Status     string   `protobuf:"bytes,8,opt,name=status,proto3" json:"status"`
+	AuthorId   int64    `protobuf:"varint,9,opt,name=author_id,json=authorId,proto3" json:"author_id"`
+	Keywords   string   `protobuf:"bytes,10,opt,name=keywords,proto3" json:"keywords"`
+	StatusList []string `protobuf:"bytes,11,rep,name=status_list,json=statusList,proto3" json:"status_list"`
+	Ids        []int32  `protobuf:"varint,12,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *PluginRequest) Reset() {
@@ -340,16 +340,15 @@ func (x *PluginRequest) GetIds() []int32 {
 	return nil
 }
 
-//
 type PluginResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Plugin       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Plugin     `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   string        `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *Plugin       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Plugin     `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   string        `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 }
 
 func (x *PluginResponse) Reset() {

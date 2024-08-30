@@ -7,7 +7,7 @@
 package services
 
 import (
-	common "../common"
+	common "github.com/geiqin/micro-kit/protobuf/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,20 +27,20 @@ type VersionPackage struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int32        `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                      //ID
-	Code        string       `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`                                   //套餐编码
-	Name        string       `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                   //套餐名称
-	VersionId   int32        `protobuf:"varint,4,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`       //所属版本
-	MarketPrice int64        `protobuf:"varint,5,opt,name=market_price,json=marketPrice,proto3" json:"market_price,omitempty"` //市场价
-	Price       int64        `protobuf:"varint,6,opt,name=price,proto3" json:"price,omitempty"`                                //优惠价
-	Description string       `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`                     //描述
-	UseConfig   string       `protobuf:"bytes,8,opt,name=use_config,json=useConfig,proto3" json:"use_config,omitempty"`        //使用配置
-	IsDefault   string       `protobuf:"bytes,9,opt,name=is_default,json=isDefault,proto3" json:"is_default,omitempty"`        //是否默认
-	Status      string       `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`                              //状态
-	CreatedAt   string       `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`       //
-	UpdatedAt   string       `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`       //
-	Version     *Version     `protobuf:"bytes,13,opt,name=version,proto3" json:"version,omitempty"`
-	Config      *StoreConfig `protobuf:"bytes,14,opt,name=config,proto3" json:"config,omitempty"`
+	Id          int32        `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                      //ID
+	Code        string       `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`                                   //套餐编码
+	Name        string       `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                                   //套餐名称
+	VersionId   int32        `protobuf:"varint,4,opt,name=version_id,json=versionId,proto3" json:"version_id"`       //所属版本
+	MarketPrice int64        `protobuf:"varint,5,opt,name=market_price,json=marketPrice,proto3" json:"market_price"` //市场价
+	Price       int64        `protobuf:"varint,6,opt,name=price,proto3" json:"price"`                                //优惠价
+	Description string       `protobuf:"bytes,7,opt,name=description,proto3" json:"description"`                     //描述
+	UseConfig   string       `protobuf:"bytes,8,opt,name=use_config,json=useConfig,proto3" json:"use_config"`        //使用配置
+	IsDefault   string       `protobuf:"bytes,9,opt,name=is_default,json=isDefault,proto3" json:"is_default"`        //是否默认
+	Status      string       `protobuf:"bytes,10,opt,name=status,proto3" json:"status"`                              //状态
+	CreatedAt   string       `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"`       //
+	UpdatedAt   string       `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`       //
+	Version     *Version     `protobuf:"bytes,13,opt,name=version,proto3" json:"version"`
+	Config      *StoreConfig `protobuf:"bytes,14,opt,name=config,proto3" json:"config"`
 }
 
 func (x *VersionPackage) Reset() {
@@ -179,20 +179,20 @@ type VersionPackageRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top,omitempty"`
-	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort,omitempty"`
-	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range,omitempty"`
-	Ids       []int32  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Id        int32    `protobuf:"varint,8,opt,name=id,proto3" json:"id,omitempty"`
+	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top"`
+	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged"`
+	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
+	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort"`
+	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range"`
+	Ids       []int32  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids"`
+	Id        int32    `protobuf:"varint,8,opt,name=id,proto3" json:"id"`
 	//以下为自定义参数
-	Code      string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`                             //套餐编码
-	Name      string `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`                             //套餐名称
-	VersionId int32  `protobuf:"varint,13,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"` //所属版本
-	IsDefault string `protobuf:"bytes,14,opt,name=is_default,json=isDefault,proto3" json:"is_default,omitempty"`  //是否默认
-	Status    string `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"`                         //状态
+	Code      string `protobuf:"bytes,11,opt,name=code,proto3" json:"code"`                             //套餐编码
+	Name      string `protobuf:"bytes,12,opt,name=name,proto3" json:"name"`                             //套餐名称
+	VersionId int32  `protobuf:"varint,13,opt,name=version_id,json=versionId,proto3" json:"version_id"` //所属版本
+	IsDefault string `protobuf:"bytes,14,opt,name=is_default,json=isDefault,proto3" json:"is_default"`  //是否默认
+	Status    string `protobuf:"bytes,15,opt,name=status,proto3" json:"status"`                         //状态
 }
 
 func (x *VersionPackageRequest) Reset() {
@@ -324,10 +324,10 @@ type VersionPackageResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *VersionPackage   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*VersionPackage `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Msg    string            `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg,omitempty"`
+	Entity *VersionPackage   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*VersionPackage `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Msg    string            `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg"`
 }
 
 func (x *VersionPackageResponse) Reset() {

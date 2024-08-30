@@ -7,7 +7,7 @@
 package services
 
 import (
-	common "../common"
+	common "github.com/geiqin/micro-kit/protobuf/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -26,33 +26,33 @@ type Store struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64           `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                       //ID
-	Code             string          `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`                                                    //店铺编码
-	Name             string          `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                                    //店铺名称
-	MerchantId       int64           `protobuf:"varint,4,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`                     //商户ID
-	PlatformId       int64           `protobuf:"varint,5,opt,name=platform_id,json=platformId,proto3" json:"platform_id,omitempty"`                     //平台ID
-	VersionId        int32           `protobuf:"varint,6,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`                        //版本ID
-	VersionPackageId int32           `protobuf:"varint,7,opt,name=version_package_id,json=versionPackageId,proto3" json:"version_package_id,omitempty"` //版本套餐ID
-	Region           string          `protobuf:"bytes,8,opt,name=region,proto3" json:"region,omitempty"`                                                //分区
-	LogoUrl          string          `protobuf:"bytes,9,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`                               //logo路径
-	ProvinceId       int64           `protobuf:"varint,10,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"`                    //所属省
-	CityId           int64           `protobuf:"varint,11,opt,name=city_id,json=cityId,proto3" json:"city_id,omitempty"`                                //所属市
-	CountyId         int64           `protobuf:"varint,12,opt,name=county_id,json=countyId,proto3" json:"county_id,omitempty"`                          //所属区
-	Address          string          `protobuf:"bytes,13,opt,name=address,proto3" json:"address,omitempty"`                                             //地址
-	Lng              float32         `protobuf:"fixed32,14,opt,name=lng,proto3" json:"lng,omitempty"`                                                   //经度
-	Lat              float32         `protobuf:"fixed32,15,opt,name=lat,proto3" json:"lat,omitempty"`                                                   //纬度
-	Status           string          `protobuf:"bytes,16,opt,name=status,proto3" json:"status,omitempty"`                                               //状态
-	ExpiredAt        string          `protobuf:"bytes,17,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`                        //失效日期
-	CreatedAt        string          `protobuf:"bytes,18,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                        //
-	UpdatedAt        string          `protobuf:"bytes,19,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`                        //
-	Version          *Version        `protobuf:"bytes,22,opt,name=version,proto3" json:"version,omitempty"`
-	VersionPackage   *VersionPackage `protobuf:"bytes,23,opt,name=version_package,json=versionPackage,proto3" json:"version_package,omitempty"`
-	Merchant         *Merchant       `protobuf:"bytes,24,opt,name=merchant,proto3" json:"merchant,omitempty"`
-	StatusName       string          `protobuf:"bytes,25,opt,name=status_name,json=statusName,proto3" json:"status_name,omitempty"`
-	ValidDays        int32           `protobuf:"varint,26,opt,name=valid_days,json=validDays,proto3" json:"valid_days,omitempty"`
-	ProvinceName     string          `protobuf:"bytes,27,opt,name=province_name,json=provinceName,proto3" json:"province_name,omitempty"`
-	CityName         string          `protobuf:"bytes,28,opt,name=city_name,json=cityName,proto3" json:"city_name,omitempty"`
-	CountyName       string          `protobuf:"bytes,29,opt,name=county_name,json=countyName,proto3" json:"county_name,omitempty"`
+	Id               int64           `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                       //ID
+	Code             string          `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`                                                    //店铺编码
+	Name             string          `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                                                    //店铺名称
+	MerchantId       int64           `protobuf:"varint,4,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id"`                     //商户ID
+	PlatformId       int64           `protobuf:"varint,5,opt,name=platform_id,json=platformId,proto3" json:"platform_id"`                     //平台ID
+	VersionId        int32           `protobuf:"varint,6,opt,name=version_id,json=versionId,proto3" json:"version_id"`                        //版本ID
+	VersionPackageId int32           `protobuf:"varint,7,opt,name=version_package_id,json=versionPackageId,proto3" json:"version_package_id"` //版本套餐ID
+	Region           string          `protobuf:"bytes,8,opt,name=region,proto3" json:"region"`                                                //分区
+	LogoUrl          string          `protobuf:"bytes,9,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url"`                               //logo路径
+	ProvinceId       int64           `protobuf:"varint,10,opt,name=province_id,json=provinceId,proto3" json:"province_id"`                    //所属省
+	CityId           int64           `protobuf:"varint,11,opt,name=city_id,json=cityId,proto3" json:"city_id"`                                //所属市
+	CountyId         int64           `protobuf:"varint,12,opt,name=county_id,json=countyId,proto3" json:"county_id"`                          //所属区
+	Address          string          `protobuf:"bytes,13,opt,name=address,proto3" json:"address"`                                             //地址
+	Lng              float32         `protobuf:"fixed32,14,opt,name=lng,proto3" json:"lng"`                                                   //经度
+	Lat              float32         `protobuf:"fixed32,15,opt,name=lat,proto3" json:"lat"`                                                   //纬度
+	Status           string          `protobuf:"bytes,16,opt,name=status,proto3" json:"status"`                                               //状态
+	ExpiredAt        string          `protobuf:"bytes,17,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at"`                        //失效日期
+	CreatedAt        string          `protobuf:"bytes,18,opt,name=created_at,json=createdAt,proto3" json:"created_at"`                        //
+	UpdatedAt        string          `protobuf:"bytes,19,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`                        //
+	Version          *Version        `protobuf:"bytes,22,opt,name=version,proto3" json:"version"`
+	VersionPackage   *VersionPackage `protobuf:"bytes,23,opt,name=version_package,json=versionPackage,proto3" json:"version_package"`
+	Merchant         *Merchant       `protobuf:"bytes,24,opt,name=merchant,proto3" json:"merchant"`
+	StatusName       string          `protobuf:"bytes,25,opt,name=status_name,json=statusName,proto3" json:"status_name"`
+	ValidDays        int32           `protobuf:"varint,26,opt,name=valid_days,json=validDays,proto3" json:"valid_days"`
+	ProvinceName     string          `protobuf:"bytes,27,opt,name=province_name,json=provinceName,proto3" json:"province_name"`
+	CityName         string          `protobuf:"bytes,28,opt,name=city_name,json=cityName,proto3" json:"city_name"`
+	CountyName       string          `protobuf:"bytes,29,opt,name=county_name,json=countyName,proto3" json:"county_name"`
 }
 
 func (x *Store) Reset() {
@@ -281,26 +281,26 @@ type StoreRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged       int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize    int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting     string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	Id          int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	StoreKey    string  `protobuf:"bytes,6,opt,name=store_key,json=storeKey,proto3" json:"store_key,omitempty"`
-	StoreSecret string  `protobuf:"bytes,7,opt,name=store_secret,json=storeSecret,proto3" json:"store_secret,omitempty"`
-	Code        string  `protobuf:"bytes,8,opt,name=code,proto3" json:"code,omitempty"`                                 //店铺编码
-	Name        string  `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`                                 //店铺名称
-	MerchantId  int64   `protobuf:"varint,10,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"` //商户ID
-	PlatformId  int64   `protobuf:"varint,11,opt,name=platform_id,json=platformId,proto3" json:"platform_id,omitempty"` //平台ID
-	VersionId   int32   `protobuf:"varint,12,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`    //版本ID
-	ProvinceId  int64   `protobuf:"varint,14,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"` //所属省
-	CityId      int64   `protobuf:"varint,15,opt,name=city_id,json=cityId,proto3" json:"city_id,omitempty"`             //所属市
-	CountyId    int64   `protobuf:"varint,16,opt,name=county_id,json=countyId,proto3" json:"county_id,omitempty"`       //所属区
-	Status      string  `protobuf:"bytes,17,opt,name=status,proto3" json:"status,omitempty"`
-	StartDate   string  `protobuf:"bytes,18,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
-	EndDate     string  `protobuf:"bytes,19,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
-	Keywords    string  `protobuf:"bytes,20,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Region      string  `protobuf:"bytes,21,opt,name=region,proto3" json:"region,omitempty"`
-	Ids         []int64 `protobuf:"varint,22,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Paged       int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize    int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting     string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Id          int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	StoreKey    string  `protobuf:"bytes,6,opt,name=store_key,json=storeKey,proto3" json:"store_key"`
+	StoreSecret string  `protobuf:"bytes,7,opt,name=store_secret,json=storeSecret,proto3" json:"store_secret"`
+	Code        string  `protobuf:"bytes,8,opt,name=code,proto3" json:"code"`                                 //店铺编码
+	Name        string  `protobuf:"bytes,9,opt,name=name,proto3" json:"name"`                                 //店铺名称
+	MerchantId  int64   `protobuf:"varint,10,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id"` //商户ID
+	PlatformId  int64   `protobuf:"varint,11,opt,name=platform_id,json=platformId,proto3" json:"platform_id"` //平台ID
+	VersionId   int32   `protobuf:"varint,12,opt,name=version_id,json=versionId,proto3" json:"version_id"`    //版本ID
+	ProvinceId  int64   `protobuf:"varint,14,opt,name=province_id,json=provinceId,proto3" json:"province_id"` //所属省
+	CityId      int64   `protobuf:"varint,15,opt,name=city_id,json=cityId,proto3" json:"city_id"`             //所属市
+	CountyId    int64   `protobuf:"varint,16,opt,name=county_id,json=countyId,proto3" json:"county_id"`       //所属区
+	Status      string  `protobuf:"bytes,17,opt,name=status,proto3" json:"status"`
+	StartDate   string  `protobuf:"bytes,18,opt,name=start_date,json=startDate,proto3" json:"start_date"`
+	EndDate     string  `protobuf:"bytes,19,opt,name=end_date,json=endDate,proto3" json:"end_date"`
+	Keywords    string  `protobuf:"bytes,20,opt,name=keywords,proto3" json:"keywords"`
+	Region      string  `protobuf:"bytes,21,opt,name=region,proto3" json:"region"`
+	Ids         []int64 `protobuf:"varint,22,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *StoreRequest) Reset() {
@@ -480,11 +480,11 @@ type StoreResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity  *Store        `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager   *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items   []*Store      `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info    string        `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
-	Modules []string      `protobuf:"bytes,5,rep,name=Modules,proto3" json:"Modules,omitempty"`
+	Entity  *Store        `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager   *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items   []*Store      `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info    string        `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Modules []string      `protobuf:"bytes,5,rep,name=Modules,proto3" json:"Modules"`
 }
 
 func (x *StoreResponse) Reset() {

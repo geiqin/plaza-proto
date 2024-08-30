@@ -7,7 +7,7 @@
 package services
 
 import (
-	common "../common"
+	common "github.com/geiqin/micro-kit/protobuf/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,33 +27,33 @@ type Merchant struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                       //ID
-	Type              string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`                                                    //商户类型
-	Name              string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                                    //商户名称
-	ShortName         string `protobuf:"bytes,4,opt,name=short_name,json=shortName,proto3" json:"short_name,omitempty"`                         //商户简称
-	IdCard            string `protobuf:"bytes,5,opt,name=id_card,json=idCard,proto3" json:"id_card,omitempty"`                                  //统一社会信用代码
-	Pinyin            string `protobuf:"bytes,6,opt,name=pinyin,proto3" json:"pinyin,omitempty"`                                                //拼音简码
-	Industry          string `protobuf:"bytes,7,opt,name=industry,proto3" json:"industry,omitempty"`                                            //所属行业
-	LegalMan          string `protobuf:"bytes,8,opt,name=legal_man,json=legalMan,proto3" json:"legal_man,omitempty"`                            //法定代表人
-	RegisteredCapital string `protobuf:"bytes,9,opt,name=registered_capital,json=registeredCapital,proto3" json:"registered_capital,omitempty"` //注册资本
-	RegisteredDate    string `protobuf:"bytes,10,opt,name=registered_date,json=registeredDate,proto3" json:"registered_date,omitempty"`         //成立日期
-	ProvinceId        int64  `protobuf:"varint,11,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"`                    //所属省
-	CityId            int64  `protobuf:"varint,12,opt,name=city_id,json=cityId,proto3" json:"city_id,omitempty"`                                //所属市
-	CountyId          int64  `protobuf:"varint,13,opt,name=county_id,json=countyId,proto3" json:"county_id,omitempty"`                          //所属区
-	Address           string `protobuf:"bytes,14,opt,name=address,proto3" json:"address,omitempty"`                                             //详细地址
-	ContactMan        string `protobuf:"bytes,15,opt,name=contact_man,json=contactMan,proto3" json:"contact_man,omitempty"`                     //联系人
-	ContactMobile     string `protobuf:"bytes,16,opt,name=contact_mobile,json=contactMobile,proto3" json:"contact_mobile,omitempty"`            //联系人电话
-	ContactEmail      string `protobuf:"bytes,17,opt,name=contact_email,json=contactEmail,proto3" json:"contact_email,omitempty"`               //联系人邮件
-	Tel               string `protobuf:"bytes,18,opt,name=tel,proto3" json:"tel,omitempty"`                                                     //公司电话
-	Memo              string `protobuf:"bytes,19,opt,name=memo,proto3" json:"memo,omitempty"`                                                   //备注
-	InvoiceType       string `protobuf:"bytes,20,opt,name=invoice_type,json=invoiceType,proto3" json:"invoice_type,omitempty"`                  //发票类型
-	Property          string `protobuf:"bytes,21,opt,name=property,proto3" json:"property,omitempty"`                                           //单位性质
-	IsTrusted         string `protobuf:"bytes,22,opt,name=is_trusted,json=isTrusted,proto3" json:"is_trusted,omitempty"`                        //是否实名
-	StoreCount        int32  `protobuf:"varint,23,opt,name=store_count,json=storeCount,proto3" json:"store_count,omitempty"`                    //店铺数量
-	CreatorId         int64  `protobuf:"varint,24,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`                       //创建者
-	Status            string `protobuf:"bytes,25,opt,name=status,proto3" json:"status,omitempty"`                                               //状态
-	CreatedAt         string `protobuf:"bytes,26,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                        //
-	UpdatedAt         string `protobuf:"bytes,27,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`                        //
+	Id                int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                       //ID
+	Type              string `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`                                                    //商户类型
+	Name              string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                                                    //商户名称
+	ShortName         string `protobuf:"bytes,4,opt,name=short_name,json=shortName,proto3" json:"short_name"`                         //商户简称
+	IdCard            string `protobuf:"bytes,5,opt,name=id_card,json=idCard,proto3" json:"id_card"`                                  //统一社会信用代码
+	Pinyin            string `protobuf:"bytes,6,opt,name=pinyin,proto3" json:"pinyin"`                                                //拼音简码
+	Industry          string `protobuf:"bytes,7,opt,name=industry,proto3" json:"industry"`                                            //所属行业
+	LegalMan          string `protobuf:"bytes,8,opt,name=legal_man,json=legalMan,proto3" json:"legal_man"`                            //法定代表人
+	RegisteredCapital string `protobuf:"bytes,9,opt,name=registered_capital,json=registeredCapital,proto3" json:"registered_capital"` //注册资本
+	RegisteredDate    string `protobuf:"bytes,10,opt,name=registered_date,json=registeredDate,proto3" json:"registered_date"`         //成立日期
+	ProvinceId        int64  `protobuf:"varint,11,opt,name=province_id,json=provinceId,proto3" json:"province_id"`                    //所属省
+	CityId            int64  `protobuf:"varint,12,opt,name=city_id,json=cityId,proto3" json:"city_id"`                                //所属市
+	CountyId          int64  `protobuf:"varint,13,opt,name=county_id,json=countyId,proto3" json:"county_id"`                          //所属区
+	Address           string `protobuf:"bytes,14,opt,name=address,proto3" json:"address"`                                             //详细地址
+	ContactMan        string `protobuf:"bytes,15,opt,name=contact_man,json=contactMan,proto3" json:"contact_man"`                     //联系人
+	ContactMobile     string `protobuf:"bytes,16,opt,name=contact_mobile,json=contactMobile,proto3" json:"contact_mobile"`            //联系人电话
+	ContactEmail      string `protobuf:"bytes,17,opt,name=contact_email,json=contactEmail,proto3" json:"contact_email"`               //联系人邮件
+	Tel               string `protobuf:"bytes,18,opt,name=tel,proto3" json:"tel"`                                                     //公司电话
+	Memo              string `protobuf:"bytes,19,opt,name=memo,proto3" json:"memo"`                                                   //备注
+	InvoiceType       string `protobuf:"bytes,20,opt,name=invoice_type,json=invoiceType,proto3" json:"invoice_type"`                  //发票类型
+	Property          string `protobuf:"bytes,21,opt,name=property,proto3" json:"property"`                                           //单位性质
+	IsTrusted         string `protobuf:"bytes,22,opt,name=is_trusted,json=isTrusted,proto3" json:"is_trusted"`                        //是否实名
+	StoreCount        int32  `protobuf:"varint,23,opt,name=store_count,json=storeCount,proto3" json:"store_count"`                    //店铺数量
+	CreatorId         int64  `protobuf:"varint,24,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`                       //创建者
+	Status            string `protobuf:"bytes,25,opt,name=status,proto3" json:"status"`                                               //状态
+	CreatedAt         string `protobuf:"bytes,26,opt,name=created_at,json=createdAt,proto3" json:"created_at"`                        //
+	UpdatedAt         string `protobuf:"bytes,27,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`                        //
 }
 
 func (x *Merchant) Reset() {
@@ -283,31 +283,31 @@ type MerchantRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top,omitempty"`
-	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort,omitempty"`
-	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range,omitempty"`
-	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id,omitempty"`
+	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top"`
+	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged"`
+	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
+	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort"`
+	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range"`
+	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids"`
+	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id"`
 	//以下为自定义参数
-	Type         string `protobuf:"bytes,10,opt,name=type,proto3" json:"type,omitempty"`                                     //商户类型
-	Name         string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`                                     //商户名称
-	ShortName    string `protobuf:"bytes,12,opt,name=short_name,json=shortName,proto3" json:"short_name,omitempty"`          //商户简称
-	IdCard       string `protobuf:"bytes,13,opt,name=id_card,json=idCard,proto3" json:"id_card,omitempty"`                   //统一社会信用代码
-	Pinyin       string `protobuf:"bytes,14,opt,name=pinyin,proto3" json:"pinyin,omitempty"`                                 //拼音简码
-	Industry     string `protobuf:"bytes,15,opt,name=industry,proto3" json:"industry,omitempty"`                             //所属行业
-	LegalMan     string `protobuf:"bytes,16,opt,name=legal_man,json=legalMan,proto3" json:"legal_man,omitempty"`             //法定代表人
-	ProvinceId   int64  `protobuf:"varint,17,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"`      //所属省
-	CityId       int64  `protobuf:"varint,18,opt,name=city_id,json=cityId,proto3" json:"city_id,omitempty"`                  //所属市
-	CountyId     int64  `protobuf:"varint,19,opt,name=county_id,json=countyId,proto3" json:"county_id,omitempty"`            //所属区
-	Address      string `protobuf:"bytes,20,opt,name=address,proto3" json:"address,omitempty"`                               //详细地址
-	ContactMan   string `protobuf:"bytes,21,opt,name=contact_man,json=contactMan,proto3" json:"contact_man,omitempty"`       //联系人
-	ContactEmail string `protobuf:"bytes,22,opt,name=contact_email,json=contactEmail,proto3" json:"contact_email,omitempty"` //联系人邮件
-	InvoiceType  string `protobuf:"bytes,23,opt,name=invoice_type,json=invoiceType,proto3" json:"invoice_type,omitempty"`    //发票类型
-	IsTrusted    string `protobuf:"bytes,24,opt,name=is_trusted,json=isTrusted,proto3" json:"is_trusted,omitempty"`          //是否实名
-	Status       string `protobuf:"bytes,25,opt,name=status,proto3" json:"status,omitempty"`                                 //状态
+	Type         string `protobuf:"bytes,10,opt,name=type,proto3" json:"type"`                                     //商户类型
+	Name         string `protobuf:"bytes,11,opt,name=name,proto3" json:"name"`                                     //商户名称
+	ShortName    string `protobuf:"bytes,12,opt,name=short_name,json=shortName,proto3" json:"short_name"`          //商户简称
+	IdCard       string `protobuf:"bytes,13,opt,name=id_card,json=idCard,proto3" json:"id_card"`                   //统一社会信用代码
+	Pinyin       string `protobuf:"bytes,14,opt,name=pinyin,proto3" json:"pinyin"`                                 //拼音简码
+	Industry     string `protobuf:"bytes,15,opt,name=industry,proto3" json:"industry"`                             //所属行业
+	LegalMan     string `protobuf:"bytes,16,opt,name=legal_man,json=legalMan,proto3" json:"legal_man"`             //法定代表人
+	ProvinceId   int64  `protobuf:"varint,17,opt,name=province_id,json=provinceId,proto3" json:"province_id"`      //所属省
+	CityId       int64  `protobuf:"varint,18,opt,name=city_id,json=cityId,proto3" json:"city_id"`                  //所属市
+	CountyId     int64  `protobuf:"varint,19,opt,name=county_id,json=countyId,proto3" json:"county_id"`            //所属区
+	Address      string `protobuf:"bytes,20,opt,name=address,proto3" json:"address"`                               //详细地址
+	ContactMan   string `protobuf:"bytes,21,opt,name=contact_man,json=contactMan,proto3" json:"contact_man"`       //联系人
+	ContactEmail string `protobuf:"bytes,22,opt,name=contact_email,json=contactEmail,proto3" json:"contact_email"` //联系人邮件
+	InvoiceType  string `protobuf:"bytes,23,opt,name=invoice_type,json=invoiceType,proto3" json:"invoice_type"`    //发票类型
+	IsTrusted    string `protobuf:"bytes,24,opt,name=is_trusted,json=isTrusted,proto3" json:"is_trusted"`          //是否实名
+	Status       string `protobuf:"bytes,25,opt,name=status,proto3" json:"status"`                                 //状态
 }
 
 func (x *MerchantRequest) Reset() {
@@ -516,10 +516,10 @@ type MerchantResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Merchant     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Merchant   `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Msg    string        `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg,omitempty"`
+	Entity *Merchant     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Merchant   `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Msg    string        `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg"`
 }
 
 func (x *MerchantResponse) Reset() {

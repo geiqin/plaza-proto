@@ -7,7 +7,7 @@
 package services
 
 import (
-	common "../common"
+	common "github.com/geiqin/micro-kit/protobuf/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,28 +27,28 @@ type VersionMenu struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                              //ID
-	VersionId     int32          `protobuf:"varint,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`               //版本ID
-	ParentId      int64          `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`                  //父ID
-	Title         string         `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`                                         //导航标题
-	Type          string         `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`                                           //类型 1目录 2菜单 3按钮
-	Path          string         `protobuf:"bytes,6,opt,name=path,proto3" json:"path,omitempty"`                                           //路由地址
-	Name          string         `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`                                           //导航名称
-	Component     string         `protobuf:"bytes,8,opt,name=component,proto3" json:"component,omitempty"`                                 //组件路径
-	Redirect      string         `protobuf:"bytes,9,opt,name=redirect,proto3" json:"redirect,omitempty"`                                   //路由重定向
-	Icon          string         `protobuf:"bytes,10,opt,name=icon,proto3" json:"icon,omitempty"`                                          //图标
-	Permission    string         `protobuf:"bytes,11,opt,name=permission,proto3" json:"permission,omitempty"`                              //权限标识
-	Locale        string         `protobuf:"bytes,12,opt,name=locale,proto3" json:"locale,omitempty"`                                      //语言包键名
-	IsCache       string         `protobuf:"bytes,13,opt,name=is_cache,json=isCache,proto3" json:"is_cache,omitempty"`                     //是否缓存: 1是 0否
-	IsHidden      string         `protobuf:"bytes,14,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`                  //是否隐藏: 1是 0否
-	IsExternal    string         `protobuf:"bytes,15,opt,name=is_external,json=isExternal,proto3" json:"is_external,omitempty"`            //是否外链: 1是 0否
-	IsRequireAuth string         `protobuf:"bytes,16,opt,name=is_require_auth,json=isRequireAuth,proto3" json:"is_require_auth,omitempty"` //是否需要登录鉴权: 1是 0否
-	Sort          int32          `protobuf:"varint,17,opt,name=sort,proto3" json:"sort,omitempty"`                                         //排序值
-	Status        string         `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"`                                      //状态: （1：启用；2：禁用）
-	CreatedAt     string         `protobuf:"bytes,23,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string         `protobuf:"bytes,24,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Parent        *VersionMenu   `protobuf:"bytes,25,opt,name=parent,proto3" json:"parent,omitempty"`
-	Children      []*VersionMenu `protobuf:"bytes,26,rep,name=children,proto3" json:"children,omitempty"`
+	Id            int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                              //ID
+	VersionId     int32          `protobuf:"varint,2,opt,name=version_id,json=versionId,proto3" json:"version_id"`               //版本ID
+	ParentId      int64          `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`                  //父ID
+	Title         string         `protobuf:"bytes,4,opt,name=title,proto3" json:"title"`                                         //导航标题
+	Type          string         `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`                                           //类型 1目录 2菜单 3按钮
+	Path          string         `protobuf:"bytes,6,opt,name=path,proto3" json:"path"`                                           //路由地址
+	Name          string         `protobuf:"bytes,7,opt,name=name,proto3" json:"name"`                                           //导航名称
+	Component     string         `protobuf:"bytes,8,opt,name=component,proto3" json:"component"`                                 //组件路径
+	Redirect      string         `protobuf:"bytes,9,opt,name=redirect,proto3" json:"redirect"`                                   //路由重定向
+	Icon          string         `protobuf:"bytes,10,opt,name=icon,proto3" json:"icon"`                                          //图标
+	Permission    string         `protobuf:"bytes,11,opt,name=permission,proto3" json:"permission"`                              //权限标识
+	Locale        string         `protobuf:"bytes,12,opt,name=locale,proto3" json:"locale"`                                      //语言包键名
+	IsCache       string         `protobuf:"bytes,13,opt,name=is_cache,json=isCache,proto3" json:"is_cache"`                     //是否缓存: 1是 0否
+	IsHidden      string         `protobuf:"bytes,14,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden"`                  //是否隐藏: 1是 0否
+	IsExternal    string         `protobuf:"bytes,15,opt,name=is_external,json=isExternal,proto3" json:"is_external"`            //是否外链: 1是 0否
+	IsRequireAuth string         `protobuf:"bytes,16,opt,name=is_require_auth,json=isRequireAuth,proto3" json:"is_require_auth"` //是否需要登录鉴权: 1是 0否
+	Sort          int32          `protobuf:"varint,17,opt,name=sort,proto3" json:"sort"`                                         //排序值
+	Status        string         `protobuf:"bytes,18,opt,name=status,proto3" json:"status"`                                      //状态: （1：启用；2：禁用）
+	CreatedAt     string         `protobuf:"bytes,23,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     string         `protobuf:"bytes,24,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Parent        *VersionMenu   `protobuf:"bytes,25,opt,name=parent,proto3" json:"parent"`
+	Children      []*VersionMenu `protobuf:"bytes,26,rep,name=children,proto3" json:"children"`
 }
 
 func (x *VersionMenu) Reset() {
@@ -242,18 +242,18 @@ type VersionMenuRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//base params
-	Id          int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name        string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	Title       string  `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
-	VersionId   int32   `protobuf:"varint,7,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	ParentId    int64   `protobuf:"varint,8,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	VersionCode string  `protobuf:"bytes,9,opt,name=version_code,json=versionCode,proto3" json:"version_code,omitempty"`
-	IsAdmin     string  `protobuf:"bytes,11,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
-	Ids         []int64 `protobuf:"varint,16,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id          int64   `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Name        string  `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
+	Title       string  `protobuf:"bytes,6,opt,name=title,proto3" json:"title"`
+	VersionId   int32   `protobuf:"varint,7,opt,name=version_id,json=versionId,proto3" json:"version_id"`
+	ParentId    int64   `protobuf:"varint,8,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
+	VersionCode string  `protobuf:"bytes,9,opt,name=version_code,json=versionCode,proto3" json:"version_code"`
+	IsAdmin     string  `protobuf:"bytes,11,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin"`
+	Ids         []int64 `protobuf:"varint,16,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *VersionMenuRequest) Reset() {
@@ -365,16 +365,15 @@ func (x *VersionMenuRequest) GetIds() []int64 {
 	return nil
 }
 
-//
 type VersionMenuResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *VersionMenu   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*VersionMenu `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   string         `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *VersionMenu   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*VersionMenu `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   string         `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *VersionMenuResponse) Reset() {
