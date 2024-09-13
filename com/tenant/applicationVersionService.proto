@@ -1,0 +1,80 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "applicationService.proto";
+
+// 应用版本服务
+service ApplicationVersionService {
+  // 应用版本新增
+  rpc Create (ApplicationVersion) returns (ApplicationVersionResponse) {}
+  // 应用版本修改
+  rpc Update (ApplicationVersion) returns (ApplicationVersionResponse) {}
+  // 应用版本删除
+  rpc Delete (ApplicationVersion) returns (ApplicationVersionResponse) {}
+  // 应用版本获取
+  rpc Get (ApplicationVersion) returns (ApplicationVersionResponse) {}
+  // 应用版本查询
+  rpc Search (ApplicationVersionRequest) returns (ApplicationVersionResponse) {}
+  // 应用版本列表
+  rpc List (ApplicationVersionRequest) returns (ApplicationVersionResponse) {}
+}
+// 应用版本
+message ApplicationVersion {
+  int32 id = 1; //ID
+  string code = 2; //版本编码
+  string name = 3; //版本名称
+  int32 application_id = 4; //所属应用
+  int64 market_price = 5; //市场价
+  int64 price = 6; //优惠价
+  string description = 7; //描述
+  string is_default = 8; //是否默认
+  VersionConfig config = 9; //使用配置
+  string status = 10; //状态
+  string created_at = 11; //
+  string updated_at = 12; //
+  Application application =13;
+}
+
+// 版本配置
+message VersionConfig {
+  int32 shop_limit_count = 1; //商户限制数量
+  int32 realstore_limit_count = 2; //门店限制数量
+  int32 warehouse_limit_count = 3; //仓库限制数量
+  int32 manager_limit_count = 4; //管理员限制数量
+  int32 member_limit_count = 5; //会员限制数量
+  int32 spu_limit_count = 6; //商品限制数量
+  string order_free_type = 7; //订单成交免费类型
+  int32 order_free_total_limit = 8; //订单成交免费总限制
+  int32 order_free_year_limit = 9; //订单成交免费年度限制
+  int32 order_free_month_limit = 10; //订单成交免费月度限制
+  float order_commission_rate = 11; //订单成交抽成比例
+  int32 media_limit_count = 12; //媒体限制数量
+  int32 media_limit_volume = 13; //媒体限制容量
+  int32 article_limit_count = 14; //文章限制数量
+}
+
+// 应用版本请求参数
+message ApplicationVersionRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string code = 11; //版本编码
+  string name = 12; //版本名称
+  int32 application_id = 13; //所属应用
+  string is_default = 14; //是否默认
+  string status = 15; //状态
+}
+// 应用版本响应数据
+message ApplicationVersionResponse {
+  ApplicationVersion entity = 1;
+  common.Pager pager = 2;
+  repeated ApplicationVersion items = 3;
+  string msg = 4;
+}

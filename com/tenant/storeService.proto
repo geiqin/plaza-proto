@@ -2,17 +2,15 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-import "versionService.proto";
-import "versionPackageService.proto";
+import "applicationService.proto";
+import "applicationVersionService.proto";
 import "merchantService.proto";
 
 service StoreService {
     //创建店铺
     rpc Create (Store) returns (StoreResponse) {}
-    //修改店铺版本（超级管理员可用）
-    rpc UpdateVersion (Store) returns (StoreResponse) {}
-    //修改店铺信息
-    rpc UpdateProfile (Store) returns (StoreResponse) {}
+    //修改店铺
+    rpc Update  (Store) returns (StoreResponse) {}
     //设置状态
     rpc UpdateStatus (Store) returns (StoreResponse) {}
     //删除店铺
@@ -26,68 +24,55 @@ service StoreService {
     rpc Search (StoreRequest) returns (StoreResponse) {}
     //获取店铺列表
     rpc List (StoreRequest) returns (StoreResponse) {}
-    //获取店铺功能模块
-    rpc GetModules (StoreRequest) returns (StoreResponse) {}
 }
 
 message Store {
-    int64 id =1; //ID
-    string code =2; //店铺编码
-    string name =3; //店铺名称
-    int64 merchant_id =4; //商户ID
-    int64 platform_id =5; //平台ID
-    int32 version_id =6; //版本ID
-    int32 version_package_id =7; //版本套餐ID
-    string region =8; //分区
-    string logo_url =9; //logo路径
-    int64 province_id =10; //所属省
-    int64 city_id =11; //所属市
-    int64 county_id =12; //所属区
-    string address =13; //地址
-    float lng =14; //经度
-    float lat =15; //纬度
-    string status =16; //状态
-    string expired_at =17; //失效日期
-    string created_at =18; //
-    string updated_at =19; //
-    Version version =22;
-    VersionPackage version_package =23;
-    Merchant merchant =24;
-    string	status_name	=25;
-    int32 valid_days =26;
-    string	province_name	=27;
-    string	city_name	=28;
-    string	county_name	=29;
+    int64 id = 1; //ID
+    string code = 2; //店铺编码
+    string name = 3; //店铺名称
+    int64 merchant_id = 4; //商户ID
+    int32 application_id = 5; //所属应用
+    int32 version_id = 6; //应用版本
+    string logo_url = 7; //logo图标
+    string nation = 8; //国家
+    string language = 9; //语言
+    string industry = 10; //行业
+    string expiry_date = 11; //到期日期
+    string status = 12; //状态
+    string created_at = 13; //创建时间
+    string updated_at = 14; //修改时间
+    Application application =15;
+    ApplicationVersion version =16;
+    Merchant merchant =17;
+    int32 valid_days =18;
 }
 
 message StoreRequest{
-    int64 paged = 1;
-    int64 page_size = 2;
-    string sorting = 3;
-
-    int64 id = 4;
-    string store_key	=6;
-    string store_secret	=7;
-    string code =8; //店铺编码
-    string name =9; //店铺名称
-    int64 merchant_id =10; //商户ID
-    int64 platform_id =11; //平台ID
-    int32 version_id =12; //版本ID
-    int64 province_id =14; //所属省
-    int64 city_id =15; //所属市
-    int64 county_id =16; //所属区
-    string status = 17;
-    string	start_date	=18;
-    string	end_date	=19;
-    string keywords = 20;
-    string region = 21;
-    repeated int64 ids = 22;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string code = 11; //店铺编码
+    string name = 12; //店铺名称
+    int64 merchant_id = 13; //商户ID
+    int32 application_id = 14; //所属应用
+    int32 version_id = 15; //应用版本
+    string nation = 16; //国家
+    string language = 17; //语言
+    string industry = 18; //行业
+    string status = 19; //状态
+    string store_key = 20;
+    string store_secret	= 21;
 }
 
 message StoreResponse {
     Store entity = 1;
     common.Pager pager =2;
     repeated Store items = 3;
-    string info =4;
-    repeated string Modules = 5;
+    string msg =4;
 }

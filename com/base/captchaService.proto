@@ -1,0 +1,30 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+// 验证码服务
+service CaptchaService {
+  // 验证
+  rpc Check (CaptchaRequest) returns (CaptchaResponse) {}
+  // 创建
+  rpc Create (CaptchaRequest) returns (CaptchaResponse) {}
+}
+
+// 验证码
+message Captcha {
+  string uuid = 1;
+  string img = 2;
+  int64 expireTime = 3;
+}
+
+// 验证码请求参数
+message CaptchaRequest {
+  string uuid = 1;
+  string code = 2;
+}
+
+// 验证码响应数据
+message CaptchaResponse {
+  Captcha entity = 1;
+  string msg = 2;
+}

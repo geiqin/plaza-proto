@@ -3,21 +3,21 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 
-service VersionMenuService {
-    rpc Get (VersionMenu) returns (VersionMenuResponse) {}
-    rpc Create (VersionMenu) returns (VersionMenuResponse) {}
-    rpc Update (VersionMenu) returns (VersionMenuResponse) {}
-    rpc UpdateHide (VersionMenu) returns (VersionMenuResponse) {}
-    rpc Delete (VersionMenu) returns (VersionMenuResponse) {}
-    rpc Search (VersionMenuRequest) returns (VersionMenuResponse) {}
-    rpc List (VersionMenuRequest) returns (VersionMenuResponse) {}
-    rpc Tree (VersionMenuRequest) returns (VersionMenuResponse) {}
+service ApplicationMenuService {
+    rpc Get (ApplicationMenu) returns (ApplicationMenuResponse) {}
+    rpc Create (ApplicationMenu) returns (ApplicationMenuResponse) {}
+    rpc Update (ApplicationMenu) returns (ApplicationMenuResponse) {}
+    rpc UpdateHide (ApplicationMenu) returns (ApplicationMenuResponse) {}
+    rpc Delete (ApplicationMenu) returns (ApplicationMenuResponse) {}
+    rpc Search (ApplicationMenuRequest) returns (ApplicationMenuResponse) {}
+    rpc List (ApplicationMenuRequest) returns (ApplicationMenuResponse) {}
+    rpc Tree (ApplicationMenuRequest) returns (ApplicationMenuResponse) {}
 }
 
-// 超级用户菜单
-message VersionMenu {
+// 应用菜单
+message ApplicationMenu {
     int64  id =1;//ID
-    int32  version_id =2;//版本ID
+    int32  application_id =2;//应用ID
     int64  parent_id =3;//父ID
     string title =4;//导航标题
     string type =5;//类型 1目录 2菜单 3按钮
@@ -36,12 +36,12 @@ message VersionMenu {
     string status =18;//状态: （1：启用；2：禁用）
     string created_at =23;
     string updated_at =24;
-    VersionMenu parent = 25;
-    repeated VersionMenu children = 26;
+    ApplicationMenu parent = 25;
+    repeated ApplicationMenu children = 26;
 }
 
 
-message VersionMenuRequest {
+message ApplicationMenuRequest {
     int64 paged = 1;
     int64 page_size = 2;
     string sorting = 3;
@@ -49,17 +49,17 @@ message VersionMenuRequest {
     int64 id = 4;
     string name = 5;
     string title = 6;
-    int32 version_id =7;
+    int32 application_id =7;
     int64 parent_id =8;
-    string version_code = 9;
+    string application_code = 9;
     string is_admin =11;
     repeated int64 ids = 16;
 }
 
 //
-message VersionMenuResponse{
-    VersionMenu entity = 1;
+message ApplicationMenuResponse{
+    ApplicationMenu entity = 1;
     common.Pager pager =2;
-    repeated VersionMenu items = 3;
+    repeated ApplicationMenu items = 3;
     string info =4;
 }

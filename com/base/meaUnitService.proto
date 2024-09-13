@@ -1,0 +1,55 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 计量单位服务
+service MeaUnitService {
+  // 计量单位新增
+  rpc Create (MeaUnit) returns (MeaUnitResponse) {}
+  // 计量单位修改
+  rpc Update (MeaUnit) returns (MeaUnitResponse) {}
+  // 计量单位删除
+  rpc Delete (MeaUnit) returns (MeaUnitResponse) {}
+  // 计量单位获取
+  rpc Get (MeaUnit) returns (MeaUnitResponse) {}
+  // 计量单位查询
+  rpc Search (MeaUnitRequest) returns (MeaUnitResponse) {}
+  // 计量单位列表
+  rpc List (MeaUnitRequest) returns (MeaUnitResponse) {}
+}
+// 计量单位
+message MeaUnit {
+  int32 id = 1; //ID
+  string name = 2; //单位名称
+  string type = 3; //单位类型
+  string symbol = 4; //单位符号
+  float exchange_rate = 5; //换算率
+  string is_system = 6; //创建来源
+  int32 sort = 7; //排序
+  string status = 8; //状态
+  string created_at = 9; //创建时间
+  string updated_at = 10; //修改时间
+}
+// 计量单位请求参数
+message MeaUnitRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string name = 11; //单位名称
+  string type = 12; //单位类型
+  string is_system = 13; //创建来源
+  string status = 14; //状态
+}
+// 计量单位响应数据
+message MeaUnitResponse {
+  MeaUnit entity = 1;
+  common.Pager pager = 2;
+  repeated MeaUnit items = 3;
+  string msg = 4;
+}

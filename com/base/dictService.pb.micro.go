@@ -49,6 +49,7 @@ type DictService interface {
 	Get(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
 	Search(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
 	List(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
+	DictConst(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error)
 }
 
 type dictService struct {
@@ -123,6 +124,16 @@ func (c *dictService) List(ctx context.Context, in *DictRequest, opts ...client.
 	return out, nil
 }
 
+func (c *dictService) DictConst(ctx context.Context, in *DictRequest, opts ...client.CallOption) (*DictResponse, error) {
+	req := c.c.NewRequest(c.name, "DictService.DictConst", in)
+	out := new(DictResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DictService service
 
 type DictServiceHandler interface {
@@ -132,6 +143,7 @@ type DictServiceHandler interface {
 	Get(context.Context, *DictRequest, *DictResponse) error
 	Search(context.Context, *DictRequest, *DictResponse) error
 	List(context.Context, *DictRequest, *DictResponse) error
+	DictConst(context.Context, *DictRequest, *DictResponse) error
 }
 
 func RegisterDictServiceHandler(s server.Server, hdlr DictServiceHandler, opts ...server.HandlerOption) error {
@@ -142,6 +154,7 @@ func RegisterDictServiceHandler(s server.Server, hdlr DictServiceHandler, opts .
 		Get(ctx context.Context, in *DictRequest, out *DictResponse) error
 		Search(ctx context.Context, in *DictRequest, out *DictResponse) error
 		List(ctx context.Context, in *DictRequest, out *DictResponse) error
+		DictConst(ctx context.Context, in *DictRequest, out *DictResponse) error
 	}
 	type DictService struct {
 		dictService
@@ -176,4 +189,8 @@ func (h *dictServiceHandler) Search(ctx context.Context, in *DictRequest, out *D
 
 func (h *dictServiceHandler) List(ctx context.Context, in *DictRequest, out *DictResponse) error {
 	return h.DictServiceHandler.List(ctx, in, out)
+}
+
+func (h *dictServiceHandler) DictConst(ctx context.Context, in *DictRequest, out *DictResponse) error {
+	return h.DictServiceHandler.DictConst(ctx, in, out)
 }

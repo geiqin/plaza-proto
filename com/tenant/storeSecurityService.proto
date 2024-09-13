@@ -1,0 +1,41 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 店铺安全服务
+service StoreSecurityService {
+  // 店铺安全修改
+  rpc Update (StoreSecurity) returns (StoreSecurityResponse) {}
+  // 店铺安全获取
+  rpc Get (StoreSecurity) returns (StoreSecurityResponse) {}
+}
+// 店铺安全
+message StoreSecurity {
+  int64 id = 1; //ID
+  int64 store_id = 2; //店铺ID
+  string store_key = 3; //店铺KEY
+  string store_secret = 4; //店铺Secret
+  string created_at = 5; //
+  string updated_at = 6; //
+  string deleted_at = 7; //
+}
+// 店铺安全请求参数
+message StoreSecurityRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 store_id = 11; //店铺ID
+}
+// 店铺安全响应数据
+message StoreSecurityResponse {
+  StoreSecurity entity = 1;
+  common.Pager pager = 2;
+  repeated StoreSecurity items = 3;
+  string msg = 4;
+}

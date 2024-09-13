@@ -143,7 +143,7 @@ func (c *genCodeService) Tables(ctx context.Context, in *GenCodeRequest, opts ..
 }
 
 func (c *genCodeService) Sync(ctx context.Context, in *GenCodeRequest, opts ...client.CallOption) (*GenCodeResponse, error) {
-	req := c.c.NewRequest(c.name, "GenCodeService.sync", in)
+	req := c.c.NewRequest(c.name, "GenCodeService.Sync", in)
 	out := new(GenCodeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {

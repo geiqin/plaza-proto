@@ -45,10 +45,8 @@ func NewStoreServiceEndpoints() []*api.Endpoint {
 type StoreService interface {
 	//创建店铺
 	Create(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//修改店铺版本（超级管理员可用）
-	UpdateVersion(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//修改店铺信息
-	UpdateProfile(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//修改店铺
+	Update(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//设置状态
 	UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//删除店铺
@@ -61,8 +59,6 @@ type StoreService interface {
 	Search(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺列表
 	List(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
-	//获取店铺功能模块
-	GetModules(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 }
 
 type storeService struct {
@@ -87,18 +83,8 @@ func (c *storeService) Create(ctx context.Context, in *Store, opts ...client.Cal
 	return out, nil
 }
 
-func (c *storeService) UpdateVersion(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.UpdateVersion", in)
-	out := new(StoreResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *storeService) UpdateProfile(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.UpdateProfile", in)
+func (c *storeService) Update(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.Update", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -167,25 +153,13 @@ func (c *storeService) List(ctx context.Context, in *StoreRequest, opts ...clien
 	return out, nil
 }
 
-func (c *storeService) GetModules(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.GetModules", in)
-	out := new(StoreResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for StoreService service
 
 type StoreServiceHandler interface {
 	//创建店铺
 	Create(context.Context, *Store, *StoreResponse) error
-	//修改店铺版本（超级管理员可用）
-	UpdateVersion(context.Context, *Store, *StoreResponse) error
-	//修改店铺信息
-	UpdateProfile(context.Context, *Store, *StoreResponse) error
+	//修改店铺
+	Update(context.Context, *Store, *StoreResponse) error
 	//设置状态
 	UpdateStatus(context.Context, *Store, *StoreResponse) error
 	//删除店铺
@@ -198,22 +172,18 @@ type StoreServiceHandler interface {
 	Search(context.Context, *StoreRequest, *StoreResponse) error
 	//获取店铺列表
 	List(context.Context, *StoreRequest, *StoreResponse) error
-	//获取店铺功能模块
-	GetModules(context.Context, *StoreRequest, *StoreResponse) error
 }
 
 func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts ...server.HandlerOption) error {
 	type storeService interface {
 		Create(ctx context.Context, in *Store, out *StoreResponse) error
-		UpdateVersion(ctx context.Context, in *Store, out *StoreResponse) error
-		UpdateProfile(ctx context.Context, in *Store, out *StoreResponse) error
+		Update(ctx context.Context, in *Store, out *StoreResponse) error
 		UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error
 		Delete(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 		Get(ctx context.Context, in *Store, out *StoreResponse) error
 		GetByName(ctx context.Context, in *Store, out *StoreResponse) error
 		Search(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 		List(ctx context.Context, in *StoreRequest, out *StoreResponse) error
-		GetModules(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 	}
 	type StoreService struct {
 		storeService
@@ -230,12 +200,8 @@ func (h *storeServiceHandler) Create(ctx context.Context, in *Store, out *StoreR
 	return h.StoreServiceHandler.Create(ctx, in, out)
 }
 
-func (h *storeServiceHandler) UpdateVersion(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.UpdateVersion(ctx, in, out)
-}
-
-func (h *storeServiceHandler) UpdateProfile(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.UpdateProfile(ctx, in, out)
+func (h *storeServiceHandler) Update(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.Update(ctx, in, out)
 }
 
 func (h *storeServiceHandler) UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error {
@@ -260,8 +226,4 @@ func (h *storeServiceHandler) Search(ctx context.Context, in *StoreRequest, out 
 
 func (h *storeServiceHandler) List(ctx context.Context, in *StoreRequest, out *StoreResponse) error {
 	return h.StoreServiceHandler.List(ctx, in, out)
-}
-
-func (h *storeServiceHandler) GetModules(ctx context.Context, in *StoreRequest, out *StoreResponse) error {
-	return h.StoreServiceHandler.GetModules(ctx, in, out)
 }

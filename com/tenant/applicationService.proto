@@ -1,0 +1,47 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service ApplicationService {
+    rpc Create (Application) returns (ApplicationResponse) {}
+    rpc Update (Application) returns (ApplicationResponse) {}
+    rpc Delete (Application) returns (ApplicationResponse) {}
+    rpc Get (Application) returns (ApplicationResponse) {}
+    rpc Search (ApplicationRequest) returns (ApplicationResponse) {}
+    rpc List (ApplicationRequest) returns (ApplicationResponse) {}
+}
+
+message Application {
+    int32	id =1;
+    string	code =2;
+    string	name =3;
+    string	type =4;
+    string	icon_url =5;
+    string	admin_url =7;
+    string	desc =9;
+    int32	sort =10;
+    string	status =11;
+    string	created_at =12;
+    string	updated_at =13;
+}
+
+message ApplicationRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
+    string keywords = 4;
+    int32 id = 5;
+    string code = 6;
+    string name = 7;
+    string type = 8;
+    string status = 9;
+    repeated int32 ids = 11;
+}
+
+message ApplicationResponse {
+    Application entity = 1;
+    common.Pager pager =2;
+    repeated Application items = 3;
+    string info =4;
+}

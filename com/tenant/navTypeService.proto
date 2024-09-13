@@ -3,7 +3,6 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 import "navService.proto";
-import "versionService.proto";
 
 service NavTypeService {
     rpc Get (NavType) returns (NavTypeResponse) {}
@@ -28,7 +27,6 @@ message NavType {
     string created_at =10;
     string updated_at =11;
     repeated Nav navs = 12;
-    Version version = 13;
 }
 
 

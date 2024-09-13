@@ -12,6 +12,7 @@ service DictService {
     rpc Get (DictRequest) returns (DictResponse) {}
     rpc Search (DictRequest) returns (DictResponse) {}
     rpc List (DictRequest) returns (DictResponse) {}
+    rpc DictConst (DictRequest) returns (DictResponse) {}
 }
 
 message DictRequest {

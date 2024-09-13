@@ -15,7 +15,7 @@ service GenCodeService {
     //表列表
     rpc Tables (GenCodeRequest) returns (GenCodeTableResponse) {}
     //同步
-    rpc sync (GenCodeRequest) returns (GenCodeResponse) {}
+    rpc Sync (GenCodeRequest) returns (GenCodeResponse) {}
 
     //预览代码
     rpc Preview (GenCodeRequest) returns (GenCodeResponse) {}
@@ -63,8 +63,9 @@ message GenCodeColumn {
     string go_type = 16;
     string ts_type = 17;
     string proto_type = 18;
-    string created_at = 19;
-    string updated_at = 20;
+    string dict_type = 19;
+    string created_at = 20;
+    string updated_at = 21;
 }
 
 message GenDatabase {

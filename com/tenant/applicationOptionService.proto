@@ -1,0 +1,59 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+// 应用配置
+service ApplicationOptionService {
+  // 保存配置
+  rpc Save (ApplicationOptionRequest) returns (ApplicationOptionResponse) {}
+  // 获取配置
+  rpc Get (ApplicationOptionRequest) returns (ApplicationOptionResponse) {}
+}
+
+// 应用版本
+message ApplicationOption {
+  int32 id = 1; //ID
+  int32 application_id = 2; //所属应用
+  string application_code = 3; //版本编码
+  OptionBaseConfig base_config = 4; //使用配置
+  OptionSecurityConfig security_config =5;//安全配置
+}
+
+// 基本配置
+message OptionBaseConfig {
+  string SITE_TITLE = 1; //系统标题
+  string SITE_DESCRIPTION = 2; //系统描述
+  string SITE_COPYRIGHT = 3; //版权信息
+  string SITE_BEIAN = 4; //备案号
+  string SITE_FAVICON = 5; //favicon
+  string SITE_LOGO = 6; //系统LOGO
+  string SITE_AD_TYPE = 7; //系统广告类型 1-封面，2-幻灯片
+  string SITE_AD_COVER = 8; //系统广告封面
+  repeated string SITE_AD_SLIDES = 9;//系统广告幻灯片
+}
+
+//安全配置
+message OptionSecurityConfig{
+  int32 PASSWORD_ERROR_LOCK_COUNT =1; //登录密码错误锁定账号的次数
+  int32 PASSWORD_ERROR_LOCK_MINUTES =2;//登录密码错误锁定账号的时间（min）
+  int32 PASSWORD_EXPIRATION_DAYS =3; //密码有效期（天）
+  int32 PASSWORD_EXPIRATION_WARNING_DAYS =4;//密码到期提前提示（天）
+  int32 PASSWORD_REPETITION_TIMES =5;//密码重复使用次数
+  int32 PASSWORD_MIN_LENGTH =6; //密码最小长度
+}
+
+// 应用版本请求参数
+message ApplicationOptionRequest {
+  int32 application_id = 1; //所属应用
+  string application_code = 2; //版本编码
+  string type = 3; //类型
+  OptionBaseConfig base_config = 4; //使用配置
+  OptionSecurityConfig security_config =5;//安全配置
+}
+
+// 应用版本响应数据
+message ApplicationOptionResponse {
+  ApplicationOption entity =1;
+  string type = 2; //类型
+  string msg = 3;
+}
