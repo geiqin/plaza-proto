@@ -1,0 +1,102 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service MenuService {
+    rpc Get (Menu) returns (MenuResponse) {}
+    rpc Create (Menu) returns (MenuResponse) {}
+    rpc Update (Menu) returns (MenuResponse) {}
+    rpc UpdateHide (Menu) returns (MenuResponse) {}
+    rpc Delete (Menu) returns (MenuResponse) {}
+    rpc Search (MenuRequest) returns (MenuResponse) {}
+    rpc List (MenuRequest) returns (MenuResponse) {}
+    rpc Tree (MenuRequest) returns (MenuResponse) {}
+    //用户菜单路由
+    rpc Routes (MenuRequest) returns (MenuResponse) {}
+    //插件导航创建
+    rpc PluginMenuCreate (MenuRequest) returns (MenuResponse) {}
+    //插件导航删除
+    rpc PluginMenuDelete (MenuRequest) returns (MenuResponse) {}
+}
+
+// 导航
+message Menu {
+    int64  id =1;//ID
+    int64  parent_id =2;//父ID
+    string title =3;//导航标题
+    string type =4;//类型 1目录 2菜单 3按钮
+    string path =5;//路由地址
+    string name =6;//导航名称
+    string component =7;//组件路径
+    string redirect =8;//路由重定向
+    string icon =9;//图标
+    string permission =10;//权限标识
+    string locale =11;//语言包键名
+    string is_cache =12;//是否缓存: 1是 0否
+    string is_hidden =13;//是否隐藏: 1是 0否
+    string is_external =14;//是否外链: 1是 0否
+    string is_plugin =15;//是否插件: 1是 0否
+    int64 plugin_id =16;//插件ID
+    int32 sort =17;//排序值
+    string status =18;//状态: （1：启用；2：禁用）
+    string created_at =20;
+    string updated_at =21;
+    Menu parent = 22;
+    repeated Menu children = 23;
+}
+
+message RouteItem {
+    int64 id =1;//ID
+    int64 parentId =2;//父ID
+    string title =3;//导航标题
+    int32 type =4;//类型 1目录 2菜单 3按钮
+    string path =5;//路由地址
+    string name =6;//导航名称
+    string component =7;//组件路径
+    string redirect =8;//路由重定向
+    string icon =9;//图标
+    string permission =10;//权限标识
+    string locale =11;//语言包键名
+    bool isCache =12;//是否缓存: 1是 0否
+    bool isHidden =13;//是否隐藏: 1是 0否
+    bool isExternal =14;//是否外链: 1是 0否
+    int32 sort =15;//排序值
+    string status =16;//状态: （1：启用；2：禁用）
+    string activeMenu =17;//
+    bool alwaysShow =18;//
+    bool breadcrumb =19;//
+    bool showInTabs =20;//
+    bool affix =21;//
+    repeated string roles =22;
+    repeated RouteItem children = 23;
+}
+
+message MenuRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    string title = 6;
+    string type = 7;
+    int64 parent_id =8;
+    int64 is_hidden =9;
+    string system =10;
+    string is_plugin =11;
+    int32 plugin_id =12;
+    int64 store_id =13;
+    repeated int32 plugin_ids = 14;
+    repeated int64 nav_type_ids = 15;
+    repeated int64 ids = 16;
+}
+
+//
+message MenuResponse{
+    Menu entity = 1;
+    common.Pager pager =2;
+    repeated Menu items = 3;
+    repeated RouteItem routes = 4;
+    string info =5;
+}

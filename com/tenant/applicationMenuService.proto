@@ -31,9 +31,10 @@ message ApplicationMenu {
     string is_cache =13;//是否缓存: 1是 0否
     string is_hidden =14;//是否隐藏: 1是 0否
     string is_external =15;//是否外链: 1是 0否
-    string is_require_auth =16;//是否需要登录鉴权: 1是 0否
-    int32  sort =17;//排序值
-    string status =18;//状态: （1：启用；2：禁用）
+    string is_plugin =16;//是否属于插件: 1是 0否
+    int32  plugin_id =17;//插件ID
+    int32  sort =18;//排序值
+    string status =19;//状态: （1：启用；2：禁用）
     string created_at =23;
     string updated_at =24;
     ApplicationMenu parent = 25;
@@ -53,6 +54,8 @@ message ApplicationMenuRequest {
     int64 parent_id =8;
     string application_code = 9;
     string is_admin =11;
+    string is_plugin =12;
+    int32  plugin_id =13;
     repeated int64 ids = 16;
 }
 
@@ -61,5 +64,5 @@ message ApplicationMenuResponse{
     ApplicationMenu entity = 1;
     common.Pager pager =2;
     repeated ApplicationMenu items = 3;
-    string info =4;
+    string msg =4;
 }

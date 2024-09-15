@@ -15,26 +15,33 @@ service RoleService {
 
 // 用户信息
 message Role {
-    int32 id = 1;
-    string name = 2;
-    string is_admin =3;
+    int64 id = 1;
+    string code = 2;
+    string name =3;
     string data_scope = 4;
-    string memo = 5;
-    string created_at = 6;
-    string updated_at = 7;
-    repeated Nav navs = 8;
-    repeated int64 nav_ids = 9;
+    string description = 5;
+    string is_system = 6;
+    int32 sort =7;
+    string created_at = 8;
+    string updated_at = 9;
+    repeated Nav navs = 10;
+    repeated int64 nav_ids = 11;
 }
 
 message RoleRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string sorting = 3;
-    //base params
-    int32 id = 4;
-    string name = 5;
-    string is_admin = 6;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
     repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    //base params
+    string code = 10;
+    string name = 11;
+    string is_system = 12;
 }
 
 
@@ -42,5 +49,5 @@ message RoleResponse {
     Role entity = 1;
     common.Pager pager =2;
     repeated Role items = 3;
-    string info =5;
+    string msg =5;
 }

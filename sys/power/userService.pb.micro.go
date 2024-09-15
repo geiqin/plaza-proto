@@ -50,7 +50,7 @@ type UserService interface {
 	Delete(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
 	Search(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
 	//根据账户和密码获得用户（SRV专用）
-	GetByUsernameAndPwd(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
+	GetByUsername(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
 	//根据绑定手机号获得用户（SRV专用）
 	GetByMobile(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
 	//根据绑定邮箱获得用户（SRV专用）
@@ -131,8 +131,8 @@ func (c *userService) Search(ctx context.Context, in *UserRequest, opts ...clien
 	return out, nil
 }
 
-func (c *userService) GetByUsernameAndPwd(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error) {
-	req := c.c.NewRequest(c.name, "UserService.GetByUsernameAndPwd", in)
+func (c *userService) GetByUsername(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.GetByUsername", in)
 	out := new(UserResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -181,7 +181,7 @@ type UserServiceHandler interface {
 	Delete(context.Context, *UserRequest, *UserResponse) error
 	Search(context.Context, *UserRequest, *UserResponse) error
 	//根据账户和密码获得用户（SRV专用）
-	GetByUsernameAndPwd(context.Context, *UserRequest, *UserResponse) error
+	GetByUsername(context.Context, *UserRequest, *UserResponse) error
 	//根据绑定手机号获得用户（SRV专用）
 	GetByMobile(context.Context, *UserRequest, *UserResponse) error
 	//根据绑定邮箱获得用户（SRV专用）
@@ -198,7 +198,7 @@ func RegisterUserServiceHandler(s server.Server, hdlr UserServiceHandler, opts .
 		Get(ctx context.Context, in *UserRequest, out *UserResponse) error
 		Delete(ctx context.Context, in *UserRequest, out *UserResponse) error
 		Search(ctx context.Context, in *UserRequest, out *UserResponse) error
-		GetByUsernameAndPwd(ctx context.Context, in *UserRequest, out *UserResponse) error
+		GetByUsername(ctx context.Context, in *UserRequest, out *UserResponse) error
 		GetByMobile(ctx context.Context, in *UserRequest, out *UserResponse) error
 		GetByEmail(ctx context.Context, in *UserRequest, out *UserResponse) error
 		GetByManagerId(ctx context.Context, in *UserRequest, out *UserResponse) error
@@ -238,8 +238,8 @@ func (h *userServiceHandler) Search(ctx context.Context, in *UserRequest, out *U
 	return h.UserServiceHandler.Search(ctx, in, out)
 }
 
-func (h *userServiceHandler) GetByUsernameAndPwd(ctx context.Context, in *UserRequest, out *UserResponse) error {
-	return h.UserServiceHandler.GetByUsernameAndPwd(ctx, in, out)
+func (h *userServiceHandler) GetByUsername(ctx context.Context, in *UserRequest, out *UserResponse) error {
+	return h.UserServiceHandler.GetByUsername(ctx, in, out)
 }
 
 func (h *userServiceHandler) GetByMobile(ctx context.Context, in *UserRequest, out *UserResponse) error {

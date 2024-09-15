@@ -15,6 +15,32 @@ service CurrentUserService {
     rpc ModifyPwd (CurrentUserRequest) returns (UserResponse) {}
 }
 
+
+// 用户状态信息
+message UserState {
+    int64  id = 1;
+    string type = 2;
+    string username = 3;
+    string display_name = 4;
+    string real_name = 5;
+    int64 avatar_id = 6;
+    string avatar_url = 7;
+    string gender = 8;
+    int32 dept_id =9;
+    int32 post_id =10;
+    int32 role_id =11;
+    int64 source_manager_id =12;
+    string status = 13;
+    string memo = 14;
+    string created_at =15;
+    string updated_at = 16;
+    string data_permission =17;
+    string dept_name =18;
+    string role_name =19;
+    repeated string roles =20;
+    repeated string permissions =21;
+}
+
 //授权请求信息
 message CurrentUserRequest {
     int64  id = 1;
@@ -28,7 +54,7 @@ message CurrentUserRequest {
 }
 
 message CurrentUserResponse {
-    User user = 1;
+    UserState user = 1;
     repeated Nav navs = 2;
     repeated string permissions = 3;
     common.Pager pager =4;

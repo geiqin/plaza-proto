@@ -16,10 +16,10 @@ service PostService {
 
 
 message Post {
-    int32	id	=1;
+    int64	id	=1;
     string	code	=2;
     string	name	=3;
-    int32	dept_id	=4;
+    int64	dept_id	=4;
     string	level	=5;
     string description =6;
     Dept	dept	=7;
@@ -33,12 +33,12 @@ message PostRequest {
     int64 page_size = 2;
     int64 top = 3;
     //my self
-    int32	id	=4;
+    int64	id	=4;
     string	code	=5;
     string	name	=6;
     string	type	=7;
-    int32	dept_id	=8;
-    repeated  int32	 ids	=9;
+    int64	dept_id	=8;
+    repeated  int64	 ids	=9;
 }
 
 message PostResponse{
@@ -46,5 +46,5 @@ message PostResponse{
     common.Pager pager =2;
     repeated Post items = 3;
     map<string,string> params = 4;
-    string info =5;
+    string msg =5;
 }

@@ -14,7 +14,7 @@ service UserService {
     rpc Delete (UserRequest) returns (UserResponse) {}
     rpc Search (UserRequest) returns (UserResponse) {}
     //根据账户和密码获得用户（SRV专用）
-    rpc GetByUsernameAndPwd(UserRequest) returns (UserResponse) {}
+    rpc GetByUsername(UserRequest) returns (UserResponse) {}
     //根据绑定手机号获得用户（SRV专用）
     rpc GetByMobile (UserRequest) returns (UserResponse) {}
     //根据绑定邮箱获得用户（SRV专用）
@@ -28,49 +28,48 @@ message User {
     int64  id = 1;
     string type = 2;
     string username = 3;
-    string display_name = 4;
-    string real_name = 5;
-    int64 avatar_id = 6;
-    string avatar_url = 7;
-    string gender = 8;
-    int32 dept_id =9;
-    int32 post_id =10;
-    int32 role_id =11;
-    int64 source_manager_id =12;
+    string nickname = 4;
+    string gender = 5;
+    string email = 6;
+    string phone = 7;
+    string avatar_url = 8;
+    string description = 9;
+    int64 dept_id =10;
+    int64 post_id =11;
+    string is_system =12;
     string status = 13;
-    string memo = 14;
     string created_at =15;
     string updated_at = 16;
-    string data_permission =17;
     Dept dept =18;
     Post post =19;
-    Role role =20;
+    repeated Role roles =20;
 }
 
 
 // 用户信息
 message UserRequest {
-    int64 paged =1;
-    int64 page_size=2;
-    string sorting =3;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
     //----
-    int64  id = 4;
-    string type = 5;
-    string username = 6;
-    string display_name = 7;
-    string real_name = 8;
-    string gender = 9;
-    int32 dept_id = 10;
-    int32 post_id = 11;
-    int32 role_id = 12;
-    int64 avatar_id = 13;
-    string avatar_url = 14;
-    string status =15;
-    string email = 16;
-    string mobile =17;
-    string password = 18;
-    int64 source_manager_id =19;
-    repeated int64 ids =20;
+    string type = 10;
+    string username = 11;
+    string nickname = 12;
+    string real_name = 13;
+    string gender = 14;
+    int64 dept_id = 15;
+    int64 post_id = 16;
+    int64 role_id = 17;
+    string email = 18;
+    string phone = 19;
+    string status =20;
+    string password = 22;
+    int64 master_member_id =23;
 }
 
 
@@ -78,5 +77,5 @@ message UserResponse {
     User entity = 1;
     common.Pager pager =2;
     repeated User items = 3;
-    string info =4;
+    string msg =4;
 }

@@ -16,33 +16,34 @@ service DeptService {
 
 
 message Dept {
-    int32	id	=1;
-    string	name	=2;
-    int32	parent_id	=3;
-    string	path	=4;
-    int32	sort	=5;
-    string  leader = 6;
-    string  phone = 7;
-    string  email = 8;
-    int64	area_id	=9;
-    string  status = 10;
-    string	created_at	=11;
-    string	updated_at	=12;
-    repeated Dept children	=13;
+    int64	id =1;
+    string name =2;
+    int64	parent_id =3;
+    string ancestors =4;
+    string description =6;
+    string is_system =7;
+    int32	sort =8;
+    string status =9;
+    string created_at	=10;
+    string updated_at	=11;
+    repeated Dept children =12;
 }
 
 
 message DeptRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    int64 top = 3;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
     //my self
-    int32	id	=4;
-    string	name	=5;
-    int32	parent_id	=6;
-    string  status = 7;
-    int64	area_id	=8;
-    repeated  int32	 ids	=9;
+    int64	parent_id	=10;
+    string name	=11;
+    string is_system =12;
+    string status = 13;
 }
 
 message DeptResponse{
@@ -50,6 +51,6 @@ message DeptResponse{
     common.Pager pager =2;
     repeated Dept items = 3;
     map<string,string> params = 4;
-    string info =5;
+    string msg =5;
 }
 
