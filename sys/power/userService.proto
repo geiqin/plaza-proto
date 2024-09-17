@@ -7,8 +7,8 @@ import "deptService.proto";
 import "postService.proto";
 
 service UserService {
-    rpc Create (UserRequest) returns (UserResponse) {}
-    rpc Update (UserRequest) returns (UserResponse) {}
+    rpc Create (User) returns (UserResponse) {}
+    rpc Update (User) returns (UserResponse) {}
     rpc UpdateStatus (UserRequest) returns (UserResponse) {}
     rpc Get (UserRequest) returns (UserResponse) {}
     rpc Delete (UserRequest) returns (UserResponse) {}
@@ -37,12 +37,17 @@ message User {
     int64 dept_id =10;
     int64 post_id =11;
     string is_system =12;
-    string status = 13;
+    int64 master_member_id =13;
+    string status = 14;
     string created_at =15;
     string updated_at = 16;
+    string password =17; //新增用户专用
     Dept dept =18;
     Post post =19;
     repeated Role roles =20;
+    repeated int64 role_ids = 21;
+    repeated string role_names = 22;
+    string dept_name =23;
 }
 
 
@@ -68,8 +73,11 @@ message UserRequest {
     string email = 18;
     string phone = 19;
     string status =20;
-    string password = 22;
+    string password =21;
+    string is_system = 22;
     int64 master_member_id =23;
+    repeated int64 role_ids = 24;
+    repeated int64 dept_ids = 25;
 }
 
 

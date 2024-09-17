@@ -21,22 +21,21 @@ message UserState {
     int64  id = 1;
     string type = 2;
     string username = 3;
-    string display_name = 4;
-    string real_name = 5;
-    int64 avatar_id = 6;
-    string avatar_url = 7;
-    string gender = 8;
-    int32 dept_id =9;
-    int32 post_id =10;
-    int32 role_id =11;
-    int64 source_manager_id =12;
-    string status = 13;
-    string memo = 14;
+    string nickname = 4;
+    string gender = 5;
+    string email = 6;
+    string phone = 7;
+    string avatar_url = 8;
+    string description = 9;
+    int32 dept_id =10;
+    int32 post_id =11;
+    int64 master_member_id =12;
+    string is_system = 13;
+    string status = 14;
     string created_at =15;
     string updated_at = 16;
-    string data_permission =17;
     string dept_name =18;
-    string role_name =19;
+    string post_name =19;
     repeated string roles =20;
     repeated string permissions =21;
 }
@@ -59,7 +58,7 @@ message CurrentUserResponse {
     repeated string permissions = 3;
     common.Pager pager =4;
     repeated User items = 5;
-    string info =6;
+    string msg =6;
 }
 
 

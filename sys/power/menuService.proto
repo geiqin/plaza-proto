@@ -2,6 +2,7 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "baseInfoService.proto";
 
 service MenuService {
     rpc Get (Menu) returns (MenuResponse) {}
@@ -45,6 +46,7 @@ message Menu {
     Menu parent = 22;
     repeated Menu children = 23;
 }
+
 
 message RouteItem {
     int64 id =1;//ID
@@ -98,5 +100,6 @@ message MenuResponse{
     common.Pager pager =2;
     repeated Menu items = 3;
     repeated RouteItem routes = 4;
-    string info =5;
+    repeated TreeItem tree = 5;
+    string msg =6;
 }

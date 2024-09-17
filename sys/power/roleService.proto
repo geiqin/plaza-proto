@@ -2,14 +2,13 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-import "navService.proto";
 
 service RoleService {
     rpc Create (Role) returns (RoleResponse) {}
     rpc Update (Role) returns (RoleResponse) {}
-    rpc UpdateScope (Role) returns (RoleResponse) {}
     rpc Delete (Role) returns (RoleResponse) {}
     rpc Get (Role) returns (RoleResponse) {}
+    rpc List (RoleRequest) returns (RoleResponse) {}
     rpc Search (RoleRequest) returns (RoleResponse) {}
 }
 
@@ -24,8 +23,7 @@ message Role {
     int32 sort =7;
     string created_at = 8;
     string updated_at = 9;
-    repeated Nav navs = 10;
-    repeated int64 nav_ids = 11;
+    repeated int64 menu_ids = 10;
 }
 
 message RoleRequest {

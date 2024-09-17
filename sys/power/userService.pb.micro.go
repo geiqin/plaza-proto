@@ -43,8 +43,8 @@ func NewUserServiceEndpoints() []*api.Endpoint {
 // Client API for UserService service
 
 type UserService interface {
-	Create(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
-	Update(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
+	Create(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
+	Update(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
 	UpdateStatus(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
 	Get(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
 	Delete(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error)
@@ -71,7 +71,7 @@ func NewUserService(name string, c client.Client) UserService {
 	}
 }
 
-func (c *userService) Create(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error) {
+func (c *userService) Create(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error) {
 	req := c.c.NewRequest(c.name, "UserService.Create", in)
 	out := new(UserResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -81,7 +81,7 @@ func (c *userService) Create(ctx context.Context, in *UserRequest, opts ...clien
 	return out, nil
 }
 
-func (c *userService) Update(ctx context.Context, in *UserRequest, opts ...client.CallOption) (*UserResponse, error) {
+func (c *userService) Update(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error) {
 	req := c.c.NewRequest(c.name, "UserService.Update", in)
 	out := new(UserResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -174,8 +174,8 @@ func (c *userService) GetByManagerId(ctx context.Context, in *UserRequest, opts 
 // Server API for UserService service
 
 type UserServiceHandler interface {
-	Create(context.Context, *UserRequest, *UserResponse) error
-	Update(context.Context, *UserRequest, *UserResponse) error
+	Create(context.Context, *User, *UserResponse) error
+	Update(context.Context, *User, *UserResponse) error
 	UpdateStatus(context.Context, *UserRequest, *UserResponse) error
 	Get(context.Context, *UserRequest, *UserResponse) error
 	Delete(context.Context, *UserRequest, *UserResponse) error
@@ -192,8 +192,8 @@ type UserServiceHandler interface {
 
 func RegisterUserServiceHandler(s server.Server, hdlr UserServiceHandler, opts ...server.HandlerOption) error {
 	type userService interface {
-		Create(ctx context.Context, in *UserRequest, out *UserResponse) error
-		Update(ctx context.Context, in *UserRequest, out *UserResponse) error
+		Create(ctx context.Context, in *User, out *UserResponse) error
+		Update(ctx context.Context, in *User, out *UserResponse) error
 		UpdateStatus(ctx context.Context, in *UserRequest, out *UserResponse) error
 		Get(ctx context.Context, in *UserRequest, out *UserResponse) error
 		Delete(ctx context.Context, in *UserRequest, out *UserResponse) error
@@ -214,11 +214,11 @@ type userServiceHandler struct {
 	UserServiceHandler
 }
 
-func (h *userServiceHandler) Create(ctx context.Context, in *UserRequest, out *UserResponse) error {
+func (h *userServiceHandler) Create(ctx context.Context, in *User, out *UserResponse) error {
 	return h.UserServiceHandler.Create(ctx, in, out)
 }
 
-func (h *userServiceHandler) Update(ctx context.Context, in *UserRequest, out *UserResponse) error {
+func (h *userServiceHandler) Update(ctx context.Context, in *User, out *UserResponse) error {
 	return h.UserServiceHandler.Update(ctx, in, out)
 }
 
