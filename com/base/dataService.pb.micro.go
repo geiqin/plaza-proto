@@ -43,11 +43,17 @@ func NewDataServiceEndpoints() []*api.Endpoint {
 // Client API for DataService service
 
 type DataService interface {
+	// 初始数据新增
 	Create(ctx context.Context, in *Data, opts ...client.CallOption) (*DataResponse, error)
+	// 初始数据修改
 	Update(ctx context.Context, in *Data, opts ...client.CallOption) (*DataResponse, error)
+	// 初始数据删除
 	Delete(ctx context.Context, in *Data, opts ...client.CallOption) (*DataResponse, error)
+	// 初始数据获取
 	Get(ctx context.Context, in *Data, opts ...client.CallOption) (*DataResponse, error)
+	// 初始数据查询
 	Search(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error)
+	// 初始数据列表
 	List(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error)
 }
 
@@ -126,11 +132,17 @@ func (c *dataService) List(ctx context.Context, in *DataRequest, opts ...client.
 // Server API for DataService service
 
 type DataServiceHandler interface {
+	// 初始数据新增
 	Create(context.Context, *Data, *DataResponse) error
+	// 初始数据修改
 	Update(context.Context, *Data, *DataResponse) error
+	// 初始数据删除
 	Delete(context.Context, *Data, *DataResponse) error
+	// 初始数据获取
 	Get(context.Context, *Data, *DataResponse) error
+	// 初始数据查询
 	Search(context.Context, *DataRequest, *DataResponse) error
+	// 初始数据列表
 	List(context.Context, *DataRequest, *DataResponse) error
 }
 

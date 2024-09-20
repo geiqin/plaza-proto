@@ -1,52 +1,55 @@
 syntax = "proto3";
-
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-
+// 初始数据服务
 service DataService {
+    // 初始数据新增
     rpc Create (Data) returns (DataResponse) {}
+    // 初始数据修改
     rpc Update (Data) returns (DataResponse) {}
+    // 初始数据删除
     rpc Delete (Data) returns (DataResponse) {}
-    rpc Get (Data ) returns (DataResponse) {}
+    // 初始数据获取
+    rpc Get (Data) returns (DataResponse) {}
+    // 初始数据查询
     rpc Search (DataRequest) returns (DataResponse) {}
+    // 初始数据列表
     rpc List (DataRequest) returns (DataResponse) {}
 }
-
-// 区域信息
+// 初始数据
 message Data {
-    int64  id =1;//ID
-    string type =2;//类型
-    string code =3;//唯一编码
-    string name =4;//数据名称
-    string content =5;//JSON内容
-    string is_init =6;//是否初始化
-    string status =7;//状态：0禁用，1可用
-    string created_at = 9;
-    string updated_at = 10;
+    int64 id = 1; //ID
+    string type = 2; //类型
+    string code = 3; //编码
+    string name = 4; //名称
+    string content = 5; //JSON内容
+    string is_init = 6; //是否初始化
+    string status = 7; //状态
+    string created_at = 8; //创建时间
+    string updated_at = 9; //修改时间
 }
-
-
-//查询参数
+// 初始数据请求参数
 message DataRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string keywords =3;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
     //以下为自定义参数
-    int64 id = 4;
-    string name =5;
-    string type = 6;
-    string status = 7;
-    repeated int64 ids =8;
-    int64 parent_id = 9;
+    string type = 11; //类型
+    string code = 12; //编码
+    string name = 13; //名称
+    string is_init = 14; //是否初始化
+    string status = 15; //状态
 }
-
-
+// 初始数据响应数据
 message DataResponse {
-    Data entity = 1;
-    common.Pager pager =2;
-    repeated Data items = 3;
-    string info = 4;
+    string msg = 1;
+    common.Pager pager = 2;
+    Data entity = 3;
+    repeated Data items = 4;
 }
-
-
