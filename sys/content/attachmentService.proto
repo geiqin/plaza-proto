@@ -1,0 +1,93 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+// 附件服务
+service AttachmentService {
+  // 附件新增
+  rpc Create (Attachment) returns (AttachmentResponse) {}
+  // 附件修改
+  rpc Update (Attachment) returns (AttachmentResponse) {}
+  // 附件删除
+  rpc Delete (Attachment) returns (AttachmentResponse) {}
+  // 附件获取
+  rpc Get (Attachment) returns (AttachmentResponse) {}
+  // 附件查询
+  rpc Search (AttachmentRequest) returns (AttachmentResponse) {}
+  // 附件列表
+  rpc List (AttachmentRequest) returns (AttachmentResponse) {}
+  //上传凭证生成
+  rpc UploadToken (AttachmentRequest) returns (AttachmentResponse) {}
+  //上传回调处理
+  rpc UploadCallback (AttachmentRequest) returns (AttachmentResponse) {}
+}
+// 附件
+message Attachment {
+  int64 id = 1; //ID
+  string hash = 2; //Hash值
+  string code = 3; //编码
+  string name = 4; //名称
+  string type = 5; //类型
+  int64 batch_id = 6; //上传批次
+  int64 cat_id = 7; //分类
+  string file_name = 8; //文件名称
+  string raw_name = 9; //文件原始名称
+  string save_path = 10; //相对路径
+  string url = 11; //完整路径
+  string mime_type = 12; //文件类型
+  int64 size = 13; //文件大小
+  int64 width = 14; //宽
+  int64 height = 15; //高
+  int64 length = 16; //时长
+  int32 pixel = 17; //分辨率
+  string description = 18; //描述
+  int32 sort = 19; //排序
+  string creator_type = 20; //创建者类型
+  int64 creator_id = 21; //创建者id
+  string created_at = 22; //创建时间
+  string updated_at = 23; //修改时间
+}
+
+// 附件视图
+message AttachmentView {
+  int64 id = 1; //ID
+  string name = 2; //名称
+  string type = 3; //类型
+  string mime_type = 4; //文件类型
+  int64 size = 5; //文件大小
+}
+
+// 附件请求参数
+message AttachmentRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string code = 11; //编码
+  string name = 12; //名称
+  string type = 13; //类型
+  int64 batch_id = 14; //上传批次
+  int64 cat_id = 15; //分类
+  string title = 16; //文件名称
+  string raw_name = 17; //文件原始名称
+  string mime_type = 18; //文件类型
+  string creator_type = 19; //创建者类型
+  int64 creator_id = 20; //创建者id
+  string filename = 21; //上传专用文件名
+}
+// 附件响应数据
+message AttachmentResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  Attachment entity = 3;
+  repeated Attachment items = 4;
+  UploadTokenInfo token =6;
+  map<string,string> callback =7;
+}

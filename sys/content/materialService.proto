@@ -1,0 +1,101 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+import "catService.proto";
+// 素材服务
+service MaterialService {
+  // 素材新增
+  rpc Create (Material) returns (MaterialResponse) {}
+  // 素材修改
+  rpc Update (Material) returns (MaterialResponse) {}
+  // 素材删除
+  rpc Delete (Material) returns (MaterialResponse) {}
+  // 素材获取
+  rpc Get (Material) returns (MaterialResponse) {}
+  // 素材查询
+  rpc Search (MaterialRequest) returns (MaterialResponse) {}
+  // 素材列表
+  rpc List (MaterialRequest) returns (MaterialResponse) {}
+  //素材统计
+  rpc Statistics (MaterialRequest) returns (MaterialResponse) {}
+
+  //上传凭证生成
+  rpc UploadToken (MaterialRequest) returns (MaterialResponse) {}
+  //上传回调处理
+  rpc UploadCallback (MaterialRequest) returns (MaterialResponse) {}
+
+}
+// 素材
+message Material {
+  int64 id = 1; //ID
+  string hash = 2; //Hash值
+  string code = 3; //编码
+  string title = 4; //标题
+  string type = 5; //类型
+  int64 storage_id = 6; //存储ID
+  int64 batch_id = 7; //上传批次
+  int64 cat_id = 8; //分类
+  string file_name = 9; //文件名称
+  string raw_name = 10; //原始名称
+  string extension = 11; //文件扩展名
+  string save_path = 12; //相对路径
+  string url = 13; //完整路径
+  string mime_type = 14; //文件类型
+  int64 size = 15; //文件大小
+  int64 width = 16; //宽
+  int64 height = 17; //高
+  int64 length = 18; //时长
+  int32 pixel = 19; //视频分辨率
+  string thumbnail_url = 20; //缩略图
+  string description = 21; //描述
+  int32 sort = 22; //排序值
+  string creator_type = 23; //创建者类型
+  int64 creator_id = 24; //创建者ID
+  MediaInfo media_info = 25; //媒体信息
+  string created_at = 26; //创建时间
+  string updated_at = 27; //修改时间
+  Cat cat =28;
+}
+// 素材请求参数
+message MaterialRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string code = 11; //编码
+  int64 batch_id = 12; //上传批次
+  int64 cat_id = 13; //分类
+  string title = 14; //标题
+  string type = 15; //类型
+  string mime_type = 16; //文件类型
+  string creator_type = 17; //创建者类型
+  int64 creator_id = 18; //创建者ID
+  int64 storage_id = 19; //存储ID
+  string filename = 20; //上传专用文件名
+}
+
+message MaterialStatistics {
+  string type = 1; //类型
+  int64 size = 2; //大小
+  int64 number = 3; //数量
+  string unit = 4; //单位
+  repeated MaterialStatistics data = 5; //子项统计
+}
+
+// 素材响应数据
+message MaterialResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  Material entity = 3;
+  repeated Material items = 4;
+  MaterialStatistics statistics =5;
+  UploadTokenInfo token =6;
+  map<string,string> callback =7;
+}

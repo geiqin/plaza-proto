@@ -1,0 +1,60 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 图册服务
+service AlbumService {
+  // 图册新增
+  rpc Create (Album) returns (AlbumResponse) {}
+  // 图册修改
+  rpc Update (Album) returns (AlbumResponse) {}
+  // 图册删除
+  rpc Delete (Album) returns (AlbumResponse) {}
+  // 图册获取
+  rpc Get (Album) returns (AlbumResponse) {}
+  // 图册查询
+  rpc Search (AlbumRequest) returns (AlbumResponse) {}
+  // 图册列表
+  rpc List (AlbumRequest) returns (AlbumResponse) {}
+}
+// 图册
+message Album {
+  int64 id = 1; //ID
+  string code = 2; //编码
+  string name = 3; //名称
+  int64 cat_id = 4; //分类ID
+  string content = 5; //详情
+  string cover_url = 6; //封面URL
+  int32 sort = 7; //排序值
+  string seo_title = 8; //SEO标题
+  string seo_keywords = 9; //SEO关键字
+  string seo_desc = 10; //SEO描述
+  int64 user_id = 11; //用户ID
+  string status = 12; //状态
+  string created_at = 13; //创建时间
+  string updated_at = 14; //修改时间
+}
+// 图册请求参数
+message AlbumRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string code = 11; //编码
+  string name = 12; //名称
+  int64 cat_id = 13; //分类ID
+  int64 user_id = 14; //用户ID
+  string status = 15; //状态
+}
+// 图册响应数据
+message AlbumResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  Album entity = 3;
+  repeated Album items = 4;
+}

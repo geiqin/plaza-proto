@@ -1,0 +1,51 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 图册照片服务
+service AlbumPhotoService {
+  // 图册照片新增
+  rpc Create (AlbumPhoto) returns (AlbumPhotoResponse) {}
+  // 图册照片修改
+  rpc Update (AlbumPhoto) returns (AlbumPhotoResponse) {}
+  // 图册照片删除
+  rpc Delete (AlbumPhoto) returns (AlbumPhotoResponse) {}
+  // 图册照片获取
+  rpc Get (AlbumPhoto) returns (AlbumPhotoResponse) {}
+  // 图册照片查询
+  rpc Search (AlbumPhotoRequest) returns (AlbumPhotoResponse) {}
+  // 图册照片列表
+  rpc List (AlbumPhotoRequest) returns (AlbumPhotoResponse) {}
+}
+// 图册照片
+message AlbumPhoto {
+  int64 id = 1; //ID
+  int64 album_id = 2; //图册
+  string name = 3; //名称
+  string desc = 4; //描述
+  string image_url = 5; //图片URL
+  int32 sort = 6; //排序值
+  string created_at = 7; //创建时间
+  string updated_at = 8; //修改时间
+}
+// 图册照片请求参数
+message AlbumPhotoRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 album_id = 11; //图册
+  string name = 12; //名称
+}
+// 图册照片响应数据
+message AlbumPhotoResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  AlbumPhoto entity = 3;
+  repeated AlbumPhoto items = 4;
+}
