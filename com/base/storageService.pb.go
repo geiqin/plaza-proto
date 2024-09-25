@@ -470,6 +470,62 @@ func (x *UploadTokenRequest) GetFileType() string {
 	return ""
 }
 
+// 删除请求参数
+type RemoveKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Storage string `protobuf:"bytes,1,opt,name=storage,proto3" json:"storage"` //存储编码
+	Key     string `protobuf:"bytes,2,opt,name=key,proto3" json:"key"`         //文件KEY
+}
+
+func (x *RemoveKeyRequest) Reset() {
+	*x = RemoveKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_storageService_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RemoveKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveKeyRequest) ProtoMessage() {}
+
+func (x *RemoveKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_storageService_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveKeyRequest.ProtoReflect.Descriptor instead.
+func (*RemoveKeyRequest) Descriptor() ([]byte, []int) {
+	return file_storageService_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *RemoveKeyRequest) GetStorage() string {
+	if x != nil {
+		return x.Storage
+	}
+	return ""
+}
+
+func (x *RemoveKeyRequest) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
 // 上传凭证响应数据
 type UploadTokenResponse struct {
 	state         protoimpl.MessageState
@@ -483,7 +539,7 @@ type UploadTokenResponse struct {
 func (x *UploadTokenResponse) Reset() {
 	*x = UploadTokenResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_storageService_proto_msgTypes[3]
+		mi := &file_storageService_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -496,7 +552,7 @@ func (x *UploadTokenResponse) String() string {
 func (*UploadTokenResponse) ProtoMessage() {}
 
 func (x *UploadTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storageService_proto_msgTypes[3]
+	mi := &file_storageService_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -509,7 +565,7 @@ func (x *UploadTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadTokenResponse.ProtoReflect.Descriptor instead.
 func (*UploadTokenResponse) Descriptor() ([]byte, []int) {
-	return file_storageService_proto_rawDescGZIP(), []int{3}
+	return file_storageService_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UploadTokenResponse) GetToken() string {
@@ -541,7 +597,7 @@ type StorageResponse struct {
 func (x *StorageResponse) Reset() {
 	*x = StorageResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_storageService_proto_msgTypes[4]
+		mi := &file_storageService_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -554,7 +610,7 @@ func (x *StorageResponse) String() string {
 func (*StorageResponse) ProtoMessage() {}
 
 func (x *StorageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storageService_proto_msgTypes[4]
+	mi := &file_storageService_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -567,7 +623,7 @@ func (x *StorageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageResponse.ProtoReflect.Descriptor instead.
 func (*StorageResponse) Descriptor() ([]byte, []int) {
-	return file_storageService_proto_rawDescGZIP(), []int{4}
+	return file_storageService_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *StorageResponse) GetEntity() *Storage {
@@ -673,7 +729,11 @@ var file_storageService_proto_rawDesc = []byte{
 	0x61, 0x63, 0x6b, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63,
 	0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x55, 0x72, 0x6c, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x69,
 	0x6c, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66,
-	0x69, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x22, 0x4e, 0x0a, 0x13, 0x55, 0x70, 0x6c, 0x6f, 0x61,
+	0x69, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x22, 0x3e, 0x0a, 0x10, 0x52, 0x65, 0x6d, 0x6f, 0x76,
+	0x65, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x73,
+	0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x73, 0x74,
+	0x6f, 0x72, 0x61, 0x67, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x22, 0x4e, 0x0a, 0x13, 0x55, 0x70, 0x6c, 0x6f, 0x61,
 	0x64, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14,
 	0x0a, 0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74,
 	0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x21, 0x0a, 0x0c, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x64, 0x5f,
@@ -688,7 +748,7 @@ var file_storageService_proto_rawDesc = []byte{
 	0x74, 0x65, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x73, 0x65, 0x72,
 	0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x52, 0x05, 0x69,
 	0x74, 0x65, 0x6d, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x32, 0xc6, 0x03, 0x0a, 0x0e, 0x53, 0x74, 0x6f, 0x72, 0x61,
+	0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x32, 0x8c, 0x04, 0x0a, 0x0e, 0x53, 0x74, 0x6f, 0x72, 0x61,
 	0x67, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x38, 0x0a, 0x06, 0x43, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x12, 0x11, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x53,
 	0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x1a, 0x19, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
@@ -716,9 +776,13 @@ var file_storageService_proto_rawDesc = []byte{
 	0x12, 0x1c, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x55, 0x70, 0x6c, 0x6f,
 	0x61, 0x64, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d,
 	0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64,
-	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42,
-	0x0d, 0x5a, 0x0b, 0x2f, 0x2e, 0x3b, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12,
+	0x44, 0x0a, 0x09, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x4b, 0x65, 0x79, 0x12, 0x1a, 0x2e, 0x73,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x4b, 0x65,
+	0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x73, 0x2e, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x0d, 0x5a, 0x0b, 0x2f, 0x2e, 0x3b, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -733,18 +797,19 @@ func file_storageService_proto_rawDescGZIP() []byte {
 	return file_storageService_proto_rawDescData
 }
 
-var file_storageService_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_storageService_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_storageService_proto_goTypes = []interface{}{
 	(*Storage)(nil),             // 0: services.Storage
 	(*StorageRequest)(nil),      // 1: services.StorageRequest
 	(*UploadTokenRequest)(nil),  // 2: services.UploadTokenRequest
-	(*UploadTokenResponse)(nil), // 3: services.UploadTokenResponse
-	(*StorageResponse)(nil),     // 4: services.StorageResponse
-	(*common.Pager)(nil),        // 5: common.Pager
+	(*RemoveKeyRequest)(nil),    // 3: services.RemoveKeyRequest
+	(*UploadTokenResponse)(nil), // 4: services.UploadTokenResponse
+	(*StorageResponse)(nil),     // 5: services.StorageResponse
+	(*common.Pager)(nil),        // 6: common.Pager
 }
 var file_storageService_proto_depIdxs = []int32{
 	0,  // 0: services.StorageResponse.entity:type_name -> services.Storage
-	5,  // 1: services.StorageResponse.pager:type_name -> common.Pager
+	6,  // 1: services.StorageResponse.pager:type_name -> common.Pager
 	0,  // 2: services.StorageResponse.items:type_name -> services.Storage
 	0,  // 3: services.StorageService.Create:input_type -> services.Storage
 	0,  // 4: services.StorageService.Update:input_type -> services.Storage
@@ -753,15 +818,17 @@ var file_storageService_proto_depIdxs = []int32{
 	1,  // 7: services.StorageService.Search:input_type -> services.StorageRequest
 	1,  // 8: services.StorageService.List:input_type -> services.StorageRequest
 	2,  // 9: services.StorageService.GetUploadToken:input_type -> services.UploadTokenRequest
-	4,  // 10: services.StorageService.Create:output_type -> services.StorageResponse
-	4,  // 11: services.StorageService.Update:output_type -> services.StorageResponse
-	4,  // 12: services.StorageService.Delete:output_type -> services.StorageResponse
-	4,  // 13: services.StorageService.Get:output_type -> services.StorageResponse
-	4,  // 14: services.StorageService.Search:output_type -> services.StorageResponse
-	4,  // 15: services.StorageService.List:output_type -> services.StorageResponse
-	3,  // 16: services.StorageService.GetUploadToken:output_type -> services.UploadTokenResponse
-	10, // [10:17] is the sub-list for method output_type
-	3,  // [3:10] is the sub-list for method input_type
+	3,  // 10: services.StorageService.RemoveKey:input_type -> services.RemoveKeyRequest
+	5,  // 11: services.StorageService.Create:output_type -> services.StorageResponse
+	5,  // 12: services.StorageService.Update:output_type -> services.StorageResponse
+	5,  // 13: services.StorageService.Delete:output_type -> services.StorageResponse
+	5,  // 14: services.StorageService.Get:output_type -> services.StorageResponse
+	5,  // 15: services.StorageService.Search:output_type -> services.StorageResponse
+	5,  // 16: services.StorageService.List:output_type -> services.StorageResponse
+	4,  // 17: services.StorageService.GetUploadToken:output_type -> services.UploadTokenResponse
+	5,  // 18: services.StorageService.RemoveKey:output_type -> services.StorageResponse
+	11, // [11:19] is the sub-list for method output_type
+	3,  // [3:11] is the sub-list for method input_type
 	3,  // [3:3] is the sub-list for extension type_name
 	3,  // [3:3] is the sub-list for extension extendee
 	0,  // [0:3] is the sub-list for field type_name
@@ -810,7 +877,7 @@ func file_storageService_proto_init() {
 			}
 		}
 		file_storageService_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UploadTokenResponse); i {
+			switch v := v.(*RemoveKeyRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -822,6 +889,18 @@ func file_storageService_proto_init() {
 			}
 		}
 		file_storageService_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UploadTokenResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_storageService_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StorageResponse); i {
 			case 0:
 				return &v.state
@@ -840,7 +919,7 @@ func file_storageService_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_storageService_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

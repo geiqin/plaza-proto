@@ -57,6 +57,8 @@ type StorageService interface {
 	List(ctx context.Context, in *StorageRequest, opts ...client.CallOption) (*StorageResponse, error)
 	// 获取上传凭证【服务专用】
 	GetUploadToken(ctx context.Context, in *UploadTokenRequest, opts ...client.CallOption) (*UploadTokenResponse, error)
+	// 删除文件【服务专用】
+	RemoveKey(ctx context.Context, in *RemoveKeyRequest, opts ...client.CallOption) (*StorageResponse, error)
 }
 
 type storageService struct {
@@ -141,6 +143,16 @@ func (c *storageService) GetUploadToken(ctx context.Context, in *UploadTokenRequ
 	return out, nil
 }
 
+func (c *storageService) RemoveKey(ctx context.Context, in *RemoveKeyRequest, opts ...client.CallOption) (*StorageResponse, error) {
+	req := c.c.NewRequest(c.name, "StorageService.RemoveKey", in)
+	out := new(StorageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for StorageService service
 
 type StorageServiceHandler interface {
@@ -158,6 +170,8 @@ type StorageServiceHandler interface {
 	List(context.Context, *StorageRequest, *StorageResponse) error
 	// 获取上传凭证【服务专用】
 	GetUploadToken(context.Context, *UploadTokenRequest, *UploadTokenResponse) error
+	// 删除文件【服务专用】
+	RemoveKey(context.Context, *RemoveKeyRequest, *StorageResponse) error
 }
 
 func RegisterStorageServiceHandler(s server.Server, hdlr StorageServiceHandler, opts ...server.HandlerOption) error {
@@ -169,6 +183,7 @@ func RegisterStorageServiceHandler(s server.Server, hdlr StorageServiceHandler, 
 		Search(ctx context.Context, in *StorageRequest, out *StorageResponse) error
 		List(ctx context.Context, in *StorageRequest, out *StorageResponse) error
 		GetUploadToken(ctx context.Context, in *UploadTokenRequest, out *UploadTokenResponse) error
+		RemoveKey(ctx context.Context, in *RemoveKeyRequest, out *StorageResponse) error
 	}
 	type StorageService struct {
 		storageService
@@ -207,4 +222,8 @@ func (h *storageServiceHandler) List(ctx context.Context, in *StorageRequest, ou
 
 func (h *storageServiceHandler) GetUploadToken(ctx context.Context, in *UploadTokenRequest, out *UploadTokenResponse) error {
 	return h.StorageServiceHandler.GetUploadToken(ctx, in, out)
+}
+
+func (h *storageServiceHandler) RemoveKey(ctx context.Context, in *RemoveKeyRequest, out *StorageResponse) error {
+	return h.StorageServiceHandler.RemoveKey(ctx, in, out)
 }
