@@ -69,9 +69,9 @@ message UploadTokenRequest {
   string user_type =3; //用户类型
   int64 user_id =4; //用户ID
   string overwrite_key =5;//需要覆盖的文件名
-  string key_prefix =6;//为指定的空间和对象前缀生成上传策略
   string callback_url =7;//回调URL
   string file_type =8; //文件类型：image/video/audio/doc/other
+  //string key_prefix =6;//为指定的空间和对象前缀生成上传策略
 }
 
 // 删除请求参数
@@ -84,6 +84,7 @@ message RemoveKeyRequest {
 message UploadTokenResponse {
   string token = 1;
   int64 expired_time =2; //过期时间
+  string key_prefix =3;//为文件Key生成前缀：如：/stores/10000009/material/ 或 /master/material/ 等等
 }
 
 // 存储响应数据
