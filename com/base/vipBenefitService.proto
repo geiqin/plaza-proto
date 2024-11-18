@@ -26,7 +26,7 @@ message VipBenefit {
   string industry = 5; //所属行业
   string icon_url = 6; //权益图标
   int64 price_value = 7; //权益价值
-  string is_select = 8; //默认选中
+  string is_init = 8; //初始化
   string verify_method = 9; //核销方式
   string desc = 10; //权益描述
   string status = 11; //状态
@@ -48,7 +48,7 @@ message VipBenefitRequest {
   string name = 12; //权益名称
   string type = 13; //权益类型
   string industry = 14; //所属行业
-  string is_select = 15; //默认选中
+  string is_init = 15; //初始化
   string verify_method = 16; //核销方式
   string status = 17; //状态
 }
