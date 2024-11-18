@@ -1,0 +1,52 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service VipBenefitService {
+    rpc Create (VipBenefit) returns (VipBenefitResponse) {}
+    rpc Append (VipBenefitRequest) returns (VipBenefitResponse) {}
+    rpc Update (VipBenefit) returns (VipBenefitResponse) {}
+    rpc Delete (VipBenefit) returns (VipBenefitResponse) {}
+    rpc Get (VipBenefit) returns (VipBenefitResponse) {}
+    rpc Search (VipBenefitRequest) returns (VipBenefitResponse) {}
+    rpc List (VipBenefitRequest) returns (VipBenefitResponse) {}
+}
+
+message VipBenefit {
+    int64 id = 1; //ID
+    string code = 2; //权益标识
+    string name = 3; //权益名称
+    string alias = 4; //权益别名
+    string type = 5; //权益类型
+    string industry = 6; //所属行业
+    string icon_url = 7; //权益图标
+    int64 price_value = 8; //权益价值
+    string is_select = 9; //默认选中
+    string verify_method = 10; //核销方式
+    string desc = 11; //权益描述
+    string status = 12; //状态
+    string created_at = 13; //创建日期
+    string updated_at = 14; //修改日期
+}
+
+//查询参数
+message VipBenefitRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    //以下为自定义参数
+    string code = 3;
+    string name = 4;
+    string alias =5;
+    string type = 6;
+    string status = 7;
+    repeated int64 ids =8;
+    repeated string codes =9;
+}
+
+message VipBenefitResponse {
+    VipBenefit entity = 1;
+    common.Pager pager =2;
+    repeated VipBenefit items = 3;
+    string info =4;
+}

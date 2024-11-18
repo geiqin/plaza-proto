@@ -1,0 +1,63 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "vipLevelService.proto";
+
+// 会员体系服务
+service VipService {
+    // 开启/关闭
+    rpc Switch (Vip) returns (VipResponse) {}
+    // 会员体系修改
+    rpc Update (Vip) returns (VipResponse) {}
+    // 会员体系获取
+    rpc Get (Vip) returns (VipResponse) {}
+    // 会员体系列表
+    rpc List (VipRequest) returns (VipResponse) {}
+}
+
+// 会员体系
+message Vip {
+    int32 id = 1; //ID
+    string name = 2; //名称
+    string type = 3; //类型
+    string expire_type = 4; //有效期类型
+    int32 expire_months = 5; //有效期月数
+    string open_method = 6; //开通方式
+    string up_method = 7; //升级方式
+    string gift_method = 8; //礼包发放方式
+    string level_calculate = 9; //等级计算时间
+    int64 valid_order_amount = 10; //有效订单金额
+    string is_need_sync = 11; //需要同步更新
+    string growth_rules = 12; //成长规则
+    string status = 13; //状态
+    string created_at = 14; //创建时间
+    string updated_at = 15; //修改时间
+    repeated VipLevel levels =16;
+}
+
+// 会员体系请求参数
+message VipRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int32 ids = 7;
+    int32 id = 8;
+    //以下为自定义参数
+    string name = 11; //名称
+    string type = 12; //类型
+    string expire_type = 13; //有效期类型
+    string is_need_sync = 14; //需要同步更新
+    string status = 15; //状态
+}
+
+// 会员体系响应数据
+message VipResponse {
+    string msg = 1;
+    common.Pager pager = 2;
+    Vip entity = 3;
+    repeated Vip items = 4;
+}

@@ -43,11 +43,18 @@ func NewScreeningPriceServiceEndpoints() []*api.Endpoint {
 // Client API for ScreeningPriceService service
 
 type ScreeningPriceService interface {
+	// 价格筛选新增
 	Create(ctx context.Context, in *ScreeningPrice, opts ...client.CallOption) (*ScreeningPriceResponse, error)
+	// 价格筛选修改
 	Update(ctx context.Context, in *ScreeningPrice, opts ...client.CallOption) (*ScreeningPriceResponse, error)
+	// 价格筛选删除
 	Delete(ctx context.Context, in *ScreeningPrice, opts ...client.CallOption) (*ScreeningPriceResponse, error)
+	// 价格筛选获取
 	Get(ctx context.Context, in *ScreeningPrice, opts ...client.CallOption) (*ScreeningPriceResponse, error)
+	// 价格筛选查询
 	Search(ctx context.Context, in *ScreeningPriceRequest, opts ...client.CallOption) (*ScreeningPriceResponse, error)
+	// 价格筛选列表
+	List(ctx context.Context, in *ScreeningPriceRequest, opts ...client.CallOption) (*ScreeningPriceResponse, error)
 }
 
 type screeningPriceService struct {
@@ -112,14 +119,31 @@ func (c *screeningPriceService) Search(ctx context.Context, in *ScreeningPriceRe
 	return out, nil
 }
 
+func (c *screeningPriceService) List(ctx context.Context, in *ScreeningPriceRequest, opts ...client.CallOption) (*ScreeningPriceResponse, error) {
+	req := c.c.NewRequest(c.name, "ScreeningPriceService.List", in)
+	out := new(ScreeningPriceResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ScreeningPriceService service
 
 type ScreeningPriceServiceHandler interface {
+	// 价格筛选新增
 	Create(context.Context, *ScreeningPrice, *ScreeningPriceResponse) error
+	// 价格筛选修改
 	Update(context.Context, *ScreeningPrice, *ScreeningPriceResponse) error
+	// 价格筛选删除
 	Delete(context.Context, *ScreeningPrice, *ScreeningPriceResponse) error
+	// 价格筛选获取
 	Get(context.Context, *ScreeningPrice, *ScreeningPriceResponse) error
+	// 价格筛选查询
 	Search(context.Context, *ScreeningPriceRequest, *ScreeningPriceResponse) error
+	// 价格筛选列表
+	List(context.Context, *ScreeningPriceRequest, *ScreeningPriceResponse) error
 }
 
 func RegisterScreeningPriceServiceHandler(s server.Server, hdlr ScreeningPriceServiceHandler, opts ...server.HandlerOption) error {
@@ -129,6 +153,7 @@ func RegisterScreeningPriceServiceHandler(s server.Server, hdlr ScreeningPriceSe
 		Delete(ctx context.Context, in *ScreeningPrice, out *ScreeningPriceResponse) error
 		Get(ctx context.Context, in *ScreeningPrice, out *ScreeningPriceResponse) error
 		Search(ctx context.Context, in *ScreeningPriceRequest, out *ScreeningPriceResponse) error
+		List(ctx context.Context, in *ScreeningPriceRequest, out *ScreeningPriceResponse) error
 	}
 	type ScreeningPriceService struct {
 		screeningPriceService
@@ -159,4 +184,8 @@ func (h *screeningPriceServiceHandler) Get(ctx context.Context, in *ScreeningPri
 
 func (h *screeningPriceServiceHandler) Search(ctx context.Context, in *ScreeningPriceRequest, out *ScreeningPriceResponse) error {
 	return h.ScreeningPriceServiceHandler.Search(ctx, in, out)
+}
+
+func (h *screeningPriceServiceHandler) List(ctx context.Context, in *ScreeningPriceRequest, out *ScreeningPriceResponse) error {
+	return h.ScreeningPriceServiceHandler.List(ctx, in, out)
 }

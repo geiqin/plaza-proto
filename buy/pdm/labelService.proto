@@ -1,0 +1,52 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 商品标签服务
+service LabelService {
+    // 商品标签新增
+    rpc Create (Label) returns (LabelResponse) {}
+    // 商品标签修改
+    rpc Update (Label) returns (LabelResponse) {}
+    // 商品标签删除
+    rpc Delete (Label) returns (LabelResponse) {}
+    // 商品标签获取
+    rpc Get (Label) returns (LabelResponse) {}
+    // 商品标签查询
+    rpc Search (LabelRequest) returns (LabelResponse) {}
+    // 商品标签列表
+    rpc List (LabelRequest) returns (LabelResponse) {}
+}
+// 商品标签
+message Label {
+    int32 id = 1; //ID
+    string name = 2; //名称
+    string type = 3; //类型
+    int32 label_group_id = 4; //分组ID
+    int32 sort = 5; //排序
+    string created_at = 6; //创建时间
+    string updated_at = 7; //修改时间
+    int32 spu_count = 8; //商品数量
+}
+// 商品标签请求参数
+message LabelRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int32 ids = 7;
+    int32 id = 8;
+    //以下为自定义参数
+    string name = 11; //名称
+    string type = 12; //名称
+    int32 label_group_id = 13; //分组ID
+}
+// 商品标签响应数据
+message LabelResponse {
+    string msg = 1;
+    common.Pager pager = 2;
+    Label entity = 3;
+    repeated Label items = 4;
+}

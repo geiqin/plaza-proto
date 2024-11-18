@@ -1,43 +1,59 @@
 syntax = "proto3";
 package services;
-option go_package = "/.;services";
+option go_package ="/.;services";
 import "common/base.proto";
+import "brandTypeService.proto";
 
-
+// 商品品牌服务
 service BrandService {
-    rpc Create(Brand) returns (BrandResponse);
-    rpc Update(Brand) returns (BrandResponse);
-    rpc Delete (Brand) returns (BrandResponse);
-    rpc Get (Brand) returns (BrandResponse);
-    rpc List (BrandRequest) returns (BrandResponse);
-    rpc Search (BrandRequest) returns (BrandResponse);
+    // 商品品牌新增
+    rpc Create (Brand) returns (BrandResponse) {}
+    // 商品品牌修改
+    rpc Update (Brand) returns (BrandResponse) {}
+    // 商品品牌删除
+    rpc Delete (Brand) returns (BrandResponse) {}
+    // 商品品牌获取
+    rpc Get (Brand) returns (BrandResponse) {}
+    // 商品品牌查询
+    rpc Search (BrandRequest) returns (BrandResponse) {}
+    // 商品品牌列表
+    rpc List (BrandRequest) returns (BrandResponse) {}
 }
-
+// 商品品牌
 message Brand {
-    int32 id = 1;
-    string name = 2;
-    int64 logo_id = 3;
-    string logo_url = 4;
-    string letter = 5;
-    string website = 6;
-    string desc = 7;
-    int32 sort = 8;
-    int32 spu_num = 9;
-    string created_at = 10;
-    string updated_at = 11;
+    int32 id = 1; //ID
+    string name = 2; //品牌名称
+    int64 shop_id = 3; //分店ID
+    int64 brand_type_id = 4; //品牌类型
+    string logo_url = 5; //LOGO
+    string letter = 6; //检索首字母
+    string website = 7; //品牌网站
+    string desc = 8; //描述
+    int32 sort = 9; //排序
+    int32 spu_count = 10; //商品数量
+    string created_at = 11; //创建时间
+    string updated_at = 12; //修改时间
+    BrandType brand_type =13;
 }
-
+// 商品品牌请求参数
 message BrandRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string keywords = 3;
-    int32 id = 4;
-    string name = 5;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int32 ids = 7;
+    int32 id = 8;
+    //以下为自定义参数
+    string name = 11; //品牌名称
+    int64 shop_id = 12; //分店ID
+    int64 brand_type_id = 13; //品牌类型
 }
-
+// 商品品牌响应数据
 message BrandResponse {
-    Brand  entity = 1;
+    string msg = 1;
     common.Pager pager = 2;
-    repeated Brand items = 3;
-    string info = 4;
+    Brand entity = 3;
+    repeated Brand items = 4;
 }

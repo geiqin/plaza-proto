@@ -1,53 +1,58 @@
 syntax = "proto3";
 package services;
-option go_package = "/.;services";
+option go_package ="/.;services";
 import "common/base.proto";
+import "baseInfoService.proto";
 
-
+// 商品分类服务
 service CategoryService {
-    rpc Create(Category) returns (CategoryResponse);
-    rpc Update(Category) returns (CategoryResponse);
-    rpc Delete (Category) returns (CategoryResponse);
-    rpc Get (Category) returns (CategoryResponse);
-    rpc Tree (CategoryRequest) returns (CategoryResponse);
-    rpc List (CategoryRequest) returns (CategoryResponse);
-    rpc Search (CategoryRequest) returns (CategoryResponse);
+    // 商品分类新增
+    rpc Create (Category) returns (CategoryResponse) {}
+    // 商品分类修改
+    rpc Update (Category) returns (CategoryResponse) {}
+    // 商品分类删除
+    rpc Delete (Category) returns (CategoryResponse) {}
+    // 商品分类获取
+    rpc Get (Category) returns (CategoryResponse) {}
+    // 商品分类列表
+    rpc List (CategoryRequest) returns (CategoryResponse) {}
+    // 商品分类列表树
+    rpc ListTree (CategoryRequest) returns (CategoryResponse) {}
+    // 商品分类选择树
+    rpc SelectTree (CategoryRequest) returns (CategoryResponse) {}
 }
-
+// 商品分类
 message Category {
-    int64 id = 1;
-    string code = 2;
-    string name = 3;
-    int64 parent_id = 4;
-    string path = 5;
-    int64 cover_id = 7;
-    string cover_url = 8;
-    string letter = 9;
-    string memo = 10;
-    int32 sort = 11;
-    string status = 12;
-    string created_at = 13;
-    string updated_at = 14;
-    Category parent = 15;
-    repeated Category children = 16;
+    int64 id = 1; //ID
+    string name = 2; //分类名称
+    int64 parent_id = 3; //上级ID
+    repeated int64 ancestors = 4; //祖级列表
+    string is_system = 5; //系统预设
+    int32 sort = 6; //排序
+    string created_at = 7; //创建时间
+    string updated_at = 8; //修改时间
+    repeated Category children =9;
 }
-
-
+// 商品分类请求参数
 message CategoryRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string keywords = 3;
-    int64 id = 4;
-    string name = 5;
-    string code = 6;
-    string letter = 7;
-    int64 parent_id = 12;
-    string status = 13;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string is_system = 11; //系统预设
+    string name = 12; //分类名称
+    int64 parent_id = 13; //上级ID
 }
-
+// 商品分类响应数据
 message CategoryResponse {
-    Category  entity = 1;
+    string msg = 1;
     common.Pager pager = 2;
-    repeated Category items = 3;
-    string info = 4;
+    Category entity = 3;
+    repeated Category items = 4;
+    repeated TreeNodeData select_tree = 5;
 }

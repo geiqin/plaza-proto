@@ -82,7 +82,7 @@ message Product {
     int64 volume =88;//体积
     string spec_desc =89;//规格描述
     string spec_data =90; //规格信息JSON
-    repeated SkuSpec spec =91; //规格信息列表
+    repeated SkuSpecInfo spec =91; //规格信息列表
     string goods_url =92;//商品URL
     string is_delete =93;//商品是否已删除（0否，1是）
 }

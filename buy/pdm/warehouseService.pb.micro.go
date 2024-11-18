@@ -43,20 +43,20 @@ func NewWarehouseServiceEndpoints() []*api.Endpoint {
 // Client API for WarehouseService service
 
 type WarehouseService interface {
-	//仓库仓库
+	// 仓库新增
 	Create(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
-	//仓库修改（可根据id和realstoreId来修改）
+	// 仓库修改
 	Update(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
-	//仓库删除（可根据id和realstoreId来删除）
+	// 仓库删除
 	Delete(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
-	//仓库获取（可根据id和realstoreId来获取）
+	// 仓库获取
 	Get(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
-	//获取默认仓库
+	// 仓库获取默认
 	GetDefault(ctx context.Context, in *Warehouse, opts ...client.CallOption) (*WarehouseResponse, error)
-	//仓库列表
-	List(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error)
-	//仓库查询
+	// 仓库查询
 	Search(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error)
+	// 仓库列表
+	List(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error)
 }
 
 type warehouseService struct {
@@ -121,8 +121,8 @@ func (c *warehouseService) GetDefault(ctx context.Context, in *Warehouse, opts .
 	return out, nil
 }
 
-func (c *warehouseService) List(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error) {
-	req := c.c.NewRequest(c.name, "WarehouseService.List", in)
+func (c *warehouseService) Search(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error) {
+	req := c.c.NewRequest(c.name, "WarehouseService.Search", in)
 	out := new(WarehouseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -131,8 +131,8 @@ func (c *warehouseService) List(ctx context.Context, in *WarehouseRequest, opts 
 	return out, nil
 }
 
-func (c *warehouseService) Search(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error) {
-	req := c.c.NewRequest(c.name, "WarehouseService.Search", in)
+func (c *warehouseService) List(ctx context.Context, in *WarehouseRequest, opts ...client.CallOption) (*WarehouseResponse, error) {
+	req := c.c.NewRequest(c.name, "WarehouseService.List", in)
 	out := new(WarehouseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -144,20 +144,20 @@ func (c *warehouseService) Search(ctx context.Context, in *WarehouseRequest, opt
 // Server API for WarehouseService service
 
 type WarehouseServiceHandler interface {
-	//仓库仓库
+	// 仓库新增
 	Create(context.Context, *Warehouse, *WarehouseResponse) error
-	//仓库修改（可根据id和realstoreId来修改）
+	// 仓库修改
 	Update(context.Context, *Warehouse, *WarehouseResponse) error
-	//仓库删除（可根据id和realstoreId来删除）
+	// 仓库删除
 	Delete(context.Context, *Warehouse, *WarehouseResponse) error
-	//仓库获取（可根据id和realstoreId来获取）
+	// 仓库获取
 	Get(context.Context, *Warehouse, *WarehouseResponse) error
-	//获取默认仓库
+	// 仓库获取默认
 	GetDefault(context.Context, *Warehouse, *WarehouseResponse) error
-	//仓库列表
-	List(context.Context, *WarehouseRequest, *WarehouseResponse) error
-	//仓库查询
+	// 仓库查询
 	Search(context.Context, *WarehouseRequest, *WarehouseResponse) error
+	// 仓库列表
+	List(context.Context, *WarehouseRequest, *WarehouseResponse) error
 }
 
 func RegisterWarehouseServiceHandler(s server.Server, hdlr WarehouseServiceHandler, opts ...server.HandlerOption) error {
@@ -167,8 +167,8 @@ func RegisterWarehouseServiceHandler(s server.Server, hdlr WarehouseServiceHandl
 		Delete(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		Get(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
 		GetDefault(ctx context.Context, in *Warehouse, out *WarehouseResponse) error
-		List(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error
 		Search(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error
+		List(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error
 	}
 	type WarehouseService struct {
 		warehouseService
@@ -201,10 +201,10 @@ func (h *warehouseServiceHandler) GetDefault(ctx context.Context, in *Warehouse,
 	return h.WarehouseServiceHandler.GetDefault(ctx, in, out)
 }
 
-func (h *warehouseServiceHandler) List(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error {
-	return h.WarehouseServiceHandler.List(ctx, in, out)
-}
-
 func (h *warehouseServiceHandler) Search(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error {
 	return h.WarehouseServiceHandler.Search(ctx, in, out)
+}
+
+func (h *warehouseServiceHandler) List(ctx context.Context, in *WarehouseRequest, out *WarehouseResponse) error {
+	return h.WarehouseServiceHandler.List(ctx, in, out)
 }

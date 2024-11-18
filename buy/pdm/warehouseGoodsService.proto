@@ -2,6 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
+import "baseInfoService.proto";
 import "spuService.proto";
 import "warehouseService.proto";
 
@@ -35,15 +36,10 @@ message WarehouseGoodsSpec {
     int64 spu_id =4;//商品id
     string md5_key =5;//MD5Key
     int64  inventory =6;//库存
-    repeated GoodsSpecValueItem spec =7;//规格值
+    repeated SkuSpecInfo spec =7;//规格值
     string created_at = 8;
     string updated_at = 9;
     string spec_text =10;
-}
-
-message GoodsSpecValueItem{
-    string type =1;
-    string value =2;
 }
 
 message WarehouseGoodsRequest {
@@ -58,12 +54,12 @@ message WarehouseGoodsRequest {
     int64 category_id =9;//商品分类ID
     int32 brand_id =10;//品牌ID
     int64 shop_id =11;//分店ID
-    int64 term_id =12;
+    int64 group_id =12;
     string title =13;//商品标题
     string keywords =14;//商品标题
     repeated int64 ids = 15;
     repeated int64 spu_ids = 16;
-    repeated int64 term_ids = 17;
+    repeated int64 group_ids = 17;
 }
 
 message WarehouseGoodsResponse {

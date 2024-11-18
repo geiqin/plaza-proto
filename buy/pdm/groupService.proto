@@ -1,0 +1,80 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+// 商品分组服务
+service GroupService {
+    // 商品分组新增
+    rpc Create (Group) returns (GroupResponse) {}
+    // 商品分组修改
+    rpc Update (Group) returns (GroupResponse) {}
+    // 商品分组删除
+    rpc Delete (Group) returns (GroupResponse) {}
+    // 商品分组获取
+    rpc Get (Group) returns (GroupResponse) {}
+    // 商品分组列表
+    rpc List (GroupRequest) returns (GroupResponse) {}
+    // 商品分组列表树
+    rpc ListTree (GroupRequest) returns (GroupResponse) {}
+    // 商品分组选择树
+    rpc SelectTree (GroupRequest) returns (GroupResponse) {}
+}
+
+// 商品分组
+message Group {
+    int64 id = 1; //ID
+    int64 parent_id = 2; //父节点
+    repeated int64 ancestors = 3; //祖级列表
+    string name = 4; //名称
+    string alias = 5; //别名
+    string vice_name = 6; //副名称
+    string describe = 7; //描述
+    string icon_url = 8; //图标
+    string bg_color = 9; //背景色
+    string list_style = 10; //列表样式
+    int32 home_show_limit = 11; //首页显示数量
+    string is_show_search = 12; //显示搜索框
+    string is_show_name = 13; //显示商品名
+    string is_show_price = 14; //显示价格
+    string is_show_cart_btn = 15; //显示购买按钮
+    string cart_btn_style = 16; //购买按钮样式
+    string is_open_filter = 17; //开启分组筛选
+    string seo_title = 18; //SEO标题
+    string seo_keywords = 19; //SEO关键词
+    string seo_desc = 20; //SEO描述
+    int32 sort = 21; //排序
+    string is_system = 22; //系统预设
+    string status = 23; //显示状态
+    string created_at = 24; //创建时间
+    string updated_at = 25; //修改时间
+    repeated Group children =26;
+}
+
+// 商品分组请求参数
+message GroupRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    int64 parent_id = 11; //父节点
+    string name = 12; //名称
+    string alias = 13; //别名
+    string status = 14; //显示状态
+    string is_system = 15; //系统预设
+}
+
+// 商品分组响应数据
+message GroupResponse {
+    string msg = 1;
+    common.Pager pager = 2;
+    Group entity = 3;
+    repeated Group items = 4;
+    repeated TreeNodeData select_tree = 5;
+}

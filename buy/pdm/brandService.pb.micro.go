@@ -43,12 +43,18 @@ func NewBrandServiceEndpoints() []*api.Endpoint {
 // Client API for BrandService service
 
 type BrandService interface {
+	// 商品品牌新增
 	Create(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
+	// 商品品牌修改
 	Update(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
+	// 商品品牌删除
 	Delete(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
+	// 商品品牌获取
 	Get(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
-	List(ctx context.Context, in *BrandRequest, opts ...client.CallOption) (*BrandResponse, error)
+	// 商品品牌查询
 	Search(ctx context.Context, in *BrandRequest, opts ...client.CallOption) (*BrandResponse, error)
+	// 商品品牌列表
+	List(ctx context.Context, in *BrandRequest, opts ...client.CallOption) (*BrandResponse, error)
 }
 
 type brandService struct {
@@ -103,8 +109,8 @@ func (c *brandService) Get(ctx context.Context, in *Brand, opts ...client.CallOp
 	return out, nil
 }
 
-func (c *brandService) List(ctx context.Context, in *BrandRequest, opts ...client.CallOption) (*BrandResponse, error) {
-	req := c.c.NewRequest(c.name, "BrandService.List", in)
+func (c *brandService) Search(ctx context.Context, in *BrandRequest, opts ...client.CallOption) (*BrandResponse, error) {
+	req := c.c.NewRequest(c.name, "BrandService.Search", in)
 	out := new(BrandResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -113,8 +119,8 @@ func (c *brandService) List(ctx context.Context, in *BrandRequest, opts ...clien
 	return out, nil
 }
 
-func (c *brandService) Search(ctx context.Context, in *BrandRequest, opts ...client.CallOption) (*BrandResponse, error) {
-	req := c.c.NewRequest(c.name, "BrandService.Search", in)
+func (c *brandService) List(ctx context.Context, in *BrandRequest, opts ...client.CallOption) (*BrandResponse, error) {
+	req := c.c.NewRequest(c.name, "BrandService.List", in)
 	out := new(BrandResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -126,12 +132,18 @@ func (c *brandService) Search(ctx context.Context, in *BrandRequest, opts ...cli
 // Server API for BrandService service
 
 type BrandServiceHandler interface {
+	// 商品品牌新增
 	Create(context.Context, *Brand, *BrandResponse) error
+	// 商品品牌修改
 	Update(context.Context, *Brand, *BrandResponse) error
+	// 商品品牌删除
 	Delete(context.Context, *Brand, *BrandResponse) error
+	// 商品品牌获取
 	Get(context.Context, *Brand, *BrandResponse) error
-	List(context.Context, *BrandRequest, *BrandResponse) error
+	// 商品品牌查询
 	Search(context.Context, *BrandRequest, *BrandResponse) error
+	// 商品品牌列表
+	List(context.Context, *BrandRequest, *BrandResponse) error
 }
 
 func RegisterBrandServiceHandler(s server.Server, hdlr BrandServiceHandler, opts ...server.HandlerOption) error {
@@ -140,8 +152,8 @@ func RegisterBrandServiceHandler(s server.Server, hdlr BrandServiceHandler, opts
 		Update(ctx context.Context, in *Brand, out *BrandResponse) error
 		Delete(ctx context.Context, in *Brand, out *BrandResponse) error
 		Get(ctx context.Context, in *Brand, out *BrandResponse) error
-		List(ctx context.Context, in *BrandRequest, out *BrandResponse) error
 		Search(ctx context.Context, in *BrandRequest, out *BrandResponse) error
+		List(ctx context.Context, in *BrandRequest, out *BrandResponse) error
 	}
 	type BrandService struct {
 		brandService
@@ -170,10 +182,10 @@ func (h *brandServiceHandler) Get(ctx context.Context, in *Brand, out *BrandResp
 	return h.BrandServiceHandler.Get(ctx, in, out)
 }
 
-func (h *brandServiceHandler) List(ctx context.Context, in *BrandRequest, out *BrandResponse) error {
-	return h.BrandServiceHandler.List(ctx, in, out)
-}
-
 func (h *brandServiceHandler) Search(ctx context.Context, in *BrandRequest, out *BrandResponse) error {
 	return h.BrandServiceHandler.Search(ctx, in, out)
+}
+
+func (h *brandServiceHandler) List(ctx context.Context, in *BrandRequest, out *BrandResponse) error {
+	return h.BrandServiceHandler.List(ctx, in, out)
 }

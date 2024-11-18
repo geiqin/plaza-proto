@@ -1,0 +1,49 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+// 品牌分组服务
+service BrandTypeService {
+    // 品牌分组新增
+    rpc Create (BrandType) returns (BrandTypeResponse) {}
+    // 品牌分组修改
+    rpc Update (BrandType) returns (BrandTypeResponse) {}
+    // 品牌分组删除
+    rpc Delete (BrandType) returns (BrandTypeResponse) {}
+    // 品牌分组获取
+    rpc Get (BrandType) returns (BrandTypeResponse) {}
+    // 品牌分组查询
+    rpc Search (BrandTypeRequest) returns (BrandTypeResponse) {}
+    // 品牌分组列表
+    rpc List (BrandTypeRequest) returns (BrandTypeResponse) {}
+}
+// 品牌分组
+message BrandType {
+    int32 id = 1; //ID
+    string name = 2; //名称
+    string icon_url = 3; //图标
+    int32 sort = 4; //排序
+    string created_at = 5; //创建时间
+    string updated_at = 6; //修改时间
+}
+// 品牌分组请求参数
+message BrandTypeRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int32 ids = 7;
+    int32 id = 8;
+    //以下为自定义参数
+    string name = 11; //名称
+}
+// 品牌分组响应数据
+message BrandTypeResponse {
+    string msg = 1;
+    common.Pager pager = 2;
+    BrandType entity = 3;
+    repeated BrandType items = 4;
+}

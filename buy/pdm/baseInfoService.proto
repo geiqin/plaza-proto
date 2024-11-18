@@ -2,6 +2,43 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 
+//SPU规格数据
+message SpuSpecType{
+    int64 id = 1;
+    int64 spec_id = 2;
+    string spec_name =3;
+    bool is_image =4;
+    repeated value values =5;
+    message value {
+        string spec_value =1;
+        int64 image_id =2;
+        string image_url =3;
+    }
+}
+
+//SKU规格信息
+message SkuSpecInfo{
+    string type =1;
+    string value =2;
+}
+
+// SKU额外字段
+message SkuExtraInfo{
+    int64 coupon_id =1;
+    int64 application_id =2;
+    int64 application_version_id =3;
+    int64 hotel_room_id =4;
+    int64 course_id =5;
+}
+
+
+message TreeNodeData{
+    int64 key =1;//ID
+    int64 parentId =2;//父ID
+    string title =3;//标题
+    int32 sort =4;//排序
+    repeated TreeNodeData children =5;
+}
 
 message GoodsSpecBase{
     string title =1;
@@ -25,35 +62,6 @@ message GoodsSpecChooseValue{
     int64 inventory =3;
     string is_only_level_one =4;
 }
-
-message GoodsParameter{
-    string title =1;
-    repeated string values = 2;
-}
-
-message SkuSpec{
-    string type =1;
-    string value =2;
-}
-
-message SpecTypeProperty{
-    int64 spec_id = 1;
-    string spec_name =2;
-    repeated value values =3;
-    message value {
-        string name =1;
-        int64 image_id =2;
-        string image_url =3;
-    }
-}
-
-message SpecificationData{
-    int32 spec_id = 1;
-    string spec_name =2;
-    string spec_value =3;
-    string image_url =4;
-}
-
 
 message CommentScore{
     float avg =1;

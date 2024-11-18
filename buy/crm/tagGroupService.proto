@@ -1,0 +1,56 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "tagService.proto";
+
+// 客户标签组服务
+service TagGroupService {
+  // 客户标签组新增
+  rpc Create (TagGroup) returns (TagGroupResponse) {}
+  // 客户标签组修改
+  rpc Update (TagGroup) returns (TagGroupResponse) {}
+  // 客户标签组删除
+  rpc Delete (TagGroup) returns (TagGroupResponse) {}
+  // 客户标签组获取
+  rpc Get (TagGroup) returns (TagGroupResponse) {}
+  // 客户标签组查询
+  rpc Search (TagGroupRequest) returns (TagGroupResponse) {}
+  // 客户标签组列表
+  rpc List (TagGroupRequest) returns (TagGroupResponse) {}
+}
+// 客户标签组
+message TagGroup {
+  int64 id = 1; //ID
+  string name = 2; //标签组名称
+  string add_rule = 3; //添加规则
+  string is_hand_add = 4; //手动打标
+  string is_auto_add = 5; //自动打标
+  string status = 6; //状态
+  string created_at = 7; //创建时间
+  string updated_at = 8; //修改时间
+  repeated Tag tags =9;
+}
+// 客户标签组请求参数
+message TagGroupRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string name = 11; //标签组名称
+  string is_hand_add = 12; //手动打标
+  string is_auto_add = 13; //自动打标
+  string status = 14; //状态
+}
+// 客户标签组响应数据
+message TagGroupResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  TagGroup entity = 3;
+  repeated TagGroup items = 4;
+}

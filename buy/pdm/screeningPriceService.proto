@@ -1,41 +1,52 @@
 syntax = "proto3";
 package services;
-option go_package = "/.;services";
+option go_package ="/.;services";
 import "common/base.proto";
-
-
+// 价格筛选服务
 service ScreeningPriceService {
-    rpc Create (ScreeningPrice) returns (ScreeningPriceResponse);
-    rpc Update (ScreeningPrice) returns (ScreeningPriceResponse);
-    rpc Delete (ScreeningPrice) returns (ScreeningPriceResponse);
-    rpc Get (ScreeningPrice) returns (ScreeningPriceResponse);
-    rpc Search (ScreeningPriceRequest) returns (ScreeningPriceResponse);
+    // 价格筛选新增
+    rpc Create (ScreeningPrice) returns (ScreeningPriceResponse) {}
+    // 价格筛选修改
+    rpc Update (ScreeningPrice) returns (ScreeningPriceResponse) {}
+    // 价格筛选删除
+    rpc Delete (ScreeningPrice) returns (ScreeningPriceResponse) {}
+    // 价格筛选获取
+    rpc Get (ScreeningPrice) returns (ScreeningPriceResponse) {}
+    // 价格筛选查询
+    rpc Search (ScreeningPriceRequest) returns (ScreeningPriceResponse) {}
+    // 价格筛选列表
+    rpc List (ScreeningPriceRequest) returns (ScreeningPriceResponse) {}
 }
-
+// 价格筛选
 message ScreeningPrice {
-    int64 id = 1;
-    string name = 2;
-    int64 parent_id = 3;
-    string logo_url = 4;
-    int64 min_price = 5;
-    int64 max_price = 6;
-    string is_enable = 7;
-    int32 sort = 8;
-    string created_at = 10;
-    string updated_at = 11;
+    int64 id = 1; //ID
+    string name = 2; //名称
+    int64 min_price = 3; //最小价格
+    int64 max_price = 4; //最大价格
+    int32 sort = 5; //顺序
+    string desc = 6; //描述
+    string is_enable = 7; //是否启用
+    string created_at = 8; //创建时间
+    string updated_at = 9; //修改时间
 }
-
+// 价格筛选请求参数
 message ScreeningPriceRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string keywords = 3;
-    int32 id = 4;
-    string name = 5;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string name = 11; //名称
+    string is_enable = 12; //是否启用
 }
-
+// 价格筛选响应数据
 message ScreeningPriceResponse {
-    ScreeningPrice  entity = 1;
+    string msg = 1;
     common.Pager pager = 2;
-    repeated ScreeningPrice items = 3;
-    string info = 4;
+    ScreeningPrice entity = 3;
+    repeated ScreeningPrice items = 4;
 }

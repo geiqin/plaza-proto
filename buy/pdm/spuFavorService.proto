@@ -1,41 +1,50 @@
 syntax = "proto3";
 package services;
-option go_package = "/.;services";
+option go_package ="/.;services";
 import "common/base.proto";
 import "spuService.proto";
 
-
+// 商品收藏服务
 service SpuFavorService {
-    rpc Collect (SpuFavor) returns (SpuFavorCollectResponse);
-    rpc Count (SpuFavorRequest) returns (SpuFavorResponse);
-    rpc Search (SpuFavorRequest) returns (SpuFavorResponse);
+    // 商品收藏新增
+    rpc Collect (SpuFavor) returns (SpuFavorResponse) {}
+    // 商品收藏删除
+    rpc Delete (SpuFavor) returns (SpuFavorResponse) {}
+    // 商品收藏获取
+    rpc Get (SpuFavor) returns (SpuFavorResponse) {}
+    // 商品收藏查询
+    rpc Search (SpuFavorRequest) returns (SpuFavorResponse) {}
+    // 商品收藏统计
+    rpc Count (SpuFavorRequest) returns (SpuFavorResponse) {}
 }
-
+// 商品收藏
 message SpuFavor {
-    int64 id = 1;
-    int64 member_id = 2;
-    int64 spu_id = 3;
-    string created_at = 4;
-    string updated_at = 5;
+    int64 id = 1; //ID
+    int64 member_id = 2; //会员ID
+    int64 spu_id = 3; //所属商品
+    string created_at = 4; //创建时间
+    string updated_at = 5; //修改时间
     Spu spu = 6;
 }
-
+// 商品收藏请求参数
 message SpuFavorRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string keywords = 3;
-    int64 id = 4;
-    int64 member_id = 5;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    int64 member_id = 11; //会员ID
+    int64 spu_id = 12; //所属商品
 }
-
+// 商品收藏响应数据
 message SpuFavorResponse {
-    int64 count = 1;
+    string msg = 1;
     common.Pager pager = 2;
-    repeated SpuFavor items = 3;
-}
-
-message SpuFavorCollectResponse {
-    int32 count = 1;
-    string status = 2;
-    string text = 3;
+    SpuFavor entity = 3;
+    repeated SpuFavor items = 4;
+    int64 count = 5;
 }

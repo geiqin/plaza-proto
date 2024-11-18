@@ -43,13 +43,20 @@ func NewCategoryServiceEndpoints() []*api.Endpoint {
 // Client API for CategoryService service
 
 type CategoryService interface {
+	// 商品分类新增
 	Create(ctx context.Context, in *Category, opts ...client.CallOption) (*CategoryResponse, error)
+	// 商品分类修改
 	Update(ctx context.Context, in *Category, opts ...client.CallOption) (*CategoryResponse, error)
+	// 商品分类删除
 	Delete(ctx context.Context, in *Category, opts ...client.CallOption) (*CategoryResponse, error)
+	// 商品分类获取
 	Get(ctx context.Context, in *Category, opts ...client.CallOption) (*CategoryResponse, error)
-	Tree(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error)
+	// 商品分类列表
 	List(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error)
-	Search(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error)
+	// 商品分类列表树
+	ListTree(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error)
+	// 商品分类选择树
+	SelectTree(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error)
 }
 
 type categoryService struct {
@@ -104,16 +111,6 @@ func (c *categoryService) Get(ctx context.Context, in *Category, opts ...client.
 	return out, nil
 }
 
-func (c *categoryService) Tree(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error) {
-	req := c.c.NewRequest(c.name, "CategoryService.Tree", in)
-	out := new(CategoryResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *categoryService) List(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error) {
 	req := c.c.NewRequest(c.name, "CategoryService.List", in)
 	out := new(CategoryResponse)
@@ -124,8 +121,18 @@ func (c *categoryService) List(ctx context.Context, in *CategoryRequest, opts ..
 	return out, nil
 }
 
-func (c *categoryService) Search(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error) {
-	req := c.c.NewRequest(c.name, "CategoryService.Search", in)
+func (c *categoryService) ListTree(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error) {
+	req := c.c.NewRequest(c.name, "CategoryService.ListTree", in)
+	out := new(CategoryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *categoryService) SelectTree(ctx context.Context, in *CategoryRequest, opts ...client.CallOption) (*CategoryResponse, error) {
+	req := c.c.NewRequest(c.name, "CategoryService.SelectTree", in)
 	out := new(CategoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -137,13 +144,20 @@ func (c *categoryService) Search(ctx context.Context, in *CategoryRequest, opts 
 // Server API for CategoryService service
 
 type CategoryServiceHandler interface {
+	// 商品分类新增
 	Create(context.Context, *Category, *CategoryResponse) error
+	// 商品分类修改
 	Update(context.Context, *Category, *CategoryResponse) error
+	// 商品分类删除
 	Delete(context.Context, *Category, *CategoryResponse) error
+	// 商品分类获取
 	Get(context.Context, *Category, *CategoryResponse) error
-	Tree(context.Context, *CategoryRequest, *CategoryResponse) error
+	// 商品分类列表
 	List(context.Context, *CategoryRequest, *CategoryResponse) error
-	Search(context.Context, *CategoryRequest, *CategoryResponse) error
+	// 商品分类列表树
+	ListTree(context.Context, *CategoryRequest, *CategoryResponse) error
+	// 商品分类选择树
+	SelectTree(context.Context, *CategoryRequest, *CategoryResponse) error
 }
 
 func RegisterCategoryServiceHandler(s server.Server, hdlr CategoryServiceHandler, opts ...server.HandlerOption) error {
@@ -152,9 +166,9 @@ func RegisterCategoryServiceHandler(s server.Server, hdlr CategoryServiceHandler
 		Update(ctx context.Context, in *Category, out *CategoryResponse) error
 		Delete(ctx context.Context, in *Category, out *CategoryResponse) error
 		Get(ctx context.Context, in *Category, out *CategoryResponse) error
-		Tree(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error
 		List(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error
-		Search(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error
+		ListTree(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error
+		SelectTree(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error
 	}
 	type CategoryService struct {
 		categoryService
@@ -183,14 +197,14 @@ func (h *categoryServiceHandler) Get(ctx context.Context, in *Category, out *Cat
 	return h.CategoryServiceHandler.Get(ctx, in, out)
 }
 
-func (h *categoryServiceHandler) Tree(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error {
-	return h.CategoryServiceHandler.Tree(ctx, in, out)
-}
-
 func (h *categoryServiceHandler) List(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error {
 	return h.CategoryServiceHandler.List(ctx, in, out)
 }
 
-func (h *categoryServiceHandler) Search(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error {
-	return h.CategoryServiceHandler.Search(ctx, in, out)
+func (h *categoryServiceHandler) ListTree(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error {
+	return h.CategoryServiceHandler.ListTree(ctx, in, out)
+}
+
+func (h *categoryServiceHandler) SelectTree(ctx context.Context, in *CategoryRequest, out *CategoryResponse) error {
+	return h.CategoryServiceHandler.SelectTree(ctx, in, out)
 }

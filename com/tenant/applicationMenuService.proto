@@ -53,7 +53,7 @@ message ApplicationMenuRequest {
     int32 application_id =7;
     int64 parent_id =8;
     string application_code = 9;
-    string is_admin =11;
+    string status =11;
     string is_plugin =12;
     int32  plugin_id =13;
     repeated int64 ids = 16;

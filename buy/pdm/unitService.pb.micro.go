@@ -43,12 +43,18 @@ func NewUnitServiceEndpoints() []*api.Endpoint {
 // Client API for UnitService service
 
 type UnitService interface {
+	// 单位库新增
 	Create(ctx context.Context, in *Unit, opts ...client.CallOption) (*UnitResponse, error)
+	// 单位库修改
 	Update(ctx context.Context, in *Unit, opts ...client.CallOption) (*UnitResponse, error)
+	// 单位库删除
 	Delete(ctx context.Context, in *Unit, opts ...client.CallOption) (*UnitResponse, error)
+	// 单位库获取
 	Get(ctx context.Context, in *Unit, opts ...client.CallOption) (*UnitResponse, error)
-	List(ctx context.Context, in *UnitRequest, opts ...client.CallOption) (*UnitResponse, error)
+	// 单位库查询
 	Search(ctx context.Context, in *UnitRequest, opts ...client.CallOption) (*UnitResponse, error)
+	// 单位库列表
+	List(ctx context.Context, in *UnitRequest, opts ...client.CallOption) (*UnitResponse, error)
 }
 
 type unitService struct {
@@ -103,8 +109,8 @@ func (c *unitService) Get(ctx context.Context, in *Unit, opts ...client.CallOpti
 	return out, nil
 }
 
-func (c *unitService) List(ctx context.Context, in *UnitRequest, opts ...client.CallOption) (*UnitResponse, error) {
-	req := c.c.NewRequest(c.name, "UnitService.List", in)
+func (c *unitService) Search(ctx context.Context, in *UnitRequest, opts ...client.CallOption) (*UnitResponse, error) {
+	req := c.c.NewRequest(c.name, "UnitService.Search", in)
 	out := new(UnitResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -113,8 +119,8 @@ func (c *unitService) List(ctx context.Context, in *UnitRequest, opts ...client.
 	return out, nil
 }
 
-func (c *unitService) Search(ctx context.Context, in *UnitRequest, opts ...client.CallOption) (*UnitResponse, error) {
-	req := c.c.NewRequest(c.name, "UnitService.Search", in)
+func (c *unitService) List(ctx context.Context, in *UnitRequest, opts ...client.CallOption) (*UnitResponse, error) {
+	req := c.c.NewRequest(c.name, "UnitService.List", in)
 	out := new(UnitResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -126,12 +132,18 @@ func (c *unitService) Search(ctx context.Context, in *UnitRequest, opts ...clien
 // Server API for UnitService service
 
 type UnitServiceHandler interface {
+	// 单位库新增
 	Create(context.Context, *Unit, *UnitResponse) error
+	// 单位库修改
 	Update(context.Context, *Unit, *UnitResponse) error
+	// 单位库删除
 	Delete(context.Context, *Unit, *UnitResponse) error
+	// 单位库获取
 	Get(context.Context, *Unit, *UnitResponse) error
-	List(context.Context, *UnitRequest, *UnitResponse) error
+	// 单位库查询
 	Search(context.Context, *UnitRequest, *UnitResponse) error
+	// 单位库列表
+	List(context.Context, *UnitRequest, *UnitResponse) error
 }
 
 func RegisterUnitServiceHandler(s server.Server, hdlr UnitServiceHandler, opts ...server.HandlerOption) error {
@@ -140,8 +152,8 @@ func RegisterUnitServiceHandler(s server.Server, hdlr UnitServiceHandler, opts .
 		Update(ctx context.Context, in *Unit, out *UnitResponse) error
 		Delete(ctx context.Context, in *Unit, out *UnitResponse) error
 		Get(ctx context.Context, in *Unit, out *UnitResponse) error
-		List(ctx context.Context, in *UnitRequest, out *UnitResponse) error
 		Search(ctx context.Context, in *UnitRequest, out *UnitResponse) error
+		List(ctx context.Context, in *UnitRequest, out *UnitResponse) error
 	}
 	type UnitService struct {
 		unitService
@@ -170,10 +182,10 @@ func (h *unitServiceHandler) Get(ctx context.Context, in *Unit, out *UnitRespons
 	return h.UnitServiceHandler.Get(ctx, in, out)
 }
 
-func (h *unitServiceHandler) List(ctx context.Context, in *UnitRequest, out *UnitResponse) error {
-	return h.UnitServiceHandler.List(ctx, in, out)
-}
-
 func (h *unitServiceHandler) Search(ctx context.Context, in *UnitRequest, out *UnitResponse) error {
 	return h.UnitServiceHandler.Search(ctx, in, out)
+}
+
+func (h *unitServiceHandler) List(ctx context.Context, in *UnitRequest, out *UnitResponse) error {
+	return h.UnitServiceHandler.List(ctx, in, out)
 }

@@ -1,65 +1,74 @@
 syntax = "proto3";
 package services;
-option go_package = "/.;services";
+option go_package ="/.;services";
 import "common/base.proto";
-
+// 仓库服务
 service WarehouseService {
-    //仓库仓库
+    // 仓库新增
     rpc Create (Warehouse) returns (WarehouseResponse) {}
-    //仓库修改（可根据id和realstoreId来修改）
+    // 仓库修改
     rpc Update (Warehouse) returns (WarehouseResponse) {}
-    //仓库删除（可根据id和realstoreId来删除）
+    // 仓库删除
     rpc Delete (Warehouse) returns (WarehouseResponse) {}
-    //仓库获取（可根据id和realstoreId来获取）
+    // 仓库获取
     rpc Get (Warehouse) returns (WarehouseResponse) {}
-    //获取默认仓库
+    // 仓库获取默认
     rpc GetDefault (Warehouse) returns (WarehouseResponse) {}
-    //仓库列表
-    rpc List (WarehouseRequest) returns (WarehouseResponse) {}
-    //仓库查询
+    // 仓库查询
     rpc Search (WarehouseRequest) returns (WarehouseResponse) {}
+    // 仓库列表
+    rpc List (WarehouseRequest) returns (WarehouseResponse) {}
 }
-
+// 仓库
 message Warehouse {
-    int64  id =1;//ID
-    string name =2;//名称
-    string alias =3;//别名
-    int32  level =4;//权重（数字越大权重越高）
-    string contact_name =5;//联系人姓名
-    string contact_tel =6;//联系电话
-    int64  province_id =7;//所在省
-    int64  city_id =8;//所在市
-    int64  county_id =9;//所在县/区
-    string address =10;//详细地址
-    float  lng =11;//经度
-    float  lat =12;//纬度
-    string is_enable =13;//是否启用（0否，1是）
-    string is_default =14;//是否默认（0否，1是）
-    int64  realstore_id =15;//门店ID
-    string created_at = 16;
-    string updated_at = 17;
-    string province_name = 18;
-    string city_name = 19;
-    string county_name = 20;
+    int64 id = 1; //ID
+    string name = 2; //名称
+    string alias = 3; //别名
+    int32 level = 4; //权重
+    string contact_name = 5; //联系人姓名
+    string contact_tel = 6; //联系电话
+    int64 province_id = 7; //所在省
+    int64 city_id = 8; //所在市
+    int64 county_id = 9; //所在县
+    string address = 10; //详细地址
+    float lng = 11; //经度
+    float lat = 12; //纬度
+    string is_enable = 13; //是否启用
+    string is_default = 14; //是否默认
+    int64 realstore_id = 15; //门店ID
+    string created_at = 16; //创建时间
+    string updated_at = 17; //修改时间
+    string province_name = 18; //所在省名
+    string city_name = 19; //所在市名
+    string county_name = 20; //所在县名
 }
-
+// 仓库请求参数
 message WarehouseRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string sorting = 3;
-    int64 id = 4;
-    string alias = 5;
-    string name = 6;
-    string is_enable = 7;
-    string is_default = 8;
-    int64 realstore_id = 9;
-    repeated int64 ids = 10;
-    repeated int64 realstore_ids = 11;
-}
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string name = 11; //名称
+    string alias = 12; //别名
+    string contact_name = 13; //联系人姓名
+    int64 province_id = 14; //所在省
+    int64 city_id = 15; //所在市
+    int64 county_id = 16; //所在县
+    string address = 17; //详细地址
+    string is_enable = 18; //是否启用
+    string is_default = 19; //是否默认
+    int64 realstore_id = 20; //门店ID
 
+}
+// 仓库响应数据
 message WarehouseResponse {
-    Warehouse entity = 1;
-    common.Pager pager =2;
-    repeated Warehouse items = 3;
-    string info =4;
+    string msg = 1;
+    common.Pager pager = 2;
+    Warehouse entity = 3;
+    repeated Warehouse items = 4;
 }

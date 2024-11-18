@@ -1,0 +1,60 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 属性库服务
+service AttributeService {
+    // 属性库新增
+    rpc Create (Attribute) returns (AttributeResponse) {}
+    // 属性库修改
+    rpc Update (Attribute) returns (AttributeResponse) {}
+    // 属性库删除
+    rpc Delete (Attribute) returns (AttributeResponse) {}
+    // 属性库获取
+    rpc Get (Attribute) returns (AttributeResponse) {}
+    // 属性库查询
+    rpc Search (AttributeRequest) returns (AttributeResponse) {}
+    // 属性库列表
+    rpc List (AttributeRequest) returns (AttributeResponse) {}
+}
+// 属性库
+message Attribute {
+    int64 id = 1; //ID
+    string name = 2; //属性项名
+    string is_buy_show = 3; //下单页展示
+    string is_multi_value = 4; //属性值多选
+    string is_required = 5; //属性值必选
+    repeated AttributeValue values = 6; //属性值列表
+    int32 spu_count = 7; //商品数量
+    string created_at = 8; //创建时间
+    string updated_at = 9; //修改时间
+}
+
+message AttributeValue {
+    string name = 1;
+    int64 add_price = 2;
+}
+
+// 属性库请求参数
+message AttributeRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string name = 11; //属性项名
+    string is_buy_show = 12; //下单页展示
+    string is_multi_value = 13; //属性值多选
+    string is_required = 14; //属性值必选
+}
+// 属性库响应数据
+message AttributeResponse {
+    string msg = 1;
+    common.Pager pager = 2;
+    Attribute entity = 3;
+    repeated Attribute items = 4;
+}

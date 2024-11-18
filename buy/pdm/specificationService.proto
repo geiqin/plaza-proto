@@ -1,0 +1,57 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 多规格服务
+service SpecificationService {
+  // 多规格新增
+  rpc Create (Specification) returns (SpecificationResponse) {}
+  // 多规格修改
+  rpc Update (Specification) returns (SpecificationResponse) {}
+  // 多规格删除
+  rpc Delete (Specification) returns (SpecificationResponse) {}
+  // 多规格获取
+  rpc Get (Specification) returns (SpecificationResponse) {}
+  // 多规格查询
+  rpc Search (SpecificationRequest) returns (SpecificationResponse) {}
+  // 多规格列表
+  rpc List (SpecificationRequest) returns (SpecificationResponse) {}
+  // 多规格值新增
+  rpc AddValue (SpecificationValueRequest) returns (SpecificationResponse) {}
+}
+// 多规格
+message Specification {
+  int64 id = 1; //ID
+  string name = 2; //规格名称
+  repeated string values = 3; //规格值
+  int32 sort = 4; //排序
+  string created_at = 5; //创建时间
+  string updated_at = 6; //修改时间
+}
+// 多规格请求参数
+message SpecificationRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string name = 11; //规格名称
+}
+
+// 多规格值请求参数
+message SpecificationValueRequest {
+  int64 specification_id = 1; //ID
+  string specification_value = 2; //规格值
+}
+
+// 多规格响应数据
+message SpecificationResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  Specification entity = 3;
+  repeated Specification items = 4;
+}

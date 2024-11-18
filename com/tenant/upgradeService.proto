@@ -4,10 +4,12 @@ option go_package ="/.;services";
 
 //升级数据库
 service UpgradeService {
-    //升级店铺
-    rpc Store (UpgradeRequest) returns (UpgradeResponse) {}
-    //升级平台库
-    rpc Master (UpgradeRequest) returns (UpgradeResponse) {}
+    //升级数据库
+    rpc Database (UpgradeRequest) returns (UpgradeResponse) {}
+    //升级菜单
+    rpc Menu (UpgradeRequest) returns (UpgradeResponse) {}
+    //初始化数据
+    rpc InitData (UpgradeRequest) returns (UpgradeResponse) {}
     //重置数据
     rpc Reset (UpgradeRequest) returns (UpgradeResponse) {}
 }
@@ -23,5 +25,5 @@ message UpgradeRequest{
 }
 
 message UpgradeResponse {
-    string info =1;
+    string msg =1;
 }

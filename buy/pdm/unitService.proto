@@ -1,49 +1,55 @@
 syntax = "proto3";
 package services;
-option go_package = "/.;services";
+option go_package ="/.;services";
 import "common/base.proto";
-
-
+// 单位库服务
 service UnitService {
-    rpc Create(Unit) returns (UnitResponse);
-    rpc Update(Unit) returns (UnitResponse);
-    rpc Delete (Unit) returns (UnitResponse);
-    rpc Get (Unit) returns (UnitResponse);
-    rpc List (UnitRequest) returns (UnitResponse);
-    rpc Search (UnitRequest) returns (UnitResponse);
+    // 单位库新增
+    rpc Create (Unit) returns (UnitResponse) {}
+    // 单位库修改
+    rpc Update (Unit) returns (UnitResponse) {}
+    // 单位库删除
+    rpc Delete (Unit) returns (UnitResponse) {}
+    // 单位库获取
+    rpc Get (Unit) returns (UnitResponse) {}
+    // 单位库查询
+    rpc Search (UnitRequest) returns (UnitResponse) {}
+    // 单位库列表
+    rpc List (UnitRequest) returns (UnitResponse) {}
 }
-
+// 单位库
 message Unit {
-    int32 id = 1;
-    string name = 2;
-    string type = 3;
-    string source = 4;
-    float rate = 5;
-    int32 sort = 6;
-    int64 creator_id = 7;
-    string creator_name = 8;
-    string status = 9;
-    string created_at = 10;
-    string updated_at = 11;
+    int32 id = 1; //ID
+    string name = 2; //单位名称
+    string type = 3; //单位类型
+    string symbol = 4; //单位符号
+    float exchange_rate = 5; //换算率
+    string is_system = 6; //创建来源
+    int32 sort = 7; //排序
+    string status = 8; //状态
+    string created_at = 9; //创建时间
+    string updated_at = 10; //修改时间
 }
-
+// 单位库请求参数
 message UnitRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string keywords = 3;
-    int32 id = 4;
-    string name = 5;
-    string type = 6;
-    string source = 7;
-    string creator_id = 8;
-    string status = 9;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int32 ids = 7;
+    int32 id = 8;
+    //以下为自定义参数
+    string name = 11; //单位名称
+    string type = 12; //单位类型
+    string is_system = 13; //创建来源
+    string status = 14; //状态
 }
-
+// 单位库响应数据
 message UnitResponse {
-    Unit  entity = 1;
+    string msg = 1;
     common.Pager pager = 2;
-    repeated Unit items = 3;
-    string info = 4;
+    Unit entity = 3;
+    repeated Unit items = 4;
 }
-
-

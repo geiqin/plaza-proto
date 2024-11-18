@@ -4,8 +4,7 @@ option go_package ="/.;services";
 import "common/base.proto";
 import "baseInfoService.proto";
 import "tagService.proto";
-import "levelService.proto";
-import "memberPayLevelService.proto";
+import "vipLevelService.proto";
 import "memberAddressService.proto";
 import "memberQrcodeService.proto";
 
@@ -62,48 +61,48 @@ service MemberService {
 
 
 message Member {
-    int64  id =1;//ID
-    string type =2;//类型：1个人,2企业
-    string number_code =3;//会员编号
-    string username =4;//用户名称
-    string nickname =5;//用户昵称
-    string gender =6;//性别:0=未知,1=男,2=女
-    string birthday =7;//会员生日
-    int64  province_id =8;//区域ID
-    int64  city_id =9;//区域ID
-    int64  county_id =10;//区域ID
-    string province_name =11;//所在省
-    string city_name =12;//所在市
-    string county_name =13;//所在区/县
-    string address =14;//详细地址
-    string email =15;//绑定邮箱
-    string mobile =16;//绑定手机
-    string avatar_url =17;//会员头像url地址
-    int32  free_level_id =18;//会员等级ID
-    int64  integral =19;//有效积分
-    int64  surplus =20;//账户余额
-    int64  points =21;//累计积分(升级专用)
-    int64  order_total_count =22;//订单成交笔数
-    int64  order_total_price =23;//订单成交总额
-    int32  comment_count =24;//评价总数
-    int32  collect_count =25;//商品收藏总数
-    int64  referrer_id =26;//推荐人ID
-    string client_type =27;//来源终端
-    string contact_tel =28;//联系电话
-    string is_scatter =29;//是否为散客（0否，1是）
-    string is_trusted =30;//是否已实名认证（0否，1是）
-    string memo =31;//备注
-    string status =32;//状态：1正常，2锁定，3禁用，9注销
-    string last_buy_time =33; //最近下单时间
-    string last_login_time =34; //最近登录时间
-    string created_at =35;
-    string updated_at =36;
-    string deleted_at =37;
-    Level free_level =38;
-    Member referrer =39;
-    MemberQrcode Qrcode =40;
-    repeated Tag tags = 41;
-    repeated MemberPayLevel pay_levels =42;
+    int64 id = 1; //ID
+    string type = 2; //类型
+    string number = 3; //会员编号
+    string username = 4; //用户名称
+    string nickname = 5; //用户昵称
+    string gender = 6; //性别
+    string birthday = 7; //会员生日
+    int64 province_id = 8; //所在省ID
+    int64 city_id = 9; //所在市ID
+    int64 county_id = 10; //所在区ID
+    string province_name = 11; //所在省
+    string city_name = 12; //所在市
+    string county_name = 13; //所在区
+    string address = 14; //详细地址
+    string email = 15; //邮箱
+    string mobile = 16; //手机号
+    string avatar_url = 17; //头像
+    int32 free_level_id = 18; //免费等级
+    int32 pay_level_id = 19; //付费等级
+    int64 integral = 20; //有效积分
+    int64 surplus = 21; //账户余额
+    int64 points = 22; //累计积分
+    int64 order_total_count = 23; //订单成交笔数
+    int64 order_total_price = 24; //订单成交总额
+    int32 comment_count = 25; //评价总数
+    int32 collect_count = 26; //收藏总数
+    int64 referrer_id = 27; //推荐人
+    string is_scatter = 28; //是否散客
+    string client_type = 29; //来源终端
+    string is_trusted = 30; //实名认证
+    string memo = 31; //备注
+    string last_buy_time = 32; //最近下单时间
+    string last_login_time = 33; //最近登录时间
+    string status = 34; //状态
+    string created_at = 35; //创建时间
+    string updated_at = 36; //修改时间
+    string deleted_at = 37; //删除时间
+    VipLevel free_level =38;
+    VipLevel pay_level =39;
+    Member referrer =40;
+    MemberQrcode Qrcode =41;
+    repeated Tag tags = 42;
     repeated MemberAddress address_list = 43;
     string type_name =48;
     string status_name =49;
@@ -119,51 +118,49 @@ message Member {
 
 }
 
-
-//客户查询参数
+// 客户请求参数
 message MemberRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string sorting = 3;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
     //以下为自定义参数
-    int64 id = 4;
-    string type = 5;//类型：1个人,2企业
-    string number_code = 6;
-    string username = 7;
-    string nickname =8;
-    string gender =9;
-    string mobile =10;
-    string email =11;
-    int32 free_level_id =12;
-    int32 pay_level_id =13;
-    int32 tag_id =14;
-    string client_type =15;
-    int64 member_id = 16;
-    int64 province_id =17;
-    int64 city_id =18;
-    string county_id =19;
-    string province_name =20;//所在省
-    string city_name =21;//所在市
-    string county_name =22;//所在区/县
-    int64 referrer_id =23;
-    string status =24;
-    string keywords =25;
-    string is_scatter =26;
+    string type = 11; //类型
+    int64 province_id = 12; //所在省ID
+    int64 city_id = 13; //所在市ID
+    int64 county_id = 14; //所在区ID
+    string province_name = 15; //所在省
+    string city_name = 16; //所在市
+    string county_name = 17; //所在区
+    int32 level_id = 18; //免费等级
+    int64 referrer_id = 19; //推荐人
+    string is_scatter = 20; //是否散客
+    string client_type = 21; //来源终端
+    string is_trusted = 22; //实名认证
+    string status = 23; //状态
     string open_id =27;
     string union_id =28;
     string password =29;
     string code =30;
     string referrer =31;
-    repeated int64 ids = 32;
-    string client_type_name =33;
-    int32  plugins_distribution_level_id =34;//插件分销等级ID
+    int32 free_level_id = 32; //免费等级
+    int32 pay_level_id = 33; //付费等级
+    int32 tag_id =34;
     string platform = 35;//来源平台
-    bool allow_auto_reg = 36;//是否允许自动注册(主要针对手机用户)
-    string is_query_platform = 37; //是否查询来源平台信息（0否，1是）
-    string is_query_free_level = 38; //是否查询免费等级信息（0否，1是）
-    string is_query_referrer = 39; //是否查询推荐人信息（0否，1是）
-    string is_exist_referrer = 40;//是否查询只有推荐人（0否，1是）
-    string is_query_qrcode = 41; //是否查询二维码信息（0否，1是）
+    string mobile = 36;
+    string email = 37;
+    string username = 38;
+    string gender = 39;
+    int64 member_id = 40;
+}
+
+message MemberRegRequest {
+    string mobile = 1;
+    string email = 2;
 }
 
 message MemberResponse {
@@ -176,7 +173,6 @@ message MemberResponse {
 
 message MemberIndexResponse {
     LevelBaseInfo base = 1;
-    MemberPayLevel pay_level =2;
     repeated NavInfo nav_list = 3;
 }
 

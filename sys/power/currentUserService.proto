@@ -4,7 +4,6 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 import "userService.proto";
-import "navService.proto";
 
 //当前用户管理
 service CurrentUserService {
@@ -54,7 +53,6 @@ message CurrentUserRequest {
 
 message CurrentUserResponse {
     UserState user = 1;
-    repeated Nav navs = 2;
     repeated string permissions = 3;
     common.Pager pager =4;
     repeated User items = 5;
