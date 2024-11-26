@@ -14,31 +14,39 @@ service DictService {
     rpc List (DictRequest) returns (DictResponse) {}
 }
 
-message DictRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    int64 id = 3;
-    string keywords = 4;
-    string status = 5;
-    repeated string codes = 6;
-    repeated int64 ids = 7;
-}
-
-//字段类型
+// 字典
 message Dict {
-    int64 id =1;
-    string code	=2;
-    string name =3;
-    string is_system = 4;
-    string description = 5;
-    string created_at = 7;
-    string updated_at = 8;
+    int64 id = 1; //ID
+    string code = 2; //编码
+    string name = 3; //名称
+    string is_system = 4; //系统创建
+    string description = 5; //描述
+    string created_at = 6; //创建时间
+    string updated_at = 7; //修改时间
     repeated DictItem items =9;
 }
 
+// 字典请求参数
+message DictRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string code = 11; //编码
+    string name = 12; //名称
+    string is_system = 13; //系统创建
+    repeated string codes = 14;
+}
+
+// 字典响应数据
 message DictResponse {
-    Dict entity = 1;
-    common.Pager pager =2;
-    repeated Dict items = 3;
-    string msg =6;
+    string msg = 1;
+    common.Pager pager = 2;
+    Dict entity = 3;
+    repeated Dict items = 4;
 }

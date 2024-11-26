@@ -5,12 +5,13 @@ import "common/base.proto";
 
 service VipBenefitService {
     rpc Create (VipBenefit) returns (VipBenefitResponse) {}
-    rpc Append (VipBenefitRequest) returns (VipBenefitResponse) {}
     rpc Update (VipBenefit) returns (VipBenefitResponse) {}
     rpc Delete (VipBenefit) returns (VipBenefitResponse) {}
     rpc Get (VipBenefit) returns (VipBenefitResponse) {}
     rpc Search (VipBenefitRequest) returns (VipBenefitResponse) {}
     rpc List (VipBenefitRequest) returns (VipBenefitResponse) {}
+    rpc AddTo  (VipBenefitRequest) returns (VipBenefitResponse) {}
+    rpc Templates (VipBenefitRequest) returns (VipBenefitResponse) {}
 }
 
 message VipBenefit {
@@ -28,25 +29,33 @@ message VipBenefit {
     string status = 12; //状态
     string created_at = 13; //创建日期
     string updated_at = 14; //修改日期
+    bool disabled =15;//选择器使用
 }
 
 //查询参数
 message VipBenefitRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
     //以下为自定义参数
-    string code = 3;
-    string name = 4;
-    string alias =5;
-    string type = 6;
-    string status = 7;
-    repeated int64 ids =8;
-    repeated string codes =9;
+    string code = 11; //权益标识
+    string name = 12; //权益名称
+    string type = 13; //权益类型
+    string is_select = 14; //默认选中
+    string is_used = 15; //是否已使用
+    string is_system = 16; //是系统创建
+    string status = 17; //状态
+    repeated string codes =19;
 }
 
 message VipBenefitResponse {
     VipBenefit entity = 1;
     common.Pager pager =2;
     repeated VipBenefit items = 3;
-    string info =4;
+    string msg =4;
 }

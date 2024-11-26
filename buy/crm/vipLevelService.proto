@@ -24,7 +24,7 @@ message VipLevel {
     VipUpCondition up_condition = 8; //升级条件
     repeated VipPayRule pay_rules = 9; //付费规则
     VipBaseBenefit base_benefit = 10; //基本权益
-    repeated int64 more_benefit_ids = 11; //更多权益
+    repeated string more_benefit_codes = 11; //更多权益
     repeated VipMoreBenefit more_benefits = 12; //更多权益
     VipUpPackage up_package = 13; //升级礼包
     int64 member_count =15; //会员数量

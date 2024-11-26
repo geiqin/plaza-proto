@@ -44,12 +44,13 @@ func NewVipBenefitServiceEndpoints() []*api.Endpoint {
 
 type VipBenefitService interface {
 	Create(ctx context.Context, in *VipBenefit, opts ...client.CallOption) (*VipBenefitResponse, error)
-	Append(ctx context.Context, in *VipBenefitRequest, opts ...client.CallOption) (*VipBenefitResponse, error)
 	Update(ctx context.Context, in *VipBenefit, opts ...client.CallOption) (*VipBenefitResponse, error)
 	Delete(ctx context.Context, in *VipBenefit, opts ...client.CallOption) (*VipBenefitResponse, error)
 	Get(ctx context.Context, in *VipBenefit, opts ...client.CallOption) (*VipBenefitResponse, error)
 	Search(ctx context.Context, in *VipBenefitRequest, opts ...client.CallOption) (*VipBenefitResponse, error)
 	List(ctx context.Context, in *VipBenefitRequest, opts ...client.CallOption) (*VipBenefitResponse, error)
+	AddTo(ctx context.Context, in *VipBenefitRequest, opts ...client.CallOption) (*VipBenefitResponse, error)
+	Templates(ctx context.Context, in *VipBenefitRequest, opts ...client.CallOption) (*VipBenefitResponse, error)
 }
 
 type vipBenefitService struct {
@@ -66,16 +67,6 @@ func NewVipBenefitService(name string, c client.Client) VipBenefitService {
 
 func (c *vipBenefitService) Create(ctx context.Context, in *VipBenefit, opts ...client.CallOption) (*VipBenefitResponse, error) {
 	req := c.c.NewRequest(c.name, "VipBenefitService.Create", in)
-	out := new(VipBenefitResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *vipBenefitService) Append(ctx context.Context, in *VipBenefitRequest, opts ...client.CallOption) (*VipBenefitResponse, error) {
-	req := c.c.NewRequest(c.name, "VipBenefitService.Append", in)
 	out := new(VipBenefitResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -134,27 +125,49 @@ func (c *vipBenefitService) List(ctx context.Context, in *VipBenefitRequest, opt
 	return out, nil
 }
 
+func (c *vipBenefitService) AddTo(ctx context.Context, in *VipBenefitRequest, opts ...client.CallOption) (*VipBenefitResponse, error) {
+	req := c.c.NewRequest(c.name, "VipBenefitService.AddTo", in)
+	out := new(VipBenefitResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vipBenefitService) Templates(ctx context.Context, in *VipBenefitRequest, opts ...client.CallOption) (*VipBenefitResponse, error) {
+	req := c.c.NewRequest(c.name, "VipBenefitService.Templates", in)
+	out := new(VipBenefitResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for VipBenefitService service
 
 type VipBenefitServiceHandler interface {
 	Create(context.Context, *VipBenefit, *VipBenefitResponse) error
-	Append(context.Context, *VipBenefitRequest, *VipBenefitResponse) error
 	Update(context.Context, *VipBenefit, *VipBenefitResponse) error
 	Delete(context.Context, *VipBenefit, *VipBenefitResponse) error
 	Get(context.Context, *VipBenefit, *VipBenefitResponse) error
 	Search(context.Context, *VipBenefitRequest, *VipBenefitResponse) error
 	List(context.Context, *VipBenefitRequest, *VipBenefitResponse) error
+	AddTo(context.Context, *VipBenefitRequest, *VipBenefitResponse) error
+	Templates(context.Context, *VipBenefitRequest, *VipBenefitResponse) error
 }
 
 func RegisterVipBenefitServiceHandler(s server.Server, hdlr VipBenefitServiceHandler, opts ...server.HandlerOption) error {
 	type vipBenefitService interface {
 		Create(ctx context.Context, in *VipBenefit, out *VipBenefitResponse) error
-		Append(ctx context.Context, in *VipBenefitRequest, out *VipBenefitResponse) error
 		Update(ctx context.Context, in *VipBenefit, out *VipBenefitResponse) error
 		Delete(ctx context.Context, in *VipBenefit, out *VipBenefitResponse) error
 		Get(ctx context.Context, in *VipBenefit, out *VipBenefitResponse) error
 		Search(ctx context.Context, in *VipBenefitRequest, out *VipBenefitResponse) error
 		List(ctx context.Context, in *VipBenefitRequest, out *VipBenefitResponse) error
+		AddTo(ctx context.Context, in *VipBenefitRequest, out *VipBenefitResponse) error
+		Templates(ctx context.Context, in *VipBenefitRequest, out *VipBenefitResponse) error
 	}
 	type VipBenefitService struct {
 		vipBenefitService
@@ -169,10 +182,6 @@ type vipBenefitServiceHandler struct {
 
 func (h *vipBenefitServiceHandler) Create(ctx context.Context, in *VipBenefit, out *VipBenefitResponse) error {
 	return h.VipBenefitServiceHandler.Create(ctx, in, out)
-}
-
-func (h *vipBenefitServiceHandler) Append(ctx context.Context, in *VipBenefitRequest, out *VipBenefitResponse) error {
-	return h.VipBenefitServiceHandler.Append(ctx, in, out)
 }
 
 func (h *vipBenefitServiceHandler) Update(ctx context.Context, in *VipBenefit, out *VipBenefitResponse) error {
@@ -193,4 +202,12 @@ func (h *vipBenefitServiceHandler) Search(ctx context.Context, in *VipBenefitReq
 
 func (h *vipBenefitServiceHandler) List(ctx context.Context, in *VipBenefitRequest, out *VipBenefitResponse) error {
 	return h.VipBenefitServiceHandler.List(ctx, in, out)
+}
+
+func (h *vipBenefitServiceHandler) AddTo(ctx context.Context, in *VipBenefitRequest, out *VipBenefitResponse) error {
+	return h.VipBenefitServiceHandler.AddTo(ctx, in, out)
+}
+
+func (h *vipBenefitServiceHandler) Templates(ctx context.Context, in *VipBenefitRequest, out *VipBenefitResponse) error {
+	return h.VipBenefitServiceHandler.Templates(ctx, in, out)
 }
