@@ -25,15 +25,14 @@ message VipLevel {
     repeated VipPayRule pay_rules = 9; //付费规则
     VipBaseBenefit base_benefit = 10; //基本权益
     repeated string more_benefit_codes = 11; //更多权益
-    repeated VipMoreBenefit more_benefits = 12; //更多权益
-    VipUpPackage up_package = 13; //升级礼包
-    int64 member_count =15; //会员数量
-    string status = 18; //状态
-    string created_at = 19; //创建时间
-    string updated_at = 20; //修改时间
-    repeated VipBenefit benefits =21;
-    repeated string benefits_names =22;
-    repeated string pay_rules_tips = 23; //付费规则描述
+    VipUpPackage up_package = 12; //升级礼包
+    int64 member_count =14; //会员数量
+    string status = 15; //状态
+    string created_at = 16; //创建时间
+    string updated_at = 17; //修改时间
+    repeated VipBenefit benefits =18;
+    repeated string benefits_names =19;
+    repeated string pay_rules_tips = 20; //付费规则描述
 }
 
 //等级升级条件

@@ -43,12 +43,18 @@ func NewTagServiceEndpoints() []*api.Endpoint {
 // Client API for TagService service
 
 type TagService interface {
+	// 客户标签新增
 	Create(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
+	// 客户标签修改
 	Update(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
+	// 客户标签删除
 	Delete(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
+	// 客户标签获取
 	Get(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
-	List(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error)
+	// 客户标签查询
 	Search(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error)
+	// 客户标签列表
+	List(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error)
 }
 
 type tagService struct {
@@ -103,8 +109,8 @@ func (c *tagService) Get(ctx context.Context, in *Tag, opts ...client.CallOption
 	return out, nil
 }
 
-func (c *tagService) List(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error) {
-	req := c.c.NewRequest(c.name, "TagService.List", in)
+func (c *tagService) Search(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error) {
+	req := c.c.NewRequest(c.name, "TagService.Search", in)
 	out := new(TagResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -113,8 +119,8 @@ func (c *tagService) List(ctx context.Context, in *TagRequest, opts ...client.Ca
 	return out, nil
 }
 
-func (c *tagService) Search(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error) {
-	req := c.c.NewRequest(c.name, "TagService.Search", in)
+func (c *tagService) List(ctx context.Context, in *TagRequest, opts ...client.CallOption) (*TagResponse, error) {
+	req := c.c.NewRequest(c.name, "TagService.List", in)
 	out := new(TagResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -126,12 +132,18 @@ func (c *tagService) Search(ctx context.Context, in *TagRequest, opts ...client.
 // Server API for TagService service
 
 type TagServiceHandler interface {
+	// 客户标签新增
 	Create(context.Context, *Tag, *TagResponse) error
+	// 客户标签修改
 	Update(context.Context, *Tag, *TagResponse) error
+	// 客户标签删除
 	Delete(context.Context, *Tag, *TagResponse) error
+	// 客户标签获取
 	Get(context.Context, *Tag, *TagResponse) error
-	List(context.Context, *TagRequest, *TagResponse) error
+	// 客户标签查询
 	Search(context.Context, *TagRequest, *TagResponse) error
+	// 客户标签列表
+	List(context.Context, *TagRequest, *TagResponse) error
 }
 
 func RegisterTagServiceHandler(s server.Server, hdlr TagServiceHandler, opts ...server.HandlerOption) error {
@@ -140,8 +152,8 @@ func RegisterTagServiceHandler(s server.Server, hdlr TagServiceHandler, opts ...
 		Update(ctx context.Context, in *Tag, out *TagResponse) error
 		Delete(ctx context.Context, in *Tag, out *TagResponse) error
 		Get(ctx context.Context, in *Tag, out *TagResponse) error
-		List(ctx context.Context, in *TagRequest, out *TagResponse) error
 		Search(ctx context.Context, in *TagRequest, out *TagResponse) error
+		List(ctx context.Context, in *TagRequest, out *TagResponse) error
 	}
 	type TagService struct {
 		tagService
@@ -170,10 +182,10 @@ func (h *tagServiceHandler) Get(ctx context.Context, in *Tag, out *TagResponse) 
 	return h.TagServiceHandler.Get(ctx, in, out)
 }
 
-func (h *tagServiceHandler) List(ctx context.Context, in *TagRequest, out *TagResponse) error {
-	return h.TagServiceHandler.List(ctx, in, out)
-}
-
 func (h *tagServiceHandler) Search(ctx context.Context, in *TagRequest, out *TagResponse) error {
 	return h.TagServiceHandler.Search(ctx, in, out)
+}
+
+func (h *tagServiceHandler) List(ctx context.Context, in *TagRequest, out *TagResponse) error {
+	return h.TagServiceHandler.List(ctx, in, out)
 }

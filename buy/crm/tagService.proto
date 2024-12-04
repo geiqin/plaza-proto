@@ -3,37 +3,56 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 
+// 客户标签服务
 service TagService {
-    rpc Create (Tag) returns (TagResponse) {}
-    rpc Update (Tag) returns (TagResponse) {}
-    rpc Delete (Tag) returns (TagResponse) {}
-    rpc Get (Tag) returns (TagResponse) {}
-    rpc List (TagRequest) returns (TagResponse) {}
-    rpc Search (TagRequest) returns (TagResponse) {}
+  // 客户标签新增
+  rpc Create (Tag) returns (TagResponse) {}
+  // 客户标签修改
+  rpc Update (Tag) returns (TagResponse) {}
+  // 客户标签删除
+  rpc Delete (Tag) returns (TagResponse) {}
+  // 客户标签获取
+  rpc Get (Tag) returns (TagResponse) {}
+  // 客户标签查询
+  rpc Search (TagRequest) returns (TagResponse) {}
+  // 客户标签列表
+  rpc List (TagRequest) returns (TagResponse) {}
 }
 
+// 客户标签
 message Tag {
-     int64 id =1;
-     string name =2;
-     string type =3;
-     string condition_type =4;
-     string created_at =5;
-     string updated_at =6;
-     int32 is_use = 7;
+  int64 id = 1; //ID
+  string name = 2; //标签名称
+  int64 tag_group_id = 3; //标签分组
+  string auto_add_rule = 4; //自动打标规则
+  string is_auto_delete = 5; //自动删除
+  int64 member_count = 6; //客户人数
+  string status = 7; //状态
+  string created_at = 8; //创建时间
+  string updated_at = 9; //修改时间
 }
 
+// 客户标签请求参数
 message TagRequest {
-  int64 paged = 1;
-  int64 page_size = 2;
-  string sorting = 3;
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
   //以下为自定义参数
-  string name = 4;
-  int64 member_id = 5;
+  string name = 11; //标签名称
+  int64 tag_group_id = 12; //标签分组
+  string is_auto_delete = 13; //自动删除
+  string status = 14; //状态
 }
 
+// 客户标签响应数据
 message TagResponse {
-  Tag entity = 1;
-  common.Pager pager =2;
-  repeated Tag items = 3;
-  string info =4;
+  string msg = 1;
+  common.Pager pager = 2;
+  Tag entity = 3;
+  repeated Tag items = 4;
 }

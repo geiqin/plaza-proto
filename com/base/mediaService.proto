@@ -1,0 +1,94 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+import "mediaCatService.proto";
+
+// 公共图标服务
+service MediaService {
+  // 公共图标新增
+  rpc Create (Media) returns (MediaResponse) {}
+  // 公共图标修改
+  rpc Update (Media) returns (MediaResponse) {}
+  // 公共图标删除
+  rpc Delete (Media) returns (MediaResponse) {}
+  // 公共图标获取
+  rpc Get (Media) returns (MediaResponse) {}
+  // 公共图标查询
+  rpc Search (MediaRequest) returns (MediaResponse) {}
+  // 公共图标列表
+  rpc List (MediaRequest) returns (MediaResponse) {}
+
+  //素材统计
+  rpc Statistics (MediaRequest) returns (MediaResponse) {}
+
+  //上传凭证生成
+  rpc UploadToken (MediaRequest) returns (MediaResponse) {}
+  //上传回调处理
+  rpc UploadCallback (CallbackInfo) returns (MediaResponse) {}
+}
+// 公共图标
+message Media {
+  int64 id = 1; //ID
+  string hash = 2; //Hash值
+  string code = 3; //编码
+  string name = 4; //名称
+  string storage = 5; //储存名
+  string type = 6; //类型
+  string raw_name = 8; //原始名称
+  string extension = 9; //文件扩展名
+  string save_path = 10; //存相对路径
+  string url = 11; //完整路径
+  string mime_type = 12; //文件类型
+  int64 size = 13; //文件大小
+  int64 width = 14; //宽
+  int64 height = 15; //高
+  string description = 16; //描述
+  int64 cat_id = 17; //分类
+  int32 sort = 18; //排序值
+  string created_at = 19; //创建时间
+  string updated_at = 20; //修改时间
+  MediaCat cat =21;
+  MediaInfo media_info = 22; //媒体信息
+}
+
+
+message MediaStatistics {
+  string type = 1; //类型
+  int64 size = 2; //大小
+  int64 number = 3; //数量
+  string unit = 4; //单位
+  repeated MediaStatistics data = 5; //子项统计
+}
+
+
+// 公共图标请求参数
+message MediaRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string code = 11; //编码
+  string name = 12; //名称
+  string storage = 13; //储存名
+  string type = 14; //类型
+  string filename = 15; //文件名称
+  string mime_type = 16; //文件类型
+  int64 cat_id = 17;
+}
+// 公共图标响应数据
+message MediaResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  Media entity = 3;
+  repeated Media items = 4;
+  MediaStatistics statistics =5;
+  UploadTokenInfo token =6;
+  map<string,string> callback =7;
+}

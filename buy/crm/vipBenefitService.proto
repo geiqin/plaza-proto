@@ -23,13 +23,13 @@ message VipBenefit {
     string industry = 6; //所属行业
     string icon_url = 7; //权益图标
     int64 price_value = 8; //权益价值
-    string is_select = 9; //默认选中
-    string verify_method = 10; //核销方式
-    string desc = 11; //权益描述
-    string status = 12; //状态
+    string verify_method = 9; //核销方式
+    string desc = 10; //权益描述
+    string is_used = 11; //已使用
+    string is_system = 12; //系统创建
     string created_at = 13; //创建日期
     string updated_at = 14; //修改日期
-    bool disabled =15;//选择器使用
+    bool checked =15;//已选中
 }
 
 //查询参数
@@ -46,10 +46,9 @@ message VipBenefitRequest {
     string code = 11; //权益标识
     string name = 12; //权益名称
     string type = 13; //权益类型
-    string is_select = 14; //默认选中
+    string industry = 14; //行业
     string is_used = 15; //是否已使用
     string is_system = 16; //是系统创建
-    string status = 17; //状态
     repeated string codes =19;
 }
 

@@ -1,0 +1,63 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+// 公共媒体分类服务
+service MediaCatService {
+  // 公共媒体分类新增
+  rpc Create (MediaCat) returns (MediaCatResponse) {}
+  // 公共媒体分类修改
+  rpc Update (MediaCat) returns (MediaCatResponse) {}
+  // 公共媒体分类删除
+  rpc Delete (MediaCat) returns (MediaCatResponse) {}
+  // 公共媒体分类获取
+  rpc Get (MediaCat) returns (MediaCatResponse) {}
+  // 公共媒体分类列表
+  rpc List (MediaCatRequest) returns (MediaCatResponse) {}
+  // 分类列表树
+  rpc ListTree (MediaCatRequest) returns (MediaCatResponse) {}
+  // 分类选择树
+  rpc SelectTree (MediaCatRequest) returns (MediaCatResponse) {}
+}
+// 公共媒体分类
+message MediaCat {
+  int64 id = 1; //ID
+  string code = 2; //编码
+  string name = 3; //名称
+  int64 parent_id = 4; //父亲ID
+  string ancestors = 5; //祖级列表
+  string description = 6; //描述
+  repeated string types = 7; //支持类型
+  int32 sort = 8; //排序
+  string status = 9; //状态
+  string created_at = 10; //创建时间
+  string updated_at = 11; //修改时间
+  repeated MediaCat children =12;
+}
+// 公共媒体分类请求参数
+message MediaCatRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string code = 11; //编码
+  string name = 12; //名称
+  int64 parent_id = 13; //父亲ID
+  string type = 14; //类型
+  string status = 15; //状态
+}
+// 公共媒体分类响应数据
+message MediaCatResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  MediaCat entity = 3;
+  repeated MediaCat items = 4;
+  repeated TreeItem tree = 5;
+}

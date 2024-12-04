@@ -1,0 +1,59 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service MemberIdentityService {
+    rpc Create (MemberIdentity) returns (MemberIdentityResponse) {}
+    rpc Get (MemberIdentity) returns (MemberIdentityResponse) {}
+    rpc Search (MemberIdentityRequest) returns (MemberIdentityResponse) {}
+}
+
+// 客户实名
+message MemberIdentity {
+    int64 id = 1; //ID
+    int64 member_id = 2; //会员ID
+    string real_type = 3; //实名类型
+    string real_name = 4; //实名名称
+    string number = 5; //证件号码
+    string birthday = 6; //出生日期
+    string address = 7; //出生地址
+    string issuer = 8; //签证机关
+    string is_forever = 9; //永久有效
+    string begin_date = 10; //开始日期
+    string end_date = 11; //结束日期
+    string gender = 12; //性别
+    string nation = 13; //民族
+    string front_url = 14; //身份证人像面
+    string back_url = 15; //身份证国微面
+    string legal_man = 16; //法定代表人
+    string registered_capital = 17; //注册资本
+    string license_url = 18; //营业执照
+    string status = 19; //状态
+    string created_at = 20; //创建时间
+    string updated_at = 21; //修改时间
+}
+// 客户实名请求参数
+message MemberIdentityRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    int64 member_id = 11; //会员ID
+    string real_type = 12; //实名类型
+    string real_name = 13; //实名名称
+    string is_forever = 14; //永久有效
+    string status = 15; //状态
+}
+// 客户实名响应数据
+message MemberIdentityResponse {
+    string msg = 1;
+    common.Pager pager = 2;
+    MemberIdentity entity = 3;
+    repeated MemberIdentity items = 4;
+}
