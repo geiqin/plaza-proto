@@ -164,20 +164,20 @@ message SpuEdit {
 
 // 商品Sku
 message Sku {
-    int64 id = 1; //
+    int64 id = 1; //ID
     int64 spu_id = 2; //商品ID
-    string code = 3; //编号
-    string barcode = 4; //条码
-    repeated string more_barcodes = 5; //更多条码
-    int64 original_price = 6; //划线价
-    int64 cost_price = 7; //成本价
-    int64 price = 8; //销售价
-    int64 inventory = 9; //库存
-    int64 weight = 10; //重量
-    int64 volume = 11; //体积
-    repeated SkuSpecInfo spec = 12; //规格信息
-    string spec_desc = 13; //规格描述
-    string md5_key = 14; //唯一标识
+    string sku_key = 3; //SKUKey
+    string coding = 4; //编号
+    string barcode = 5; //条码
+    repeated string more_barcodes = 6; //更多条码
+    int64 original_price = 7; //划线价
+    int64 cost_price = 8; //成本价
+    int64 price = 9; //销售价
+    int64 inventory = 10; //库存
+    int64 weight = 11; //重量
+    int64 volume = 12; //体积
+    repeated SkuSpecInfo spec = 13; //规格信息
+    string spec_desc = 14; //规格描述
     SkuExtraInfo extra = 15; //额外字段
     string created_at = 16; //创建时间
     string updated_at = 17; //修改时间
@@ -206,9 +206,9 @@ message SkuRequest {
     int64 id = 8;
     //以下为自定义参数
     int64 spu_id = 11; //商品ID
-    string code = 12; //编号
+    string coding = 12; //编号
     string barcode = 13; //条码
-    string md5_key = 14; //唯一标识
+    string sku_key = 14; //唯一标识
     int64 coupon_id = 15; //付费优惠劵
     repeated int64 spu_ids =16;
     repeated int64 sku_ids =17;

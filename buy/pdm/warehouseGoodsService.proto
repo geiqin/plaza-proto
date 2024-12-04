@@ -34,12 +34,12 @@ message WarehouseGoodsSpec {
     int64 warehouse_goods_id =2;//仓库商品id
     int64 warehouse_id =3;//仓库id
     int64 spu_id =4;//商品id
-    string md5_key =5;//MD5Key
+    string sku_key =5;//SKUKey
     int64  inventory =6;//库存
     repeated SkuSpecInfo spec =7;//规格值
     string created_at = 8;
     string updated_at = 9;
-    string spec_text =10;
+    string spec_desc =10;
 }
 
 message WarehouseGoodsRequest {
@@ -55,7 +55,7 @@ message WarehouseGoodsRequest {
     int32 brand_id =10;//品牌ID
     int64 shop_id =11;//分店ID
     int64 group_id =12;
-    string title =13;//商品标题
+    string name =13;//商品名称
     string keywords =14;//商品标题
     repeated int64 ids = 15;
     repeated int64 spu_ids = 16;
@@ -66,11 +66,11 @@ message WarehouseGoodsResponse {
     WarehouseGoods entity = 1;
     common.Pager pager =2;
     repeated WarehouseGoods items = 3;
-    string info =4;
+    string msg =4;
 }
 
 message WarehouseGoodsSelectResponse {
     common.Pager pager =2;
     repeated Spu items = 3;
-    string info =4;
+    string msg =4;
 }
