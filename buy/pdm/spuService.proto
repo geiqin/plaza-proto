@@ -126,7 +126,7 @@ message SpuEdit {
     string explain_video_url = 13; //讲解视频
     string is_virtual = 14; //虚拟商品
     string is_many_spec = 15; //多规格商品
-    string is_open_weight = 16; //开启称重
+    string is_open_weigh = 16; //开启称重
     string is_open_presale = 17; //开启预售
     string is_multi_barcode = 18; //一品多码
     int64 unit_id = 19; //计量单位ID
@@ -235,7 +235,7 @@ message SpuRequest {
     string name = 16; //商品名称
     string is_virtual = 17; //虚拟商品
     string is_many_spec = 18; //多规格商品
-    string is_open_weight = 19; //开启称重
+    string is_open_weigh = 19; //开启称重
     string is_open_presale = 20; //开启预售
     string is_multi_barcode = 21; //一品多码
     int64 unit_id = 22; //计量单位ID
