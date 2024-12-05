@@ -2,7 +2,6 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "paymentWayService.proto";
 import "paymentAccountService.proto";
 
 //支付方式
@@ -38,7 +37,7 @@ message Payment {
   string payment_type_name =12;
   string client_type_name =13;
   string is_enabled_name =14;
-  PaymentWay way =15;
+  string way_code =15;
   PaymentAccount account =16;
 }
 
@@ -62,5 +61,5 @@ message PaymentResponse{
   Payment entity = 1;
   repeated Payment items =2;
   common.Pager pager =3;
-  string info =4;
+  string msg =4;
 }

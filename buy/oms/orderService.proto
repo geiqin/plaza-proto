@@ -220,12 +220,12 @@ message OrderResponse {
     repeated int64 order_ids =5;
     OrderFlow order_flow = 6;
     repeated PaymentInfo payment_list =7;
-    string info =8;
+    string msg =8;
 }
 
 message OrderDetailResponse {
     Order order = 1;
-    string info =2;
+    string msg =2;
     OrderFlow order_flow = 3;
     repeated PaymentInfo payment_list =4;
 }

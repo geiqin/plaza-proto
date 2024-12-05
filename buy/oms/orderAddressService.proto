@@ -14,8 +14,8 @@ service OrderAddressService {
 message OrderAddress {
     int64 id =1;//ID
     int64 order_id =2;//区域ID
-    int64 address_id =3;//客户地址ID
-    int64 extraction_id =4;//取货地址ID
+    int64 customer_addr_id =3;//客户地址ID
+    int64 extraction_addr_id =4;//取货地址ID
     string name =6;//姓名
     string alias =7;//别名
     string tel =8;//电话
@@ -56,5 +56,5 @@ message OrderAddressResponse {
     OrderAddress entity = 1;
     common.Pager pager =2;
     repeated OrderAddress items = 3;
-    string info =4;
+    string msg =4;
 }

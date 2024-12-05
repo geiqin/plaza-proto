@@ -20,5 +20,5 @@ message SynchroniseRequest {
 }
 
 message SynchroniseResponse {
-    string info =1;
+    string msg =1;
 }

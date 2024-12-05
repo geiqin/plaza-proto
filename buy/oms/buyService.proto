@@ -39,7 +39,7 @@ message BuyGoodsItem  {
     string title =2;//标题
     string image_url =3;//封面图片
     int64  spu_id =4;//商品spuId
-    string md5_key =5;//商品规格md5_key
+    string sku_key =5;//商品规格sku_key
     int32  inventory =6;//库存数量
     int64  sale_price =7;//销售价
     int64  price =8;//购买价
@@ -113,7 +113,7 @@ message BuyRequest {
 //购买商品信息
 message BuyCommodity {
     int64 spu_id = 1; //商品ID
-    string md5_key =2;//规格md5_key
+    string sku_key =2;//规格sku_key
     int64 stock = 3; //数量
     int64 cart_id =4;//购物车行id【购物车专用】
     repeated SkuSpecInfo spec =5; //规格【待弃用：为兼容旧版小程序】

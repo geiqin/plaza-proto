@@ -20,13 +20,13 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// 支付宝
+//支付宝
 type Alipay struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PayLogNo string `protobuf:"bytes,1,opt,name=pay_log_no,json=payLogNo,proto3" json:"pay_log_no"` //支付单号
+	PayLogNo string `protobuf:"bytes,1,opt,name=pay_log_no,json=payLogNo,proto3" json:"pay_log_no,omitempty"` //支付单号
 }
 
 func (x *Alipay) Reset() {
@@ -73,8 +73,8 @@ type AlipayResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Alipay           `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Entity *Alipay           `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *AlipayResponse) Reset() {

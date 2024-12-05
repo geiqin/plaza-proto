@@ -20,14 +20,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// 微信退款信息
+//微信退款信息
 type WeixinRefundRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RefundLogNo string `protobuf:"bytes,1,opt,name=refund_log_no,json=refundLogNo,proto3" json:"refund_log_no"` //退款日志编号
-	ClientType  string `protobuf:"bytes,2,opt,name=client_type,json=clientType,proto3" json:"client_type"`      //客户端类型
+	RefundLogNo string `protobuf:"bytes,1,opt,name=refund_log_no,json=refundLogNo,proto3" json:"refund_log_no,omitempty"` //退款日志编号
+	ClientType  string `protobuf:"bytes,2,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"`      //客户端类型
 }
 
 func (x *WeixinRefundRequest) Reset() {
@@ -76,19 +76,19 @@ func (x *WeixinRefundRequest) GetClientType() string {
 	return ""
 }
 
-// 微信小程序支付请求
+//微信小程序支付请求
 type WeixinPayRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PayLogNo      string            `protobuf:"bytes,1,opt,name=pay_log_no,json=payLogNo,proto3" json:"pay_log_no"`                //支付单号
-	ClientType    string            `protobuf:"bytes,2,opt,name=client_type,json=clientType,proto3" json:"client_type"`            //客户端类型
-	AuthCode      string            `protobuf:"bytes,3,opt,name=auth_code,json=authCode,proto3" json:"auth_code"`                  //授权码
-	IsClosePubsub string            `protobuf:"bytes,4,opt,name=is_close_pubsub,json=isClosePubsub,proto3" json:"is_close_pubsub"` //直接支付成功关闭消息通知（0否，1是）
-	PayerInfo     *WeixinPayerInfo  `protobuf:"bytes,10,opt,name=payer_info,json=payerInfo,proto3" json:"payer_info"`              //微信买家信息
-	SceneInfo     *WeixinSceneInfo  `protobuf:"bytes,11,opt,name=scene_info,json=sceneInfo,proto3" json:"scene_info"`              //微信支付场景
-	SettleInfo    *WeixinSettleInfo `protobuf:"bytes,12,opt,name=settle_info,json=settleInfo,proto3" json:"settle_info"`           //微信结算信息
+	PayLogNo      string            `protobuf:"bytes,1,opt,name=pay_log_no,json=payLogNo,proto3" json:"pay_log_no,omitempty"`                //支付单号
+	ClientType    string            `protobuf:"bytes,2,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"`            //客户端类型
+	AuthCode      string            `protobuf:"bytes,3,opt,name=auth_code,json=authCode,proto3" json:"auth_code,omitempty"`                  //授权码
+	IsClosePubsub string            `protobuf:"bytes,4,opt,name=is_close_pubsub,json=isClosePubsub,proto3" json:"is_close_pubsub,omitempty"` //直接支付成功关闭消息通知（0否，1是）
+	PayerInfo     *WeixinPayerInfo  `protobuf:"bytes,10,opt,name=payer_info,json=payerInfo,proto3" json:"payer_info,omitempty"`              //微信买家信息
+	SceneInfo     *WeixinSceneInfo  `protobuf:"bytes,11,opt,name=scene_info,json=sceneInfo,proto3" json:"scene_info,omitempty"`              //微信支付场景
+	SettleInfo    *WeixinSettleInfo `protobuf:"bytes,12,opt,name=settle_info,json=settleInfo,proto3" json:"settle_info,omitempty"`           //微信结算信息
 }
 
 func (x *WeixinPayRequest) Reset() {
@@ -172,15 +172,15 @@ func (x *WeixinPayRequest) GetSettleInfo() *WeixinSettleInfo {
 	return nil
 }
 
-// 微信订单请求
+//微信订单请求
 type WeixinOrderRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PayLogNo   string `protobuf:"bytes,1,opt,name=pay_log_no,json=payLogNo,proto3" json:"pay_log_no"`     //支付单号
-	ClientType string `protobuf:"bytes,2,opt,name=client_type,json=clientType,proto3" json:"client_type"` //客户端类型
-	AuthCode   string `protobuf:"bytes,3,opt,name=auth_code,json=authCode,proto3" json:"auth_code"`       //授权码
+	PayLogNo   string `protobuf:"bytes,1,opt,name=pay_log_no,json=payLogNo,proto3" json:"pay_log_no,omitempty"`     //支付单号
+	ClientType string `protobuf:"bytes,2,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"` //客户端类型
+	AuthCode   string `protobuf:"bytes,3,opt,name=auth_code,json=authCode,proto3" json:"auth_code,omitempty"`       //授权码
 }
 
 func (x *WeixinOrderRequest) Reset() {
@@ -236,13 +236,13 @@ func (x *WeixinOrderRequest) GetAuthCode() string {
 	return ""
 }
 
-// 微信买家信息
+//微信买家信息
 type WeixinPayerInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OpenId string `protobuf:"bytes,1,opt,name=open_id,json=openId,proto3" json:"open_id"` //用户标识
+	OpenId string `protobuf:"bytes,1,opt,name=open_id,json=openId,proto3" json:"open_id,omitempty"` //用户标识
 }
 
 func (x *WeixinPayerInfo) Reset() {
@@ -284,14 +284,14 @@ func (x *WeixinPayerInfo) GetOpenId() string {
 	return ""
 }
 
-// 微信支付场景
+//微信支付场景
 type WeixinSceneInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PayerClientIp string `protobuf:"bytes,1,opt,name=payer_client_ip,json=payerClientIp,proto3" json:"payer_client_ip"` //用户终端IP
-	DeviceId      string `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id"`                  //商户端设备号
+	PayerClientIp string `protobuf:"bytes,1,opt,name=payer_client_ip,json=payerClientIp,proto3" json:"payer_client_ip,omitempty"` //用户终端IP
+	DeviceId      string `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                  //商户端设备号
 }
 
 func (x *WeixinSceneInfo) Reset() {
@@ -340,13 +340,13 @@ func (x *WeixinSceneInfo) GetDeviceId() string {
 	return ""
 }
 
-// 微信结算信息
+//微信结算信息
 type WeixinSettleInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProfitSharing bool `protobuf:"varint,1,opt,name=profit_sharing,json=profitSharing,proto3" json:"profit_sharing"` //是否指定分账
+	ProfitSharing bool `protobuf:"varint,1,opt,name=profit_sharing,json=profitSharing,proto3" json:"profit_sharing,omitempty"` //是否指定分账
 }
 
 func (x *WeixinSettleInfo) Reset() {
@@ -393,8 +393,8 @@ type WeixinPayData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	State  string            `protobuf:"bytes,1,opt,name=state,proto3" json:"state"` //状态：0成功
-	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	State  string            `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"` //状态：0成功
+	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *WeixinPayData) Reset() {
@@ -448,21 +448,21 @@ type WeixinMicroPayData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ResultCode     string `protobuf:"bytes,1,opt,name=result_code,json=resultCode,proto3" json:"result_code"`      //业务结果：	SUCCESS/FAIL
-	ErrCode        string `protobuf:"bytes,2,opt,name=err_code,json=errCode,proto3" json:"err_code"`               //错误代码
-	ErrCodeDesc    string `protobuf:"bytes,3,opt,name=err_code_desc,json=errCodeDesc,proto3" json:"err_code_desc"` //错误代码描述
-	TradeType      string `protobuf:"bytes,4,opt,name=trade_type,json=tradeType,proto3" json:"trade_type"`         //交易类型: 取值如下：JSAPI，NATIVE，APP，MICROPAY
-	Openid         string `protobuf:"bytes,6,opt,name=openid,proto3" json:"openid"`
-	FeeType        string `protobuf:"bytes,7,opt,name=fee_type,json=feeType,proto3" json:"fee_type"`
-	CashFee        int64  `protobuf:"varint,8,opt,name=cash_fee,json=cashFee,proto3" json:"cash_fee"`
-	IsSubscribe    string `protobuf:"bytes,9,opt,name=is_subscribe,json=isSubscribe,proto3" json:"is_subscribe"` //是否订阅app(0否，1是)
-	SubOpenid      string `protobuf:"bytes,10,opt,name=sub_openid,json=subOpenid,proto3" json:"sub_openid"`
-	TransactionId  string `protobuf:"bytes,11,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id"`
-	OutTradeNo     string `protobuf:"bytes,12,opt,name=out_trade_no,json=outTradeNo,proto3" json:"out_trade_no"`
-	TotalFee       int64  `protobuf:"varint,13,opt,name=total_fee,json=totalFee,proto3" json:"total_fee"`
-	SubIsSubscribe string `protobuf:"bytes,14,opt,name=sub_is_subscribe,json=subIsSubscribe,proto3" json:"sub_is_subscribe"` //是否订阅子APP(0否，1是)
-	BankType       string `protobuf:"bytes,15,opt,name=bank_type,json=bankType,proto3" json:"bank_type"`
-	TimeEnd        string `protobuf:"bytes,16,opt,name=time_end,json=timeEnd,proto3" json:"time_end"`
+	ResultCode     string `protobuf:"bytes,1,opt,name=result_code,json=resultCode,proto3" json:"result_code,omitempty"`      //业务结果：	SUCCESS/FAIL
+	ErrCode        string `protobuf:"bytes,2,opt,name=err_code,json=errCode,proto3" json:"err_code,omitempty"`               //错误代码
+	ErrCodeDesc    string `protobuf:"bytes,3,opt,name=err_code_desc,json=errCodeDesc,proto3" json:"err_code_desc,omitempty"` //错误代码描述
+	TradeType      string `protobuf:"bytes,4,opt,name=trade_type,json=tradeType,proto3" json:"trade_type,omitempty"`         //交易类型: 取值如下：JSAPI，NATIVE，APP，MICROPAY
+	Openid         string `protobuf:"bytes,6,opt,name=openid,proto3" json:"openid,omitempty"`
+	FeeType        string `protobuf:"bytes,7,opt,name=fee_type,json=feeType,proto3" json:"fee_type,omitempty"`
+	CashFee        int64  `protobuf:"varint,8,opt,name=cash_fee,json=cashFee,proto3" json:"cash_fee,omitempty"`
+	IsSubscribe    string `protobuf:"bytes,9,opt,name=is_subscribe,json=isSubscribe,proto3" json:"is_subscribe,omitempty"` //是否订阅app(0否，1是)
+	SubOpenid      string `protobuf:"bytes,10,opt,name=sub_openid,json=subOpenid,proto3" json:"sub_openid,omitempty"`
+	TransactionId  string `protobuf:"bytes,11,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OutTradeNo     string `protobuf:"bytes,12,opt,name=out_trade_no,json=outTradeNo,proto3" json:"out_trade_no,omitempty"`
+	TotalFee       int64  `protobuf:"varint,13,opt,name=total_fee,json=totalFee,proto3" json:"total_fee,omitempty"`
+	SubIsSubscribe string `protobuf:"bytes,14,opt,name=sub_is_subscribe,json=subIsSubscribe,proto3" json:"sub_is_subscribe,omitempty"` //是否订阅子APP(0否，1是)
+	BankType       string `protobuf:"bytes,15,opt,name=bank_type,json=bankType,proto3" json:"bank_type,omitempty"`
+	TimeEnd        string `protobuf:"bytes,16,opt,name=time_end,json=timeEnd,proto3" json:"time_end,omitempty"`
 }
 
 func (x *WeixinMicroPayData) Reset() {
@@ -607,8 +607,8 @@ type WeixinQueryOrderData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	State  string            `protobuf:"bytes,1,opt,name=state,proto3" json:"state"` //状态：0成功
-	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	State  string            `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"` //状态：0成功
+	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *WeixinQueryOrderData) Reset() {
@@ -662,8 +662,8 @@ type WeixinCloseOrderData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	State  string            `protobuf:"bytes,1,opt,name=state,proto3" json:"state"` //状态：0成功
-	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	State  string            `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"` //状态：0成功
+	Params map[string]string `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *WeixinCloseOrderData) Reset() {
@@ -712,22 +712,22 @@ func (x *WeixinCloseOrderData) GetParams() map[string]string {
 	return nil
 }
 
-// 微信退款数据
+//微信退款数据
 type WeixinRefundData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RefundId            string `protobuf:"bytes,1,opt,name=refund_id,json=refundId,proto3" json:"refund_id"`
-	OutRefundNo         string `protobuf:"bytes,2,opt,name=out_refund_no,json=outRefundNo,proto3" json:"out_refund_no"`
-	TransactionId       string `protobuf:"bytes,3,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id"`
-	OutTradeNo          string `protobuf:"bytes,4,opt,name=out_trade_no,json=outTradeNo,proto3" json:"out_trade_no"`
-	Channel             string `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel"`
-	UserReceivedAccount string `protobuf:"bytes,6,opt,name=user_received_account,json=userReceivedAccount,proto3" json:"user_received_account"`
-	SuccessTime         string `protobuf:"bytes,7,opt,name=success_time,json=successTime,proto3" json:"success_time"`
-	CreateTime          string `protobuf:"bytes,8,opt,name=create_time,json=createTime,proto3" json:"create_time"`
-	State               string `protobuf:"bytes,9,opt,name=state,proto3" json:"state"`                                    //状态：0成功
-	ReturnParams        string `protobuf:"bytes,10,opt,name=return_params,json=returnParams,proto3" json:"return_params"` //平台返回数据JSON
+	RefundId            string `protobuf:"bytes,1,opt,name=refund_id,json=refundId,proto3" json:"refund_id,omitempty"`
+	OutRefundNo         string `protobuf:"bytes,2,opt,name=out_refund_no,json=outRefundNo,proto3" json:"out_refund_no,omitempty"`
+	TransactionId       string `protobuf:"bytes,3,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OutTradeNo          string `protobuf:"bytes,4,opt,name=out_trade_no,json=outTradeNo,proto3" json:"out_trade_no,omitempty"`
+	Channel             string `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel,omitempty"`
+	UserReceivedAccount string `protobuf:"bytes,6,opt,name=user_received_account,json=userReceivedAccount,proto3" json:"user_received_account,omitempty"`
+	SuccessTime         string `protobuf:"bytes,7,opt,name=success_time,json=successTime,proto3" json:"success_time,omitempty"`
+	CreateTime          string `protobuf:"bytes,8,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	State               string `protobuf:"bytes,9,opt,name=state,proto3" json:"state,omitempty"`                                    //状态：0成功
+	ReturnParams        string `protobuf:"bytes,10,opt,name=return_params,json=returnParams,proto3" json:"return_params,omitempty"` //平台返回数据JSON
 }
 
 func (x *WeixinRefundData) Reset() {
@@ -837,19 +837,19 @@ type WeixinResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	IsDirectSucceed string                `protobuf:"bytes,1,opt,name=is_direct_succeed,json=isDirectSucceed,proto3" json:"is_direct_succeed"` //是否直接成功(0否，1是)【支付/退款/转账/提现】
-	IsNeedCallback  string                `protobuf:"bytes,2,opt,name=is_need_callback,json=isNeedCallback,proto3" json:"is_need_callback"`    //是否需要通知确认(0否，1是)
-	PayLog          *PayLog               `protobuf:"bytes,3,opt,name=pay_log,json=payLog,proto3" json:"pay_log"`                              //支付日志
-	RefundLog       *RefundLog            `protobuf:"bytes,4,opt,name=refund_log,json=refundLog,proto3" json:"refund_log"`                     //退款日志
-	ActionSuggest   string                `protobuf:"bytes,5,opt,name=action_suggest,json=actionSuggest,proto3" json:"action_suggest"`         //操作建议：again 重新支付 / wait 等待确认 / close 关闭支付（选择其他支付方式）
-	AppPayData      *WeixinPayData        `protobuf:"bytes,10,opt,name=app_pay_data,json=appPayData,proto3" json:"app_pay_data"`               //App支付数据
-	MiniPayData     *WeixinPayData        `protobuf:"bytes,11,opt,name=mini_pay_data,json=miniPayData,proto3" json:"mini_pay_data"`            //小程序支付数据
-	MicroPayData    *WeixinMicroPayData   `protobuf:"bytes,12,opt,name=micro_pay_data,json=microPayData,proto3" json:"micro_pay_data"`         //付款码支付数据
-	NativePayData   *WeixinPayData        `protobuf:"bytes,13,opt,name=native_pay_data,json=nativePayData,proto3" json:"native_pay_data"`      //扫码支付数据
-	RefundData      *WeixinRefundData     `protobuf:"bytes,14,opt,name=refund_data,json=refundData,proto3" json:"refund_data"`                 //退款数据
-	QueryOrderData  *WeixinQueryOrderData `protobuf:"bytes,15,opt,name=query_order_data,json=queryOrderData,proto3" json:"query_order_data"`   //产订单数据
-	CloseOrderData  *WeixinCloseOrderData `protobuf:"bytes,16,opt,name=close_order_data,json=closeOrderData,proto3" json:"close_order_data"`   //关闭订单数据
-	Info            string                `protobuf:"bytes,17,opt,name=info,proto3" json:"info"`
+	IsDirectSucceed string                `protobuf:"bytes,1,opt,name=is_direct_succeed,json=isDirectSucceed,proto3" json:"is_direct_succeed,omitempty"` //是否直接成功(0否，1是)【支付/退款/转账/提现】
+	IsNeedCallback  string                `protobuf:"bytes,2,opt,name=is_need_callback,json=isNeedCallback,proto3" json:"is_need_callback,omitempty"`    //是否需要通知确认(0否，1是)
+	PayLog          *PayLog               `protobuf:"bytes,3,opt,name=pay_log,json=payLog,proto3" json:"pay_log,omitempty"`                              //支付日志
+	RefundLog       *RefundLog            `protobuf:"bytes,4,opt,name=refund_log,json=refundLog,proto3" json:"refund_log,omitempty"`                     //退款日志
+	ActionSuggest   string                `protobuf:"bytes,5,opt,name=action_suggest,json=actionSuggest,proto3" json:"action_suggest,omitempty"`         //操作建议：again 重新支付 / wait 等待确认 / close 关闭支付（选择其他支付方式）
+	AppPayData      *WeixinPayData        `protobuf:"bytes,10,opt,name=app_pay_data,json=appPayData,proto3" json:"app_pay_data,omitempty"`               //App支付数据
+	MiniPayData     *WeixinPayData        `protobuf:"bytes,11,opt,name=mini_pay_data,json=miniPayData,proto3" json:"mini_pay_data,omitempty"`            //小程序支付数据
+	MicroPayData    *WeixinMicroPayData   `protobuf:"bytes,12,opt,name=micro_pay_data,json=microPayData,proto3" json:"micro_pay_data,omitempty"`         //付款码支付数据
+	NativePayData   *WeixinPayData        `protobuf:"bytes,13,opt,name=native_pay_data,json=nativePayData,proto3" json:"native_pay_data,omitempty"`      //扫码支付数据
+	RefundData      *WeixinRefundData     `protobuf:"bytes,14,opt,name=refund_data,json=refundData,proto3" json:"refund_data,omitempty"`                 //退款数据
+	QueryOrderData  *WeixinQueryOrderData `protobuf:"bytes,15,opt,name=query_order_data,json=queryOrderData,proto3" json:"query_order_data,omitempty"`   //产订单数据
+	CloseOrderData  *WeixinCloseOrderData `protobuf:"bytes,16,opt,name=close_order_data,json=closeOrderData,proto3" json:"close_order_data,omitempty"`   //关闭订单数据
+	Info            string                `protobuf:"bytes,17,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *WeixinResponse) Reset() {

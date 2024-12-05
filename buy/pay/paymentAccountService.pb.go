@@ -26,21 +26,21 @@ type PaymentAccount struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int32                `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	AccountNo       string               `protobuf:"bytes,2,opt,name=account_no,json=accountNo,proto3" json:"account_no"`
-	AccountName     string               `protobuf:"bytes,3,opt,name=account_name,json=accountName,proto3" json:"account_name"`
-	PaymentType     string               `protobuf:"bytes,4,opt,name=payment_type,json=paymentType,proto3" json:"payment_type"`
-	IsProvider      string               `protobuf:"bytes,5,opt,name=is_provider,json=isProvider,proto3" json:"is_provider"`
-	PublicCert      string               `protobuf:"bytes,7,opt,name=public_cert,json=publicCert,proto3" json:"public_cert"`
-	PrivateCert     string               `protobuf:"bytes,8,opt,name=private_cert,json=privateCert,proto3" json:"private_cert"`
-	IsEnabled       string               `protobuf:"bytes,10,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled"`
-	CreatedAt       string               `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt       string               `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	WeixinConfig    *AccountWeixinConfig `protobuf:"bytes,13,opt,name=weixin_config,json=weixinConfig,proto3" json:"weixin_config"`
-	AlipayConfig    *AccountAlipayConfig `protobuf:"bytes,14,opt,name=alipay_config,json=alipayConfig,proto3" json:"alipay_config"`
-	IsProviderName  string               `protobuf:"bytes,15,opt,name=is_provider_name,json=isProviderName,proto3" json:"is_provider_name"`
-	IsEnabledName   string               `protobuf:"bytes,16,opt,name=is_enabled_name,json=isEnabledName,proto3" json:"is_enabled_name"`
-	PaymentTypeName string               `protobuf:"bytes,17,opt,name=payment_type_name,json=paymentTypeName,proto3" json:"payment_type_name"`
+	Id              int32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	AccountNo       string               `protobuf:"bytes,2,opt,name=account_no,json=accountNo,proto3" json:"account_no,omitempty"`
+	AccountName     string               `protobuf:"bytes,3,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
+	PaymentType     string               `protobuf:"bytes,4,opt,name=payment_type,json=paymentType,proto3" json:"payment_type,omitempty"`
+	IsProvider      string               `protobuf:"bytes,5,opt,name=is_provider,json=isProvider,proto3" json:"is_provider,omitempty"`
+	PublicCert      string               `protobuf:"bytes,7,opt,name=public_cert,json=publicCert,proto3" json:"public_cert,omitempty"`
+	PrivateCert     string               `protobuf:"bytes,8,opt,name=private_cert,json=privateCert,proto3" json:"private_cert,omitempty"`
+	IsEnabled       string               `protobuf:"bytes,10,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	CreatedAt       string               `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt       string               `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	WeixinConfig    *AccountWeixinConfig `protobuf:"bytes,13,opt,name=weixin_config,json=weixinConfig,proto3" json:"weixin_config,omitempty"`
+	AlipayConfig    *AccountAlipayConfig `protobuf:"bytes,14,opt,name=alipay_config,json=alipayConfig,proto3" json:"alipay_config,omitempty"`
+	IsProviderName  string               `protobuf:"bytes,15,opt,name=is_provider_name,json=isProviderName,proto3" json:"is_provider_name,omitempty"`
+	IsEnabledName   string               `protobuf:"bytes,16,opt,name=is_enabled_name,json=isEnabledName,proto3" json:"is_enabled_name,omitempty"`
+	PaymentTypeName string               `protobuf:"bytes,17,opt,name=payment_type_name,json=paymentTypeName,proto3" json:"payment_type_name,omitempty"`
 }
 
 func (x *PaymentAccount) Reset() {
@@ -186,18 +186,18 @@ type AccountWeixinConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MchId             string `protobuf:"bytes,2,opt,name=mch_id,json=mchId,proto3" json:"mch_id"`
-	SignType          string `protobuf:"bytes,3,opt,name=sign_type,json=signType,proto3" json:"sign_type"`
-	Md5Key            string `protobuf:"bytes,4,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`
-	CertSerialNo      string `protobuf:"bytes,5,opt,name=cert_serial_no,json=certSerialNo,proto3" json:"cert_serial_no"`
-	PublicCert        string `protobuf:"bytes,6,opt,name=public_cert,json=publicCert,proto3" json:"public_cert"`
-	V2PrivateKey      string `protobuf:"bytes,7,opt,name=v2_private_key,json=v2PrivateKey,proto3" json:"v2_private_key"`
-	V2ApiKey          string `protobuf:"bytes,8,opt,name=v2_api_key,json=v2ApiKey,proto3" json:"v2_api_key"`
-	V3ApiKey          string `protobuf:"bytes,9,opt,name=v3_api_key,json=v3ApiKey,proto3" json:"v3_api_key"`
-	V3PrivateKey      string `protobuf:"bytes,10,opt,name=v3_private_key,json=v3PrivateKey,proto3" json:"v3_private_key"`
-	ApiClientCertFile string `protobuf:"bytes,11,opt,name=api_client_cert_file,json=apiClientCertFile,proto3" json:"api_client_cert_file"`
-	ApiClientKeyFile  string `protobuf:"bytes,12,opt,name=api_client_key_file,json=apiClientKeyFile,proto3" json:"api_client_key_file"`
-	ApiClientP12File  string `protobuf:"bytes,13,opt,name=api_client_p12_file,json=apiClientP12File,proto3" json:"api_client_p12_file"`
+	MchId             string `protobuf:"bytes,2,opt,name=mch_id,json=mchId,proto3" json:"mch_id,omitempty"`
+	SignType          string `protobuf:"bytes,3,opt,name=sign_type,json=signType,proto3" json:"sign_type,omitempty"`
+	Md5Key            string `protobuf:"bytes,4,opt,name=md5_key,json=md5Key,proto3" json:"md5_key,omitempty"`
+	CertSerialNo      string `protobuf:"bytes,5,opt,name=cert_serial_no,json=certSerialNo,proto3" json:"cert_serial_no,omitempty"`
+	PublicCert        string `protobuf:"bytes,6,opt,name=public_cert,json=publicCert,proto3" json:"public_cert,omitempty"`
+	V2PrivateKey      string `protobuf:"bytes,7,opt,name=v2_private_key,json=v2PrivateKey,proto3" json:"v2_private_key,omitempty"`
+	V2ApiKey          string `protobuf:"bytes,8,opt,name=v2_api_key,json=v2ApiKey,proto3" json:"v2_api_key,omitempty"`
+	V3ApiKey          string `protobuf:"bytes,9,opt,name=v3_api_key,json=v3ApiKey,proto3" json:"v3_api_key,omitempty"`
+	V3PrivateKey      string `protobuf:"bytes,10,opt,name=v3_private_key,json=v3PrivateKey,proto3" json:"v3_private_key,omitempty"`
+	ApiClientCertFile string `protobuf:"bytes,11,opt,name=api_client_cert_file,json=apiClientCertFile,proto3" json:"api_client_cert_file,omitempty"`
+	ApiClientKeyFile  string `protobuf:"bytes,12,opt,name=api_client_key_file,json=apiClientKeyFile,proto3" json:"api_client_key_file,omitempty"`
+	ApiClientP12File  string `protobuf:"bytes,13,opt,name=api_client_p12_file,json=apiClientP12File,proto3" json:"api_client_p12_file,omitempty"`
 }
 
 func (x *AccountWeixinConfig) Reset() {
@@ -322,12 +322,12 @@ type AccountAlipayConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MchId        string `protobuf:"bytes,2,opt,name=mch_id,json=mchId,proto3" json:"mch_id"`
-	SignType     string `protobuf:"bytes,3,opt,name=sign_type,json=signType,proto3" json:"sign_type"`
-	Md5Key       string `protobuf:"bytes,4,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`
-	CertSerialNo string `protobuf:"bytes,5,opt,name=cert_serial_no,json=certSerialNo,proto3" json:"cert_serial_no"`
-	V2PrivateKey string `protobuf:"bytes,6,opt,name=v2_private_key,json=v2PrivateKey,proto3" json:"v2_private_key"`
-	V2ApiKey     string `protobuf:"bytes,7,opt,name=v2_api_key,json=v2ApiKey,proto3" json:"v2_api_key"`
+	MchId        string `protobuf:"bytes,2,opt,name=mch_id,json=mchId,proto3" json:"mch_id,omitempty"`
+	SignType     string `protobuf:"bytes,3,opt,name=sign_type,json=signType,proto3" json:"sign_type,omitempty"`
+	Md5Key       string `protobuf:"bytes,4,opt,name=md5_key,json=md5Key,proto3" json:"md5_key,omitempty"`
+	CertSerialNo string `protobuf:"bytes,5,opt,name=cert_serial_no,json=certSerialNo,proto3" json:"cert_serial_no,omitempty"`
+	V2PrivateKey string `protobuf:"bytes,6,opt,name=v2_private_key,json=v2PrivateKey,proto3" json:"v2_private_key,omitempty"`
+	V2ApiKey     string `protobuf:"bytes,7,opt,name=v2_api_key,json=v2ApiKey,proto3" json:"v2_api_key,omitempty"`
 }
 
 func (x *AccountAlipayConfig) Reset() {
@@ -409,15 +409,15 @@ type PaymentAccountRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged       int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize    int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Keywords    string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords"`
-	Id          int32  `protobuf:"varint,5,opt,name=id,proto3" json:"id"`
-	AccountNo   string `protobuf:"bytes,6,opt,name=account_no,json=accountNo,proto3" json:"account_no"`
-	AccountName string `protobuf:"bytes,7,opt,name=account_name,json=accountName,proto3" json:"account_name"`
-	PaymentType string `protobuf:"bytes,8,opt,name=payment_type,json=paymentType,proto3" json:"payment_type"`
-	IsProvider  string `protobuf:"bytes,9,opt,name=is_provider,json=isProvider,proto3" json:"is_provider"`
-	IsEnabled   string `protobuf:"bytes,10,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled"`
+	Paged       int64  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize    int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Keywords    string `protobuf:"bytes,3,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Id          int32  `protobuf:"varint,5,opt,name=id,proto3" json:"id,omitempty"`
+	AccountNo   string `protobuf:"bytes,6,opt,name=account_no,json=accountNo,proto3" json:"account_no,omitempty"`
+	AccountName string `protobuf:"bytes,7,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
+	PaymentType string `protobuf:"bytes,8,opt,name=payment_type,json=paymentType,proto3" json:"payment_type,omitempty"`
+	IsProvider  string `protobuf:"bytes,9,opt,name=is_provider,json=isProvider,proto3" json:"is_provider,omitempty"`
+	IsEnabled   string `protobuf:"bytes,10,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
 }
 
 func (x *PaymentAccountRequest) Reset() {
@@ -520,10 +520,10 @@ type PaymentAccountResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *PaymentAccount   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*PaymentAccount `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   string            `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
+	Entity *PaymentAccount   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*PaymentAccount `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   string            `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *PaymentAccountResponse) Reset() {

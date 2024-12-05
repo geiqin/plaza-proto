@@ -58,15 +58,16 @@ message Aftersale {
     string order_no =2; //订单编号
     int64  order_id =3; //订单ID
     int64  order_detail_id =4; //订单详情id
-    int64  sku_id =5; //SkuID
-    int64  member_id =6; //用户id
-    string type =7; //业务类型（0仅退款, 1退货退款）
-    string refundment =8; //退款类型（0原路退回, 1退至钱包, 2手动处理）
-    string reason =9; //申请原因
-    int64  number =10; //退货数量
-    int64  price =11; //退款金额
-    int64  freight_subsidy =12; //运费补贴金
-    string msg =13; //退款说明
+    int64  spu_id =5; //SpuID
+    int64  sku_key =6; //SkuKey
+    int64  member_id =7; //用户id
+    string type =8; //业务类型（0仅退款, 1退货退款）
+    string refundment =9; //退款类型（0原路退回, 1退至钱包, 2手动处理）
+    string reason =10; //申请原因
+    int64  number =11; //退货数量
+    int64  price =12; //退款金额
+    int64  subsidy_money =13; //运费补贴金
+    string msg =14; //退款说明
     string refuse_reason =15; //拒绝原因
     string express_name =16; //快递名称
     string express_number =17; //快递单号
@@ -131,7 +132,7 @@ message AftersaleResponse {
     Aftersale aftersale = 1;
     common.Pager pager = 4;
     repeated Aftersale items = 5;
-    string info = 6;
+    string msg = 6;
 }
 
 

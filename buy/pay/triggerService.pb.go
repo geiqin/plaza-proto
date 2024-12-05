@@ -25,10 +25,10 @@ type TriggerRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderId      int64   `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	SafeguardId  int64   `protobuf:"varint,2,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id"`
-	OrderIds     []int64 `protobuf:"varint,3,rep,packed,name=order_ids,json=orderIds,proto3" json:"order_ids"`
-	SafeguardIds []int64 `protobuf:"varint,4,rep,packed,name=safeguard_ids,json=safeguardIds,proto3" json:"safeguard_ids"`
+	OrderId      int64   `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	SafeguardId  int64   `protobuf:"varint,2,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id,omitempty"`
+	OrderIds     []int64 `protobuf:"varint,3,rep,packed,name=order_ids,json=orderIds,proto3" json:"order_ids,omitempty"`
+	SafeguardIds []int64 `protobuf:"varint,4,rep,packed,name=safeguard_ids,json=safeguardIds,proto3" json:"safeguard_ids,omitempty"`
 }
 
 func (x *TriggerRequest) Reset() {
@@ -96,8 +96,8 @@ type TriggerResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Params map[string]string `protobuf:"bytes,1,rep,name=params,proto3" json:"params" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Info   string            `protobuf:"bytes,2,opt,name=info,proto3" json:"info"`
+	Params map[string]string `protobuf:"bytes,1,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Info   string            `protobuf:"bytes,2,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *TriggerResponse) Reset() {

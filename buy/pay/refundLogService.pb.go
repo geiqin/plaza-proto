@@ -27,26 +27,26 @@ type RefundLog struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                       //ID
-	LogNo            string `protobuf:"bytes,2,opt,name=log_no,json=logNo,proto3" json:"log_no"`                                     //退款单号
-	PayLogId         int64  `protobuf:"varint,3,opt,name=pay_log_id,json=payLogId,proto3" json:"pay_log_id"`                         //支付日志id
-	MemberId         int64  `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id"`                           //用户ID
-	BusinessId       int64  `protobuf:"varint,5,opt,name=business_id,json=businessId,proto3" json:"business_id"`                     // 业务订单id
-	BusinessType     string `protobuf:"bytes,6,opt,name=business_type,json=businessType,proto3" json:"business_type"`                //订单类型: order 订单, wallet 钱包 vip 会员等级
-	TradeNo          string `protobuf:"bytes,7,opt,name=trade_no,json=tradeNo,proto3" json:"trade_no"`                               //支付平台交易号
-	BuyerUser        string `protobuf:"bytes,8,opt,name=buyer_user,json=buyerUser,proto3" json:"buyer_user"`                         //支付平台用户帐号
-	RefundPrice      int64  `protobuf:"varint,9,opt,name=refund_price,json=refundPrice,proto3" json:"refund_price"`                  //退款金额
-	PayPrice         int64  `protobuf:"varint,10,opt,name=pay_price,json=payPrice,proto3" json:"pay_price"`                          //订单实际支付金额
-	Reason           string `protobuf:"bytes,11,opt,name=reason,proto3" json:"reason"`                                               //原因描述
-	PaymentId        int32  `protobuf:"varint,12,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`                       //支付方式ID
-	PaymentWayCode   string `protobuf:"bytes,13,opt,name=payment_way_code,json=paymentWayCode,proto3" json:"payment_way_code"`       //支付方式标识
-	PaymentType      string `protobuf:"bytes,14,opt,name=payment_type,json=paymentType,proto3" json:"payment_type"`                  //支付类型
-	PaymentAccountNo string `protobuf:"bytes,15,opt,name=payment_account_no,json=paymentAccountNo,proto3" json:"payment_account_no"` //支付结算账户编号
-	Refundment       string `protobuf:"bytes,16,opt,name=refundment,proto3" json:"refundment"`                                       //退款类型（0原路退回, 1退至钱包, 2手动处理）
-	RequestParams    string `protobuf:"bytes,17,opt,name=request_params,json=requestParams,proto3" json:"request_params"`            //支付平台返回参数（以json存储）
-	Status           string `protobuf:"bytes,18,opt,name=status,proto3" json:"status"`                                               //退款状态：0待退款，1退款成功，2退款失败
-	CreatedAt        string `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt        string `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                       //ID
+	LogNo            string `protobuf:"bytes,2,opt,name=log_no,json=logNo,proto3" json:"log_no,omitempty"`                                     //退款单号
+	PayLogId         int64  `protobuf:"varint,3,opt,name=pay_log_id,json=payLogId,proto3" json:"pay_log_id,omitempty"`                         //支付日志id
+	MemberId         int64  `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`                           //用户ID
+	BusinessId       int64  `protobuf:"varint,5,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`                     // 业务订单id
+	BusinessType     string `protobuf:"bytes,6,opt,name=business_type,json=businessType,proto3" json:"business_type,omitempty"`                //订单类型: order 订单, wallet 钱包 vip 会员等级
+	TradeNo          string `protobuf:"bytes,7,opt,name=trade_no,json=tradeNo,proto3" json:"trade_no,omitempty"`                               //支付平台交易号
+	BuyerUser        string `protobuf:"bytes,8,opt,name=buyer_user,json=buyerUser,proto3" json:"buyer_user,omitempty"`                         //支付平台用户帐号
+	RefundPrice      int64  `protobuf:"varint,9,opt,name=refund_price,json=refundPrice,proto3" json:"refund_price,omitempty"`                  //退款金额
+	PayPrice         int64  `protobuf:"varint,10,opt,name=pay_price,json=payPrice,proto3" json:"pay_price,omitempty"`                          //订单实际支付金额
+	Reason           string `protobuf:"bytes,11,opt,name=reason,proto3" json:"reason,omitempty"`                                               //原因描述
+	PaymentId        int32  `protobuf:"varint,12,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`                       //支付方式ID
+	PaymentWayCode   string `protobuf:"bytes,13,opt,name=payment_way_code,json=paymentWayCode,proto3" json:"payment_way_code,omitempty"`       //支付方式标识
+	PaymentType      string `protobuf:"bytes,14,opt,name=payment_type,json=paymentType,proto3" json:"payment_type,omitempty"`                  //支付类型
+	PaymentAccountNo string `protobuf:"bytes,15,opt,name=payment_account_no,json=paymentAccountNo,proto3" json:"payment_account_no,omitempty"` //支付结算账户编号
+	Refundment       string `protobuf:"bytes,16,opt,name=refundment,proto3" json:"refundment,omitempty"`                                       //退款类型（0原路退回, 1退至钱包, 2手动处理）
+	RequestParams    string `protobuf:"bytes,17,opt,name=request_params,json=requestParams,proto3" json:"request_params,omitempty"`            //支付平台返回参数（以json存储）
+	Status           string `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"`                                               //退款状态：0待退款，1退款成功，2退款失败
+	CreatedAt        string `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt        string `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
 
 func (x *RefundLog) Reset() {
@@ -226,21 +226,21 @@ type RefundLogRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
+	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
 	//base params
-	Id             int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`                                                 //退款日志ID
-	BusinessId     int64  `protobuf:"varint,5,opt,name=business_id,json=businessId,proto3" json:"business_id"`               // 业务订单id
-	BusinessType   string `protobuf:"bytes,6,opt,name=business_type,json=businessType,proto3" json:"business_type"`          //订单类型: order 订单, wallet 钱包 vip 会员等级
-	TradeNo        string `protobuf:"bytes,7,opt,name=trade_no,json=tradeNo,proto3" json:"trade_no"`                         //支付平台交易号
-	BuyerUser      string `protobuf:"bytes,8,opt,name=buyer_user,json=buyerUser,proto3" json:"buyer_user"`                   //支付平台用户帐号
-	PaymentId      int32  `protobuf:"varint,9,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`                  //支付方式ID
-	PaymentWayCode string `protobuf:"bytes,10,opt,name=payment_way_code,json=paymentWayCode,proto3" json:"payment_way_code"` //支付方式标识
-	PaymentType    string `protobuf:"bytes,11,opt,name=payment_type,json=paymentType,proto3" json:"payment_type"`            //支付类型
-	Refundment     string `protobuf:"bytes,12,opt,name=refundment,proto3" json:"refundment"`                                 //退款类型（0原路退回, 1退至钱包, 2手动处理）
-	LogNo          string `protobuf:"bytes,13,opt,name=log_no,json=logNo,proto3" json:"log_no"`                              //退款日志编号
-	Status         string `protobuf:"bytes,14,opt,name=status,proto3" json:"status"`                                         //状态
+	Id             int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`                                                 //退款日志ID
+	BusinessId     int64  `protobuf:"varint,5,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`               // 业务订单id
+	BusinessType   string `protobuf:"bytes,6,opt,name=business_type,json=businessType,proto3" json:"business_type,omitempty"`          //订单类型: order 订单, wallet 钱包 vip 会员等级
+	TradeNo        string `protobuf:"bytes,7,opt,name=trade_no,json=tradeNo,proto3" json:"trade_no,omitempty"`                         //支付平台交易号
+	BuyerUser      string `protobuf:"bytes,8,opt,name=buyer_user,json=buyerUser,proto3" json:"buyer_user,omitempty"`                   //支付平台用户帐号
+	PaymentId      int32  `protobuf:"varint,9,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`                  //支付方式ID
+	PaymentWayCode string `protobuf:"bytes,10,opt,name=payment_way_code,json=paymentWayCode,proto3" json:"payment_way_code,omitempty"` //支付方式标识
+	PaymentType    string `protobuf:"bytes,11,opt,name=payment_type,json=paymentType,proto3" json:"payment_type,omitempty"`            //支付类型
+	Refundment     string `protobuf:"bytes,12,opt,name=refundment,proto3" json:"refundment,omitempty"`                                 //退款类型（0原路退回, 1退至钱包, 2手动处理）
+	LogNo          string `protobuf:"bytes,13,opt,name=log_no,json=logNo,proto3" json:"log_no,omitempty"`                              //退款日志编号
+	Status         string `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`                                         //状态
 }
 
 func (x *RefundLogRequest) Reset() {
@@ -378,10 +378,10 @@ type RefundLogResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *RefundLog    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items  []*RefundLog  `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Info   string        `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity *RefundLog    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items  []*RefundLog  `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Info   string        `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *RefundLogResponse) Reset() {

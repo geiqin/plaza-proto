@@ -40,6 +40,6 @@ message OrderStatusLogRequest {
 message OrderStatusLogResponse{
     OrderStatusLog entity = 1;
     repeated OrderStatusLog items =2;
-    common.Info info =3;
+    common.Info msg =3;
 }
 
