@@ -4,43 +4,40 @@ option go_package = "/.;services";
 import "baseInfoService.proto";
 
 message OrderDetail {
-    int64  id =1;//ID
-    int64  order_id =2;//订单ID
-    int64  spu_id =3;//商品id
-    string md5_key =4;//md5key
-    string title =5;//标题
-    string unit =6;//型号
-    float unit_rate =7;//计量单位换算率
-    string is_open_weight =8;//是否开启称重（称重商品不能是多规格）（0否, 1是）
-    string image_url =9;//图片路径
-    int64  spec_weight =10;//重量（g）
-    int64  spec_volume =11;//体积
-    string spec_coding =12;//编码
-    string spec_barcode =13;//编码
-    int64  buy_number =14;//购买数量
-    int64  price =15;//成交价
-    int64  sale_price =16;//销售价
-    int64  subtotal_price =17;//小计(成交价*数量)
-    int64  refunded_money =20;//已退款金额
-    int64  returned_number =21;//已退货数量
-    int64  delivered_number =22;//已发货数量
-    string is_all_delivered =23; //是否已全部发货(0否，1是)
-    string model =24;//型号
-    DiscountAllocation DiscountAllocation =25; //优惠分摊
-    repeated SkuSpecInfo spec =26;//规格
-    string spec_desc =27;//描述
-    string extend_data =28;//扩展数据 json
-    string created_at  = 29;
-    string updated_at  = 30;
-    string orderaftersale_btn_text =31;//订单售后服务按钮文本
-    LastAftersale orderaftersale =32;//最新一条售后单
-}
-
-//优惠分摊
-message DiscountAllocation{
-    int64  preferential_total =1;//优惠金额合计
-    int64  preferential_allocation_money =2;//优惠分摊金额（分摊到每个商品上）
-    int64  last_one_allocation_money =3;//最后一个商品的优惠分摊，0为不是最后个
+    int64 id = 1; //ID
+    int64 order_id = 2; //订单ID
+    int64 spu_id = 3; //商品ID
+    string sku_key = 4; //SKUKey
+    string name = 5; //商品名称
+    string image_url = 6; //图片路径
+    int64 spec_weight = 7; //规格重量
+    int64 spec_volume = 8; //规格体积
+    string spec_coding = 9; //规格编码
+    string spec_barcode = 10; //规格条码
+    int64 unit_id = 11; //计量单位ID
+    string unit_name = 12; //计量单位名称
+    float unit_rate = 13; //单位换算率
+    string is_weighed = 14; //称重商品
+    int64 buy_number = 15; //购买数量
+    int64 integral = 16; //消耗积分
+    int64 sale_price = 17; //销售价
+    int64 price = 18; //成交价
+    int64 discount_amount = 19; //优惠金额
+    int64 subtotal_amount = 20; //合计金额
+    int64 refunded_amount = 21; //已退款金额
+    int64 returned_number = 22; //已退货数量
+    int64 delivered_number = 23; //已发货数量
+    string is_all_delivered = 24; //已全部发货
+    string discount_details = 25; //优惠明细
+    repeated SkuSpecInfo spec = 26; //规格
+    string spec_desc = 27; //规格描述
+    string out_primary_id = 28; //外部主表主键
+    string out_secondary_id = 29; //外部次表主键
+    string is_gift = 30; //是否为赠品
+    string created_at = 31; //创建时间
+    string updated_at = 32; //修改时间
+    string orderaftersale_btn_text =33;//订单售后服务按钮文本
+    LastAftersale orderaftersale =34;//最新一条售后单
 }
 
 //最后条售后
@@ -49,15 +46,16 @@ message LastAftersale {
     string order_no =2; //订单编号
     int64  order_id =3; //订单ID
     int64  order_detail_id =4; //订单详情id
-    int64  sku_id =5; //SkuID
-    int64  member_id =6; //用户id
-    string type =7; //业务类型（0仅退款, 1退货退款）
-    string refund_method =8; //退款类型（0原路退回, 1退至钱包, 2手动处理）
-    string reason =9; //申请原因
-    int32  number =10; //退货数量
-    int64  price =11; //退款金额
-    int64  freight_subsidy =12; //运费补贴金
-    string msg =13; //退款说明
-    string status =14; //状态（0待确认, 1待退货, 2待审核, 3已完成, 4已拒绝, 5已取消）
+    int64  spu_id =5; //SpuId
+    string  sku_key =6; //SkuKey
+    int64  member_id =7; //用户id
+    string type =8; //业务类型（0仅退款, 1退货退款）
+    string refund_method =9; //退款类型（0原路退回, 1退至钱包, 2手动处理）
+    string reason =10; //申请原因
+    int32  number =11; //退货数量
+    int64  price =12; //退款金额
+    int64  freight_subsidy =13; //运费补贴金
+    string msg =14; //退款说明
+    string status =15; //状态（0待确认, 1待退货, 2待审核, 3已完成, 4已拒绝, 5已取消）
     string status_text =28;
 }

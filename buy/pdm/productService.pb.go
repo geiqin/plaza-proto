@@ -658,7 +658,7 @@ type ProductRequest struct {
 	IsManySpec    string   `protobuf:"bytes,31,opt,name=is_many_spec,json=isManySpec,proto3" json:"is_many_spec"`       //是否多规格商品,否则为单品(0否，1是)
 	IsOpenWeight  string   `protobuf:"bytes,32,opt,name=is_open_weight,json=isOpenWeight,proto3" json:"is_open_weight"` //
 	Md5Key        string   `protobuf:"bytes,33,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`
-	Md5KeyList    []string `protobuf:"bytes,34,rep,name=md5_key_list,json=md5KeyList,proto3" json:"md5_key_list"`
+	SkuKeyList    []string `protobuf:"bytes,34,rep,name=md5_key_list,json=md5KeyList,proto3" json:"md5_key_list"`
 	IsQueryDelete string   `protobuf:"bytes,35,opt,name=is_query_delete,json=isQueryDelete,proto3" json:"is_query_delete"` //是否查询已删除（0否，1是）
 }
 
@@ -925,9 +925,9 @@ func (x *ProductRequest) GetMd5Key() string {
 	return ""
 }
 
-func (x *ProductRequest) GetMd5KeyList() []string {
+func (x *ProductRequest) GetSkuKeyList() []string {
 	if x != nil {
-		return x.Md5KeyList
+		return x.SkuKeyList
 	}
 	return nil
 }
