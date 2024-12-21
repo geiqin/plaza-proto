@@ -24,8 +24,8 @@ message ExpressCorp {
   string name = 3; //名称
   string logo_url = 4; //图标URL
   string tel = 5; //联系电话
-  string memo = 6; //备注
-  string is_electronic = 7; //是否支持电子面单
+  string desc = 6; //描述
+  string type = 7; //类型：1快递，2物流
   string weixin_code = 8; //微信编码
   string kdniao_code = 9; //快递鸟编码
   string kd100_code = 10; //快递100编码
@@ -47,7 +47,7 @@ message ExpressCorpRequest {
   //以下为自定义参数
   string code = 11; //编码
   string name = 12; //名称
-  string is_electronic = 13; //是否支持电子面单
+  string type = 13; //类型
   string weixin_code = 14; //微信编码
   string kdniao_code = 15; //快递鸟编码
   string kd100_code = 16; //快递100编码
