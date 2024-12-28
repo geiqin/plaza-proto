@@ -1,0 +1,68 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 快递公司服务
+service ExpressCorpService {
+  // 快递公司新增
+  rpc Create (ExpressCorp) returns (ExpressCorpResponse) {}
+  // 快递公司新增添加
+  rpc AddTo (ExpressCorp) returns (ExpressCorpResponse) {}
+  // 快递公司修改
+  rpc Update (ExpressCorp) returns (ExpressCorpResponse) {}
+  // 快递公司删除
+  rpc Delete (ExpressCorp) returns (ExpressCorpResponse) {}
+  // 快递公司获取
+  rpc Get (ExpressCorp) returns (ExpressCorpResponse) {}
+  // 快递公司查询
+  rpc Search (ExpressCorpRequest) returns (ExpressCorpResponse) {}
+  // 快递公司列表
+  rpc List (ExpressCorpRequest) returns (ExpressCorpResponse) {}
+  // 快递公司选择器
+  rpc Selector (ExpressCorpRequest) returns (ExpressCorpResponse) {}
+}
+// 快递公司
+message ExpressCorp {
+  int32 id = 1; //ID
+  string code = 2; //编码
+  string name = 3; //名称
+  string type = 4; //类型
+  string logo_url = 5; //Logo
+  string tel = 6; //联系电话
+  string is_surface = 7; //电子面单
+  string config = 8; //配置内容
+  string desc = 9; //备注
+  string weixin_code = 10; //微信编码
+  string kdniao_code = 11; //快递鸟编码
+  string kd100_code = 12; //快递100编码
+  int32 sort = 13; //排序
+  string status = 14; //状态
+  string created_at = 15; //创建时间
+  string updated_at = 16; //修改时间
+  bool checked =17;
+}
+// 快递公司请求参数
+message ExpressCorpRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string code = 11; //编码
+  string name = 12; //名称
+  string type = 13; //类型
+  string is_surface = 14; //电子面单
+  string status = 15; //状态
+  repeated string codes = 16; //编码
+}
+// 快递公司响应数据
+message ExpressCorpResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  ExpressCorp entity = 3;
+  repeated ExpressCorp items = 4;
+}

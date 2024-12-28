@@ -5,7 +5,7 @@ option go_package ="/.;services";
 import "common/base.proto";
 
 service AreaService {
-    rpc Get (Area) returns (AreaResponse) {}
+    rpc Get (AreaRequest) returns (AreaResponse) {}
     rpc Search (AreaRequest) returns (AreaResponse) {}
     rpc Tree (AreaRequest) returns (AreaResponse) {}
     rpc List (AreaRequest) returns (AreaResponse) {}
@@ -38,6 +38,7 @@ message Area {
     string remark1 =23;
     string remark2 =24;
     repeated Area children =25;
+
 }
 
 
@@ -53,6 +54,7 @@ message AreaRequest {
     string status = 7;
     repeated int64 ids =8;
     int64 parent_id = 9;
+    bool is_children =10;
 }
 
 

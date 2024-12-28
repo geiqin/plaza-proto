@@ -1,0 +1,58 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "expressConfigService.proto";
+import "localConfigService.proto";
+import "mentionConfigService.proto";
+
+service DeliveryService {
+  rpc Switch (Delivery) returns (DeliveryResponse) {}
+  rpc Save (Delivery) returns (DeliveryResponse) {}
+  rpc Get (Delivery) returns (DeliveryResponse) {}
+  rpc List (DeliveryRequest) returns (DeliveryResponse) {}
+}
+
+message Delivery {
+  int32 id = 1; //ID
+  string code = 2; //编码
+  string name = 3; //名称
+  string desc = 4; //描述
+  int32 sort = 5; //排序
+  DeliveryConfig config = 6; //配置信息
+  string is_default = 7; //是否默认
+  string status = 8; //状态
+  string created_at = 9; //创建时间
+  string updated_at = 10; //修改时间
+}
+
+message DeliveryConfig {
+  ExpressConfig express =1;
+  LocalConfig local =2;
+  MentionConfig mention =3;
+}
+
+message DeliveryRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string code = 11; //编码
+  string name = 12; //名称
+  string is_default = 13; //是否默认
+  string status = 14; //状态
+}
+
+message DeliveryResponse{
+  Delivery entity = 1;
+  common.Pager pager =2;
+  repeated Delivery items = 3;
+  string msg =4;
+}
+
+

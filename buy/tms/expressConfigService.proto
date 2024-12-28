@@ -1,0 +1,10 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+
+
+//快递发货配置
+message ExpressConfig {
+    string is_enable_delivery =1;//是否开启快递发货(0否、1是)
+    string charging_type =2;//计费方式:1-累加运费,2-组合运费
+}

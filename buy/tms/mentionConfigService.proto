@@ -1,0 +1,8 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+
+//到店自提配置
+message MentionConfig {
+    string custom_name =1;//自定义名称
+}

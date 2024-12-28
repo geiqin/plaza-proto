@@ -43,7 +43,7 @@ func NewAreaServiceEndpoints() []*api.Endpoint {
 // Client API for AreaService service
 
 type AreaService interface {
-	Get(ctx context.Context, in *Area, opts ...client.CallOption) (*AreaResponse, error)
+	Get(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
 	Search(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
 	Tree(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
 	List(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
@@ -61,7 +61,7 @@ func NewAreaService(name string, c client.Client) AreaService {
 	}
 }
 
-func (c *areaService) Get(ctx context.Context, in *Area, opts ...client.CallOption) (*AreaResponse, error) {
+func (c *areaService) Get(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error) {
 	req := c.c.NewRequest(c.name, "AreaService.Get", in)
 	out := new(AreaResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -104,7 +104,7 @@ func (c *areaService) List(ctx context.Context, in *AreaRequest, opts ...client.
 // Server API for AreaService service
 
 type AreaServiceHandler interface {
-	Get(context.Context, *Area, *AreaResponse) error
+	Get(context.Context, *AreaRequest, *AreaResponse) error
 	Search(context.Context, *AreaRequest, *AreaResponse) error
 	Tree(context.Context, *AreaRequest, *AreaResponse) error
 	List(context.Context, *AreaRequest, *AreaResponse) error
@@ -112,7 +112,7 @@ type AreaServiceHandler interface {
 
 func RegisterAreaServiceHandler(s server.Server, hdlr AreaServiceHandler, opts ...server.HandlerOption) error {
 	type areaService interface {
-		Get(ctx context.Context, in *Area, out *AreaResponse) error
+		Get(ctx context.Context, in *AreaRequest, out *AreaResponse) error
 		Search(ctx context.Context, in *AreaRequest, out *AreaResponse) error
 		Tree(ctx context.Context, in *AreaRequest, out *AreaResponse) error
 		List(ctx context.Context, in *AreaRequest, out *AreaResponse) error
@@ -128,7 +128,7 @@ type areaServiceHandler struct {
 	AreaServiceHandler
 }
 
-func (h *areaServiceHandler) Get(ctx context.Context, in *Area, out *AreaResponse) error {
+func (h *areaServiceHandler) Get(ctx context.Context, in *AreaRequest, out *AreaResponse) error {
 	return h.AreaServiceHandler.Get(ctx, in, out)
 }
 

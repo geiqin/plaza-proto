@@ -1,0 +1,22 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+
+//同城配送配置
+message LocalConfig {
+    string is_timed_arrival =1;//是否开启定时达(0否、1是)
+    LocalTimedArrival timed_arrival  =2;//定时达规则
+    string description =3;//配送说明
+}
+
+//定时送达数据
+message LocalTimedArrival {
+    string repeat_type =1;//配送时间:all_day全天、repeat_day每天重复、repeat_week每周重复
+    int32  repeat_weeks =2;//自提时间每周重复的星期数按|运算: 1周一，2周二，4周三，8周四，16周五，32周六，64周日
+    string time_section =3;//配送时段细分: day按天，hour按小时，half_hour按半小时
+    string appointment_type =4;//预约下单：no无需提前、day提前X天、hour提前X小时、minute提前X分钟
+    int32  appointment_value =5;//预约下单的天数、小时、分钟
+    int32  appointment_max_days =6;//最长预约天数(0只能当天配送)
+    repeated string ranges =7;//范围 待定
+    repeated string delivery_times =8;// 配送时段 待定
+}
