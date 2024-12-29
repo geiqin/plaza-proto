@@ -1,0 +1,49 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 线下支付服务
+service PaymentOfflineService {
+  // 线下支付新增
+  rpc Create (PaymentOffline) returns (PaymentOfflineResponse) {}
+  // 线下支付修改
+  rpc Update (PaymentOffline) returns (PaymentOfflineResponse) {}
+  // 线下支付删除
+  rpc Delete (PaymentOffline) returns (PaymentOfflineResponse) {}
+  // 线下支付获取
+  rpc Get (PaymentOffline) returns (PaymentOfflineResponse) {}
+  // 线下支付查询
+  rpc Search (PaymentOfflineRequest) returns (PaymentOfflineResponse) {}
+  // 线下支付列表
+  rpc List (PaymentOfflineRequest) returns (PaymentOfflineResponse) {}
+}
+// 线下支付
+message PaymentOffline {
+  int32 id = 1; //ID
+  string name = 2; //名称
+  string scene = 3; //适用场景
+  string status = 4; //启用状态
+  string created_at = 5; //创建时间
+  string updated_at = 6; //修改时间
+}
+// 线下支付请求参数
+message PaymentOfflineRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string name = 11; //名称
+  string status = 12; //启用状态
+}
+// 线下支付响应数据
+message PaymentOfflineResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  PaymentOffline entity = 3;
+  repeated PaymentOffline items = 4;
+}

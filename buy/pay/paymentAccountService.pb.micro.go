@@ -47,6 +47,7 @@ type PaymentAccountService interface {
 	Update(ctx context.Context, in *PaymentAccount, opts ...client.CallOption) (*PaymentAccountResponse, error)
 	Delete(ctx context.Context, in *PaymentAccount, opts ...client.CallOption) (*PaymentAccountResponse, error)
 	Get(ctx context.Context, in *PaymentAccount, opts ...client.CallOption) (*PaymentAccountResponse, error)
+	List(ctx context.Context, in *PaymentAccountRequest, opts ...client.CallOption) (*PaymentAccountResponse, error)
 	Search(ctx context.Context, in *PaymentAccountRequest, opts ...client.CallOption) (*PaymentAccountResponse, error)
 }
 
@@ -102,6 +103,16 @@ func (c *paymentAccountService) Get(ctx context.Context, in *PaymentAccount, opt
 	return out, nil
 }
 
+func (c *paymentAccountService) List(ctx context.Context, in *PaymentAccountRequest, opts ...client.CallOption) (*PaymentAccountResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentAccountService.List", in)
+	out := new(PaymentAccountResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *paymentAccountService) Search(ctx context.Context, in *PaymentAccountRequest, opts ...client.CallOption) (*PaymentAccountResponse, error) {
 	req := c.c.NewRequest(c.name, "PaymentAccountService.Search", in)
 	out := new(PaymentAccountResponse)
@@ -119,6 +130,7 @@ type PaymentAccountServiceHandler interface {
 	Update(context.Context, *PaymentAccount, *PaymentAccountResponse) error
 	Delete(context.Context, *PaymentAccount, *PaymentAccountResponse) error
 	Get(context.Context, *PaymentAccount, *PaymentAccountResponse) error
+	List(context.Context, *PaymentAccountRequest, *PaymentAccountResponse) error
 	Search(context.Context, *PaymentAccountRequest, *PaymentAccountResponse) error
 }
 
@@ -128,6 +140,7 @@ func RegisterPaymentAccountServiceHandler(s server.Server, hdlr PaymentAccountSe
 		Update(ctx context.Context, in *PaymentAccount, out *PaymentAccountResponse) error
 		Delete(ctx context.Context, in *PaymentAccount, out *PaymentAccountResponse) error
 		Get(ctx context.Context, in *PaymentAccount, out *PaymentAccountResponse) error
+		List(ctx context.Context, in *PaymentAccountRequest, out *PaymentAccountResponse) error
 		Search(ctx context.Context, in *PaymentAccountRequest, out *PaymentAccountResponse) error
 	}
 	type PaymentAccountService struct {
@@ -155,6 +168,10 @@ func (h *paymentAccountServiceHandler) Delete(ctx context.Context, in *PaymentAc
 
 func (h *paymentAccountServiceHandler) Get(ctx context.Context, in *PaymentAccount, out *PaymentAccountResponse) error {
 	return h.PaymentAccountServiceHandler.Get(ctx, in, out)
+}
+
+func (h *paymentAccountServiceHandler) List(ctx context.Context, in *PaymentAccountRequest, out *PaymentAccountResponse) error {
+	return h.PaymentAccountServiceHandler.List(ctx, in, out)
 }
 
 func (h *paymentAccountServiceHandler) Search(ctx context.Context, in *PaymentAccountRequest, out *PaymentAccountResponse) error {

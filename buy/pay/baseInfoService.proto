@@ -1,0 +1,17 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+
+// 支付通道
+message PaymentChannelInfo {
+	int32 id = 1; //ID
+	string channel_code = 2; //唯一标记
+	string channel_name = 3; //方式名称
+	string payment_type = 4; //支付类型
+	string icon_url = 5; //图标URL
+	string uniapp_provider = 6; //UniApp标识
+	string desc = 7; //支付描述
+	int32 sort = 8; //顺序
+	string created_at = 9; //创建时间
+	string updated_at = 10; //修改时间
+}

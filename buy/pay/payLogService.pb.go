@@ -27,27 +27,27 @@ type PayLog struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                       //ID
-	LogNo            string         `protobuf:"bytes,2,opt,name=log_no,json=logNo,proto3" json:"log_no,omitempty"`                                     //支付日志订单号
-	BusinessType     string         `protobuf:"bytes,3,opt,name=business_type,json=businessType,proto3" json:"business_type,omitempty"`                //订单类型: order 订单, wallet 钱包 vip 会员等级
-	MemberId         int64          `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`                           //用户ID
-	Subject          string         `protobuf:"bytes,8,opt,name=subject,proto3" json:"subject,omitempty"`                                              //订单名称
-	TotalPrice       int64          `protobuf:"varint,9,opt,name=total_price,json=totalPrice,proto3" json:"total_price,omitempty"`                     //业务订单金额
-	PayPrice         int64          `protobuf:"varint,10,opt,name=pay_price,json=payPrice,proto3" json:"pay_price,omitempty"`                          //支付金额
-	Currency         string         `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`                                           //货币代码
-	TradeNo          string         `protobuf:"bytes,12,opt,name=trade_no,json=tradeNo,proto3" json:"trade_no,omitempty"`                              //支付平台交易号
-	BuyerUser        string         `protobuf:"bytes,13,opt,name=buyer_user,json=buyerUser,proto3" json:"buyer_user,omitempty"`                        //支付平台用户帐号
-	PaymentId        int32          `protobuf:"varint,5,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`                        //支付方式ID
-	PaymentWayCode   string         `protobuf:"bytes,6,opt,name=payment_way_code,json=paymentWayCode,proto3" json:"payment_way_code,omitempty"`        //支付通道标识
-	PaymentType      string         `protobuf:"bytes,7,opt,name=payment_type,json=paymentType,proto3" json:"payment_type,omitempty"`                   //支付类型
-	PaymentAccountNo string         `protobuf:"bytes,14,opt,name=payment_account_no,json=paymentAccountNo,proto3" json:"payment_account_no,omitempty"` //支付结算账户编号
-	ClientType       string         `protobuf:"bytes,15,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"`                     //应用客户端类型
-	Status           string         `protobuf:"bytes,16,opt,name=status,proto3" json:"status,omitempty"`                                               //状态（0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
-	PaidTime         string         `protobuf:"bytes,17,opt,name=paid_time,json=paidTime,proto3" json:"paid_time,omitempty"`                           //支付时间
-	ClosedTime       string         `protobuf:"bytes,18,opt,name=closed_time,json=closedTime,proto3" json:"closed_time,omitempty"`                     //关闭时间
-	CreatedAt        string         `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                        //创建时间
-	UpdatedAt        string         `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`                        //修改时间
-	Values           []*PayLogValue `protobuf:"bytes,21,rep,name=values,proto3" json:"values,omitempty"`                                               //支付日志关联业务数据
+	Id               int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                       //ID
+	LogNo            string         `protobuf:"bytes,2,opt,name=log_no,json=logNo,proto3" json:"log_no"`                                     //支付日志订单号
+	BusinessType     string         `protobuf:"bytes,3,opt,name=business_type,json=businessType,proto3" json:"business_type"`                //订单类型: order 订单, wallet 钱包 vip 会员等级
+	MemberId         int64          `protobuf:"varint,4,opt,name=member_id,json=memberId,proto3" json:"member_id"`                           //用户ID
+	Subject          string         `protobuf:"bytes,8,opt,name=subject,proto3" json:"subject"`                                              //订单名称
+	TotalPrice       int64          `protobuf:"varint,9,opt,name=total_price,json=totalPrice,proto3" json:"total_price"`                     //业务订单金额
+	PayPrice         int64          `protobuf:"varint,10,opt,name=pay_price,json=payPrice,proto3" json:"pay_price"`                          //支付金额
+	Currency         string         `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency"`                                           //货币代码
+	TradeNo          string         `protobuf:"bytes,12,opt,name=trade_no,json=tradeNo,proto3" json:"trade_no"`                              //支付平台交易号
+	BuyerUser        string         `protobuf:"bytes,13,opt,name=buyer_user,json=buyerUser,proto3" json:"buyer_user"`                        //支付平台用户帐号
+	PaymentId        int32          `protobuf:"varint,5,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`                        //支付方式ID
+	PaymentWayCode   string         `protobuf:"bytes,6,opt,name=payment_way_code,json=paymentWayCode,proto3" json:"payment_way_code"`        //支付通道标识
+	PaymentType      string         `protobuf:"bytes,7,opt,name=payment_type,json=paymentType,proto3" json:"payment_type"`                   //支付类型
+	PaymentAccountNo string         `protobuf:"bytes,14,opt,name=payment_account_no,json=paymentAccountNo,proto3" json:"payment_account_no"` //支付结算账户编号
+	ClientType       string         `protobuf:"bytes,15,opt,name=client_type,json=clientType,proto3" json:"client_type"`                     //应用客户端类型
+	Status           string         `protobuf:"bytes,16,opt,name=status,proto3" json:"status"`                                               //状态（0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
+	PaidTime         string         `protobuf:"bytes,17,opt,name=paid_time,json=paidTime,proto3" json:"paid_time"`                           //支付时间
+	ClosedTime       string         `protobuf:"bytes,18,opt,name=closed_time,json=closedTime,proto3" json:"closed_time"`                     //关闭时间
+	CreatedAt        string         `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`                        //创建时间
+	UpdatedAt        string         `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`                        //修改时间
+	Values           []*PayLogValue `protobuf:"bytes,21,rep,name=values,proto3" json:"values"`                                               //支付日志关联业务数据
 }
 
 func (x *PayLog) Reset() {
@@ -235,12 +235,12 @@ type PayLogValue struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                   //ID
-	PayLogId   int64  `protobuf:"varint,2,opt,name=pay_log_id,json=payLogId,proto3" json:"pay_log_id,omitempty"`     //支付日志id
-	BusinessId int64  `protobuf:"varint,3,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"` //业务订单id
-	BusinessNo string `protobuf:"bytes,4,opt,name=business_no,json=businessNo,proto3" json:"business_no,omitempty"`  //业务订单号
-	CreatedAt  string `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`     //创建时间
-	UpdatedAt  string `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`     //修改时间
+	Id         int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                   //ID
+	PayLogId   int64  `protobuf:"varint,2,opt,name=pay_log_id,json=payLogId,proto3" json:"pay_log_id"`     //支付日志id
+	BusinessId int64  `protobuf:"varint,3,opt,name=business_id,json=businessId,proto3" json:"business_id"` //业务订单id
+	BusinessNo string `protobuf:"bytes,4,opt,name=business_no,json=businessNo,proto3" json:"business_no"`  //业务订单号
+	CreatedAt  string `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at"`     //创建时间
+	UpdatedAt  string `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`     //修改时间
 }
 
 func (x *PayLogValue) Reset() {
@@ -322,26 +322,26 @@ type PayLogRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
+	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
 	//base params
-	Id             int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`                                                //ID
-	LogNo          string `protobuf:"bytes,5,opt,name=log_no,json=logNo,proto3" json:"log_no,omitempty"`                              //支付日志订单号
-	BusinessType   string `protobuf:"bytes,6,opt,name=business_type,json=businessType,proto3" json:"business_type,omitempty"`         //订单类型: order 订单, wallet 钱包 vip 会员等级
-	MemberId       int64  `protobuf:"varint,7,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`                    //用户ID
-	PaymentId      int32  `protobuf:"varint,8,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`                 //支付方式ID
-	PaymentWayCode string `protobuf:"bytes,9,opt,name=payment_way_code,json=paymentWayCode,proto3" json:"payment_way_code,omitempty"` //支付方式标识
-	PaymentType    string `protobuf:"bytes,10,opt,name=payment_type,json=paymentType,proto3" json:"payment_type,omitempty"`           //支付类型
-	Subject        string `protobuf:"bytes,11,opt,name=subject,proto3" json:"subject,omitempty"`                                      //订单名称
-	TradeNo        string `protobuf:"bytes,12,opt,name=trade_no,json=tradeNo,proto3" json:"trade_no,omitempty"`                       //支付平台交易号
-	BuyerUser      string `protobuf:"bytes,13,opt,name=buyer_user,json=buyerUser,proto3" json:"buyer_user,omitempty"`                 //支付平台用户帐号
-	BusinessId     int64  `protobuf:"varint,14,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`             //业务订单ID
-	BusinessNo     string `protobuf:"bytes,15,opt,name=business_no,json=businessNo,proto3" json:"business_no,omitempty"`              //业务订单编号
-	Status         string `protobuf:"bytes,16,opt,name=status,proto3" json:"status,omitempty"`                                        //状态
-	BeginTime      string `protobuf:"bytes,17,opt,name=begin_time,json=beginTime,proto3" json:"begin_time,omitempty"`                 //开始时间
-	EndTime        string `protobuf:"bytes,18,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`                       //结束时间
-	ClientType     string `protobuf:"bytes,19,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"`              //应用客户端类型
+	Id             int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`                                                //ID
+	LogNo          string `protobuf:"bytes,5,opt,name=log_no,json=logNo,proto3" json:"log_no"`                              //支付日志订单号
+	BusinessType   string `protobuf:"bytes,6,opt,name=business_type,json=businessType,proto3" json:"business_type"`         //订单类型: order 订单, wallet 钱包 vip 会员等级
+	MemberId       int64  `protobuf:"varint,7,opt,name=member_id,json=memberId,proto3" json:"member_id"`                    //用户ID
+	PaymentId      int32  `protobuf:"varint,8,opt,name=payment_id,json=paymentId,proto3" json:"payment_id"`                 //支付方式ID
+	PaymentWayCode string `protobuf:"bytes,9,opt,name=payment_way_code,json=paymentWayCode,proto3" json:"payment_way_code"` //支付方式标识
+	PaymentType    string `protobuf:"bytes,10,opt,name=payment_type,json=paymentType,proto3" json:"payment_type"`           //支付类型
+	Subject        string `protobuf:"bytes,11,opt,name=subject,proto3" json:"subject"`                                      //订单名称
+	TradeNo        string `protobuf:"bytes,12,opt,name=trade_no,json=tradeNo,proto3" json:"trade_no"`                       //支付平台交易号
+	BuyerUser      string `protobuf:"bytes,13,opt,name=buyer_user,json=buyerUser,proto3" json:"buyer_user"`                 //支付平台用户帐号
+	BusinessId     int64  `protobuf:"varint,14,opt,name=business_id,json=businessId,proto3" json:"business_id"`             //业务订单ID
+	BusinessNo     string `protobuf:"bytes,15,opt,name=business_no,json=businessNo,proto3" json:"business_no"`              //业务订单编号
+	Status         string `protobuf:"bytes,16,opt,name=status,proto3" json:"status"`                                        //状态
+	BeginTime      string `protobuf:"bytes,17,opt,name=begin_time,json=beginTime,proto3" json:"begin_time"`                 //开始时间
+	EndTime        string `protobuf:"bytes,18,opt,name=end_time,json=endTime,proto3" json:"end_time"`                       //结束时间
+	ClientType     string `protobuf:"bytes,19,opt,name=client_type,json=clientType,proto3" json:"client_type"`              //应用客户端类型
 }
 
 func (x *PayLogRequest) Reset() {
@@ -514,10 +514,10 @@ type PayLogResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *PayLog       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*PayLog     `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   string        `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *PayLog       `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*PayLog     `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   string        `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *PayLogResponse) Reset() {

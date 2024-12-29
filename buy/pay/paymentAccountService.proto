@@ -9,29 +9,32 @@ service PaymentAccountService {
     rpc Update (PaymentAccount) returns (PaymentAccountResponse) {}
     rpc Delete (PaymentAccount) returns (PaymentAccountResponse) {}
     rpc Get (PaymentAccount) returns (PaymentAccountResponse) {}
+    rpc List (PaymentAccountRequest) returns (PaymentAccountResponse) {}
     rpc Search (PaymentAccountRequest) returns (PaymentAccountResponse) {}
 }
 
 message PaymentAccount {
-    int32	id =1;
-    string account_no =2;
-    string account_name =3;
-    string payment_type	=4;
-    string is_provider =5;
-    string public_cert = 7;
-    string private_cert = 8;
-    string is_enabled	=10;
-    string created_at = 11;
-    string updated_at = 12;
-    AccountWeixinConfig weixin_config = 13;
-    AccountAlipayConfig alipay_config = 14;
-    string is_provider_name	=15;
-    string is_enabled_name	=16;
-    string payment_type_name =17;
+    int32 id = 1; //ID
+    string account_no = 2; //支付账号
+    string account_name = 3; //账号名称
+    string payment_type = 4; //账户类型
+    string is_provider = 5; //是否服务商
+    AccountConfig config = 6; //参数配置
+    string private_cert = 7; //私有证书信息
+    string public_cert = 8; //公共证书信息
+    string status = 9; //启用状态
+    string created_at = 10; //创建时间
+    string updated_at = 11; //修改时间
 }
 
 //支付账户微信配置
-message AccountWeixinConfig{
+message AccountConfig{
+    AccountConfigWeixin weixin = 1;
+    AccountConfigAlipay alipay = 2;
+}
+
+//支付账户微信配置
+message AccountConfigWeixin{
     string mch_id =2;
     string sign_type =3;
     string md5_key =4;
@@ -47,7 +50,7 @@ message AccountWeixinConfig{
 }
 
 //支付账户支付宝配置
-message AccountAlipayConfig{
+message AccountConfigAlipay{
     string mch_id =2;
     string sign_type =3;
     string md5_key =4;
@@ -58,15 +61,20 @@ message AccountAlipayConfig{
 
 
 message PaymentAccountRequest{
-    int64 paged =1;
-    int64 page_size =2;
-    string keywords =3;
-    int32	id =5;
-    string account_no =6;
-    string account_name =7;
-    string payment_type	=8;
-    string is_provider = 9;
-    string is_enabled = 10;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int32 ids = 7;
+    int32 id = 8;
+    //以下为自定义参数
+    string account_no = 11; //支付账号
+    string account_name = 12; //账号名称
+    string payment_type = 13; //账户类型
+    string is_provider = 14; //是否服务商
+    string status = 15; //启用状态
 }
 
 message PaymentAccountResponse {

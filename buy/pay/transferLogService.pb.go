@@ -27,27 +27,27 @@ type TransferLog struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TransferSn   string `protobuf:"bytes,2,opt,name=transfer_sn,json=transferSn,proto3" json:"transfer_sn,omitempty"`
-	PayGatewayId int64  `protobuf:"varint,3,opt,name=pay_gateway_id,json=payGatewayId,proto3" json:"pay_gateway_id,omitempty"`
-	Type         string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Channel      string `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel,omitempty"` //wx_wallet
-	Recipient    string `protobuf:"bytes,6,opt,name=recipient,proto3" json:"recipient,omitempty"`
-	RealName     string `protobuf:"bytes,7,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`
-	Amount       int64  `protobuf:"varint,8,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency     string `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
-	OrderType    string `protobuf:"bytes,10,opt,name=order_type,json=orderType,proto3" json:"order_type,omitempty"`
-	OrderId      int64  `protobuf:"varint,11,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	OrderSn      string `protobuf:"bytes,12,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
-	Memo         string `protobuf:"bytes,13,opt,name=memo,proto3" json:"memo,omitempty"`
-	Extra        string `protobuf:"bytes,14,opt,name=extra,proto3" json:"extra,omitempty"`
-	Metadata     string `protobuf:"bytes,15,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	Status       string `protobuf:"bytes,16,opt,name=status,proto3" json:"status,omitempty"`
-	MemberId     int64  `protobuf:"varint,17,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	OpenId       string `protobuf:"bytes,18,opt,name=open_id,json=openId,proto3" json:"open_id,omitempty"`
-	FinishedAt   string `protobuf:"bytes,19,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
-	CreatedAt    string `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt    string `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	TransferSn   string `protobuf:"bytes,2,opt,name=transfer_sn,json=transferSn,proto3" json:"transfer_sn"`
+	PayGatewayId int64  `protobuf:"varint,3,opt,name=pay_gateway_id,json=payGatewayId,proto3" json:"pay_gateway_id"`
+	Type         string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`
+	Channel      string `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel"` //wx_wallet
+	Recipient    string `protobuf:"bytes,6,opt,name=recipient,proto3" json:"recipient"`
+	RealName     string `protobuf:"bytes,7,opt,name=real_name,json=realName,proto3" json:"real_name"`
+	Amount       int64  `protobuf:"varint,8,opt,name=amount,proto3" json:"amount"`
+	Currency     string `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency"`
+	OrderType    string `protobuf:"bytes,10,opt,name=order_type,json=orderType,proto3" json:"order_type"`
+	OrderId      int64  `protobuf:"varint,11,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	OrderSn      string `protobuf:"bytes,12,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
+	Memo         string `protobuf:"bytes,13,opt,name=memo,proto3" json:"memo"`
+	Extra        string `protobuf:"bytes,14,opt,name=extra,proto3" json:"extra"`
+	Metadata     string `protobuf:"bytes,15,opt,name=metadata,proto3" json:"metadata"`
+	Status       string `protobuf:"bytes,16,opt,name=status,proto3" json:"status"`
+	MemberId     int64  `protobuf:"varint,17,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	OpenId       string `protobuf:"bytes,18,opt,name=open_id,json=openId,proto3" json:"open_id"`
+	FinishedAt   string `protobuf:"bytes,19,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at"`
+	CreatedAt    string `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt    string `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 }
 
 func (x *TransferLog) Reset() {
@@ -234,23 +234,23 @@ type TransferLogRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
+	Paged    int64 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Top      int64 `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
 	//base params
-	Id        int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Currency  string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	MemberId  int64  `protobuf:"varint,6,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Extra     string `protobuf:"bytes,7,opt,name=extra,proto3" json:"extra,omitempty"`
-	Memo      string `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo,omitempty"`
-	Type      string `protobuf:"bytes,9,opt,name=type,proto3" json:"type,omitempty"`
-	OrderType string `protobuf:"bytes,10,opt,name=order_type,json=orderType,proto3" json:"order_type,omitempty"`
-	OrderId   int64  `protobuf:"varint,11,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	OrderSn   string `protobuf:"bytes,12,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
-	Keywords  string `protobuf:"bytes,13,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Status    string `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
-	StartDate string `protobuf:"bytes,15,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
-	EndDate   string `protobuf:"bytes,16,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	Id        int64  `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Currency  string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency"`
+	MemberId  int64  `protobuf:"varint,6,opt,name=member_id,json=memberId,proto3" json:"member_id"`
+	Extra     string `protobuf:"bytes,7,opt,name=extra,proto3" json:"extra"`
+	Memo      string `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo"`
+	Type      string `protobuf:"bytes,9,opt,name=type,proto3" json:"type"`
+	OrderType string `protobuf:"bytes,10,opt,name=order_type,json=orderType,proto3" json:"order_type"`
+	OrderId   int64  `protobuf:"varint,11,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	OrderSn   string `protobuf:"bytes,12,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
+	Keywords  string `protobuf:"bytes,13,opt,name=keywords,proto3" json:"keywords"`
+	Status    string `protobuf:"bytes,14,opt,name=status,proto3" json:"status"`
+	StartDate string `protobuf:"bytes,15,opt,name=start_date,json=startDate,proto3" json:"start_date"`
+	EndDate   string `protobuf:"bytes,16,opt,name=end_date,json=endDate,proto3" json:"end_date"`
 }
 
 func (x *TransferLogRequest) Reset() {
@@ -402,10 +402,10 @@ type TransferLogResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *TransferLog   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*TransferLog `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Info   string         `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+	Entity *TransferLog   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager  `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*TransferLog `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Info   string         `protobuf:"bytes,4,opt,name=info,proto3" json:"info"`
 }
 
 func (x *TransferLogResponse) Reset() {
