@@ -1,0 +1,63 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "memberService.proto";
+
+// 积分明细服务
+service IntegralRecordService {
+  // 积分明细新增
+  rpc Create (IntegralRecord) returns (IntegralRecordResponse) {}
+  // 积分明细获取
+  rpc Get (IntegralRecord) returns (IntegralRecordResponse) {}
+  // 积分明细查询
+  rpc Search (IntegralRecordRequest) returns (IntegralRecordResponse) {}
+  // 积分明细列表
+  rpc List (IntegralRecordRequest) returns (IntegralRecordResponse) {}
+}
+// 积分明细
+message IntegralRecord {
+  int64 id = 1; //ID
+  int64 member_id = 2; //用户ID
+  string direction = 3; //操作方向：（1增加,2减少）
+  int64 original_integral = 4; //原始积分
+  int64 new_integral = 5; //最新积分
+  int64 operation_integral = 6; //操作积分
+  string business_type = 7; //业务类型
+  string business_type_name =8;//业务类型名称
+  int64 business_id = 9; //业务ID
+  string msg = 10; //操作原因
+  int64 operator_id = 11; //操作人id
+  string operator_name = 12; //操作人名称
+  string is_rollback = 13; //是否回滚
+  string created_at = 14; //创建时间
+  string updated_at = 15; //修改时间
+  Member member = 18;
+}
+// 积分明细请求参数
+message IntegralRecordRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 member_id = 11; //用户ID
+  string direction = 12; //操作类型
+  string business_type = 13; //业务类型
+  string business_type_name =14;//业务类型名称
+  int64 business_id = 15; //业务ID
+  int64 operator_id = 16; //操作人id
+  string operator_name = 17; //操作人名称
+  string is_rollback = 18; //是否回滚
+}
+// 积分明细响应数据
+message IntegralRecordResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  IntegralRecord entity = 3;
+  repeated IntegralRecord items = 4;
+}

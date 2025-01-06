@@ -13,7 +13,8 @@ service WarehouseGoodsService {
     rpc Detail (WarehouseGoods) returns (WarehouseGoodsResponse) {}
     rpc List (WarehouseGoodsRequest) returns (WarehouseGoodsResponse) {}
     rpc Search (WarehouseGoodsRequest) returns (WarehouseGoodsResponse) {}
-    rpc SelectGoods (WarehouseGoodsRequest) returns (WarehouseGoodsSelectResponse) {}
+    //商品选择器
+    rpc Selector (WarehouseGoodsRequest) returns (WarehouseGoodsSelectorResponse) {}
 }
 
 message WarehouseGoods {
@@ -37,9 +38,10 @@ message WarehouseGoodsSpec {
     string sku_key =5;//SKUKey
     int64  inventory =6;//库存
     repeated SkuSpecInfo spec =7;//规格值
-    string created_at = 8;
-    string updated_at = 9;
-    string spec_desc =10;
+    string spec_desc =8;
+    string created_at = 9;
+    string updated_at = 10;
+    Sku sku =12;
 }
 
 message WarehouseGoodsRequest {
@@ -69,7 +71,7 @@ message WarehouseGoodsResponse {
     string msg =4;
 }
 
-message WarehouseGoodsSelectResponse {
+message WarehouseGoodsSelectorResponse {
     common.Pager pager =2;
     repeated Spu items = 3;
     string msg =4;

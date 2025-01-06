@@ -42,12 +42,16 @@ func NewIntegralServiceEndpoints() []*api.Endpoint {
 // Client API for IntegralService service
 
 type IntegralService interface {
-	//积分增加
-	IntegralAdd(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error)
-	//积分使用
-	IntegralUse(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error)
-	//积分释放
-	IntegralRollback(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error)
+	// 积分设置修改
+	Save(ctx context.Context, in *Integral, opts ...client.CallOption) (*IntegralResponse, error)
+	// 积分设置获取
+	Get(ctx context.Context, in *Integral, opts ...client.CallOption) (*IntegralResponse, error)
+	//增加积分值
+	AddIntegralValue(ctx context.Context, in *IntegralValue, opts ...client.CallOption) (*IntegralResponse, error)
+	//使用积分值
+	UseIntegralValue(ctx context.Context, in *IntegralValue, opts ...client.CallOption) (*IntegralResponse, error)
+	//回滚积分值
+	RollbackIntegralValue(ctx context.Context, in *IntegralValue, opts ...client.CallOption) (*IntegralResponse, error)
 }
 
 type integralService struct {
@@ -62,8 +66,8 @@ func NewIntegralService(name string, c client.Client) IntegralService {
 	}
 }
 
-func (c *integralService) IntegralAdd(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error) {
-	req := c.c.NewRequest(c.name, "IntegralService.IntegralAdd", in)
+func (c *integralService) Save(ctx context.Context, in *Integral, opts ...client.CallOption) (*IntegralResponse, error) {
+	req := c.c.NewRequest(c.name, "IntegralService.Save", in)
 	out := new(IntegralResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -72,8 +76,8 @@ func (c *integralService) IntegralAdd(ctx context.Context, in *IntegralInfo, opt
 	return out, nil
 }
 
-func (c *integralService) IntegralUse(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error) {
-	req := c.c.NewRequest(c.name, "IntegralService.IntegralUse", in)
+func (c *integralService) Get(ctx context.Context, in *Integral, opts ...client.CallOption) (*IntegralResponse, error) {
+	req := c.c.NewRequest(c.name, "IntegralService.Get", in)
 	out := new(IntegralResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -82,8 +86,28 @@ func (c *integralService) IntegralUse(ctx context.Context, in *IntegralInfo, opt
 	return out, nil
 }
 
-func (c *integralService) IntegralRollback(ctx context.Context, in *IntegralInfo, opts ...client.CallOption) (*IntegralResponse, error) {
-	req := c.c.NewRequest(c.name, "IntegralService.IntegralRollback", in)
+func (c *integralService) AddIntegralValue(ctx context.Context, in *IntegralValue, opts ...client.CallOption) (*IntegralResponse, error) {
+	req := c.c.NewRequest(c.name, "IntegralService.AddIntegralValue", in)
+	out := new(IntegralResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integralService) UseIntegralValue(ctx context.Context, in *IntegralValue, opts ...client.CallOption) (*IntegralResponse, error) {
+	req := c.c.NewRequest(c.name, "IntegralService.UseIntegralValue", in)
+	out := new(IntegralResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integralService) RollbackIntegralValue(ctx context.Context, in *IntegralValue, opts ...client.CallOption) (*IntegralResponse, error) {
+	req := c.c.NewRequest(c.name, "IntegralService.RollbackIntegralValue", in)
 	out := new(IntegralResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -95,19 +119,25 @@ func (c *integralService) IntegralRollback(ctx context.Context, in *IntegralInfo
 // Server API for IntegralService service
 
 type IntegralServiceHandler interface {
-	//积分增加
-	IntegralAdd(context.Context, *IntegralInfo, *IntegralResponse) error
-	//积分使用
-	IntegralUse(context.Context, *IntegralInfo, *IntegralResponse) error
-	//积分释放
-	IntegralRollback(context.Context, *IntegralInfo, *IntegralResponse) error
+	// 积分设置修改
+	Save(context.Context, *Integral, *IntegralResponse) error
+	// 积分设置获取
+	Get(context.Context, *Integral, *IntegralResponse) error
+	//增加积分值
+	AddIntegralValue(context.Context, *IntegralValue, *IntegralResponse) error
+	//使用积分值
+	UseIntegralValue(context.Context, *IntegralValue, *IntegralResponse) error
+	//回滚积分值
+	RollbackIntegralValue(context.Context, *IntegralValue, *IntegralResponse) error
 }
 
 func RegisterIntegralServiceHandler(s server.Server, hdlr IntegralServiceHandler, opts ...server.HandlerOption) error {
 	type integralService interface {
-		IntegralAdd(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error
-		IntegralUse(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error
-		IntegralRollback(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error
+		Save(ctx context.Context, in *Integral, out *IntegralResponse) error
+		Get(ctx context.Context, in *Integral, out *IntegralResponse) error
+		AddIntegralValue(ctx context.Context, in *IntegralValue, out *IntegralResponse) error
+		UseIntegralValue(ctx context.Context, in *IntegralValue, out *IntegralResponse) error
+		RollbackIntegralValue(ctx context.Context, in *IntegralValue, out *IntegralResponse) error
 	}
 	type IntegralService struct {
 		integralService
@@ -120,14 +150,22 @@ type integralServiceHandler struct {
 	IntegralServiceHandler
 }
 
-func (h *integralServiceHandler) IntegralAdd(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error {
-	return h.IntegralServiceHandler.IntegralAdd(ctx, in, out)
+func (h *integralServiceHandler) Save(ctx context.Context, in *Integral, out *IntegralResponse) error {
+	return h.IntegralServiceHandler.Save(ctx, in, out)
 }
 
-func (h *integralServiceHandler) IntegralUse(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error {
-	return h.IntegralServiceHandler.IntegralUse(ctx, in, out)
+func (h *integralServiceHandler) Get(ctx context.Context, in *Integral, out *IntegralResponse) error {
+	return h.IntegralServiceHandler.Get(ctx, in, out)
 }
 
-func (h *integralServiceHandler) IntegralRollback(ctx context.Context, in *IntegralInfo, out *IntegralResponse) error {
-	return h.IntegralServiceHandler.IntegralRollback(ctx, in, out)
+func (h *integralServiceHandler) AddIntegralValue(ctx context.Context, in *IntegralValue, out *IntegralResponse) error {
+	return h.IntegralServiceHandler.AddIntegralValue(ctx, in, out)
+}
+
+func (h *integralServiceHandler) UseIntegralValue(ctx context.Context, in *IntegralValue, out *IntegralResponse) error {
+	return h.IntegralServiceHandler.UseIntegralValue(ctx, in, out)
+}
+
+func (h *integralServiceHandler) RollbackIntegralValue(ctx context.Context, in *IntegralValue, out *IntegralResponse) error {
+	return h.IntegralServiceHandler.RollbackIntegralValue(ctx, in, out)
 }

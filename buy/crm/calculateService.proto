@@ -13,7 +13,7 @@ service CalculateService {
 //计算购买商品
 message CalculateBuyGoods{
     int64 spu_id =1;
-    string md5_key =2;
+    string sku_key =2;
     int64 price =3; //价格
     int64 stock =4; //购买数量
 }
@@ -21,7 +21,7 @@ message CalculateBuyGoods{
 //计算优惠商品
 message CalculateDiscountGoods{
     int64 spu_id =1;
-    string md5_key =2;
+    string sku_key =2;
     int64 price =3; //价格
     int64 stock =4; //购买数量
     int64 discount_price =5;//优惠金额

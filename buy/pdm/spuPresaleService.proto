@@ -3,21 +3,36 @@ package services;
 option go_package = "/.;services";
 
 message SpuPresale {
-    int64 id = 1;
-    int64 spu_id = 2;
-    int32 presale_type = 3;
-    string payed_date = 4;
-    string advance_start_date = 5;
-    string advance_end_date = 6;
-    string balance_start_date = 7;
-    string balance_end_date = 8;
-    string advance_type = 9;
-    int32 advance_rate = 10;
-    int64 advance_money = 11;
-    int64 balance_money = 12;
-    string delivery_type = 13;
-    string delivery_date = 14;
-    int32 delivery_days = 15;
-    string created_at = 16;
-    string updated_at = 17;
+    int64 id = 1; //ID
+    int64 spu_id = 2; //商品ID
+    string deposit_type = 3; //预售类型
+    int64 deposit_price = 4; //固定定金预售
+    int32 deposit_percent = 5; //比例定金预售
+    string ignore_change_type = 6; //比例定金预售取向
+    string presale_time_type = 7; //预售时间类型
+    string start_presale_time = 8; //开始预售时间
+    string end_presale_time = 9; //结束预售时间
+    string expire_process_type = 10; //到期后处理类型
+    SpuPresaleDeliveryInfo delivery_info = 11; //发货信息
+    SpuPresaleFinalPaymentInfo final_payment_info = 12; //尾款支付信息
+    string created_at = 13; //创建时间
+    string updated_at = 14; //修改时间
+}
+
+// 发货信息
+message SpuPresaleDeliveryInfo {
+    string delivery_type = 1; //发货时间类型
+    int32 after_final_pay_delivery_day = 2; //支付全款后X天发货
+    int32 after_final_pay_delivery_hour = 3; //支付全款后X小时发货
+    string schedule_delivery_time = 4; //指定发货日期
+}
+
+//尾款支付信息
+message SpuPresaleFinalPaymentInfo {
+    string final_payment_type = 1; //尾款支付时间类型：1支付定金后，2固定期间
+    int32 after_deposit_end_final_day = 2; //X天内支付完
+    int32 after_deposit_end_final_hour = 3; //X小时内支付完
+    int32 after_deposit_start_final_day = 4; //支付定金后X天开始支付
+    string end_final_pay_time = 5; //尾款支付开始时间 【2固定期间】
+    string start_final_pay_time = 6; //尾款支付结束时间 【2固定期间】
 }

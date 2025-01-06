@@ -27,7 +27,7 @@ type CalculateBuyGoods struct {
 	unknownFields protoimpl.UnknownFields
 
 	SpuId  int64  `protobuf:"varint,1,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
-	Md5Key string `protobuf:"bytes,2,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`
+	SkuKey string `protobuf:"bytes,2,opt,name=sku_key,json=skuKey,proto3" json:"sku_key"`
 	Price  int64  `protobuf:"varint,3,opt,name=price,proto3" json:"price"` //价格
 	Stock  int64  `protobuf:"varint,4,opt,name=stock,proto3" json:"stock"` //购买数量
 }
@@ -71,9 +71,9 @@ func (x *CalculateBuyGoods) GetSpuId() int64 {
 	return 0
 }
 
-func (x *CalculateBuyGoods) GetMd5Key() string {
+func (x *CalculateBuyGoods) GetSkuKey() string {
 	if x != nil {
-		return x.Md5Key
+		return x.SkuKey
 	}
 	return ""
 }
@@ -99,7 +99,7 @@ type CalculateDiscountGoods struct {
 	unknownFields protoimpl.UnknownFields
 
 	SpuId         int64  `protobuf:"varint,1,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
-	Md5Key        string `protobuf:"bytes,2,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`
+	SkuKey        string `protobuf:"bytes,2,opt,name=sku_key,json=skuKey,proto3" json:"sku_key"`
 	Price         int64  `protobuf:"varint,3,opt,name=price,proto3" json:"price"`                                      //价格
 	Stock         int64  `protobuf:"varint,4,opt,name=stock,proto3" json:"stock"`                                      //购买数量
 	DiscountPrice int64  `protobuf:"varint,5,opt,name=discount_price,json=discountPrice,proto3" json:"discount_price"` //优惠金额
@@ -145,9 +145,9 @@ func (x *CalculateDiscountGoods) GetSpuId() int64 {
 	return 0
 }
 
-func (x *CalculateDiscountGoods) GetMd5Key() string {
+func (x *CalculateDiscountGoods) GetSkuKey() string {
 	if x != nil {
-		return x.Md5Key
+		return x.SkuKey
 	}
 	return ""
 }

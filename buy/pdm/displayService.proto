@@ -28,7 +28,7 @@ service DisplayService {
 message SpecDetailDataBase{
     int64 id =1;
     int64 spu_id =2;
-    string md5_key =3;
+    string sku_key =3;
     int64 price =4;
     int64 inventory =5;
     int64 weight =6;

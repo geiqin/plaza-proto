@@ -29,7 +29,7 @@ type VipPrice struct {
 	Id           int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                          //ID
 	LevelId      int64   `protobuf:"varint,2,opt,name=level_id,json=levelId,proto3" json:"level_id"`                 //会员等级id
 	SpuId        int64   `protobuf:"varint,3,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`                       //SpuId
-	Md5Key       string  `protobuf:"bytes,4,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`                     //md5key
+	SkuKey       string  `protobuf:"bytes,4,opt,name=sku_key,json=skuKey,proto3" json:"sku_key"`                     //md5key
 	Method       string  `protobuf:"bytes,5,opt,name=method,proto3" json:"method"`                                   //优惠方式：0 指定价，1 打折,2 减价
 	Price        int64   `protobuf:"varint,6,opt,name=price,proto3" json:"price"`                                    //优惠价
 	DiscountRate float32 `protobuf:"fixed32,7,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate"` //优惠折扣
@@ -91,9 +91,9 @@ func (x *VipPrice) GetSpuId() int64 {
 	return 0
 }
 
-func (x *VipPrice) GetMd5Key() string {
+func (x *VipPrice) GetSkuKey() string {
 	if x != nil {
-		return x.Md5Key
+		return x.SkuKey
 	}
 	return ""
 }
@@ -148,7 +148,7 @@ type VipPriceRequest struct {
 	Id      int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                          //ID
 	LevelId int64       `protobuf:"varint,2,opt,name=level_id,json=levelId,proto3" json:"level_id"` //会员等级id
 	SpuId   int64       `protobuf:"varint,3,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`       //SpuId
-	Md5Key  string      `protobuf:"bytes,4,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`     //md5key
+	SkuKey  string      `protobuf:"bytes,4,opt,name=sku_key,json=skuKey,proto3" json:"sku_key"`     //md5key
 	Method  string      `protobuf:"bytes,5,opt,name=method,proto3" json:"method"`                   //优惠方式：0 指定价，1 打折,2 减价
 	Ids     []int64     `protobuf:"varint,6,rep,packed,name=ids,proto3" json:"ids"`
 	Details []*VipPrice `protobuf:"bytes,7,rep,name=details,proto3" json:"details"`
@@ -207,9 +207,9 @@ func (x *VipPriceRequest) GetSpuId() int64 {
 	return 0
 }
 
-func (x *VipPriceRequest) GetMd5Key() string {
+func (x *VipPriceRequest) GetSkuKey() string {
 	if x != nil {
-		return x.Md5Key
+		return x.SkuKey
 	}
 	return ""
 }

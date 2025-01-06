@@ -43,6 +43,8 @@ func NewUnitServiceEndpoints() []*api.Endpoint {
 // Client API for UnitService service
 
 type UnitService interface {
+	// 单位库拉取最新
+	PullNew(ctx context.Context, in *Unit, opts ...client.CallOption) (*UnitResponse, error)
 	// 单位库新增
 	Create(ctx context.Context, in *Unit, opts ...client.CallOption) (*UnitResponse, error)
 	// 单位库修改
@@ -67,6 +69,16 @@ func NewUnitService(name string, c client.Client) UnitService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *unitService) PullNew(ctx context.Context, in *Unit, opts ...client.CallOption) (*UnitResponse, error) {
+	req := c.c.NewRequest(c.name, "UnitService.PullNew", in)
+	out := new(UnitResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *unitService) Create(ctx context.Context, in *Unit, opts ...client.CallOption) (*UnitResponse, error) {
@@ -132,6 +144,8 @@ func (c *unitService) List(ctx context.Context, in *UnitRequest, opts ...client.
 // Server API for UnitService service
 
 type UnitServiceHandler interface {
+	// 单位库拉取最新
+	PullNew(context.Context, *Unit, *UnitResponse) error
 	// 单位库新增
 	Create(context.Context, *Unit, *UnitResponse) error
 	// 单位库修改
@@ -148,6 +162,7 @@ type UnitServiceHandler interface {
 
 func RegisterUnitServiceHandler(s server.Server, hdlr UnitServiceHandler, opts ...server.HandlerOption) error {
 	type unitService interface {
+		PullNew(ctx context.Context, in *Unit, out *UnitResponse) error
 		Create(ctx context.Context, in *Unit, out *UnitResponse) error
 		Update(ctx context.Context, in *Unit, out *UnitResponse) error
 		Delete(ctx context.Context, in *Unit, out *UnitResponse) error
@@ -164,6 +179,10 @@ func RegisterUnitServiceHandler(s server.Server, hdlr UnitServiceHandler, opts .
 
 type unitServiceHandler struct {
 	UnitServiceHandler
+}
+
+func (h *unitServiceHandler) PullNew(ctx context.Context, in *Unit, out *UnitResponse) error {
+	return h.UnitServiceHandler.PullNew(ctx, in, out)
 }
 
 func (h *unitServiceHandler) Create(ctx context.Context, in *Unit, out *UnitResponse) error {

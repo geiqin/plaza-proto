@@ -888,7 +888,7 @@ type VipUpPackageGift struct {
 	unknownFields protoimpl.UnknownFields
 
 	SpuId    int64  `protobuf:"varint,1,opt,name=spu_id,json=spuId,proto3" json:"spu_id"`
-	Md5Key   string `protobuf:"bytes,2,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`
+	SkuKey   string `protobuf:"bytes,2,opt,name=sku_key,json=skuKey,proto3" json:"sku_key"`
 	Title    string `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
 	Unit     string `protobuf:"bytes,4,opt,name=unit,proto3" json:"unit"`
 	ImageUrl string `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
@@ -934,9 +934,9 @@ func (x *VipUpPackageGift) GetSpuId() int64 {
 	return 0
 }
 
-func (x *VipUpPackageGift) GetMd5Key() string {
+func (x *VipUpPackageGift) GetSkuKey() string {
 	if x != nil {
-		return x.Md5Key
+		return x.SkuKey
 	}
 	return ""
 }

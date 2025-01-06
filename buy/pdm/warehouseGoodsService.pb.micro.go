@@ -49,7 +49,8 @@ type WarehouseGoodsService interface {
 	Detail(ctx context.Context, in *WarehouseGoods, opts ...client.CallOption) (*WarehouseGoodsResponse, error)
 	List(ctx context.Context, in *WarehouseGoodsRequest, opts ...client.CallOption) (*WarehouseGoodsResponse, error)
 	Search(ctx context.Context, in *WarehouseGoodsRequest, opts ...client.CallOption) (*WarehouseGoodsResponse, error)
-	SelectGoods(ctx context.Context, in *WarehouseGoodsRequest, opts ...client.CallOption) (*WarehouseGoodsSelectResponse, error)
+	//商品选择器
+	Selector(ctx context.Context, in *WarehouseGoodsRequest, opts ...client.CallOption) (*WarehouseGoodsSelectorResponse, error)
 }
 
 type warehouseGoodsService struct {
@@ -124,9 +125,9 @@ func (c *warehouseGoodsService) Search(ctx context.Context, in *WarehouseGoodsRe
 	return out, nil
 }
 
-func (c *warehouseGoodsService) SelectGoods(ctx context.Context, in *WarehouseGoodsRequest, opts ...client.CallOption) (*WarehouseGoodsSelectResponse, error) {
-	req := c.c.NewRequest(c.name, "WarehouseGoodsService.SelectGoods", in)
-	out := new(WarehouseGoodsSelectResponse)
+func (c *warehouseGoodsService) Selector(ctx context.Context, in *WarehouseGoodsRequest, opts ...client.CallOption) (*WarehouseGoodsSelectorResponse, error) {
+	req := c.c.NewRequest(c.name, "WarehouseGoodsService.Selector", in)
+	out := new(WarehouseGoodsSelectorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -143,7 +144,8 @@ type WarehouseGoodsServiceHandler interface {
 	Detail(context.Context, *WarehouseGoods, *WarehouseGoodsResponse) error
 	List(context.Context, *WarehouseGoodsRequest, *WarehouseGoodsResponse) error
 	Search(context.Context, *WarehouseGoodsRequest, *WarehouseGoodsResponse) error
-	SelectGoods(context.Context, *WarehouseGoodsRequest, *WarehouseGoodsSelectResponse) error
+	//商品选择器
+	Selector(context.Context, *WarehouseGoodsRequest, *WarehouseGoodsSelectorResponse) error
 }
 
 func RegisterWarehouseGoodsServiceHandler(s server.Server, hdlr WarehouseGoodsServiceHandler, opts ...server.HandlerOption) error {
@@ -154,7 +156,7 @@ func RegisterWarehouseGoodsServiceHandler(s server.Server, hdlr WarehouseGoodsSe
 		Detail(ctx context.Context, in *WarehouseGoods, out *WarehouseGoodsResponse) error
 		List(ctx context.Context, in *WarehouseGoodsRequest, out *WarehouseGoodsResponse) error
 		Search(ctx context.Context, in *WarehouseGoodsRequest, out *WarehouseGoodsResponse) error
-		SelectGoods(ctx context.Context, in *WarehouseGoodsRequest, out *WarehouseGoodsSelectResponse) error
+		Selector(ctx context.Context, in *WarehouseGoodsRequest, out *WarehouseGoodsSelectorResponse) error
 	}
 	type WarehouseGoodsService struct {
 		warehouseGoodsService
@@ -191,6 +193,6 @@ func (h *warehouseGoodsServiceHandler) Search(ctx context.Context, in *Warehouse
 	return h.WarehouseGoodsServiceHandler.Search(ctx, in, out)
 }
 
-func (h *warehouseGoodsServiceHandler) SelectGoods(ctx context.Context, in *WarehouseGoodsRequest, out *WarehouseGoodsSelectResponse) error {
-	return h.WarehouseGoodsServiceHandler.SelectGoods(ctx, in, out)
+func (h *warehouseGoodsServiceHandler) Selector(ctx context.Context, in *WarehouseGoodsRequest, out *WarehouseGoodsSelectorResponse) error {
+	return h.WarehouseGoodsServiceHandler.Selector(ctx, in, out)
 }

@@ -478,7 +478,7 @@ type SkuInfo struct {
 	CostPrice      int64          `protobuf:"varint,4,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`             //成本价
 	Price          int64          `protobuf:"varint,5,opt,name=price,proto3" json:"price"`                                      //销售价
 	Inventory      int64          `protobuf:"varint,6,opt,name=inventory,proto3" json:"inventory"`                              //库存
-	Md5Key         string         `protobuf:"bytes,7,opt,name=md5_key,json=md5Key,proto3" json:"md5_key"`                       //唯一标识
+	SkuKey         string         `protobuf:"bytes,7,opt,name=sku_key,json=skuKey,proto3" json:"sku_key"`                       //唯一标识
 	Coding         string         `protobuf:"bytes,8,opt,name=coding,proto3" json:"coding"`                                     //编号
 	Barcode        string         `protobuf:"bytes,9,opt,name=barcode,proto3" json:"barcode"`                                   //条码
 	Weight         int64          `protobuf:"varint,10,opt,name=weight,proto3" json:"weight"`                                   //重量：克
@@ -565,9 +565,9 @@ func (x *SkuInfo) GetInventory() int64 {
 	return 0
 }
 
-func (x *SkuInfo) GetMd5Key() string {
+func (x *SkuInfo) GetSkuKey() string {
 	if x != nil {
-		return x.Md5Key
+		return x.SkuKey
 	}
 	return ""
 }

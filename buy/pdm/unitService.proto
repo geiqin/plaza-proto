@@ -4,6 +4,8 @@ option go_package ="/.;services";
 import "common/base.proto";
 // 单位库服务
 service UnitService {
+    // 单位库拉取最新
+    rpc PullNew (Unit) returns (UnitResponse) {}
     // 单位库新增
     rpc Create (Unit) returns (UnitResponse) {}
     // 单位库修改
@@ -16,6 +18,7 @@ service UnitService {
     rpc Search (UnitRequest) returns (UnitResponse) {}
     // 单位库列表
     rpc List (UnitRequest) returns (UnitResponse) {}
+
 }
 // 单位库
 message Unit {
@@ -29,6 +32,8 @@ message Unit {
     string status = 8; //状态
     string created_at = 9; //创建时间
     string updated_at = 10; //修改时间
+    string type_name = 11; //单位类型名
+    string is_system_name = 12; //创建来源名
 }
 // 单位库请求参数
 message UnitRequest {

@@ -75,7 +75,7 @@ message Product {
     int64 cost_price =81;//成本价
     int64 price =82;//销售价
     int64 inventory =83;//库存
-    string md5_key =84;//唯一标识
+    string sku_key =84;//唯一标识
     string coding =85;//编号
     string barcode =86;//条码
     int64 weight =87;//重量：克
@@ -121,8 +121,8 @@ message ProductRequest {
     int32 top = 30;
     string is_many_spec =31;//是否多规格商品,否则为单品(0否，1是)
     string is_open_weight =32;//
-    string md5_key =33;
-    repeated string md5_key_list = 34;
+    string sku_key =33;
+    repeated string sku_key_list = 34;
     string is_query_delete =35;//是否查询已删除（0否，1是）
 }
 

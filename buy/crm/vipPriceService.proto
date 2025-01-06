@@ -14,7 +14,7 @@ message VipPrice {
     int64 id = 1;//ID
     int64 level_id = 2;//会员等级id
     int64 spu_id = 3;//SpuId
-    string md5_key = 4;//md5key
+    string sku_key = 4;//md5key
     string method = 5;//优惠方式：0 指定价，1 打折,2 减价
     int64 price = 6;//优惠价
     float discount_rate = 7;//优惠折扣
@@ -27,7 +27,7 @@ message VipPriceRequest {
     int64 id = 1;//ID
     int64 level_id = 2;//会员等级id
     int64 spu_id = 3;//SpuId
-    string md5_key = 4;//md5key
+    string sku_key = 4;//md5key
     string method = 5;//优惠方式：0 指定价，1 打折,2 减价
     repeated  int64  ids= 6;
     repeated VipPrice details = 7;
