@@ -25,7 +25,7 @@ message CartGoods  {
     string title =2;//标题
     string image_url =3;//封面图片
     int64  spu_id =4;//商品spuId
-    string md5_key =5;//商品规格md5_key
+    string sku_key =5;//商品规格sku_key
     int64  inventory =6;//库存数量
     int64  original_price =7;//原价
     int64  price =8;//销售价格

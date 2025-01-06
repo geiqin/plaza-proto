@@ -79,7 +79,7 @@ message ProductInfo {
 	int64 cost_price =81;//成本价
 	int64 price =82;//销售价
 	int64 inventory =83;//库存
-	string md5_key =84;//唯一标识
+	string sku_key =84;//唯一标识
 	string coding =85;//编号
 	string barcode =86;//条码
 	int64 weight =87;//重量：克
