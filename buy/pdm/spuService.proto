@@ -46,7 +46,7 @@ message Spu {
     string is_virtual = 13; //虚拟商品
     string is_many_spec = 14; //多规格商品
     string is_open_weigh = 15; //开启称重
-    string is_multi_barcode = 16; //一品多码
+    string is_more_barcode = 16; //一品多码
     int32 unit_id = 17; //计量单位ID
     string unit_name = 18; //计量单位名称
     string unit_type = 19; //计量单位类型
@@ -130,7 +130,7 @@ message SpuEdit {
     string is_many_spec = 15; //多规格商品
     string is_open_weigh = 16; //开启称重
     string code = 17; //SPU编码
-    string is_multi_barcode = 18; //一品多码
+    string is_more_barcode = 18; //一品多码
     int32 unit_id = 19; //计量单位ID
     string unit_name = 20; //计量单位名称
     string is_shelve = 23; //是否上架
