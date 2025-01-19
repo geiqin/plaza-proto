@@ -58,7 +58,7 @@ type SpuService interface {
 	// 商品库列表
 	List(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
 	//批量操作
-	BatchAction(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
+	BatchExec(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error)
 }
 
 type spuService struct {
@@ -143,8 +143,8 @@ func (c *spuService) List(ctx context.Context, in *SpuRequest, opts ...client.Ca
 	return out, nil
 }
 
-func (c *spuService) BatchAction(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error) {
-	req := c.c.NewRequest(c.name, "SpuService.BatchAction", in)
+func (c *spuService) BatchExec(ctx context.Context, in *SpuRequest, opts ...client.CallOption) (*SpuResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuService.BatchExec", in)
 	out := new(SpuResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -171,7 +171,7 @@ type SpuServiceHandler interface {
 	// 商品库列表
 	List(context.Context, *SpuRequest, *SpuResponse) error
 	//批量操作
-	BatchAction(context.Context, *SpuRequest, *SpuResponse) error
+	BatchExec(context.Context, *SpuRequest, *SpuResponse) error
 }
 
 func RegisterSpuServiceHandler(s server.Server, hdlr SpuServiceHandler, opts ...server.HandlerOption) error {
@@ -183,7 +183,7 @@ func RegisterSpuServiceHandler(s server.Server, hdlr SpuServiceHandler, opts ...
 		Detail(ctx context.Context, in *Spu, out *SpuResponse) error
 		Search(ctx context.Context, in *SpuRequest, out *SpuResponse) error
 		List(ctx context.Context, in *SpuRequest, out *SpuResponse) error
-		BatchAction(ctx context.Context, in *SpuRequest, out *SpuResponse) error
+		BatchExec(ctx context.Context, in *SpuRequest, out *SpuResponse) error
 	}
 	type SpuService struct {
 		spuService
@@ -224,6 +224,6 @@ func (h *spuServiceHandler) List(ctx context.Context, in *SpuRequest, out *SpuRe
 	return h.SpuServiceHandler.List(ctx, in, out)
 }
 
-func (h *spuServiceHandler) BatchAction(ctx context.Context, in *SpuRequest, out *SpuResponse) error {
-	return h.SpuServiceHandler.BatchAction(ctx, in, out)
+func (h *spuServiceHandler) BatchExec(ctx context.Context, in *SpuRequest, out *SpuResponse) error {
+	return h.SpuServiceHandler.BatchExec(ctx, in, out)
 }

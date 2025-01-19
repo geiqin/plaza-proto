@@ -1,0 +1,86 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "complaintProgressService.proto";
+
+// 售后维权服务
+service ComplaintService {
+  // 售后维权新增
+  rpc Create (Complaint) returns (ComplaintResponse) {}
+  // 售后维权修改
+  rpc Update (Complaint) returns (ComplaintResponse) {}
+  // 售后维权删除
+  rpc Delete (Complaint) returns (ComplaintResponse) {}
+  // 售后维权获取
+  rpc Get (Complaint) returns (ComplaintResponse) {}
+  // 售后维权查询
+  rpc Search (ComplaintRequest) returns (ComplaintResponse) {}
+  // 售后维权列表
+  rpc List (ComplaintRequest) returns (ComplaintResponse) {}
+}
+// 售后维权
+message Complaint {
+  int64 id = 1; //ID
+  string code = 2; //维权编号
+  int64 member_id = 3; //用户id
+  int64 order_id = 4; //订单ID
+  int64 order_detail_id = 5; //订单详情id
+  int64 spu_id = 6; //商品ID
+  string sku_key = 7; //货品Key
+  int64 quantity = 8; //退货数量
+  string type = 9; //售后类型
+  string reason = 10; //维权原因
+  string description = 11; //情况描述
+  string evidence_images = 12; //证据图片
+  int64 reviewer_id = 13; //审核人员
+  string review_comment = 14; //审核意见
+  string refund_type = 15; //退款类型
+  string refunded_time = 16; //退款时间
+  string canceled_time = 17; //取消时间
+  string status = 18; //售后状态
+  string created_at = 19; //创建时间
+  string updated_at = 20; //修改时间
+  ComplaintSolution solution =21;
+  repeated ComplaintProgress progress_list =22;
+}
+
+// 售后处理方案
+message ComplaintSolution {
+  int64 id = 1; //ID
+  int64 complaint_id = 2; //维权申请id
+  string solution_type = 3; //解决方案类型
+  string solution_detail = 4; //方案细节
+  int64 executor_id = 5; //负责执行人
+  string created_at = 6; //创建时间
+  string updated_at = 7; //修改时间
+}
+
+// 售后维权请求参数
+message ComplaintRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string code = 11; //维权编号
+  int64 member_id = 12; //用户id
+  int64 order_id = 13; //订单ID
+  int64 order_detail_id = 14; //订单详情id
+  int64 spu_id = 15; //商品ID
+  string type = 16; //售后类型
+  int64 reviewer_id = 17; //审核人员
+  string refund_type = 18; //退款类型
+  string status = 19; //售后状态
+}
+// 售后维权响应数据
+message ComplaintResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  Complaint entity = 3;
+  repeated Complaint items = 4;
+}

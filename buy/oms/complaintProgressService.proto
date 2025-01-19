@@ -1,0 +1,43 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 售后处理进度服务
+service ComplaintProgressService {
+  // 售后处理进度获取
+  rpc Get (ComplaintProgress) returns (ComplaintProgressResponse) {}
+  // 售后处理进度查询
+  rpc Search (ComplaintProgressRequest) returns (ComplaintProgressResponse) {}
+  // 售后处理进度列表
+  rpc List (ComplaintProgressRequest) returns (ComplaintProgressResponse) {}
+}
+// 售后处理进度
+message ComplaintProgress {
+  int64 id = 1; //ID
+  int64 complaint_id = 2; //维权申请id
+  string current_status = 3; //当前维权状态
+  string note = 4; //进度备注
+  string created_at = 5; //创建时间
+  string updated_at = 6; //修改时间
+}
+// 售后处理进度请求参数
+message ComplaintProgressRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 complaint_id = 11; //维权申请id
+  string current_status = 12; //当前维权状态
+}
+// 售后处理进度响应数据
+message ComplaintProgressResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  ComplaintProgress entity = 3;
+  repeated ComplaintProgress items = 4;
+}

@@ -2,33 +2,44 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "baseInfoService.proto";
+import "vipLevelService.proto";
 
 service VipPriceService {
-    rpc SetPrice (VipPriceRequest) returns (VipPriceResponse) {}
+    rpc Save (VipPriceRequest) returns (VipPriceResponse) {}
     rpc List (VipPriceRequest) returns (VipPriceResponse) {}
-    rpc Detail (VipPriceRequest) returns (VipPriceDetailResponse) {}
+    rpc Detail (VipPriceRequest) returns (VipPriceResponse) {}
+    rpc Delete (VipPriceRequest) returns (VipPriceResponse) {}
 }
 
 message VipPrice {
     int64 id = 1;//ID
-    int64 level_id = 2;//会员等级id
+    int32 level_id = 2;//会员等级id
     int64 spu_id = 3;//SpuId
     string sku_key = 4;//md5key
-    string method = 5;//优惠方式：0 指定价，1 打折,2 减价
-    int64 price = 6;//优惠价
-    float discount_rate = 7;//优惠折扣
-    int64 reduce_price = 8;//减少金额
+    string method = 5;//优惠方式：1 打折,2 减价, 3 指定价
+    int64 discount_value = 7;//优惠值
     string created_at = 9;
     string updated_at = 10;
 }
 
+// 会员价格详情
+message VipPriceDetail {
+    int64 spu_id = 1;
+    string free_discount_method =2;
+    string pay_discount_method = 3;
+    repeated VipLevel free_levels =4;
+    repeated VipLevel pay_levels =5;
+    repeated VipPrice free_list =6;
+    repeated VipPrice pay_list =7;
+}
+
+
 message VipPriceRequest {
     int64 id = 1;//ID
-    int64 level_id = 2;//会员等级id
+    int32 level_id = 2;//会员等级id
     int64 spu_id = 3;//SpuId
     string sku_key = 4;//md5key
-    string method = 5;//优惠方式：0 指定价，1 打折,2 减价
+    string method = 5;//优惠方式：1 打折,2 减价, 3 指定价
     repeated  int64  ids= 6;
     repeated VipPrice details = 7;
 }
@@ -37,13 +48,6 @@ message VipPriceResponse {
     VipPrice  entity = 1;
     common.Pager pager = 2;
     repeated VipPrice items = 3;
-    string info = 4;
-    SpuInfo spu =5;
-}
-
-
-message VipPriceDetailResponse {
-    string method = 1;//优惠方式：0 指定价，1 打折,2 减价
-    SpuInfo spu =2;
-    repeated VipPrice price_list =3;
+    string msg = 4;
+    VipPriceDetail detail =5;
 }

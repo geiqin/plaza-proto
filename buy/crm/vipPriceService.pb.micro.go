@@ -43,9 +43,10 @@ func NewVipPriceServiceEndpoints() []*api.Endpoint {
 // Client API for VipPriceService service
 
 type VipPriceService interface {
-	SetPrice(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceResponse, error)
+	Save(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceResponse, error)
 	List(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceResponse, error)
-	Detail(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceDetailResponse, error)
+	Detail(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceResponse, error)
+	Delete(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceResponse, error)
 }
 
 type vipPriceService struct {
@@ -60,8 +61,8 @@ func NewVipPriceService(name string, c client.Client) VipPriceService {
 	}
 }
 
-func (c *vipPriceService) SetPrice(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceResponse, error) {
-	req := c.c.NewRequest(c.name, "VipPriceService.SetPrice", in)
+func (c *vipPriceService) Save(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceResponse, error) {
+	req := c.c.NewRequest(c.name, "VipPriceService.Save", in)
 	out := new(VipPriceResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -80,9 +81,19 @@ func (c *vipPriceService) List(ctx context.Context, in *VipPriceRequest, opts ..
 	return out, nil
 }
 
-func (c *vipPriceService) Detail(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceDetailResponse, error) {
+func (c *vipPriceService) Detail(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceResponse, error) {
 	req := c.c.NewRequest(c.name, "VipPriceService.Detail", in)
-	out := new(VipPriceDetailResponse)
+	out := new(VipPriceResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vipPriceService) Delete(ctx context.Context, in *VipPriceRequest, opts ...client.CallOption) (*VipPriceResponse, error) {
+	req := c.c.NewRequest(c.name, "VipPriceService.Delete", in)
+	out := new(VipPriceResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -93,16 +104,18 @@ func (c *vipPriceService) Detail(ctx context.Context, in *VipPriceRequest, opts 
 // Server API for VipPriceService service
 
 type VipPriceServiceHandler interface {
-	SetPrice(context.Context, *VipPriceRequest, *VipPriceResponse) error
+	Save(context.Context, *VipPriceRequest, *VipPriceResponse) error
 	List(context.Context, *VipPriceRequest, *VipPriceResponse) error
-	Detail(context.Context, *VipPriceRequest, *VipPriceDetailResponse) error
+	Detail(context.Context, *VipPriceRequest, *VipPriceResponse) error
+	Delete(context.Context, *VipPriceRequest, *VipPriceResponse) error
 }
 
 func RegisterVipPriceServiceHandler(s server.Server, hdlr VipPriceServiceHandler, opts ...server.HandlerOption) error {
 	type vipPriceService interface {
-		SetPrice(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error
+		Save(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error
 		List(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error
-		Detail(ctx context.Context, in *VipPriceRequest, out *VipPriceDetailResponse) error
+		Detail(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error
+		Delete(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error
 	}
 	type VipPriceService struct {
 		vipPriceService
@@ -115,14 +128,18 @@ type vipPriceServiceHandler struct {
 	VipPriceServiceHandler
 }
 
-func (h *vipPriceServiceHandler) SetPrice(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error {
-	return h.VipPriceServiceHandler.SetPrice(ctx, in, out)
+func (h *vipPriceServiceHandler) Save(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error {
+	return h.VipPriceServiceHandler.Save(ctx, in, out)
 }
 
 func (h *vipPriceServiceHandler) List(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error {
 	return h.VipPriceServiceHandler.List(ctx, in, out)
 }
 
-func (h *vipPriceServiceHandler) Detail(ctx context.Context, in *VipPriceRequest, out *VipPriceDetailResponse) error {
+func (h *vipPriceServiceHandler) Detail(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error {
 	return h.VipPriceServiceHandler.Detail(ctx, in, out)
+}
+
+func (h *vipPriceServiceHandler) Delete(ctx context.Context, in *VipPriceRequest, out *VipPriceResponse) error {
+	return h.VipPriceServiceHandler.Delete(ctx, in, out)
 }

@@ -36,6 +36,7 @@ message Vip {
     repeated VipLevel levels =16;
 }
 
+
 // 会员体系请求参数
 message VipRequest {
     int32 top = 1;

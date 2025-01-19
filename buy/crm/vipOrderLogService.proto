@@ -57,5 +57,5 @@ message VipOrderLogResponse {
   VipOrderLog entity = 1;
   common.Pager pager =2;
   repeated VipOrderLog items = 3;
-  string info =4;
+  string msg =4;
 }

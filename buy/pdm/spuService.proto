@@ -27,7 +27,7 @@ service SpuService {
     // 商品库列表
     rpc List (SpuRequest) returns (SpuResponse) {}
     //批量操作
-    rpc BatchAction (SpuRequest) returns (SpuResponse) {}
+    rpc BatchExec (SpuRequest) returns (SpuResponse) {}
 }
 // 商品库
 message Spu {
@@ -51,7 +51,7 @@ message Spu {
     string unit_name = 18; //计量单位名称
     string unit_type = 19; //计量单位类型
     int64 inventory = 20; //库存
-    string deduct_inventory_type = 21; //扣减库存类型
+    string inventory_deduct_type = 21; //库存扣减类型
     string is_shelve = 22; //是否上架
     string is_member_right = 23; //购买权限
     string is_member_price = 24; //是否会员折扣价
@@ -135,7 +135,7 @@ message SpuEdit {
     string unit_name = 20; //计量单位名称
     string is_shelve = 23; //是否上架
     string sell_mode = 24; //销售模式
-    string deduct_inventory_type = 25; //扣减库存类型
+    string inventory_deduct_type = 25; //扣减库存类型
     string is_member_right = 26; //购买权限
     string is_member_price = 27; //是否会员折扣价
     int64 buy_min_number = 32; //最低起购数量
@@ -207,6 +207,7 @@ message SkuRequest {
     repeated string date_range = 6;
     repeated int64 ids = 7;
     int64 id = 8;
+    string command = 9;
     //以下为自定义参数
     int64 spu_id = 11; //商品ID
     string coding = 12; //编号
@@ -228,7 +229,7 @@ message SpuRequest {
     repeated string date_range = 6;
     repeated int64 ids = 7;
     int64 id = 8;
-    string action = 9; //批量操作命令
+    string command = 9;
     //以下为自定义参数
     string type = 11; //商品类型
     int64 shop_id = 12; //分店ID
@@ -246,7 +247,7 @@ message SpuRequest {
     int64 inventory = 24; //库存
     string is_shelve = 25; //是否上架
     string sell_mode = 26; //销售模式
-    string deduct_inventory_type = 27; //扣减库存类型
+    string inventory_deduct_type = 27; //库存扣减类型
     string is_member_right = 28; //购买权限
     string is_member_price = 29; //是否会员折扣价
     string logistics_fee_mode = 30; //运费模式
