@@ -4,6 +4,25 @@ option go_package ="/.;services";
 
 
 message SpuInfo {
+    int64 id = 1; //ID
+    string type = 2; //商品类型
+    string name = 3; //商品名称
+    string code = 4; //SPU编码
+    string image_url = 5; //商品主图
+    string is_virtual = 6; //虚拟商品
+    string is_many_spec = 7; //多规格商品
+    int32 unit_id = 8; //计量单位ID
+    string unit_name = 9; //计量单位名称
+    string unit_type = 10; //计量单位类型
+    int64 inventory = 11; //库存
+    string is_shelve = 12; //是否上架
+    int64 min_price = 13; //最低价格
+    int64 max_price = 14; //最高价格
+    string status = 15; //商品状态
+    repeated SkuInfo skus = 20;
+}
+/*
+message SpuInfo {
     int64  id =1;//ID
     int64  shop_id =2;//多店铺ID
     int64  taxonomy_id =3;//标准类目ID
@@ -56,6 +75,8 @@ message SpuInfo {
     string is_error =82;//是否错误（0否，1是）
     string error_msg =83;//错误信息
 }
+
+ */
 
 message SkuInfo  {
     int64 id =1;//ID
