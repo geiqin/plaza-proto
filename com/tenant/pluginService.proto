@@ -25,19 +25,20 @@ message Plugin {
     string name =3;//插件名称
     string type =4;//插件类型
     string icon_url =5; //插件图标
-    string desc =6;//插件描述
-    string intro =7;//插件介绍
-    string data =8;//初始数据
-    int32 ver  =9;//版本号
-    string url =10;//URL地址
-    int32  weight =11;//权重
-    string status =12;//状态(0 禁用，1 启用)
-    string author_id =13;//作者ID
-    string author_name =14;//作者名称
-    string created_at =15;
-    string updated_at =16;
-    string ver_text =17; //版本文本（版本号美化）
-    string is_install =18; //当前店铺是否已安装(0否，1是)
+    string promotion =6; //营销标记
+    string desc =7;//插件描述
+    string intro =8;//插件介绍
+    string data =9;//初始数据
+    int32 ver  =10;//版本号
+    string url =11;//URL地址
+    int32  weight =12;//权重
+    string status =13;//状态(0 禁用，1 启用)
+    string author_id =14;//作者ID
+    string author_name =15;//作者名称
+    string created_at =16;
+    string updated_at =17;
+    string ver_text =18; //版本文本（版本号美化）
+    bool checked =19;
 }
 
 
@@ -55,6 +56,10 @@ message PluginRequest {
     string keywords = 10;
     repeated string status_list = 11;
     repeated int32 ids = 12;
+    int64 store_id = 13;
+    int64 application_id = 14;
+    int64 version_id = 15;
+    string is_promotion =16;
 }
 
 //
@@ -62,5 +67,5 @@ message PluginResponse {
     Plugin entity = 1;
     common.Pager pager =2;
     repeated Plugin items = 3;
-    string info =5;
+    string msg =5;
 }

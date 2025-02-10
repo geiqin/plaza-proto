@@ -43,5 +43,5 @@ message ApplicationResponse {
     Application entity = 1;
     common.Pager pager =2;
     repeated Application items = 3;
-    string info =4;
+    string msg =4;
 }

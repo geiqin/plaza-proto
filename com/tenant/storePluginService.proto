@@ -8,6 +8,8 @@ import "pluginService.proto";
 service StorePluginService {
     //店铺应用安装
     rpc Install (StorePlugin) returns (StorePluginResponse) {}
+    //店铺应用修改
+    rpc Update (StorePlugin) returns (StorePluginResponse) {}
     //店铺应用升级
     rpc Upgrade (StorePlugin) returns (StorePluginResponse) {}
     //店铺应用移除
@@ -44,28 +46,30 @@ message StorePlugin {
     string created_at =12;
     string updated_at =13;
     Plugin plugin =14;
-    int32  valid_days =15;//剩余天数
+    int64  remaining_days =15;//剩余天数
     string ver_text =16; //版本文本（版本号美化）
-    string is_enabled_name =17;//是否已启用名称
 }
 
 message StorePluginRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string sorting = 3;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
     //base params
-    int32 id = 4;
-    int64 store_id = 5;
-    int32 plugin_id = 9;
-    string plugin_code = 6;
-    string keywords = 7;
-    string is_enabled = 8;
-    string is_error = 10;
-    string mode = 11; //ConfigList 数据模式: 1-plugin_base模式,2-plugin_data 模式，3-maps模式，无-对象列表
-    repeated string status_list = 13;
-    repeated int64 ids = 14;
-    repeated int32 plugin_ids = 15;
-    repeated string plugin_codes = 16;
+    int64 store_id = 10;
+    int32 plugin_id = 11;
+    string plugin_code = 12;
+    string is_promotion = 13;
+    string is_enabled = 14;
+    string is_error = 15;
+    string mode = 16; //ConfigList 数据模式: 1-plugin_base模式,2-plugin_data 模式，3-maps模式，无-对象列表
+    repeated string status_list = 17;
+    repeated int32 plugin_ids = 18;
+    repeated string plugin_codes = 19;
 }
 
 
@@ -74,5 +78,5 @@ message StorePluginResponse {
     common.Pager pager =2;
     repeated StorePlugin items = 3;
     repeated string plugins_valid_codes =4;
-    string info =5;
+    string msg =5;
 }

@@ -17,6 +17,6 @@ message CurrentStoreRequest{
 
 message CurrentStoreResponse {
     Store store = 1;
-    string info =4;
+    string msg =4;
     repeated string Modules = 5;
 }

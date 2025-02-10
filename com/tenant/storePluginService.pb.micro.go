@@ -45,6 +45,8 @@ func NewStorePluginServiceEndpoints() []*api.Endpoint {
 type StorePluginService interface {
 	//店铺应用安装
 	Install(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error)
+	//店铺应用修改
+	Update(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error)
 	//店铺应用升级
 	Upgrade(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error)
 	//店铺应用移除
@@ -79,6 +81,16 @@ func NewStorePluginService(name string, c client.Client) StorePluginService {
 
 func (c *storePluginService) Install(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error) {
 	req := c.c.NewRequest(c.name, "StorePluginService.Install", in)
+	out := new(StorePluginResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *storePluginService) Update(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error) {
+	req := c.c.NewRequest(c.name, "StorePluginService.Update", in)
 	out := new(StorePluginResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -182,6 +194,8 @@ func (c *storePluginService) PluginsValidCodes(ctx context.Context, in *StorePlu
 type StorePluginServiceHandler interface {
 	//店铺应用安装
 	Install(context.Context, *StorePlugin, *StorePluginResponse) error
+	//店铺应用修改
+	Update(context.Context, *StorePlugin, *StorePluginResponse) error
 	//店铺应用升级
 	Upgrade(context.Context, *StorePlugin, *StorePluginResponse) error
 	//店铺应用移除
@@ -205,6 +219,7 @@ type StorePluginServiceHandler interface {
 func RegisterStorePluginServiceHandler(s server.Server, hdlr StorePluginServiceHandler, opts ...server.HandlerOption) error {
 	type storePluginService interface {
 		Install(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
+		Update(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
 		Upgrade(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
 		Remove(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
 		Switch(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
@@ -228,6 +243,10 @@ type storePluginServiceHandler struct {
 
 func (h *storePluginServiceHandler) Install(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error {
 	return h.StorePluginServiceHandler.Install(ctx, in, out)
+}
+
+func (h *storePluginServiceHandler) Update(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error {
+	return h.StorePluginServiceHandler.Update(ctx, in, out)
 }
 
 func (h *storePluginServiceHandler) Upgrade(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error {

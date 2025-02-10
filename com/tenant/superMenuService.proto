@@ -40,27 +40,30 @@ message SuperMenu {
     repeated SuperMenu children = 26;
 }
 
-
-message UserSuperMenu {
-    string name =1;//名称
-    string path =2;//路径
-    string redirect =3;//路由重定向
-    string component =4;//组件路径
-    UserSuperMenuMeta meta =5;//元素
-    repeated UserSuperMenu children = 6;
-}
-
-message UserSuperMenuMeta{
-    string icon =1;//菜单图标
-    string locale =2;//语言包键名
-    bool requiresAuth =3; //是否需要登录鉴权
-    bool hideInMenu =4; //是否在左侧菜单中隐藏该项
-    bool hideChildrenInMenu =5;//强制在左侧菜单中显示单项
-    bool noAffix =6; //如果设置为true，标签将不会添加到tab-bar中
-    bool ignoreCache =7; //如果设置为true页面将不会被缓存
-    string activeMenu =8; //高亮设置的菜单项
-    int32 order =9;//排序路由菜单项。如果设置该值，值越高，越靠前
-    repeated string roles =10;//配置能访问该页面的角色，如果不匹配，则会被禁止访问该路由页面
+message RouteItem {
+    int64 id =1;//ID
+    int64 parentId =2;//父ID
+    string title =3;//导航标题
+    int32 type =4;//类型 1目录 2菜单 3按钮
+    string path =5;//路由地址
+    string name =6;//导航名称
+    string component =7;//组件路径
+    string redirect =8;//路由重定向
+    string icon =9;//图标
+    string permission =10;//权限标识
+    string locale =11;//语言包键名
+    bool isCache =12;//是否缓存: 1是 0否
+    bool isHidden =13;//是否隐藏: 1是 0否
+    bool isExternal =14;//是否外链: 1是 0否
+    int32 sort =15;//排序值
+    string status =16;//状态: （1：启用；2：禁用）
+    string activeMenu =17;//
+    bool alwaysShow =18;//
+    bool breadcrumb =19;//
+    bool showInTabs =20;//
+    bool affix =21;//
+    repeated string roles =22;
+    repeated RouteItem children = 23;
 }
 
 message SuperMenuRequest {
@@ -81,11 +84,6 @@ message SuperMenuResponse{
     SuperMenu entity = 1;
     common.Pager pager =2;
     repeated SuperMenu items = 3;
-    string info =4;
-}
-
-message UserSuperMenuResponse{
-    repeated UserSuperMenu menus = 1;
-    repeated string user_roles =2;
-    string info =3;
+    repeated RouteItem Routes = 4;
+    string msg =5;
 }

@@ -44,7 +44,7 @@ message Store {
     Application application =15;
     ApplicationVersion version =16;
     Merchant merchant =17;
-    int32 valid_days =18;
+    int64 remaining_days =18;
 }
 
 message StoreRequest{
