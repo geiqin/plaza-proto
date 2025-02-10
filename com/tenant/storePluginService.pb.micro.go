@@ -65,6 +65,8 @@ type StorePluginService interface {
 	ConfigSave(ctx context.Context, in *StorePlugin, opts ...client.CallOption) (*StorePluginResponse, error)
 	//有效应用名称列表
 	PluginsValidCodes(ctx context.Context, in *StorePluginRequest, opts ...client.CallOption) (*StorePluginResponse, error)
+	//活动列表
+	PromotionList(ctx context.Context, in *StorePluginRequest, opts ...client.CallOption) (*StorePluginResponse, error)
 }
 
 type storePluginService struct {
@@ -189,6 +191,16 @@ func (c *storePluginService) PluginsValidCodes(ctx context.Context, in *StorePlu
 	return out, nil
 }
 
+func (c *storePluginService) PromotionList(ctx context.Context, in *StorePluginRequest, opts ...client.CallOption) (*StorePluginResponse, error) {
+	req := c.c.NewRequest(c.name, "StorePluginService.PromotionList", in)
+	out := new(StorePluginResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for StorePluginService service
 
 type StorePluginServiceHandler interface {
@@ -214,6 +226,8 @@ type StorePluginServiceHandler interface {
 	ConfigSave(context.Context, *StorePlugin, *StorePluginResponse) error
 	//有效应用名称列表
 	PluginsValidCodes(context.Context, *StorePluginRequest, *StorePluginResponse) error
+	//活动列表
+	PromotionList(context.Context, *StorePluginRequest, *StorePluginResponse) error
 }
 
 func RegisterStorePluginServiceHandler(s server.Server, hdlr StorePluginServiceHandler, opts ...server.HandlerOption) error {
@@ -229,6 +243,7 @@ func RegisterStorePluginServiceHandler(s server.Server, hdlr StorePluginServiceH
 		Search(ctx context.Context, in *StorePluginRequest, out *StorePluginResponse) error
 		ConfigSave(ctx context.Context, in *StorePlugin, out *StorePluginResponse) error
 		PluginsValidCodes(ctx context.Context, in *StorePluginRequest, out *StorePluginResponse) error
+		PromotionList(ctx context.Context, in *StorePluginRequest, out *StorePluginResponse) error
 	}
 	type StorePluginService struct {
 		storePluginService
@@ -283,4 +298,8 @@ func (h *storePluginServiceHandler) ConfigSave(ctx context.Context, in *StorePlu
 
 func (h *storePluginServiceHandler) PluginsValidCodes(ctx context.Context, in *StorePluginRequest, out *StorePluginResponse) error {
 	return h.StorePluginServiceHandler.PluginsValidCodes(ctx, in, out)
+}
+
+func (h *storePluginServiceHandler) PromotionList(ctx context.Context, in *StorePluginRequest, out *StorePluginResponse) error {
+	return h.StorePluginServiceHandler.PromotionList(ctx, in, out)
 }

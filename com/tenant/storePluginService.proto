@@ -29,6 +29,8 @@ service StorePluginService {
     rpc ConfigSave (StorePlugin) returns (StorePluginResponse) {}
     //有效应用名称列表
     rpc PluginsValidCodes (StorePluginRequest) returns (StorePluginResponse) {}
+    //活动列表
+    rpc PromotionList (StorePluginRequest) returns (StorePluginResponse) {}
 }
 
 message StorePlugin {
@@ -48,6 +50,12 @@ message StorePlugin {
     Plugin plugin =14;
     int64  remaining_days =15;//剩余天数
     string ver_text =16; //版本文本（版本号美化）
+}
+
+message PromotionInfo {
+    string code =1;
+    string name =2;
+    string status =3;
 }
 
 message StorePluginRequest {
@@ -74,9 +82,11 @@ message StorePluginRequest {
 
 
 message StorePluginResponse {
-    StorePlugin entity = 1;
-    common.Pager pager =2;
-    repeated StorePlugin items = 3;
-    repeated string plugins_valid_codes =4;
-    string msg =5;
+    string msg =1;
+    StorePlugin entity = 2;
+    common.Pager pager =3;
+    repeated StorePlugin items = 4;
+    repeated string plugins_valid_codes =5;
+    repeated PromotionInfo promotion_list =6;
 }
+
