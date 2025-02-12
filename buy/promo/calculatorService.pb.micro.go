@@ -4,7 +4,6 @@
 package services
 
 import (
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
@@ -43,12 +42,10 @@ func NewCalculatorServiceEndpoints() []*api.Endpoint {
 // Client API for CalculatorService service
 
 type CalculatorService interface {
-	//商品显示级核算
-	Display(ctx context.Context, in *DisplayRequest, opts ...client.CallOption) (*CalculatorResponse, error)
-	//下单购买级核算
-	Purchase(ctx context.Context, in *PurchaseRequest, opts ...client.CallOption) (*CalculatorResponse, error)
-	//支付完成级核算
-	Payment(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*CalculatorResponse, error)
+	//计算订单优惠
+	OrderDiscount(ctx context.Context, in *PurchaseInfo, opts ...client.CallOption) (*CalculatorResponse, error)
+	//计算商品显示价
+	DisplayPrice(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
 }
 
 type calculatorService struct {
@@ -63,8 +60,8 @@ func NewCalculatorService(name string, c client.Client) CalculatorService {
 	}
 }
 
-func (c *calculatorService) Display(ctx context.Context, in *DisplayRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
-	req := c.c.NewRequest(c.name, "CalculatorService.Display", in)
+func (c *calculatorService) OrderDiscount(ctx context.Context, in *PurchaseInfo, opts ...client.CallOption) (*CalculatorResponse, error) {
+	req := c.c.NewRequest(c.name, "CalculatorService.OrderDiscount", in)
 	out := new(CalculatorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -73,18 +70,8 @@ func (c *calculatorService) Display(ctx context.Context, in *DisplayRequest, opt
 	return out, nil
 }
 
-func (c *calculatorService) Purchase(ctx context.Context, in *PurchaseRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
-	req := c.c.NewRequest(c.name, "CalculatorService.Purchase", in)
-	out := new(CalculatorResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *calculatorService) Payment(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
-	req := c.c.NewRequest(c.name, "CalculatorService.Payment", in)
+func (c *calculatorService) DisplayPrice(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
+	req := c.c.NewRequest(c.name, "CalculatorService.DisplayPrice", in)
 	out := new(CalculatorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -96,19 +83,16 @@ func (c *calculatorService) Payment(ctx context.Context, in *PaymentRequest, opt
 // Server API for CalculatorService service
 
 type CalculatorServiceHandler interface {
-	//商品显示级核算
-	Display(context.Context, *DisplayRequest, *CalculatorResponse) error
-	//下单购买级核算
-	Purchase(context.Context, *PurchaseRequest, *CalculatorResponse) error
-	//支付完成级核算
-	Payment(context.Context, *PaymentRequest, *CalculatorResponse) error
+	//计算订单优惠
+	OrderDiscount(context.Context, *PurchaseInfo, *CalculatorResponse) error
+	//计算商品显示价
+	DisplayPrice(context.Context, *CalculatorRequest, *CalculatorResponse) error
 }
 
 func RegisterCalculatorServiceHandler(s server.Server, hdlr CalculatorServiceHandler, opts ...server.HandlerOption) error {
 	type calculatorService interface {
-		Display(ctx context.Context, in *DisplayRequest, out *CalculatorResponse) error
-		Purchase(ctx context.Context, in *PurchaseRequest, out *CalculatorResponse) error
-		Payment(ctx context.Context, in *PaymentRequest, out *CalculatorResponse) error
+		OrderDiscount(ctx context.Context, in *PurchaseInfo, out *CalculatorResponse) error
+		DisplayPrice(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
 	}
 	type CalculatorService struct {
 		calculatorService
@@ -121,14 +105,10 @@ type calculatorServiceHandler struct {
 	CalculatorServiceHandler
 }
 
-func (h *calculatorServiceHandler) Display(ctx context.Context, in *DisplayRequest, out *CalculatorResponse) error {
-	return h.CalculatorServiceHandler.Display(ctx, in, out)
+func (h *calculatorServiceHandler) OrderDiscount(ctx context.Context, in *PurchaseInfo, out *CalculatorResponse) error {
+	return h.CalculatorServiceHandler.OrderDiscount(ctx, in, out)
 }
 
-func (h *calculatorServiceHandler) Purchase(ctx context.Context, in *PurchaseRequest, out *CalculatorResponse) error {
-	return h.CalculatorServiceHandler.Purchase(ctx, in, out)
-}
-
-func (h *calculatorServiceHandler) Payment(ctx context.Context, in *PaymentRequest, out *CalculatorResponse) error {
-	return h.CalculatorServiceHandler.Payment(ctx, in, out)
+func (h *calculatorServiceHandler) DisplayPrice(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
+	return h.CalculatorServiceHandler.DisplayPrice(ctx, in, out)
 }

@@ -1,166 +1,39 @@
 syntax = "proto3";
 package services;
 option go_package = "/.;services";
-import "common/base.proto";
-import "skuInfoService.proto";
+import "baseInfoService.proto";
 
-//活动核算
+//计算器服务
 service CalculatorService {
-    //商品显示级核算
-    rpc Display (DisplayRequest) returns (CalculatorResponse) {}
-    //下单购买级核算
-    rpc Purchase (PurchaseRequest) returns (CalculatorResponse) {}
-    //支付完成级核算
-    rpc Payment (PaymentRequest) returns (CalculatorResponse) {}
+    //计算订单优惠
+    rpc OrderDiscount (PurchaseInfo) returns (CalculatorResponse) {}
+    //计算商品显示价
+    rpc DisplayPrice (CalculatorRequest) returns (CalculatorResponse) {}
 }
 
-//赠品信息
-message PresentInfo{
-    int64 sku_id =1;
-    int32 num =2;
-    int32 stock = 3;
-    SkuInfo sku = 4;
+message OrderDiscountData {
+    int64 total_amount = 1; //订单单价
+    int64 final_amount = 2; //订单实付
+    int64 increase_amount = 3; //增加金额
+    int64 discount_amount = 4; //优惠金额
+    repeated PurchaseItemInfo items =7;
+    repeated OrderDiscountInfo discounts =8;
+    repeated int64 member_coupon_ids = 9; //用户优惠劵
+    int64 purchase_member_id =10;
 }
 
-
-//优惠劵批次信息
-message CouponBatchInfo{
-    int64 batch_id =1;
-    int64 coupon_id =2;
-    string coupon_name =3;
-    int32 num =4;
-}
-
-
-message PurchaseSkuInfo{
-    int64 sku_id =1;//SkuId
-    int32 num =2;//数量
-    int64 price =3; //销售价
-    int64 promotion_price =4;//促销价
-    int64 subtotal_discount =5;//优惠金额（小计）
-    int64 subtotal_amount =6;//商品金额（小计）
-    int64 member_discount =7; //会员优惠金额
-    int64 promotion_discount =8; //活动优惠金额
-    int64 discount_allocation =9;//优惠金额分摊
-    string preferential_way =10;//优惠方式：vip 会员折扣，promotion 促销活动，none 无优惠
-    repeated string discounts =11;//参与优惠信息 如：[member_discount,promotion_sku,promotion_store]
-    repeated PromotionInfo promotions = 12;//参与的活动
+//计算请求
+message CalculatorRequest {
+    int64 total_amount =1;
+    int64 remaining_amount =2;
+    repeated PurchaseItemInfo purchase_items =3;
+    repeated OrderDiscountInfo order_discounts =4;
+    int64 purchase_member_id =5;
+    int64 use_integral =6; //使用积分
 }
 
 
-message AdjustmentInfo {
-    int64 sku_id = 1;
-    string type = 2;
-    string label = 3;
-    string origin_code = 4;
-    int64 amount =5;
-    bool included =6;
-}
-
-//参与的活动
-message PromotionInfo {
-    int64 id = 1; //活动ID
-    string code = 2; //活动编码:如：coupon_20210101212
-    string title = 3; //活动标题
-    string type = 4; //活动类型:Coupon优惠劵/满减送/限时折扣/秒杀/拼团/通用
-    string subtype = 5; //活动子类型
-    string tag = 6; //标签
-}
-
-//购买结果
-message PurchaseResult {
-    string currency =1;//货币类型
-    int32 total_num =2; //总数量（商品数量）
-    int64 total_weight =3; //总重量（商品重量）
-    int64 total_price =4; //总价格
-    int64 total_discount =5; //总优惠
-    int64 total_amount =6; //总金额（实付金额）
-    int64 freight_fee =7; //运费金额
-    int64 freight_discount =8; //运费优惠
-    bool is_free_freight =9;//是否免运费
-    repeated PurchaseSkuInfo skus =10; //结算商品列表
-    repeated AdjustmentInfo adjustments =11; //价格变动记录
-    repeated PromotionInfo promotions = 12;//参与的活动
-    repeated PresentInfo send_presents =13; //获得的赠品
-    repeated CouponBatchInfo send_coupon_batches =14; //获得的优惠劵
-    int64 send_integrals =15; //获得的积分
-}
-
-//显示商品信息
-message DisplaySkuInfo{
-    int64 sku_id =1; //SkuId
-    int64 price =2;//销售价
-    int64 promotion_price =3; //促销价（优惠价）
-    int64 member_discount =4; //会员优惠金额
-    int64 promotion_discount =5; //活动优惠金额
-    int64 discount_money =6;//最终优惠金额
-    repeated PromotionInfo promotions = 7;//参与的活动
-    repeated PresentInfo presents =8; //赠品列表
-}
-
-//显示商品信息
-message DisplayResult{
-    string mode =1; //模式：1-单个模式，2-多个模式
-    repeated DisplaySkuInfo skus =2;//显示商品列表
-}
-
-//请求商品参数
-message RequestSkuInfo {
-    int64 sku_id =1; //skuId
-    int32 num =2; //数量
-    int64 weight =3; //重量
-    int64 price =4; //销售价
-    int64 member_discount =5; //会员优惠金额
-}
-
-//显示商品核算请求
-message DisplayRequest {
-    int64 area_id = 1;//所在区域ID
-    BuyerInfo buyer =2; //买家信息
-    repeated RequestSkuInfo skus = 3;//多个商品
-}
-
-//下单核算请求
-message PurchaseRequest {
-    string currency =1;//货币类型
-    int64 integral = 2;//使用的积分
-    int64 coupon_id = 3;//使用的优惠劵ID
-    int64 destination_area_id = 4;//目的地区域ID
-    int64 freight_fee =5; //运费
-    BuyerInfo buyer =6; //买家信息
-    repeated RequestSkuInfo skus = 7;//购买的商品列表
-}
-
-message BuyerInfo {
-    int64 member_id = 1;//会员ID
-    int32 member_rank_id = 2;//会员等级ID
-    bool has_newcomer = 3;//是否为新人下单
-    bool has_bound_mobile =4;//是否绑定手机
-    bool has_trusted =5;//是否实名认证
-    string birthday =6; //出生日期(生日优惠)
-}
-
-//完成支付核算请求
-message PaymentRequest {
-    string currency =1;//货币类型
-    int32 order_id =2;//订单ID
-    int32 total_num =3; //总数量
-    int64 total_weight =4;//总重量
-    int64 total_discount =5;//优惠总额
-    int64 total_amount =6;//订单总额
-    int64 pay_money =7;//当前支付金额
-    int64 paid_amount =8;//已支付金额
-    string channel_type =9;//通道类型
-    BuyerInfo buyer =10; //买家信息
-    repeated RequestSkuInfo skus = 11;//购买的商品列表
-}
-
-message CalculatorData {
-    DisplayResult display_result =1;//显示商品结果
-    PurchaseResult purchase_result =2; //购买清单结果
-}
-
-message CalculatorResponse {
-    CalculatorData data = 1;
-    common.Error error = 2;
+message CalculatorResponse{
+    string msg =1;
+    OrderDiscountData order_discount_data =2;
 }

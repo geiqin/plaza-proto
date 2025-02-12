@@ -4,8 +4,8 @@
 package services
 
 import (
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -47,16 +47,10 @@ type PromotionService interface {
 	Create(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
 	// 编辑促销活动
 	Update(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
-	//修改已报名数
-	UpdateAssignCount(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
-	//修改已使用数
-	UpdateUsedCount(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
 	// 删除促销活动
 	Delete(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
-	//启动活动
-	Start(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
-	//终止活动
-	Stop(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
+	//撤销活动
+	Cancel(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error)
 	// 获取活动详情
 	Get(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
 	//获取活动列表
@@ -97,26 +91,6 @@ func (c *promotionService) Update(ctx context.Context, in *Promotion, opts ...cl
 	return out, nil
 }
 
-func (c *promotionService) UpdateAssignCount(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error) {
-	req := c.c.NewRequest(c.name, "PromotionService.UpdateAssignCount", in)
-	out := new(PromotionResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *promotionService) UpdateUsedCount(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error) {
-	req := c.c.NewRequest(c.name, "PromotionService.UpdateUsedCount", in)
-	out := new(PromotionResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *promotionService) Delete(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error) {
 	req := c.c.NewRequest(c.name, "PromotionService.Delete", in)
 	out := new(PromotionResponse)
@@ -127,18 +101,8 @@ func (c *promotionService) Delete(ctx context.Context, in *Promotion, opts ...cl
 	return out, nil
 }
 
-func (c *promotionService) Start(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error) {
-	req := c.c.NewRequest(c.name, "PromotionService.Start", in)
-	out := new(PromotionResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *promotionService) Stop(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error) {
-	req := c.c.NewRequest(c.name, "PromotionService.Stop", in)
+func (c *promotionService) Cancel(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error) {
+	req := c.c.NewRequest(c.name, "PromotionService.Cancel", in)
 	out := new(PromotionResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -184,16 +148,10 @@ type PromotionServiceHandler interface {
 	Create(context.Context, *Promotion, *PromotionResponse) error
 	// 编辑促销活动
 	Update(context.Context, *Promotion, *PromotionResponse) error
-	//修改已报名数
-	UpdateAssignCount(context.Context, *Promotion, *PromotionResponse) error
-	//修改已使用数
-	UpdateUsedCount(context.Context, *Promotion, *PromotionResponse) error
 	// 删除促销活动
 	Delete(context.Context, *Promotion, *PromotionResponse) error
-	//启动活动
-	Start(context.Context, *Promotion, *PromotionResponse) error
-	//终止活动
-	Stop(context.Context, *Promotion, *PromotionResponse) error
+	//撤销活动
+	Cancel(context.Context, *PromotionRequest, *PromotionResponse) error
 	// 获取活动详情
 	Get(context.Context, *Promotion, *PromotionResponse) error
 	//获取活动列表
@@ -206,11 +164,8 @@ func RegisterPromotionServiceHandler(s server.Server, hdlr PromotionServiceHandl
 	type promotionService interface {
 		Create(ctx context.Context, in *Promotion, out *PromotionResponse) error
 		Update(ctx context.Context, in *Promotion, out *PromotionResponse) error
-		UpdateAssignCount(ctx context.Context, in *Promotion, out *PromotionResponse) error
-		UpdateUsedCount(ctx context.Context, in *Promotion, out *PromotionResponse) error
 		Delete(ctx context.Context, in *Promotion, out *PromotionResponse) error
-		Start(ctx context.Context, in *Promotion, out *PromotionResponse) error
-		Stop(ctx context.Context, in *Promotion, out *PromotionResponse) error
+		Cancel(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error
 		Get(ctx context.Context, in *Promotion, out *PromotionResponse) error
 		List(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error
 		Search(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error
@@ -234,24 +189,12 @@ func (h *promotionServiceHandler) Update(ctx context.Context, in *Promotion, out
 	return h.PromotionServiceHandler.Update(ctx, in, out)
 }
 
-func (h *promotionServiceHandler) UpdateAssignCount(ctx context.Context, in *Promotion, out *PromotionResponse) error {
-	return h.PromotionServiceHandler.UpdateAssignCount(ctx, in, out)
-}
-
-func (h *promotionServiceHandler) UpdateUsedCount(ctx context.Context, in *Promotion, out *PromotionResponse) error {
-	return h.PromotionServiceHandler.UpdateUsedCount(ctx, in, out)
-}
-
 func (h *promotionServiceHandler) Delete(ctx context.Context, in *Promotion, out *PromotionResponse) error {
 	return h.PromotionServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *promotionServiceHandler) Start(ctx context.Context, in *Promotion, out *PromotionResponse) error {
-	return h.PromotionServiceHandler.Start(ctx, in, out)
-}
-
-func (h *promotionServiceHandler) Stop(ctx context.Context, in *Promotion, out *PromotionResponse) error {
-	return h.PromotionServiceHandler.Stop(ctx, in, out)
+func (h *promotionServiceHandler) Cancel(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error {
+	return h.PromotionServiceHandler.Cancel(ctx, in, out)
 }
 
 func (h *promotionServiceHandler) Get(ctx context.Context, in *Promotion, out *PromotionResponse) error {

@@ -1,0 +1,126 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+
+
+message SpuInfo {
+	int64 id = 1; //ID
+	string type = 2; //商品类型
+	string name = 3; //商品名称
+	string code = 4; //SPU编码
+	string image_url = 5; //商品主图
+	string is_virtual = 6; //虚拟商品
+	string is_many_spec = 7; //多规格商品
+	int32 unit_id = 8; //计量单位ID
+	string unit_name = 9; //计量单位名称
+	string unit_type = 10; //计量单位类型
+	int64 inventory = 11; //库存
+	string is_shelve = 12; //是否上架
+	int64 min_price = 13; //最低价格
+	int64 max_price = 14; //最高价格
+	string status = 15; //商品状态
+}
+
+//优惠劵
+message CouponInfo{
+	int64 id = 1; //ID
+	int64 shop_id = 2; //店铺id
+	string coupon_type = 3; //优惠券类型
+	string coupon_name = 4; //名称
+	string coupon_desc = 5; //名称备注
+	string user_type = 6; //用户类型
+	int64 face_value = 7; //优惠内容
+	int64 max_value = 8; //最多优惠
+	int64 min_value = 9; //最少优惠
+	string expire_type = 13; //到期类型
+	int32 expire_days = 14; //到期天数
+	string expire_start_time = 15; //生效时间
+	string expire_end_time = 16; //到期时间
+	string usage_threshold = 17; //使用门槛
+	int64 threshold_amount = 18; //门槛金额
+	string limit_receive_type = 19; //每人限领类型
+	int32 limit_receive_count = 20; //每人限领次数
+	int32 issue_count = 21; //发放总量
+	int32 received_count = 22; //领取数量
+	string spu_scope_type = 23; //适用商品类型
+	string is_public_receive = 24; //是否公开领取
+	string status = 28; //启用状态
+}
+
+
+message MemberInfo {
+	int64  id =1;//ID
+	string type =2;//类型：0个人,1企业
+	string number_code =3;//会员编号
+	string username =4;//用户名称
+	string nickname =5;//用户昵称
+	string gender =6;//性别:0=未知,1=男,2=女
+	string birthday =7;//会员生日
+	int64  area_id =8;//区域ID
+	string province_name =9;//所在省
+	string city_name =10;//所在市
+	string county_name =11;//所在区/县
+	string address =12;//详细地址
+	string email =13;//邮箱
+	string mobile =14;//手机号
+	int64  avatar_id =15;//会员头像ID
+	string avatar_url =16;//会员头像url地址
+	string status =17;
+}
+
+
+message PurchaseInfo {
+	int64 member_id = 1; //买家ID
+	int64 shop_id = 2; //多商户ID
+	int64 realstore_id = 3; //多门店ID
+	int64 warehouse_id = 4; //仓库ID
+	float buy_count = 5; //购买总数
+	int64 buy_count_number = 6; //购买总件数
+	int64 buy_count_weighed = 7; //购买总称重
+	int64 total_amount = 8; //订单单价
+	int64 final_amount = 9; //订单实付
+	int64 increase_amount = 10; //增加金额
+	int64 discount_amount = 11; //优惠金额
+	int64 use_integral = 12; //使用积分
+	int64 use_surplus = 13; //使用余额
+	repeated int64 member_coupon_ids = 14; //用户优惠劵
+	string logistics_type = 15; //物流类型
+	string delivery_method = 16; //配送方式
+	repeated PurchaseItemInfo items =17;
+	repeated OrderDiscountInfo discounts =18;
+}
+
+
+message PurchaseItemInfo {
+	int64 spu_id = 1; //商品ID
+	string sku_key = 2; //SKUKey
+	int64 spec_weight = 3; //规格重量
+	int64 spec_volume = 4; //规格体积
+	int64 quantity = 5; //购买数量
+	int64 unit_price = 6; //商品单价
+	int64 total_price = 7; //合计价格
+	int64 discount_share = 8; //优惠分摊
+	int64 final_price = 9; //支付价格
+}
+
+
+
+message OrderIncreaseInfo {
+	int64 id = 1;// ID
+	int64 order_id = 2;// 订单ID
+	string increase_type = 3;// 增加类型
+	int64 increase_amount = 4;// 增加金额
+	string rule_detail = 5;// 规则详情
+	string tips = 6; //提示信息
+}
+
+
+
+//订单优惠
+message OrderDiscountInfo{
+	string discount_type =1;
+	int64 discount_amount =2;
+	bytes rule_detail =3; //规则详情
+	string share_detail =4; //分摊明细
+	repeated string sync_tags =5; //同步标签
+}
