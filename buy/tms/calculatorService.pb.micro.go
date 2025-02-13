@@ -42,10 +42,12 @@ func NewCalculatorServiceEndpoints() []*api.Endpoint {
 // Client API for CalculatorService service
 
 type CalculatorService interface {
+	//下单选择配送信息
+	BuyChoiceDelivery(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
 	//快递运费计算
-	ExpressFee(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
+	ExpressDeliveryFee(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
 	//同城配送费计算
-	DeliveryFee(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
+	LocalDeliveryFee(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
 }
 
 type calculatorService struct {
@@ -60,8 +62,8 @@ func NewCalculatorService(name string, c client.Client) CalculatorService {
 	}
 }
 
-func (c *calculatorService) ExpressFee(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
-	req := c.c.NewRequest(c.name, "CalculatorService.ExpressFee", in)
+func (c *calculatorService) BuyChoiceDelivery(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
+	req := c.c.NewRequest(c.name, "CalculatorService.BuyChoiceDelivery", in)
 	out := new(CalculatorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -70,8 +72,18 @@ func (c *calculatorService) ExpressFee(ctx context.Context, in *CalculatorReques
 	return out, nil
 }
 
-func (c *calculatorService) DeliveryFee(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
-	req := c.c.NewRequest(c.name, "CalculatorService.DeliveryFee", in)
+func (c *calculatorService) ExpressDeliveryFee(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
+	req := c.c.NewRequest(c.name, "CalculatorService.ExpressDeliveryFee", in)
+	out := new(CalculatorResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *calculatorService) LocalDeliveryFee(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
+	req := c.c.NewRequest(c.name, "CalculatorService.LocalDeliveryFee", in)
 	out := new(CalculatorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -83,16 +95,19 @@ func (c *calculatorService) DeliveryFee(ctx context.Context, in *CalculatorReque
 // Server API for CalculatorService service
 
 type CalculatorServiceHandler interface {
+	//下单选择配送信息
+	BuyChoiceDelivery(context.Context, *CalculatorRequest, *CalculatorResponse) error
 	//快递运费计算
-	ExpressFee(context.Context, *CalculatorRequest, *CalculatorResponse) error
+	ExpressDeliveryFee(context.Context, *CalculatorRequest, *CalculatorResponse) error
 	//同城配送费计算
-	DeliveryFee(context.Context, *CalculatorRequest, *CalculatorResponse) error
+	LocalDeliveryFee(context.Context, *CalculatorRequest, *CalculatorResponse) error
 }
 
 func RegisterCalculatorServiceHandler(s server.Server, hdlr CalculatorServiceHandler, opts ...server.HandlerOption) error {
 	type calculatorService interface {
-		ExpressFee(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
-		DeliveryFee(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
+		BuyChoiceDelivery(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
+		ExpressDeliveryFee(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
+		LocalDeliveryFee(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
 	}
 	type CalculatorService struct {
 		calculatorService
@@ -105,10 +120,14 @@ type calculatorServiceHandler struct {
 	CalculatorServiceHandler
 }
 
-func (h *calculatorServiceHandler) ExpressFee(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
-	return h.CalculatorServiceHandler.ExpressFee(ctx, in, out)
+func (h *calculatorServiceHandler) BuyChoiceDelivery(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
+	return h.CalculatorServiceHandler.BuyChoiceDelivery(ctx, in, out)
 }
 
-func (h *calculatorServiceHandler) DeliveryFee(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
-	return h.CalculatorServiceHandler.DeliveryFee(ctx, in, out)
+func (h *calculatorServiceHandler) ExpressDeliveryFee(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
+	return h.CalculatorServiceHandler.ExpressDeliveryFee(ctx, in, out)
+}
+
+func (h *calculatorServiceHandler) LocalDeliveryFee(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
+	return h.CalculatorServiceHandler.LocalDeliveryFee(ctx, in, out)
 }

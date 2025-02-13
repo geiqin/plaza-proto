@@ -2,54 +2,81 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 
-//运费计算器
+//配送计算器
 service CalculatorService {
+    //下单选择配送信息
+    rpc BuyChoiceDelivery  (CalculatorRequest) returns (CalculatorResponse) {}
     //快递运费计算
-    rpc ExpressFee (CalculatorRequest) returns (CalculatorResponse) {}
+    rpc ExpressDeliveryFee (CalculatorRequest) returns (CalculatorResponse) {}
     //同城配送费计算
-    rpc DeliveryFee  (CalculatorRequest) returns (CalculatorResponse) {}
+    rpc LocalDeliveryFee  (CalculatorRequest) returns (CalculatorResponse) {}
+}
+
+//配送选择数据
+message BuyChoiceDeliveryData{
+    repeated string flags =1; //物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
+    repeated item header_navs =2; //头部导航
+    bool can_express_delivery =6;//是否支持快递发货(0否，1是)
+    bool can_local_delivery =7;//是否支持同城配送(0否，1是)
+    bool can_mention_delivery =8;//是否支持上门自提(0否，1是)
+    string current_logistics_type =9;//当前选中的配送方式值
+    string current_logistics_type_name =10; //当前选中的配送方式名称
+    string is_error =11; //是否有错误 0否，1是
+    string error_msg =12; //错误信息
+    //配送选择项
+    message item{
+        string name =1; //选项名称
+        string value =2; //选项值
+        repeated item children =3; //子项选择
+    }
 }
 
 message CalculatorRequest {
-    int64 area_id = 1;
-    string longitude =2;
-    string latitude =3;
-    int32 total_num = 4;
-    int64 total_weight = 5;
-    int32 charging_method =6;
-    repeated PurchaseSku purchase_skus =7;
+    int64 province_id = 1; //所在省
+    int64 city_id = 2; //所在市
+    int64 county_id = 3; //所在县
+    string longitude =4;
+    string latitude =5;
+    string selected_delivery_type =6;//当前选中的配送方式
+    string calculate_fee_method =7;//计算费用方法：1-组合计算，2-累加计算
+    float buy_count = 8; //购买总数
+    int64 buy_count_number = 9; //购买总件数
+    int64 buy_count_weighed = 10; //购买总称重
+    int64 total_amount = 11; //订单单价
+    int64 final_amount = 12; //订单实付
+    int64 increase_amount = 13; //增加金额
+    int64 discount_amount = 14; //优惠金额
+    int64 spec_total_weight =15;//规格重量总计
+    int64 spec_total_volume =16; //规格体积总计
+    repeated PurchaseItem purchase_items =17;
 }
 
-message PurchaseSku {
-    int64 sku_id =1; //skuId
-    int32 num =2; //数量
-    int64 weight =3; //重量
-    string freight_type =4; //运费类型
-    int64 freight_uniform_fee =5; //统一运费
-    int64 freight_express_id =6;  //运费模板ID
+message PurchaseItem {
+    int64 spu_id =1;
+    string sku_key =2;
+    int64 quantity = 3; //购买数量
+    int64 spec_weight = 4; //规格重量
+    int64 spec_volume = 5; //规格体积
+    int64 unit_price = 6; //商品单价
+    int64 total_price = 7; //合计价格
+    string express_fee_type = 8; //快递运费类型
+    int64 express_uniform_fee = 9; //快递统一运费
+    int64 express_fee_template_id = 10; //快递运费模板
 }
 
-message AdjustmentInfo {
-    int64 sku_id = 1;
-    string type = 2;
-    string label = 3;
-    string origin_code = 4;
-    int64 amount =5;
-    bool included =6;
+message OrderIncreaseInfo {
+    string increase_type = 1;//增加类型
+    int64 increase_amount = 2;//增加金额
+    string rule_detail = 3;//规则详情
 }
 
-message ExpressResult {
-    int64 express_fee = 1;
-    repeated AdjustmentInfo adjustments =2;
-}
-
-
-message DeliveryResult { 
+message DeliveryFeeData {
     int64 delivery_fee = 1;
-    repeated AdjustmentInfo adjustments =2;
+    repeated OrderIncreaseInfo increases =2;
 }
 
 message CalculatorResponse {
-    ExpressResult express_result = 1;
-    DeliveryResult delivery_result = 2;
+    BuyChoiceDeliveryData buy_choice_delivery_data =1;
+    DeliveryFeeData express_delivery_fee_data = 2;
+    DeliveryFeeData local_delivery_fee_data = 3;
 }
