@@ -2,6 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "warehouseService.proto";
+import "productService.proto";
 
 //计算器服务
 service CalculatorService {
@@ -42,6 +43,7 @@ message BuyOrderItem {
     int64 total_price = 7; //合计价格
     int64 discount_share = 8; //优惠分摊
     int64 final_price = 9; //支付价格
+    Product product =10;
 }
 
 //购买商品信息
