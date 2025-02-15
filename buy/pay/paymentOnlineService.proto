@@ -1,0 +1,64 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+import "paymentAccountService.proto";
+
+// 支付方式服务
+service PaymentOnlineService {
+  // 支付方式新增
+  rpc Create (PaymentOnline) returns (PaymentOnlineResponse) {}
+  // 支付方式修改
+  rpc Update (PaymentOnline) returns (PaymentOnlineResponse) {}
+  // 支付方式删除
+  rpc Delete (PaymentOnline) returns (PaymentOnlineResponse) {}
+  // 支付方式获取
+  rpc Get (PaymentOnline) returns (PaymentOnlineResponse) {}
+  // 支付方式查询
+  rpc Search (PaymentOnlineRequest) returns (PaymentOnlineResponse) {}
+  // 支付方式列表
+  rpc List (PaymentOnlineRequest) returns (PaymentOnlineResponse) {}
+}
+// 支付方式
+message PaymentOnline {
+  int32 id = 1; //ID
+  string payment_type = 2; //支付类型
+  int32 channel_id = 3; //支付通道ID
+  PaymentChannelInfo channel_data = 4; //支付通道编码
+  int32 account_id = 5; //支付账户ID
+  string client_type = 8; //客户端类型
+  string client_app_id = 9; //客户端AppId
+  int32 sort = 10; //排序值
+  string status = 11; //启用状态
+  string created_at = 12; //创建时间
+  string updated_at = 13; //修改时间
+  PaymentAccount account =14;
+}
+
+// 支付方式请求参数
+message PaymentOnlineRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string payment_type = 11; //支付类型
+  int32 channel_id = 12; //支付通道ID
+  string channel_code = 13; //支付通道编码
+  int32 account_id = 14; //支付账户ID
+  string client_type = 17; //客户端类型
+  string client_app_id = 18; //客户端AppId
+  string status = 19; //启用状态
+}
+// 支付方式响应数据
+message PaymentOnlineResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  PaymentOnline entity = 3;
+  repeated PaymentOnline items = 4;
+}
