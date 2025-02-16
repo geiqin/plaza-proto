@@ -6,8 +6,10 @@ import "productService.proto";
 
 //计算器服务
 service CalculatorService {
-    //计算下单数据
-    rpc CalculateBuyData (CalculatorRequest) returns (CalculatorResponse) {}
+    //构建订单数据
+    rpc BuildBuyGroups (CalculatorRequest) returns (CalculatorResponse) {}
+    //获取购买清单
+    rpc GetPurchaseList (CalculatorRequest) returns (CalculatorResponse) {}
 }
 
 
@@ -57,10 +59,12 @@ message PurchaseItem {
 message CalculatorRequest {
     int64 shop_id =1;
     int64 realstore_id =2;
-    repeated PurchaseItem purchase_items =3;
+    int64 member_id =3;
+    repeated PurchaseItem purchase_items =4;
 }
 
 message CalculatorResponse{
     string msg =1;
-    repeated BuyGroup calculate_buy_data =2;
+    repeated BuyGroup build_buy_groups =2;
+    repeated BuyOrderItem get_purchase_list =3;
 }

@@ -43,7 +43,11 @@ func NewCalculatorServiceEndpoints() []*api.Endpoint {
 
 type CalculatorService interface {
 	//计算下单数据
-	CalculateBuyData(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
+	//rpc CalculateBuyData (CalculatorRequest) returns (CalculatorResponse) {}
+	//构建订单数据
+	BuildBuyGroups(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
+	//获取购买清单
+	GetPurchaseList(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
 }
 
 type calculatorService struct {
@@ -58,8 +62,18 @@ func NewCalculatorService(name string, c client.Client) CalculatorService {
 	}
 }
 
-func (c *calculatorService) CalculateBuyData(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
-	req := c.c.NewRequest(c.name, "CalculatorService.CalculateBuyData", in)
+func (c *calculatorService) BuildBuyGroups(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
+	req := c.c.NewRequest(c.name, "CalculatorService.BuildBuyGroups", in)
+	out := new(CalculatorResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *calculatorService) GetPurchaseList(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
+	req := c.c.NewRequest(c.name, "CalculatorService.GetPurchaseList", in)
 	out := new(CalculatorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -72,12 +86,17 @@ func (c *calculatorService) CalculateBuyData(ctx context.Context, in *Calculator
 
 type CalculatorServiceHandler interface {
 	//计算下单数据
-	CalculateBuyData(context.Context, *CalculatorRequest, *CalculatorResponse) error
+	//rpc CalculateBuyData (CalculatorRequest) returns (CalculatorResponse) {}
+	//构建订单数据
+	BuildBuyGroups(context.Context, *CalculatorRequest, *CalculatorResponse) error
+	//获取购买清单
+	GetPurchaseList(context.Context, *CalculatorRequest, *CalculatorResponse) error
 }
 
 func RegisterCalculatorServiceHandler(s server.Server, hdlr CalculatorServiceHandler, opts ...server.HandlerOption) error {
 	type calculatorService interface {
-		CalculateBuyData(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
+		BuildBuyGroups(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
+		GetPurchaseList(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
 	}
 	type CalculatorService struct {
 		calculatorService
@@ -90,6 +109,10 @@ type calculatorServiceHandler struct {
 	CalculatorServiceHandler
 }
 
-func (h *calculatorServiceHandler) CalculateBuyData(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
-	return h.CalculatorServiceHandler.CalculateBuyData(ctx, in, out)
+func (h *calculatorServiceHandler) BuildBuyGroups(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
+	return h.CalculatorServiceHandler.BuildBuyGroups(ctx, in, out)
+}
+
+func (h *calculatorServiceHandler) GetPurchaseList(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
+	return h.CalculatorServiceHandler.GetPurchaseList(ctx, in, out)
 }
