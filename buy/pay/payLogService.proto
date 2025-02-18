@@ -24,27 +24,31 @@ service PayLogService {
 
 //支付日志
 message PayLog{
-    int64  id =1;//ID
-    string log_no =2;//支付日志订单号
-    string business_type =3;//订单类型: order 订单, wallet 钱包 vip 会员等级
-    int64  member_id =4;//用户ID
-    string subject =8;//订单名称
-    int64  total_price =9;//业务订单金额
-    int64  pay_price =10;//支付金额
-    string currency =11;//货币代码
-    string trade_no =12;//支付平台交易号
-    string buyer_user =13;//支付平台用户帐号
-    int32  payment_id =5;//支付方式ID
-    string payment_way_code =6;//支付通道标识
-    string payment_type =7;//支付类型
-    string payment_account_no =14;//支付结算账户编号
-    string client_type =15;//应用客户端类型
-    string status =16;//状态（0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
-    string paid_time =17;//支付时间
-    string closed_time =18;//关闭时间
-    string created_at = 19; //创建时间
-    string updated_at = 20; //修改时间
-    repeated PayLogValue values =21; //支付日志关联业务数据
+    int64 id = 1; //ID
+    string log_no = 2; //支付日志单号
+    string business_type = 3; //订单类型 : order 订单, wallet 钱包 vip 会员等级
+    int64 member_id = 4; //用户ID
+    int32 payment_id = 5; //支付方式ID
+    string payment_mode = 6; //支付模式
+    string payment_type = 7; //支付类型
+    string payment_channel = 8; //支付通道
+    string payment_account_no = 9; //支付账户
+    string subject = 10; //订单名称
+    int64 total_price = 11; //订单金额
+    int64 pay_price = 12; //支付金额
+    string currency = 13; //货币代码
+    string transaction_no = 14; //交易单号
+    string buyer_user = 15; //支付平台用户
+    string client_type = 16; //客户端类型
+    string close_reason = 17; //关闭原因
+    string recipient = 18; //收款人
+    string remark = 19; //备注
+    string status = 20; //状态  （0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
+    string paid_time = 21; //支付时间
+    string closed_time = 22; //关闭时间
+    string created_at = 23; //创建时间
+    string updated_at = 24; //修改时间
+    repeated PayLogValue values =25; //支付日志关联业务数据
 }
 
 //支付日志关联业务数据
@@ -58,32 +62,33 @@ message PayLogValue{
 }
 
 message PayLogRequest{
-    int64 paged = 1;
-    int64 page_size = 2;
-    int64 top = 3;
-    //base params
-    int64  id =4;//ID
-    string log_no =5;//支付日志订单号
-    string business_type =6;//订单类型: order 订单, wallet 钱包 vip 会员等级
-    int64  member_id =7;//用户ID
-    int32  payment_id =8;//支付方式ID
-    string payment_way_code =9;//支付方式标识
-    string payment_type =10;//支付类型
-    string subject =11;//订单名称
-    string trade_no =12;//支付平台交易号
-    string buyer_user =13;//支付平台用户帐号
-    int64  business_id =14;//业务订单ID
-    string business_no =15;//业务订单编号
-    string status =16;//状态
-    string begin_time = 17; //开始时间
-    string end_time = 18; //结束时间
-    string client_type =19;//应用客户端类型
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sorts = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string log_no = 11; //支付日志单号
+    string business_type = 12; //订单类型
+    int64 member_id = 13; //用户ID
+    int32 payment_id = 14; //支付方式ID
+    string payment_type = 15; //支付类型
+    string subject = 16; //订单名称
+    string transaction_no = 17; //交易单号
+    string client_type = 18; //客户端类型
+    string recipient = 19; //收款人
+    string status = 20; //状态
+    int64  business_id =21;//业务订单ID
+    string business_no =22;//业务订单编号
 }
 
 message PayLogResponse {
     PayLog entity = 1;
     common.Pager pager =2;
     repeated PayLog items = 3;
-    string info =4;
+    string msg =4;
 }
 
