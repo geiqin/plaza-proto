@@ -13,10 +13,11 @@ service PaymentService {
 // 支付方式
 message PaymentMethod {
   string coding =1;//支付方式标识
-  string payment_type =2;//支付类型
-  string payment_type_name =3;//支付类型名称
-  string payment_type_icon =4;//支付类型图标
-  string payment_mode = 6; //支付模式：1-线上支付，2-线下支付
+  int32 payment_id =2;//支付ID
+  string payment_mode =3; //支付模式：1-线上支付，2-线下支付
+  string payment_type =4;//支付类型
+  string payment_type_name =5;//支付类型名称
+  string payment_type_icon =6;//支付类型图标
   string client_type =7;//客户端类型:app/pc/h5/cashier
   int32  account_id =8;//支付账户ID（支付类型为weixin,alipay该项必填）
   string account_no =9;//支付账户编号
