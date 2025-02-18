@@ -4,8 +4,10 @@ option go_package ="/.;services";
 
 // 支付方式
 service PaymentService {
-  // 选择支付方式列表
-  rpc PayMethodList (PaymentRequest) returns (PaymentResponse) {}
+  //获取支付方式列表
+  rpc GetMethodList (PaymentRequest) returns (PaymentResponse) {}
+  //获取支付方式信息
+  rpc GetMethodInfo (PaymentRequest) returns (PaymentResponse) {}
 }
 
 // 支付方式
@@ -14,15 +16,16 @@ message PaymentMethod {
   string payment_type =2;//支付类型
   string payment_type_name =3;//支付类型名称
   string payment_type_icon =4;//支付类型图标
-  string client_type =5;//客户端类型:app/pc/h5/cashier
-  int32  account_id =6;//支付账户ID（支付类型为weixin,alipay该项必填）
-  string account_no =7;//支付账户编号
-  string channel_name = 8; //支付通道名称
-  string channel_code = 9;//支付通道编码
-  string client_app_id = 10; //客户端AppId
-  string uniapp_provider =11; //UniApp支付标识
-  bool is_online_pay =12;//是否线上支付
-  bool is_enabled =13;//是否启用
+  string payment_mode = 6; //支付模式：1-线上支付，2-线下支付
+  string client_type =7;//客户端类型:app/pc/h5/cashier
+  int32  account_id =8;//支付账户ID（支付类型为weixin,alipay该项必填）
+  string account_no =9;//支付账户编号
+  string channel_name = 10; //支付通道名称
+  string channel_code = 11;//支付通道编码
+  string client_app_id = 12; //客户端AppId
+  string uniapp_provider =13; //UniApp支付标识
+  bool is_online_pay =14;//是否线上支付
+  bool is_enabled =15;//是否启用
 }
 
 // 支付方式请求参数
@@ -36,10 +39,12 @@ message PaymentRequest {
   repeated int32 ids = 7;
   int32 id = 8;
   //以下为自定义参数
-  string payment_type = 11; //支付类型
-  int32 channel_id = 12; //支付通道ID
-  string channel_code = 13; //支付通道编码
-  int32 account_id = 14; //支付账户ID
+  int32 payment_id = 10; //支付ID
+  string payment_mode = 11; //支付模式：1-线上支付，2-线下支付
+  string payment_type = 12; //支付类型
+  int32 channel_id = 13; //支付通道ID
+  string channel_code = 14; //支付通道编码
+  int32 account_id = 15; //支付账户ID
   string client_type = 17; //客户端类型
   string client_app_id = 18; //客户端AppId
   string status = 19; //启用状态
@@ -47,5 +52,6 @@ message PaymentRequest {
 // 支付方式响应数据
 message PaymentResponse {
   string msg = 1;
-  repeated PaymentMethod pay_method_list = 2;
+  PaymentMethod method_info = 2;
+  repeated PaymentMethod method_list = 3;
 }

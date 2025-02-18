@@ -42,8 +42,10 @@ func NewPaymentServiceEndpoints() []*api.Endpoint {
 // Client API for PaymentService service
 
 type PaymentService interface {
-	// 选择支付方式列表
-	PayMethodList(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
+	//获取支付方式列表
+	GetMethodList(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
+	//获取支付方式信息
+	GetMethodInfo(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
 }
 
 type paymentService struct {
@@ -58,8 +60,18 @@ func NewPaymentService(name string, c client.Client) PaymentService {
 	}
 }
 
-func (c *paymentService) PayMethodList(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.PayMethodList", in)
+func (c *paymentService) GetMethodList(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.GetMethodList", in)
+	out := new(PaymentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentService) GetMethodInfo(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.GetMethodInfo", in)
 	out := new(PaymentResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -71,13 +83,16 @@ func (c *paymentService) PayMethodList(ctx context.Context, in *PaymentRequest, 
 // Server API for PaymentService service
 
 type PaymentServiceHandler interface {
-	// 选择支付方式列表
-	PayMethodList(context.Context, *PaymentRequest, *PaymentResponse) error
+	//获取支付方式列表
+	GetMethodList(context.Context, *PaymentRequest, *PaymentResponse) error
+	//获取支付方式信息
+	GetMethodInfo(context.Context, *PaymentRequest, *PaymentResponse) error
 }
 
 func RegisterPaymentServiceHandler(s server.Server, hdlr PaymentServiceHandler, opts ...server.HandlerOption) error {
 	type paymentService interface {
-		PayMethodList(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
+		GetMethodList(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
+		GetMethodInfo(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
 	}
 	type PaymentService struct {
 		paymentService
@@ -90,6 +105,10 @@ type paymentServiceHandler struct {
 	PaymentServiceHandler
 }
 
-func (h *paymentServiceHandler) PayMethodList(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.PayMethodList(ctx, in, out)
+func (h *paymentServiceHandler) GetMethodList(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.GetMethodList(ctx, in, out)
+}
+
+func (h *paymentServiceHandler) GetMethodInfo(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.GetMethodInfo(ctx, in, out)
 }
