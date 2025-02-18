@@ -37,18 +37,20 @@ message PayLog{
     int64 total_price = 11; //订单金额
     int64 pay_price = 12; //支付金额
     string currency = 13; //货币代码
-    string transaction_no = 14; //交易单号
+    string transaction_no = 14; //交易单号【线上/线下支付】
     string buyer_user = 15; //支付平台用户
     string client_type = 16; //客户端类型
     string close_reason = 17; //关闭原因
-    string recipient = 18; //收款人
-    string remark = 19; //备注
-    string status = 20; //状态  （0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
-    string paid_time = 21; //支付时间
-    string closed_time = 22; //关闭时间
-    string created_at = 23; //创建时间
-    string updated_at = 24; //修改时间
-    repeated PayLogValue values =25; //支付日志关联业务数据
+    string receipt_channel =18; //收款渠道【线下支付】
+    string receipt_man =19; //收款人【线下支付】
+    string receipt_account =20; //收款账号【线下支付】
+    string remark = 21; //备注【线下支付】
+    string status = 22; //状态  （0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
+    string paid_time = 23; //支付时间
+    string closed_time = 24; //关闭时间
+    string created_at = 25; //创建时间
+    string updated_at = 26; //修改时间
+    repeated PayLogValue values =27; //支付日志关联业务数据
 }
 
 //支付日志关联业务数据
