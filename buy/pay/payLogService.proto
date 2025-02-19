@@ -56,10 +56,11 @@ message PayLog{
 message PayLogValue{
     int64  id =1;//ID
     int64  pay_log_id =2;//支付日志id
-    int64  business_id =3;//业务订单id
-    int64 business_price =4;//业务金额
-    string created_at = 5;//创建时间
-    string updated_at = 6;//修改时间
+    int64  business_id =3;//业务单id
+    string business_no =4;//业务单号(用于显示)
+    int64 business_price =5;//业务单金额
+    string created_at = 6;//创建时间
+    string updated_at = 7;//修改时间
 }
 
 message PayLogRequest{
