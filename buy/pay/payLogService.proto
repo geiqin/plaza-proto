@@ -34,8 +34,7 @@ message PayLog{
     string payment_channel = 8; //支付通道
     string payment_account_no = 9; //支付账户
     string subject = 10; //订单名称
-    int64 total_price = 11; //订单金额
-    int64 pay_price = 12; //支付金额
+    int64 pay_amount = 12; //支付金额
     string currency = 13; //货币代码
     string transaction_no = 14; //交易单号【线上/线下支付】
     string buyer_user = 15; //支付平台用户
@@ -58,7 +57,7 @@ message PayLogValue{
     int64  id =1;//ID
     int64  pay_log_id =2;//支付日志id
     int64  business_id =3;//业务订单id
-    string business_no =4;//业务订单号
+    int64 business_price =4;//业务金额
     string created_at = 5;//创建时间
     string updated_at = 6;//修改时间
 }
@@ -73,8 +72,9 @@ message PayLogRequest{
     repeated int64 ids = 7;
     int64 id = 8;
     //以下为自定义参数
-    string log_no = 11; //支付日志单号
-    string business_type = 12; //订单类型
+    string log_no = 10; //支付日志单号
+    string business_type = 11; //业务单类型
+    int64  business_id =12;//业务单ID
     int64 member_id = 13; //用户ID
     int32 payment_id = 14; //支付方式ID
     string payment_type = 15; //支付类型
@@ -83,8 +83,6 @@ message PayLogRequest{
     string client_type = 18; //客户端类型
     string recipient = 19; //收款人
     string status = 20; //状态
-    int64  business_id =21;//业务订单ID
-    string business_no =22;//业务订单编号
 }
 
 message PayLogResponse {
