@@ -35,7 +35,7 @@ message OrderPayRequest {
     string client_type =4;
     int32 payment_id =5;
     string payment_type =6;
-    string payment_way_code =7;
+    string payment_mode =7;
     string auth_code =8; //付款码
     int64 member_id =9;
     repeated int64 ids = 12;

@@ -3,20 +3,58 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 import "complaintProgressService.proto";
+import "baseInfoService.proto";
+import "orderService.proto";
+import "orderDetailService.proto";
 
 // 售后维权服务
 service ComplaintService {
-  // 售后维权新增
-  rpc Create (Complaint) returns (ComplaintResponse) {}
-  // 售后维权修改
-  rpc Update (Complaint) returns (ComplaintResponse) {}
-  // 售后维权删除
+
+  //售后列表页【user】
+  //rpc ListIndex (ComplaintRequest) returns (ComplaintResponse) {}
+
+  //售后申请页【user】
+  rpc ApplyIndex (ComplaintRequest) returns (ComplaintResponse) {}
+
+  // 售后申请创建【user】
+  rpc ApplyCreate (Complaint) returns (ComplaintResponse) {}
+
+  //售后取消【admin/user】
+  rpc Cancel (Complaint) returns (ComplaintResponse) {}
+
+  //售后单删除【admin/user】
   rpc Delete (Complaint) returns (ComplaintResponse) {}
-  // 售后维权获取
+
+  //用户退货【user：换货/退货】
+  rpc ReturnGoods (Complaint) returns (ComplaintResponse) {}
+
+  /**管理员审核【admin】
+  *拒绝申请，拒绝原因
+  *仅退款：确认退款
+  *退货退款：同意并发送退货地址
+  *换货：同意并发送退货地址
+  */
+  rpc ConfirmReview  (ComplaintReviewRequest) returns (ComplaintResponse) {}
+
+  //确认收货(换货：[确认并重新发货]确认收货并重新发货)【admin：换货/退货】
+  rpc ConfirmCollect (Complaint) returns (ComplaintResponse) {}
+
+  //确认退款【admin】
+  rpc ConfirmRefund (Complaint) returns (ComplaintResponse) {}
+
+  //重新退款【admin】：对退款失败重新执行退款命令
+  rpc RefundAgain (Complaint) returns (ComplaintResponse) {}
+
+  //售后单详情【admin/user】
+  rpc Detail (ComplaintRequest) returns (ComplaintResponse) {}
+
+  // 售后单获取
   rpc Get (Complaint) returns (ComplaintResponse) {}
-  // 售后维权查询
+
+  // 售后单查询
   rpc Search (ComplaintRequest) returns (ComplaintResponse) {}
-  // 售后维权列表
+
+  // 售后单列表
   rpc List (ComplaintRequest) returns (ComplaintResponse) {}
 }
 // 售后维权
@@ -25,35 +63,107 @@ message Complaint {
   string code = 2; //维权编号
   int64 member_id = 3; //用户id
   int64 order_id = 4; //订单ID
-  int64 order_detail_id = 5; //订单详情id
-  int64 spu_id = 6; //商品ID
-  string sku_key = 7; //货品Key
-  int64 quantity = 8; //退货数量
-  string type = 9; //售后类型
-  string reason = 10; //维权原因
-  string description = 11; //情况描述
-  string evidence_images = 12; //证据图片
-  int64 reviewer_id = 13; //审核人员
-  string review_comment = 14; //审核意见
-  string refund_type = 15; //退款类型
-  string refunded_time = 16; //退款时间
-  string canceled_time = 17; //取消时间
-  string status = 18; //售后状态
-  string created_at = 19; //创建时间
-  string updated_at = 20; //修改时间
-  ComplaintSolution solution =21;
-  repeated ComplaintProgress progress_list =22;
+  string order_no = 5; //订单编号
+  int64 first_spu_id = 6; //首个商品ID
+  string first_sku_key = 7; //首个货品Key
+  int64 total_number = 8; //退货总数
+  int64 final_amount = 9; //实收金额
+  string type = 10; //售后类型
+  string reason = 11; //维权原因
+  string description = 12; //情况描述
+  string evidence_images = 13; //证据图片
+  string review_type =14;//审核类型：0待审核，1审核通过，2审核拒绝
+  string review_comment = 15; //审核意见
+  int64 reviewer_id = 16; //审核人员
+  string refund_type = 17; //退款类型
+  string refund_time = 18; //退款时间
+  string cancel_time = 19; //取消时间
+  string status = 20; //售后状态
+  string created_at = 21; //创建时间
+  string updated_at = 22; //修改时间
+  ComplaintSolution solution =25;
+  repeated ComplaintProgress progress_list =26;
+  repeated ComplaintDetail details = 27;
+  ProductInfo product = 28;
+  Order order = 29;
+  MemberInfo member =30;
+  string type_name = 31; //售后类型名称
+  string status_name = 32; //售后状态名称
+  int64 order_detail_id = 33; //订单明细ID [创建用]
+  ComplaintAdminCommand admin_command =34;
+  ComplaintUserCommand user_command =35;
+}
+
+
+message ComplaintDetail {
+  int64 id = 1; //ID
+  int64 complaint_id = 2; //售后维权单ID
+  int64 order_detail_id = 3; //订单明细ID
+  int64 spu_id = 4; //商品ID
+  string sku_key = 5; //SKUKey
+  string name = 6; //商品名称
+  string image_url = 7; //图片路径
+  string unit_name = 8; //计量单位名称
+  int64 quantity = 9; //购买数量
+  int64 final_amount = 10; //实付价格
+  int64 refund_amount = 11; //退款金额
+  repeated SkuSpecInfo spec = 12; //规格
+  string spec_desc = 13; //规格描述
+  string extra_main_id = 14; //扩展业务主要ID
+  string extra_detail_id = 15; //扩展业务明细ID
+  string created_at = 16; //创建时间
+  string updated_at = 17; //修改时间
+  OrderDetail order_detail =18;
 }
 
 // 售后处理方案
 message ComplaintSolution {
   int64 id = 1; //ID
   int64 complaint_id = 2; //维权申请id
-  string solution_type = 3; //解决方案类型
-  string solution_detail = 4; //方案细节
-  int64 executor_id = 5; //负责执行人
-  string created_at = 6; //创建时间
-  string updated_at = 7; //修改时间
+  string solution_type = 3; //解决方案类型：1全额退款, 2部分退款,3补发商品，4优惠券补偿
+  int64 refund_amount = 4; //退款金额
+  int64 compensate_spu_id = 5; //补偿商品SpuID
+  string compensate_sku_key = 6; //补偿商品SKUKey
+  int64 compensate_coupon_id = 7; //补偿优惠劵ID
+  int64 compensate_number = 8; //补偿数量
+  int64 return_address_id = 9; //退货地址ID
+  int64 exchange_order_id = 10; //换货新订单ID
+  string exchange_order_no = 11; //换货新订单号
+  int64 executor_id = 12; //负责执行人
+  string created_at = 13; //创建时间
+  string updated_at = 14; //修改时间
+  ReturnAddress return_address =15;
+}
+
+//管理员命令
+message ComplaintAdminCommand{
+  bool has_confirm_review =1; //确认审核
+  bool has_confirm_collect =2; //确认收货
+  bool has_confirm_refund =3;// 确认退款
+  bool has_complaint_delete =4;// 删除订单
+}
+
+//用户命令
+message ComplaintUserCommand{
+  bool has_return_goods =1; //买家退货
+  bool has_complaint_cancel =2;// 取消订单
+  bool has_complaint_delete =3;// 删除订单
+}
+
+// 售后维权审核请求
+message ComplaintReviewRequest {
+  int64 complaint_id = 1; //维权申请id
+  string review_type = 2; //审核类型：1通过, 2拒绝
+  int64 reviewer_id = 3; //审核人员
+  string review_comment = 4; //审核意见
+  string refund_type = 5; //退款类型
+  string solution_type = 6; //解决方案类型：1全额退款, 2部分退款,3补发商品，4优惠券补偿
+  int64 refund_amount = 7; //退款金额
+  int64 compensate_spu_id = 8; //补偿商品SpuID
+  string compensate_sku_key = 9; //补偿商品SKUKey
+  int64 compensate_coupon_id = 10; //补偿优惠劵ID
+  int64 compensate_number = 11; //补偿数量
+  int64 return_address_id = 12; //退货地址ID
 }
 
 // 售后维权请求参数
@@ -75,7 +185,8 @@ message ComplaintRequest {
   string type = 16; //售后类型
   int64 reviewer_id = 17; //审核人员
   string refund_type = 18; //退款类型
-  string status = 19; //售后状态
+  string review_type = 19; //审核类型：0待审核 1通过, 2拒绝
+  string status = 20; //售后状态
 }
 // 售后维权响应数据
 message ComplaintResponse {
@@ -83,4 +194,29 @@ message ComplaintResponse {
   common.Pager pager = 2;
   Complaint entity = 3;
   repeated Complaint items = 4;
+  ComplaintApplyIndex apply_index =5;
+}
+
+message ComplaintRefundInfo{
+  int64 return_quantity =1; //可退回数量
+  int64 refund_price =2; //可退款金额
+}
+
+message ComplaintTypeInfo {
+  int32 value =1;
+  string name =2;
+  string desc =3;
+  string icon =4;
+  string class =5;
+}
+
+message ComplaintApplyIndex {
+  int32 progress_index =1; //进度位置
+  Order order_info = 2; //订单信息
+  Complaint complaint_info =3; //维权信息
+  ComplaintRefundInfo refund_info =4; //退款数据
+  repeated string refund_only_reasons =5; //仅退款原因
+  repeated string return_and_refund_reasons =6; //退货退款原因
+  repeated ComplaintTypeInfo type_list =7; //维权类型列表
+  string upload_path_type =8;
 }

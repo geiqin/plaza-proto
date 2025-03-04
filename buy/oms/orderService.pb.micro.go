@@ -47,8 +47,8 @@ type OrderService interface {
 	OrderPay(ctx context.Context, in *OrderPayRequest, opts ...client.CallOption) (*OrderPayResponse, error)
 	//订单插入【service】
 	OrderInsertHandle(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//订单线下支付【admin】
-	OrderUnderLinePay(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	//线下支付确认【admin】
+	OfflinePayConfirm(ctx context.Context, in *OfflinePayConfirmRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单发货【admin】
 	OrderDelivery(ctx context.Context, in *OrderPacket, opts ...client.CallOption) (*OrderResponse, error)
 	//订单取消【admin/user】
@@ -123,8 +123,8 @@ func (c *orderService) OrderInsertHandle(ctx context.Context, in *Order, opts ..
 	return out, nil
 }
 
-func (c *orderService) OrderUnderLinePay(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderUnderLinePay", in)
+func (c *orderService) OfflinePayConfirm(ctx context.Context, in *OfflinePayConfirmRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.OfflinePayConfirm", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -340,8 +340,8 @@ type OrderServiceHandler interface {
 	OrderPay(context.Context, *OrderPayRequest, *OrderPayResponse) error
 	//订单插入【service】
 	OrderInsertHandle(context.Context, *Order, *OrderResponse) error
-	//订单线下支付【admin】
-	OrderUnderLinePay(context.Context, *OrderRequest, *OrderResponse) error
+	//线下支付确认【admin】
+	OfflinePayConfirm(context.Context, *OfflinePayConfirmRequest, *OrderResponse) error
 	//订单发货【admin】
 	OrderDelivery(context.Context, *OrderPacket, *OrderResponse) error
 	//订单取消【admin/user】
@@ -388,7 +388,7 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 	type orderService interface {
 		OrderPay(ctx context.Context, in *OrderPayRequest, out *OrderPayResponse) error
 		OrderInsertHandle(ctx context.Context, in *Order, out *OrderResponse) error
-		OrderUnderLinePay(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		OfflinePayConfirm(ctx context.Context, in *OfflinePayConfirmRequest, out *OrderResponse) error
 		OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error
 		OrderCancel(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderDelete(ctx context.Context, in *OrderRequest, out *OrderResponse) error
@@ -429,8 +429,8 @@ func (h *orderServiceHandler) OrderInsertHandle(ctx context.Context, in *Order, 
 	return h.OrderServiceHandler.OrderInsertHandle(ctx, in, out)
 }
 
-func (h *orderServiceHandler) OrderUnderLinePay(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
-	return h.OrderServiceHandler.OrderUnderLinePay(ctx, in, out)
+func (h *orderServiceHandler) OfflinePayConfirm(ctx context.Context, in *OfflinePayConfirmRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.OfflinePayConfirm(ctx, in, out)
 }
 
 func (h *orderServiceHandler) OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error {

@@ -14,8 +14,8 @@ service OrderAddressService {
 message OrderAddress {
     int64 id =1;//ID
     int64 order_id =2;//区域ID
-    int64 customer_addr_id =3;//客户地址ID
-    int64 extraction_addr_id =4;//取货地址ID
+    string source_type =3;//来源类型：1-客户地址，2-自提点地址
+    int64 source_addr_id =4;//来源地址ID
     string name =6;//姓名
     string alias =7;//别名
     string tel =8;//电话
@@ -46,7 +46,7 @@ message OrderAddressRequest {
     //----------
     int64 id = 4;
     string order_no = 5;
-    string type = 6;
+    string source_type = 6;
     string start_date = 7;
     string end_date = 8;
     repeated int64 ids = 9;
