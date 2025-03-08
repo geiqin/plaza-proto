@@ -1,0 +1,114 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+// 销售渠道配置服务
+service RoutineConfigService {
+  // 销售渠道配置新增
+  rpc Create (RoutineConfig) returns (RoutineConfigResponse) {}
+  // 销售渠道配置修改
+  rpc Update (RoutineConfig) returns (RoutineConfigResponse) {}
+  // 销售渠道配置删除
+  rpc Delete (RoutineConfig) returns (RoutineConfigResponse) {}
+  // 销售渠道配置获取
+  rpc Get (RoutineConfig) returns (RoutineConfigResponse) {}
+  // 销售渠道配置查询
+  rpc Search (RoutineConfigRequest) returns (RoutineConfigResponse) {}
+  // 销售渠道配置列表
+  rpc List (RoutineConfigRequest) returns (RoutineConfigResponse) {}
+  // 销售渠道列表
+  rpc RoutineList (RoutineConfigRequest) returns (RoutineListResponse) {}
+  // 获取微信小程序配置
+  rpc GetMPWexinConfig (RoutineConfig) returns (RoutineConfigResponse) {}
+  // 获取支付宝小程序配置
+  rpc GetMPAlipayConfig (RoutineConfig) returns (RoutineConfigResponse) {}
+  // 获取抖音小程序配置
+  rpc GetMPDouYinConfig (RoutineConfig) returns (RoutineConfigResponse) {}
+}
+
+// 销售渠道
+message Routine {
+  int32 id = 1; //ID
+  string code = 2; //编码
+  string name = 3; //名称
+  string type = 4; //类型
+  string icon_url = 5; //图标
+  string description = 6; //描述
+  string status = 7; //状态
+  string created_at = 8; //创建时间
+  string updated_at = 9; //修改时间
+  bool is_config =10; //是否配置
+}
+
+// 销售渠道配置
+message RoutineConfig {
+  int32 id = 1; //ID
+  int32 routine_id = 2; //渠道ID
+  string routine_code = 3; //渠道编码
+  string app_name = 4; //应用名称
+  bytes config = 5; //配置数据
+  string is_enable = 6; //是否启用
+  string created_at = 7; //创建时间
+  string updated_at = 8; //修改时间
+}
+
+//微信小程序
+message RoutineMPWexinConfig {
+  string app_id = 1; //小程序appId
+  string app_secret = 2; //小程序AppSecret
+  string application_name = 3; //小程序名称
+  repeated string auth_types =4 ; //手机号获取方式:1-微信授权，2-手动填写
+  bool open_get_avatar =5; //强制获取昵称头像(是否在小程序用户授权之后，弹窗获取用户的昵称和头像)
+  bool open_order_shipping =6; //发货信息管理(小程序有订单发货管理时，请打开此开关，否则会导致订单资金冻结)
+}
+
+//支付宝小程序
+message RoutineMPAlipayConfig {
+  string app_id = 1; //小程序appId
+  string app_secret = 2; //小程序AppSecret
+  string application_name = 3; //小程序名称
+}
+
+//抖音小程序
+message RoutineMPDouYinConfig {
+  string app_id = 1; //小程序appId
+  string app_secret = 2; //小程序AppSecret
+  string application_name = 3; //小程序名称
+}
+
+
+// 销售渠道配置请求参数
+message RoutineConfigRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  int32 routine_id = 11; //渠道ID
+  string routine_code = 12; //渠道编码
+  string app_name = 13; //应用名称
+  string is_enable = 14; //是否启用
+}
+// 销售渠道配置响应数据
+message RoutineConfigResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  RoutineConfig entity = 3;
+  repeated RoutineConfig items = 4;
+  RoutineMPWexinConfig MPWexinConfig =5;
+  RoutineMPAlipayConfig MPAlipayConfig =6;
+  RoutineMPDouYinConfig MPDouYinConfig =7;
+}
+
+// 销售渠道响应数据
+message RoutineListResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  RoutineConfig entity = 3;
+  repeated Routine items = 4;
+}
