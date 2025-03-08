@@ -25,9 +25,10 @@ message Routine {
   string type = 4; //类型
   string icon_url = 5; //图标
   string description = 6; //描述
-  string status = 7; //状态
-  string created_at = 8; //创建时间
-  string updated_at = 9; //修改时间
+  int32 sort = 7; //排序
+  string status = 8; //状态
+  string created_at = 9; //创建时间
+  string updated_at = 10; //修改时间
 }
 // 销售渠道请求参数
 message RoutineRequest {
