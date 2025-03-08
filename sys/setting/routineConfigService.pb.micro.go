@@ -43,10 +43,6 @@ func NewRoutineConfigServiceEndpoints() []*api.Endpoint {
 // Client API for RoutineConfigService service
 
 type RoutineConfigService interface {
-	// 销售渠道配置新增
-	Create(ctx context.Context, in *RoutineConfig, opts ...client.CallOption) (*RoutineConfigResponse, error)
-	// 销售渠道配置修改
-	Update(ctx context.Context, in *RoutineConfig, opts ...client.CallOption) (*RoutineConfigResponse, error)
 	// 销售渠道配置删除
 	Delete(ctx context.Context, in *RoutineConfig, opts ...client.CallOption) (*RoutineConfigResponse, error)
 	// 销售渠道配置获取
@@ -57,6 +53,12 @@ type RoutineConfigService interface {
 	List(ctx context.Context, in *RoutineConfigRequest, opts ...client.CallOption) (*RoutineConfigResponse, error)
 	// 销售渠道列表
 	RoutineList(ctx context.Context, in *RoutineConfigRequest, opts ...client.CallOption) (*RoutineListResponse, error)
+	// 保存微信小程序配置
+	SaveMPWexinConfig(ctx context.Context, in *RoutineMPWexinConfig, opts ...client.CallOption) (*RoutineConfigResponse, error)
+	// 保存支付宝小程序配置
+	SaveMPAlipayConfig(ctx context.Context, in *RoutineMPAlipayConfig, opts ...client.CallOption) (*RoutineConfigResponse, error)
+	// 保存抖音小程序配置
+	SaveMPDouYinConfig(ctx context.Context, in *RoutineMPDouYinConfig, opts ...client.CallOption) (*RoutineConfigResponse, error)
 	// 获取微信小程序配置
 	GetMPWexinConfig(ctx context.Context, in *RoutineConfig, opts ...client.CallOption) (*RoutineConfigResponse, error)
 	// 获取支付宝小程序配置
@@ -75,26 +77,6 @@ func NewRoutineConfigService(name string, c client.Client) RoutineConfigService 
 		c:    c,
 		name: name,
 	}
-}
-
-func (c *routineConfigService) Create(ctx context.Context, in *RoutineConfig, opts ...client.CallOption) (*RoutineConfigResponse, error) {
-	req := c.c.NewRequest(c.name, "RoutineConfigService.Create", in)
-	out := new(RoutineConfigResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *routineConfigService) Update(ctx context.Context, in *RoutineConfig, opts ...client.CallOption) (*RoutineConfigResponse, error) {
-	req := c.c.NewRequest(c.name, "RoutineConfigService.Update", in)
-	out := new(RoutineConfigResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *routineConfigService) Delete(ctx context.Context, in *RoutineConfig, opts ...client.CallOption) (*RoutineConfigResponse, error) {
@@ -147,6 +129,36 @@ func (c *routineConfigService) RoutineList(ctx context.Context, in *RoutineConfi
 	return out, nil
 }
 
+func (c *routineConfigService) SaveMPWexinConfig(ctx context.Context, in *RoutineMPWexinConfig, opts ...client.CallOption) (*RoutineConfigResponse, error) {
+	req := c.c.NewRequest(c.name, "RoutineConfigService.SaveMPWexinConfig", in)
+	out := new(RoutineConfigResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routineConfigService) SaveMPAlipayConfig(ctx context.Context, in *RoutineMPAlipayConfig, opts ...client.CallOption) (*RoutineConfigResponse, error) {
+	req := c.c.NewRequest(c.name, "RoutineConfigService.SaveMPAlipayConfig", in)
+	out := new(RoutineConfigResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routineConfigService) SaveMPDouYinConfig(ctx context.Context, in *RoutineMPDouYinConfig, opts ...client.CallOption) (*RoutineConfigResponse, error) {
+	req := c.c.NewRequest(c.name, "RoutineConfigService.SaveMPDouYinConfig", in)
+	out := new(RoutineConfigResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *routineConfigService) GetMPWexinConfig(ctx context.Context, in *RoutineConfig, opts ...client.CallOption) (*RoutineConfigResponse, error) {
 	req := c.c.NewRequest(c.name, "RoutineConfigService.GetMPWexinConfig", in)
 	out := new(RoutineConfigResponse)
@@ -180,10 +192,6 @@ func (c *routineConfigService) GetMPDouYinConfig(ctx context.Context, in *Routin
 // Server API for RoutineConfigService service
 
 type RoutineConfigServiceHandler interface {
-	// 销售渠道配置新增
-	Create(context.Context, *RoutineConfig, *RoutineConfigResponse) error
-	// 销售渠道配置修改
-	Update(context.Context, *RoutineConfig, *RoutineConfigResponse) error
 	// 销售渠道配置删除
 	Delete(context.Context, *RoutineConfig, *RoutineConfigResponse) error
 	// 销售渠道配置获取
@@ -194,6 +202,12 @@ type RoutineConfigServiceHandler interface {
 	List(context.Context, *RoutineConfigRequest, *RoutineConfigResponse) error
 	// 销售渠道列表
 	RoutineList(context.Context, *RoutineConfigRequest, *RoutineListResponse) error
+	// 保存微信小程序配置
+	SaveMPWexinConfig(context.Context, *RoutineMPWexinConfig, *RoutineConfigResponse) error
+	// 保存支付宝小程序配置
+	SaveMPAlipayConfig(context.Context, *RoutineMPAlipayConfig, *RoutineConfigResponse) error
+	// 保存抖音小程序配置
+	SaveMPDouYinConfig(context.Context, *RoutineMPDouYinConfig, *RoutineConfigResponse) error
 	// 获取微信小程序配置
 	GetMPWexinConfig(context.Context, *RoutineConfig, *RoutineConfigResponse) error
 	// 获取支付宝小程序配置
@@ -204,13 +218,14 @@ type RoutineConfigServiceHandler interface {
 
 func RegisterRoutineConfigServiceHandler(s server.Server, hdlr RoutineConfigServiceHandler, opts ...server.HandlerOption) error {
 	type routineConfigService interface {
-		Create(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error
-		Update(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error
 		Delete(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error
 		Get(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error
 		Search(ctx context.Context, in *RoutineConfigRequest, out *RoutineConfigResponse) error
 		List(ctx context.Context, in *RoutineConfigRequest, out *RoutineConfigResponse) error
 		RoutineList(ctx context.Context, in *RoutineConfigRequest, out *RoutineListResponse) error
+		SaveMPWexinConfig(ctx context.Context, in *RoutineMPWexinConfig, out *RoutineConfigResponse) error
+		SaveMPAlipayConfig(ctx context.Context, in *RoutineMPAlipayConfig, out *RoutineConfigResponse) error
+		SaveMPDouYinConfig(ctx context.Context, in *RoutineMPDouYinConfig, out *RoutineConfigResponse) error
 		GetMPWexinConfig(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error
 		GetMPAlipayConfig(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error
 		GetMPDouYinConfig(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error
@@ -224,14 +239,6 @@ func RegisterRoutineConfigServiceHandler(s server.Server, hdlr RoutineConfigServ
 
 type routineConfigServiceHandler struct {
 	RoutineConfigServiceHandler
-}
-
-func (h *routineConfigServiceHandler) Create(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error {
-	return h.RoutineConfigServiceHandler.Create(ctx, in, out)
-}
-
-func (h *routineConfigServiceHandler) Update(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error {
-	return h.RoutineConfigServiceHandler.Update(ctx, in, out)
 }
 
 func (h *routineConfigServiceHandler) Delete(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error {
@@ -252,6 +259,18 @@ func (h *routineConfigServiceHandler) List(ctx context.Context, in *RoutineConfi
 
 func (h *routineConfigServiceHandler) RoutineList(ctx context.Context, in *RoutineConfigRequest, out *RoutineListResponse) error {
 	return h.RoutineConfigServiceHandler.RoutineList(ctx, in, out)
+}
+
+func (h *routineConfigServiceHandler) SaveMPWexinConfig(ctx context.Context, in *RoutineMPWexinConfig, out *RoutineConfigResponse) error {
+	return h.RoutineConfigServiceHandler.SaveMPWexinConfig(ctx, in, out)
+}
+
+func (h *routineConfigServiceHandler) SaveMPAlipayConfig(ctx context.Context, in *RoutineMPAlipayConfig, out *RoutineConfigResponse) error {
+	return h.RoutineConfigServiceHandler.SaveMPAlipayConfig(ctx, in, out)
+}
+
+func (h *routineConfigServiceHandler) SaveMPDouYinConfig(ctx context.Context, in *RoutineMPDouYinConfig, out *RoutineConfigResponse) error {
+	return h.RoutineConfigServiceHandler.SaveMPDouYinConfig(ctx, in, out)
 }
 
 func (h *routineConfigServiceHandler) GetMPWexinConfig(ctx context.Context, in *RoutineConfig, out *RoutineConfigResponse) error {
