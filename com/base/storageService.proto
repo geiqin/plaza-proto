@@ -85,6 +85,7 @@ message UploadTokenResponse {
   string token = 1;
   int64 expired_time =2; //过期时间
   string key_prefix =3;//为文件Key生成前缀：如：/stores/10000009/material/ 或 /master/material/ 等等
+  string visit_prefix =4; //访问前缀
 }
 
 // 存储响应数据
