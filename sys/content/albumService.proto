@@ -2,6 +2,8 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "albumPhotoService.proto";
+
 // 图册服务
 service AlbumService {
   // 图册新增
@@ -33,6 +35,8 @@ message Album {
   string status = 12; //状态
   string created_at = 13; //创建时间
   string updated_at = 14; //修改时间
+  repeated AlbumPhoto photos =15;
+
 }
 // 图册请求参数
 message AlbumRequest {

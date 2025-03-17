@@ -51,7 +51,7 @@ type CartService interface {
 	//清除购物车
 	Clear(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
 	//更新购物车数量（根据cartId）
-	Stock(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartStockResponse, error)
+	Update(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
 	//获得统计数量(服务调的多)
 	Count(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error)
 	//选中商品计算
@@ -110,9 +110,9 @@ func (c *cartService) Clear(ctx context.Context, in *CartRequest, opts ...client
 	return out, nil
 }
 
-func (c *cartService) Stock(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartStockResponse, error) {
-	req := c.c.NewRequest(c.name, "CartService.Stock", in)
-	out := new(CartStockResponse)
+func (c *cartService) Update(ctx context.Context, in *CartRequest, opts ...client.CallOption) (*CartResponse, error) {
+	req := c.c.NewRequest(c.name, "CartService.Update", in)
+	out := new(CartResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -152,7 +152,7 @@ type CartServiceHandler interface {
 	//清除购物车
 	Clear(context.Context, *CartRequest, *CartResponse) error
 	//更新购物车数量（根据cartId）
-	Stock(context.Context, *CartRequest, *CartStockResponse) error
+	Update(context.Context, *CartRequest, *CartResponse) error
 	//获得统计数量(服务调的多)
 	Count(context.Context, *CartRequest, *CartResponse) error
 	//选中商品计算
@@ -165,7 +165,7 @@ func RegisterCartServiceHandler(s server.Server, hdlr CartServiceHandler, opts .
 		Add(ctx context.Context, in *CartRequest, out *CartResponse) error
 		Remove(ctx context.Context, in *CartRequest, out *CartResponse) error
 		Clear(ctx context.Context, in *CartRequest, out *CartResponse) error
-		Stock(ctx context.Context, in *CartRequest, out *CartStockResponse) error
+		Update(ctx context.Context, in *CartRequest, out *CartResponse) error
 		Count(ctx context.Context, in *CartRequest, out *CartResponse) error
 		Checked(ctx context.Context, in *CartRequest, out *CartResponse) error
 	}
@@ -196,8 +196,8 @@ func (h *cartServiceHandler) Clear(ctx context.Context, in *CartRequest, out *Ca
 	return h.CartServiceHandler.Clear(ctx, in, out)
 }
 
-func (h *cartServiceHandler) Stock(ctx context.Context, in *CartRequest, out *CartStockResponse) error {
-	return h.CartServiceHandler.Stock(ctx, in, out)
+func (h *cartServiceHandler) Update(ctx context.Context, in *CartRequest, out *CartResponse) error {
+	return h.CartServiceHandler.Update(ctx, in, out)
 }
 
 func (h *cartServiceHandler) Count(ctx context.Context, in *CartRequest, out *CartResponse) error {

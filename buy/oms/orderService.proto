@@ -6,13 +6,14 @@ import "orderDetailService.proto";
 import "orderAddressService.proto";
 import "orderPacketService.proto";
 import "baseInfoService.proto";
-import "orderPayService.proto";
 
 //订单服务
 service OrderService {
+    //订单收银台
+    rpc OrderCashier (OrderRequest) returns (OrderResponse) {}
 
     //订单支付【user】
-    rpc OrderPay (OrderPayRequest) returns (OrderPayResponse) {}
+    rpc OrderPay (OrderPayRequest) returns (OrderResponse) {}
 
     //订单插入【service】
     rpc OrderInsertHandle (Order) returns (OrderResponse) {}
@@ -54,7 +55,7 @@ service OrderService {
     rpc OrderSearch (OrderRequest) returns (OrderResponse) {}
 
     //订单详情【admin/user】
-    rpc OrderDetail (OrderRequest) returns (OrderDetailResponse) {}
+    rpc OrderDetail (OrderRequest) returns (OrderResponse) {}
 
     //订单主信息列表(服务专用)
     rpc OrderMainInfo (OrderRequest) returns (OrderResponse) {}
@@ -73,11 +74,8 @@ service OrderService {
     //订单列表【service】
     rpc List (OrderRequest) returns (OrderResponse) {}
 
-    //新订单通知数据
+    //新订单通知数据(循环模式：将弃用)
     rpc NewOrderNotice (OrderRequest) returns (OrderResponse) {}
-
-    //扩展列表【service】
-    rpc OrderExtensionList (OrderRequest) returns (OrderExtensionResponse) {}
 
 }
 
@@ -139,6 +137,8 @@ message Order {
     string created_at = 55; //创建时间
     string updated_at = 56; //修改时间
     string deleted_at = 57; //删除时间
+    string currency=58;
+    int64 cart_id =59;
     //--ext---
     bool is_can_launch_aftersale =60; //是否启动售后服务
     string client_type_name =61; //终端类型名称
@@ -149,7 +149,6 @@ message Order {
     string pay_status_name =66; //状态名称
     string logistics_type_name =67; //物流模式名称
     string delivery_mode_name =68; //发货模式名称
-    OrderCurrency  currency=69;
     OrderAddress address =70;
     MemberInfo member = 71;
     PaymentInfo payment = 72;
@@ -184,6 +183,20 @@ message OrderUserCommand{
     bool has_allow_comment =6;// 订单评论
 }
 
+
+
+message OrderPayRequest {
+    int64 id = 1;
+    string order_no = 2;
+    string str_ids = 3;
+    string client_type =4;
+    int32 payment_id =5;
+    string payment_type =6;
+    string payment_mode =7;
+    string auth_code =8; //付款码
+    int64 member_id =9;
+    repeated int64 ids = 12;
+}
 
 // 订单请求参数
 message OrderRequest {
@@ -248,29 +261,63 @@ message OrderStatusStepTotalResponse{
     int64 aftersale_doing_count =10; //正在售后服务数量
 }
 
-
-
-message OrderResponse {
-    Order entity = 1;
-    common.Pager pager =2;
-    repeated Order items = 3;
-    int64 order_id =4;
-    repeated int64 order_ids =5;
-    OrderFlow order_flow = 6;
-    repeated PaymentInfo payment_list =7;
-    string msg =8;
+message OrderCashierData{
+    bool ali_pay_status =1;
+    bool friend_pay_status =2;
+    int64 invalid_time =3;
+    int64 now_money =4;
+    bool offline_pay_status =5;
+    int64 offline_postage =6;
+    int64 order_id = 7; //replace: oid
+    string order_code =8; //replace: order_id
+    int64 pay_postage= 9;
+    int64 pay_price =10;
+    bool wechat_pay_status =11;
+    bool yue_pay_status =12;
 }
 
-message OrderDetailResponse {
+
+message OrderPayData {
+    int64 order_id =1;
+    string order_no =2;
+    string pay_status =3; //支付状态：success 成功,fail 失败, unknown 未知（需要查询确认）
+    string err_code =4; //错误代码
+    string err_code_desc =5; //错误代码描述
+    string column = 6;
+    PaymentInfo payment =7;
+    OrderPayUnderline underline =8;
+    OrderPayWallet wallet =9;
+    map<string,string> WechatMini =10;
+    string info = 12;
+}
+
+message OrderPayUnderline{
+    string is_html =7;
+    string html_text =8;
+}
+
+message OrderPayWallet{
+    int64 member_id =7;
+    int64 balance =8;
+}
+
+message OrderDetailData {
     Order order = 1;
     string msg =2;
     OrderFlow order_flow = 3;
     repeated PaymentInfo payment_list =4;
 }
 
+message OrderSearchData {
+    common.Pager pager =1;
+    repeated Order items =2;
+}
 
-
-message OrderExtensionResponse {
-    OrderExtension entity = 1;
-    repeated OrderExtension items =2;
+message OrderResponse {
+    string msg =1;
+    OrderCashierData cashier =2;
+    OrderDetailData detail = 4;
+    repeated Order list =5;
+    OrderSearchData search =6;
+    OrderPayData order_pay =7;
 }

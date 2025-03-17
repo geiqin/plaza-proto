@@ -60,7 +60,7 @@ type MaterialService interface {
 	//上传凭证生成
 	UploadToken(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
 	//上传回调处理
-	UploadCallback(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
+	UploadCallback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*MaterialResponse, error)
 }
 
 type materialService struct {
@@ -155,7 +155,7 @@ func (c *materialService) UploadToken(ctx context.Context, in *MaterialRequest, 
 	return out, nil
 }
 
-func (c *materialService) UploadCallback(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error) {
+func (c *materialService) UploadCallback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*MaterialResponse, error) {
 	req := c.c.NewRequest(c.name, "MaterialService.UploadCallback", in)
 	out := new(MaterialResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -185,7 +185,7 @@ type MaterialServiceHandler interface {
 	//上传凭证生成
 	UploadToken(context.Context, *MaterialRequest, *MaterialResponse) error
 	//上传回调处理
-	UploadCallback(context.Context, *MaterialRequest, *MaterialResponse) error
+	UploadCallback(context.Context, *CallbackInfo, *MaterialResponse) error
 }
 
 func RegisterMaterialServiceHandler(s server.Server, hdlr MaterialServiceHandler, opts ...server.HandlerOption) error {
@@ -198,7 +198,7 @@ func RegisterMaterialServiceHandler(s server.Server, hdlr MaterialServiceHandler
 		List(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		Statistics(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		UploadToken(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
-		UploadCallback(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
+		UploadCallback(ctx context.Context, in *CallbackInfo, out *MaterialResponse) error
 	}
 	type MaterialService struct {
 		materialService
@@ -243,6 +243,6 @@ func (h *materialServiceHandler) UploadToken(ctx context.Context, in *MaterialRe
 	return h.MaterialServiceHandler.UploadToken(ctx, in, out)
 }
 
-func (h *materialServiceHandler) UploadCallback(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error {
+func (h *materialServiceHandler) UploadCallback(ctx context.Context, in *CallbackInfo, out *MaterialResponse) error {
 	return h.MaterialServiceHandler.UploadCallback(ctx, in, out)
 }

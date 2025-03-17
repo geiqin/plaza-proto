@@ -13,7 +13,7 @@ service CartService {
     //清除购物车
     rpc Clear (CartRequest) returns (CartResponse) {}
     //更新购物车数量（根据cartId）
-    rpc Stock (CartRequest) returns (CartStockResponse) {}
+    rpc Update (CartRequest) returns (CartResponse) {}
     //获得统计数量(服务调的多)
     rpc Count (CartRequest) returns (CartResponse) {}
     //选中商品计算
@@ -21,56 +21,59 @@ service CartService {
 }
 
 message CartItem  {
-    int64  cart_id =1;//ID
-    string name =2;//商品名称
-    string image_url =3;//封面图片
-    int64 spu_id =4;//商品spuId
-    string sku_key =5;//商品规格sku_key
-    int64 unit_price =6;//商品单价
-    int64 stock =7;//购买数量
-    int64 discount_share =8;//优惠分摊
-    int64 total_price =10;//合计金额
-    int64  final_price =11;//支付金额
-    int64  min_buy_number =12; //最低购买数量
-    int64  max_buy_number =13;//最多购买数量
-    int64  spec_weight =14;//规格重量
-    int64  spec_volume =15; //规格体积
-    string spec_coding =16; //规格编码
-    string spec_barcode =17;//规格条码
-    string unit_name =18;//库存单位
-    int64  inventory =19;//库存数量
-    string is_invalid =20;//是否无效（0否，1是）
-    string is_error =21;//是否错误（0否，1是）
-    string error_msg =22;//错误信息
-    map<string,string> extends =23;//扩展数据
-    repeated SkuSpecInfo spec =24; //规格描述
-    string spec_desc =25;
-    string brand_name =26;
-    string goods_url =27;
+    int64 id =1;//ID
+    int64 spu_id =2;//商品spuId
+    string sku_key =3;//商品规格sku_key
+    int64 unit_price =4;//商品单价
+    int64 true_price =5;//实际价格
+    int64 true_stock =7;//实际库存
+    int64 quantity =8;//购买数量
+    int64 sum_price =9;//小计金额
+    int64 min_qty =12; //最低购买数量
+    int64 max_qty =13;//最多购买数量
+    bool is_valid =14;//是否有效
+    bool is_error =15;//是否错误
+    string error_msg =16;//错误信息
+    ProductInfo productInfo =17;
+    bool attrStatus =18;
+}
+
+message CartCountData{
+    int64 count =1;
+    int64 sum_price =2;
+    repeated int64 ids =3;
+}
+
+message CartIndexDeduction {
+    int64 bargain_id =1;
+    int64 combination_id =2;
+    int64 discount_id = 3;
+    int64 seckill_id = 4;
 }
 
 //购物车数据
-message CartResponse {
-    int64 buy_number =1;
-    int64 total_price =2;
-    int64 address_id = 3;
-    repeated CartItem cart_items =4;
-    repeated PromotionInfo promotions_data =5;
+message CartIndexData {
+    CartIndexDeduction deduction =1;
+    repeated CartItem valid =2;
+    repeated CartItem invalid =3;
 }
 
 message CartRequest {
     string type =1;
     int64 id =2;
     int64 spu_id =3;
-    int64 stock =4;
-    string buy_event_type =5;
-    repeated SkuSpecInfo spec =6;
-    repeated int64 ids =9;
-    int64 member_id =10;
+    string sku_key =4;
+    int64 number =5;
+    int64 cart_num =7;
+    string uniqueId =8;
+    int64 productId =9;
+    repeated int64 ids =10;
+    int64 member_id =12;
 }
 
-
-message CartStockResponse {
-    CartItem data = 1;
-    string msg = 2;
+//购物车数据
+message CartResponse {
+    string msg =1;
+    CartIndexData index =2;
+    CartCountData count =3;
 }

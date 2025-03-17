@@ -13,8 +13,10 @@ message TreeItem{
 //上传凭证信息
 message UploadTokenInfo {
   string token = 1; //上传凭证
-  int64 expired_time = 2; //失效时间
-  string key = 3; //储存KEY
+  string visit_prefix =2; //访问路径
+  string folder_path =3; //保存文件夹路径
+  int64 expired_time = 4; //失效时间
+  string key = 5; //储存KEY（将弃用）
 }
 
 //上传回调数据
@@ -32,9 +34,12 @@ message CallbackInfo {
   string uuid =12;
   string catId =14;
   string channel =15;
-  string batchCode =16; //上传批次，自定义【x:batch】
-  ImageInfo imageInfo =17;
-  AvInfo avInfo =18;
+  string userType =16;
+  int64 userId =17;
+  string storage =18;
+  bool is_overwrite =19;
+  ImageInfo imageInfo =20;
+  AvInfo avInfo =21;
 }
 
 //媒体信息

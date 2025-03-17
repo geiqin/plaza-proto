@@ -21,7 +21,7 @@ service AttachmentService {
   //上传凭证生成
   rpc UploadToken (AttachmentRequest) returns (AttachmentResponse) {}
   //上传回调处理
-  rpc UploadCallback (AttachmentRequest) returns (AttachmentResponse) {}
+  rpc UploadCallback (CallbackInfo) returns (AttachmentResponse) {}
 }
 // 附件
 message Attachment {

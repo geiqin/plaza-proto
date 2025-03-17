@@ -43,8 +43,10 @@ func NewOrderServiceEndpoints() []*api.Endpoint {
 // Client API for OrderService service
 
 type OrderService interface {
+	//订单收银台
+	OrderCashier(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单支付【user】
-	OrderPay(ctx context.Context, in *OrderPayRequest, opts ...client.CallOption) (*OrderPayResponse, error)
+	OrderPay(ctx context.Context, in *OrderPayRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单插入【service】
 	OrderInsertHandle(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//线下支付确认【admin】
@@ -72,7 +74,7 @@ type OrderService interface {
 	//订单查询【admin/user】
 	OrderSearch(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单详情【admin/user】
-	OrderDetail(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderDetailResponse, error)
+	OrderDetail(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单主信息列表(服务专用)
 	OrderMainInfo(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单主信息(服务专用)
@@ -85,10 +87,8 @@ type OrderService interface {
 	Get(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//订单列表【service】
 	List(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
-	//新订单通知数据
+	//新订单通知数据(循环模式：将弃用)
 	NewOrderNotice(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
-	//扩展列表【service】
-	OrderExtensionList(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderExtensionResponse, error)
 }
 
 type orderService struct {
@@ -103,9 +103,19 @@ func NewOrderService(name string, c client.Client) OrderService {
 	}
 }
 
-func (c *orderService) OrderPay(ctx context.Context, in *OrderPayRequest, opts ...client.CallOption) (*OrderPayResponse, error) {
+func (c *orderService) OrderCashier(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.OrderCashier", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) OrderPay(ctx context.Context, in *OrderPayRequest, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.OrderPay", in)
-	out := new(OrderPayResponse)
+	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -243,9 +253,9 @@ func (c *orderService) OrderSearch(ctx context.Context, in *OrderRequest, opts .
 	return out, nil
 }
 
-func (c *orderService) OrderDetail(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderDetailResponse, error) {
+func (c *orderService) OrderDetail(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.OrderDetail", in)
-	out := new(OrderDetailResponse)
+	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -323,21 +333,13 @@ func (c *orderService) NewOrderNotice(ctx context.Context, in *OrderRequest, opt
 	return out, nil
 }
 
-func (c *orderService) OrderExtensionList(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderExtensionResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderExtensionList", in)
-	out := new(OrderExtensionResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
+	//订单收银台
+	OrderCashier(context.Context, *OrderRequest, *OrderResponse) error
 	//订单支付【user】
-	OrderPay(context.Context, *OrderPayRequest, *OrderPayResponse) error
+	OrderPay(context.Context, *OrderPayRequest, *OrderResponse) error
 	//订单插入【service】
 	OrderInsertHandle(context.Context, *Order, *OrderResponse) error
 	//线下支付确认【admin】
@@ -365,7 +367,7 @@ type OrderServiceHandler interface {
 	//订单查询【admin/user】
 	OrderSearch(context.Context, *OrderRequest, *OrderResponse) error
 	//订单详情【admin/user】
-	OrderDetail(context.Context, *OrderRequest, *OrderDetailResponse) error
+	OrderDetail(context.Context, *OrderRequest, *OrderResponse) error
 	//订单主信息列表(服务专用)
 	OrderMainInfo(context.Context, *OrderRequest, *OrderResponse) error
 	//订单主信息(服务专用)
@@ -378,15 +380,14 @@ type OrderServiceHandler interface {
 	Get(context.Context, *Order, *OrderResponse) error
 	//订单列表【service】
 	List(context.Context, *OrderRequest, *OrderResponse) error
-	//新订单通知数据
+	//新订单通知数据(循环模式：将弃用)
 	NewOrderNotice(context.Context, *OrderRequest, *OrderResponse) error
-	//扩展列表【service】
-	OrderExtensionList(context.Context, *OrderRequest, *OrderExtensionResponse) error
 }
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
 	type orderService interface {
-		OrderPay(ctx context.Context, in *OrderPayRequest, out *OrderPayResponse) error
+		OrderCashier(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		OrderPay(ctx context.Context, in *OrderPayRequest, out *OrderResponse) error
 		OrderInsertHandle(ctx context.Context, in *Order, out *OrderResponse) error
 		OfflinePayConfirm(ctx context.Context, in *OfflinePayConfirmRequest, out *OrderResponse) error
 		OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error
@@ -400,7 +401,7 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		OrderStatusStepTotal(ctx context.Context, in *OrderRequest, out *OrderStatusStepTotalResponse) error
 		OrderTotal(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderSearch(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		OrderDetail(ctx context.Context, in *OrderRequest, out *OrderDetailResponse) error
+		OrderDetail(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderMainInfo(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderMainList(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		Respond(ctx context.Context, in *OrderRequest, out *OrderResponse) error
@@ -408,7 +409,6 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		Get(ctx context.Context, in *Order, out *OrderResponse) error
 		List(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		NewOrderNotice(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		OrderExtensionList(ctx context.Context, in *OrderRequest, out *OrderExtensionResponse) error
 	}
 	type OrderService struct {
 		orderService
@@ -421,7 +421,11 @@ type orderServiceHandler struct {
 	OrderServiceHandler
 }
 
-func (h *orderServiceHandler) OrderPay(ctx context.Context, in *OrderPayRequest, out *OrderPayResponse) error {
+func (h *orderServiceHandler) OrderCashier(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+	return h.OrderServiceHandler.OrderCashier(ctx, in, out)
+}
+
+func (h *orderServiceHandler) OrderPay(ctx context.Context, in *OrderPayRequest, out *OrderResponse) error {
 	return h.OrderServiceHandler.OrderPay(ctx, in, out)
 }
 
@@ -477,7 +481,7 @@ func (h *orderServiceHandler) OrderSearch(ctx context.Context, in *OrderRequest,
 	return h.OrderServiceHandler.OrderSearch(ctx, in, out)
 }
 
-func (h *orderServiceHandler) OrderDetail(ctx context.Context, in *OrderRequest, out *OrderDetailResponse) error {
+func (h *orderServiceHandler) OrderDetail(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
 	return h.OrderServiceHandler.OrderDetail(ctx, in, out)
 }
 
@@ -507,8 +511,4 @@ func (h *orderServiceHandler) List(ctx context.Context, in *OrderRequest, out *O
 
 func (h *orderServiceHandler) NewOrderNotice(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
 	return h.OrderServiceHandler.NewOrderNotice(ctx, in, out)
-}
-
-func (h *orderServiceHandler) OrderExtensionList(ctx context.Context, in *OrderRequest, out *OrderExtensionResponse) error {
-	return h.OrderServiceHandler.OrderExtensionList(ctx, in, out)
 }
