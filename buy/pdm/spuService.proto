@@ -197,6 +197,14 @@ message SpuPhoto {
     string updated_at = 9;
 }
 
+//显示详情数据
+message ShowDetailData {
+
+    map<string,Sku> productValue =2;
+}
+
+
+
 // 商品Sku请求参数
 message SkuRequest {
     int32 top = 1;

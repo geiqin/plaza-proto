@@ -29,27 +29,15 @@ message Group {
     repeated int64 ancestors = 3; //祖级列表
     string name = 4; //名称
     string alias = 5; //别名
-    string vice_name = 6; //副名称
-    string describe = 7; //描述
-    string icon_url = 8; //图标
-    string bg_color = 9; //背景色
-    string list_style = 10; //列表样式
-    int32 home_show_limit = 11; //首页显示数量
-    string is_show_search = 12; //显示搜索框
-    string is_show_name = 13; //显示商品名
-    string is_show_price = 14; //显示价格
-    string is_show_cart_btn = 15; //显示购买按钮
-    string cart_btn_style = 16; //购买按钮样式
-    string is_open_filter = 17; //开启分组筛选
-    string seo_title = 18; //SEO标题
-    string seo_keywords = 19; //SEO关键词
-    string seo_desc = 20; //SEO描述
-    int32 sort = 21; //排序
-    string is_system = 22; //系统预设
-    string status = 23; //显示状态
-    string created_at = 24; //创建时间
-    string updated_at = 25; //修改时间
-    repeated Group children =26;
+    string pic_url = 6; //图标
+    string big_pic_url = 7; //大图
+    string is_show = 9; //是否显示
+    string is_recommend = 10; //是否推荐
+    string is_system = 11; //系统预设
+    int32 sort = 12; //排序
+    string created_at = 13; //创建时间
+    string updated_at = 14; //修改时间
+    repeated Group children =15;
 }
 
 // 商品分组请求参数
@@ -66,8 +54,9 @@ message GroupRequest {
     int64 parent_id = 11; //父节点
     string name = 12; //名称
     string alias = 13; //别名
-    string status = 14; //显示状态
+    string is_show = 14; //显示状态
     string is_system = 15; //系统预设
+    string is_recommend = 16; //是否推荐
 }
 
 // 商品分组响应数据

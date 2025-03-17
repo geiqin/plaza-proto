@@ -1,0 +1,197 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+// 显示服务
+service ShowService {
+  // 显示商品详情
+  rpc GoodsDetail (ShowRequest) returns (ShowResponse) {}
+  // 显示商品列表
+  rpc GoodsList (ShowRequest) returns (ShowResponse) {}
+}
+// 显示商品数据
+message ShowGoodsDetailData{
+  int64 uid =1;
+  bool svip_open =2;
+  bool svip_price_open =3;
+  bool store_self_mention =4;
+  string priceName =5;
+  bytes reply =6;
+  int64 replyChance =7;
+  int64 replyCount =8;
+  int64 mer_id =9;
+  ShowGoodsSpu goodsInfo =12;
+  repeated ShowGoodsAttr productAttr =13;
+  map<string,ShowGoodsSku> productValue =14;
+  repeated ShowGoodsInfo good_list =15; //优品推荐
+  bytes realstoreInfo =19; //门店信息
+  bytes coupons =20;
+  bytes activity =21;
+  string mapKey =22;
+  string routine_contact_type =23;
+}
+
+//显示商品信息（主要在列表）
+message ShowGoodsInfo{
+  int64 id = 1; //ID
+  string type = 2; //商品类型
+  string spu_name = 7; //商品名称
+  string spu_code = 8; //SPU编码
+  string image = 9; //商品主图
+  string unit_name = 10; //计量单位名称
+  float price =11; //销售价
+  float ot_price =12; //划线价
+  bool is_vip =13;//是否会员商品
+  float vip_price =14; //会员价
+  bool svip_price_open =15; //开启SVIP价格
+  float svip_economize_price =16; //SVIP节省金额
+  int64 sales =17; //销量
+  int64 stock =18; //库存量
+  int32 min_qty =19;
+  bool is_many_spec = 20; //多规格商品
+  bool is_open_weigh = 21; //开启称重
+  bool presale =22; //是否预售
+  bool is_virtual =23;
+  bool cart_button =24;
+}
+
+message ShowGoodsAttr{
+  int64 id =1;
+  int64 product_id =2;
+  string attr_name =3;
+  string type =4;
+  repeated string attr_values =5;
+  repeated value attr_value =6;
+  message value{
+    string attr =1;
+    bool check =2;
+  }
+}
+
+message ShowGoodsSpu{
+  int64 id = 1; //ID
+  string type = 2; //商品类型
+  int64 shop_id = 3; //分店ID
+  int64 category_id = 4; //商品分类
+  int64 taxonomy_id = 5; //商品类目
+  int32 brand_id = 6; //品牌
+  string spu_name = 7; //商品名称
+  string spu_code = 8; //SPU编码
+  string sell_mode = 9; //销售模式
+  string image = 10; //商品主图
+  string video = 11; //主图视频
+  string explain_video = 12; //讲解视频
+  repeated string slider_image = 13; //商品幻灯片
+  bool is_many_spec = 14; //多规格商品
+  bool is_open_weigh = 15; //开启称重
+  bool is_more_barcode = 16; //一品多码
+  int32 unit_id = 17; //计量单位ID
+  string unit_name = 18; //计量单位名称
+  string unit_type = 19; //计量单位类型
+  bool is_shelve = 22; //是否上架
+  float min_price = 27; //最低价格
+  float max_price = 28; //最高价格
+  float price =29; //销售价
+  float ot_price =30; //划线价
+  float cost =31; //成本价
+  float postage =32; //运费
+  bool is_vip =33;//是否会员商品
+  float vip_price =34; //会员价
+  bool svip_price_open =35; //开启SVIP价格
+  float svip_economize_price =36; //SVIP节省金额
+  int64 sales =39; //销量
+  int64 stock =40; //库存量
+  int64 browse =41; //浏览量
+  bool presale =42; //是否预售
+  string presale_start_time =43; //预售开始时间
+  string presale_end_time =44; //预售结束时间
+  int32 presale_day =45; //预售天数
+  bool presale_pay_status =46; //预售支付状态
+  bool is_limit =50;
+  string limit_type =51;
+  int32 limit_num =52;
+  int32 min_qty =53;
+  bool is_virtual =60;
+  string virtual_type =61;
+  bool user_collect =66; //是否收藏
+  bool user_like =67; //是否喜欢
+  bool cart_button =68;
+  string wechat_code =70;
+  int64 give_integral =71; //赠送积分
+  string description =72; //商品内容
+  string selling_desc =73; //卖点描述
+  string share_desc =74; //分享描述
+  string seo_title =75; //SEO标题
+  string seo_keywords =76; //SEO关键字
+  string seo_desc =77; //SEO描述
+  string status = 78; //商品状态
+  /*
+  bool is_show =54; //--》
+  bool is_hot =55;
+  bool is_benefit =56;
+  bool is_best =57;
+  bool is_new =58;
+  bool is_postage =62;
+  bool is_del =63;
+  bool is_seckill =64;
+  bool is_bargain =65;
+  bool is_good =59; //--《
+   */
+}
+
+message ShowGoodsSku{
+  int64 id =1;
+  int64 product_id =2;
+  string suk =3; //"黑色,46mm",
+  int64 stock =4;
+  int64 sales =5; //销量
+  float price =6; //销售价(元)
+  string image =7; //图片
+  string unique =8; //唯一标识
+  float cost =9; //成本价
+  string bar_code =10; //商品条码
+  float ot_price  =11; //原始价(元)
+  float vip_price =12; //会员价(元)
+  float weight =13; //重量千克
+  float volume =15; //体积
+  float brokerage =16; //推广佣金
+  float brokerage_two =17;//二级推广佣金
+  string type =18;
+  int64 quota =19; ///配额数量
+  bool quota_show =20; //是否显示配额
+  bool is_virtual =21; //是否虚拟商品
+  int64 coupon_id =22; //优惠劵ID
+  string disk_info =23;
+  int64 product_stock =24; //库存量
+}
+
+// 商品库请求参数
+message ShowRequest {
+  int64 id = 8;
+  string command = 9;
+  //以下为自定义参数
+  string type = 11; //商品类型
+  int64 shop_id = 12; //分店ID
+  int64 category_id = 13; //商品分类
+  int64 taxonomy_id = 14; //商品类目
+  int32 brand_id = 15; //品牌
+  string name = 16; //商品名称
+  string is_virtual = 17; //虚拟商品
+  string is_many_spec = 18; //多规格商品
+  string is_open_weigh = 19; //开启称重
+  string code = 20; //SPU编码
+  string is_multi_barcode = 21; //一品多码
+  int32 unit_id = 22; //计量单位ID
+  string unit_type = 23; //计量单位类型
+  int64 inventory = 24; //库存
+  string is_shelve = 25; //是否上架
+  string sell_mode = 26; //销售模式
+}
+// 商品库响应数据
+message ShowResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  repeated ShowGoodsInfo list = 3;
+  ShowGoodsDetailData goods = 4;
+}

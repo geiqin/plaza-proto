@@ -49,10 +49,10 @@ message BuyOrderItem {
 }
 
 //购买商品信息
-message PurchaseItem {
+message CartItem {
     int64 spu_id = 1; //商品ID
     string sku_key =2;//规格sku_key
-    int64 stock = 3; //数量
+    int64 quantity = 3; //数量
 }
 
 //计算请求
@@ -60,7 +60,7 @@ message CalculatorRequest {
     int64 shop_id =1;
     int64 realstore_id =2;
     int64 member_id =3;
-    repeated PurchaseItem purchase_items =4;
+    repeated CartItem cart_items =4;
 }
 
 message CalculatorResponse{

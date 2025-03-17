@@ -42,8 +42,6 @@ func NewCalculatorServiceEndpoints() []*api.Endpoint {
 // Client API for CalculatorService service
 
 type CalculatorService interface {
-	//计算下单数据
-	//rpc CalculateBuyData (CalculatorRequest) returns (CalculatorResponse) {}
 	//构建订单数据
 	BuildBuyGroups(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
 	//获取购买清单
@@ -85,8 +83,6 @@ func (c *calculatorService) GetPurchaseList(ctx context.Context, in *CalculatorR
 // Server API for CalculatorService service
 
 type CalculatorServiceHandler interface {
-	//计算下单数据
-	//rpc CalculateBuyData (CalculatorRequest) returns (CalculatorResponse) {}
 	//构建订单数据
 	BuildBuyGroups(context.Context, *CalculatorRequest, *CalculatorResponse) error
 	//获取购买清单
