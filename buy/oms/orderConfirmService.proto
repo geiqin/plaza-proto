@@ -19,11 +19,56 @@ service OrderConfirmService {
   rpc Create (OrderConfirmRequest) returns (OrderConfirmResponse) {}
 }
 
+
+message BuyGroup {
+  WarehouseInfo warehouse =1;
+  BuyOrderBase order_base =2;//订单基本信息
+  repeated BuyOrderItem order_items = 3; //订单商品列表
+  repeated OrderIncrease order_increases = 4; //订单增加数据
+  repeated OrderDiscount order_discounts = 5; //订单优惠数据
+  repeated int64 member_coupon_ids = 6; //选择的优惠劵IDS
+}
+
+message BuyOrderItem  {
+  int64 cart_id = 1; //购车ID
+  int64 spu_id = 2; //商品ID
+  string sku_key = 3; //SKUKey
+  int64 spec_weight = 4; //规格重量
+  int64 spec_volume = 5; //规格体积
+  int64 quantity = 6; //购买数量
+  int64 unit_price = 7; //商品单价
+  int64 true_price = 8; //实付价格
+  int64 vip_true_price =9; //VIP实付价格
+  int64 total_price = 10; //合计价格
+  int64 discount_share = 11; //优惠分摊
+  int64 final_price = 12; //最终支付价格
+  ProductInfo product =13; //商品信息
+  bool is_invalid =14;//是否无效
+  string invalid_msg =15;//无效信息
+}
+
+//订单基础信息
+message BuyOrderBase {
+  int64 total_amount =1; //订单总价
+  int64 final_amount =2; //订单实付金额(已减去优惠金额, 已加上增加金额)
+  int64 increase_amount =3; //增加金额
+  int64 discount_amount =4; //优惠金额
+  float buy_count =5;//购买商品总数量(总件数+总称重（千克）)
+  int64 buy_count_number =6;//购买商品总件数（非称重商品）
+  int64 buy_count_weighed =7;//购买商品总称重（称重商品.克）
+  int64 spec_total_weight =8;//规格重量合计
+  int64 spec_total_volume =9; //规格体积合计
+  int64 use_integral = 10; //使用的积分
+  int64 use_surplus = 11; //使用的余额
+  int64 member_id = 12; //会员ID
+  int64 warehouse_id = 13; //仓库ID
+}
+
 message OrderConfirmIndex {
   OrderAddress address_info =1;
-  ConfirmPriceGroup price_group =2;//订单基本信息
-  repeated  CartItem cart_items = 3; //订单商品列表
-  MemberInfo member_info =4;
+  ConfirmPriceGroup priceGroup =2;//订单基本信息
+  repeated  CartItem cartInfo = 3; //订单商品列表
+  MemberInfo memberInfo =4;
   int64 advance_id =6;
   int64 bargain_id =7;
   int64 combination_id =8;
@@ -180,6 +225,7 @@ message OrderConfirmRequest {
   int64 choice_coupon_id  =15;//选中优惠劵
   repeated int64 cart_ids = 19; //购物车IDS
   bool new =20;
+  string cart_ids_str = 21; //购物车IDS
 }
 
 message OrderConfirmResponse {

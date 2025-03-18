@@ -59,16 +59,25 @@ message CartIndexData {
 }
 
 message CartRequest {
-    string type =1;
-    int64 id =2;
-    int64 spu_id =3;
-    string sku_key =4;
-    int64 number =5;
-    int64 cart_num =7;
-    string uniqueId =8;
-    int64 productId =9;
-    repeated int64 ids =10;
-    int64 member_id =12;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sorts = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    int64 member_id = 11; //会员ID
+    int64 spu_id = 12; //商品ID
+    string sku_key = 13; //SKUKey
+    string name = 14; //商品名称
+
+    string type =20;
+    int64 number =21;
+    int64 cart_num =22;
+    string uniqueId =23;
+    int64 productId =24;
 }
 
 //购物车数据
