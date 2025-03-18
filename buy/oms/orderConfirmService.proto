@@ -221,11 +221,13 @@ message OrderConfirmRequest {
   float location_lng =12;//位置经度
   float location_lat =13;//位置纬度
   string location_address =14;//位置地址信息
-  string logistics_type =22;//物流类型：1-快递发货，2-同城配送，3-用户自提，4-虚拟发货(无需物流)
-  int64 choice_coupon_id  =15;//选中优惠劵
-  repeated int64 cart_ids = 19; //购物车IDS
+  string logistics_type =15;//物流类型：1-快递发货，2-同城配送，3-用户自提，4-虚拟发货(无需物流)
+  int64 choice_coupon_id  =16;//选中优惠劵
+  repeated int64 cart_ids = 17; //购物车IDS
+  int32 shipping_type =18; //发货类型：需要转换为logistics_type 可以用
   bool new =20;
-  string cart_ids_str = 21; //购物车IDS
+  string cartId = 21; //购物车ids
+  string key =22;
 }
 
 message OrderConfirmResponse {

@@ -58,6 +58,12 @@ message CartIndexData {
     repeated CartItem invalid =3;
 }
 
+message CartAddData {
+   string cartId =1;
+}
+
+
+
 message CartRequest {
     int32 top = 1;
     int64 paged = 2;
@@ -78,6 +84,7 @@ message CartRequest {
     int64 cart_num =22;
     string uniqueId =23;
     int64 productId =24;
+    bool new =25;
 }
 
 //购物车数据
@@ -85,4 +92,5 @@ message CartResponse {
     string msg =1;
     CartIndexData index =2;
     CartCountData count =3;
+    CartAddData add =4;
 }

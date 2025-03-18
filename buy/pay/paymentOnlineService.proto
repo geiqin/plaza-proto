@@ -25,8 +25,9 @@ message PaymentOnline {
   int32 id = 1; //ID
   string payment_type = 2; //支付类型
   int32 channel_id = 3; //支付通道ID
-  PaymentChannelInfo channel_data = 4; //支付通道编码
-  int32 account_id = 5; //支付账户ID
+  string channel_code = 4; //支付通道编码
+  PaymentChannelInfo channel_data = 5; //支付通道
+  int32 account_id = 6; //支付账户ID
   string client_type = 8; //客户端类型
   string client_app_id = 9; //客户端AppId
   int32 sort = 10; //排序值
