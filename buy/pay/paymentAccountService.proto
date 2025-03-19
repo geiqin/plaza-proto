@@ -19,22 +19,16 @@ message PaymentAccount {
     string account_name = 3; //账号名称
     string payment_type = 4; //账户类型
     string is_provider = 5; //是否服务商
-    AccountConfig config = 6; //参数配置
-    string private_cert = 7; //私有证书信息
-    string public_cert = 8; //公共证书信息
     string status = 9; //启用状态
     string created_at = 10; //创建时间
     string updated_at = 11; //修改时间
+    AccountWeixinConfig weixin_config = 12;
+    AccountAlipayConfig alipay_config = 13;
 }
 
-//支付账户微信配置
-message AccountConfig{
-    AccountConfigWeixin weixin = 1;
-    AccountConfigAlipay alipay = 2;
-}
 
 //支付账户微信配置
-message AccountConfigWeixin{
+message AccountWeixinConfig{
     string mch_id =2;
     string sign_type =3;
     string md5_key =4;
@@ -50,7 +44,7 @@ message AccountConfigWeixin{
 }
 
 //支付账户支付宝配置
-message AccountConfigAlipay{
+message AccountAlipayConfig{
     string mch_id =2;
     string sign_type =3;
     string md5_key =4;
@@ -81,5 +75,5 @@ message PaymentAccountResponse {
     PaymentAccount entity = 1;
     common.Pager pager =2;
     repeated PaymentAccount items = 3;
-    string info =4;
+    string msg =4;
 }

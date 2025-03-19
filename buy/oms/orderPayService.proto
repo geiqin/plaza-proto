@@ -64,10 +64,7 @@ message OrderPayData {
     string err_code_desc =5; //错误代码描述
     string column = 6;
     PaymentInfo payment =7;
-    OrderPayUnderline underline =8;
-    OrderPayWallet wallet =9;
-    map<string,string> WechatMini =10;
-    string info = 12;
+    bytes result =10;
 }
 
 message OrderPayUnderline{
