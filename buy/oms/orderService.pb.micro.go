@@ -43,14 +43,8 @@ func NewOrderServiceEndpoints() []*api.Endpoint {
 // Client API for OrderService service
 
 type OrderService interface {
-	//订单收银台
-	OrderCashier(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
-	//订单支付【user】
-	OrderPay(ctx context.Context, in *OrderPayRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单插入【service】
 	OrderInsertHandle(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//线下支付确认【admin】
-	OfflinePayConfirm(ctx context.Context, in *OfflinePayConfirmRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单发货【admin】
 	OrderDelivery(ctx context.Context, in *OrderPacket, opts ...client.CallOption) (*OrderResponse, error)
 	//订单取消【admin/user】
@@ -103,38 +97,8 @@ func NewOrderService(name string, c client.Client) OrderService {
 	}
 }
 
-func (c *orderService) OrderCashier(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderCashier", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) OrderPay(ctx context.Context, in *OrderPayRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderPay", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *orderService) OrderInsertHandle(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.OrderInsertHandle", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) OfflinePayConfirm(ctx context.Context, in *OfflinePayConfirmRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OfflinePayConfirm", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -336,14 +300,8 @@ func (c *orderService) NewOrderNotice(ctx context.Context, in *OrderRequest, opt
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
-	//订单收银台
-	OrderCashier(context.Context, *OrderRequest, *OrderResponse) error
-	//订单支付【user】
-	OrderPay(context.Context, *OrderPayRequest, *OrderResponse) error
 	//订单插入【service】
 	OrderInsertHandle(context.Context, *Order, *OrderResponse) error
-	//线下支付确认【admin】
-	OfflinePayConfirm(context.Context, *OfflinePayConfirmRequest, *OrderResponse) error
 	//订单发货【admin】
 	OrderDelivery(context.Context, *OrderPacket, *OrderResponse) error
 	//订单取消【admin/user】
@@ -386,10 +344,7 @@ type OrderServiceHandler interface {
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
 	type orderService interface {
-		OrderCashier(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		OrderPay(ctx context.Context, in *OrderPayRequest, out *OrderResponse) error
 		OrderInsertHandle(ctx context.Context, in *Order, out *OrderResponse) error
-		OfflinePayConfirm(ctx context.Context, in *OfflinePayConfirmRequest, out *OrderResponse) error
 		OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error
 		OrderCancel(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderDelete(ctx context.Context, in *OrderRequest, out *OrderResponse) error
@@ -421,20 +376,8 @@ type orderServiceHandler struct {
 	OrderServiceHandler
 }
 
-func (h *orderServiceHandler) OrderCashier(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
-	return h.OrderServiceHandler.OrderCashier(ctx, in, out)
-}
-
-func (h *orderServiceHandler) OrderPay(ctx context.Context, in *OrderPayRequest, out *OrderResponse) error {
-	return h.OrderServiceHandler.OrderPay(ctx, in, out)
-}
-
 func (h *orderServiceHandler) OrderInsertHandle(ctx context.Context, in *Order, out *OrderResponse) error {
 	return h.OrderServiceHandler.OrderInsertHandle(ctx, in, out)
-}
-
-func (h *orderServiceHandler) OfflinePayConfirm(ctx context.Context, in *OfflinePayConfirmRequest, out *OrderResponse) error {
-	return h.OrderServiceHandler.OfflinePayConfirm(ctx, in, out)
 }
 
 func (h *orderServiceHandler) OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error {

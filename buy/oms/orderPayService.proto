@@ -1,0 +1,87 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "baseInfoService.proto";
+
+//订单支付服务
+service OrderPayService {
+    //收银台【user】
+    rpc Cashier (OrderPayRequest) returns (OrderPayResponse) {}
+
+    //统一支付【user】
+    rpc Pay (OrderPayRequest) returns (OrderPayResponse) {}
+
+    //线下支付确认【admin】
+    rpc OfflinePay (OfflinePayRequest) returns (OrderPayResponse) {}
+}
+
+
+message OrderPayRequest {
+    int64 order_id = 1;
+    string order_no = 2;
+    string str_ids = 3;
+    string client_type =4;
+    int32 payment_id =5;
+    string payment_type =6;
+    string payment_mode =7;
+    string auth_code =8; //付款码
+    int64 member_id =9;
+    repeated int64 ids = 12;
+}
+
+message OfflinePayRequest{
+    int64 order_id = 1; //订单ID
+    int64 pay_price = 2; //支付金额
+    string transaction_no = 3; //交易单号
+    string receipt_channel =4; //收款渠道
+    string receipt_man = 5; //收款人
+    string receipt_account =6; //收款账号
+    string paid_time = 7; //支付时间
+    string remark = 8; //备注
+}
+
+message OrderPayCashierData{
+    bool ali_pay_status =1;
+    bool friend_pay_status =2;
+    int64 invalid_time =3;
+    int64 now_money =4;
+    bool offline_pay_status =5;
+    int64 offline_postage =6;
+    int64 order_id = 7; //replace: oid
+    string order_no =8; //replace: order_id
+    int64 pay_postage = 9;
+    int64 pay_price =10;
+    bool wechat_pay_status =11;
+    bool yue_pay_status =12;
+}
+
+
+message OrderPayData {
+    int64 order_id =1;
+    string order_no =2;
+    string pay_status =3; //支付状态：success 成功,fail 失败, unknown 未知（需要查询确认）
+    string err_code =4; //错误代码
+    string err_code_desc =5; //错误代码描述
+    string column = 6;
+    PaymentInfo payment =7;
+    OrderPayUnderline underline =8;
+    OrderPayWallet wallet =9;
+    map<string,string> WechatMini =10;
+    string info = 12;
+}
+
+message OrderPayUnderline{
+    string is_html =7;
+    string html_text =8;
+}
+
+message OrderPayWallet{
+    int64 member_id =7;
+    int64 balance =8;
+}
+
+message OrderPayResponse {
+    string msg =1;
+    OrderPayCashierData cashier =2;
+    OrderPayData pay =3;
+}
