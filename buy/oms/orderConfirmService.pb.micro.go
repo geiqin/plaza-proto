@@ -50,7 +50,7 @@ type OrderConfirmService interface {
 	ComputedOrder(ctx context.Context, in *OrderConfirmRequest, opts ...client.CallOption) (*OrderConfirmResponse, error)
 	//可选优惠劵列表
 	CouponList(ctx context.Context, in *OrderConfirmRequest, opts ...client.CallOption) (*OrderConfirmResponse, error)
-	//订单创建
+	//订单确认创建
 	Create(ctx context.Context, in *OrderConfirmRequest, opts ...client.CallOption) (*OrderConfirmResponse, error)
 }
 
@@ -127,7 +127,7 @@ type OrderConfirmServiceHandler interface {
 	ComputedOrder(context.Context, *OrderConfirmRequest, *OrderConfirmResponse) error
 	//可选优惠劵列表
 	CouponList(context.Context, *OrderConfirmRequest, *OrderConfirmResponse) error
-	//订单创建
+	//订单确认创建
 	Create(context.Context, *OrderConfirmRequest, *OrderConfirmResponse) error
 }
 

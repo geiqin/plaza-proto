@@ -4,16 +4,14 @@ option go_package = "/.;services";
 import "common/base.proto";
 import "orderDetailService.proto";
 import "orderAddressService.proto";
-import "orderPacketService.proto";
+import "orderShippingService.proto";
 import "baseInfoService.proto";
 
-//订单服务
+//订单管理
 service OrderService {
+
     //订单插入【service】
     rpc OrderInsertHandle (Order) returns (OrderResponse) {}
-
-    //订单发货【admin】
-    rpc OrderDelivery(OrderPacket) returns (OrderResponse) {}
 
     //订单取消【admin/user】
     rpc OrderCancel (OrderRequest) returns (OrderResponse) {}
@@ -24,20 +22,14 @@ service OrderService {
     //订单确认【admin】
     rpc OrderConfirm (OrderRequest) returns (OrderResponse) {}
 
-    //订单收货【user】
-    rpc OrderCollect (OrderRequest) returns (OrderResponse) {}
-
-    //支付状态校验
-    rpc OrderPayCheck (OrderRequest) returns (OrderResponse) {}
-
     //修改订单价格【admin】
-    rpc ModifyOrderPrice (Order) returns (OrderResponse) {}
+    rpc ModifyPrice (Order) returns (OrderResponse) {}
 
     //修改订单地址【admin】
-    rpc ModifyOrderAddress (OrderAddress) returns (OrderResponse) {}
+    rpc ModifyAddress (OrderAddress) returns (OrderResponse) {}
 
     //订单每个环节状态总数
-    rpc OrderStatusStepTotal (OrderRequest) returns (OrderStatusStepTotalResponse) {}
+    rpc OrderStatusTotal (OrderRequest) returns (OrderStatusTotalResponse) {}
 
     //订单总数
     rpc OrderTotal (OrderRequest) returns (OrderResponse) {}
@@ -50,6 +42,7 @@ service OrderService {
 
     //订单主信息列表(服务专用)
     rpc OrderMainInfo (OrderRequest) returns (OrderResponse) {}
+
     //订单主信息(服务专用)
     rpc OrderMainList (OrderRequest) returns (OrderResponse) {}
 
@@ -147,7 +140,7 @@ message Order {
     repeated OrderDiscount discounts = 74;
     map<string,string> metas =75;
     WarehouseInfo warehouse =76;
-    repeated OrderPacket packets =77;
+    repeated OrderShipping shippings =77;
     OrderAdminCommand admin_command =78;
     OrderUserCommand user_command =79;
     string ship_status =80; //发货状态：1-待发货，2-已发货，3-已完成
@@ -214,7 +207,7 @@ message OrderRequest {
 
 
 //订单统计数据
-message OrderStatusStepTotalResponse{
+message OrderStatusTotalResponse{
     int64 member_id =1;//会员ID
     int64 order_count =2; //订单总数
     int64 order_pending_count =3; //待审核数量

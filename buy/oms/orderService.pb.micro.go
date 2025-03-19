@@ -45,24 +45,18 @@ func NewOrderServiceEndpoints() []*api.Endpoint {
 type OrderService interface {
 	//订单插入【service】
 	OrderInsertHandle(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//订单发货【admin】
-	OrderDelivery(ctx context.Context, in *OrderPacket, opts ...client.CallOption) (*OrderResponse, error)
 	//订单取消【admin/user】
 	OrderCancel(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单删除【admin/user】
 	OrderDelete(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单确认【admin】
 	OrderConfirm(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
-	//订单收货【user】
-	OrderCollect(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
-	//支付状态校验
-	OrderPayCheck(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//修改订单价格【admin】
-	ModifyOrderPrice(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
+	ModifyPrice(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//修改订单地址【admin】
-	ModifyOrderAddress(ctx context.Context, in *OrderAddress, opts ...client.CallOption) (*OrderResponse, error)
+	ModifyAddress(ctx context.Context, in *OrderAddress, opts ...client.CallOption) (*OrderResponse, error)
 	//订单每个环节状态总数
-	OrderStatusStepTotal(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderStatusStepTotalResponse, error)
+	OrderStatusTotal(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderStatusTotalResponse, error)
 	//订单总数
 	OrderTotal(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	//订单查询【admin/user】
@@ -107,16 +101,6 @@ func (c *orderService) OrderInsertHandle(ctx context.Context, in *Order, opts ..
 	return out, nil
 }
 
-func (c *orderService) OrderDelivery(ctx context.Context, in *OrderPacket, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderDelivery", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *orderService) OrderCancel(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.OrderCancel", in)
 	out := new(OrderResponse)
@@ -147,8 +131,8 @@ func (c *orderService) OrderConfirm(ctx context.Context, in *OrderRequest, opts 
 	return out, nil
 }
 
-func (c *orderService) OrderCollect(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderCollect", in)
+func (c *orderService) ModifyPrice(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.ModifyPrice", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -157,8 +141,8 @@ func (c *orderService) OrderCollect(ctx context.Context, in *OrderRequest, opts 
 	return out, nil
 }
 
-func (c *orderService) OrderPayCheck(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderPayCheck", in)
+func (c *orderService) ModifyAddress(ctx context.Context, in *OrderAddress, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.ModifyAddress", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -167,29 +151,9 @@ func (c *orderService) OrderPayCheck(ctx context.Context, in *OrderRequest, opts
 	return out, nil
 }
 
-func (c *orderService) ModifyOrderPrice(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.ModifyOrderPrice", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) ModifyOrderAddress(ctx context.Context, in *OrderAddress, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.ModifyOrderAddress", in)
-	out := new(OrderResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderService) OrderStatusStepTotal(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderStatusStepTotalResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.OrderStatusStepTotal", in)
-	out := new(OrderStatusStepTotalResponse)
+func (c *orderService) OrderStatusTotal(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderStatusTotalResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.OrderStatusTotal", in)
+	out := new(OrderStatusTotalResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -302,24 +266,18 @@ func (c *orderService) NewOrderNotice(ctx context.Context, in *OrderRequest, opt
 type OrderServiceHandler interface {
 	//订单插入【service】
 	OrderInsertHandle(context.Context, *Order, *OrderResponse) error
-	//订单发货【admin】
-	OrderDelivery(context.Context, *OrderPacket, *OrderResponse) error
 	//订单取消【admin/user】
 	OrderCancel(context.Context, *OrderRequest, *OrderResponse) error
 	//订单删除【admin/user】
 	OrderDelete(context.Context, *OrderRequest, *OrderResponse) error
 	//订单确认【admin】
 	OrderConfirm(context.Context, *OrderRequest, *OrderResponse) error
-	//订单收货【user】
-	OrderCollect(context.Context, *OrderRequest, *OrderResponse) error
-	//支付状态校验
-	OrderPayCheck(context.Context, *OrderRequest, *OrderResponse) error
 	//修改订单价格【admin】
-	ModifyOrderPrice(context.Context, *Order, *OrderResponse) error
+	ModifyPrice(context.Context, *Order, *OrderResponse) error
 	//修改订单地址【admin】
-	ModifyOrderAddress(context.Context, *OrderAddress, *OrderResponse) error
+	ModifyAddress(context.Context, *OrderAddress, *OrderResponse) error
 	//订单每个环节状态总数
-	OrderStatusStepTotal(context.Context, *OrderRequest, *OrderStatusStepTotalResponse) error
+	OrderStatusTotal(context.Context, *OrderRequest, *OrderStatusTotalResponse) error
 	//订单总数
 	OrderTotal(context.Context, *OrderRequest, *OrderResponse) error
 	//订单查询【admin/user】
@@ -345,15 +303,12 @@ type OrderServiceHandler interface {
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
 	type orderService interface {
 		OrderInsertHandle(ctx context.Context, in *Order, out *OrderResponse) error
-		OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error
 		OrderCancel(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderDelete(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderConfirm(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		OrderCollect(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		OrderPayCheck(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		ModifyOrderPrice(ctx context.Context, in *Order, out *OrderResponse) error
-		ModifyOrderAddress(ctx context.Context, in *OrderAddress, out *OrderResponse) error
-		OrderStatusStepTotal(ctx context.Context, in *OrderRequest, out *OrderStatusStepTotalResponse) error
+		ModifyPrice(ctx context.Context, in *Order, out *OrderResponse) error
+		ModifyAddress(ctx context.Context, in *OrderAddress, out *OrderResponse) error
+		OrderStatusTotal(ctx context.Context, in *OrderRequest, out *OrderStatusTotalResponse) error
 		OrderTotal(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderSearch(ctx context.Context, in *OrderRequest, out *OrderResponse) error
 		OrderDetail(ctx context.Context, in *OrderRequest, out *OrderResponse) error
@@ -380,10 +335,6 @@ func (h *orderServiceHandler) OrderInsertHandle(ctx context.Context, in *Order, 
 	return h.OrderServiceHandler.OrderInsertHandle(ctx, in, out)
 }
 
-func (h *orderServiceHandler) OrderDelivery(ctx context.Context, in *OrderPacket, out *OrderResponse) error {
-	return h.OrderServiceHandler.OrderDelivery(ctx, in, out)
-}
-
 func (h *orderServiceHandler) OrderCancel(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
 	return h.OrderServiceHandler.OrderCancel(ctx, in, out)
 }
@@ -396,24 +347,16 @@ func (h *orderServiceHandler) OrderConfirm(ctx context.Context, in *OrderRequest
 	return h.OrderServiceHandler.OrderConfirm(ctx, in, out)
 }
 
-func (h *orderServiceHandler) OrderCollect(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
-	return h.OrderServiceHandler.OrderCollect(ctx, in, out)
+func (h *orderServiceHandler) ModifyPrice(ctx context.Context, in *Order, out *OrderResponse) error {
+	return h.OrderServiceHandler.ModifyPrice(ctx, in, out)
 }
 
-func (h *orderServiceHandler) OrderPayCheck(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
-	return h.OrderServiceHandler.OrderPayCheck(ctx, in, out)
+func (h *orderServiceHandler) ModifyAddress(ctx context.Context, in *OrderAddress, out *OrderResponse) error {
+	return h.OrderServiceHandler.ModifyAddress(ctx, in, out)
 }
 
-func (h *orderServiceHandler) ModifyOrderPrice(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.OrderServiceHandler.ModifyOrderPrice(ctx, in, out)
-}
-
-func (h *orderServiceHandler) ModifyOrderAddress(ctx context.Context, in *OrderAddress, out *OrderResponse) error {
-	return h.OrderServiceHandler.ModifyOrderAddress(ctx, in, out)
-}
-
-func (h *orderServiceHandler) OrderStatusStepTotal(ctx context.Context, in *OrderRequest, out *OrderStatusStepTotalResponse) error {
-	return h.OrderServiceHandler.OrderStatusStepTotal(ctx, in, out)
+func (h *orderServiceHandler) OrderStatusTotal(ctx context.Context, in *OrderRequest, out *OrderStatusTotalResponse) error {
+	return h.OrderServiceHandler.OrderStatusTotal(ctx, in, out)
 }
 
 func (h *orderServiceHandler) OrderTotal(ctx context.Context, in *OrderRequest, out *OrderResponse) error {

@@ -15,7 +15,7 @@ service OrderConfirmService {
   rpc ComputedOrder (OrderConfirmRequest) returns (OrderConfirmResponse) {}
   //可选优惠劵列表
   rpc CouponList (OrderConfirmRequest) returns (OrderConfirmResponse) {}
-  //订单创建
+  //订单确认创建
   rpc Create (OrderConfirmRequest) returns (OrderConfirmResponse) {}
 }
 

@@ -5,13 +5,19 @@ import "common/base.proto";
 import "orderAddressService.proto";
 
 //订单发货包裹
-service OrderPacketService {
-    rpc Detail (OrderPacket) returns (OrderPacketResponse) {}
-    rpc Search (OrderPacketRequest) returns (OrderPacketResponse) {}
+service OrderShippingService {
+    //订单发货【admin】
+    rpc Create(OrderShipping) returns (OrderShippingResponse) {}
+    //订单收货【user】
+    rpc Collect (OrderShippingRequest) returns (OrderShippingResponse) {}
+    //发货详细
+    rpc Detail (OrderShipping) returns (OrderShippingResponse) {}
+     //发货查询
+    rpc Search (OrderShippingRequest) returns (OrderShippingResponse) {}
 }
 
 //订单发货包裹
-message OrderPacket{
+message OrderShipping{
     int64  id =1;//ID
     int64  order_id =2;//订单ID
     string logistics_type =3;//物流模式：1-物流快递，2-同城配送，3-虚拟发货，4-用户自提
@@ -22,7 +28,7 @@ message OrderPacket{
     string tracking_number =8;//快递单号
     string pickup_code =9;//取件码
     int64  goods_count =10;//商品数量
-    repeated OrderPacketGoods goods_list =11;//商品内容
+    repeated OrderShippingGoods goods_list =11;//商品内容
     string status =12;
     string created_at =13;
     string updated_at =14;
@@ -33,7 +39,7 @@ message OrderPacket{
 }
 
 //订单发货包裹商品
-message OrderPacketGoods{
+message OrderShippingGoods{
     int64  detail_id =1;//订单明细ID
     int64  spu_id =2;//商品ID
     string sku_key =4;//货品MD5KEY
@@ -44,7 +50,7 @@ message OrderPacketGoods{
     string spec_desc =11; //商品规格描述
 }
 
-message OrderPacketRequest {
+message OrderShippingRequest {
     int32 top = 1;
     int64 paged = 2;
     int64 page_size = 3;
@@ -67,9 +73,9 @@ message OrderPacketRequest {
 }
 
 
-message OrderPacketResponse {
-    OrderPacket entity = 1;
+message OrderShippingResponse {
+    OrderShipping entity = 1;
     common.Pager pager =2;
-    repeated OrderPacket items = 3;
+    repeated OrderShipping items = 3;
     string msg =4;
 }
