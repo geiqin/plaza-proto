@@ -1,0 +1,48 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+service FriendlyLinkService {
+    rpc Create (FriendlyLink) returns (FriendlyLinkResponse) {}
+    rpc Update (FriendlyLink) returns (FriendlyLinkResponse) {}
+    rpc Delete (FriendlyLink) returns (FriendlyLinkResponse) {}
+    rpc Get (FriendlyLink) returns (FriendlyLinkResponse) {}
+    rpc Search (FriendlyLinkRequest) returns (FriendlyLinkResponse) {}
+    rpc List (FriendlyLinkRequest) returns (FriendlyLinkResponse) {}
+}
+
+message FriendlyLink {
+    int64 id =1;
+    string type =2;
+    string name =3;
+    string url =4;
+    string logo_url =5;
+    string describe =6;
+    string is_new_window_open  =7;
+    int64 sort =8;
+    string status =9;
+    int64 created_at =10;
+    int64 updated_at =11;
+}
+
+message FriendlyLinkRequest {
+    int64 paged = 1;
+    int64 page_size = 2;
+    string sorting = 3;
+    //base params
+    int64 id = 4;
+    string name = 5;
+    string status = 6;
+    string type = 7;
+    string keywords = 8;
+    repeated int64 ids = 10;
+    int32 top = 11;
+}
+
+message FriendlyLinkResponse {
+    FriendlyLink entity = 1;
+    common.Pager pager =2;
+    repeated FriendlyLink items = 3;
+    string msg =5;
+}

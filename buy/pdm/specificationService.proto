@@ -25,8 +25,8 @@ message Specification {
   string name = 2; //规格名称
   repeated string values = 3; //规格值
   int32 sort = 4; //排序
-  string created_at = 5; //创建时间
-  string updated_at = 6; //修改时间
+  int64 created_at = 5; //创建时间
+  int64 updated_at = 6; //修改时间
 }
 // 多规格请求参数
 message SpecificationRequest {

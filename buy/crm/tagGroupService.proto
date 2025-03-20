@@ -27,8 +27,8 @@ message TagGroup {
   string is_hand_add = 4; //手动打标
   string is_auto_add = 5; //自动打标
   string status = 6; //状态
-  string created_at = 7; //创建时间
-  string updated_at = 8; //修改时间
+  int64 created_at = 7; //创建时间
+  int64 updated_at = 8; //修改时间
   repeated Tag tags =9;
 }
 // 客户标签组请求参数

@@ -29,8 +29,8 @@ message Category {
     repeated int64 ancestors = 4; //祖级列表
     string is_system = 5; //系统预设
     int32 sort = 6; //排序
-    string created_at = 7; //创建时间
-    string updated_at = 8; //修改时间
+    int64 created_at = 7; //创建时间
+    int64 updated_at = 8; //修改时间
     repeated Category children =9;
 }
 // 商品分类请求参数

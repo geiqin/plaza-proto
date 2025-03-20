@@ -38,8 +38,8 @@ message LocalFeeTemplate {
   string range_type = 16; //范围划分
   string ranges = 17; //配送范围
   string status = 18; //状态
-  string created_at = 19; //创建时间
-  string updated_at = 20; //修改时间
+  int64 created_at = 19; //创建时间
+  int64 updated_at = 20; //修改时间
 }
 
 // 同城配送模版请求参数

@@ -27,15 +27,15 @@ type Data struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                               //ID
-	Type      string `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`                            //类型
-	Code      string `protobuf:"bytes,3,opt,name=code,proto3" json:"code"`                            //编码
-	Name      string `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`                            //名称
-	Content   string `protobuf:"bytes,5,opt,name=content,proto3" json:"content"`                      //JSON内容
-	IsInit    string `protobuf:"bytes,6,opt,name=is_init,json=isInit,proto3" json:"is_init"`          //是否初始化
-	Status    string `protobuf:"bytes,7,opt,name=status,proto3" json:"status"`                        //状态
-	CreatedAt string `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
-	UpdatedAt string `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                //ID
+	Type      string `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`                             //类型
+	Code      string `protobuf:"bytes,3,opt,name=code,proto3" json:"code"`                             //编码
+	Name      string `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`                             //名称
+	Content   string `protobuf:"bytes,5,opt,name=content,proto3" json:"content"`                       //JSON内容
+	IsInit    string `protobuf:"bytes,6,opt,name=is_init,json=isInit,proto3" json:"is_init"`           //是否初始化
+	Status    string `protobuf:"bytes,7,opt,name=status,proto3" json:"status"`                         //状态
+	CreatedAt int64  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
+	UpdatedAt int64  `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
 }
 
 func (x *Data) Reset() {
@@ -119,18 +119,18 @@ func (x *Data) GetStatus() string {
 	return ""
 }
 
-func (x *Data) GetCreatedAt() string {
+func (x *Data) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return 0
 }
 
-func (x *Data) GetUpdatedAt() string {
+func (x *Data) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return ""
+	return 0
 }
 
 // 初始数据请求参数
@@ -367,9 +367,9 @@ var file_dataService_proto_rawDesc = []byte{
 	0x52, 0x06, 0x69, 0x73, 0x49, 0x6e, 0x69, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
 	0x75, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
 	0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x08,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12,
 	0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0xb0,
+	0x01, 0x28, 0x03, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0xb0,
 	0x02, 0x0a, 0x0b, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10,
 	0x0a, 0x03, 0x74, 0x6f, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x74, 0x6f, 0x70,
 	0x12, 0x14, 0x0a, 0x05, 0x70, 0x61, 0x67, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52,

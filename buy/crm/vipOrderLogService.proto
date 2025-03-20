@@ -30,27 +30,29 @@ message VipOrderLog {
   int32  payment_id =12;//支付方式Id
   string status =13;//状态：0待支付，1已支付，2已失效
   string settle_status =14;//结算状态：0待支付，1已结算，2结算失败
-  string created_at =15;
-  string updated_at =16;
+  int64 created_at =15;
+  int64 updated_at =16;
   Member member =17;
 }
 
 
 //查询参数
 message VipOrderLogRequest {
-  int64 paged = 1;
-  int64 page_size = 2;
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
   //以下为自定义参数
-  int64 member_id =3;
-  string type =4;
-  int32 level_id =5;
-  int64 money =6;
-  int32 payment_id =7;
-  int64 log_no =8;
-  string period_unit =9;
-  string memo =10;
-  string start_date = 11;
-  string end_date = 12;
+  int64 member_id =10;
+  string type =11;
+  int32 level_id =12;
+  int64 money =13;
+  int32 payment_id =14;
+  int64 log_no =15;
 }
 
 message VipOrderLogResponse {

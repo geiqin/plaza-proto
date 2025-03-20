@@ -56,8 +56,8 @@ message ExpressFeeTemplateDetail {
   int64 additional_weight = 6;
   int32 additional_number = 7;
   int64 additional_fee = 8;
-  string created_at = 9;
-  string updated_at = 10;
+  int64 created_at = 9;
+  int64 updated_at = 10;
   string range_area_text = 11;
   repeated int64 range_area_ids = 12;
 }

@@ -36,8 +36,8 @@ message Integral {
   int64 total_earned_integral = 16; //累计发放积分
   int64 total_protected_integral = 17; //保护期内积分
   string status = 18; //启用状态
-  string created_at = 19; //创建时间
-  string updated_at = 20; //修改时间
+  int64 created_at = 19; //创建时间
+  int64 updated_at = 20; //修改时间
 }
 
 // 抵现规则

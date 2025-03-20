@@ -39,8 +39,8 @@ message Storage {
   string description = 14; //描述
   int32 sort = 15; //排序
   string status = 16; //状态
-  string created_at = 17; //创建时间
-  string updated_at = 18; //修改时间
+  int64 created_at = 17; //创建时间
+  int64 updated_at = 18; //修改时间
 }
 // 存储请求参数
 message StorageRequest {

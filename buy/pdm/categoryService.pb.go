@@ -27,14 +27,14 @@ type Category struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                               //ID
-	Name      string      `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`                            //分类名称
-	ParentId  int64       `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`   //上级ID
-	Ancestors []int64     `protobuf:"varint,4,rep,packed,name=ancestors,proto3" json:"ancestors"`          //祖级列表
-	IsSystem  string      `protobuf:"bytes,5,opt,name=is_system,json=isSystem,proto3" json:"is_system"`    //系统预设
-	Sort      int32       `protobuf:"varint,6,opt,name=sort,proto3" json:"sort"`                           //排序
-	CreatedAt string      `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
-	UpdatedAt string      `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
+	Id        int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                //ID
+	Name      string      `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`                             //分类名称
+	ParentId  int64       `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`    //上级ID
+	Ancestors []int64     `protobuf:"varint,4,rep,packed,name=ancestors,proto3" json:"ancestors"`           //祖级列表
+	IsSystem  string      `protobuf:"bytes,5,opt,name=is_system,json=isSystem,proto3" json:"is_system"`     //系统预设
+	Sort      int32       `protobuf:"varint,6,opt,name=sort,proto3" json:"sort"`                            //排序
+	CreatedAt int64       `protobuf:"varint,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
+	UpdatedAt int64       `protobuf:"varint,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
 	Children  []*Category `protobuf:"bytes,9,rep,name=children,proto3" json:"children"`
 }
 
@@ -112,18 +112,18 @@ func (x *Category) GetSort() int32 {
 	return 0
 }
 
-func (x *Category) GetCreatedAt() string {
+func (x *Category) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return 0
 }
 
-func (x *Category) GetUpdatedAt() string {
+func (x *Category) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return ""
+	return 0
 }
 
 func (x *Category) GetChildren() []*Category {
@@ -360,9 +360,9 @@ var file_categoryService_proto_rawDesc = []byte{
 	0x73, 0x74, 0x65, 0x6d, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x69, 0x73, 0x53, 0x79,
 	0x73, 0x74, 0x65, 0x6d, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x18, 0x06, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72,
+	0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72,
 	0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64,
+	0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x75, 0x70, 0x64,
 	0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x2e, 0x0a, 0x08, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x72,
 	0x65, 0x6e, 0x18, 0x09, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69,
 	0x63, 0x65, 0x73, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x08, 0x63, 0x68,

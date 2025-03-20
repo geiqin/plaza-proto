@@ -1,0 +1,60 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 店铺页面服务
+service MainPageService {
+  // 店铺页面新增
+  rpc Create (MainPage) returns (MainPageResponse) {}
+  // 店铺页面修改
+  rpc Update (MainPage) returns (MainPageResponse) {}
+  // 店铺页面删除
+  rpc Delete (MainPage) returns (MainPageResponse) {}
+  // 店铺页面获取
+  rpc Get (MainPage) returns (MainPageResponse) {}
+  // 店铺页面查询
+  rpc Search (MainPageRequest) returns (MainPageResponse) {}
+  // 店铺页面列表
+  rpc List (MainPageRequest) returns (MainPageResponse) {}
+}
+// 店铺页面
+message MainPage {
+  int64 id = 1; //ID
+  string type = 2; //页面类型
+  string code = 3; //页面编码
+  string name = 4; //页面名称
+  int64 template_id = 5; //模板id
+  string is_system = 6; //系统预设
+  string seo_title = 7; //SEO标题
+  string seo_keywords = 8; //SEO关键字
+  string seo_desc = 9; //SEO描述
+  string config = 10; //配置信息
+  string status = 11; //状态
+  int64 created_at = 12; //创建时间
+  int64 updated_at = 13; //修改时间
+}
+// 店铺页面请求参数
+message MainPageRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string type = 11; //页面类型
+  string code = 12; //页面编码
+  string name = 13; //页面名称
+  int64 template_id = 14; //模板id
+  string is_system = 15; //系统预设
+  string status = 16; //状态
+}
+// 店铺页面响应数据
+message MainPageResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  MainPage entity = 3;
+  repeated MainPage items = 4;
+}

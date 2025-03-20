@@ -41,6 +41,6 @@ message PromotionResponse{
     Promotion entity = 1;
     common.Pager pager =2;
     repeated Promotion items = 3;
-    string info =4;
+    string msg =4;
     map<string,string> params =5;
 }

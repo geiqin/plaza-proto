@@ -27,8 +27,8 @@ message VipBenefit {
     string desc = 10; //权益描述
     string is_used = 11; //已使用
     string is_system = 12; //系统创建
-    string created_at = 13; //创建日期
-    string updated_at = 14; //修改日期
+    int64 created_at = 13; //创建日期
+    int64 updated_at = 14; //修改日期
     bool checked =15;//已选中
 }
 

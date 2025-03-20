@@ -1,0 +1,154 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+//个人中心
+service UCenterService {
+  //个人中心首页
+  rpc Index (UCenterRequest) returns (UCenterResponse) {}
+  //导航菜单
+  rpc Menu (UCenterRequest) returns (UCenterResponse) {}
+  //设置访问
+  rpc SetVisit (UCenterRequest) returns (UCenterResponse) {}
+}
+
+message UCenterIndexData{
+  bool is_open_member =1;
+  string address =2; //addres
+  bool adminid =3;
+  bool agent_apply_open =4;
+  int64 agent_id =5;
+  int32  agent_level =6;
+  string agent_level_name =7;
+   string avatar =8;
+  string balance_func_status =9;
+  string birthday =10;
+  int64  broken_commission =11;
+  int32  broken_day =13;
+  string  brokerage_price =14;
+  string card_id =15;
+  int64 collectCount =16;
+  string commissionCount =17;
+  int64  couponCount =18;
+  string  division_change_time =19;
+  string division_end_time =23;
+  int64 division_id =24;
+  int64  division_invite =25;
+  string  division_name =26;
+  bool  division_open =27;
+  int64  division_percent =28;
+   string division_status =29;
+  string  division_type =30;
+  string exp =31;
+   int64 extract_price =32;   //extractPrice
+  int64 extract_total_price =33;   //extractTotalPrice
+  repeated string extract_type =34; // ["0", "1", "2"]
+  OrderStatusNum orderStatusNum =35;
+
+   int64 uid =36;
+   string  uniqid =37;
+   string user_type =38;
+   bool vip =39;
+   string vip_status =40;
+   int32 yesterDay =41;
+
+   bool member_func_status =70;
+   string member_style =71;
+   string nickname =72;
+   int32 notice =73;
+   string now_money =74;
+
+    string orderStatusSum =42; //金额
+    int64 overdue_time  =43; // 1741662776
+    int64 partner_id =44;
+    int64 pay_count =45;
+    bool pay_vip_status =46;
+    string  phone =47;
+    string real_name =48;
+    int64 recharge =49;
+    bool recharge_switch =50;
+    string record_phone =51;
+    int64 service_num =52;
+    int64 sign_num =53;
+    int64 sign_remind =54;
+    bool  special_invoice =55;
+    int64 spread_count =56;
+    int64 spread_level_count =57;
+    bool spread_open =58;
+    bool spread_status =59;
+    int64 spread_time =60;
+    int64 spread_uid =61;
+    int64 staff_id =62;
+    bool statu =63;
+    string status =64;
+    bool svip_open =65;
+}
+
+message PicLinkInfo{
+  int32 id =1;
+  string name =2;
+  string pic =3;
+  string url =4;
+}
+
+message UCenterMenuData{
+  UCenterMenuDiyData diy_data =1;
+  string routine_contact_type =2;
+  repeated PicLinkInfo routine_my_menus =3;
+  repeated PicLinkInfo routine_my_banner =4;
+}
+
+message UCenterMenuDiyData {
+  string value = 1;
+  bool my_banner_status =2;
+  string order_status =3;
+}
+
+
+//订单状态统计
+message OrderStatusNum{
+  bool ali_pay_status =1;
+  int64 complete_count =2;
+  int64 evaluated_count =3;
+  bool friend_pay_status =4;
+  int64 no_refund_count =5;
+  int64 order_count =6;
+  bool  pay_weixin_open =7;
+  int64  pc_order_count =8;
+  int64 received_count =9;
+  int64 refund_count =10;
+  int64 refunded_count =11;
+  int64  refunding_count =12;
+  int64 sum_price =13;
+  int64  unpaid_count =14;
+  int64  unshipped_count =15;
+  string surplus_pay_status =16; //yue_pay_status
+}
+
+message switchUserInfo{
+
+}
+
+message UCenterRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string type = 11; //类型
+  string name = 12; //名称
+  string event_type = 13; //事件类型
+  string status = 14; //状态
+  string platform = 15;
+}
+
+//
+message UCenterResponse {
+  string msg =1;
+  UCenterIndexData index = 2;
+  UCenterMenuData menu =3;
+}

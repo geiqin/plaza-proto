@@ -24,8 +24,8 @@ message PaymentOffline {
   string name = 3; //名称
   string scene = 4; //适用场景
   string status = 5; //启用状态
-  string created_at = 6; //创建时间
-  string updated_at = 7; //修改时间
+  int64 created_at = 6; //创建时间
+  int64 updated_at = 7; //修改时间
 }
 // 线下支付请求参数
 message PaymentOfflineRequest {

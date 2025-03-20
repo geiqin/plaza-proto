@@ -47,6 +47,7 @@ type AreaService interface {
 	Search(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
 	Tree(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
 	List(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
+	SimpleList(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error)
 }
 
 type areaService struct {
@@ -101,6 +102,16 @@ func (c *areaService) List(ctx context.Context, in *AreaRequest, opts ...client.
 	return out, nil
 }
 
+func (c *areaService) SimpleList(ctx context.Context, in *AreaRequest, opts ...client.CallOption) (*AreaResponse, error) {
+	req := c.c.NewRequest(c.name, "AreaService.SimpleList", in)
+	out := new(AreaResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for AreaService service
 
 type AreaServiceHandler interface {
@@ -108,6 +119,7 @@ type AreaServiceHandler interface {
 	Search(context.Context, *AreaRequest, *AreaResponse) error
 	Tree(context.Context, *AreaRequest, *AreaResponse) error
 	List(context.Context, *AreaRequest, *AreaResponse) error
+	SimpleList(context.Context, *AreaRequest, *AreaResponse) error
 }
 
 func RegisterAreaServiceHandler(s server.Server, hdlr AreaServiceHandler, opts ...server.HandlerOption) error {
@@ -116,6 +128,7 @@ func RegisterAreaServiceHandler(s server.Server, hdlr AreaServiceHandler, opts .
 		Search(ctx context.Context, in *AreaRequest, out *AreaResponse) error
 		Tree(ctx context.Context, in *AreaRequest, out *AreaResponse) error
 		List(ctx context.Context, in *AreaRequest, out *AreaResponse) error
+		SimpleList(ctx context.Context, in *AreaRequest, out *AreaResponse) error
 	}
 	type AreaService struct {
 		areaService
@@ -142,4 +155,8 @@ func (h *areaServiceHandler) Tree(ctx context.Context, in *AreaRequest, out *Are
 
 func (h *areaServiceHandler) List(ctx context.Context, in *AreaRequest, out *AreaResponse) error {
 	return h.AreaServiceHandler.List(ctx, in, out)
+}
+
+func (h *areaServiceHandler) SimpleList(ctx context.Context, in *AreaRequest, out *AreaResponse) error {
+	return h.AreaServiceHandler.SimpleList(ctx, in, out)
 }

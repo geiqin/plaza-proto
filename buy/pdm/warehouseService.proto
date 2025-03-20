@@ -36,8 +36,8 @@ message Warehouse {
     string is_enable = 13; //是否启用
     string is_default = 14; //是否默认
     int64 realstore_id = 15; //门店ID
-    string created_at = 16; //创建时间
-    string updated_at = 17; //修改时间
+    int64 created_at = 16; //创建时间
+    int64 updated_at = 17; //修改时间
     string province_name = 18; //所在省名
     string city_name = 19; //所在市名
     string county_name = 20; //所在县名

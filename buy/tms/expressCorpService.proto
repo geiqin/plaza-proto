@@ -37,8 +37,8 @@ message ExpressCorp {
   string kd100_code = 12; //快递100编码
   int32 sort = 13; //排序
   string status = 14; //状态
-  string created_at = 15; //创建时间
-  string updated_at = 16; //修改时间
+  int64 created_at = 15; //创建时间
+  int64 updated_at = 16; //修改时间
   bool checked =17;
 }
 // 快递公司请求参数

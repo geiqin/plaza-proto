@@ -6,7 +6,7 @@ import "baseInfoService.proto";
 //计算器服务
 service CalculatorService {
     //计算订单优惠
-    rpc OrderDiscount (PurchaseInfo) returns (CalculatorResponse) {}
+    rpc OrderDiscount (CalculatorRequest) returns (CalculatorResponse) {}
     //计算商品显示价
     rpc DisplayPrice (CalculatorRequest) returns (CalculatorResponse) {}
 }

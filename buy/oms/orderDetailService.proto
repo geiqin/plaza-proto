@@ -36,8 +36,8 @@ message OrderDetail {
     string extra_detail_id = 30; //扩展业务明细ID
     string is_gift = 31; //是否为赠品
     string out_system_id = 32; //外部系统ID
-    string created_at = 33; //创建时间
-    string updated_at = 34; //修改时间
+    int64 created_at = 33; //创建时间
+    int64 updated_at = 34; //修改时间
     string orderaftersale_btn_text =35;//订单售后服务按钮文本
     LastAftersale orderaftersale =36;//最新一条售后单
 }

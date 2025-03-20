@@ -22,8 +22,8 @@ message Application {
     string	desc =9;
     int32	sort =10;
     string	status =11;
-    string	created_at =12;
-    string	updated_at =13;
+    int64	created_at =12;
+    int64	updated_at =13;
 }
 
 message ApplicationRequest {

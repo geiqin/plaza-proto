@@ -26,8 +26,8 @@ message Option {
     string value = 5; //值
     string default_value = 6; //默认值
     string description = 7; //描述
-    string created_at = 8; //创建日期
-    string updated_at = 9; //修改日期
+    int64 created_at = 8; //创建日期
+    int64 updated_at = 9; //修改日期
 }
 // 全局配置请求参数
 message OptionRequest {

@@ -43,10 +43,10 @@ message StorePlugin {
     string error_msg =7;//错误信息
     string config =8;//配置信息
     int32  sort =9;//排序
-    string expired_time =10;//到期时间
+    int64 expired_time =10;//到期时间
     int32 ver =11;//版本号
-    string created_at =12;
-    string updated_at =13;
+    int64 created_at =12;
+    int64 updated_at =13;
     Plugin plugin =14;
     int64  remaining_days =15;//剩余天数
     string ver_text =16; //版本文本（版本号美化）

@@ -28,8 +28,8 @@ message Tag {
   string is_auto_delete = 5; //自动删除
   int64 member_count = 6; //客户人数
   string status = 7; //状态
-  string created_at = 8; //创建时间
-  string updated_at = 9; //修改时间
+  int64 created_at = 8; //创建时间
+  int64 updated_at = 9; //修改时间
 }
 
 // 客户标签请求参数

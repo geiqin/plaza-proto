@@ -30,8 +30,8 @@ message VipBenefit {
   string verify_method = 9; //核销方式
   string desc = 10; //权益描述
   string status = 11; //状态
-  string created_at = 12; //创建日期
-  string updated_at = 13; //修改日期
+  int64 created_at = 12; //创建日期
+  int64 updated_at = 13; //修改日期
 }
 // VIP权益请求参数
 message VipBenefitRequest {

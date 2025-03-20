@@ -46,8 +46,8 @@ message Attachment {
   int32 sort = 19; //排序
   string creator_type = 20; //创建者类型
   int64 creator_id = 21; //创建者id
-  string created_at = 22; //创建时间
-  string updated_at = 23; //修改时间
+  int64 created_at = 22; //创建时间
+  int64 updated_at = 23; //修改时间
 }
 
 // 附件视图

@@ -27,24 +27,24 @@ type Storage struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                //ID
-	Code        string `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`                             //编码
-	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                             //名称
-	Type        string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`                             //类型
-	AccessKey   string `protobuf:"bytes,5,opt,name=access_key,json=accessKey,proto3" json:"access_key"`  //访问密钥
-	SecretKey   string `protobuf:"bytes,6,opt,name=secret_key,json=secretKey,proto3" json:"secret_key"`  //私有密钥
-	Bucket      string `protobuf:"bytes,7,opt,name=bucket,proto3" json:"bucket"`                         //桶名称
-	Endpoint    string `protobuf:"bytes,8,opt,name=endpoint,proto3" json:"endpoint"`                     //终端节点
-	Zone        string `protobuf:"bytes,9,opt,name=zone,proto3" json:"zone"`                             //储存区
-	Domain      string `protobuf:"bytes,10,opt,name=domain,proto3" json:"domain"`                        //访问域名
-	HostUrl     string `protobuf:"bytes,11,opt,name=host_url,json=hostUrl,proto3" json:"host_url"`       //主机地址
-	IsDefault   string `protobuf:"bytes,12,opt,name=is_default,json=isDefault,proto3" json:"is_default"` //是否默认
-	IsPrivate   string `protobuf:"bytes,13,opt,name=is_private,json=isPrivate,proto3" json:"is_private"` //是否私有
-	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description"`              //描述
-	Sort        int32  `protobuf:"varint,15,opt,name=sort,proto3" json:"sort"`                           //排序
-	Status      string `protobuf:"bytes,16,opt,name=status,proto3" json:"status"`                        //状态
-	CreatedAt   string `protobuf:"bytes,17,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
-	UpdatedAt   string `protobuf:"bytes,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
+	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                 //ID
+	Code        string `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`                              //编码
+	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                              //名称
+	Type        string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`                              //类型
+	AccessKey   string `protobuf:"bytes,5,opt,name=access_key,json=accessKey,proto3" json:"access_key"`   //访问密钥
+	SecretKey   string `protobuf:"bytes,6,opt,name=secret_key,json=secretKey,proto3" json:"secret_key"`   //私有密钥
+	Bucket      string `protobuf:"bytes,7,opt,name=bucket,proto3" json:"bucket"`                          //桶名称
+	Endpoint    string `protobuf:"bytes,8,opt,name=endpoint,proto3" json:"endpoint"`                      //终端节点
+	Zone        string `protobuf:"bytes,9,opt,name=zone,proto3" json:"zone"`                              //储存区
+	Domain      string `protobuf:"bytes,10,opt,name=domain,proto3" json:"domain"`                         //访问域名
+	HostUrl     string `protobuf:"bytes,11,opt,name=host_url,json=hostUrl,proto3" json:"host_url"`        //主机地址
+	IsDefault   string `protobuf:"bytes,12,opt,name=is_default,json=isDefault,proto3" json:"is_default"`  //是否默认
+	IsPrivate   string `protobuf:"bytes,13,opt,name=is_private,json=isPrivate,proto3" json:"is_private"`  //是否私有
+	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description"`               //描述
+	Sort        int32  `protobuf:"varint,15,opt,name=sort,proto3" json:"sort"`                            //排序
+	Status      string `protobuf:"bytes,16,opt,name=status,proto3" json:"status"`                         //状态
+	CreatedAt   int64  `protobuf:"varint,17,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
+	UpdatedAt   int64  `protobuf:"varint,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
 }
 
 func (x *Storage) Reset() {
@@ -191,18 +191,18 @@ func (x *Storage) GetStatus() string {
 	return ""
 }
 
-func (x *Storage) GetCreatedAt() string {
+func (x *Storage) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return 0
 }
 
-func (x *Storage) GetUpdatedAt() string {
+func (x *Storage) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return ""
+	return 0
 }
 
 // 存储请求参数
@@ -695,9 +695,9 @@ var file_storageService_proto_rawDesc = []byte{
 	0x28, 0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
 	0x75, 0x73, 0x18, 0x10, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
 	0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x11,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12,
 	0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x12, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0xf0,
+	0x01, 0x28, 0x03, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0xf0,
 	0x02, 0x0a, 0x0e, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x12, 0x10, 0x0a, 0x03, 0x74, 0x6f, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03,
 	0x74, 0x6f, 0x70, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x61, 0x67, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01,

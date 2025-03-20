@@ -28,8 +28,8 @@ message VipLevel {
     VipUpPackage up_package = 12; //升级礼包
     int64 member_count =14; //会员数量
     string status = 15; //状态
-    string created_at = 16; //创建时间
-    string updated_at = 17; //修改时间
+    int64 created_at = 16; //创建时间
+    int64 updated_at = 17; //修改时间
     repeated VipBenefit benefits =18;
     repeated string benefits_names =19;
     repeated string pay_rules_tips = 20; //付费规则描述

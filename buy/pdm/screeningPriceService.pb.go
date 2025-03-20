@@ -27,15 +27,15 @@ type ScreeningPrice struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                               //ID
-	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`                            //名称
-	MinPrice  int64  `protobuf:"varint,3,opt,name=min_price,json=minPrice,proto3" json:"min_price"`   //最小价格
-	MaxPrice  int64  `protobuf:"varint,4,opt,name=max_price,json=maxPrice,proto3" json:"max_price"`   //最大价格
-	Sort      int32  `protobuf:"varint,5,opt,name=sort,proto3" json:"sort"`                           //顺序
-	Desc      string `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc"`                            //描述
-	IsEnable  string `protobuf:"bytes,7,opt,name=is_enable,json=isEnable,proto3" json:"is_enable"`    //是否启用
-	CreatedAt string `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
-	UpdatedAt string `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                //ID
+	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`                             //名称
+	MinPrice  int64  `protobuf:"varint,3,opt,name=min_price,json=minPrice,proto3" json:"min_price"`    //最小价格
+	MaxPrice  int64  `protobuf:"varint,4,opt,name=max_price,json=maxPrice,proto3" json:"max_price"`    //最大价格
+	Sort      int32  `protobuf:"varint,5,opt,name=sort,proto3" json:"sort"`                            //顺序
+	Desc      string `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc"`                             //描述
+	IsEnable  string `protobuf:"bytes,7,opt,name=is_enable,json=isEnable,proto3" json:"is_enable"`     //是否启用
+	CreatedAt int64  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
+	UpdatedAt int64  `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
 }
 
 func (x *ScreeningPrice) Reset() {
@@ -119,18 +119,18 @@ func (x *ScreeningPrice) GetIsEnable() string {
 	return ""
 }
 
-func (x *ScreeningPrice) GetCreatedAt() string {
+func (x *ScreeningPrice) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return 0
 }
 
-func (x *ScreeningPrice) GetUpdatedAt() string {
+func (x *ScreeningPrice) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return ""
+	return 0
 }
 
 // 价格筛选请求参数
@@ -345,9 +345,9 @@ var file_screeningPriceService_proto_rawDesc = []byte{
 	0x65, 0x73, 0x63, 0x12, 0x1b, 0x0a, 0x09, 0x69, 0x73, 0x5f, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65,
 	0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x69, 0x73, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65,
 	0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x08,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12,
 	0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x80,
+	0x01, 0x28, 0x03, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x80,
 	0x02, 0x0a, 0x15, 0x53, 0x63, 0x72, 0x65, 0x65, 0x6e, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x69, 0x63,
 	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x74, 0x6f, 0x70, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x74, 0x6f, 0x70, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x61,

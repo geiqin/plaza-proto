@@ -24,8 +24,8 @@ message DictItem {
     string description =7;
     int32 sort =8;
     string status = 9;
-    string created_at = 10;
-    string updated_at = 11;
+    int64 created_at = 10;
+    int64 updated_at = 11;
 }
 
 

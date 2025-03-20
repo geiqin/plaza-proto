@@ -26,19 +26,19 @@ type StorePlugin struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                      //ID
-	StoreId       int64   `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id"`             //店铺ID
-	PluginId      int32   `protobuf:"varint,3,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id"`          //插件ID
-	PluginCode    string  `protobuf:"bytes,4,opt,name=plugin_code,json=pluginCode,proto3" json:"plugin_code"`     //插件code
-	IsEnabled     string  `protobuf:"bytes,5,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled"`        //是否已启用
-	IsError       string  `protobuf:"bytes,6,opt,name=is_error,json=isError,proto3" json:"is_error"`              //是否有异常
-	ErrorMsg      string  `protobuf:"bytes,7,opt,name=error_msg,json=errorMsg,proto3" json:"error_msg"`           //错误信息
-	Config        string  `protobuf:"bytes,8,opt,name=config,proto3" json:"config"`                               //配置信息
-	Sort          int32   `protobuf:"varint,9,opt,name=sort,proto3" json:"sort"`                                  //排序
-	ExpiredTime   string  `protobuf:"bytes,10,opt,name=expired_time,json=expiredTime,proto3" json:"expired_time"` //到期时间
-	Ver           int32   `protobuf:"varint,11,opt,name=ver,proto3" json:"ver"`                                   //版本号
-	CreatedAt     string  `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt     string  `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id            int64   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                       //ID
+	StoreId       int64   `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id"`              //店铺ID
+	PluginId      int32   `protobuf:"varint,3,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id"`           //插件ID
+	PluginCode    string  `protobuf:"bytes,4,opt,name=plugin_code,json=pluginCode,proto3" json:"plugin_code"`      //插件code
+	IsEnabled     string  `protobuf:"bytes,5,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled"`         //是否已启用
+	IsError       string  `protobuf:"bytes,6,opt,name=is_error,json=isError,proto3" json:"is_error"`               //是否有异常
+	ErrorMsg      string  `protobuf:"bytes,7,opt,name=error_msg,json=errorMsg,proto3" json:"error_msg"`            //错误信息
+	Config        string  `protobuf:"bytes,8,opt,name=config,proto3" json:"config"`                                //配置信息
+	Sort          int32   `protobuf:"varint,9,opt,name=sort,proto3" json:"sort"`                                   //排序
+	ExpiredTime   int64   `protobuf:"varint,10,opt,name=expired_time,json=expiredTime,proto3" json:"expired_time"` //到期时间
+	Ver           int32   `protobuf:"varint,11,opt,name=ver,proto3" json:"ver"`                                    //版本号
+	CreatedAt     int64   `protobuf:"varint,12,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt     int64   `protobuf:"varint,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	Plugin        *Plugin `protobuf:"bytes,14,opt,name=plugin,proto3" json:"plugin"`
 	RemainingDays int64   `protobuf:"varint,15,opt,name=remaining_days,json=remainingDays,proto3" json:"remaining_days"` //剩余天数
 	VerText       string  `protobuf:"bytes,16,opt,name=ver_text,json=verText,proto3" json:"ver_text"`                    //版本文本（版本号美化）
@@ -139,11 +139,11 @@ func (x *StorePlugin) GetSort() int32 {
 	return 0
 }
 
-func (x *StorePlugin) GetExpiredTime() string {
+func (x *StorePlugin) GetExpiredTime() int64 {
 	if x != nil {
 		return x.ExpiredTime
 	}
-	return ""
+	return 0
 }
 
 func (x *StorePlugin) GetVer() int32 {
@@ -153,18 +153,18 @@ func (x *StorePlugin) GetVer() int32 {
 	return 0
 }
 
-func (x *StorePlugin) GetCreatedAt() string {
+func (x *StorePlugin) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return 0
 }
 
-func (x *StorePlugin) GetUpdatedAt() string {
+func (x *StorePlugin) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return ""
+	return 0
 }
 
 func (x *StorePlugin) GetPlugin() *Plugin {
@@ -546,12 +546,12 @@ var file_storePluginService_proto_rawDesc = []byte{
 	0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x63, 0x6f,
 	0x6e, 0x66, 0x69, 0x67, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x18, 0x09, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x65, 0x78, 0x70, 0x69,
-	0x72, 0x65, 0x64, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
+	0x72, 0x65, 0x64, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b,
 	0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x76,
 	0x65, 0x72, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x76, 0x65, 0x72, 0x12, 0x1d, 0x0a,
 	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0c, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
-	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09,
+	0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
+	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x28, 0x0a, 0x06, 0x70,
 	0x6c, 0x75, 0x67, 0x69, 0x6e, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x73, 0x65,
 	0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x50, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x52, 0x06, 0x70,

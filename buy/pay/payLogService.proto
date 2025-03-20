@@ -45,10 +45,10 @@ message PayLog{
     string receipt_account =20; //收款账号【线下支付】
     string remark = 21; //备注【线下支付】
     string status = 22; //状态  （0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
-    string paid_time = 23; //支付时间
-    string closed_time = 24; //关闭时间
-    string created_at = 25; //创建时间
-    string updated_at = 26; //修改时间
+    int64 paid_time = 23; //支付时间
+    int64 closed_time = 24; //关闭时间
+    int64 created_at = 25; //创建时间
+    int64 updated_at = 26; //修改时间
     repeated PayLogValue values =27; //支付日志关联业务数据
 }
 
@@ -59,8 +59,8 @@ message PayLogValue{
     int64  business_id =3;//业务单id
     string business_no =4;//业务单号(用于显示)
     int64 business_price =5;//业务单金额
-    string created_at = 6;//创建时间
-    string updated_at = 7;//修改时间
+    int64 created_at = 6;//创建时间
+    int64 updated_at = 7;//修改时间
 }
 
 message PayLogRequest{

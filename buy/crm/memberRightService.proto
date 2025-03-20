@@ -7,8 +7,8 @@ message MemberRight {
     string owner_type = 2;
     int64 owner_id = 3;
     int64	sku_id =4;
-    string created_at = 5;
-    string updated_at = 6;
+    int64 created_at = 5;
+    int64 updated_at = 6;
 }
 
 

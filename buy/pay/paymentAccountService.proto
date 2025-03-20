@@ -20,8 +20,8 @@ message PaymentAccount {
     string payment_type = 4; //账户类型
     string is_provider = 5; //是否服务商
     string status = 9; //启用状态
-    string created_at = 10; //创建时间
-    string updated_at = 11; //修改时间
+    int64 created_at = 10; //创建时间
+    int64 updated_at = 11; //修改时间
     AccountWeixinConfig weixin_config = 12;
     AccountAlipayConfig alipay_config = 13;
 }

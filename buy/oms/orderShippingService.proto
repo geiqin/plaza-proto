@@ -30,8 +30,8 @@ message OrderShipping{
     int64  goods_count =10;//商品数量
     repeated OrderShippingGoods goods_list =11;//商品内容
     string status =12;
-    string created_at =13;
-    string updated_at =14;
+    int64 created_at =13;
+    int64 updated_at =14;
     OrderAddress address =16;
     string logistics_type_name =17;
     string shipping_method_name =18;

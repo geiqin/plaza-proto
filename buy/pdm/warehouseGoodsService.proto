@@ -23,8 +23,8 @@ message WarehouseGoods {
     int64 spu_id =3;//商品id
     int64  inventory =4;//总库存
     string is_enable =5;//是否启用（0否，1是）
-    string created_at = 7;
-    string updated_at = 8;
+    int64 created_at = 7;
+    int64 updated_at = 8;
     Warehouse warehouse = 9;
     Spu spu = 10;
     repeated WarehouseGoodsSpec spec_list =11;
@@ -39,8 +39,8 @@ message WarehouseGoodsSpec {
     int64  inventory =6;//库存
     repeated SkuSpecInfo spec =7;//规格值
     string spec_desc =8;
-    string created_at = 9;
-    string updated_at = 10;
+    int64 created_at = 9;
+    int64 updated_at = 10;
     Sku sku =12;
 }
 

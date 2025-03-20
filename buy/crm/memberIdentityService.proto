@@ -30,8 +30,8 @@ message MemberIdentity {
     string registered_capital = 17; //注册资本
     string license_url = 18; //营业执照
     string status = 19; //状态
-    string created_at = 20; //创建时间
-    string updated_at = 21; //修改时间
+    int64 created_at = 20; //创建时间
+    int64 updated_at = 21; //修改时间
 }
 // 客户实名请求参数
 message MemberIdentityRequest {

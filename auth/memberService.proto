@@ -58,8 +58,8 @@ message Member {
     string is_trusted =30;//是否已实名认证
     string memo =31;//备注
     string status =33;//状态：1正常，2锁定，3禁用，9注销
-    string created_at =34;
-    string updated_at =35;
+    int64 created_at =34;
+    int64 updated_at =35;
 }
 
 
@@ -88,5 +88,5 @@ message MemberResponse {
     Member entity = 1;
     common.Pager pager =2;
     repeated Member items = 3;
-    string info =4;
+    string msg =4;
 }

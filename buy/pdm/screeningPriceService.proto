@@ -26,8 +26,8 @@ message ScreeningPrice {
     int32 sort = 5; //顺序
     string desc = 6; //描述
     string is_enable = 7; //是否启用
-    string created_at = 8; //创建时间
-    string updated_at = 9; //修改时间
+    int64 created_at = 8; //创建时间
+    int64 updated_at = 9; //修改时间
 }
 // 价格筛选请求参数
 message ScreeningPriceRequest {

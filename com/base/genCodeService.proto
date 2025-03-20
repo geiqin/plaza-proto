@@ -38,8 +38,8 @@ message GenCode {
     string engine = 11; //
     string charset = 12; //
     string comment = 13; //
-    string created_at = 14;
-    string updated_at = 15;
+    int64 created_at = 14;
+    int64 updated_at = 15;
     repeated GenCodeColumn columns =16;
     bool disabled = 17; //
 }
@@ -64,8 +64,8 @@ message GenCodeColumn {
     string ts_type = 17;
     string proto_type = 18;
     string dict_type = 19;
-    string created_at = 20;
-    string updated_at = 21;
+    int64 created_at = 20;
+    int64 updated_at = 21;
 }
 
 message GenDatabase {

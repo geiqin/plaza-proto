@@ -27,18 +27,18 @@ type DictItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                //ID
-	DictId      int64  `protobuf:"varint,2,opt,name=dict_id,json=dictId,proto3" json:"dict_id"`          //字典ID
-	Label       string `protobuf:"bytes,3,opt,name=label,proto3" json:"label"`                           //键名
-	Value       string `protobuf:"bytes,4,opt,name=value,proto3" json:"value"`                           //键值
-	Color       string `protobuf:"bytes,5,opt,name=color,proto3" json:"color"`                           //标签颜色
-	Group       string `protobuf:"bytes,6,opt,name=group,proto3" json:"group"`                           //分组
-	Description string `protobuf:"bytes,7,opt,name=description,proto3" json:"description"`               //描述
-	IsSystem    string `protobuf:"bytes,8,opt,name=is_system,json=isSystem,proto3" json:"is_system"`     //系统创建
-	Sort        int32  `protobuf:"varint,9,opt,name=sort,proto3" json:"sort"`                            //排序
-	Status      string `protobuf:"bytes,10,opt,name=status,proto3" json:"status"`                        //状态
-	CreatedAt   string `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
-	UpdatedAt   string `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
+	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                 //ID
+	DictId      int64  `protobuf:"varint,2,opt,name=dict_id,json=dictId,proto3" json:"dict_id"`           //字典ID
+	Label       string `protobuf:"bytes,3,opt,name=label,proto3" json:"label"`                            //键名
+	Value       string `protobuf:"bytes,4,opt,name=value,proto3" json:"value"`                            //键值
+	Color       string `protobuf:"bytes,5,opt,name=color,proto3" json:"color"`                            //标签颜色
+	Group       string `protobuf:"bytes,6,opt,name=group,proto3" json:"group"`                            //分组
+	Description string `protobuf:"bytes,7,opt,name=description,proto3" json:"description"`                //描述
+	IsSystem    string `protobuf:"bytes,8,opt,name=is_system,json=isSystem,proto3" json:"is_system"`      //系统创建
+	Sort        int32  `protobuf:"varint,9,opt,name=sort,proto3" json:"sort"`                             //排序
+	Status      string `protobuf:"bytes,10,opt,name=status,proto3" json:"status"`                         //状态
+	CreatedAt   int64  `protobuf:"varint,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
+	UpdatedAt   int64  `protobuf:"varint,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
 }
 
 func (x *DictItem) Reset() {
@@ -143,18 +143,18 @@ func (x *DictItem) GetStatus() string {
 	return ""
 }
 
-func (x *DictItem) GetCreatedAt() string {
+func (x *DictItem) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return 0
 }
 
-func (x *DictItem) GetUpdatedAt() string {
+func (x *DictItem) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return ""
+	return 0
 }
 
 type DictItemRequest struct {
@@ -379,8 +379,8 @@ var file_dictItemService_proto_rawDesc = []byte{
 	0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,
 	0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1d, 0x0a,
 	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0b, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
-	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09,
+	0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
+	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x95, 0x02, 0x0a, 0x0f,
 	0x44, 0x69, 0x63, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
 	0x10, 0x0a, 0x03, 0x74, 0x6f, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x74, 0x6f,

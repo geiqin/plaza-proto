@@ -91,8 +91,8 @@ message SkuInfo  {
     int64 weight =10;//重量：克
     int64 volume =11;//体积
     string spec_indexes =12;//规格索引
-    string created_at = 14;
-    string updated_at = 15;
+    int64 created_at = 14;
+    int64 updated_at = 15;
     repeated SkuSpecInfo spec =17; //规格信息列表
     int64 promotion_price =18;//促销价
     string promotion_type =19;//促销类型

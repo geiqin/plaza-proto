@@ -20,23 +20,25 @@ service AddressService {
 // 地址库
 message Address {
   int64 id = 1; //ID
-  string contacts = 2; //联系人
-  string tel = 3; //联系电话
-  int64 province_id = 4; //所在省
-  int64 city_id = 5; //所在市
-  int64 county_id = 6; //所在县
-  string address = 7; //详细地址
-  float lng = 8; //经度
-  float lat = 9; //纬度
-  string is_shipping = 10; //发货地址
-  string is_return = 11; //退货地址
-  string header_url = 12; //门头照片
-  string desc = 13; //描述
-  string created_at = 14; //创建时间
-  string updated_at = 15; //修改时间
-  string province_name = 16; //所在省
-  string city_name = 17; //所在市
-  string county_name = 18; //所在县
+  string real_name = 2; //姓名
+  string alias = 3; //联系人
+  string phone = 4; //联系电话
+  int64 province_id = 5; //所在省
+  int64 city_id = 6; //所在市
+  int64 county_id = 7; //所在县
+  string province_name = 8; //所在省
+  string city_name = 9; //所在市
+  string county_name = 10; //所在县
+  string detail = 11; //详细地址
+  float lng = 12; //经度
+  float lat = 13; //纬度
+  string is_shipping = 14; //是发货地址
+  string is_return = 15; //退货地址
+  string header_url = 16; //门头照片
+  string desc = 17; //描述
+  int64 created_at = 18; //创建时间
+  int64 updated_at = 19; //修改时间
+
 }
 // 地址库请求参数
 message AddressRequest {

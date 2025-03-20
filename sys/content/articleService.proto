@@ -34,7 +34,7 @@ message Article {
     string cover_url = 5; //封面图
     string content = 6; //文章内容
     string publish_type = 7; //发布方式
-    string publish_time = 8; //发布时间
+    int64 publish_time = 8; //发布时间
     int64 shop_id = 9; //分店ID
     int64 realstore_id = 10; //门店ID
     string source = 11; //来源
@@ -51,8 +51,8 @@ message Article {
     int32 sort = 22; //排序值
     string status = 23; //状态
     string meta_json = 24; //附加数据
-    string created_at = 25; //创建时间
-    string updated_at = 26; //修改时间
+    int64 created_at = 25; //创建时间
+    int64 updated_at = 26; //修改时间
     repeated Cat cats =27;
     repeated Tag tags =28;
     repeated AttachmentView attachments =29;

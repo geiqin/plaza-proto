@@ -31,6 +31,7 @@ message AuthToken {
     string scope =4;
     string token_type =5;
     int64 expires_in =2;
+    bool bindName =6;
 }
 
 

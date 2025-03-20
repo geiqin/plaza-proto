@@ -44,8 +44,8 @@ message Merchant {
   int32 store_count = 23; //店铺数量
   int64 creator_id = 24; //创建者
   string status = 25; //状态
-  string created_at = 26; //
-  string updated_at = 27; //
+  int64 created_at = 26; //
+  int64 updated_at = 27; //
 }
 // 商户请求参数
 message MerchantRequest {

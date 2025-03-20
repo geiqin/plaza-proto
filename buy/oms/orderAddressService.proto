@@ -32,8 +32,8 @@ message OrderAddress {
     string idcard_number = 18; //身份证号码
     string idcard_front = 19; //身份证人像面
     string idcard_back = 20; //身份证国微面
-    string created_at = 21; //创建时间
-    string updated_at = 22; //修改时间
+    int64 created_at = 21; //创建时间
+    int64 updated_at = 22; //修改时间
 }
 
 

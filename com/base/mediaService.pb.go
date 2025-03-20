@@ -27,25 +27,25 @@ type Media struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                //ID
-	Hash        string     `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash"`                             //Hash值
-	Code        string     `protobuf:"bytes,3,opt,name=code,proto3" json:"code"`                             //编码
-	Name        string     `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`                             //名称
-	Storage     string     `protobuf:"bytes,5,opt,name=storage,proto3" json:"storage"`                       //储存名
-	Type        string     `protobuf:"bytes,6,opt,name=type,proto3" json:"type"`                             //类型
-	RawName     string     `protobuf:"bytes,8,opt,name=raw_name,json=rawName,proto3" json:"raw_name"`        //原始名称
-	Extension   string     `protobuf:"bytes,9,opt,name=extension,proto3" json:"extension"`                   //文件扩展名
-	SavePath    string     `protobuf:"bytes,10,opt,name=save_path,json=savePath,proto3" json:"save_path"`    //存相对路径
-	Url         string     `protobuf:"bytes,11,opt,name=url,proto3" json:"url"`                              //完整路径
-	MimeType    string     `protobuf:"bytes,12,opt,name=mime_type,json=mimeType,proto3" json:"mime_type"`    //文件类型
-	Size        int64      `protobuf:"varint,13,opt,name=size,proto3" json:"size"`                           //文件大小
-	Width       int64      `protobuf:"varint,14,opt,name=width,proto3" json:"width"`                         //宽
-	Height      int64      `protobuf:"varint,15,opt,name=height,proto3" json:"height"`                       //高
-	Description string     `protobuf:"bytes,16,opt,name=description,proto3" json:"description"`              //描述
-	CatId       int64      `protobuf:"varint,17,opt,name=cat_id,json=catId,proto3" json:"cat_id"`            //分类
-	Sort        int32      `protobuf:"varint,18,opt,name=sort,proto3" json:"sort"`                           //排序值
-	CreatedAt   string     `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
-	UpdatedAt   string     `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
+	Id          int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                 //ID
+	Hash        string     `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash"`                              //Hash值
+	Code        string     `protobuf:"bytes,3,opt,name=code,proto3" json:"code"`                              //编码
+	Name        string     `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`                              //名称
+	Storage     string     `protobuf:"bytes,5,opt,name=storage,proto3" json:"storage"`                        //储存名
+	Type        string     `protobuf:"bytes,6,opt,name=type,proto3" json:"type"`                              //类型
+	RawName     string     `protobuf:"bytes,8,opt,name=raw_name,json=rawName,proto3" json:"raw_name"`         //原始名称
+	Extension   string     `protobuf:"bytes,9,opt,name=extension,proto3" json:"extension"`                    //文件扩展名
+	SavePath    string     `protobuf:"bytes,10,opt,name=save_path,json=savePath,proto3" json:"save_path"`     //存相对路径
+	Url         string     `protobuf:"bytes,11,opt,name=url,proto3" json:"url"`                               //完整路径
+	MimeType    string     `protobuf:"bytes,12,opt,name=mime_type,json=mimeType,proto3" json:"mime_type"`     //文件类型
+	Size        int64      `protobuf:"varint,13,opt,name=size,proto3" json:"size"`                            //文件大小
+	Width       int64      `protobuf:"varint,14,opt,name=width,proto3" json:"width"`                          //宽
+	Height      int64      `protobuf:"varint,15,opt,name=height,proto3" json:"height"`                        //高
+	Description string     `protobuf:"bytes,16,opt,name=description,proto3" json:"description"`               //描述
+	CatId       int64      `protobuf:"varint,17,opt,name=cat_id,json=catId,proto3" json:"cat_id"`             //分类
+	Sort        int32      `protobuf:"varint,18,opt,name=sort,proto3" json:"sort"`                            //排序值
+	CreatedAt   int64      `protobuf:"varint,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
+	UpdatedAt   int64      `protobuf:"varint,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
 	Cat         *MediaCat  `protobuf:"bytes,21,opt,name=cat,proto3" json:"cat"`
 	MediaInfo   *MediaInfo `protobuf:"bytes,22,opt,name=media_info,json=mediaInfo,proto3" json:"media_info"` //媒体信息
 }
@@ -201,18 +201,18 @@ func (x *Media) GetSort() int32 {
 	return 0
 }
 
-func (x *Media) GetCreatedAt() string {
+func (x *Media) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return 0
 }
 
-func (x *Media) GetUpdatedAt() string {
+func (x *Media) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return ""
+	return 0
 }
 
 func (x *Media) GetCat() *MediaCat {
@@ -600,9 +600,9 @@ var file_mediaService_proto_rawDesc = []byte{
 	0x63, 0x61, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x11, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x61,
 	0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x18, 0x12, 0x20, 0x01, 0x28,
 	0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74,
-	0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x13, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65,
+	0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x13, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x64, 0x5f, 0x61, 0x74, 0x18, 0x14, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61,
+	0x64, 0x5f, 0x61, 0x74, 0x18, 0x14, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61,
 	0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x24, 0x0a, 0x03, 0x63, 0x61, 0x74, 0x18, 0x15, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x12, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x4d, 0x65,
 	0x64, 0x69, 0x61, 0x43, 0x61, 0x74, 0x52, 0x03, 0x63, 0x61, 0x74, 0x12, 0x32, 0x0a, 0x0a, 0x6d,

@@ -46,8 +46,8 @@ message Navigation {
     string is_show = 11;
     string is_new_window_open = 12;
     int32 sort = 13;
-    string created_at = 14;
-    string updated_at = 15;
+    int64 created_at = 14;
+    int64 updated_at = 15;
     Navigation parent = 16;
     repeated string tags = 17;
     repeated Navigation children = 18;

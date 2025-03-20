@@ -1,0 +1,57 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 组合数据服务
+service GroupDataService {
+  // 组合数据新增
+  rpc Create (GroupData) returns (GroupDataResponse) {}
+  // 组合数据修改
+  rpc Update (GroupData) returns (GroupDataResponse) {}
+  // 组合数据删除
+  rpc Delete (GroupData) returns (GroupDataResponse) {}
+  // 组合数据获取
+  rpc Get (GroupData) returns (GroupDataResponse) {}
+  // 组合数据查询
+  rpc Search (GroupDataRequest) returns (GroupDataResponse) {}
+  // 组合数据列表
+  rpc List (GroupDataRequest) returns (GroupDataResponse) {}
+}
+// 组合数据
+message GroupData {
+  int32 id = 1; //ID
+  int32 group_id = 2; //组合ID
+  map<string,GroupDataItem> value = 3; //组合数据
+  int32 sort = 4; //排序
+  string status = 5; //状态
+  int64 created_at = 6; //创建时间
+  int64 updated_at = 7; //修改时间
+}
+
+// 组合数据项
+message GroupDataItem {
+  string type = 1;
+  string value = 2;
+}
+
+// 组合数据请求参数
+message GroupDataRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  int32 group_id = 11; //组合ID
+  string status = 12; //状态
+}
+// 组合数据响应数据
+message GroupDataResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  GroupData entity = 3;
+  repeated GroupData items = 4;
+}

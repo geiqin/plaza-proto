@@ -31,8 +31,8 @@ message Brand {
     string desc = 8; //描述
     int32 sort = 9; //排序
     int32 spu_count = 10; //商品数量
-    string created_at = 11; //创建时间
-    string updated_at = 12; //修改时间
+    int64 created_at = 11; //创建时间
+    int64 updated_at = 12; //修改时间
     BrandType brand_type =13;
 }
 // 商品品牌请求参数

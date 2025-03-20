@@ -42,34 +42,35 @@ message TransferLog{
     string status = 16;
     int64 member_id = 17;
     string open_id = 18;
-    string finished_at =19;
-    string created_at = 20;
-    string updated_at = 21;
+    int64 finished_at =19;
+    int64 created_at = 20;
+    int64 updated_at = 21;
 }
 
 message TransferLogRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    int64 top = 3;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int32 ids = 7;
+    int32 id = 8;
     //base params
-    int64 id = 4;
-    string currency = 5;
-    int64 member_id = 6;
-    string extra = 7;
-    string memo = 8;
-    string type = 9;
-    string order_type = 10;
-    int64 order_id =11;
-    string order_sn = 12;
-    string keywords = 13;
-    string status =14;
-    string start_date =15;
-    string end_date =16;
+    string currency = 10;
+    int64 member_id = 11;
+    string extra = 17;
+    string memo = 18;
+    string type = 19;
+    string order_type = 20;
+    int64 order_id =21;
+    string order_sn = 22;
+    string status =24;
 }
 
 message TransferLogResponse {
     TransferLog entity = 1;
     common.Pager pager =2;
     repeated TransferLog items = 3;
-    string info =4;
+    string msg =4;
 }

@@ -24,8 +24,8 @@ message Tag {
     string name = 3; //名称    
     int32 weight = 4; //权重    
     string is_system = 5; //系统预设    
-    string created_at = 6; //创建时间    
-    string updated_at = 7; //修改时间    
+    int64 created_at = 6; //创建时间
+    int64 updated_at = 7; //修改时间
 }
 // 标签请求参数
 message TagRequest {

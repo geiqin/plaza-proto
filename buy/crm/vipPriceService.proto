@@ -18,8 +18,8 @@ message VipPrice {
     string sku_key = 4;//md5key
     string method = 5;//优惠方式：1 打折,2 减价, 3 指定价
     int64 discount_value = 7;//优惠值
-    string created_at = 9;
-    string updated_at = 10;
+    int64 created_at = 9;
+    int64 updated_at = 10;
 }
 
 // 会员价格详情

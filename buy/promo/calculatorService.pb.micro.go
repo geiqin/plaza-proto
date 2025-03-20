@@ -43,7 +43,7 @@ func NewCalculatorServiceEndpoints() []*api.Endpoint {
 
 type CalculatorService interface {
 	//计算订单优惠
-	OrderDiscount(ctx context.Context, in *PurchaseInfo, opts ...client.CallOption) (*CalculatorResponse, error)
+	OrderDiscount(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
 	//计算商品显示价
 	DisplayPrice(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error)
 }
@@ -60,7 +60,7 @@ func NewCalculatorService(name string, c client.Client) CalculatorService {
 	}
 }
 
-func (c *calculatorService) OrderDiscount(ctx context.Context, in *PurchaseInfo, opts ...client.CallOption) (*CalculatorResponse, error) {
+func (c *calculatorService) OrderDiscount(ctx context.Context, in *CalculatorRequest, opts ...client.CallOption) (*CalculatorResponse, error) {
 	req := c.c.NewRequest(c.name, "CalculatorService.OrderDiscount", in)
 	out := new(CalculatorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -84,14 +84,14 @@ func (c *calculatorService) DisplayPrice(ctx context.Context, in *CalculatorRequ
 
 type CalculatorServiceHandler interface {
 	//计算订单优惠
-	OrderDiscount(context.Context, *PurchaseInfo, *CalculatorResponse) error
+	OrderDiscount(context.Context, *CalculatorRequest, *CalculatorResponse) error
 	//计算商品显示价
 	DisplayPrice(context.Context, *CalculatorRequest, *CalculatorResponse) error
 }
 
 func RegisterCalculatorServiceHandler(s server.Server, hdlr CalculatorServiceHandler, opts ...server.HandlerOption) error {
 	type calculatorService interface {
-		OrderDiscount(ctx context.Context, in *PurchaseInfo, out *CalculatorResponse) error
+		OrderDiscount(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
 		DisplayPrice(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error
 	}
 	type CalculatorService struct {
@@ -105,7 +105,7 @@ type calculatorServiceHandler struct {
 	CalculatorServiceHandler
 }
 
-func (h *calculatorServiceHandler) OrderDiscount(ctx context.Context, in *PurchaseInfo, out *CalculatorResponse) error {
+func (h *calculatorServiceHandler) OrderDiscount(ctx context.Context, in *CalculatorRequest, out *CalculatorResponse) error {
 	return h.CalculatorServiceHandler.OrderDiscount(ctx, in, out)
 }
 

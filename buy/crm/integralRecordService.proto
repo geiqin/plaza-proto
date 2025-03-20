@@ -30,8 +30,8 @@ message IntegralRecord {
   int64 operator_id = 11; //操作人id
   string operator_name = 12; //操作人名称
   string is_rollback = 13; //是否回滚
-  string created_at = 14; //创建时间
-  string updated_at = 15; //修改时间
+  int64 created_at = 14; //创建时间
+  int64 updated_at = 15; //修改时间
   Member member = 18;
 }
 // 积分明细请求参数

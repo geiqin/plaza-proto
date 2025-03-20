@@ -39,8 +39,8 @@ message RefundLog{
     string refundment =16;//退款类型（0原路退回, 1退至钱包, 2手动处理）
     string request_params =17;//支付平台返回参数（以json存储）
     string status =18;//退款状态：0待退款，1退款成功，2退款失败
-    string created_at = 19;
-    string updated_at = 20;
+    int64 created_at = 19;
+    int64 updated_at = 20;
 }
 
 message RefundLogRequest{
@@ -65,6 +65,6 @@ message RefundLogResponse {
     RefundLog entity = 1;
     common.Pager pager =2;
     repeated RefundLog items = 3;
-    string info =5;
+    string msg =5;
 }
 

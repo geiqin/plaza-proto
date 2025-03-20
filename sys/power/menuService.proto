@@ -41,8 +41,8 @@ message Menu {
     int64 plugin_id =16;//插件ID
     int32 sort =17;//排序值
     string status =18;//状态: （1：启用；2：禁用）
-    string created_at =20;
-    string updated_at =21;
+    int64 created_at =20;
+    int64 updated_at =21;
     Menu parent = 22;
     repeated Menu children = 23;
 }

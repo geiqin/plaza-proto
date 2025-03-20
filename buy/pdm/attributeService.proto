@@ -26,8 +26,8 @@ message Attribute {
     string is_required = 5; //属性值必选
     repeated AttributeValue values = 6; //属性值列表
     int32 spu_count = 7; //商品数量
-    string created_at = 8; //创建时间
-    string updated_at = 9; //修改时间
+    int64 created_at = 8; //创建时间
+    int64 updated_at = 9; //修改时间
 }
 
 message AttributeValue {

@@ -22,8 +22,8 @@ message Delivery {
   DeliveryConfig config = 6; //配置信息
   string is_default = 7; //是否默认
   string status = 8; //状态
-  string created_at = 9; //创建时间
-  string updated_at = 10; //修改时间
+  int64 created_at = 9; //创建时间
+  int64 updated_at = 10; //修改时间
 }
 
 message DeliveryConfig {

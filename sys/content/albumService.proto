@@ -33,8 +33,8 @@ message Album {
   string seo_desc = 10; //SEO描述
   int64 user_id = 11; //用户ID
   string status = 12; //状态
-  string created_at = 13; //创建时间
-  string updated_at = 14; //修改时间
+  int64 created_at = 13; //创建时间
+  int64 updated_at = 14; //修改时间
   repeated AlbumPhoto photos =15;
 
 }

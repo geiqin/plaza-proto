@@ -27,18 +27,18 @@ type Cat struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                //ID
-	Type        string `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`                             //类型
-	Code        string `protobuf:"bytes,3,opt,name=code,proto3" json:"code"`                             //编码
-	Name        string `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`                             //名称
-	ParentId    int64  `protobuf:"varint,5,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`    //父亲ID
-	Ancestors   string `protobuf:"bytes,6,opt,name=ancestors,proto3" json:"ancestors"`                   //祖级列表
-	ImageUrl    string `protobuf:"bytes,7,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`     //图标
-	Description string `protobuf:"bytes,8,opt,name=description,proto3" json:"description"`               //描述
-	Sort        int32  `protobuf:"varint,9,opt,name=sort,proto3" json:"sort"`                            //排序
-	Status      string `protobuf:"bytes,10,opt,name=status,proto3" json:"status"`                        //状态
-	CreatedAt   string `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
-	UpdatedAt   string `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
+	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                 //ID
+	Type        string `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`                              //类型
+	Code        string `protobuf:"bytes,3,opt,name=code,proto3" json:"code"`                              //编码
+	Name        string `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`                              //名称
+	ParentId    int64  `protobuf:"varint,5,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`     //父亲ID
+	Ancestors   string `protobuf:"bytes,6,opt,name=ancestors,proto3" json:"ancestors"`                    //祖级列表
+	ImageUrl    string `protobuf:"bytes,7,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`      //图标
+	Description string `protobuf:"bytes,8,opt,name=description,proto3" json:"description"`                //描述
+	Sort        int32  `protobuf:"varint,9,opt,name=sort,proto3" json:"sort"`                             //排序
+	Status      string `protobuf:"bytes,10,opt,name=status,proto3" json:"status"`                         //状态
+	CreatedAt   int64  `protobuf:"varint,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //创建时间
+	UpdatedAt   int64  `protobuf:"varint,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
 	Children    []*Cat `protobuf:"bytes,13,rep,name=children,proto3" json:"children"`
 }
 
@@ -144,18 +144,18 @@ func (x *Cat) GetStatus() string {
 	return ""
 }
 
-func (x *Cat) GetCreatedAt() string {
+func (x *Cat) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return 0
 }
 
-func (x *Cat) GetUpdatedAt() string {
+func (x *Cat) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return ""
+	return 0
 }
 
 func (x *Cat) GetChildren() []*Cat {
@@ -414,9 +414,9 @@ var file_catService_proto_rawDesc = []byte{
 	0x28, 0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
 	0x75, 0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
 	0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0b,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12,
 	0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0c, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x29,
+	0x01, 0x28, 0x03, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x29,
 	0x0a, 0x08, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x72, 0x65, 0x6e, 0x18, 0x0d, 0x20, 0x03, 0x28, 0x0b,
 	0x32, 0x0d, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2e, 0x43, 0x61, 0x74, 0x52,
 	0x08, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x72, 0x65, 0x6e, 0x22, 0xb3, 0x02, 0x0a, 0x0a, 0x43, 0x61,

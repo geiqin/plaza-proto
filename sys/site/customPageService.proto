@@ -1,0 +1,56 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 自定义页服务
+service CustomPageService {
+  // 自定义页新增
+  rpc Create (CustomPage) returns (CustomPageResponse) {}
+  // 自定义页修改
+  rpc Update (CustomPage) returns (CustomPageResponse) {}
+  // 自定义页删除
+  rpc Delete (CustomPage) returns (CustomPageResponse) {}
+  // 自定义页获取
+  rpc Get (CustomPage) returns (CustomPageResponse) {}
+  // 自定义页查询
+  rpc Search (CustomPageRequest) returns (CustomPageResponse) {}
+  // 自定义页列表
+  rpc List (CustomPageRequest) returns (CustomPageResponse) {}
+}
+// 自定义页
+message CustomPage {
+  int64 id = 1; //ID
+  string code = 2; //页面编码
+  string name = 3; //页面名称
+  int64 template_id = 4; //模板id
+  string seo_title = 5; //SEO标题
+  string seo_keywords = 6; //SEO关键字
+  string seo_desc = 7; //SEO描述
+  string config = 8; //配置信息
+  string status = 9; //状态
+  int64 created_at = 10; //创建时间
+  int64 updated_at = 11; //修改时间
+}
+// 自定义页请求参数
+message CustomPageRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sort = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string code = 11; //页面编码
+  string name = 12; //页面名称
+  int64 template_id = 13; //模板id
+  string status = 14; //状态
+}
+// 自定义页响应数据
+message CustomPageResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  CustomPage entity = 3;
+  repeated CustomPage items = 4;
+}

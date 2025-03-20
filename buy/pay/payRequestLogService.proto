@@ -30,34 +30,36 @@ message PayRequestLog{
     string scheme =14;//http类型
     string version =15;//http版本
     string client =16;//客户端详情信息
-    string created_at = 17; //创建时间
-    string updated_at = 18; //修改时间
+    int64 created_at = 17; //创建时间
+    int64 updated_at = 18; //修改时间
 }
 
 
 message PayRequestLogRequest{
-    int64 paged = 1;
-    int64 page_size = 2;
-    int64 top = 3;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int32 ids = 7;
+    int32 id = 8;
     //base params
-    int64  id =4;//ID
-    string log_no =5;//支付日志订单号
-    string business_type =6;//订单类型: order 订单, wallet 钱包 vip 会员等级
+    string log_no =10;//支付日志订单号
+    string business_type =11;//订单类型: order 订单, wallet 钱包 vip 会员等级
 
-    string os =9;//支付方式标识
-    string payment_name =10;//支付方式名称
-    string subject =11;//订单名称
-    string trade_no =12;//支付平台交易号
-    string buyer_user =13;//支付平台用户帐号
-    string pay_account_no =14;//支付结算账号
-    string status =15;//状态
-    string begin_time = 16; //开始时间
-    string end_time = 17; //结束时间
+    string os =12;//支付方式标识
+    string payment_name =13;//支付方式名称
+    string subject =14;//订单名称
+    string trade_no =15;//支付平台交易号
+    string buyer_user =16;//支付平台用户帐号
+    string pay_account_no =17;//支付结算账号
+    string status =18;//状态
 }
 
 message PayRequestLogResponse {
     PayRequestLog entity = 1;
     common.Pager pager =2;
     repeated PayRequestLog items = 3;
-    string info =4;
+    string msg =4;
 }

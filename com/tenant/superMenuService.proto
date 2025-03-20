@@ -34,8 +34,8 @@ message SuperMenu {
     string is_require_auth =15;//是否需要登录鉴权: 1是 0否
     int32  sort =16;//排序值
     string status =17;//状态: （1：启用；2：禁用）
-    string created_at =23;
-    string updated_at =24;
+    int64 created_at =23;
+    int64 updated_at =24;
     SuperMenu parent = 25;
     repeated SuperMenu children = 26;
 }

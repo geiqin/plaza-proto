@@ -32,8 +32,8 @@ message PaymentOnline {
   string client_app_id = 9; //客户端AppId
   int32 sort = 10; //排序值
   string status = 11; //启用状态
-  string created_at = 12; //创建时间
-  string updated_at = 13; //修改时间
+  int64 created_at = 12; //创建时间
+  int64 updated_at = 13; //修改时间
   PaymentAccount account =14;
 }
 

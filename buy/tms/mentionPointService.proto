@@ -51,8 +51,8 @@ message MentionPoint {
   string logo_url = 16;
   string memo = 17;
   MentionPointRule rule =18; //规则
-  string created_at = 21;
-  string updated_at = 22;
+  int64 created_at = 21;
+  int64 updated_at = 22;
   float distance_value = 27; //距离数据（离用户位置）
   string distance_unit = 28; //距离单位（离用户位置）
 }
@@ -75,8 +75,8 @@ message MentionPointRule{
 
 message MentionPointTime{
   string type = 3;
-  string start_time = 4;
-  string end_time = 5;
+  int64 start_time = 4;
+  int64 end_time = 5;
 }
 
 

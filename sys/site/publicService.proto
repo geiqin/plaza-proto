@@ -1,0 +1,111 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+//公共服务
+service PublicService {
+  rpc WorkerManUrl (PublicRequest) returns (PublicResponse) {}
+  rpc BasicConfig (PublicRequest) returns (PublicResponse) {}
+  rpc SiteConfig (PublicRequest) returns (PublicResponse) {}
+  rpc Copyright (PublicRequest) returns (PublicResponse) {}
+  rpc GetOpenAdv (PublicRequest) returns (PublicResponse) {}
+  rpc Navigation (PublicRequest) returns (PublicResponse) {}
+  rpc Share (PublicRequest) returns (PublicResponse) {}
+  rpc LangVersion (PublicRequest) returns (PublicResponse) {}
+  rpc GetLangJson (PublicRequest) returns (PublicResponse) {}
+}
+
+message WorkerManUrlData {
+  string admin =1;
+  string chat =2;
+}
+
+message BasicConfigData {
+  string balance_func_status =1;
+  string invoice_func_status =2;
+  string member_card_status =3;
+  string member_func_status =4;
+  string member_price_status =5;
+  string network_security =6;
+  bool offline_pay_status =7;
+  bool pay_weixin_open =8;
+  string  phone_auth_switch =9;
+  string special_invoice_status =10;
+  string store_self_mention =11;
+  string wap_login_logo =12;
+  string wechat_auth_switch =13;
+  bool wechat_status =14;
+  bool alipay_status =15; //change
+  bool surplus_pay_status =16; //change
+  bool friend_pay_status =17;
+  string site_name =18;
+  string site_url =19;
+  repeated string site_func =20;
+  string recharge_switch =21;
+  string record_no =22;
+}
+
+message SiteConfigData {
+  string icp_url =1;
+  string network_security =2;
+  string network_security_url =3;
+  string record_no =4; //change
+}
+
+
+message CopyrightData {
+  string copyright_context =1;
+  string copyright_image =2;
+  string site_logo =3;
+  string site_name =4;
+}
+
+message GetOpenAdvData {
+  int32 status =1;
+  string time =2;
+  string type =3;
+  string video_link =4;
+  repeated string values =5; //change
+}
+
+message ShareData {
+  string img = 1;
+  string synopsis = 2;
+  string title = 3;
+}
+
+message PublicRequest {
+  int64 paged = 1;
+  int64 page_size = 2;
+  string sorting = 3;
+  //base params
+  int64 id = 4;
+  string name = 5;
+  string status = 6;
+  int64 parent_id = 7;
+  string keywords = 8;
+  repeated int64 ids = 10;
+}
+
+message LangVersionData{
+  string version =1;
+}
+
+message LangJsonData{
+  string locale =1;
+  map<string,string> content =2;
+}
+
+//
+message PublicResponse {
+  string msg =1;
+  WorkerManUrlData worker_man_url =2;
+  BasicConfigData basic_config =3;
+  SiteConfigData site_config =4;
+  CopyrightData copyright =6;
+  GetOpenAdvData get_open_adv =7;
+  bytes navigation =8;
+  ShareData share =9;
+  LangVersionData lang_version  =10;
+  LangJsonData get_lang_json =11;
+}

@@ -1,0 +1,63 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "baseInfoService.proto";
+
+//会员授权【新】
+service MemberAuthService {
+
+  //账号登录
+  rpc AccountLogin (MemberAuthRequest) returns (MemberAuthResponse) {}
+
+  //小程序登录页面自动加载，返回用户信息的缓存key，返回是否强制绑定手机号
+  rpc MiniAuthType (MemberAuthRequest) returns (MemberAuthResponse) {}
+
+  //小程序授权登录，返回token
+  rpc MiniAuthLogin (MemberAuthRequest) returns (MemberAuthResponse) {}
+
+  //手机号直接登录
+  rpc PhoneLogin (MemberAuthRequest) returns (MemberAuthResponse) {}
+
+  ////小程序授权后绑定手机号
+  rpc MiniBindingPhone (MemberAuthRequest) returns (MemberAuthResponse) {}
+
+  //微信公众号授权登录，返回token
+  rpc WoaAuthLogin (MemberAuthRequest) returns (MemberAuthResponse) {}
+
+  //微信公众号授权绑定手机号
+  rpc WoaAuthBindingPhone(MemberAuthRequest) returns (MemberAuthResponse) {}
+
+}
+
+//客户查询参数
+message MemberAuthRequest {
+  string code =1;
+  string spread_spid =2;
+  string spread_code =3;
+  string username = 4;
+  string password =5;
+  string mobile =6;
+  string email =7;
+  string key =8;
+
+  string client_id =10;
+  string client_secret =11;
+  string store_id =12;
+  string scope =13;
+  string state =14;
+  string grant_type =15;
+
+  string encryptedData =17; //小程序拉取手机号用
+  string iv=18;//小程序拉取手机号用
+}
+
+message MemberAuthType {
+  bool bindPhone =1;
+  string key =2;
+}
+
+message MemberAuthResponse {
+  string msg =1;
+  AuthToken auth_token =2;
+  MemberAuthType auth_type =3;
+}

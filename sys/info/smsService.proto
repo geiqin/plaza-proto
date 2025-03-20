@@ -16,8 +16,8 @@ service SmsService {
 //验证码
 message Sms {
     int64   id =1; //ID
-    string	created_at	=14;
-    string	updated_at	=15;
+    int64	created_at	=14;
+    int64	updated_at	=15;
 }
 
 message SmsRequest {

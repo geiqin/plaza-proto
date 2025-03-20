@@ -31,8 +31,8 @@ message Vip {
     string is_need_sync = 11; //需要同步更新
     string growth_rules = 12; //成长规则
     string status = 13; //状态
-    string created_at = 14; //创建时间
-    string updated_at = 15; //修改时间
+    int64 created_at = 14; //创建时间
+    int64 updated_at = 15; //修改时间
     repeated VipLevel levels =16;
 }
 

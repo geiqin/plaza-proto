@@ -26,13 +26,13 @@ message VerifyCode {
     string  email =6;//接收邮件地址
     int32   read_num =7;//已读取次数（比如最多不超过3次）
     string  is_used =8;//是否已使用
-    string	used_time =9;//已使用时间
+    int64	used_time =9;//已使用时间
     int64   user_id =10;//关联用户ID
     string  user_type =11;//关联用户类型
     map<string,string> params =12;//附加参数
     string  status =13;//状态: 0待验证，1验证通过，2验证失败
-    string	created_at	=14;
-    string	updated_at	=15;
+    int64	created_at	=14;
+    int64	updated_at	=15;
 }
 
 message VerifyCodeRequest {
@@ -55,5 +55,5 @@ message VerifyCodeResponse {
     VerifyCode entity = 1;
     common.Pager pager =2;
     repeated VerifyCode items = 3;
-    string info =5;
+    string msg =5;
 }

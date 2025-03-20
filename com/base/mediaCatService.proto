@@ -32,8 +32,8 @@ message MediaCat {
   repeated string types = 7; //支持类型
   int32 sort = 8; //排序
   string status = 9; //状态
-  string created_at = 10; //创建时间
-  string updated_at = 11; //修改时间
+  int64 created_at = 10; //创建时间
+  int64 updated_at = 11; //修改时间
   repeated MediaCat children =12;
 }
 // 公共媒体分类请求参数

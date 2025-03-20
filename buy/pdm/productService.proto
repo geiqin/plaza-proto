@@ -73,9 +73,8 @@ message Product {
     string spec_desc = 74; //规格描述
     string extra_detail_id = 75; //扩展业务明细ID
     string out_system_id = 76; //外部系统ID
-    string created_at = 77; //创建时间
-    string updated_at = 78; //修改时间
-    string deleted_at = 79; //删除时间
+    int64 created_at = 77; //创建时间
+    int64 updated_at = 78; //修改时间
     //额外扩展
     string goods_url =80;//商品URL
     string is_delete =81;//商品是否已删除（0否，1是）

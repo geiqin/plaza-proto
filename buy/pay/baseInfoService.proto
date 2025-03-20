@@ -12,6 +12,6 @@ message PaymentChannelInfo {
 	string uniapp_provider = 6; //UniApp标识
 	string desc = 7; //支付描述
 	int32 sort = 8; //顺序
-	string created_at = 9; //创建时间
-	string updated_at = 10; //修改时间
+	int64 created_at = 9; //创建时间
+	int64 updated_at = 10; //修改时间
 }

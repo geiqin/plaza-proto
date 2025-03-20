@@ -1,0 +1,51 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 协议服务
+service AgreementService {
+  // 协议新增
+  rpc Create (Agreement) returns (AgreementResponse) {}
+  // 协议修改
+  rpc Update (Agreement) returns (AgreementResponse) {}
+  // 协议删除
+  rpc Delete (Agreement) returns (AgreementResponse) {}
+  // 协议获取
+  rpc Get (Agreement) returns (AgreementResponse) {}
+  // 协议查询
+  rpc Search (AgreementRequest) returns (AgreementResponse) {}
+  // 协议列表
+  rpc List (AgreementRequest) returns (AgreementResponse) {}
+}
+// 协议
+message Agreement {
+  int64 id = 1; //ID
+  string type = 2; //页面类型
+  string title = 3; //协议名称
+  string content = 4; //协议内容
+  int32 sort = 5; //排序倒序
+  string status = 6; //是否使用
+  int64 created_at = 7; //创建时间
+  int64 updated_at = 8; //修改时间
+}
+// 协议请求参数
+message AgreementRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string type = 11; //页面类型
+  string status = 12; //是否使用
+}
+// 协议响应数据
+message AgreementResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  Agreement entity = 3;
+  repeated Agreement items = 4;
+}

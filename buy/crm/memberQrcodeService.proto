@@ -18,8 +18,8 @@ message MemberQrcode {
     string toutiao_mini_qrcode =7;//头条小程序二维码
     string baidu_mini_qrcode =8;//百度小程序二维码
     string kuaishou_mini_qrcode =9;//快手小程序二维码
-    string created_at = 10;
-    string updated_at = 11;
+    int64 created_at = 10;
+    int64 updated_at = 11;
 }
 
 

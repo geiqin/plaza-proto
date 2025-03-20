@@ -43,14 +43,12 @@ func NewFrontpageServiceEndpoints() []*api.Endpoint {
 // Client API for FrontpageService service
 
 type FrontpageService interface {
-	//前端初始化
-	Init(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageInitResponse, error)
-	//首页数据
-	Home(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageHomeResponse, error)
-	//搜索页数据
-	SearchIndex(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageResponse, error)
-	//个人中心数据
-	UserCenter(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageUserCenterResponse, error)
+	Create(ctx context.Context, in *Frontpage, opts ...client.CallOption) (*FrontpageResponse, error)
+	Update(ctx context.Context, in *Frontpage, opts ...client.CallOption) (*FrontpageResponse, error)
+	Delete(ctx context.Context, in *Frontpage, opts ...client.CallOption) (*FrontpageResponse, error)
+	Get(ctx context.Context, in *Frontpage, opts ...client.CallOption) (*FrontpageResponse, error)
+	Search(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageResponse, error)
+	List(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageResponse, error)
 }
 
 type frontpageService struct {
@@ -65,28 +63,8 @@ func NewFrontpageService(name string, c client.Client) FrontpageService {
 	}
 }
 
-func (c *frontpageService) Init(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageInitResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontpageService.Init", in)
-	out := new(FrontpageInitResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *frontpageService) Home(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageHomeResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontpageService.Home", in)
-	out := new(FrontpageHomeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *frontpageService) SearchIndex(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontpageService.SearchIndex", in)
+func (c *frontpageService) Create(ctx context.Context, in *Frontpage, opts ...client.CallOption) (*FrontpageResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontpageService.Create", in)
 	out := new(FrontpageResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -95,9 +73,49 @@ func (c *frontpageService) SearchIndex(ctx context.Context, in *FrontpageRequest
 	return out, nil
 }
 
-func (c *frontpageService) UserCenter(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageUserCenterResponse, error) {
-	req := c.c.NewRequest(c.name, "FrontpageService.UserCenter", in)
-	out := new(FrontpageUserCenterResponse)
+func (c *frontpageService) Update(ctx context.Context, in *Frontpage, opts ...client.CallOption) (*FrontpageResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontpageService.Update", in)
+	out := new(FrontpageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontpageService) Delete(ctx context.Context, in *Frontpage, opts ...client.CallOption) (*FrontpageResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontpageService.Delete", in)
+	out := new(FrontpageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontpageService) Get(ctx context.Context, in *Frontpage, opts ...client.CallOption) (*FrontpageResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontpageService.Get", in)
+	out := new(FrontpageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontpageService) Search(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontpageService.Search", in)
+	out := new(FrontpageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontpageService) List(ctx context.Context, in *FrontpageRequest, opts ...client.CallOption) (*FrontpageResponse, error) {
+	req := c.c.NewRequest(c.name, "FrontpageService.List", in)
+	out := new(FrontpageResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -108,22 +126,22 @@ func (c *frontpageService) UserCenter(ctx context.Context, in *FrontpageRequest,
 // Server API for FrontpageService service
 
 type FrontpageServiceHandler interface {
-	//前端初始化
-	Init(context.Context, *FrontpageRequest, *FrontpageInitResponse) error
-	//首页数据
-	Home(context.Context, *FrontpageRequest, *FrontpageHomeResponse) error
-	//搜索页数据
-	SearchIndex(context.Context, *FrontpageRequest, *FrontpageResponse) error
-	//个人中心数据
-	UserCenter(context.Context, *FrontpageRequest, *FrontpageUserCenterResponse) error
+	Create(context.Context, *Frontpage, *FrontpageResponse) error
+	Update(context.Context, *Frontpage, *FrontpageResponse) error
+	Delete(context.Context, *Frontpage, *FrontpageResponse) error
+	Get(context.Context, *Frontpage, *FrontpageResponse) error
+	Search(context.Context, *FrontpageRequest, *FrontpageResponse) error
+	List(context.Context, *FrontpageRequest, *FrontpageResponse) error
 }
 
 func RegisterFrontpageServiceHandler(s server.Server, hdlr FrontpageServiceHandler, opts ...server.HandlerOption) error {
 	type frontpageService interface {
-		Init(ctx context.Context, in *FrontpageRequest, out *FrontpageInitResponse) error
-		Home(ctx context.Context, in *FrontpageRequest, out *FrontpageHomeResponse) error
-		SearchIndex(ctx context.Context, in *FrontpageRequest, out *FrontpageResponse) error
-		UserCenter(ctx context.Context, in *FrontpageRequest, out *FrontpageUserCenterResponse) error
+		Create(ctx context.Context, in *Frontpage, out *FrontpageResponse) error
+		Update(ctx context.Context, in *Frontpage, out *FrontpageResponse) error
+		Delete(ctx context.Context, in *Frontpage, out *FrontpageResponse) error
+		Get(ctx context.Context, in *Frontpage, out *FrontpageResponse) error
+		Search(ctx context.Context, in *FrontpageRequest, out *FrontpageResponse) error
+		List(ctx context.Context, in *FrontpageRequest, out *FrontpageResponse) error
 	}
 	type FrontpageService struct {
 		frontpageService
@@ -136,18 +154,26 @@ type frontpageServiceHandler struct {
 	FrontpageServiceHandler
 }
 
-func (h *frontpageServiceHandler) Init(ctx context.Context, in *FrontpageRequest, out *FrontpageInitResponse) error {
-	return h.FrontpageServiceHandler.Init(ctx, in, out)
+func (h *frontpageServiceHandler) Create(ctx context.Context, in *Frontpage, out *FrontpageResponse) error {
+	return h.FrontpageServiceHandler.Create(ctx, in, out)
 }
 
-func (h *frontpageServiceHandler) Home(ctx context.Context, in *FrontpageRequest, out *FrontpageHomeResponse) error {
-	return h.FrontpageServiceHandler.Home(ctx, in, out)
+func (h *frontpageServiceHandler) Update(ctx context.Context, in *Frontpage, out *FrontpageResponse) error {
+	return h.FrontpageServiceHandler.Update(ctx, in, out)
 }
 
-func (h *frontpageServiceHandler) SearchIndex(ctx context.Context, in *FrontpageRequest, out *FrontpageResponse) error {
-	return h.FrontpageServiceHandler.SearchIndex(ctx, in, out)
+func (h *frontpageServiceHandler) Delete(ctx context.Context, in *Frontpage, out *FrontpageResponse) error {
+	return h.FrontpageServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *frontpageServiceHandler) UserCenter(ctx context.Context, in *FrontpageRequest, out *FrontpageUserCenterResponse) error {
-	return h.FrontpageServiceHandler.UserCenter(ctx, in, out)
+func (h *frontpageServiceHandler) Get(ctx context.Context, in *Frontpage, out *FrontpageResponse) error {
+	return h.FrontpageServiceHandler.Get(ctx, in, out)
+}
+
+func (h *frontpageServiceHandler) Search(ctx context.Context, in *FrontpageRequest, out *FrontpageResponse) error {
+	return h.FrontpageServiceHandler.Search(ctx, in, out)
+}
+
+func (h *frontpageServiceHandler) List(ctx context.Context, in *FrontpageRequest, out *FrontpageResponse) error {
+	return h.FrontpageServiceHandler.List(ctx, in, out)
 }

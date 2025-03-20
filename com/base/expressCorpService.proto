@@ -31,8 +31,8 @@ message ExpressCorp {
   string kd100_code = 10; //快递100编码
   int32 sort = 11; //排序
   string status = 12; //状态
-  string created_at = 13; //创建时间
-  string updated_at = 14; //修改时间
+  int64 created_at = 13; //创建时间
+  int64 updated_at = 14; //修改时间
 }
 // 快递公司请求参数
 message ExpressCorpRequest {

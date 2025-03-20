@@ -27,16 +27,16 @@ type Routine struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                //ID
-	Code        string `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`                             //编码
-	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                             //名称
-	Type        string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`                             //类型
-	IconUrl     string `protobuf:"bytes,5,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`        //图标
-	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description"`               //描述
-	Sort        int32  `protobuf:"varint,7,opt,name=sort,proto3" json:"sort"`                            //排序
-	Status      string `protobuf:"bytes,8,opt,name=status,proto3" json:"status"`                         //状态
-	CreatedAt   string `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"`  //创建时间
-	UpdatedAt   string `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
+	Id          int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                 //ID
+	Code        string `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`                              //编码
+	Name        string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                              //名称
+	Type        string `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`                              //类型
+	IconUrl     string `protobuf:"bytes,5,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url"`         //图标
+	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description"`                //描述
+	Sort        int32  `protobuf:"varint,7,opt,name=sort,proto3" json:"sort"`                             //排序
+	Status      string `protobuf:"bytes,8,opt,name=status,proto3" json:"status"`                          //状态
+	CreatedAt   int64  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"`  //创建时间
+	UpdatedAt   int64  `protobuf:"varint,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //修改时间
 }
 
 func (x *Routine) Reset() {
@@ -127,18 +127,18 @@ func (x *Routine) GetStatus() string {
 	return ""
 }
 
-func (x *Routine) GetCreatedAt() string {
+func (x *Routine) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return ""
+	return 0
 }
 
-func (x *Routine) GetUpdatedAt() string {
+func (x *Routine) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return ""
+	return 0
 }
 
 // 销售渠道请求参数
@@ -369,9 +369,9 @@ var file_routineService_proto_rawDesc = []byte{
 	0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x16, 0x0a, 0x06,
 	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74,
 	0x61, 0x74, 0x75, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f,
-	0x61, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x61, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
 	0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61,
-	0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64,
+	0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64,
 	0x41, 0x74, 0x22, 0x9c, 0x02, 0x0a, 0x0e, 0x52, 0x6f, 0x75, 0x74, 0x69, 0x6e, 0x65, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x74, 0x6f, 0x70, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x03, 0x74, 0x6f, 0x70, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x61, 0x67, 0x65, 0x64,

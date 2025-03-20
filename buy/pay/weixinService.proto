@@ -126,6 +126,6 @@ message WeixinResponse {
     WeixinRefundData refund_data =14; //退款数据
     WeixinQueryOrderData query_order_data =15; //产订单数据
     WeixinCloseOrderData close_order_data =16; //关闭订单数据
-    string info= 17;
+    string msg = 17;
 }
 

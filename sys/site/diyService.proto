@@ -1,0 +1,91 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// DIY服务
+service DiyService {
+  // DIY新增
+  rpc Create (Diy) returns (DiyResponse) {}
+  // DIY修改
+  rpc Update (Diy) returns (DiyResponse) {}
+  // DIY删除
+  rpc Delete (Diy) returns (DiyResponse) {}
+  // DIY默认
+  rpc Default (Diy) returns (DiyResponse) {}
+  // DIY获取
+  rpc Get (Diy) returns (DiyResponse) {}
+  // DIY查询
+  rpc Search (DiyRequest) returns (DiyResponse) {}
+ //获取版本
+  rpc GetVersion (Diy) returns (DiyResponse) {}
+
+  rpc ColorChange (Diy) returns (DiyResponse) {}
+}
+// DIY
+message Diy {
+  int64 id = 1; //ID
+  string version = 2; //版本号
+  string name = 3; //页面名称
+  string template_name = 4; //模版名称
+  bytes value = 5; //页面数据
+  bytes default_value = 6; //默认页面数据
+  string color_picker = 7; //背景颜色
+  string bg_pic = 8; //背景图
+  string bg_tab_val = 9; //背景图图片样式
+  string type = 10; //页面类型
+  string is_show = 11; //显示首页
+  string is_bg_color = 12; //颜色是否选中
+  string is_bg_pic = 13; //背景图是否选中
+  string is_del = 14; //是否删除
+  string order_status = 15; //个人中心订单样式
+  string my_banner_status = 16; //个人中心banner是否显示
+  string is_diy = 17; //是否diy
+  string title = 18; //diy顶部title
+  string status = 19; //是否使用
+  int64 created_at = 20; //创建时间
+  int64 updated_at = 21; //修改时间
+}
+
+message GetVersionData {
+  bool is_diy =1;
+  string version =2;
+}
+
+message ColorChangeData {
+  bool is_diy =1;
+  string status =2;
+}
+
+// DIY请求参数
+message DiyRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string name = 11; //页面名称
+  string template_name = 12; //模版名称
+  string type = 13; //页面类型
+  string is_show = 14; //显示首页
+  string is_bg_color = 15; //颜色是否选中
+  string is_bg_pic = 16; //背景图是否选中
+  string is_del = 17; //是否删除
+  string order_status = 18; //个人中心订单样式
+  string my_banner_status = 19; //个人中心banner是否显示
+  string is_diy = 20; //是否diy
+  string status = 21; //是否使用
+}
+// DIY响应数据
+message DiyResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  Diy entity = 3;
+  repeated Diy items = 4;
+  bytes bytes =6;
+  GetVersionData get_version =5;
+  ColorChangeData color_change =7;
+}

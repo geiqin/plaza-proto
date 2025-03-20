@@ -16,8 +16,8 @@ message Config {
     string value =3;//内容
     string type =4;//类型：admin后台，home前台，common公共
     string group =5; //组
-    string created_at = 8;
-    string updated_at = 9;
+    int64 created_at = 8;
+    int64 updated_at = 9;
 }
 
 message ConfigRequest {

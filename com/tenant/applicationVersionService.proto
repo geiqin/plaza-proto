@@ -31,8 +31,8 @@ message ApplicationVersion {
   string is_default = 8; //是否默认
   VersionConfig config = 9; //使用配置
   string status = 10; //状态
-  string created_at = 11; //
-  string updated_at = 12; //
+  int64 created_at = 11; //
+  int64 updated_at = 12; //
   Application application =13;
 }
 

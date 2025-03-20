@@ -22,8 +22,8 @@ message MemberSocial {
     string qq_openid =12;//QQ openid
     string qq_unionid =13;//QQ unionid
     string kuaishou_openid =14;//快手openid
-    string created_at = 50;
-    string updated_at = 51;
+    int64 created_at = 50;
+    int64 updated_at = 51;
 }
 
 
@@ -54,5 +54,5 @@ message MemberSocialResponse {
     MemberSocial entity = 1;
     common.Pager pager =2;
     repeated MemberSocial items = 3;
-    string info =4;
+    string msg =4;
 }

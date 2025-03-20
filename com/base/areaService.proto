@@ -9,6 +9,7 @@ service AreaService {
     rpc Search (AreaRequest) returns (AreaResponse) {}
     rpc Tree (AreaRequest) returns (AreaResponse) {}
     rpc List (AreaRequest) returns (AreaResponse) {}
+    rpc SimpleList (AreaRequest) returns (AreaResponse) {}
 }
 
 // 区域信息
@@ -41,6 +42,12 @@ message Area {
 
 }
 
+//简易区域
+message SimpleArea {
+    int64 v=1;
+    string n=2;
+    repeated SimpleArea c =3;
+}
 
 //查询参数
 message AreaRequest {
@@ -62,5 +69,6 @@ message AreaResponse {
     Area entity = 1;
     common.Pager pager =2;
     repeated Area items = 3;
+    repeated SimpleArea simple_list =4;
 }
 

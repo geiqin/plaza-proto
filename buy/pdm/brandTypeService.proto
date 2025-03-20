@@ -24,8 +24,8 @@ message BrandType {
     string name = 2; //名称
     string icon_url = 3; //图标
     int32 sort = 4; //排序
-    string created_at = 5; //创建时间
-    string updated_at = 6; //修改时间
+    int64 created_at = 5; //创建时间
+    int64 updated_at = 6; //修改时间
 }
 // 品牌分组请求参数
 message BrandTypeRequest {

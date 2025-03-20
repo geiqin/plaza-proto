@@ -40,8 +40,8 @@ message StoreConfig {
   int32 media_limit_count = 19; //媒体限制数量
   int32 media_limit_volume = 20; //媒体限制容量
   int32 article_limit_count = 21; //文章限制数量
-  string created_at = 22; //
-  string updated_at = 23; //
+  int64 created_at = 22; //
+  int64 updated_at = 23; //
 }
 // 店铺配置请求参数
 message StoreConfigRequest {

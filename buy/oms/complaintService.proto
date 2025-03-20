@@ -76,11 +76,11 @@ message Complaint {
   string review_comment = 15; //审核意见
   int64 reviewer_id = 16; //审核人员
   string refund_type = 17; //退款类型
-  string refund_time = 18; //退款时间
-  string cancel_time = 19; //取消时间
+  int64 refund_time = 18; //退款时间
+  int64 cancel_time = 19; //取消时间
   string status = 20; //售后状态
-  string created_at = 21; //创建时间
-  string updated_at = 22; //修改时间
+  int64 created_at = 21; //创建时间
+  int64 updated_at = 22; //修改时间
   ComplaintSolution solution =25;
   repeated ComplaintProgress progress_list =26;
   repeated ComplaintDetail details = 27;

@@ -23,8 +23,8 @@ message MemberSecurity{
     int64 member_id =2;
     string password =3;
     string salt = 4;
-    string created_at =5;
-    string updated_at =6;
+    int64 created_at =5;
+    int64 updated_at =6;
     Member member =7;
 }
 

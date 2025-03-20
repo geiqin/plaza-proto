@@ -22,8 +22,8 @@ message SpuFavor {
     int64 id = 1; //ID
     int64 member_id = 2; //会员ID
     int64 spu_id = 3; //所属商品
-    string created_at = 4; //创建时间
-    string updated_at = 5; //修改时间
+    int64 created_at = 4; //创建时间
+    int64 updated_at = 5; //修改时间
     Spu spu = 6;
 }
 // 商品收藏请求参数

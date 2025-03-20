@@ -24,8 +24,8 @@ message Label {
     string type = 3; //类型
     int32 label_group_id = 4; //分组ID
     int32 sort = 5; //排序
-    string created_at = 6; //创建时间
-    string updated_at = 7; //修改时间
+    int64 created_at = 6; //创建时间
+    int64 updated_at = 7; //修改时间
     int32 spu_count = 8; //商品数量
 }
 // 商品标签请求参数

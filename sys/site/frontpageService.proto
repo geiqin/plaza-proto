@@ -2,21 +2,34 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-import "appNavService.proto";
-import "slideService.proto";
-import "baseInfoService.proto";
 
-//前端页面数据
 service FrontpageService {
-    //前端初始化
-    rpc Init (FrontpageRequest) returns (FrontpageInitResponse) {}
-    //首页数据
-    rpc Home (FrontpageRequest) returns (FrontpageHomeResponse) {}
-    //搜索页数据
-    rpc SearchIndex (FrontpageRequest) returns (FrontpageResponse) {}
-    //个人中心数据
-    rpc UserCenter (FrontpageRequest) returns (FrontpageUserCenterResponse) {}
+    rpc Create (Frontpage) returns (FrontpageResponse) {}
+    rpc Update (Frontpage) returns (FrontpageResponse) {}
+    rpc Delete (Frontpage) returns (FrontpageResponse) {}
+    rpc Get (Frontpage) returns (FrontpageResponse) {}
+    rpc Search (FrontpageRequest) returns (FrontpageResponse) {}
+    rpc List (FrontpageRequest) returns (FrontpageResponse) {}
 }
+
+message Frontpage {
+    int64 id =1;
+    string name	 =3;
+    int64 logo_id =4;
+    string logo_url =5;
+    string content  =6;
+    string is_footer =7;
+    string is_header =8;
+    string is_full_screen  =9;
+    string seo_title =10;
+    string seo_keywords =11;
+    string seo_desc  =12;
+    int64 access_count =13;
+    string status =14;
+    int64 created_at =15;
+    int64 updated_at =16;
+}
+
 
 message FrontpageRequest {
     int64 paged = 1;
@@ -25,180 +38,16 @@ message FrontpageRequest {
     //base params
     int64 id = 4;
     string name = 5;
-    string code = 6;
+    string status = 6;
     int64 parent_id = 7;
     string keywords = 8;
     repeated int64 ids = 10;
 }
 
-
-//站点配置信息
-message SiteConfigInfo {
-    //基础
-    string common_site_type =1;//站点类型:web-网站，app-小程序/APP
-    string common_shop_notice =2;//店铺公告
-    //协议
-    string agreement_user_register_url =3;//注册协议URL
-    string agreement_user_privacy_url =4;//隐私协议URL
-    string agreement_user_logout_url =5;//注销协议URL
-
-    // 手机端相关配置
-    string common_app_is_enable_search =6;//是否开启搜索
-    string common_app_is_enable_answer =7;//是否开启留言
-    string common_app_is_header_nav_fixed =8;//头部导航是否固定
-    string common_app_is_online_service =9;//是否在线客服
-    string common_app_customer_service_tel =10;//客服电话
-    string common_app_is_head_vice_nav =11;//是否开启用户中心副导航
-    string common_app_is_enable_quick_nav =12;//是否开启快捷导航
-    string common_app_is_use_mobile_detail =13;//
-    int32 common_show_goods_category_level =14; //
-    string common_is_goods_detail_show_photo =15;//商品详情页展示相册(0否，1是)
-    string common_is_show_goods_comments =16;//展示商品评价(0否，1是)
-
-    // 基础-站点域名和CDN
-    string common_domain_host =20;//站点域名主机
-    string common_cdn_attachment_host =21;//CDN附件主机
-    string common_cdn_public_host =22;//CDN公共素材主机
-
-    // 扩展项-留言、问答
-    string common_is_login_answer =23;//留言是否需要登录
-
-    // 站点信息
-    string home_site_name =30;//站点名称
-    string home_site_logo =31;//站点logo
-    string home_site_logo_wap =32;//站点logo(wap)
-    string home_site_logo_square =33;//站点logo(正方型)
-    string home_site_state =34;//站点状态
-    string home_site_web_home_state =35;//
-    string home_site_web_pc_state =36;//
-    string home_site_close_reason =37;//站点关闭原因
-    //备案信息
-    string home_site_icp =38;//工信部备案
-    string home_site_security_record_name =39;//公安备案名称
-    string home_site_security_record_url =40;//公安备案URL
-    string home_site_company_license =41;//公司统一信用代码
-    string home_site_telecom_license =42;//电信许可证
-
-    // 搜索相关
-    int32 home_search_limit_number =45;//
-    string home_search_is_brand =46;//
-    string home_search_is_category =47;//
-    string home_search_is_price =48;//
-    string home_search_is_params =49;//
-    string home_search_is_spec =50;//
-
-    // 底部代码
-    string home_footer_info =51;//
-
-    // SEO信息
-    string home_seo_site_title =52;//
-    string home_seo_site_keywords =53;//
-    string home_seo_site_description =54;//
-
-    // 地图密钥
-    string common_map_type =60;//地图类型：baidu百度地图,amap高德地图,tencent腾讯地图,tianditu天地图
-    string common_baidu_map_ak =61;//百度地图
-    string common_amap_map_ak =62;//高德地图AK
-    string common_amap_map_safety_ak =63;//高德地图safety_ak
-    string common_tencent_map_ak =64;//腾讯地图AK
-    string common_tianditu_map_ak =65;//天地图AK
-
-    string common_user_center_notice =66;//用户中心公告
-    string common_order_is_booking =67; //订单预约模式开启后用户提交订单需要管理员确认
-
-    // 小程序基础信息
-    string common_app_mini_weixin_title =70;//微信小程序标题
-    string common_app_mini_weixin_describe =71;//微信小程序描述
-    string common_app_mini_alipay_title =72;//支付宝小程序标题
-    string common_app_mini_alipay_describe =73;//支付宝小程序描述
-    string common_app_mini_baidu_title =74;//百度小程序标题
-    string common_app_mini_baidu_describe =75;//百度小程序描述
-    string common_app_mini_toutiao_title =76;//头条小程序标题
-    string common_app_mini_toutiao_describe =77;//头条小程序描述
-    string common_app_mini_qq_title =78;//QQ小程序标题
-    string common_app_mini_qq_describe =79;//QQ小程序描述
-    string common_app_mini_kuaishou_title =80;//快手小程序标题
-    string common_app_mini_kuaishou_describe =81;//快手小程序描述
-
-    // 验证码
-    int32 common_verify_expire_time =82;//
-    int32 common_verify_interval_time =83;//
-    string common_verify_img_state =84;//
-    string common_is_enable_wallet =85;//是否开启钱包
-    string common_is_enable_vip =86;//是否开启vip
-    // 注册
-    repeated string home_user_register_type =87;//用户注册类型
-    string home_user_register_img_verify_state =88;//
-    string home_user_register_is_enable_audit =89;//
-    string home_user_register_is_enable_agreement =90;//
-    repeated AdInfo home_user_register_bg_images =91;//
-
-    // 用户登录
-    repeated string home_user_login_type =92;//用户登录类型
-    string home_user_login_img_verify_state =93;//
-    repeated AdInfo home_user_login_ad_images =94;//
-
-    // 密码找回
-    repeated AdInfo home_user_forget_pwd_ad_images =95;//
-
-    //风格样式
-    string home_app_ucenter_head_text_color =96;//用户中心头部文本颜色
-    string home_app_ucenter_head_border_color =97;//用户中心头部文本边框颜色
-
-    //用户地址
-    string home_user_address_map_status =98;//用户地址地图(0关闭，1开启)
-    string home_user_address_idcard_status =99;//用户地址身份证(0关闭，1开启)
-    string home_extraction_address_position =100;//自提选择地理位置(0关闭，1开启)
-}
-
-//
-message FrontpageInitResponse {
-    SiteConfigInfo config = 1; //配置
-    string currency_symbol =2; //货币符号
-    repeated AppNav quick_nav =3; //快捷入口信息
-    string plugins_base =4;
-}
-
-
 //
 message FrontpageResponse {
+    Frontpage entity = 1;
     common.Pager pager =2;
+    repeated Frontpage items = 3;
     string info =5;
-}
-
-
-message FrontpageHomeResponse {
-    repeated AppNav navigation = 1;
-    repeated Slide banner_list = 2;
-    CartTotalInfo cart_total =3;
-    int32 message_total =4;
-    repeated HomeFloorData data_list =5;
-    repeated ArticleInfo article_list =6;
-    repeated PluginSortInfo plugins_sort_list =7;
-    PluginSeckillData plugins_seckill_data =8;
-    PluginsActivityData plugins_activity_data =9;
-}
-
-message UserOrderStatus{
-    string name =1;
-    string status =2;
-    int64 count =3;
-}
-
-//用户中心数据
-message FrontpageUserCenterResponse{
-    int64 user_id =1;
-    string username =2;
-    string nickname =3;
-    string user_name_view =4;
-    string avatar_url =5;
-    string status =6;
-    int64 user_order_count =8;
-    int64 user_goods_favor_count =9;
-    int64 user_goods_browse_count =10;
-    int64 message_total =11;
-    int64 integral =12;
-    repeated AppNav navigation = 13;
-    repeated UserOrderStatus user_order_status =14;
-    CartTotalInfo cart_total =15;
 }

@@ -27,8 +27,8 @@ message Promotion {
     string type = 2; //活动类型
     string name = 3; //活动名称
     string time_type = 4; //活动时间类型
-    string begin_date = 5; //开始日期
-    string end_date = 6; //结束日期
+    int64 begin_date = 5; //开始日期
+    int64 end_date = 6; //结束日期
     string period_time_type = 7; //周期类型
     repeated int32 period_days = 8; //周期天数
     string period_begin_time = 9; //开始时间
@@ -38,8 +38,8 @@ message Promotion {
     string is_sync_add_tag = 14; //是否同步标签
     string sync_add_tags = 15; //同步的标签
     string status = 16; //状态
-    string created_at = 18; //创建时间
-    string updated_at = 19; //修改时间
+    int64 created_at = 18; //创建时间
+    int64 updated_at = 19; //修改时间
     repeated SpuInfo spu_ranges = 20;
     repeated int64 spu_range_ids = 21;
     string type_name = 22; //活动类型名称

@@ -51,6 +51,8 @@ type MessageService interface {
 	Read(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
 	//消息获取
 	Get(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
+	//未读消息列表
+	Unread(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
 	//消息查询
 	Search(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error)
 }
@@ -107,6 +109,16 @@ func (c *messageService) Get(ctx context.Context, in *MessageRequest, opts ...cl
 	return out, nil
 }
 
+func (c *messageService) Unread(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error) {
+	req := c.c.NewRequest(c.name, "MessageService.Unread", in)
+	out := new(MessageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *messageService) Search(ctx context.Context, in *MessageRequest, opts ...client.CallOption) (*MessageResponse, error) {
 	req := c.c.NewRequest(c.name, "MessageService.Search", in)
 	out := new(MessageResponse)
@@ -128,6 +140,8 @@ type MessageServiceHandler interface {
 	Read(context.Context, *MessageRequest, *MessageResponse) error
 	//消息获取
 	Get(context.Context, *MessageRequest, *MessageResponse) error
+	//未读消息列表
+	Unread(context.Context, *MessageRequest, *MessageResponse) error
 	//消息查询
 	Search(context.Context, *MessageRequest, *MessageResponse) error
 }
@@ -138,6 +152,7 @@ func RegisterMessageServiceHandler(s server.Server, hdlr MessageServiceHandler, 
 		Delete(ctx context.Context, in *MessageRequest, out *MessageResponse) error
 		Read(ctx context.Context, in *MessageRequest, out *MessageResponse) error
 		Get(ctx context.Context, in *MessageRequest, out *MessageResponse) error
+		Unread(ctx context.Context, in *MessageRequest, out *MessageResponse) error
 		Search(ctx context.Context, in *MessageRequest, out *MessageResponse) error
 	}
 	type MessageService struct {
@@ -165,6 +180,10 @@ func (h *messageServiceHandler) Read(ctx context.Context, in *MessageRequest, ou
 
 func (h *messageServiceHandler) Get(ctx context.Context, in *MessageRequest, out *MessageResponse) error {
 	return h.MessageServiceHandler.Get(ctx, in, out)
+}
+
+func (h *messageServiceHandler) Unread(ctx context.Context, in *MessageRequest, out *MessageResponse) error {
+	return h.MessageServiceHandler.Unread(ctx, in, out)
 }
 
 func (h *messageServiceHandler) Search(ctx context.Context, in *MessageRequest, out *MessageResponse) error {

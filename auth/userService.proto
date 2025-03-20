@@ -44,8 +44,8 @@ message User {
     string is_auto_upgrade =16;//是否开启自动升级【免费会员】
     string is_auto_renewal =17;//是否开启自动续费【付费会员】
     string status =18;//状态：启用，禁用
-    string created_at =19;
-    string updated_at =20;
+    int64 created_at =19;
+    int64 updated_at =20;
 }
 
 
@@ -87,5 +87,5 @@ message UserResponse {
     map<string,string> entity = 1;
     common.Pager pager =2;
     repeated User items = 3;
-    string info =4;
+    string msg =4;
 }

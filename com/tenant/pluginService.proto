@@ -35,8 +35,8 @@ message Plugin {
     string status =13;//状态(0 禁用，1 启用)
     string author_id =14;//作者ID
     string author_name =15;//作者名称
-    string created_at =16;
-    string updated_at =17;
+    int64 created_at =16;
+    int64 updated_at =17;
     string ver_text =18; //版本文本（版本号美化）
     bool checked =19;
 }

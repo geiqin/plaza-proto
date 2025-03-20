@@ -26,8 +26,8 @@ message Data {
     string content = 5; //JSON内容
     string is_init = 6; //是否初始化
     string status = 7; //状态
-    string created_at = 8; //创建时间
-    string updated_at = 9; //修改时间
+    int64 created_at = 8; //创建时间
+    int64 updated_at = 9; //修改时间
 }
 // 初始数据请求参数
 message DataRequest {

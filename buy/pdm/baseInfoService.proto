@@ -71,6 +71,6 @@ message CommentInfo{
     string image_url =9;
     string is_anonymous =10;
     string reply_time =11;
-    string created_at =12;
-    string updated_at =13;
+    int64 created_at =12;
+    int64 updated_at =13;
 }
