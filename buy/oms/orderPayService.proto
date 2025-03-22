@@ -36,7 +36,7 @@ message OfflinePayRequest{
     string receipt_channel =4; //收款渠道
     string receipt_man = 5; //收款人
     string receipt_account =6; //收款账号
-    string paid_time = 7; //支付时间
+    int64 paid_time = 7; //支付时间
     string remark = 8; //备注
 }
 

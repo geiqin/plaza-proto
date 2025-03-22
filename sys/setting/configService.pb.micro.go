@@ -5,7 +5,6 @@ package services
 
 import (
 	fmt "fmt"
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -43,9 +42,14 @@ func NewConfigServiceEndpoints() []*api.Endpoint {
 // Client API for ConfigService service
 
 type ConfigService interface {
-	Set(ctx context.Context, in *ConfigData, opts ...client.CallOption) (*ConfigResponse, error)
-	GetMap(ctx context.Context, in *ConfigRequest, opts ...client.CallOption) (*ConfigResponse, error)
-	GetList(ctx context.Context, in *ConfigRequest, opts ...client.CallOption) (*ConfigResponse, error)
+	//获取通用配置
+	GetCommonConfig(ctx context.Context, in *ConfigRequest, opts ...client.CallOption) (*ConfigResponse, error)
+	//保存通用配置
+	SaveCommonConfig(ctx context.Context, in *CommonConfigData, opts ...client.CallOption) (*ConfigResponse, error)
+	//获取小票配置
+	GetPrintingConfig(ctx context.Context, in *ConfigRequest, opts ...client.CallOption) (*ConfigResponse, error)
+	//保存小票配置
+	SavePrintingConfig(ctx context.Context, in *PrintingConfig, opts ...client.CallOption) (*ConfigResponse, error)
 }
 
 type configService struct {
@@ -60,8 +64,8 @@ func NewConfigService(name string, c client.Client) ConfigService {
 	}
 }
 
-func (c *configService) Set(ctx context.Context, in *ConfigData, opts ...client.CallOption) (*ConfigResponse, error) {
-	req := c.c.NewRequest(c.name, "ConfigService.Set", in)
+func (c *configService) GetCommonConfig(ctx context.Context, in *ConfigRequest, opts ...client.CallOption) (*ConfigResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigService.GetCommonConfig", in)
 	out := new(ConfigResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -70,8 +74,8 @@ func (c *configService) Set(ctx context.Context, in *ConfigData, opts ...client.
 	return out, nil
 }
 
-func (c *configService) GetMap(ctx context.Context, in *ConfigRequest, opts ...client.CallOption) (*ConfigResponse, error) {
-	req := c.c.NewRequest(c.name, "ConfigService.GetMap", in)
+func (c *configService) SaveCommonConfig(ctx context.Context, in *CommonConfigData, opts ...client.CallOption) (*ConfigResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigService.SaveCommonConfig", in)
 	out := new(ConfigResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -80,8 +84,18 @@ func (c *configService) GetMap(ctx context.Context, in *ConfigRequest, opts ...c
 	return out, nil
 }
 
-func (c *configService) GetList(ctx context.Context, in *ConfigRequest, opts ...client.CallOption) (*ConfigResponse, error) {
-	req := c.c.NewRequest(c.name, "ConfigService.GetList", in)
+func (c *configService) GetPrintingConfig(ctx context.Context, in *ConfigRequest, opts ...client.CallOption) (*ConfigResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigService.GetPrintingConfig", in)
+	out := new(ConfigResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configService) SavePrintingConfig(ctx context.Context, in *PrintingConfig, opts ...client.CallOption) (*ConfigResponse, error) {
+	req := c.c.NewRequest(c.name, "ConfigService.SavePrintingConfig", in)
 	out := new(ConfigResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -93,16 +107,22 @@ func (c *configService) GetList(ctx context.Context, in *ConfigRequest, opts ...
 // Server API for ConfigService service
 
 type ConfigServiceHandler interface {
-	Set(context.Context, *ConfigData, *ConfigResponse) error
-	GetMap(context.Context, *ConfigRequest, *ConfigResponse) error
-	GetList(context.Context, *ConfigRequest, *ConfigResponse) error
+	//获取通用配置
+	GetCommonConfig(context.Context, *ConfigRequest, *ConfigResponse) error
+	//保存通用配置
+	SaveCommonConfig(context.Context, *CommonConfigData, *ConfigResponse) error
+	//获取小票配置
+	GetPrintingConfig(context.Context, *ConfigRequest, *ConfigResponse) error
+	//保存小票配置
+	SavePrintingConfig(context.Context, *PrintingConfig, *ConfigResponse) error
 }
 
 func RegisterConfigServiceHandler(s server.Server, hdlr ConfigServiceHandler, opts ...server.HandlerOption) error {
 	type configService interface {
-		Set(ctx context.Context, in *ConfigData, out *ConfigResponse) error
-		GetMap(ctx context.Context, in *ConfigRequest, out *ConfigResponse) error
-		GetList(ctx context.Context, in *ConfigRequest, out *ConfigResponse) error
+		GetCommonConfig(ctx context.Context, in *ConfigRequest, out *ConfigResponse) error
+		SaveCommonConfig(ctx context.Context, in *CommonConfigData, out *ConfigResponse) error
+		GetPrintingConfig(ctx context.Context, in *ConfigRequest, out *ConfigResponse) error
+		SavePrintingConfig(ctx context.Context, in *PrintingConfig, out *ConfigResponse) error
 	}
 	type ConfigService struct {
 		configService
@@ -115,14 +135,18 @@ type configServiceHandler struct {
 	ConfigServiceHandler
 }
 
-func (h *configServiceHandler) Set(ctx context.Context, in *ConfigData, out *ConfigResponse) error {
-	return h.ConfigServiceHandler.Set(ctx, in, out)
+func (h *configServiceHandler) GetCommonConfig(ctx context.Context, in *ConfigRequest, out *ConfigResponse) error {
+	return h.ConfigServiceHandler.GetCommonConfig(ctx, in, out)
 }
 
-func (h *configServiceHandler) GetMap(ctx context.Context, in *ConfigRequest, out *ConfigResponse) error {
-	return h.ConfigServiceHandler.GetMap(ctx, in, out)
+func (h *configServiceHandler) SaveCommonConfig(ctx context.Context, in *CommonConfigData, out *ConfigResponse) error {
+	return h.ConfigServiceHandler.SaveCommonConfig(ctx, in, out)
 }
 
-func (h *configServiceHandler) GetList(ctx context.Context, in *ConfigRequest, out *ConfigResponse) error {
-	return h.ConfigServiceHandler.GetList(ctx, in, out)
+func (h *configServiceHandler) GetPrintingConfig(ctx context.Context, in *ConfigRequest, out *ConfigResponse) error {
+	return h.ConfigServiceHandler.GetPrintingConfig(ctx, in, out)
+}
+
+func (h *configServiceHandler) SavePrintingConfig(ctx context.Context, in *PrintingConfig, out *ConfigResponse) error {
+	return h.ConfigServiceHandler.SavePrintingConfig(ctx, in, out)
 }

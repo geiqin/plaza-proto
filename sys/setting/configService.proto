@@ -1,42 +1,111 @@
 syntax = "proto3";
 package services;
 option go_package ="/.;services";
-import "common/base.proto";
 
-//配置信息
+//系统配置信息
 service ConfigService {
-    rpc Set (ConfigData) returns (ConfigResponse) {}
-    rpc GetMap (ConfigRequest) returns (ConfigResponse) {}
-    rpc GetList (ConfigRequest) returns (ConfigResponse) {}
+  //获取通用配置
+  rpc GetCommonConfig (ConfigRequest) returns (ConfigResponse) {}
+  //保存通用配置
+  rpc SaveCommonConfig (CommonConfigData) returns (ConfigResponse) {}
+
+  //获取小票配置
+  rpc GetPrintingConfig (ConfigRequest) returns (ConfigResponse) {}
+  //保存小票配置
+  rpc SavePrintingConfig (PrintingConfig) returns (ConfigResponse) {}
+
 }
 
-message Config {
-    int64 id =1;
-    string name =2;//唯一名称
-    string value =3;//内容
-    string type =4;//类型：admin后台，home前台，common公共
-    string group =5; //组
-    int64 created_at = 8;
-    int64 updated_at = 9;
+//通用配置
+message CommonConfig {
+
+ //基础设置
+  string timezone =100;//默认时区默认,亚洲/上海 [标准时+8]
+  string locale =101;//使用语言：默认:zh-CN
+
+  //店铺设置
+  string site_state =200;//站点状态（经营状态）
+  string site_name =201;//站点名称
+  string site_description =202; //店铺简介
+  string site_service_phone =203; //客服电话
+  string site_logo =206;//电脑端logo支持 [jpg, png, gif]，建议220x60px
+  string site_logo_wap =207;//手机端logo支持 [jpg, png, gif]，建议220x66px
+  string site_logo_square =208;//正方形logo建议使用png格式，建议300x300px
+
+  string home_icp_no =250; //备案号
+  string home_icp_url =251; //ICP备案链接
+  string home_network_security =252; //网安备案
+  string home_network_security_url =253; //网安备案链接
+
+  bool backend_watermark_open =260; //后台水印开启
+
+  //商品设置
+  string inventory_deduction_type =302; //库存扣减方式
+  bool goods_comment_open =303;//商品评论开启
+  bool cart_button =305; //购物车按钮开关
+  bool buy_now_button =306; //详情页立即购买
+  bool detail_home_button =307; //详情页店铺按钮
+
+  bool detail_sales_show  =308; //详情页销量展示
+
+  //订单设置
+  bool invoice_func_open =401;//发票功能
+  bool invoice_tips_open =402; //发票提示语开关
+  string invoice_tips_content =403; //发票提示语内容
+  bool auto_agree_refund =405; //自动同意退款申请
+
+  //支付设置
+  bool weixin_pay_open =500; //微信支付开关
+  bool alipay_pay_open = 501; //支付宝支付开关
+  bool offline_pay_open =503; //线下支付开关
+  bool balance_pay_open =504; //余额支付开关
+  bool friend_pay_open =505; //好友代付开关
+
+
+  //相关设置
+  string map_type =900;//地图类型
+  string map_tencent_ak =901;//腾讯地图api秘钥
+  string map_baidu_ak =902;//百度地图api密钥
+  string map_amap_ak =903;//高德地图api秘钥
+  string map_tianditu_ak =904;//天地图api秘钥
+
+  string wechat_share_img =910; //微信分享图片
+  string wechat_share_title =911;//微信分享标题
+  string wechat_share_synopsis =912;//微信分享简介
+
+}
+
+message CommonConfigData {
+  string group =1;
+  CommonConfig config =2;
+}
+//收银小票配置
+message PrintingConfig {
+  bool printing_switch =1; //小票打印开关
+  string printing_type =2; //打印平台类型: yly 易联云 fey 飞鹅云
+
+  string yly_develop_id =3; //开发者ID【易联云】
+  string yly_api_key =4; //应用密钥
+  string yly_client_id =5; //应用ID
+  string yly_terminal_number =6; //终端号
+
+  string fey_sn =7; //飞鹅云SN
+  string fey_ukey =8; //飞鹅云UKEY
+  string fey_user =9; //鹅云USER
 }
 
 message ConfigRequest {
-    int64 id = 1;
-    string code =2;//唯一标识
-    string  name =3;//名称
-    string type = 4;//类型：admin后台，home前台，common公共
-    string group = 5;
-    repeated string groups = 6;
-    repeated string names = 7;
-    repeated int64 ids = 8;
-}
-
-message ConfigData{
-    repeated Config config_list =1;//配置对象集合
-    map<string,string> config_map =2;//配置键值集合：如<code,value>集合
+  int64 id = 1;
+  string  key =3;//名称
+  string type = 4;//类型
+  string group = 5;
+  repeated string groups = 6;
+  repeated string keys = 7;
+  repeated int64 ids = 8;
 }
 
 message ConfigResponse {
-    ConfigData data = 1;
-    common.Error error = 2;
+  string msg = 1;
+  CommonConfig common = 2;
+  PrintingConfig printing = 3;
 }
