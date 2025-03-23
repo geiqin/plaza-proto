@@ -118,11 +118,11 @@ message PrintingConfig {
 
 message ConfigRequest {
   int64 id = 1;
-  string  key =3;//名称
+  string  code =3;//名称
   string type = 4;//类型
   string group = 5;
   repeated string groups = 6;
-  repeated string keys = 7;
+  repeated string codes = 7;
   repeated int64 ids = 8;
 }
 
