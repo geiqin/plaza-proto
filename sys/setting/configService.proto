@@ -32,27 +32,49 @@ message CommonConfig {
   string site_logo_wap =207;//手机端logo支持 [jpg, png, gif]，建议220x66px
   string site_logo_square =208;//正方形logo建议使用png格式，建议300x300px
 
-  string home_icp_no =250; //备案号
-  string home_icp_url =251; //ICP备案链接
-  string home_network_security =252; //网安备案
-  string home_network_security_url =253; //网安备案链接
+  string beian_icp_no =250; //备案号
+  string beian_icp_url =251; //ICP备案链接
+  string beian_network_security =252; //网安备案
+  string beian_network_security_url =253; //网安备案链接
 
-  bool backend_watermark_open =260; //后台水印开启
+  bool contact_customer_service =260; //联系客服
+  bool backend_watermark_open =261; //后台水印开关
+  bool force_member_login_visit =262;//强制客户登录后访问
 
   //商品设置
-  string inventory_deduction_type =302; //库存扣减方式
   bool goods_comment_open =303;//商品评论开启
   bool cart_button =305; //购物车按钮开关
   bool buy_now_button =306; //详情页立即购买
-  bool detail_home_button =307; //详情页店铺按钮
-
+  bool detail_store_button =307; //详情页店铺按钮
   bool detail_sales_show  =308; //详情页销量展示
 
+  int32 pay_success_allow_comment_time =312; //交易成功后X天内，买家可发布评价
+  int32 pay_success_auto_comment_limit =313; //买家交易成功X天后买家未评论，系统将自动评论
+  bool auto_comment_open =315; //自动评价开关
+  string auto_comment_content =316; //自动评价内容
+
   //订单设置
-  bool invoice_func_open =401;//发票功能
-  bool invoice_tips_open =402; //发票提示语开关
-  string invoice_tips_content =403; //发票提示语内容
-  bool auto_agree_refund =405; //自动同意退款申请
+  bool purchase_agreement_open =400; //下单服务协议
+  string buyer_message_prompt =402; //买家留言提示语
+  repeated string overseas_purchase_type =403; //海淘下单设置:1上传身份证照片，2身份实名认证
+  bool delivery_address_coordinate_open =404; //收货地址精准选点
+
+  string inventory_deduction_type =410; //库存扣减方式: 1下单减库存 ,2支付减库存
+  string inventory_not_enough_handle =411; //商品库存不足处理: 1允许扣成负库存 2整个订单自动售后3仅售后缺货商品
+
+  bool invoice_func_open =421;//发票功能
+  bool invoice_tips_open =422; //发票提示语开关
+  string invoice_tips_content =423; //发票提示语内容
+
+  //---售后服务----
+  repeated string shipped_aftersale_apply_type =450;//发货前售后申请设置: 1仅退款 2退货退款 3退换货
+  string pre_shipment_refund_type =451;//发货前售后申请设置: 1需要审核 2;无需审核，系统自动退款
+  string shipped_freight_return_type =452;//发货后运费退还设置: 1退运费 2不退运费
+  int32 order_auto_close_time =453;//订单自动关闭时间，货到付款订单不适用（未支付订单超时关闭：单位：分钟）
+  int32 order_auto_receive_time =454; //已发货订单X天后自动确认收货
+  int32 order_close_refund_time =455;//已收货订单X天后关闭售后功能(最长可设置365天， 0表示确认收货后关闭售后功能)
+  int32 returned_auto_refund_time =456;//买家发起退货退款申请X天后商家未处理，系统将自动同意售后。
+
 
   //支付设置
   bool weixin_pay_open =500; //微信支付开关
