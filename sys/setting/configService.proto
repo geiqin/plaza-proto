@@ -69,12 +69,13 @@ message CommonConfig {
 
   //---售后服务----
   repeated string shipped_aftersale_apply_type =450;//发货前售后申请设置: 1仅退款 2退货退款 3退换货
-  string pre_shipment_refund_type =451;//发货前售后申请设置: 1需要审核 2;无需审核，系统自动退款
-  string shipped_freight_return_type =452;//发货后运费退还设置: 1退运费 2不退运费
-  int32 order_auto_close_time =453;//订单自动关闭时间，货到付款订单不适用（未支付订单超时关闭：单位：分钟）
-  int32 order_auto_receive_time =454; //已发货订单X天后自动确认收货
-  int32 order_close_refund_time =455;//已收货订单X天后关闭售后功能(最长可设置365天， 0表示确认收货后关闭售后功能)
-  int32 returned_auto_refund_time =456;//买家发起退货退款申请X天后商家未处理，系统将自动同意售后。
+  repeated string aftersale_apply_reasons =451; //售后申请原因设置
+  string pre_shipment_refund_type =452;//发货前售后申请设置: 1需要审核 2;无需审核，系统自动退款
+  string shipped_freight_return_type =453;//发货后运费退还设置: 1退运费 2不退运费
+  int32 order_auto_close_time =454;//订单自动关闭时间，货到付款订单不适用（未支付订单超时关闭：单位：分钟）
+  int32 order_auto_receive_time =455; //已发货订单X天后自动确认收货
+  int32 order_close_refund_time =456;//已收货订单X天后关闭售后功能(最长可设置365天， 0表示确认收货后关闭售后功能)
+  int32 returned_auto_refund_time =457;//买家发起退货退款申请X天后商家未处理，系统将自动同意售后。
 
 
   //支付设置
