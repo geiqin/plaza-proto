@@ -54,7 +54,8 @@ message CommonConfig {
   string auto_comment_content =316; //自动评价内容
 
   //订单设置
-  bool purchase_agreement_open =400; //下单服务协议
+  bool order_is_booking =400 ; //订单是否开启预约模式（开启后需要审核确认才能支付）
+  bool purchase_agreement_open =401; //下单服务协议
   string buyer_message_prompt =402; //买家留言提示语
   repeated string overseas_purchase_type =403; //海淘下单设置:1上传身份证照片，2身份实名认证
   bool delivery_address_coordinate_open =404; //收货地址精准选点
