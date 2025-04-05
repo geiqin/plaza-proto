@@ -7,11 +7,9 @@ import "spuService.proto";
 // 商品收藏服务
 service SpuFavorService {
     // 商品收藏新增
-    rpc Collect (SpuFavor) returns (SpuFavorResponse) {}
+    rpc Add (SpuFavor) returns (SpuFavorResponse) {}
     // 商品收藏删除
     rpc Delete (SpuFavor) returns (SpuFavorResponse) {}
-    // 商品收藏获取
-    rpc Get (SpuFavor) returns (SpuFavorResponse) {}
     // 商品收藏查询
     rpc Search (SpuFavorRequest) returns (SpuFavorResponse) {}
     // 商品收藏统计
@@ -24,8 +22,8 @@ message SpuFavor {
     int64 spu_id = 3; //所属商品
     int64 created_at = 4; //创建时间
     int64 updated_at = 5; //修改时间
-    Spu spu = 6;
 }
+
 // 商品收藏请求参数
 message SpuFavorRequest {
     int32 top = 1;
@@ -40,11 +38,11 @@ message SpuFavorRequest {
     int64 member_id = 11; //会员ID
     int64 spu_id = 12; //所属商品
 }
+
 // 商品收藏响应数据
 message SpuFavorResponse {
     string msg = 1;
     common.Pager pager = 2;
-    SpuFavor entity = 3;
-    repeated SpuFavor items = 4;
+    repeated Spu items = 4;
     int64 count = 5;
 }

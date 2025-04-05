@@ -1,0 +1,30 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+// 统计服务
+service StatisticsService {
+  // 已售罄统计数
+  rpc SellOutCount (StatisticsRequest) returns (StatisticsResponse) {}
+}
+
+// 已售罄统计
+message SellOutCountData {
+  int64 count = 1; //数量
+}
+
+// 统计请求参数
+message StatisticsRequest {
+  int64 year = 1;
+  int64 month = 2;
+  int64 day = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+}
+
+// 统计响应数据
+message StatisticsResponse {
+  string msg = 1;
+  SellOutCountData  SellOutCount = 2;
+}

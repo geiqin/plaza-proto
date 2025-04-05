@@ -211,12 +211,18 @@ message ComplaintTypeInfo {
 }
 
 message ComplaintApplyIndex {
-  int32 progress_index =1; //进度位置
   Order order_info = 2; //订单信息
   Complaint complaint_info =3; //维权信息
   ComplaintRefundInfo refund_info =4; //退款数据
-  repeated string refund_only_reasons =5; //仅退款原因
-  repeated string return_and_refund_reasons =6; //退货退款原因
-  repeated ComplaintTypeInfo type_list =7; //维权类型列表
+  repeated string reasons =5; //原因
+  repeated ComplaintTypeInfo types =7; //维权类型列表
   string upload_path_type =8;
+  repeated OrderDetail refund_details =9;
+  ComplaintApplyStatus status =10;
+}
+
+message ComplaintApplyStatus {
+  string type =1;
+  bool is_back =2;
+  int32 progress_index =3; //进度位置
 }

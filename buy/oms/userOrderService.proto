@@ -1,0 +1,84 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "orderService.proto";
+
+//用户订单（适用前端）
+service UserOrderService {
+  //订单总数
+  rpc Total (UserOrderRequest) returns (UserOrderResponse) {}
+  //订单查询
+  rpc Search (UserOrderRequest) returns (UserOrderResponse) {}
+  //订单详情
+  rpc Detail (UserOrderRequest) returns (UserOrderResponse) {}
+
+  //订单取消
+  rpc Cancel (UserOrderRequest) returns (UserOrderResponse) {}
+  //订单删除
+  rpc Delete (UserOrderRequest) returns (UserOrderResponse) {}
+}
+
+message UserOrderSearchData {
+  common.Pager pager =1;
+  repeated Order items =2;
+}
+
+//订单统计数据
+message UserOrderTotalData{
+  int64 complete_count =1; //已完成数
+  int64 evaluated_count =2; //已评价数
+  int64 no_refund_count =3; //未退款数
+  int64 pc_order_count =5; //PC端订单数
+  int64 received_count =6; //已收货数
+  int64 refund_count =7; //退款数
+  int64 refunded_count =8; //已退款数
+  int64 refunding_count =9; //退款中数
+  int64 unpaid_count =10; //未支付数
+  int64 unshipped_count =11; //待发货数
+  int64 order_count =4; //订单总数
+  int64 sum_price =12; //总消费金额
+}
+
+// 订单请求参数
+message UserOrderRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string order_no = 11; //订单号
+  string type = 12; //订单类型
+  int64 member_id = 13; //买家ID
+  int64 shop_id = 14; //多商户ID
+  int64 realstore_id = 15; //多门店ID
+  int64 warehouse_id = 16; //仓库ID
+  string logistics_type = 17; //物流类型
+  string delivery_method = 18; //配送方式
+  string delivery_mode = 19; //发货模式
+  string is_multi_packet = 20; //多包裹发货
+  string is_all_delivered = 21; //已全部发货
+  string table_code = 22; //桌台编号
+  string is_cod = 23; //是否货到付款
+  string is_invoiced = 24; //已开过发票
+  string is_refunded = 25; //已产生退款
+  string is_modify_address = 26; //已修改地址
+  string is_modify_price = 27; //已修改价格
+  int32 payment_id = 28; //支付ID
+  string payment_mode = 29; //支付模式
+  string payment_type = 30; //支付类型
+  string client_type = 31; //客户端类型
+  string pay_status = 32; //支付状态
+  string status = 33; //订单状态
+}
+
+message UserOrderResponse {
+  string msg =1;
+  Order order =2;
+  UserOrderSearchData search =3;
+  UserOrderTotalData total =4;
+}

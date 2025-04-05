@@ -8,7 +8,7 @@ message OrderDetail {
     int64 order_id = 2; //订单ID
     int64 spu_id = 3; //商品ID
     string sku_key = 4; //SKUKey
-    string name = 5; //商品名称
+    string spu_name = 5; //商品名称
     string image_url = 6; //图片路径
     int64 spec_weight = 7; //规格重量
     int64 spec_volume = 8; //规格体积
@@ -40,6 +40,8 @@ message OrderDetail {
     int64 updated_at = 34; //修改时间
     string orderaftersale_btn_text =35;//订单售后服务按钮文本
     LastAftersale orderaftersale =36;//最新一条售后单
+    ProductInfo product =37;
+    bool is_valid =38;//是否有效
 }
 
 //最后条售后

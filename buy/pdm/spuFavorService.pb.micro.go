@@ -44,11 +44,9 @@ func NewSpuFavorServiceEndpoints() []*api.Endpoint {
 
 type SpuFavorService interface {
 	// 商品收藏新增
-	Collect(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error)
+	Add(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error)
 	// 商品收藏删除
 	Delete(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error)
-	// 商品收藏获取
-	Get(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error)
 	// 商品收藏查询
 	Search(ctx context.Context, in *SpuFavorRequest, opts ...client.CallOption) (*SpuFavorResponse, error)
 	// 商品收藏统计
@@ -67,8 +65,8 @@ func NewSpuFavorService(name string, c client.Client) SpuFavorService {
 	}
 }
 
-func (c *spuFavorService) Collect(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error) {
-	req := c.c.NewRequest(c.name, "SpuFavorService.Collect", in)
+func (c *spuFavorService) Add(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error) {
+	req := c.c.NewRequest(c.name, "SpuFavorService.Add", in)
 	out := new(SpuFavorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -79,16 +77,6 @@ func (c *spuFavorService) Collect(ctx context.Context, in *SpuFavor, opts ...cli
 
 func (c *spuFavorService) Delete(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error) {
 	req := c.c.NewRequest(c.name, "SpuFavorService.Delete", in)
-	out := new(SpuFavorResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *spuFavorService) Get(ctx context.Context, in *SpuFavor, opts ...client.CallOption) (*SpuFavorResponse, error) {
-	req := c.c.NewRequest(c.name, "SpuFavorService.Get", in)
 	out := new(SpuFavorResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -121,11 +109,9 @@ func (c *spuFavorService) Count(ctx context.Context, in *SpuFavorRequest, opts .
 
 type SpuFavorServiceHandler interface {
 	// 商品收藏新增
-	Collect(context.Context, *SpuFavor, *SpuFavorResponse) error
+	Add(context.Context, *SpuFavor, *SpuFavorResponse) error
 	// 商品收藏删除
 	Delete(context.Context, *SpuFavor, *SpuFavorResponse) error
-	// 商品收藏获取
-	Get(context.Context, *SpuFavor, *SpuFavorResponse) error
 	// 商品收藏查询
 	Search(context.Context, *SpuFavorRequest, *SpuFavorResponse) error
 	// 商品收藏统计
@@ -134,9 +120,8 @@ type SpuFavorServiceHandler interface {
 
 func RegisterSpuFavorServiceHandler(s server.Server, hdlr SpuFavorServiceHandler, opts ...server.HandlerOption) error {
 	type spuFavorService interface {
-		Collect(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error
+		Add(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error
 		Delete(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error
-		Get(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error
 		Search(ctx context.Context, in *SpuFavorRequest, out *SpuFavorResponse) error
 		Count(ctx context.Context, in *SpuFavorRequest, out *SpuFavorResponse) error
 	}
@@ -151,16 +136,12 @@ type spuFavorServiceHandler struct {
 	SpuFavorServiceHandler
 }
 
-func (h *spuFavorServiceHandler) Collect(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error {
-	return h.SpuFavorServiceHandler.Collect(ctx, in, out)
+func (h *spuFavorServiceHandler) Add(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error {
+	return h.SpuFavorServiceHandler.Add(ctx, in, out)
 }
 
 func (h *spuFavorServiceHandler) Delete(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error {
 	return h.SpuFavorServiceHandler.Delete(ctx, in, out)
-}
-
-func (h *spuFavorServiceHandler) Get(ctx context.Context, in *SpuFavor, out *SpuFavorResponse) error {
-	return h.SpuFavorServiceHandler.Get(ctx, in, out)
 }
 
 func (h *spuFavorServiceHandler) Search(ctx context.Context, in *SpuFavorRequest, out *SpuFavorResponse) error {

@@ -7,44 +7,38 @@ import "orderAddressService.proto";
 import "orderShippingService.proto";
 import "baseInfoService.proto";
 
-//订单管理
+//订单管理(后台适用)
 service OrderService {
 
     //订单插入【service】
-    rpc OrderInsertHandle (Order) returns (OrderResponse) {}
+    rpc OrderInsert (Order) returns (OrderResponse) {}
 
-    //订单取消【admin/user】
+    //订单取消
     rpc OrderCancel (OrderRequest) returns (OrderResponse) {}
 
-    //订单删除【admin/user】
+    //订单删除
     rpc OrderDelete (OrderRequest) returns (OrderResponse) {}
 
-    //订单确认【admin】
+    //订单确认
     rpc OrderConfirm (OrderRequest) returns (OrderResponse) {}
 
-    //修改订单价格【admin】
+    //修改订单价格
     rpc ModifyPrice (Order) returns (OrderResponse) {}
 
-    //修改订单地址【admin】
+    //修改订单地址
     rpc ModifyAddress (OrderAddress) returns (OrderResponse) {}
-
-    //订单每个环节状态总数
-    rpc OrderStatusTotal (OrderRequest) returns (OrderStatusTotalResponse) {}
-
-    //订单总数
-    rpc OrderTotal (OrderRequest) returns (OrderResponse) {}
-
-    //订单查询【admin/user】
-    rpc OrderSearch (OrderRequest) returns (OrderResponse) {}
-
-    //订单详情【admin/user】
-    rpc OrderDetail (OrderRequest) returns (OrderResponse) {}
 
     //订单主信息列表(服务专用)
     rpc OrderMainInfo (OrderRequest) returns (OrderResponse) {}
 
     //订单主信息(服务专用)
     rpc OrderMainList (OrderRequest) returns (OrderResponse) {}
+
+    //订单查询
+    rpc Search (OrderRequest) returns (OrderResponse) {}
+
+    //订单详情
+    rpc Detail (OrderRequest) returns (OrderResponse) {}
 
     //支付同步处理
     rpc Respond (OrderRequest) returns (OrderResponse) {}
@@ -60,6 +54,7 @@ service OrderService {
 
     //新订单通知数据(循环模式：将弃用)
     rpc NewOrderNotice (OrderRequest) returns (OrderResponse) {}
+
 
 }
 
@@ -80,7 +75,7 @@ message Order {
     int64 discount_amount = 14; //优惠金额
     int64 use_integral = 15; //使用积分
     int64 use_surplus = 16; //使用余额
-    repeated int64 member_coupon_ids = 17; //用户优惠劵
+    int64 use_coupon_id = 17; //用户优惠劵
     int64 paid_amount = 18; //已支付金额
     int64 refunded_amount = 19; //已退款金额
     int64 returned_number = 20; //已退货数量
@@ -88,9 +83,8 @@ message Order {
     string integral_discount_type = 22; //积分优惠类型
     int64 integral_deduction_rate = 23; //积分抵现率
     string order_model = 24; //订单模式
-    string logistics_type = 25; //物流类型：1-快递发货，2-同城配送，3-用户自提，4-虚拟发货(无需物流)
-    string delivery_method = 26; //配送方式
-    string delivery_mode = 27; //发货模式
+    string delivery_type = 25; //配送类型：1-快递发货，2-同城配送，3-用户自提，4-虚拟发货(无需物流)
+    string shipping_method = 26; //发货方式
     string is_multi_packet = 28; //多包裹发货
     string is_all_delivered = 29; //已全部发货
     string subject = 30; //订单标题
@@ -141,9 +135,38 @@ message Order {
     WarehouseInfo warehouse =76;
     repeated OrderShipping shippings =77;
     OrderAdminCommand admin_command =78;
-    OrderUserCommand user_command =79;
+    OrderUserAction user_action =79;
     string ship_status =80; //发货状态：1-待发货，2-已发货，3-已完成
+    ShowStatus showStatus =81; //显示状态
+    OrderProgress progress_info = 83;
+    string created_at_str =85;
+    OrderHelpInfo help_info =86;
+    bool paid =87;
 }
+
+//订单代付信息
+message OrderHelpInfo{
+    string pay_uid =1; //代付人ID
+    string pay_nickname =2; //代付人昵称
+    string pay_avatar =3;//代付人头像
+    string help_status =4;//代付状态
+}
+
+//订单详情步骤
+message OrderProgress {
+    step current =1;
+    repeated step steps =2;
+    message step {
+        string code =1;
+        string name =2;
+        string short_name =3;
+        string icon_url =4;
+        string status =5;
+        string happen_at =6;
+        string description =7;
+    }
+}
+
 
 //管理员命令
 message OrderAdminCommand{
@@ -157,13 +180,31 @@ message OrderAdminCommand{
 }
 
 //用户命令
-message OrderUserCommand{
-    bool has_order_pay =1; //订单支付
-    bool has_order_collect =2; //订单收货
-    bool has_order_cancel =3;// 取消订单
-    bool has_order_delete =4;// 删除订单
-    bool has_express_query =5;// 物流查询
-    bool has_allow_comment =6;// 订单评论
+message OrderUserAction{
+    bool order_pay_button =1; //订单支付
+    bool order_collect_button =2; //订单收货
+    bool order_cancel_button =3;// 取消订单
+    bool order_delete_button =4;// 删除订单
+    bool shipping_logistics_query =5;// 发货物流查询
+    bool refund_logistics_query =6;// 退货物流查询
+    bool order_comment_button =7;// 订单评论
+    bool write_return_button =8;//填写退货信息
+    bool buy_again_button =9; //再次购买
+    bool refund_apply_button =10;//申请退款
+    bool refund_cancel_button =11; //取消申请退款
+    bool invoice_apply_button =12;//申请开票
+    bool invoice_view_button =13;//查看发票
+}
+
+//显示状态
+message ShowStatus{
+    string class =1; //如:nobuy
+    string deliveryType =2; //配送方式
+    string msg =3; //提示信息
+    string payType =4; //支付类型
+    string title =5; //标题
+    string type =6; //类型
+    string status_pic =8; //状态图片
 }
 
 // 订单请求参数
@@ -183,8 +224,8 @@ message OrderRequest {
     int64 shop_id = 14; //多商户ID
     int64 realstore_id = 15; //多门店ID
     int64 warehouse_id = 16; //仓库ID
-    string logistics_type = 17; //物流类型
-    string delivery_method = 18; //配送方式
+    string delivery_type = 17; //物流类型
+    string shipping_method = 18; //配送方式
     string delivery_mode = 19; //发货模式
     string is_multi_packet = 20; //多包裹发货
     string is_all_delivered = 21; //已全部发货
@@ -204,28 +245,6 @@ message OrderRequest {
 }
 
 
-
-//订单统计数据
-message OrderStatusTotalResponse{
-    int64 member_id =1;//会员ID
-    int64 order_count =2; //订单总数
-    int64 order_pending_count =3; //待审核数量
-    int64 order_confirmed_count =4; //待支付数量
-    int64 order_paid_count =5; //待发货数量
-    int64 order_shipped_count =6; //待发货数量
-    int64 order_canceled_count =7; //已取消数量
-    int64 order_succeed_count =8; //已完成数量
-    int64 order_closed_count =9; //已关闭数量
-    int64 aftersale_doing_count =10; //正在售后服务数量
-}
-
-message OrderDetailData {
-    Order order = 1;
-    string msg =2;
-    OrderFlow order_flow = 3;
-    repeated PaymentInfo payment_list =4;
-}
-
 message OrderSearchData {
     common.Pager pager =1;
     repeated Order items =2;
@@ -233,7 +252,7 @@ message OrderSearchData {
 
 message OrderResponse {
     string msg =1;
-    OrderDetailData detail = 4;
-    repeated Order list =5;
-    OrderSearchData search =6;
+    Order order = 2;
+    repeated Order list =3;
+    OrderSearchData search =4;
 }

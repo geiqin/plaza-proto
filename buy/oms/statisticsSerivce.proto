@@ -1,0 +1,59 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+// 统计服务
+service StatisticsService {
+
+  //数据总览【后台】
+  rpc Overview (StatisticsRequest) returns (StatisticsResponse) {}
+
+  //订单发货统计【后台】
+  rpc ShippingTotal (StatisticsRequest) returns (StatisticsResponse) {}
+
+  //订单售后统计【后台】
+  rpc ComplaintTotal (StatisticsRequest) returns (StatisticsResponse) {}
+
+}
+
+
+// 数据总览
+message OverviewData {
+  int64 paid_order_count =1; //已支付订单总数
+  int64 paid_order_amount =2; //已支付订单金额
+  int64 wait_pay_count =3; //待支付订单数量
+  int64 wait_shipping_count =4; //待发货订单数量
+  int64 wait_commit_count = 5; //待评价订单数
+}
+
+//订单发货统计数据
+message ShippingTotalData{
+  int64 wait_count =1; //待发货总数量
+  int64 wait_express_delivery =2; //待发快递数量
+  int64 wait_local_delivery  =3; //同城配送数量
+  int64 wait_mention_delivery =4; //上门自提数量
+}
+
+// 订单售后统计
+message ComplaintTotalData {
+  int64 count = 1; //数量
+}
+
+// 统计请求参数
+message StatisticsRequest {
+  int64 year = 1;
+  int64 month = 2;
+  int64 day = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  int64 member_id = 7;
+}
+
+// 统计响应数据
+message StatisticsResponse {
+  string msg = 1;
+  OverviewData Overview =2;
+  ShippingTotalData ShippingTotal =3;
+  ComplaintTotalData ComplaintTotal =5;
+}

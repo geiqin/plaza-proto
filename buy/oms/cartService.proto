@@ -34,7 +34,7 @@ message CartItem  {
     bool is_valid =14;//是否有效
     bool is_error =15;//是否错误
     string error_msg =16;//错误信息
-    ProductInfo productInfo =17;
+    ProductInfo product =17;
     bool attrStatus =18;
 }
 
