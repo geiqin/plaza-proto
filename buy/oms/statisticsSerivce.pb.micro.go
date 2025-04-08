@@ -44,6 +44,8 @@ func NewStatisticsServiceEndpoints() []*api.Endpoint {
 type StatisticsService interface {
 	//数据总览【后台】
 	Overview(ctx context.Context, in *StatisticsRequest, opts ...client.CallOption) (*StatisticsResponse, error)
+	//支付订单统计【后台】
+	PayOrderTotal(ctx context.Context, in *StatisticsRequest, opts ...client.CallOption) (*StatisticsResponse, error)
 	//订单发货统计【后台】
 	ShippingTotal(ctx context.Context, in *StatisticsRequest, opts ...client.CallOption) (*StatisticsResponse, error)
 	//订单售后统计【后台】
@@ -64,6 +66,16 @@ func NewStatisticsService(name string, c client.Client) StatisticsService {
 
 func (c *statisticsService) Overview(ctx context.Context, in *StatisticsRequest, opts ...client.CallOption) (*StatisticsResponse, error) {
 	req := c.c.NewRequest(c.name, "StatisticsService.Overview", in)
+	out := new(StatisticsResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *statisticsService) PayOrderTotal(ctx context.Context, in *StatisticsRequest, opts ...client.CallOption) (*StatisticsResponse, error) {
+	req := c.c.NewRequest(c.name, "StatisticsService.PayOrderTotal", in)
 	out := new(StatisticsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -97,6 +109,8 @@ func (c *statisticsService) ComplaintTotal(ctx context.Context, in *StatisticsRe
 type StatisticsServiceHandler interface {
 	//数据总览【后台】
 	Overview(context.Context, *StatisticsRequest, *StatisticsResponse) error
+	//支付订单统计【后台】
+	PayOrderTotal(context.Context, *StatisticsRequest, *StatisticsResponse) error
 	//订单发货统计【后台】
 	ShippingTotal(context.Context, *StatisticsRequest, *StatisticsResponse) error
 	//订单售后统计【后台】
@@ -106,6 +120,7 @@ type StatisticsServiceHandler interface {
 func RegisterStatisticsServiceHandler(s server.Server, hdlr StatisticsServiceHandler, opts ...server.HandlerOption) error {
 	type statisticsService interface {
 		Overview(ctx context.Context, in *StatisticsRequest, out *StatisticsResponse) error
+		PayOrderTotal(ctx context.Context, in *StatisticsRequest, out *StatisticsResponse) error
 		ShippingTotal(ctx context.Context, in *StatisticsRequest, out *StatisticsResponse) error
 		ComplaintTotal(ctx context.Context, in *StatisticsRequest, out *StatisticsResponse) error
 	}
@@ -122,6 +137,10 @@ type statisticsServiceHandler struct {
 
 func (h *statisticsServiceHandler) Overview(ctx context.Context, in *StatisticsRequest, out *StatisticsResponse) error {
 	return h.StatisticsServiceHandler.Overview(ctx, in, out)
+}
+
+func (h *statisticsServiceHandler) PayOrderTotal(ctx context.Context, in *StatisticsRequest, out *StatisticsResponse) error {
+	return h.StatisticsServiceHandler.PayOrderTotal(ctx, in, out)
 }
 
 func (h *statisticsServiceHandler) ShippingTotal(ctx context.Context, in *StatisticsRequest, out *StatisticsResponse) error {

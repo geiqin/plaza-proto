@@ -51,10 +51,10 @@ type StoreService interface {
 	UpdateStatus(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//删除店铺
 	Delete(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
+	//店铺详情
+	Detail(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺信息
 	Get(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
-	//根据名称获取店铺信息
-	GetByName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//查询店铺
 	Search(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺列表
@@ -113,8 +113,8 @@ func (c *storeService) Delete(ctx context.Context, in *StoreRequest, opts ...cli
 	return out, nil
 }
 
-func (c *storeService) Get(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.Get", in)
+func (c *storeService) Detail(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.Detail", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -123,8 +123,8 @@ func (c *storeService) Get(ctx context.Context, in *Store, opts ...client.CallOp
 	return out, nil
 }
 
-func (c *storeService) GetByName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
-	req := c.c.NewRequest(c.name, "StoreService.GetByName", in)
+func (c *storeService) Get(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.Get", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -164,10 +164,10 @@ type StoreServiceHandler interface {
 	UpdateStatus(context.Context, *Store, *StoreResponse) error
 	//删除店铺
 	Delete(context.Context, *StoreRequest, *StoreResponse) error
+	//店铺详情
+	Detail(context.Context, *Store, *StoreResponse) error
 	//获取店铺信息
 	Get(context.Context, *Store, *StoreResponse) error
-	//根据名称获取店铺信息
-	GetByName(context.Context, *Store, *StoreResponse) error
 	//查询店铺
 	Search(context.Context, *StoreRequest, *StoreResponse) error
 	//获取店铺列表
@@ -180,8 +180,8 @@ func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts
 		Update(ctx context.Context, in *Store, out *StoreResponse) error
 		UpdateStatus(ctx context.Context, in *Store, out *StoreResponse) error
 		Delete(ctx context.Context, in *StoreRequest, out *StoreResponse) error
+		Detail(ctx context.Context, in *Store, out *StoreResponse) error
 		Get(ctx context.Context, in *Store, out *StoreResponse) error
-		GetByName(ctx context.Context, in *Store, out *StoreResponse) error
 		Search(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 		List(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 	}
@@ -212,12 +212,12 @@ func (h *storeServiceHandler) Delete(ctx context.Context, in *StoreRequest, out 
 	return h.StoreServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *storeServiceHandler) Get(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.Get(ctx, in, out)
+func (h *storeServiceHandler) Detail(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.Detail(ctx, in, out)
 }
 
-func (h *storeServiceHandler) GetByName(ctx context.Context, in *Store, out *StoreResponse) error {
-	return h.StoreServiceHandler.GetByName(ctx, in, out)
+func (h *storeServiceHandler) Get(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.Get(ctx, in, out)
 }
 
 func (h *storeServiceHandler) Search(ctx context.Context, in *StoreRequest, out *StoreResponse) error {

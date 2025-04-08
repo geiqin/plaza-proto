@@ -1,0 +1,55 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 运营人员服务
+service StoreOperatorService {
+  // 运营人员保存
+  rpc Save (StoreOperator) returns (StoreOperatorResponse) {}
+  // 运营人员删除
+  rpc Delete (StoreOperator) returns (StoreOperatorResponse) {}
+  // 运营人员获取
+  rpc Get (StoreOperator) returns (StoreOperatorResponse) {}
+  // 运营人员查询
+  rpc Search (StoreOperatorRequest) returns (StoreOperatorResponse) {}
+  // 运营人员列表
+  rpc List (StoreOperatorRequest) returns (StoreOperatorResponse) {}
+}
+// 运营人员
+message StoreOperator {
+  int64 id = 1; //ID
+  int64 store_id = 2; //店铺ID
+  string real_name = 3; //姓名
+  string mobile = 4; //手机号码
+  string wechat = 5; //微信账号
+  string email = 6; //邮件
+  int64 geiqin_id = 7; //给亲账号
+  int64 updated_at = 8; //创建时间
+  int64 created_at = 9; //修改时间
+}
+
+// 运营人员请求参数
+message StoreOperatorRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 store_id = 11; //店铺ID
+  string real_name = 12; //姓名
+  string mobile = 13; //手机号码
+  string wechat = 14; //微信账号
+  int64 geiqin_id = 15; //给亲账号
+}
+
+// 运营人员响应数据
+message StoreOperatorResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  StoreOperator entity = 3;
+  repeated StoreOperator items = 4;
+}

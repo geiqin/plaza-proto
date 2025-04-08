@@ -8,6 +8,9 @@ service StatisticsService {
   //数据总览【后台】
   rpc Overview (StatisticsRequest) returns (StatisticsResponse) {}
 
+  //支付订单统计【后台】
+  rpc PayOrderTotal (StatisticsRequest) returns (StatisticsResponse) {}
+
   //订单发货统计【后台】
   rpc ShippingTotal (StatisticsRequest) returns (StatisticsResponse) {}
 
@@ -24,6 +27,16 @@ message OverviewData {
   int64 wait_pay_count =3; //待支付订单数量
   int64 wait_shipping_count =4; //待发货订单数量
   int64 wait_commit_count = 5; //待评价订单数
+}
+
+// 支付订单统计
+message PayOrderTotalData {
+  int64 paid_count =1; //已支付订单总数
+  int64 paid_amount =2; //已支付订单金额
+  int64 today_paid_count =3; // 今日已支付订单总数
+  int64 today_paid_amount =4; //今日已支付订单金额
+  string count_growth = 5; //今日数量成长值（较昨日）
+  string amount_growth = 6; //今日金额成长值（较昨日）
 }
 
 //订单发货统计数据
@@ -55,5 +68,6 @@ message StatisticsResponse {
   string msg = 1;
   OverviewData Overview =2;
   ShippingTotalData ShippingTotal =3;
+  PayOrderTotalData PayOrderTotal =4;
   ComplaintTotalData ComplaintTotal =5;
 }

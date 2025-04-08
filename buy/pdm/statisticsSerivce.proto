@@ -10,7 +10,8 @@ service StatisticsService {
 
 // 已售罄统计
 message SellOutCountData {
-  int64 count = 1; //数量
+  int64 spu_count = 1; //SPU数量
+  int64 sku_count = 2; //SKU数量
 }
 
 // 统计请求参数

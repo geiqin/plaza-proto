@@ -43,23 +43,27 @@ message Plugin {
 
 
 message PluginRequest {
-    int64 paged = 1;
-    int64 page_size = 2;
-    string sorting = 3;
-    //base params
-    int32 id = 4;
-    string name = 5;
-    string code = 6;
-    string type = 7;
-    string status = 8;
-    int64 author_id = 9;
-    string keywords = 10;
-    repeated string status_list = 11;
-    repeated int32 ids = 12;
-    int64 store_id = 13;
-    int64 application_id = 14;
-    int64 version_id = 15;
-    string is_promotion =16;
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sorts = 5;
+    repeated string date_range = 6;
+    repeated int32 ids = 7;
+    int32 id = 8;
+    //以下为自定义参数
+    string code = 11; //唯一标记
+    string name = 12; //插件名称
+    string type = 13; //插件类型
+    int64 author_id = 14; //作者ID
+    string author_name = 15; //作者名称
+    string status = 16; //状态
+
+    repeated string status_list = 17;
+    int64 store_id = 18;
+    int64 application_id = 19;
+    int64 version_id = 20;
+    string is_promotion =21;
 }
 
 //
