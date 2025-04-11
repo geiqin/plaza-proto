@@ -6,3 +6,26 @@ option go_package = "/.;services";
 message MentionConfig {
     string custom_name =1;//自定义名称
 }
+
+
+message MentionPointRule{
+    string reception = 9;
+    int32 reception_repeat_weeks = 10;
+    repeated int32 reception_repeat_week_arr = 11;
+    bool is_fetch_time = 12;
+    string fetch = 13;
+    int32 fetch_repeat_weeks = 14;
+    repeated int32 fetch_repeat_week_arr = 15;
+    string sub_fetch_time = 16;
+    string appointment = 17;
+    int32 appointment_num = 18;
+    int32 max_appointment_num = 19;
+    repeated MentionPointTime reception_times = 23;
+    repeated MentionPointTime fetch_times = 24;
+}
+
+message MentionPointTime{
+    string type = 3;
+    int64 start_time = 4;
+    int64 end_time = 5;
+}

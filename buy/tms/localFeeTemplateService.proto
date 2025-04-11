@@ -22,12 +22,6 @@ service LocalFeeTemplateService {
 message LocalFeeTemplate {
   int64 id = 1; //ID
   string name = 2; //模板名称
-  int64 fetch_province_id = 3; //取货点省
-  int64 fetch_city_id = 4; //取货点市
-  int64 fetch_county_id = 5; //取货点县
-  string fetch_address = 6; //取货点地址
-  float fetch_lng = 7; //取货点经度
-  float fetch_lat = 8; //取货点纬度
   int64 first_km = 9; //首公里
   int64 first_km_fee = 10; //首公里收费
   int64 additional_km = 11; //续公里
@@ -35,7 +29,7 @@ message LocalFeeTemplate {
   int64 first_weight = 13; //首重
   int64 additional_weight = 14; //续重
   int64 additional_weight_fee = 15; //续重收费
-  string range_type = 16; //范围划分
+  string range_type = 16; //范围划分:1按服务半径,2-按行政区域,3-自定义配送范围
   string ranges = 17; //配送范围
   string status = 18; //状态
   int64 created_at = 19; //创建时间
@@ -54,9 +48,6 @@ message LocalFeeTemplateRequest {
   int64 id = 8;
   //以下为自定义参数
   string name = 11; //模板名称
-  int64 fetch_province_id = 12; //取货点省
-  int64 fetch_city_id = 13; //取货点市
-  int64 fetch_county_id = 14; //取货点县
   string range_type = 15; //范围划分
   string status = 16; //状态
 }

@@ -67,6 +67,10 @@ message CommonConfig {
   bool invoice_tips_open =422; //发票提示语开关
   string invoice_tips_content =423; //发票提示语内容
 
+  //发票功能
+  bool invoice_func_status =431; //发票功能
+  bool special_invoice_func_status =432; //专用发票功能
+
   //---售后服务----
   repeated string shipped_aftersale_apply_type =450;//发货前售后申请设置: 1仅退款 2退货退款 3退换货
   repeated string aftersale_apply_reasons =451; //售后申请原因设置

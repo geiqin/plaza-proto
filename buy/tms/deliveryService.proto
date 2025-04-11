@@ -15,21 +15,18 @@ service DeliveryService {
 
 message Delivery {
   int32 id = 1; //ID
-  string code = 2; //编码
+  string code = 2; //编码: express 快递，local 同城，mention 自提
   string name = 3; //名称
   string desc = 4; //描述
   int32 sort = 5; //排序
-  DeliveryConfig config = 6; //配置信息
+  bytes config = 6; //配置信息
   string is_default = 7; //是否默认
   string status = 8; //状态
   int64 created_at = 9; //创建时间
   int64 updated_at = 10; //修改时间
-}
-
-message DeliveryConfig {
-  ExpressConfig express =1;
-  LocalConfig local =2;
-  MentionConfig mention =3;
+  ExpressConfig express_config =11;
+  LocalConfig local_config =12;
+  MentionConfig mention_config =13;
 }
 
 message DeliveryRequest {

@@ -1,0 +1,72 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+
+//到店自提点
+service MentionAddrService {
+  rpc Create (MentionAddr) returns (MentionAddrResponse) {}
+  rpc Update (MentionAddr) returns (MentionAddrResponse) {}
+  rpc Delete (MentionAddrRequest) returns (MentionAddrResponse) {}
+  rpc Get (MentionAddr) returns (MentionAddrResponse) {}
+  rpc Search (MentionAddrRequest) returns (MentionAddrResponse) {}
+  rpc List (MentionAddrRequest) returns (MentionAddrResponse) {}
+  // 获取距离用户最近的自提点
+  rpc Nearest (MentionAddrRequest) returns (MentionAddrResponse) {}
+}
+
+message MentionAddr {
+  int64 id = 1; //ID
+  string name = 2; //自提点名称
+  string time_start = 3; //开始营业时间
+  string time_end = 4; //结束营业时间
+  repeated int32 weeks = 5; //营业时间周
+  string logo_url = 6; //LOGO图片
+  repeated string images = 7; //自提点图片
+  int64 province_id = 8; //所在省
+  int64 city_id = 9; //所在省
+  int64 county_id = 10; //所在县
+  string province_name = 11; //收件人省名
+  string city_name = 12; //收件人市名
+  string county_name = 13; //收件人县名
+  string detail = 14; //详细地址
+  float lng = 15; //经度
+  float lat = 16; //纬度
+  int64 manager_id = 17; //管理员ID
+  string manager_name = 18; // 管理员名称
+  string phone = 19; //联系电话
+  string description = 20; //自提点简介
+  int64 updated_at = 21; //创建时间
+  int64 created_at = 22; //修改时间
+}
+
+message MentionAddrRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string name = 11; //自提点名称
+  int64 province_id = 12; //所在省
+  int64 city_id = 13; //所在省
+  int64 county_id = 14; //所在县
+  string province_name = 15; //收件人省名
+  string city_name = 16; //收件人市名
+  string county_name = 17; //收件人县名
+  int64 manager_id = 18; //管理员ID
+  string manager_name = 19; // 管理员名称
+  string phone = 20; //联系电话
+}
+
+message MentionAddrResponse {
+  MentionAddr entity = 1;
+  common.Pager pager =2;
+  repeated MentionAddr items = 3;
+  string msg =4;
+}
+
+
