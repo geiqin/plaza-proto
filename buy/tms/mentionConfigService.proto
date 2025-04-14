@@ -4,28 +4,10 @@ option go_package = "/.;services";
 
 //到店自提配置
 message MentionConfig {
-    string custom_name =1;//自定义名称
-}
-
-
-message MentionPointRule{
-    string reception = 9;
-    int32 reception_repeat_weeks = 10;
-    repeated int32 reception_repeat_week_arr = 11;
-    bool is_fetch_time = 12;
-    string fetch = 13;
-    int32 fetch_repeat_weeks = 14;
-    repeated int32 fetch_repeat_week_arr = 15;
-    string sub_fetch_time = 16;
-    string appointment = 17;
-    int32 appointment_num = 18;
-    int32 max_appointment_num = 19;
-    repeated MentionPointTime reception_times = 23;
-    repeated MentionPointTime fetch_times = 24;
-}
-
-message MentionPointTime{
-    string type = 3;
-    int64 start_time = 4;
-    int64 end_time = 5;
+    string customName =1;//自定义名称
+    bool isDefault =2; //设置为默认配送方式
+    bool isSelectTime =4; //买家可选自提时间
+    bool isFetchExp =5; //提货有效期
+    int32 fetchExpTime =6; //备货完成X天后，停止提货填写0天，即仅限当天可提货
+    string fetchExpType =7; //过期订单处理:1过期后，订单将自动完成，不退款,2过期后，订单将自动售后，自动向买家退款
 }

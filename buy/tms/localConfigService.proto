@@ -4,19 +4,27 @@ option go_package = "/.;services";
 
 //同城配送配置
 message LocalConfig {
-    string is_timed_arrival =1;//是否开启定时达(0否、1是)
-    LocalTimedArrival timed_arrival  =2;//定时达规则
-    string description =3;//配送说明
+    string customName =1;//自定义名称
+    bool isDefault =2; //设置为默认配送方式
+    bool customDatetime =3;//自定义配送时间
+    string deliveryDatetimeType =4;//配送时间类型：1使用固定配送时间选项,2自定义配送时间选项
+    int32 earliestDeliveryDay =5; //最早可配送时间,下单后X天,可送货上门
+    int32 latestDeliveryDay =6; //最晚可配送时间,下单后X天,可送货上门
+    int32 freightConstituteRule =7;//计费方式:1-累加运费,2-组合运费
+    bool isSupportThirdPartLogistics =8; //启用第三方配送
+    string deliveryDescription =9;//配送说明
+    bool isTimedDelivery =10;//是否开启定时达(0否、1是)(暂待开发)
+    LocalTimedDelivery timedDelivery =11;//定时达规则(暂待开发)
 }
 
 //定时送达数据
-message LocalTimedArrival {
-    string repeat_type =1;//配送时间:all_day全天、repeat_day每天重复、repeat_week每周重复
-    int32  repeat_weeks =2;//自提时间每周重复的星期数按|运算: 1周一，2周二，4周三，8周四，16周五，32周六，64周日
-    string time_section =3;//配送时段细分: day按天，hour按小时，half_hour按半小时
-    string appointment_type =4;//预约下单：no无需提前、day提前X天、hour提前X小时、minute提前X分钟
-    int32  appointment_value =5;//预约下单的天数、小时、分钟
-    int32  appointment_max_days =6;//最长预约天数(0只能当天配送)
+message LocalTimedDelivery {
+    string repeatType =1;//配送时间:all_day全天、repeat_day每天重复、repeat_week每周重复
+    int32  repeatWeeks =2;//自提时间每周重复的星期数按|运算: 1周一，2周二，4周三，8周四，16周五，32周六，64周日
+    string timeSection =3;//配送时段细分: day按天，hour按小时，half_hour按半小时
+    string appointmentType =4;//预约下单：no无需提前、day提前X天、hour提前X小时、minute提前X分钟
+    int32  appointmentValue =5;//预约下单的天数、小时、分钟
+    int32  appointmentMaxDays =6;//最长预约天数(0只能当天配送)
     repeated string ranges =7;//范围 待定
-    repeated string delivery_times =8;// 配送时段 待定
+    repeated string deliveryTimes =8;// 配送时段 待定
 }
