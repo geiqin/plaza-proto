@@ -69,7 +69,7 @@ message Spu {
     string button_custom = 36; //按钮自定义名称
     repeated string logistics_types = 37; //支持物流类型
     string express_fee_type = 38; //快递运费类型
-    int64 express_uniform_fee = 39; //快递统一运费
+    int64 express_fee_price = 39; //快递统一运费
     int64 express_fee_template_id = 40; //快递运费模板
     repeated string client_types = 41; //的客户终端
     int64 detail_template_id = 42; //详情模板
@@ -108,6 +108,8 @@ message Spu {
     string error_msg =83;//错误信息
     string is_favor = 84; //是否已收藏(0否，1是)
     bool checked = 85;
+    repeated int32 label_ids = 86;
+    repeated int64 group_ids = 87;
 }
 
 // 商品库
@@ -143,8 +145,8 @@ message SpuEdit {
     string button_mode = 38; //立即购买按钮
     string button_custom = 39; //按钮自定义名称
     repeated string logistics_types = 40; //支持物流类型
-    string express_fee_mode = 41; //运费模式
-    int64 express_uniform_fee = 42; //统一运费
+    string express_fee_type = 41; //运费模式
+    int64 express_fee_price = 42; //统一运费
     int64 express_fee_template_id = 43; //运费模板
     repeated string client_types = 46; //的客户终端
     int64 detail_template_id = 47; //详情模板
@@ -155,11 +157,11 @@ message SpuEdit {
     string status = 52; //商品状态
     SpuPresale presale = 66;
     repeated SpuPhoto photos = 67;
-    repeated Group groups = 68;
-    repeated Sku skus = 69;
-    Sku sku  = 70;
-    repeated Label labels = 71;
-    repeated SpuSpecType spec_types =72;
+    repeated Sku skus = 68;
+    Sku sku  = 69;
+    repeated SpuSpecType spec_types =70;
+    repeated int32 label_ids = 71;
+    repeated int64 group_ids = 72;
 }
 
 
