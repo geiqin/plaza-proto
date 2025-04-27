@@ -1,0 +1,59 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "pageCategoryService.proto";
+
+// 页面链接服务
+service PageLinkService {
+  // 页面链接新增
+  rpc Create (PageLink) returns (PageLinkResponse) {}
+  // 页面链接修改
+  rpc Update (PageLink) returns (PageLinkResponse) {}
+  // 页面链接删除
+  rpc Delete (PageLink) returns (PageLinkResponse) {}
+  // 页面链接获取
+  rpc Get (PageLink) returns (PageLinkResponse) {}
+  // 页面链接查询
+  rpc Search (PageLinkRequest) returns (PageLinkResponse) {}
+  // 页面链接列表
+  rpc List (PageLinkRequest) returns (PageLinkResponse) {}
+}
+// 页面链接
+message PageLink {
+  int64 id = 1; //ID
+  int64 category_id = 2; //分类ID
+  string type = 3; //类型
+  string name = 4; //分类名称
+  string url = 5; //页面链接
+  string param = 6; //参数
+  string example = 7; //事例
+  int32 sort = 8; //排序
+  string status = 9; //状态
+  int64 updated_at = 10; //创建时间
+  int64 created_at = 11; //修改时间
+  PageCategory category =12;
+}
+// 页面链接请求参数
+message PageLinkRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 category_id = 11; //分类ID
+  string type = 12; //类型
+  string name = 13; //分类名称
+  string status = 14; //状态
+}
+// 页面链接响应数据
+message PageLinkResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  PageLink entity = 3;
+  repeated PageLink items = 4;
+}

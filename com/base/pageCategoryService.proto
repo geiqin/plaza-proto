@@ -1,0 +1,56 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 页面分类服务
+service PageCategoryService {
+  // 页面分类新增
+  rpc Create (PageCategory) returns (PageCategoryResponse) {}
+  // 页面分类修改
+  rpc Update (PageCategory) returns (PageCategoryResponse) {}
+  // 页面分类删除
+  rpc Delete (PageCategory) returns (PageCategoryResponse) {}
+  // 页面分类获取
+  rpc Get (PageCategory) returns (PageCategoryResponse) {}
+  // 页面分类查询
+  rpc Search (PageCategoryRequest) returns (PageCategoryResponse) {}
+  // 页面分类列表
+  rpc List (PageCategoryRequest) returns (PageCategoryResponse) {}
+}
+
+// 页面分类
+message PageCategory {
+  int64 id = 1; //ID
+  string name = 2; //分类名称
+  string type = 3; //分类类型
+  int64 parent_id = 4; //上级ID
+  string ancestors = 5; //祖级列表
+  int32 sort = 6; //排序
+  string status = 7; //状态
+  int64 updated_at = 8; //创建时间
+  int64 created_at = 9; //修改时间
+  repeated PageCategory children =10;
+}
+// 页面分类请求参数
+message PageCategoryRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string name = 11; //分类名称
+  string type = 12; //分类类型
+  int64 parent_id = 13; //上级ID
+  string status = 14; //状态
+}
+// 页面分类响应数据
+message PageCategoryResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  PageCategory entity = 3;
+  repeated PageCategory items = 4;
+}

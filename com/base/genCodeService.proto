@@ -81,8 +81,8 @@ message GenTable {
     string engine = 4; //
     string charset = 5; //
     string comment = 6; //
-    string created_at = 7;
-    string updated_at = 8;
+    int64 created_at = 7;
+    int64 updated_at = 8;
     bool selected = 9; //是否已选择
 }
 
