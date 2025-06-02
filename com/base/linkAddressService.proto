@@ -2,25 +2,25 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-import "pageCategoryService.proto";
+import "linkCategoryService.proto";
 
 // 页面链接服务
-service PageLinkService {
+service LinkAddressService {
   // 页面链接新增
-  rpc Create (PageLink) returns (PageLinkResponse) {}
+  rpc Create (LinkAddress) returns (LinkAddressResponse) {}
   // 页面链接修改
-  rpc Update (PageLink) returns (PageLinkResponse) {}
+  rpc Update (LinkAddress) returns (LinkAddressResponse) {}
   // 页面链接删除
-  rpc Delete (PageLink) returns (PageLinkResponse) {}
+  rpc Delete (LinkAddress) returns (LinkAddressResponse) {}
   // 页面链接获取
-  rpc Get (PageLink) returns (PageLinkResponse) {}
+  rpc Get (LinkAddress) returns (LinkAddressResponse) {}
   // 页面链接查询
-  rpc Search (PageLinkRequest) returns (PageLinkResponse) {}
+  rpc Search (LinkAddressRequest) returns (LinkAddressResponse) {}
   // 页面链接列表
-  rpc List (PageLinkRequest) returns (PageLinkResponse) {}
+  rpc List (LinkAddressRequest) returns (LinkAddressResponse) {}
 }
 // 页面链接
-message PageLink {
+message LinkAddress {
   int64 id = 1; //ID
   int64 category_id = 2; //分类ID
   string type = 3; //类型
@@ -32,10 +32,10 @@ message PageLink {
   string status = 9; //状态
   int64 updated_at = 10; //创建时间
   int64 created_at = 11; //修改时间
-  PageCategory category =12;
+  LinkCategory category =12;
 }
 // 页面链接请求参数
-message PageLinkRequest {
+message LinkAddressRequest {
   int32 top = 1;
   int64 paged = 2;
   int64 page_size = 3;
@@ -51,9 +51,9 @@ message PageLinkRequest {
   string status = 14; //状态
 }
 // 页面链接响应数据
-message PageLinkResponse {
+message LinkAddressResponse {
   string msg = 1;
   common.Pager pager = 2;
-  PageLink entity = 3;
-  repeated PageLink items = 4;
+  LinkAddress entity = 3;
+  repeated LinkAddress items = 4;
 }

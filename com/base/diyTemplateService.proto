@@ -1,0 +1,61 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 装修模版服务
+service DiyTemplateService {
+  // 装修模版新增
+  rpc Create (DiyTemplate) returns (DiyTemplateResponse) {}
+  // 装修模版修改
+  rpc Update (DiyTemplate) returns (DiyTemplateResponse) {}
+  // 装修模版删除
+  rpc Delete (DiyTemplate) returns (DiyTemplateResponse) {}
+  // 装修模版详情
+  rpc Detail (DiyTemplate) returns (DiyTemplateResponse) {}
+  // 装修模版内容
+  rpc GetTemplate (DiyTemplate) returns (DiyTemplateResponse) {}
+  // 装修模版查询
+  rpc Search (DiyTemplateRequest) returns (DiyTemplateResponse) {}
+  // 装修模版列表
+  rpc List (DiyTemplateRequest) returns (DiyTemplateResponse) {}
+}
+// 装修模版
+message DiyTemplate {
+  int64 id = 1; //ID
+  string name = 2; //模板名称
+  string type = 3; //模板类型
+  string industry = 4; //适用行业
+  string image_url = 5; //预览图片
+  string is_vip = 6; //VIP专属
+  string is_free = 7; //是否免费
+  int64 price = 8; //价格
+  string author_name = 9; //作者名称
+  string description = 10; //模版描述
+  bytes template = 11; //模版内容
+  int64 updated_at = 12; //创建时间
+  int64 created_at = 13; //修改时间
+}
+// 装修模版请求参数
+message DiyTemplateRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string name = 11; //模板名称
+  string type = 12; //模板类型
+  string is_vip = 13; //VIP专属
+  string is_free = 14; //是否免费
+  string author_name = 15; //作者名称
+}
+// 装修模版响应数据
+message DiyTemplateResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  DiyTemplate entity = 3;
+  repeated DiyTemplate items = 4;
+}
