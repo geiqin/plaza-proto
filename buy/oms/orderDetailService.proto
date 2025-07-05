@@ -7,7 +7,7 @@ message OrderDetail {
     int64 id = 1; //ID
     int64 order_id = 2; //订单ID
     int64 spu_id = 3; //商品ID
-    string sku_key = 4; //SKUKey
+    string unique = 4; //SKUKey
     string spu_name = 5; //商品名称
     string image_url = 6; //图片路径
     int64 spec_weight = 7; //规格重量
@@ -51,7 +51,7 @@ message LastAftersale {
     int64  order_id =3; //订单ID
     int64  order_detail_id =4; //订单详情id
     int64  spu_id =5; //SpuId
-    string  sku_key =6; //SkuKey
+    string  unique =6; //Unique
     int64  member_id =7; //用户id
     string type =8; //业务类型（0仅退款, 1退货退款）
     string refund_method =9; //退款类型（0原路退回, 1退至钱包, 2手动处理）

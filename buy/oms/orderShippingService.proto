@@ -42,7 +42,7 @@ message OrderShipping{
 message OrderShippingGoods{
     int64  detail_id =1;//订单明细ID
     int64  spu_id =2;//商品ID
-    string sku_key =4;//货品MD5KEY
+    string unique =4;//货品MD5KEY
     int64  number =7;//商品数量
     string name =8;//商品名称
     string unit_name =9;//商品单位

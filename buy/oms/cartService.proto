@@ -23,7 +23,7 @@ service CartService {
 message CartItem  {
     int64 id =1;//ID
     int64 spu_id =2;//商品spuId
-    string sku_key =3;//商品规格sku_key
+    string unique =3;//商品规格unique
     int64 unit_price =4;//商品单价
     int64 true_price =5;//实际价格
     int64 true_stock =7;//实际库存
@@ -76,7 +76,7 @@ message CartRequest {
     //以下为自定义参数
     int64 member_id = 11; //会员ID
     int64 spu_id = 12; //商品ID
-    string sku_key = 13; //SKUKey
+    string unique = 13; //SKUKey
     string name = 14; //商品名称
 
     string type =20;

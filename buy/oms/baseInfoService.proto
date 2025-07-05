@@ -26,8 +26,8 @@ message ProductInfo {
 	int64 category_id = 4; //商品分类
 	int64 taxonomy_id = 5; //商品类目
 	int32 brand_id = 6; //品牌
-	string name = 7; //商品名称
-	string code = 8; //SPU编码
+	string spu_name = 7; //商品名称
+	string spu_code = 8; //SPU编码
 	string sell_mode = 9; //销售模式
 	string image_url = 10; //商品主图
 	string video_url = 11; //主图视频
@@ -47,14 +47,14 @@ message ProductInfo {
 	int64 max_original_price = 26; //最大原价
 	int64 min_price = 27; //最低价格
 	int64 max_price = 28; //最高价格
-	int64 buy_min_number = 29; //最低起购数量
-	int64 buy_max_number = 30; //最大购买数量
-	int64 photo_count = 31; //图片数量
-	int64 access_count = 32; //访问次数
-	int64 sale_count = 33; //实际销量
-	int64 initial_sales = 34; //初始销量
-	string button_mode = 35; //立即购买按钮
-	string button_custom = 36; //按钮自定义名称
+	int64 photo_count = 29; //图片数量
+	int64 access_count = 30; //访问次数
+	int64 sale_count = 31; //实际销量
+	int64 min_qty = 32; //起购数量
+	string is_limit = 33; // 是否开启限购（0否, 1是）
+	string limit_type = 34; //限购类型: 1单次限购2永久限购
+	int64 limit_num = 35; //限购数量
+	int64 fictions = 36; //虚拟销量
 	repeated string logistics_types = 37; //支持物流类型
 	string express_fee_type = 38; //快递运费类型
 	int64 express_uniform_fee = 39; //快递统一运费
@@ -65,7 +65,7 @@ message ProductInfo {
 	string status = 52; //商品状态
 	//sku信息
 	int64 spu_id = 62; //商品ID
-	string sku_key = 63; //SKUKey
+	string unique = 63; //SKUKey
 	string coding = 64; //编号
 	string barcode = 65; //条码
 	repeated string more_barcodes = 66; //更多条码

@@ -65,7 +65,7 @@ message Complaint {
   int64 order_id = 4; //订单ID
   string order_no = 5; //订单编号
   int64 first_spu_id = 6; //首个商品ID
-  string first_sku_key = 7; //首个货品Key
+  string first_unique = 7; //首个货品Key
   int64 total_number = 8; //退货总数
   int64 final_amount = 9; //实收金额
   string type = 10; //售后类型
@@ -100,7 +100,7 @@ message ComplaintDetail {
   int64 complaint_id = 2; //售后维权单ID
   int64 order_detail_id = 3; //订单明细ID
   int64 spu_id = 4; //商品ID
-  string sku_key = 5; //SKUKey
+  string unique = 5; //SKUKey
   string name = 6; //商品名称
   string image_url = 7; //图片路径
   string unit_name = 8; //计量单位名称
@@ -123,7 +123,7 @@ message ComplaintSolution {
   string solution_type = 3; //解决方案类型：1全额退款, 2部分退款,3补发商品，4优惠券补偿
   int64 refund_amount = 4; //退款金额
   int64 compensate_spu_id = 5; //补偿商品SpuID
-  string compensate_sku_key = 6; //补偿商品SKUKey
+  string compensate_unique = 6; //补偿商品SKUKey
   int64 compensate_coupon_id = 7; //补偿优惠劵ID
   int64 compensate_number = 8; //补偿数量
   int64 return_address_id = 9; //退货地址ID
@@ -160,7 +160,7 @@ message ComplaintReviewRequest {
   string solution_type = 6; //解决方案类型：1全额退款, 2部分退款,3补发商品，4优惠券补偿
   int64 refund_amount = 7; //退款金额
   int64 compensate_spu_id = 8; //补偿商品SpuID
-  string compensate_sku_key = 9; //补偿商品SKUKey
+  string compensate_unique = 9; //补偿商品SKUKey
   int64 compensate_coupon_id = 10; //补偿优惠劵ID
   int64 compensate_number = 11; //补偿数量
   int64 return_address_id = 12; //退货地址ID
