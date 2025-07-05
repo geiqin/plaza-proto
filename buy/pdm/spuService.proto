@@ -37,8 +37,8 @@ message Spu {
     int64 category_id = 4; //商品分类
     int64 taxonomy_id = 5; //商品类目
     int32 brand_id = 6; //品牌
-    string name = 7; //商品名称
-    string code = 8; //SPU编码
+    string spu_name = 7; //商品名称
+    string spu_code = 8; //SPU编码
     string sell_mode = 9; //销售模式
     string image_url = 10; //商品主图
     string video_url = 11; //主图视频
@@ -59,46 +59,48 @@ message Spu {
     int64 max_original_price = 26; //最大原价
     int64 min_price = 27; //最低价格
     int64 max_price = 28; //最高价格
-    int64 buy_min_number = 29; //最低起购数量
-    int64 buy_max_number = 30; //最大购买数量
     int64 photo_count = 31; //图片数量
     int64 access_count = 32; //访问次数
     int64 sale_count = 33; //实际销量
-    int64 initial_sales = 34; //初始销量
-    string button_mode = 35; //立即购买按钮
-    string button_custom = 36; //按钮自定义名称
-    repeated string logistics_types = 37; //支持物流类型
-    string express_fee_type = 38; //快递运费类型
-    int64 express_fee_price = 39; //快递统一运费
-    int64 express_fee_template_id = 40; //快递运费模板
-    repeated string client_types = 41; //的客户终端
-    int64 detail_template_id = 42; //详情模板
-    string content = 43; //商品内容
-    string selling_desc = 44; //卖点描述
-    string share_desc = 45; //分享描述
-    string seo_title = 46; //SEO标题
-    string seo_keywords = 47; //SEO关键字
-    string seo_desc = 48; //SEO描述
-    int32 sort = 49; //排序
-    string extra_main_id = 50; //扩展业务主要ID
-    string out_system_id = 51; //外部系统ID
-    string status = 52; //商品状态
-    int64 created_at = 53; //创建时间
-    int64 updated_at = 54; //修改时间
-    string show_original_price =60;//显示原价（单值:10, 区间:10.00-20.00）一般用于展示使用
-    string show_price =61;//显示销售价格（单值:10, 区间:10.00-20.00）一般用于展示使用
-    string show_field_original_price_text =62;
-    string show_field_price_text =63;
-    Brand brand = 64;
-    Category category = 65;
-    SpuPresale presale = 66;
-    repeated SpuPhoto photos = 67;
-    repeated Group groups = 68;
-    repeated Sku skus = 69;
-    Sku sku  = 70;
-    repeated Label labels = 71;
-    repeated SpuSpecType spec_types =72;
-    int64 comments_count =76;
+    int64 min_qty = 34; //起购数量
+    string is_limit = 35; // 是否开启限购（0否, 1是）
+    string limit_type = 36; //限购类型: 1单次限购2永久限购
+    int64 limit_num = 37; //限购数量
+    int64 fictions = 38; //虚拟销量
+    string button_mode = 39; //立即购买按钮
+    string button_custom = 40; //按钮自定义名称
+    repeated string logistics_types = 41; //支持物流类型
+    string express_fee_type = 44; //快递运费类型
+    int64 express_fee_price = 45; //快递统一运费
+    int64 express_fee_template_id = 46; //快递运费模板
+    repeated string client_types = 417; //的客户终端
+    int64 detail_template_id = 48; //详情模板
+    string content = 439; //商品内容
+    string selling_desc = 50; //卖点描述
+    string share_desc = 51; //分享描述
+    string seo_title = 52; //SEO标题
+    string seo_keywords = 53; //SEO关键字
+    string seo_desc = 54; //SEO描述
+    int32 sort = 55; //排序
+    string extra_main_id = 56; //扩展业务主要ID
+    string out_system_id = 57; //外部系统ID
+    string status = 58; //商品状态
+    int64 created_at = 59; //创建时间
+    int64 updated_at = 60; //修改时间
+    int64 ot_original_price =61;//显示原价
+    int64 ot_price =62;//显示销售价格
+    int64 ot_vip_price =63;//显示VIP价格
+    int64 ot_promotion_price =64; //促销价（暂时保留）
+    Brand brand = 65;
+    Category category = 66;
+    SpuPresale presale = 67;
+    repeated SpuPhoto photos = 68;
+    repeated Group groups = 69;
+    repeated Sku skus = 70;
+    Sku sku  = 71;
+    repeated Label labels = 72;
+    repeated SpuSpecType spec_types =73;
+    int64 comments_count =74;
     string goods_url =77;
     string content_web =78; //web内容
     string content_app =79; //app内容
@@ -120,7 +122,7 @@ message SpuEdit {
     int64 category_id = 4; //商品分类
     int64 taxonomy_id = 5; //商品类目
     int32 brand_id = 6; //品牌
-    string name = 7; //商品名称
+    string spu_name = 7; //商品名称
     string content = 8; //商品内容
     string selling_desc = 9; //卖点描述
     string share_desc = 10; //分享描述
@@ -139,9 +141,11 @@ message SpuEdit {
     string inventory_deduct_type = 25; //扣减库存类型
     string is_member_right = 26; //购买权限
     string is_member_price = 27; //是否会员折扣价
-    int64 buy_min_number = 32; //最低起购数量
-    int64 buy_max_number = 33; //最大购买数量
-    int64 initial_sales = 37; //初始销售数量
+    int64 min_qty = 32; //起购数量
+    string is_limit = 33; // 是否开启限购（0否, 1是）
+    string limit_type = 34; //限购类型: 1单次限购2永久限购
+    int64 limit_num = 35; //限购数量
+    int64 fictions = 37; //虚拟销量
     string button_mode = 38; //立即购买按钮
     string button_custom = 39; //按钮自定义名称
     repeated string logistics_types = 40; //支持物流类型
@@ -169,7 +173,7 @@ message SpuEdit {
 message Sku {
     int64 id = 1; //ID
     int64 spu_id = 2; //商品ID
-    string sku_key = 3; //SKUKey
+    string unique = 3; //唯一标识
     string coding = 4; //编号
     string barcode = 5; //条码
     repeated string more_barcodes = 6; //更多条码
@@ -198,13 +202,6 @@ message SpuPhoto {
     int64 updated_at = 9;
 }
 
-//显示详情数据
-message ShowDetailData {
-
-    map<string,Sku> productValue =2;
-}
-
-
 
 // 商品Sku请求参数
 message SkuRequest {
@@ -221,11 +218,11 @@ message SkuRequest {
     int64 spu_id = 11; //商品ID
     string coding = 12; //编号
     string barcode = 13; //条码
-    string sku_key = 14; //唯一标识
+    string unique = 14; //唯一标识
     string extra_detail_id =15; //扩展业务明细ID
     repeated int64 spu_ids =16;
     repeated int64 sku_ids =17;
-    repeated string sku_key_list =18;
+    repeated string unique_list =18;
 }
 
 // 商品库请求参数
@@ -245,11 +242,11 @@ message SpuRequest {
     int64 category_id = 13; //商品分类
     int64 taxonomy_id = 14; //商品类目
     int32 brand_id = 15; //品牌
-    string name = 16; //商品名称
+    string spu_name = 16; //商品名称
     string is_virtual = 17; //虚拟商品
     string is_many_spec = 18; //多规格商品
     string is_open_weigh = 19; //开启称重
-    string code = 20; //SPU编码
+    string spu_code = 20; //SPU编码
     string is_multi_barcode = 21; //一品多码
     int32 unit_id = 22; //计量单位ID
     string unit_type = 23; //计量单位类型

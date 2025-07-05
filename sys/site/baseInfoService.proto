@@ -3,6 +3,13 @@ package services;
 option go_package ="/.;services";
 
 
+message PicLinkInfo{
+    int32 id =1;
+    string name =2;
+    string pic =3;
+    string url =4;
+}
+
 //内部商品信息(基于SKU的商品)
 message GoodsInfo {
     int64 id = 1;

@@ -47,8 +47,20 @@ type DiyService interface {
 	Create(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
 	// DIY修改
 	Update(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	// DIY复制
+	Copy(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
 	// DIY删除
 	Delete(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	// DIY设为首页
+	SwitchHome(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	// DIY重命名
+	Rename(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	//修改商品分类
+	UpdateCategory(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	//修改个人中心
+	UpdateUserCenter(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	//修改主体风格
+	UpdateThemeStyle(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
 	// DIY默认
 	Default(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
 	// DIY获取
@@ -57,7 +69,16 @@ type DiyService interface {
 	Search(ctx context.Context, in *DiyRequest, opts ...client.CallOption) (*DiyResponse, error)
 	//获取版本
 	GetVersion(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	//获取风格
 	ColorChange(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	//获取个人中心
+	GetUserCenter(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	//使用模版
+	UseTemplate(ctx context.Context, in *DiyRequest, opts ...client.CallOption) (*DiyResponse, error)
+	//获取个人中心Diy
+	GetUserCenterDiy(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	//保存个人中心Diy
+	SaveUserCenterDiy(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
 }
 
 type diyService struct {
@@ -92,8 +113,68 @@ func (c *diyService) Update(ctx context.Context, in *Diy, opts ...client.CallOpt
 	return out, nil
 }
 
+func (c *diyService) Copy(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.Copy", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *diyService) Delete(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
 	req := c.c.NewRequest(c.name, "DiyService.Delete", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diyService) SwitchHome(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.SwitchHome", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diyService) Rename(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.Rename", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diyService) UpdateCategory(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.UpdateCategory", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diyService) UpdateUserCenter(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.UpdateUserCenter", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diyService) UpdateThemeStyle(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.UpdateThemeStyle", in)
 	out := new(DiyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -152,6 +233,46 @@ func (c *diyService) ColorChange(ctx context.Context, in *Diy, opts ...client.Ca
 	return out, nil
 }
 
+func (c *diyService) GetUserCenter(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.GetUserCenter", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diyService) UseTemplate(ctx context.Context, in *DiyRequest, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.UseTemplate", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diyService) GetUserCenterDiy(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.GetUserCenterDiy", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diyService) SaveUserCenterDiy(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
+	req := c.c.NewRequest(c.name, "DiyService.SaveUserCenterDiy", in)
+	out := new(DiyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DiyService service
 
 type DiyServiceHandler interface {
@@ -159,8 +280,20 @@ type DiyServiceHandler interface {
 	Create(context.Context, *Diy, *DiyResponse) error
 	// DIY修改
 	Update(context.Context, *Diy, *DiyResponse) error
+	// DIY复制
+	Copy(context.Context, *Diy, *DiyResponse) error
 	// DIY删除
 	Delete(context.Context, *Diy, *DiyResponse) error
+	// DIY设为首页
+	SwitchHome(context.Context, *Diy, *DiyResponse) error
+	// DIY重命名
+	Rename(context.Context, *Diy, *DiyResponse) error
+	//修改商品分类
+	UpdateCategory(context.Context, *Diy, *DiyResponse) error
+	//修改个人中心
+	UpdateUserCenter(context.Context, *Diy, *DiyResponse) error
+	//修改主体风格
+	UpdateThemeStyle(context.Context, *Diy, *DiyResponse) error
 	// DIY默认
 	Default(context.Context, *Diy, *DiyResponse) error
 	// DIY获取
@@ -169,19 +302,38 @@ type DiyServiceHandler interface {
 	Search(context.Context, *DiyRequest, *DiyResponse) error
 	//获取版本
 	GetVersion(context.Context, *Diy, *DiyResponse) error
+	//获取风格
 	ColorChange(context.Context, *Diy, *DiyResponse) error
+	//获取个人中心
+	GetUserCenter(context.Context, *Diy, *DiyResponse) error
+	//使用模版
+	UseTemplate(context.Context, *DiyRequest, *DiyResponse) error
+	//获取个人中心Diy
+	GetUserCenterDiy(context.Context, *Diy, *DiyResponse) error
+	//保存个人中心Diy
+	SaveUserCenterDiy(context.Context, *Diy, *DiyResponse) error
 }
 
 func RegisterDiyServiceHandler(s server.Server, hdlr DiyServiceHandler, opts ...server.HandlerOption) error {
 	type diyService interface {
 		Create(ctx context.Context, in *Diy, out *DiyResponse) error
 		Update(ctx context.Context, in *Diy, out *DiyResponse) error
+		Copy(ctx context.Context, in *Diy, out *DiyResponse) error
 		Delete(ctx context.Context, in *Diy, out *DiyResponse) error
+		SwitchHome(ctx context.Context, in *Diy, out *DiyResponse) error
+		Rename(ctx context.Context, in *Diy, out *DiyResponse) error
+		UpdateCategory(ctx context.Context, in *Diy, out *DiyResponse) error
+		UpdateUserCenter(ctx context.Context, in *Diy, out *DiyResponse) error
+		UpdateThemeStyle(ctx context.Context, in *Diy, out *DiyResponse) error
 		Default(ctx context.Context, in *Diy, out *DiyResponse) error
 		Get(ctx context.Context, in *Diy, out *DiyResponse) error
 		Search(ctx context.Context, in *DiyRequest, out *DiyResponse) error
 		GetVersion(ctx context.Context, in *Diy, out *DiyResponse) error
 		ColorChange(ctx context.Context, in *Diy, out *DiyResponse) error
+		GetUserCenter(ctx context.Context, in *Diy, out *DiyResponse) error
+		UseTemplate(ctx context.Context, in *DiyRequest, out *DiyResponse) error
+		GetUserCenterDiy(ctx context.Context, in *Diy, out *DiyResponse) error
+		SaveUserCenterDiy(ctx context.Context, in *Diy, out *DiyResponse) error
 	}
 	type DiyService struct {
 		diyService
@@ -202,8 +354,32 @@ func (h *diyServiceHandler) Update(ctx context.Context, in *Diy, out *DiyRespons
 	return h.DiyServiceHandler.Update(ctx, in, out)
 }
 
+func (h *diyServiceHandler) Copy(ctx context.Context, in *Diy, out *DiyResponse) error {
+	return h.DiyServiceHandler.Copy(ctx, in, out)
+}
+
 func (h *diyServiceHandler) Delete(ctx context.Context, in *Diy, out *DiyResponse) error {
 	return h.DiyServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *diyServiceHandler) SwitchHome(ctx context.Context, in *Diy, out *DiyResponse) error {
+	return h.DiyServiceHandler.SwitchHome(ctx, in, out)
+}
+
+func (h *diyServiceHandler) Rename(ctx context.Context, in *Diy, out *DiyResponse) error {
+	return h.DiyServiceHandler.Rename(ctx, in, out)
+}
+
+func (h *diyServiceHandler) UpdateCategory(ctx context.Context, in *Diy, out *DiyResponse) error {
+	return h.DiyServiceHandler.UpdateCategory(ctx, in, out)
+}
+
+func (h *diyServiceHandler) UpdateUserCenter(ctx context.Context, in *Diy, out *DiyResponse) error {
+	return h.DiyServiceHandler.UpdateUserCenter(ctx, in, out)
+}
+
+func (h *diyServiceHandler) UpdateThemeStyle(ctx context.Context, in *Diy, out *DiyResponse) error {
+	return h.DiyServiceHandler.UpdateThemeStyle(ctx, in, out)
 }
 
 func (h *diyServiceHandler) Default(ctx context.Context, in *Diy, out *DiyResponse) error {
@@ -224,4 +400,20 @@ func (h *diyServiceHandler) GetVersion(ctx context.Context, in *Diy, out *DiyRes
 
 func (h *diyServiceHandler) ColorChange(ctx context.Context, in *Diy, out *DiyResponse) error {
 	return h.DiyServiceHandler.ColorChange(ctx, in, out)
+}
+
+func (h *diyServiceHandler) GetUserCenter(ctx context.Context, in *Diy, out *DiyResponse) error {
+	return h.DiyServiceHandler.GetUserCenter(ctx, in, out)
+}
+
+func (h *diyServiceHandler) UseTemplate(ctx context.Context, in *DiyRequest, out *DiyResponse) error {
+	return h.DiyServiceHandler.UseTemplate(ctx, in, out)
+}
+
+func (h *diyServiceHandler) GetUserCenterDiy(ctx context.Context, in *Diy, out *DiyResponse) error {
+	return h.DiyServiceHandler.GetUserCenterDiy(ctx, in, out)
+}
+
+func (h *diyServiceHandler) SaveUserCenterDiy(ctx context.Context, in *Diy, out *DiyResponse) error {
+	return h.DiyServiceHandler.SaveUserCenterDiy(ctx, in, out)
 }

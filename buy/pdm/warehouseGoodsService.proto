@@ -35,7 +35,7 @@ message WarehouseGoodsSpec {
     int64 warehouse_goods_id =2;//仓库商品id
     int64 warehouse_id =3;//仓库id
     int64 spu_id =4;//商品id
-    string sku_key =5;//SKUKey
+    string unique =5;//SKUKey
     int64  inventory =6;//库存
     repeated SkuSpecInfo spec =7;//规格值
     string spec_desc =8;

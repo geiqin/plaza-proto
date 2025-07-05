@@ -22,7 +22,7 @@ message WorkerManUrlData {
 
 message BasicConfigData {
   string balance_func_status =1;
-  string invoice_func_status =2;
+  bool invoice_func_status =2;
   string member_card_status =3;
   string member_func_status =4;
   string member_price_status =5;
@@ -30,7 +30,7 @@ message BasicConfigData {
   bool offline_pay_status =7;
   bool pay_weixin_open =8;
   string  phone_auth_switch =9;
-  string special_invoice_status =10;
+  bool special_invoice_status =10;
   string store_self_mention =11;
   string wap_login_logo =12;
   string wechat_auth_switch =13;

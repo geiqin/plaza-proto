@@ -1,0 +1,49 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "memberService.proto";
+
+// 会员访问服务
+service MemberVisitService {
+  // 会员访问新增
+  rpc Create (MemberVisit) returns (MemberVisitResponse) {}
+  // 会员访问删除
+  rpc Delete (MemberVisit) returns (MemberVisitResponse) {}
+  // 会员访问获取
+  rpc Get (MemberVisit) returns (MemberVisitResponse) {}
+  // 会员访问查询
+  rpc Search (MemberVisitRequest) returns (MemberVisitResponse) {}
+}
+// 会员访问
+message MemberVisit {
+  int64 id = 1; //ID
+  int64 member_id = 2; //会员ID
+  string url = 3; //访问路径
+  string ip = 4; //用户IP
+  string channel_type = 5; //访问端标识
+  int64 updated_at = 6; //创建时间
+  int64 created_at = 7; //修改时间
+  Member member =10;
+}
+// 会员访问请求参数
+message MemberVisitRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 member_id = 11; //会员ID
+  string channel_type = 12; //访问端标识
+}
+// 会员访问响应数据
+message MemberVisitResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  MemberVisit entity = 3;
+  repeated MemberVisit items = 4;
+}

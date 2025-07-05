@@ -38,7 +38,7 @@ message BuyOrderBase {
 message BuyOrderItem {
     int64 cart_id = 1; //购车ID
     int64 spu_id = 2; //商品ID
-    string sku_key = 3; //SKUKey
+    string unique = 3; //SKUKey
     int64 spec_weight = 4; //规格重量
     int64 spec_volume = 5; //规格体积
     int64 quantity = 6; //购买数量
@@ -53,7 +53,7 @@ message BuyOrderItem {
 message CartItem {
     int64 id =1; //购车ID
     int64 spu_id =2; //商品ID
-    string sku_key =3;//规格sku_key
+    string unique =3;//规格unique
     int64 quantity =4; //数量
 }
 

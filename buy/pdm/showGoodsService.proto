@@ -3,15 +3,43 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 
-// 显示服务
-service ShowService {
-  // 显示商品详情
-  rpc GoodsDetail (ShowRequest) returns (ShowResponse) {}
-  // 显示商品列表
-  rpc GoodsList (ShowRequest) returns (ShowResponse) {}
+// 显示商品服务
+service ShowGoodsService {
+  // 商品详情
+  rpc Detail (ShowGoodsRequest) returns (ShowGoodsResponse) {}
+  // 商品列表
+  rpc List (ShowGoodsRequest) returns (ShowGoodsResponse) {}
+  // 获取到手价
+  rpc RealPrice (ShowGoodsRequest) returns (ShowGoodsResponse) {}
+  // 商品二维码
+  rpc Qrcode (ShowGoodsRequest) returns (ShowGoodsResponse) {}
+  // 商品海报
+  rpc Poster (ShowGoodsRequest) returns (ShowGoodsResponse) {}
 }
+
+message ShowRealPriceData {
+  bool is_vip =1;
+  int64 level_price =2;
+  int64 member_price =3;
+  int64 price =4;
+  bool product_is_vip =5;
+  int64 real_price =6;
+  bool user_is_member =7;
+}
+
+message ShowQrcodeData {
+  string url =1;
+  bytes code =2;
+}
+
+
+message ShowPosterData {
+  string url =1;
+  bytes code =2;
+}
+
 // 显示商品数据
-message ShowGoodsDetailData{
+message ShowDetailData{
   int64 uid =1;
   bool svip_open =2;
   bool svip_price_open =3;
@@ -30,6 +58,7 @@ message ShowGoodsDetailData{
   bytes activity =21;
   string mapKey =22;
   string routine_contact_type =23;
+  string spec_unique =24;
 }
 
 //显示商品信息（主要在列表）
@@ -40,20 +69,21 @@ message ShowGoodsInfo{
   string spu_code = 8; //SPU编码
   string image = 9; //商品主图
   string unit_name = 10; //计量单位名称
-  float price =11; //销售价
-  float ot_price =12; //划线价
+  int64 price =11; //销售价
+  int64 ot_price =12; //划线价
   bool is_vip =13;//是否会员商品
-  float vip_price =14; //会员价
+  int64 vip_price =14; //会员价
   bool svip_price_open =15; //开启SVIP价格
-  float svip_economize_price =16; //SVIP节省金额
+  int64 svip_economize_price =16; //SVIP节省金额
   int64 sales =17; //销量
   int64 stock =18; //库存量
-  int32 min_qty =19;
+  int64 min_qty =19;
   bool is_many_spec = 20; //多规格商品
   bool is_open_weigh = 21; //开启称重
   bool presale =22; //是否预售
   bool is_virtual =23;
   bool cart_button =24;
+  repeated string attrPics =25;
 }
 
 message ShowGoodsAttr{
@@ -90,16 +120,16 @@ message ShowGoodsSpu{
   string unit_name = 18; //计量单位名称
   string unit_type = 19; //计量单位类型
   bool is_shelve = 22; //是否上架
-  float min_price = 27; //最低价格
-  float max_price = 28; //最高价格
-  float price =29; //销售价
-  float ot_price =30; //划线价
-  float cost =31; //成本价
-  float postage =32; //运费
+  int64 min_price = 27; //最低价格
+  int64 max_price = 28; //最高价格
+  int64 price =29; //销售价
+  int64 ot_price =30; //划线价
+  int64 cost =31; //成本价
+  int64 postage =32; //运费
   bool is_vip =33;//是否会员商品
   float vip_price =34; //会员价
   bool svip_price_open =35; //开启SVIP价格
-  float svip_economize_price =36; //SVIP节省金额
+  int64 svip_economize_price =36; //SVIP节省金额
   int64 sales =39; //销量
   int64 stock =40; //库存量
   int64 browse =41; //浏览量
@@ -110,8 +140,8 @@ message ShowGoodsSpu{
   bool presale_pay_status =46; //预售支付状态
   bool is_limit =50;
   string limit_type =51;
-  int32 limit_num =52;
-  int32 min_qty =53;
+  int64 limit_num =52;
+  int64 min_qty =53;
   bool is_virtual =60;
   string virtual_type =61;
   bool user_collect =66; //是否收藏
@@ -126,6 +156,7 @@ message ShowGoodsSpu{
   string seo_keywords =76; //SEO关键字
   string seo_desc =77; //SEO描述
   string status = 78; //商品状态
+  string default_sku =79; //默认选中SKU
   /*
   bool is_show =54; //--》
   bool is_hot =55;
@@ -146,17 +177,17 @@ message ShowGoodsSku{
   string suk =3; //"黑色,46mm",
   int64 stock =4;
   int64 sales =5; //销量
-  float price =6; //销售价(元)
+  int64 price =6; //销售价(元)
   string image =7; //图片
   string unique =8; //唯一标识
-  float cost =9; //成本价
+  int64 cost =9; //成本价
   string bar_code =10; //商品条码
-  float ot_price  =11; //原始价(元)
-  float vip_price =12; //会员价(元)
+  int64 ot_price  =11; //原始价(元)
+  int64 vip_price =12; //会员价(元)
   float weight =13; //重量千克
   float volume =15; //体积
-  float brokerage =16; //推广佣金
-  float brokerage_two =17;//二级推广佣金
+  int64 brokerage =16; //推广佣金
+  int64 brokerage_two =17;//二级推广佣金
   string type =18;
   int64 quota =19; ///配额数量
   bool quota_show =20; //是否显示配额
@@ -167,10 +198,18 @@ message ShowGoodsSku{
 }
 
 // 商品库请求参数
-message ShowRequest {
+message ShowGoodsRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
   int64 id = 8;
-  string command = 9;
   //以下为自定义参数
+  int64 spu_id = 9;
+  string unique =10;
   string type = 11; //商品类型
   int64 shop_id = 12; //分店ID
   int64 category_id = 13; //商品分类
@@ -187,11 +226,21 @@ message ShowRequest {
   int64 inventory = 24; //库存
   string is_shelve = 25; //是否上架
   string sell_mode = 26; //销售模式
+  string command = 27;
 }
+
 // 商品库响应数据
-message ShowResponse {
-  string msg = 1;
+message ShowListData {
   common.Pager pager = 2;
   repeated ShowGoodsInfo list = 3;
-  ShowGoodsDetailData goods = 4;
+}
+
+// 商品库响应数据
+message ShowGoodsResponse {
+  string msg = 1;
+  ShowListData list = 3;
+  ShowDetailData detail = 4;
+  ShowRealPriceData realPrice =5;
+  ShowQrcodeData qrcode =6;
+  ShowPosterData poster =7;
 }

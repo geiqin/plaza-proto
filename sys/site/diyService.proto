@@ -2,14 +2,32 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "templateService.proto";
+
 // DIY服务
 service DiyService {
   // DIY新增
   rpc Create (Diy) returns (DiyResponse) {}
   // DIY修改
   rpc Update (Diy) returns (DiyResponse) {}
+  // DIY复制
+  rpc Copy (Diy) returns (DiyResponse) {}
   // DIY删除
   rpc Delete (Diy) returns (DiyResponse) {}
+
+  // DIY设为首页
+  rpc SwitchHome (Diy) returns (DiyResponse) {}
+  // DIY重命名
+  rpc Rename (Diy) returns (DiyResponse) {}
+
+  //修改商品分类
+  rpc UpdateCategory (Diy) returns (DiyResponse) {}
+  //修改个人中心
+  rpc UpdateUserCenter (Diy) returns (DiyResponse) {}
+  //修改主体风格
+  rpc UpdateThemeStyle (Diy) returns (DiyResponse) {}
+
+
   // DIY默认
   rpc Default (Diy) returns (DiyResponse) {}
   // DIY获取
@@ -18,8 +36,17 @@ service DiyService {
   rpc Search (DiyRequest) returns (DiyResponse) {}
  //获取版本
   rpc GetVersion (Diy) returns (DiyResponse) {}
-
+  //获取风格
   rpc ColorChange (Diy) returns (DiyResponse) {}
+  //获取个人中心
+  rpc GetUserCenter(Diy) returns (DiyResponse) {}
+  //使用模版
+  rpc UseTemplate (DiyRequest) returns (DiyResponse) {}
+
+  //获取个人中心Diy
+  rpc GetUserCenterDiy(Diy) returns (DiyResponse) {}
+  //保存个人中心Diy
+  rpc SaveUserCenterDiy(Diy) returns (DiyResponse) {}
 }
 // DIY
 message Diy {
@@ -37,13 +64,15 @@ message Diy {
   string is_bg_color = 12; //颜色是否选中
   string is_bg_pic = 13; //背景图是否选中
   string is_del = 14; //是否删除
-  string order_status = 15; //个人中心订单样式
-  string my_banner_status = 16; //个人中心banner是否显示
+  int32 order_status = 15; //个人中心订单样式
+  int32 my_banner_status = 16; //个人中心banner是否显示
   string is_diy = 17; //是否diy
   string title = 18; //diy顶部title
-  string status = 19; //是否使用
+  int32 status = 19; //是否使用
   int64 created_at = 20; //创建时间
   int64 updated_at = 21; //修改时间
+  string valueJson = 22; //页面数据JSON
+  int32 color_change =23; //主题色系
 }
 
 message GetVersionData {
@@ -51,10 +80,19 @@ message GetVersionData {
   string version =2;
 }
 
+
 message ColorChangeData {
   bool is_diy =1;
-  string status =2;
+  int32 status =2;
 }
+
+message UserCenterData {
+  bool is_diy =1;
+  int32 status =2;
+  int32 order_status = 3; //个人中心订单样式
+  int32 my_banner_status = 4; //个人中心banner是否显示
+}
+
 
 // DIY请求参数
 message DiyRequest {
@@ -74,10 +112,12 @@ message DiyRequest {
   string is_bg_color = 15; //颜色是否选中
   string is_bg_pic = 16; //背景图是否选中
   string is_del = 17; //是否删除
-  string order_status = 18; //个人中心订单样式
-  string my_banner_status = 19; //个人中心banner是否显示
+  int32 order_status = 18; //个人中心订单样式
+  int32 my_banner_status = 19; //个人中心banner是否显示
   string is_diy = 20; //是否diy
-  string status = 21; //是否使用
+  int32 status = 21; //是否使用
+  int64 template_type = 22; //模版类型：1-通用模版，2-我的模版
+  int64 template_id = 23; //模版ID
 }
 // DIY响应数据
 message DiyResponse {
@@ -85,7 +125,9 @@ message DiyResponse {
   common.Pager pager = 2;
   Diy entity = 3;
   repeated Diy items = 4;
-  bytes bytes =6;
-  GetVersionData get_version =5;
-  ColorChangeData color_change =7;
+  bytes bytes =5;
+  ColorChangeData color_change =6;
+  GetVersionData get_version =7;
+  UserCenterData get_user_center =8;
+  Template use_template =9;
 }
