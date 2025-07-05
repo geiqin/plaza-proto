@@ -93,7 +93,7 @@ message PurchaseInfo {
 
 message PurchaseItemInfo {
 	int64 spu_id = 1; //商品ID
-	string sku_key = 2; //SKUKey
+	string unique = 2; //SKUKey
 	int64 spec_weight = 3; //规格重量
 	int64 spec_volume = 4; //规格体积
 	int64 quantity = 5; //购买数量
