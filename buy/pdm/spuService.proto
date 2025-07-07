@@ -53,14 +53,15 @@ message Spu {
     int64 inventory = 20; //库存
     string inventory_deduct_type = 21; //库存扣减类型
     string is_shelve = 22; //是否上架
-    string is_member_right = 23; //购买权限
-    string is_member_price = 24; //是否会员折扣价
-    int64 min_original_price = 25; //最低原价
-    int64 max_original_price = 26; //最大原价
-    int64 min_price = 27; //最低价格
-    int64 max_price = 28; //最高价格
+    string is_buy_right = 23; //是否开启购买权限
+    string is_vip_price = 24; //是否开启会员价
+    string vip_product = 25; //VIP专属产品
+    int64 min_original_price = 26; //最低原价
+    int64 max_original_price = 27; //最大原价
+    int64 min_price = 28; //最低价格
+    int64 max_price = 29; //最高价格
     int64 photo_count = 31; //图片数量
-    int64 access_count = 32; //访问次数
+    int64 browse_count = 32; //访问次数
     int64 sale_count = 33; //实际销量
     int64 min_qty = 34; //起购数量
     string is_limit = 35; // 是否开启限购（0否, 1是）
@@ -82,7 +83,7 @@ message Spu {
     string seo_keywords = 53; //SEO关键字
     string seo_desc = 54; //SEO描述
     int32 sort = 55; //排序
-    string extra_main_id = 56; //扩展业务主要ID
+    string ext_object_id = 56; //扩展业务主要ID
     string out_system_id = 57; //外部系统ID
     string status = 58; //商品状态
     int64 created_at = 59; //创建时间
@@ -139,8 +140,9 @@ message SpuEdit {
     string is_shelve = 23; //是否上架
     string sell_mode = 24; //销售模式
     string inventory_deduct_type = 25; //扣减库存类型
-    string is_member_right = 26; //购买权限
-    string is_member_price = 27; //是否会员折扣价
+    string is_buy_right = 26; //购买权限
+    string is_vip_price = 27; //是否会员折扣价
+    string vip_product =28; //VIP专属产品
     int64 min_qty = 32; //起购数量
     string is_limit = 33; // 是否开启限购（0否, 1是）
     string limit_type = 34; //限购类型: 1单次限购2永久限购
@@ -185,8 +187,8 @@ message Sku {
     int64 volume = 12; //体积
     repeated SkuSpecInfo spec = 13; //规格信息
     string spec_desc = 14; //规格描述
-    string extra_detail_id = 15; //扩展业务明细ID
-    string out_system_id = 16; //外部系统ID
+    string ext_object_child_id = 15; //扩展业务明细ID
+    string out_system_child_id = 16; //外部系统子ID
     int64 created_at = 17; //创建时间
     int64 updated_at = 18; //修改时间
     Spu spu =19;
@@ -219,7 +221,7 @@ message SkuRequest {
     string coding = 12; //编号
     string barcode = 13; //条码
     string unique = 14; //唯一标识
-    string extra_detail_id =15; //扩展业务明细ID
+    string ext_object_child_id =15; //扩展业务明细ID
     repeated int64 spu_ids =16;
     repeated int64 sku_ids =17;
     repeated string unique_list =18;
@@ -254,15 +256,15 @@ message SpuRequest {
     string is_shelve = 25; //是否上架
     string sell_mode = 26; //销售模式
     string inventory_deduct_type = 27; //库存扣减类型
-    string is_member_right = 28; //购买权限
-    string is_member_price = 29; //是否会员折扣价
+    string is_buy_right = 28; //购买权限
+    string is_vip_price = 29; //是否会员折扣价
     string logistics_fee_mode = 30; //运费模式
     int64 logistics_fee_template_id = 31; //运费模板
     string primary_label = 32; //关键标签
     int64 detail_template_id = 33; //详情模板
     string status = 34; //商品状态
-    string extra_main_id =35; //扩展业务主要ID
-    string extra_detail_id =36; //扩展业务明细ID
+    string ext_object_id =35; //扩展业务主要ID
+    string ext_object_child_id =36; //扩展业务明细ID
     string out_system_id =37; //外部系统ID
 }
 // 商品库响应数据

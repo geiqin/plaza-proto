@@ -15,6 +15,8 @@ service ShowGoodsService {
   rpc Qrcode (ShowGoodsRequest) returns (ShowGoodsResponse) {}
   // 商品海报
   rpc Poster (ShowGoodsRequest) returns (ShowGoodsResponse) {}
+  // 获取属性
+  rpc GetAttr (ShowGoodsRequest) returns (ShowGoodsResponse) {}
 }
 
 message ShowRealPriceData {
@@ -36,6 +38,13 @@ message ShowQrcodeData {
 message ShowPosterData {
   string url =1;
   bytes code =2;
+}
+
+// 商品属性数据
+message ShowGetAttrData{
+  ShowGoodsSpu goodsInfo =1;
+  repeated ShowGoodsAttr productAttr =2;
+  map<string,ShowGoodsSku> productValue =3;
 }
 
 // 显示商品数据
@@ -243,4 +252,5 @@ message ShowGoodsResponse {
   ShowRealPriceData realPrice =5;
   ShowQrcodeData qrcode =6;
   ShowPosterData poster =7;
+  ShowGetAttrData getAttr =8;
 }
