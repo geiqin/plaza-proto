@@ -88,6 +88,7 @@ message ProductAttrInfo {
     int64 created_at = 77; //创建时间
     int64 updated_at = 78; //修改时间
     int64 vip_price =79; //VIP价格
+    string image = 80; //商品规格图
 }
 
 message ProductRequest {
