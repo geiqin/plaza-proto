@@ -70,10 +70,10 @@ message Member {
     int64 birthday = 7; //会员生日
     int64 province_id = 8; //所在省ID
     int64 city_id = 9; //所在市ID
-    int64 county_id = 10; //所在区ID
+    int64 district_id = 10; //所在区ID
     string province_name = 11; //所在省
     string city_name = 12; //所在市
-    string county_name = 13; //所在区
+    string district_name = 13; //所在区
     string address = 14; //详细地址
     string email = 15; //邮箱
     string mobile = 16; //手机号
@@ -131,10 +131,10 @@ message MemberRequest {
     string type = 11; //类型
     int64 province_id = 12; //所在省ID
     int64 city_id = 13; //所在市ID
-    int64 county_id = 14; //所在区ID
+    int64 district_id = 14; //所在区ID
     string province_name = 15; //所在省
     string city_name = 16; //所在市
-    string county_name = 17; //所在区
+    string district_name = 17; //所在区
     int32 level_id = 18; //免费等级
     int64 referrer_id = 19; //推荐人
     string is_scatter = 20; //是否散客

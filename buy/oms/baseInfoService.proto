@@ -21,6 +21,7 @@ message PaymentInfo {
 
 //产品信息
 message ProductInfo {
+	int64 id = 1; //ID
 	string type = 2; //商品类型
 	int64 shop_id = 3; //分店ID
 	int64 category_id = 4; //商品分类
@@ -29,41 +30,52 @@ message ProductInfo {
 	string spu_name = 7; //商品名称
 	string spu_code = 8; //SPU编码
 	string sell_mode = 9; //销售模式
-	string image_url = 10; //商品主图
-	string video_url = 11; //主图视频
-	string explain_video_url = 12; //讲解视频
-	string is_virtual = 13; //虚拟商品
-	string is_many_spec = 14; //多规格商品
-	string is_open_weigh = 15; //开启称重
-	string is_more_barcode = 16; //一品多码
+	string image = 10; //商品主图
+	string video = 11; //主图视频
+	string explain_video = 12; //讲解视频
+	bool is_virtual = 13; //虚拟商品
+	bool is_many_spec = 14; //多规格商品
+	bool is_open_weigh = 15; //开启称重
+	bool is_more_barcode = 16; //一品多码
 	int32 unit_id = 17; //计量单位ID
 	string unit_name = 18; //计量单位名称
 	string unit_type = 19; //计量单位类型
 	string inventory_deduct_type = 21; //库存扣减类型
-	string is_shelve = 22; //是否上架
-	string is_member_right = 23; //购买权限
-	string is_member_price = 24; //是否会员折扣价
-	int64 min_original_price = 25; //最低原价
-	int64 max_original_price = 26; //最大原价
-	int64 min_price = 27; //最低价格
-	int64 max_price = 28; //最高价格
-	int64 photo_count = 29; //图片数量
-	int64 access_count = 30; //访问次数
-	int64 sale_count = 31; //实际销量
-	int64 min_qty = 32; //起购数量
-	string is_limit = 33; // 是否开启限购（0否, 1是）
-	string limit_type = 34; //限购类型: 1单次限购2永久限购
-	int64 limit_num = 35; //限购数量
-	int64 fictions = 36; //虚拟销量
-	repeated string logistics_types = 37; //支持物流类型
-	string express_fee_type = 38; //快递运费类型
-	int64 express_uniform_fee = 39; //快递统一运费
-	int64 express_fee_template_id = 40; //快递运费模板
-	repeated string client_types = 41; //的客户终端
+	bool is_shelve = 22; //是否上架
+	bool is_buy_right = 23; //是否开启购买权限
+	bool is_vip_price = 24; //是否开启会员价格
+	bool vip_product =25; //VIP专属产品
+	int64 min_original_price = 26; //最低原价
+	int64 max_original_price = 27; //最大原价
+	int64 min_price = 28; //最低价格
+	int64 max_price = 29; //最高价格
+	repeated string slider_image = 30; //轮播图片
+	int64 browse = 31; //访问次数
+	int64 sales = 32; //实际销量
+	int64 fictions = 33; //虚拟销量
+	int64 min_qty = 34; //起购数量
+	bool is_limit = 35; // 是否开启限购（0否, 1是）
+	string limit_type = 36; //限购类型: 1单次限购2永久限购
+	int64 limit_num = 37; //限购数量
+	repeated string logistics_types = 38; //支持物流类型
+	string express_fee_type = 41; //快递运费类型
+	int64 express_fee_price = 42; //快递统一运费
+	int64 express_fee_template_id = 43; //快递运费模板
+	repeated string client_types = 44; //的客户终端
 	int32 sort = 49; //排序
-	string extra_main_id = 50; //扩展业务主要ID
+	string ext_object_id = 50; //扩展业务主要ID
 	string status = 52; //商品状态
-	//sku信息
+	ProductAttrInfo attrInfo =53;
+	bool is_presale =54;
+	//额外扩展
+	string goods_url =80;//商品URL
+	bool is_delete =81;//商品是否已删除（0否，1是）
+	bool is_error =82;//是否错误（0否，1是）
+	string error_msg =83;//错误信息
+}
+
+message ProductAttrInfo {
+	int64 id = 61; //SkuID
 	int64 spu_id = 62; //商品ID
 	string unique = 63; //SKUKey
 	string coding = 64; //编号
@@ -77,15 +89,12 @@ message ProductInfo {
 	int64 volume = 72; //体积
 	repeated SkuSpecInfo spec = 73; //规格信息
 	string spec_desc = 74; //规格描述
-	string extra_detail_id = 75; //扩展业务明细ID
-	string out_system_id = 76; //外部系统ID
+	string ext_object_child_id = 75; //扩展业务子ID
+	string out_system_child_id = 76; //外部系统子ID
 	int64 created_at = 77; //创建时间
 	int64 updated_at = 78; //修改时间
-	//额外扩展
-	string goods_url =80;//商品URL
-	bool is_error =82;//是否错误（0否，1是）
-	string error_msg =83;//错误信息
-
+	int64 vip_price =79; //VIP价格
+	string image = 80; //商品主图
 }
 
 //货品规格信息
@@ -101,7 +110,7 @@ message ReturnAddress {
 	string tel = 3; //联系电话
 	int64 province_id = 4; //所在省
 	int64 city_id = 5; //所在市
-	int64 county_id = 6; //所在县
+	int64 district_id = 6; //所在县
 	string address = 7; //详细地址
 	float lng = 8; //经度
 	float lat = 9; //纬度
@@ -113,7 +122,7 @@ message ReturnAddress {
 	string updated_at = 15; //修改时间
 	string province_name = 16; //所在省
 	string city_name = 17; //所在市
-	string county_name = 18; //所在县
+	string district_name = 18; //所在县
 }
 
 
@@ -156,10 +165,10 @@ message MemberInfo {
 	string birthday = 7; //会员生日
 	int64 province_id = 8; //所在省ID
 	int64 city_id = 9; //所在市ID
-	int64 county_id = 10; //所在区ID
+	int64 district_id = 10; //所在区ID
 	string province_name = 11; //所在省
 	string city_name = 12; //所在市
-	string county_name = 13; //所在区
+	string district_name = 13; //所在区
 	string address = 14; //详细地址
 	string email = 15; //邮箱
 	string mobile = 16; //手机号
@@ -190,7 +199,7 @@ message WarehouseInfo {
 	string contact_tel =6;//联系电话
 	string icon_url =7;//图片
 	int64  city_id =8;//所在市
-	int64  county_id =9;//所在县/区
+	int64  district_id =9;//所在县/区
 	string address =10;//详细地址
 	string lng =11;//经度
 	string lat =12;//纬度
@@ -200,7 +209,7 @@ message WarehouseInfo {
 	string updated_at = 16;
 	string province_name = 17;
 	string city_name = 18;
-	string county_name = 19;
+	string district_name = 19;
 }
 
 

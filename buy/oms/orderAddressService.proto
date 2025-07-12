@@ -19,10 +19,10 @@ message OrderAddress {
     string phone = 5; //电话
     int64 province_id = 6; //收件人省ID
     int64 city_id = 7; //收件人市ID
-    int64 county_id = 8; //收件人县ID
+    int64 district_id = 8; //收件人县ID
     string province_name = 9; //收件人省名
     string city_name = 10; //收件人市名
-    string county_name = 11; //收件人县名
+    string district_name = 11; //收件人县名
     string detail = 12; //详细地址
     float lng = 13; //经度
     float lat = 14; //纬度
@@ -52,10 +52,10 @@ message OrderAddressRequest {
     string phone = 13; //电话
     int64 province_id = 14; //收件人省ID
     int64 city_id = 15; //收件人市ID
-    int64 county_id = 16; //收件人县ID
+    int64 district_id = 16; //收件人县ID
     string province_name = 17; //收件人省名
     string city_name = 18; //收件人市名
-    string county_name = 19; //收件人县名
+    string district_name = 19; //收件人县名
     string detail = 20; //详细地址
     string source_type = 21; //来源类型
     int64 source_id = 22; //来源地址ID

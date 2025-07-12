@@ -33,10 +33,10 @@ type OrderAddress struct {
 	Phone        string  `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone"`                                    //电话
 	ProvinceId   int64   `protobuf:"varint,6,opt,name=province_id,json=provinceId,proto3" json:"province_id"`       //收件人省ID
 	CityId       int64   `protobuf:"varint,7,opt,name=city_id,json=cityId,proto3" json:"city_id"`                   //收件人市ID
-	CountyId     int64   `protobuf:"varint,8,opt,name=county_id,json=countyId,proto3" json:"county_id"`             //收件人县ID
+	DistrictId   int64   `protobuf:"varint,8,opt,name=district_id,json=districtId,proto3" json:"district_id"`       //收件人县ID
 	ProvinceName string  `protobuf:"bytes,9,opt,name=province_name,json=provinceName,proto3" json:"province_name"`  //收件人省名
 	CityName     string  `protobuf:"bytes,10,opt,name=city_name,json=cityName,proto3" json:"city_name"`             //收件人市名
-	CountyName   string  `protobuf:"bytes,11,opt,name=county_name,json=countyName,proto3" json:"county_name"`       //收件人县名
+	DistrictName string  `protobuf:"bytes,11,opt,name=district_name,json=districtName,proto3" json:"district_name"` //收件人县名
 	Detail       string  `protobuf:"bytes,12,opt,name=detail,proto3" json:"detail"`                                 //详细地址
 	Lng          float32 `protobuf:"fixed32,13,opt,name=lng,proto3" json:"lng"`                                     //经度
 	Lat          float32 `protobuf:"fixed32,14,opt,name=lat,proto3" json:"lat"`                                     //纬度
@@ -131,9 +131,9 @@ func (x *OrderAddress) GetCityId() int64 {
 	return 0
 }
 
-func (x *OrderAddress) GetCountyId() int64 {
+func (x *OrderAddress) GetDistrictId() int64 {
 	if x != nil {
-		return x.CountyId
+		return x.DistrictId
 	}
 	return 0
 }
@@ -152,9 +152,9 @@ func (x *OrderAddress) GetCityName() string {
 	return ""
 }
 
-func (x *OrderAddress) GetCountyName() string {
+func (x *OrderAddress) GetDistrictName() string {
 	if x != nil {
-		return x.CountyName
+		return x.DistrictName
 	}
 	return ""
 }
@@ -255,10 +255,10 @@ type OrderAddressRequest struct {
 	Phone        string `protobuf:"bytes,13,opt,name=phone,proto3" json:"phone"`                                   //电话
 	ProvinceId   int64  `protobuf:"varint,14,opt,name=province_id,json=provinceId,proto3" json:"province_id"`      //收件人省ID
 	CityId       int64  `protobuf:"varint,15,opt,name=city_id,json=cityId,proto3" json:"city_id"`                  //收件人市ID
-	CountyId     int64  `protobuf:"varint,16,opt,name=county_id,json=countyId,proto3" json:"county_id"`            //收件人县ID
+	DistrictId   int64  `protobuf:"varint,16,opt,name=district_id,json=districtId,proto3" json:"district_id"`      //收件人县ID
 	ProvinceName string `protobuf:"bytes,17,opt,name=province_name,json=provinceName,proto3" json:"province_name"` //收件人省名
 	CityName     string `protobuf:"bytes,18,opt,name=city_name,json=cityName,proto3" json:"city_name"`             //收件人市名
-	CountyName   string `protobuf:"bytes,19,opt,name=county_name,json=countyName,proto3" json:"county_name"`       //收件人县名
+	DistrictName string `protobuf:"bytes,19,opt,name=district_name,json=districtName,proto3" json:"district_name"` //收件人县名
 	Detail       string `protobuf:"bytes,20,opt,name=detail,proto3" json:"detail"`                                 //详细地址
 	SourceType   string `protobuf:"bytes,21,opt,name=source_type,json=sourceType,proto3" json:"source_type"`       //来源类型
 	SourceId     int64  `protobuf:"varint,22,opt,name=source_id,json=sourceId,proto3" json:"source_id"`            //来源地址ID
@@ -388,9 +388,9 @@ func (x *OrderAddressRequest) GetCityId() int64 {
 	return 0
 }
 
-func (x *OrderAddressRequest) GetCountyId() int64 {
+func (x *OrderAddressRequest) GetDistrictId() int64 {
 	if x != nil {
-		return x.CountyId
+		return x.DistrictId
 	}
 	return 0
 }
@@ -409,9 +409,9 @@ func (x *OrderAddressRequest) GetCityName() string {
 	return ""
 }
 
-func (x *OrderAddressRequest) GetCountyName() string {
+func (x *OrderAddressRequest) GetDistrictName() string {
 	if x != nil {
-		return x.CountyName
+		return x.DistrictName
 	}
 	return ""
 }

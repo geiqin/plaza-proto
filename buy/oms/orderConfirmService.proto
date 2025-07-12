@@ -65,7 +65,7 @@ message BuyOrderBase {
 }
 
 message OrderConfirmIndex {
-  OrderAddress address_info =1;
+  OrderAddress addressInfo =1;
   ConfirmPriceGroup priceGroup =2;//订单基本信息
   repeated  CartItem cartInfo = 3; //订单商品列表
   MemberInfo memberInfo =4;
@@ -83,7 +83,7 @@ message OrderConfirmIndex {
   bool yue_pay_status = 18;
   bool offline_pay_status =19;
   bool store_self_mention =20;
-  bool virtual_type =21;
+  int64 virtual_type =21;
   int64 valid_count =22;
   int64  storeFreePostage =23;
   repeated string custom_form =24;

@@ -32,8 +32,8 @@ message OrderDetail {
     string discount_details = 26; //优惠明细
     repeated SkuSpecInfo spec = 27; //规格
     string spec_desc = 28; //规格描述
-    string extra_main_id = 29; //扩展业务主要ID
-    string extra_detail_id = 30; //扩展业务明细ID
+    string ext_object_id = 29; //扩展业务ID
+    string ext_object_child_id = 30; //扩展业务子ID
     string is_gift = 31; //是否为赠品
     string out_system_id = 32; //外部系统ID
     int64 created_at = 33; //创建时间

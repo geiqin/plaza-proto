@@ -21,21 +21,29 @@ service CartService {
 }
 
 message CartItem  {
-    int64 id =1;//ID
+    int64 id =1;//购车ID
     int64 spu_id =2;//商品spuId
-    string unique =3;//商品规格unique
+    string unique =3;//商品唯一标识
     int64 unit_price =4;//商品单价
-    int64 true_price =5;//实际价格
+    int64 true_price =5;//支付价格
+    int64 vip_true_price =6; //会员支付价格
     int64 true_stock =7;//实际库存
-    int64 quantity =8;//购买数量
-    int64 sum_price =9;//小计金额
+    int64 cart_num =8;//购买数量
+    int64 cost_price =9;//成本价
+    int64 sum_price =10;//小计金额
     int64 min_qty =12; //最低购买数量
-    int64 max_qty =13;//最多购买数量
-    bool is_valid =14;//是否有效
-    bool is_error =15;//是否错误
-    string error_msg =16;//错误信息
-    ProductInfo product =17;
-    bool attrStatus =18;
+    string price_type =13; //价格类型
+    int64 advance_id =14;
+    int64 bargain_id =15;
+    int64 seckill_id =16;
+    int64 discount_id =17;
+    int64 combination_id =18;
+    bool is_valid =19;
+    string status =20;
+    ProductInfo productInfo =21;
+    bool is_error =22;//是否错误
+    string error_msg =23;//错误信息
+    bool attrStatus =24;
 }
 
 message CartCountData{

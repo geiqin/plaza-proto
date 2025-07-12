@@ -23,10 +23,10 @@ message MemberAddress {
     string phone = 5; //电话
     int64 province_id = 6; //所在省ID
     int64 city_id = 7; //所在市ID
-    int64 county_id = 8; //所在县ID
+    int64 district_id = 8; //所在县ID
     string province_name = 9; //所在省
     string city_name = 10; //所在市
-    string county_name = 11; //所在县
+    string district_name = 11; //所在县
     string detail = 12; //详细地址
     float lng = 13; //经度
     float lat = 14; //纬度
@@ -55,10 +55,10 @@ message MemberAddressRequest {
     int64 member_id = 11; //会员ID
     int64 province_id = 12; //所在省ID
     int64 city_id = 13; //所在市ID
-    int64 county_id = 14; //所在县ID
+    int64 district_id = 14; //所在县ID
     string province_name = 15; //所在省
     string city_name = 16; //所在市
-    string county_name = 17; //所在县
+    string district_name = 17; //所在县
     string idcard_name = 18; //身份证姓名
     string is_default = 19; //默认地址
 }
