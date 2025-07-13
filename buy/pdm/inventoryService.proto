@@ -6,11 +6,11 @@ import "common/base.proto";
 // 库存变动服务
 service InventoryService {
   // 新增库存扣除
-  rpc CreateDeduction (InventoryDeductionRequest) returns (InventoryResponse) {}
+  rpc DeductionAdd (InventoryDeductionRequest) returns (InventoryResponse) {}
   // 新增库存冻结
-  rpc CreateFrozen (InventoryFrozenRequest) returns (InventoryResponse) {}
+  rpc FrozenAdd (InventoryFrozenRequest) returns (InventoryResponse) {}
   // 撤销库存冻结
-  rpc CancelFrozen (InventoryFrozenLog) returns (InventoryResponse) {}
+  rpc FrozenCancel (InventoryFrozenRequest) returns (InventoryResponse) {}
   // 库存冻结日志查询
   rpc FrozenLogs (InventoryRequest) returns (InventoryResponse) {}
   // 库存扣减日志列表
@@ -34,8 +34,7 @@ message InventoryFrozenLog {
 }
 // 库存冻结日志请求参数
 message InventoryFrozenRequest {
-  int64 order_id = 1; //订单ID
-  repeated InventoryFrozenLog items = 2;
+  repeated InventoryFrozenLog items = 1;
 }
 
 // 库存扣减日志

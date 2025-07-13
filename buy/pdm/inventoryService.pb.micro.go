@@ -44,11 +44,11 @@ func NewInventoryServiceEndpoints() []*api.Endpoint {
 
 type InventoryService interface {
 	// 新增库存扣除
-	CreateDeduction(ctx context.Context, in *InventoryDeductionRequest, opts ...client.CallOption) (*InventoryResponse, error)
+	DeductionAdd(ctx context.Context, in *InventoryDeductionRequest, opts ...client.CallOption) (*InventoryResponse, error)
 	// 新增库存冻结
-	CreateFrozen(ctx context.Context, in *InventoryFrozenRequest, opts ...client.CallOption) (*InventoryResponse, error)
+	FrozenAdd(ctx context.Context, in *InventoryFrozenRequest, opts ...client.CallOption) (*InventoryResponse, error)
 	// 撤销库存冻结
-	CancelFrozen(ctx context.Context, in *InventoryFrozenLog, opts ...client.CallOption) (*InventoryResponse, error)
+	FrozenCancel(ctx context.Context, in *InventoryFrozenRequest, opts ...client.CallOption) (*InventoryResponse, error)
 	// 库存冻结日志查询
 	FrozenLogs(ctx context.Context, in *InventoryRequest, opts ...client.CallOption) (*InventoryResponse, error)
 	// 库存扣减日志列表
@@ -67,8 +67,8 @@ func NewInventoryService(name string, c client.Client) InventoryService {
 	}
 }
 
-func (c *inventoryService) CreateDeduction(ctx context.Context, in *InventoryDeductionRequest, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.CreateDeduction", in)
+func (c *inventoryService) DeductionAdd(ctx context.Context, in *InventoryDeductionRequest, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InventoryService.DeductionAdd", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -77,8 +77,8 @@ func (c *inventoryService) CreateDeduction(ctx context.Context, in *InventoryDed
 	return out, nil
 }
 
-func (c *inventoryService) CreateFrozen(ctx context.Context, in *InventoryFrozenRequest, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.CreateFrozen", in)
+func (c *inventoryService) FrozenAdd(ctx context.Context, in *InventoryFrozenRequest, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InventoryService.FrozenAdd", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -87,8 +87,8 @@ func (c *inventoryService) CreateFrozen(ctx context.Context, in *InventoryFrozen
 	return out, nil
 }
 
-func (c *inventoryService) CancelFrozen(ctx context.Context, in *InventoryFrozenLog, opts ...client.CallOption) (*InventoryResponse, error) {
-	req := c.c.NewRequest(c.name, "InventoryService.CancelFrozen", in)
+func (c *inventoryService) FrozenCancel(ctx context.Context, in *InventoryFrozenRequest, opts ...client.CallOption) (*InventoryResponse, error) {
+	req := c.c.NewRequest(c.name, "InventoryService.FrozenCancel", in)
 	out := new(InventoryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -121,11 +121,11 @@ func (c *inventoryService) DeductionLogs(ctx context.Context, in *InventoryReque
 
 type InventoryServiceHandler interface {
 	// 新增库存扣除
-	CreateDeduction(context.Context, *InventoryDeductionRequest, *InventoryResponse) error
+	DeductionAdd(context.Context, *InventoryDeductionRequest, *InventoryResponse) error
 	// 新增库存冻结
-	CreateFrozen(context.Context, *InventoryFrozenRequest, *InventoryResponse) error
+	FrozenAdd(context.Context, *InventoryFrozenRequest, *InventoryResponse) error
 	// 撤销库存冻结
-	CancelFrozen(context.Context, *InventoryFrozenLog, *InventoryResponse) error
+	FrozenCancel(context.Context, *InventoryFrozenRequest, *InventoryResponse) error
 	// 库存冻结日志查询
 	FrozenLogs(context.Context, *InventoryRequest, *InventoryResponse) error
 	// 库存扣减日志列表
@@ -134,9 +134,9 @@ type InventoryServiceHandler interface {
 
 func RegisterInventoryServiceHandler(s server.Server, hdlr InventoryServiceHandler, opts ...server.HandlerOption) error {
 	type inventoryService interface {
-		CreateDeduction(ctx context.Context, in *InventoryDeductionRequest, out *InventoryResponse) error
-		CreateFrozen(ctx context.Context, in *InventoryFrozenRequest, out *InventoryResponse) error
-		CancelFrozen(ctx context.Context, in *InventoryFrozenLog, out *InventoryResponse) error
+		DeductionAdd(ctx context.Context, in *InventoryDeductionRequest, out *InventoryResponse) error
+		FrozenAdd(ctx context.Context, in *InventoryFrozenRequest, out *InventoryResponse) error
+		FrozenCancel(ctx context.Context, in *InventoryFrozenRequest, out *InventoryResponse) error
 		FrozenLogs(ctx context.Context, in *InventoryRequest, out *InventoryResponse) error
 		DeductionLogs(ctx context.Context, in *InventoryRequest, out *InventoryResponse) error
 	}
@@ -151,16 +151,16 @@ type inventoryServiceHandler struct {
 	InventoryServiceHandler
 }
 
-func (h *inventoryServiceHandler) CreateDeduction(ctx context.Context, in *InventoryDeductionRequest, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.CreateDeduction(ctx, in, out)
+func (h *inventoryServiceHandler) DeductionAdd(ctx context.Context, in *InventoryDeductionRequest, out *InventoryResponse) error {
+	return h.InventoryServiceHandler.DeductionAdd(ctx, in, out)
 }
 
-func (h *inventoryServiceHandler) CreateFrozen(ctx context.Context, in *InventoryFrozenRequest, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.CreateFrozen(ctx, in, out)
+func (h *inventoryServiceHandler) FrozenAdd(ctx context.Context, in *InventoryFrozenRequest, out *InventoryResponse) error {
+	return h.InventoryServiceHandler.FrozenAdd(ctx, in, out)
 }
 
-func (h *inventoryServiceHandler) CancelFrozen(ctx context.Context, in *InventoryFrozenLog, out *InventoryResponse) error {
-	return h.InventoryServiceHandler.CancelFrozen(ctx, in, out)
+func (h *inventoryServiceHandler) FrozenCancel(ctx context.Context, in *InventoryFrozenRequest, out *InventoryResponse) error {
+	return h.InventoryServiceHandler.FrozenCancel(ctx, in, out)
 }
 
 func (h *inventoryServiceHandler) FrozenLogs(ctx context.Context, in *InventoryRequest, out *InventoryResponse) error {
