@@ -51,15 +51,16 @@ message Spu {
     string unit_name = 18; //计量单位名称
     string unit_type = 19; //计量单位类型
     int64 inventory = 20; //库存
-    string inventory_deduct_type = 21; //库存扣减类型
-    string is_shelve = 22; //是否上架
-    string is_buy_right = 23; //是否开启购买权限
-    string is_vip_price = 24; //是否开启会员价
-    string vip_product = 25; //VIP专属产品
-    int64 min_original_price = 26; //最低原价
-    int64 max_original_price = 27; //最大原价
-    int64 min_price = 28; //最低价格
-    int64 max_price = 29; //最高价格
+    int64 frozen_num = 21; //冻结数量
+    string inventory_deduct_type = 22; //库存扣减类型
+    string is_shelve = 23; //是否上架
+    string is_buy_right = 24; //是否开启购买权限
+    string is_vip_price = 25; //是否开启会员价
+    string vip_product = 26; //VIP专属产品
+    int64 min_original_price = 27; //最低原价
+    int64 max_original_price = 28; //最大原价
+    int64 min_price = 29; //最低价格
+    int64 max_price = 30; //最高价格
     int64 photo_count = 31; //图片数量
     int64 browse_count = 32; //访问次数
     int64 sale_count = 33; //实际销量
@@ -187,15 +188,16 @@ message Sku {
     int64 cost_price = 8; //成本价
     int64 price = 9; //销售价
     int64 inventory = 10; //库存
-    int64 weight = 11; //重量
-    int64 volume = 12; //体积
-    repeated SkuSpecInfo spec = 13; //规格信息
-    string spec_desc = 14; //规格描述
-    string ext_object_child_id = 15; //扩展业务明细ID
-    string out_system_child_id = 16; //外部系统子ID
-    int64 created_at = 17; //创建时间
-    int64 updated_at = 18; //修改时间
-    Spu spu =19;
+    int64 frozen_num = 11; //冻结数量
+    int64 weight = 12; //重量
+    int64 volume = 13; //体积
+    repeated SkuSpecInfo spec = 14; //规格信息
+    string spec_desc = 15; //规格描述
+    string ext_object_child_id = 16; //扩展业务明细ID
+    string out_system_child_id = 17; //外部系统子ID
+    int64 created_at = 18; //创建时间
+    int64 updated_at = 19; //修改时间
+    Spu spu =20;
 }
 
 message SpuPhoto {

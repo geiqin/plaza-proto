@@ -71,26 +71,28 @@ message Product {
 }
 
 message ProductAttrInfo {
-    int64 id = 61; //SkuID
-    int64 spu_id = 62; //商品ID
-    string unique = 63; //SKUKey
-    string coding = 64; //编号
-    string barcode = 65; //条码
-    repeated string more_barcodes = 66; //更多条码
-    int64 original_price = 67; //划线价
-    int64 cost_price = 68; //成本价
-    int64 price = 69; //销售价
-    int64 inventory = 70; //库存
-    int64 weight = 71; //重量
-    int64 volume = 72; //体积
-    repeated SkuSpecInfo spec = 73; //规格信息
-    string spec_desc = 74; //规格描述
-    string ext_object_child_id = 75; //扩展业务子ID
-    string out_system_child_id = 76; //外部系统子ID
-    int64 created_at = 77; //创建时间
-    int64 updated_at = 78; //修改时间
-    int64 vip_price =79; //VIP价格
-    string image = 80; //商品规格图
+    int64 id = 1; //SkuID
+    int64 spu_id = 2; //商品ID
+    string unique = 3; //SKUKey
+    string coding = 4; //编号
+    string barcode = 5; //条码
+    string image = 6; //商品规格图
+    repeated string more_barcodes = 7; //更多条码
+    int64 original_price = 8; //划线价
+    int64 cost_price = 9; //成本价
+    int64 price = 10; //销售价
+    int64 vip_price =11; //VIP价格
+    int64 inventory = 12; //库存
+    int64 frozen_num = 13; //冻结数量
+    int64 weight = 14; //重量
+    int64 volume = 15; //体积
+    repeated SkuSpecInfo spec = 16; //规格信息
+    string spec_desc = 17; //规格描述
+    string ext_object_child_id = 18; //扩展业务子ID
+    string out_system_child_id = 19; //外部系统子ID
+    int64 created_at = 20; //创建时间
+    int64 updated_at = 21; //修改时间
+
 }
 
 message ProductRequest {
