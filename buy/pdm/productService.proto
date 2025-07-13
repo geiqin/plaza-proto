@@ -51,7 +51,9 @@ message Product {
     bool is_limit = 35; // 是否开启限购（0否, 1是）
     string limit_type = 36; //限购类型: 1单次限购2永久限购
     int64 limit_num = 37; //限购数量
-    repeated string logistics_types = 38; //支持物流类型
+    bool is_gift = 38; //是否礼品
+    int64 gift_price = 39; //礼品附件费
+    repeated string logistics_types = 40; //支持物流类型
     string express_fee_type = 41; //快递运费类型
     int64 express_fee_price = 42; //快递统一运费
     int64 express_fee_template_id = 43; //快递运费模板
@@ -129,6 +131,7 @@ message ProductRequest {
     string is_shelve =35;
     repeated string unique_list = 36;
     string is_query_delete =37;//是否查询已删除（0否，1是）
+    int64 vip_level_id = 38; //会员等级ID
 }
 
 message ProductResponse {

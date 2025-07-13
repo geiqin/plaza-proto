@@ -136,7 +136,7 @@ message ShowGoodsSpu{
   int64 cost =31; //成本价
   int64 postage =32; //运费
   bool is_vip =33;//是否会员商品
-  float vip_price =34; //会员价
+  int64 vip_price =34; //会员价
   bool svip_price_open =35; //开启SVIP价格
   int64 svip_economize_price =36; //SVIP节省金额
   int64 sales =39; //销量
@@ -147,6 +147,8 @@ message ShowGoodsSpu{
   string presale_end_time =44; //预售结束时间
   int32 presale_day =45; //预售天数
   bool presale_pay_status =46; //预售支付状态
+  bool is_gift = 56; //是否礼品
+  int64 gift_price = 57; //礼品附件费
   bool is_limit =50;
   string limit_type =51;
   int64 limit_num =52;
@@ -236,6 +238,7 @@ message ShowGoodsRequest {
   string is_shelve = 25; //是否上架
   string sell_mode = 26; //销售模式
   string command = 27;
+  int64 vip_level_id = 28; //会员等级ID
 }
 
 // 商品库响应数据
