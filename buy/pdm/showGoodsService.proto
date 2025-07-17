@@ -238,7 +238,10 @@ message ShowGoodsRequest {
   string is_shelve = 25; //是否上架
   string sell_mode = 26; //销售模式
   string command = 27;
-  int64 vip_level_id = 28; //会员等级ID
+  int32 vip_level_id = 28; //等级会员ID
+  float vip_discount =29; //等级会员折扣
+  int32 svip_level_id = 30; //付费会员ID
+  float svip_discount =31; //付费折扣率
 }
 
 // 商品库响应数据
