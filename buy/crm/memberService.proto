@@ -86,7 +86,7 @@ message Member {
     int32 vip_level_id = 23; //免费等级
     int32 svip_level_id = 24; //付费等级
     int64 svip_overdue_time = 25; //SVIP到期时间
-    string is_ever_level = 26; //是否永久性会员
+    string is_ever_svip = 26; //是否永久性会员
     int32 agent_level_id = 27; //分销等级
     int64 admin_id = 28; //管理员ID
     string spread_open = 29; //是否有推广资格
@@ -153,8 +153,8 @@ message MemberRequest {
     string email = 19; //邮箱
     string mobile = 20; //手机号
     int32 vip_level_id = 21; //免费等级
-    int32 s_vip_level_id = 22; //付费等级
-    string is_ever_level = 23; //是否永久性会员
+    int32 svip_level_id = 22; //付费等级
+    string is_ever_svip = 23; //是否永久性会员
     int32 agent_level_id = 24; //分销等级
     int64 admin_id = 25; //管理员ID
     string is_scatter = 26; //是否散客

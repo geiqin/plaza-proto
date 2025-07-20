@@ -58,15 +58,6 @@ message VipMoreBenefit {
     int64 name =3; //权益名称
 }
 
-//VIP基本权益
-message VipBaseBenefit {
-    bool is_free_shipping = 10; //会员包邮
-    bool is_discount = 11; //会员折扣
-    float discount_rate = 12; //会员折扣率
-    bool is_point_feedback = 13; //积分回馈
-    int32 point_feedback_doubly = 14; //积分回馈倍数
-}
-
 //VIP付费规则
 message VipPayRule {
     int32 month =2; //月份
@@ -109,7 +100,7 @@ message VipLevelRequest {
     //以下为自定义参数
     int32 vip_id = 11; //体系ID
     string name = 12; //等级名称
-    string is_free_shipping = 13; //会员包邮
+    string is_free_postage = 13; //会员包邮
     string is_discount = 14; //会员折扣
     string is_point_feedback = 15; //积分回馈
     string status = 16; //状态
