@@ -2,6 +2,12 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 
+message VipLevelInfo{
+    int32 id =1;
+    string name =2;
+}
+
+
 //SKU规格信息
 message SkuSpecInfo{
     string type =1;

@@ -1,0 +1,53 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 服务保障服务
+service SpuProtectionService {
+  // 服务保障新增
+  rpc Create (SpuProtection) returns (SpuProtectionResponse) {}
+  // 服务保障修改
+  rpc Update (SpuProtection) returns (SpuProtectionResponse) {}
+  // 服务保障删除
+  rpc Delete (SpuProtection) returns (SpuProtectionResponse) {}
+  // 服务保障获取
+  rpc Get (SpuProtection) returns (SpuProtectionResponse) {}
+  // 服务保障查询
+  rpc Search (SpuProtectionRequest) returns (SpuProtectionResponse) {}
+  // 服务保障列表
+  rpc List (SpuProtectionRequest) returns (SpuProtectionResponse) {}
+}
+// 服务保障
+message SpuProtection {
+  int32 id = 1; //ID
+  string title = 2; //标题
+  string image = 3; //图标
+  string content = 4; //内容
+  int32 num = 5; //使用数量
+  string is_system = 6; //创建来源
+  int32 sort = 7; //排序
+  string status = 8; //状态
+  int64 updated_at = 9; //创建时间
+  int64 created_at = 10; //修改时间
+}
+// 服务保障请求参数
+message SpuProtectionRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int32 ids = 7;
+  int32 id = 8;
+  //以下为自定义参数
+  string is_system = 11; //创建来源
+  string status = 12; //状态
+}
+// 服务保障响应数据
+message SpuProtectionResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  SpuProtection entity = 3;
+  repeated SpuProtection items = 4;
+}

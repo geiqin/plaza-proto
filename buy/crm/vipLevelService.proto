@@ -81,7 +81,7 @@ message VipUpPackage {
     }
     message gift  {
         int64 spu_id =1;
-        string sku_key =2;
+        string unique =2;
         string title =3;
         string unit =4;
         string image_url =5;

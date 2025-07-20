@@ -19,7 +19,7 @@ message OrderDiscountInfo{
 //购买商品项
 message PurchaseItemInfo{
   int64 spu_id =1;
-  string sku_key =2;
+  string unique =2;
   int64 price =3; //价格
   int64 stock =4; //购买数量
   int64 weight =5; //重量

@@ -2,7 +2,7 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "vipLevelService.proto";
+import "baseInfoService.proto";
 
 service VipPriceService {
     rpc Save (VipPriceRequest) returns (VipPriceResponse) {}
@@ -15,7 +15,7 @@ message VipPrice {
     int64 id = 1;//ID
     int32 level_id = 2;//会员等级id
     int64 spu_id = 3;//SpuId
-    string sku_key = 4;//md5key
+    string unique = 4;//md5key
     string method = 5;//优惠方式：1 打折,2 减价, 3 指定价
     int64 discount_value = 7;//优惠值
     int64 created_at = 9;
@@ -27,8 +27,8 @@ message VipPriceDetail {
     int64 spu_id = 1;
     string free_discount_method =2;
     string pay_discount_method = 3;
-    repeated VipLevel free_levels =4;
-    repeated VipLevel pay_levels =5;
+    repeated VipLevelInfo free_levels =4;
+    repeated VipLevelInfo pay_levels =5;
     repeated VipPrice free_list =6;
     repeated VipPrice pay_list =7;
 }
@@ -38,7 +38,7 @@ message VipPriceRequest {
     int64 id = 1;//ID
     int32 level_id = 2;//会员等级id
     int64 spu_id = 3;//SpuId
-    string sku_key = 4;//md5key
+    string unique = 4;//md5key
     string method = 5;//优惠方式：1 打折,2 减价, 3 指定价
     repeated  int64  ids= 6;
     repeated VipPrice details = 7;
