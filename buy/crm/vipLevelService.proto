@@ -24,32 +24,27 @@ message VipLevel {
     string bg_color = 8; //背景颜色
     string bg_image = 9; //背景图
     string upgrade_type = 10; //升级方式
-    int64 upgrade_value = 11; //升级值
-    string is_pay = 12; //是否付费等级
-    repeated VipPayRule pay_rules = 13; //付费规则
-    string is_free_postage = 14; //是否包邮
-    string is_discount = 15; //是否折扣
-    float discount = 16; //折扣率
-    string is_point_feedback = 17; //是否积分回馈
-    int32 point_feedback = 18; //积分回馈倍数
-    repeated string more_benefit_codes = 19; //更多权益
-    VipUpPackage up_package = 20; //升级礼包
-    int64 member_count = 21; //会员数量
-    string status = 22; //状态
-    int64 updated_at = 23; //创建时间
-    int64 created_at = 24; //修改时间
+    int64 upgrade_exp = 11; //升级经验值
+    int64 upgrade_order_num = 12; //升级订单数量
+    int64 upgrade_order_amount = 13; //升级订单金额
+    string is_pay = 14; //是否付费等级
+    repeated VipPayRule pay_rules = 15; //付费规则
+    string is_free_postage = 16; //是否包邮
+    string is_discount = 17; //是否折扣
+    float discount = 18; //折扣率
+    string is_point_feedback = 19; //是否积分回馈
+    int32 point_feedback = 20; //积分回馈倍数
+    repeated string more_benefit_codes = 22; //更多权益
+    VipUpPackage up_package = 23; //升级礼包
+    int64 member_count = 24; //会员数量
+    string status = 25; //状态
+    int64 updated_at = 26; //创建时间
+    int64 created_at = 27; //修改时间
     repeated VipBenefit benefits =30;
     repeated string benefits_names =31;
     repeated string pay_rules_tips = 32; //付费规则描述
 }
 
-//等级升级条件
-message VipUpCondition {
-    int64 growth_value =1; //需要成长值
-    int64 order_amount =2; //消费满X金额
-    int64 order_number =3; //消费满X笔数
-    int64 integrate_total =4; //累计积分
-}
 
 //VIP更多权益
 message VipMoreBenefit {
@@ -98,7 +93,8 @@ message VipLevelRequest {
     repeated int32 ids = 7;
     int32 id = 8;
     //以下为自定义参数
-    int32 vip_id = 11; //体系ID
+    int32 vip_id = 10; //体系ID
+    string vip_code = 11; //体系Code
     string name = 12; //等级名称
     string is_free_postage = 13; //会员包邮
     string is_discount = 14; //会员折扣
