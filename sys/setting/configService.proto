@@ -63,24 +63,23 @@ message CommonConfig {
   string inventory_deduction_type =410; //库存扣减方式: 1下单减库存 ,2支付减库存
   string inventory_not_enough_handle =411; //商品库存不足处理: 1允许扣成负库存 2整个订单自动售后3仅售后缺货商品
 
-  bool invoice_func_open =421;//发票功能
-  bool invoice_tips_open =422; //发票提示语开关
-  string invoice_tips_content =423; //发票提示语内容
+  int64 store_free_postage =421; //商城满额包邮
+  bool offline_postage =422;//线下支付是否包邮
 
   //发票功能
   bool invoice_func_status =431; //发票功能
-  bool special_invoice_func_status =432; //专用发票功能
+  bool special_invoice_status =432; //专用发票功能
 
   //---售后服务----
   repeated string shipped_aftersale_apply_type =450;//发货前售后申请设置: 1仅退款 2退货退款 3退换货
   repeated string aftersale_apply_reasons =451; //售后申请原因设置
   string pre_shipment_refund_type =452;//发货前售后申请设置: 1需要审核 2;无需审核，系统自动退款
   string shipped_freight_return_type =453;//发货后运费退还设置: 1退运费 2不退运费
-  int32 order_auto_close_time =454;//订单自动关闭时间，货到付款订单不适用（未支付订单超时关闭：单位：分钟）
+  int32 order_cancel_time =454;//订单未支付自动关闭时间（单位小时），货到付款订单不适用
   int32 order_auto_receive_time =455; //已发货订单X天后自动确认收货
-  int32 order_close_refund_time =456;//已收货订单X天后关闭售后功能(最长可设置365天， 0表示确认收货后关闭售后功能)
+  int32 refund_time_available =456;//已收货订单X天后关闭售后功能(最长可设置365天， 0表示确认收货后关闭售后功能)
   int32 returned_auto_refund_time =457;//买家发起退货退款申请X天后商家未处理，系统将自动同意售后。
-
+  bool coupon_return_open =469 ;///优惠券退还状态
 
   //支付设置
   bool weixin_pay_open =500; //微信支付开关
