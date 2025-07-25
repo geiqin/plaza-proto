@@ -39,7 +39,7 @@ message CommonConfig {
 
   bool contact_customer_service =260; //联系客服
   bool backend_watermark_open =261; //后台水印开关
-  bool force_member_login_visit =262;//强制客户登录后访问
+
 
   //商品设置
   bool goods_comment_open =303;//商品评论开启
@@ -66,9 +66,22 @@ message CommonConfig {
   int64 store_free_postage =421; //商城满额包邮
   bool offline_postage =422;//线下支付是否包邮
 
-  //发票功能
   bool invoice_func_status =431; //发票功能
   bool special_invoice_status =432; //专用发票功能
+
+  //客户设置
+  bool member_vip_open =440;//等级会员启用
+  bool member_svip_open =441; //付费会员启用
+  string default_avatar =442; //用户默认头像
+  bool store_user_mobile =443; //强制手机号登录
+  bool force_user_login =444;//强制客户登录
+  int64 new_user_reward_integral =445; //赠送积分
+  int64 new_user_reward_money =446;  //赠送余额
+  repeated int64 new_user_reward_coupon =447;//赠送优惠劵
+
+  int64 invite_user_exp =448;  //订单赠送经验:下单赠送用户经验比例（实际支付1元赠送多少经验）
+  int64 order_give_exp =449;  //邀新赠送经验
+
 
   //---售后服务----
   repeated string shipped_aftersale_apply_type =450;//发货前售后申请设置: 1仅退款 2退货退款 3退换货
