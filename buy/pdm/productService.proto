@@ -53,10 +53,10 @@ message Product {
     int64 limit_num = 37; //限购数量
     bool is_gift = 38; //是否礼品
     int64 gift_price = 39; //礼品附件费
-    repeated string logistics_types = 40; //支持物流类型
-    string express_fee_type = 41; //快递运费类型
-    int64 express_fee_price = 42; //快递统一运费
-    int64 express_fee_template_id = 43; //快递运费模板
+    repeated string logistics = 40; //支持物流类型
+    string freight_type = 41; //快递运费类型
+    int64 freight_price = 42; //快递统一运费
+    int64 freight_template_id = 43; //快递运费模板
     repeated string client_types = 44; //的客户终端
     int32 sort = 49; //排序
     string ext_object_id = 50; //扩展业务主要ID

@@ -27,91 +27,91 @@ type Spu struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                                      //ID
-	Type                 string         `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`                                                                   //商品类型
-	ShopId               int64          `protobuf:"varint,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`                                                //分店ID
-	CategoryId           int64          `protobuf:"varint,4,opt,name=category_id,json=categoryId,proto3" json:"category_id"`                                    //商品分类
-	TaxonomyId           int64          `protobuf:"varint,5,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id"`                                    //商品类目
-	BrandId              int32          `protobuf:"varint,6,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`                                             //品牌
-	SpuName              string         `protobuf:"bytes,7,opt,name=spu_name,json=spuName,proto3" json:"spu_name"`                                              //商品名称
-	SpuCode              string         `protobuf:"bytes,8,opt,name=spu_code,json=spuCode,proto3" json:"spu_code"`                                              //SPU编码
-	SellMode             string         `protobuf:"bytes,9,opt,name=sell_mode,json=sellMode,proto3" json:"sell_mode"`                                           //销售模式
-	ImageUrl             string         `protobuf:"bytes,10,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`                                          //商品主图
-	VideoUrl             string         `protobuf:"bytes,11,opt,name=video_url,json=videoUrl,proto3" json:"video_url"`                                          //主图视频
-	ExplainVideoUrl      string         `protobuf:"bytes,12,opt,name=explain_video_url,json=explainVideoUrl,proto3" json:"explain_video_url"`                   //讲解视频
-	IsVirtual            string         `protobuf:"bytes,13,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`                                       //虚拟商品
-	IsManySpec           string         `protobuf:"bytes,14,opt,name=is_many_spec,json=isManySpec,proto3" json:"is_many_spec"`                                  //多规格商品
-	IsOpenWeigh          string         `protobuf:"bytes,15,opt,name=is_open_weigh,json=isOpenWeigh,proto3" json:"is_open_weigh"`                               //开启称重
-	IsMoreBarcode        string         `protobuf:"bytes,16,opt,name=is_more_barcode,json=isMoreBarcode,proto3" json:"is_more_barcode"`                         //一品多码
-	UnitId               int32          `protobuf:"varint,17,opt,name=unit_id,json=unitId,proto3" json:"unit_id"`                                               //计量单位ID
-	UnitName             string         `protobuf:"bytes,18,opt,name=unit_name,json=unitName,proto3" json:"unit_name"`                                          //计量单位名称
-	UnitType             string         `protobuf:"bytes,19,opt,name=unit_type,json=unitType,proto3" json:"unit_type"`                                          //计量单位类型
-	Inventory            int64          `protobuf:"varint,20,opt,name=inventory,proto3" json:"inventory"`                                                       //库存
-	FrozenNum            int64          `protobuf:"varint,21,opt,name=frozen_num,json=frozenNum,proto3" json:"frozen_num"`                                      //冻结数量
-	InventoryDeductType  string         `protobuf:"bytes,22,opt,name=inventory_deduct_type,json=inventoryDeductType,proto3" json:"inventory_deduct_type"`       //库存扣减类型
-	IsShelve             string         `protobuf:"bytes,23,opt,name=is_shelve,json=isShelve,proto3" json:"is_shelve"`                                          //是否上架
-	IsBuyRight           string         `protobuf:"bytes,24,opt,name=is_buy_right,json=isBuyRight,proto3" json:"is_buy_right"`                                  //是否开启购买权限
-	IsVipPrice           string         `protobuf:"bytes,25,opt,name=is_vip_price,json=isVipPrice,proto3" json:"is_vip_price"`                                  //是否开启会员价
-	VipProduct           string         `protobuf:"bytes,26,opt,name=vip_product,json=vipProduct,proto3" json:"vip_product"`                                    //VIP专属产品
-	MinOriginalPrice     int64          `protobuf:"varint,27,opt,name=min_original_price,json=minOriginalPrice,proto3" json:"min_original_price"`               //最低原价
-	MaxOriginalPrice     int64          `protobuf:"varint,28,opt,name=max_original_price,json=maxOriginalPrice,proto3" json:"max_original_price"`               //最大原价
-	MinPrice             int64          `protobuf:"varint,29,opt,name=min_price,json=minPrice,proto3" json:"min_price"`                                         //最低价格
-	MaxPrice             int64          `protobuf:"varint,30,opt,name=max_price,json=maxPrice,proto3" json:"max_price"`                                         //最高价格
-	PhotoCount           int64          `protobuf:"varint,31,opt,name=photo_count,json=photoCount,proto3" json:"photo_count"`                                   //图片数量
-	BrowseCount          int64          `protobuf:"varint,32,opt,name=browse_count,json=browseCount,proto3" json:"browse_count"`                                //访问次数
-	SaleCount            int64          `protobuf:"varint,33,opt,name=sale_count,json=saleCount,proto3" json:"sale_count"`                                      //实际销量
-	MinQty               int64          `protobuf:"varint,34,opt,name=min_qty,json=minQty,proto3" json:"min_qty"`                                               //起购数量
-	IsLimit              string         `protobuf:"bytes,35,opt,name=is_limit,json=isLimit,proto3" json:"is_limit"`                                             // 是否开启限购（0否, 1是）
-	LimitType            string         `protobuf:"bytes,36,opt,name=limit_type,json=limitType,proto3" json:"limit_type"`                                       //限购类型: 1单次限购2永久限购
-	LimitNum             int64          `protobuf:"varint,37,opt,name=limit_num,json=limitNum,proto3" json:"limit_num"`                                         //限购数量
-	Fictions             int64          `protobuf:"varint,38,opt,name=fictions,proto3" json:"fictions"`                                                         //虚拟销量
-	ButtonMode           string         `protobuf:"bytes,39,opt,name=button_mode,json=buttonMode,proto3" json:"button_mode"`                                    //立即购买按钮
-	ButtonCustom         string         `protobuf:"bytes,40,opt,name=button_custom,json=buttonCustom,proto3" json:"button_custom"`                              //按钮自定义名称
-	LogisticsTypes       []string       `protobuf:"bytes,41,rep,name=logistics_types,json=logisticsTypes,proto3" json:"logistics_types"`                        //支持物流类型
-	ExpressFeeType       string         `protobuf:"bytes,44,opt,name=express_fee_type,json=expressFeeType,proto3" json:"express_fee_type"`                      //快递运费类型
-	ExpressFeePrice      int64          `protobuf:"varint,45,opt,name=express_fee_price,json=expressFeePrice,proto3" json:"express_fee_price"`                  //快递统一运费
-	ExpressFeeTemplateId int64          `protobuf:"varint,46,opt,name=express_fee_template_id,json=expressFeeTemplateId,proto3" json:"express_fee_template_id"` //快递运费模板
-	ClientTypes          []string       `protobuf:"bytes,47,rep,name=client_types,json=clientTypes,proto3" json:"client_types"`                                 //的客户终端
-	DetailTemplateId     int64          `protobuf:"varint,48,opt,name=detail_template_id,json=detailTemplateId,proto3" json:"detail_template_id"`               //详情模板
-	Content              string         `protobuf:"bytes,49,opt,name=content,proto3" json:"content"`                                                            //商品内容
-	SellingDesc          string         `protobuf:"bytes,50,opt,name=selling_desc,json=sellingDesc,proto3" json:"selling_desc"`                                 //卖点描述
-	ShareDesc            string         `protobuf:"bytes,51,opt,name=share_desc,json=shareDesc,proto3" json:"share_desc"`                                       //分享描述
-	SeoTitle             string         `protobuf:"bytes,52,opt,name=seo_title,json=seoTitle,proto3" json:"seo_title"`                                          //SEO标题
-	SeoKeywords          string         `protobuf:"bytes,53,opt,name=seo_keywords,json=seoKeywords,proto3" json:"seo_keywords"`                                 //SEO关键字
-	SeoDesc              string         `protobuf:"bytes,54,opt,name=seo_desc,json=seoDesc,proto3" json:"seo_desc"`                                             //SEO描述
-	Sort                 int32          `protobuf:"varint,55,opt,name=sort,proto3" json:"sort"`                                                                 //排序
-	IsGift               string         `protobuf:"bytes,56,opt,name=is_gift,json=isGift,proto3" json:"is_gift"`                                                //是否礼品
-	GiftPrice            int64          `protobuf:"varint,57,opt,name=gift_price,json=giftPrice,proto3" json:"gift_price"`                                      //礼品附件费
-	ExtObjectId          string         `protobuf:"bytes,58,opt,name=ext_object_id,json=extObjectId,proto3" json:"ext_object_id"`                               //扩展业务主要ID
-	OutSystemId          string         `protobuf:"bytes,60,opt,name=out_system_id,json=outSystemId,proto3" json:"out_system_id"`                               //外部系统ID
-	Status               string         `protobuf:"bytes,61,opt,name=status,proto3" json:"status"`                                                              //商品状态
-	CreatedAt            int64          `protobuf:"varint,62,opt,name=created_at,json=createdAt,proto3" json:"created_at"`                                      //创建时间
-	UpdatedAt            int64          `protobuf:"varint,63,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`                                      //修改时间
-	OtOriginalPrice      int64          `protobuf:"varint,64,opt,name=ot_original_price,json=otOriginalPrice,proto3" json:"ot_original_price"`                  //显示原价
-	OtPrice              int64          `protobuf:"varint,65,opt,name=ot_price,json=otPrice,proto3" json:"ot_price"`                                            //显示销售价格
-	OtVipPrice           int64          `protobuf:"varint,66,opt,name=ot_vip_price,json=otVipPrice,proto3" json:"ot_vip_price"`                                 //显示VIP价格
-	OtPromotionPrice     int64          `protobuf:"varint,67,opt,name=ot_promotion_price,json=otPromotionPrice,proto3" json:"ot_promotion_price"`               //促销价（暂时保留）
-	Brand                *Brand         `protobuf:"bytes,68,opt,name=brand,proto3" json:"brand"`
-	Category             *Category      `protobuf:"bytes,69,opt,name=category,proto3" json:"category"`
-	Presale              *SpuPresale    `protobuf:"bytes,70,opt,name=presale,proto3" json:"presale"`
-	Photos               []*SpuPhoto    `protobuf:"bytes,71,rep,name=photos,proto3" json:"photos"`
-	Groups               []*Group       `protobuf:"bytes,72,rep,name=groups,proto3" json:"groups"`
-	Skus                 []*Sku         `protobuf:"bytes,73,rep,name=skus,proto3" json:"skus"`
-	Sku                  *Sku           `protobuf:"bytes,74,opt,name=sku,proto3" json:"sku"`
-	Labels               []*Label       `protobuf:"bytes,75,rep,name=labels,proto3" json:"labels"`
-	SpecTypes            []*SpuSpecType `protobuf:"bytes,76,rep,name=spec_types,json=specTypes,proto3" json:"spec_types"`
-	CommentsCount        int64          `protobuf:"varint,77,opt,name=comments_count,json=commentsCount,proto3" json:"comments_count"`
-	GoodsUrl             string         `protobuf:"bytes,78,opt,name=goods_url,json=goodsUrl,proto3" json:"goods_url"`
-	ContentWeb           string         `protobuf:"bytes,79,opt,name=content_web,json=contentWeb,proto3" json:"content_web"` //web内容
-	ContentApp           string         `protobuf:"bytes,80,opt,name=content_app,json=contentApp,proto3" json:"content_app"` //app内容
-	BrandName            string         `protobuf:"bytes,81,opt,name=brand_name,json=brandName,proto3" json:"brand_name"`
-	StatusName           string         `protobuf:"bytes,82,opt,name=status_name,json=statusName,proto3" json:"status_name"`
-	IsError              string         `protobuf:"bytes,83,opt,name=is_error,json=isError,proto3" json:"is_error"`    //是否错误（0否，1是）
-	ErrorMsg             string         `protobuf:"bytes,84,opt,name=error_msg,json=errorMsg,proto3" json:"error_msg"` //错误信息
-	IsFavor              string         `protobuf:"bytes,85,opt,name=is_favor,json=isFavor,proto3" json:"is_favor"`    //是否已收藏(0否，1是)
-	Checked              bool           `protobuf:"varint,86,opt,name=checked,proto3" json:"checked"`
-	LabelIds             []int32        `protobuf:"varint,87,rep,packed,name=label_ids,json=labelIds,proto3" json:"label_ids"`
-	GroupIds             []int64        `protobuf:"varint,88,rep,packed,name=group_ids,json=groupIds,proto3" json:"group_ids"`
+	Id                  int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                                //ID
+	Type                string         `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`                                                             //商品类型
+	ShopId              int64          `protobuf:"varint,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`                                          //分店ID
+	CategoryId          int64          `protobuf:"varint,4,opt,name=category_id,json=categoryId,proto3" json:"category_id"`                              //商品分类
+	TaxonomyId          int64          `protobuf:"varint,5,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id"`                              //商品类目
+	BrandId             int32          `protobuf:"varint,6,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`                                       //品牌
+	SpuName             string         `protobuf:"bytes,7,opt,name=spu_name,json=spuName,proto3" json:"spu_name"`                                        //商品名称
+	SpuCode             string         `protobuf:"bytes,8,opt,name=spu_code,json=spuCode,proto3" json:"spu_code"`                                        //SPU编码
+	SellMode            string         `protobuf:"bytes,9,opt,name=sell_mode,json=sellMode,proto3" json:"sell_mode"`                                     //销售模式
+	ImageUrl            string         `protobuf:"bytes,10,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`                                    //商品主图
+	VideoUrl            string         `protobuf:"bytes,11,opt,name=video_url,json=videoUrl,proto3" json:"video_url"`                                    //主图视频
+	ExplainVideoUrl     string         `protobuf:"bytes,12,opt,name=explain_video_url,json=explainVideoUrl,proto3" json:"explain_video_url"`             //讲解视频
+	IsVirtual           string         `protobuf:"bytes,13,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`                                 //虚拟商品
+	IsManySpec          string         `protobuf:"bytes,14,opt,name=is_many_spec,json=isManySpec,proto3" json:"is_many_spec"`                            //多规格商品
+	IsOpenWeigh         string         `protobuf:"bytes,15,opt,name=is_open_weigh,json=isOpenWeigh,proto3" json:"is_open_weigh"`                         //开启称重
+	IsMoreBarcode       string         `protobuf:"bytes,16,opt,name=is_more_barcode,json=isMoreBarcode,proto3" json:"is_more_barcode"`                   //一品多码
+	UnitId              int32          `protobuf:"varint,17,opt,name=unit_id,json=unitId,proto3" json:"unit_id"`                                         //计量单位ID
+	UnitName            string         `protobuf:"bytes,18,opt,name=unit_name,json=unitName,proto3" json:"unit_name"`                                    //计量单位名称
+	UnitType            string         `protobuf:"bytes,19,opt,name=unit_type,json=unitType,proto3" json:"unit_type"`                                    //计量单位类型
+	Inventory           int64          `protobuf:"varint,20,opt,name=inventory,proto3" json:"inventory"`                                                 //库存
+	FrozenNum           int64          `protobuf:"varint,21,opt,name=frozen_num,json=frozenNum,proto3" json:"frozen_num"`                                //冻结数量
+	InventoryDeductType string         `protobuf:"bytes,22,opt,name=inventory_deduct_type,json=inventoryDeductType,proto3" json:"inventory_deduct_type"` //库存扣减类型
+	IsShelve            string         `protobuf:"bytes,23,opt,name=is_shelve,json=isShelve,proto3" json:"is_shelve"`                                    //是否上架
+	IsBuyRight          string         `protobuf:"bytes,24,opt,name=is_buy_right,json=isBuyRight,proto3" json:"is_buy_right"`                            //是否开启购买权限
+	IsVipPrice          string         `protobuf:"bytes,25,opt,name=is_vip_price,json=isVipPrice,proto3" json:"is_vip_price"`                            //是否开启会员价
+	VipProduct          string         `protobuf:"bytes,26,opt,name=vip_product,json=vipProduct,proto3" json:"vip_product"`                              //VIP专属产品
+	MinOriginalPrice    int64          `protobuf:"varint,27,opt,name=min_original_price,json=minOriginalPrice,proto3" json:"min_original_price"`         //最低原价
+	MaxOriginalPrice    int64          `protobuf:"varint,28,opt,name=max_original_price,json=maxOriginalPrice,proto3" json:"max_original_price"`         //最大原价
+	MinPrice            int64          `protobuf:"varint,29,opt,name=min_price,json=minPrice,proto3" json:"min_price"`                                   //最低价格
+	MaxPrice            int64          `protobuf:"varint,30,opt,name=max_price,json=maxPrice,proto3" json:"max_price"`                                   //最高价格
+	PhotoCount          int64          `protobuf:"varint,31,opt,name=photo_count,json=photoCount,proto3" json:"photo_count"`                             //图片数量
+	BrowseCount         int64          `protobuf:"varint,32,opt,name=browse_count,json=browseCount,proto3" json:"browse_count"`                          //访问次数
+	SaleCount           int64          `protobuf:"varint,33,opt,name=sale_count,json=saleCount,proto3" json:"sale_count"`                                //实际销量
+	MinQty              int64          `protobuf:"varint,34,opt,name=min_qty,json=minQty,proto3" json:"min_qty"`                                         //起购数量
+	IsLimit             string         `protobuf:"bytes,35,opt,name=is_limit,json=isLimit,proto3" json:"is_limit"`                                       // 是否开启限购（0否, 1是）
+	LimitType           string         `protobuf:"bytes,36,opt,name=limit_type,json=limitType,proto3" json:"limit_type"`                                 //限购类型: 1单次限购2永久限购
+	LimitNum            int64          `protobuf:"varint,37,opt,name=limit_num,json=limitNum,proto3" json:"limit_num"`                                   //限购数量
+	Fictions            int64          `protobuf:"varint,38,opt,name=fictions,proto3" json:"fictions"`                                                   //虚拟销量
+	ButtonMode          string         `protobuf:"bytes,39,opt,name=button_mode,json=buttonMode,proto3" json:"button_mode"`                              //立即购买按钮
+	ButtonCustom        string         `protobuf:"bytes,40,opt,name=button_custom,json=buttonCustom,proto3" json:"button_custom"`                        //按钮自定义名称
+	Logistics           []string       `protobuf:"bytes,41,rep,name=logistics,proto3" json:"logistics"`                                                  //支持物流类型
+	FreightType         string         `protobuf:"bytes,44,opt,name=freight_type,json=freightType,proto3" json:"freight_type"`                           //快递运费类型
+	FreightPrice        int64          `protobuf:"varint,45,opt,name=freight_price,json=freightPrice,proto3" json:"freight_price"`                       //快递统一运费
+	FreightTemplateId   int64          `protobuf:"varint,46,opt,name=freight_template_id,json=freightTemplateId,proto3" json:"freight_template_id"`      //快递运费模板
+	ClientTypes         []string       `protobuf:"bytes,47,rep,name=client_types,json=clientTypes,proto3" json:"client_types"`                           //的客户终端
+	DetailTemplateId    int64          `protobuf:"varint,48,opt,name=detail_template_id,json=detailTemplateId,proto3" json:"detail_template_id"`         //详情模板
+	Content             string         `protobuf:"bytes,49,opt,name=content,proto3" json:"content"`                                                      //商品内容
+	SellingDesc         string         `protobuf:"bytes,50,opt,name=selling_desc,json=sellingDesc,proto3" json:"selling_desc"`                           //卖点描述
+	ShareDesc           string         `protobuf:"bytes,51,opt,name=share_desc,json=shareDesc,proto3" json:"share_desc"`                                 //分享描述
+	SeoTitle            string         `protobuf:"bytes,52,opt,name=seo_title,json=seoTitle,proto3" json:"seo_title"`                                    //SEO标题
+	SeoKeywords         string         `protobuf:"bytes,53,opt,name=seo_keywords,json=seoKeywords,proto3" json:"seo_keywords"`                           //SEO关键字
+	SeoDesc             string         `protobuf:"bytes,54,opt,name=seo_desc,json=seoDesc,proto3" json:"seo_desc"`                                       //SEO描述
+	Sort                int32          `protobuf:"varint,55,opt,name=sort,proto3" json:"sort"`                                                           //排序
+	IsGift              string         `protobuf:"bytes,56,opt,name=is_gift,json=isGift,proto3" json:"is_gift"`                                          //是否礼品
+	GiftPrice           int64          `protobuf:"varint,57,opt,name=gift_price,json=giftPrice,proto3" json:"gift_price"`                                //礼品附件费
+	ExtObjectId         string         `protobuf:"bytes,58,opt,name=ext_object_id,json=extObjectId,proto3" json:"ext_object_id"`                         //扩展业务主要ID
+	OutSystemId         string         `protobuf:"bytes,60,opt,name=out_system_id,json=outSystemId,proto3" json:"out_system_id"`                         //外部系统ID
+	Status              string         `protobuf:"bytes,61,opt,name=status,proto3" json:"status"`                                                        //商品状态
+	CreatedAt           int64          `protobuf:"varint,62,opt,name=created_at,json=createdAt,proto3" json:"created_at"`                                //创建时间
+	UpdatedAt           int64          `protobuf:"varint,63,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`                                //修改时间
+	OtOriginalPrice     int64          `protobuf:"varint,64,opt,name=ot_original_price,json=otOriginalPrice,proto3" json:"ot_original_price"`            //显示原价
+	OtPrice             int64          `protobuf:"varint,65,opt,name=ot_price,json=otPrice,proto3" json:"ot_price"`                                      //显示销售价格
+	OtVipPrice          int64          `protobuf:"varint,66,opt,name=ot_vip_price,json=otVipPrice,proto3" json:"ot_vip_price"`                           //显示VIP价格
+	OtPromotionPrice    int64          `protobuf:"varint,67,opt,name=ot_promotion_price,json=otPromotionPrice,proto3" json:"ot_promotion_price"`         //促销价（暂时保留）
+	Brand               *Brand         `protobuf:"bytes,68,opt,name=brand,proto3" json:"brand"`
+	Category            *Category      `protobuf:"bytes,69,opt,name=category,proto3" json:"category"`
+	Presale             *SpuPresale    `protobuf:"bytes,70,opt,name=presale,proto3" json:"presale"`
+	Photos              []*SpuPhoto    `protobuf:"bytes,71,rep,name=photos,proto3" json:"photos"`
+	Groups              []*Group       `protobuf:"bytes,72,rep,name=groups,proto3" json:"groups"`
+	Skus                []*Sku         `protobuf:"bytes,73,rep,name=skus,proto3" json:"skus"`
+	Sku                 *Sku           `protobuf:"bytes,74,opt,name=sku,proto3" json:"sku"`
+	Labels              []*Label       `protobuf:"bytes,75,rep,name=labels,proto3" json:"labels"`
+	SpecTypes           []*SpuSpecType `protobuf:"bytes,76,rep,name=spec_types,json=specTypes,proto3" json:"spec_types"`
+	CommentsCount       int64          `protobuf:"varint,77,opt,name=comments_count,json=commentsCount,proto3" json:"comments_count"`
+	GoodsUrl            string         `protobuf:"bytes,78,opt,name=goods_url,json=goodsUrl,proto3" json:"goods_url"`
+	ContentWeb          string         `protobuf:"bytes,79,opt,name=content_web,json=contentWeb,proto3" json:"content_web"` //web内容
+	ContentApp          string         `protobuf:"bytes,80,opt,name=content_app,json=contentApp,proto3" json:"content_app"` //app内容
+	BrandName           string         `protobuf:"bytes,81,opt,name=brand_name,json=brandName,proto3" json:"brand_name"`
+	StatusName          string         `protobuf:"bytes,82,opt,name=status_name,json=statusName,proto3" json:"status_name"`
+	IsError             string         `protobuf:"bytes,83,opt,name=is_error,json=isError,proto3" json:"is_error"`    //是否错误（0否，1是）
+	ErrorMsg            string         `protobuf:"bytes,84,opt,name=error_msg,json=errorMsg,proto3" json:"error_msg"` //错误信息
+	IsFavor             string         `protobuf:"bytes,85,opt,name=is_favor,json=isFavor,proto3" json:"is_favor"`    //是否已收藏(0否，1是)
+	Checked             bool           `protobuf:"varint,86,opt,name=checked,proto3" json:"checked"`
+	LabelIds            []int32        `protobuf:"varint,87,rep,packed,name=label_ids,json=labelIds,proto3" json:"label_ids"`
+	GroupIds            []int64        `protobuf:"varint,88,rep,packed,name=group_ids,json=groupIds,proto3" json:"group_ids"`
 }
 
 func (x *Spu) Reset() {
@@ -426,30 +426,30 @@ func (x *Spu) GetButtonCustom() string {
 	return ""
 }
 
-func (x *Spu) GetLogisticsTypes() []string {
+func (x *Spu) GetLogistics() []string {
 	if x != nil {
-		return x.LogisticsTypes
+		return x.Logistics
 	}
 	return nil
 }
 
-func (x *Spu) GetExpressFeeType() string {
+func (x *Spu) GetFreightType() string {
 	if x != nil {
-		return x.ExpressFeeType
+		return x.FreightType
 	}
 	return ""
 }
 
-func (x *Spu) GetExpressFeePrice() int64 {
+func (x *Spu) GetFreightPrice() int64 {
 	if x != nil {
-		return x.ExpressFeePrice
+		return x.FreightPrice
 	}
 	return 0
 }
 
-func (x *Spu) GetExpressFeeTemplateId() int64 {
+func (x *Spu) GetFreightTemplateId() int64 {
 	if x != nil {
-		return x.ExpressFeeTemplateId
+		return x.FreightTemplateId
 	}
 	return 0
 }
@@ -747,59 +747,59 @@ type SpuEdit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                                      //ID
-	Type                 string         `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`                                                                   //商品类型
-	ShopId               int64          `protobuf:"varint,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`                                                //分店ID
-	CategoryId           int64          `protobuf:"varint,4,opt,name=category_id,json=categoryId,proto3" json:"category_id"`                                    //商品分类
-	TaxonomyId           int64          `protobuf:"varint,5,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id"`                                    //商品类目
-	BrandId              int32          `protobuf:"varint,6,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`                                             //品牌
-	SpuName              string         `protobuf:"bytes,7,opt,name=spu_name,json=spuName,proto3" json:"spu_name"`                                              //商品名称
-	Content              string         `protobuf:"bytes,8,opt,name=content,proto3" json:"content"`                                                             //商品内容
-	SellingDesc          string         `protobuf:"bytes,9,opt,name=selling_desc,json=sellingDesc,proto3" json:"selling_desc"`                                  //卖点描述
-	ShareDesc            string         `protobuf:"bytes,10,opt,name=share_desc,json=shareDesc,proto3" json:"share_desc"`                                       //分享描述
-	ImageUrl             string         `protobuf:"bytes,11,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`                                          //商品主图
-	VideoUrl             string         `protobuf:"bytes,12,opt,name=video_url,json=videoUrl,proto3" json:"video_url"`                                          //主图视频
-	ExplainVideoUrl      string         `protobuf:"bytes,13,opt,name=explain_video_url,json=explainVideoUrl,proto3" json:"explain_video_url"`                   //讲解视频
-	IsVirtual            string         `protobuf:"bytes,14,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`                                       //虚拟商品
-	IsManySpec           string         `protobuf:"bytes,15,opt,name=is_many_spec,json=isManySpec,proto3" json:"is_many_spec"`                                  //多规格商品
-	IsOpenWeigh          string         `protobuf:"bytes,16,opt,name=is_open_weigh,json=isOpenWeigh,proto3" json:"is_open_weigh"`                               //开启称重
-	Code                 string         `protobuf:"bytes,17,opt,name=code,proto3" json:"code"`                                                                  //SPU编码
-	IsMoreBarcode        string         `protobuf:"bytes,18,opt,name=is_more_barcode,json=isMoreBarcode,proto3" json:"is_more_barcode"`                         //一品多码
-	UnitId               int32          `protobuf:"varint,19,opt,name=unit_id,json=unitId,proto3" json:"unit_id"`                                               //计量单位ID
-	UnitName             string         `protobuf:"bytes,20,opt,name=unit_name,json=unitName,proto3" json:"unit_name"`                                          //计量单位名称
-	IsShelve             string         `protobuf:"bytes,23,opt,name=is_shelve,json=isShelve,proto3" json:"is_shelve"`                                          //是否上架
-	SellMode             string         `protobuf:"bytes,24,opt,name=sell_mode,json=sellMode,proto3" json:"sell_mode"`                                          //销售模式
-	InventoryDeductType  string         `protobuf:"bytes,25,opt,name=inventory_deduct_type,json=inventoryDeductType,proto3" json:"inventory_deduct_type"`       //扣减库存类型
-	IsBuyRight           string         `protobuf:"bytes,26,opt,name=is_buy_right,json=isBuyRight,proto3" json:"is_buy_right"`                                  //购买权限
-	IsVipPrice           string         `protobuf:"bytes,27,opt,name=is_vip_price,json=isVipPrice,proto3" json:"is_vip_price"`                                  //是否会员折扣价
-	VipProduct           string         `protobuf:"bytes,28,opt,name=vip_product,json=vipProduct,proto3" json:"vip_product"`                                    //VIP专属产品
-	MinQty               int64          `protobuf:"varint,32,opt,name=min_qty,json=minQty,proto3" json:"min_qty"`                                               //起购数量
-	IsLimit              string         `protobuf:"bytes,33,opt,name=is_limit,json=isLimit,proto3" json:"is_limit"`                                             // 是否开启限购（0否, 1是）
-	LimitType            string         `protobuf:"bytes,34,opt,name=limit_type,json=limitType,proto3" json:"limit_type"`                                       //限购类型: 1单次限购2永久限购
-	LimitNum             int64          `protobuf:"varint,35,opt,name=limit_num,json=limitNum,proto3" json:"limit_num"`                                         //限购数量
-	Fictions             int64          `protobuf:"varint,37,opt,name=fictions,proto3" json:"fictions"`                                                         //虚拟销量
-	ButtonMode           string         `protobuf:"bytes,38,opt,name=button_mode,json=buttonMode,proto3" json:"button_mode"`                                    //立即购买按钮
-	ButtonCustom         string         `protobuf:"bytes,39,opt,name=button_custom,json=buttonCustom,proto3" json:"button_custom"`                              //按钮自定义名称
-	LogisticsTypes       []string       `protobuf:"bytes,40,rep,name=logistics_types,json=logisticsTypes,proto3" json:"logistics_types"`                        //支持物流类型
-	ExpressFeeType       string         `protobuf:"bytes,41,opt,name=express_fee_type,json=expressFeeType,proto3" json:"express_fee_type"`                      //运费模式
-	ExpressFeePrice      int64          `protobuf:"varint,42,opt,name=express_fee_price,json=expressFeePrice,proto3" json:"express_fee_price"`                  //统一运费
-	ExpressFeeTemplateId int64          `protobuf:"varint,43,opt,name=express_fee_template_id,json=expressFeeTemplateId,proto3" json:"express_fee_template_id"` //运费模板
-	ClientTypes          []string       `protobuf:"bytes,46,rep,name=client_types,json=clientTypes,proto3" json:"client_types"`                                 //的客户终端
-	DetailTemplateId     int64          `protobuf:"varint,47,opt,name=detail_template_id,json=detailTemplateId,proto3" json:"detail_template_id"`               //详情模板
-	SeoTitle             string         `protobuf:"bytes,48,opt,name=seo_title,json=seoTitle,proto3" json:"seo_title"`                                          //SEO标题
-	SeoKeywords          string         `protobuf:"bytes,49,opt,name=seo_keywords,json=seoKeywords,proto3" json:"seo_keywords"`                                 //SEO关键字
-	SeoDesc              string         `protobuf:"bytes,50,opt,name=seo_desc,json=seoDesc,proto3" json:"seo_desc"`                                             //SEO描述
-	Sort                 int32          `protobuf:"varint,51,opt,name=sort,proto3" json:"sort"`                                                                 //排序
-	IsGift               string         `protobuf:"bytes,52,opt,name=is_gift,json=isGift,proto3" json:"is_gift"`                                                //是否礼品
-	GiftPrice            int64          `protobuf:"varint,53,opt,name=gift_price,json=giftPrice,proto3" json:"gift_price"`                                      //礼品附件费
-	Status               string         `protobuf:"bytes,54,opt,name=status,proto3" json:"status"`                                                              //商品状态
-	Presale              *SpuPresale    `protobuf:"bytes,66,opt,name=presale,proto3" json:"presale"`
-	Photos               []*SpuPhoto    `protobuf:"bytes,67,rep,name=photos,proto3" json:"photos"`
-	Skus                 []*Sku         `protobuf:"bytes,68,rep,name=skus,proto3" json:"skus"`
-	Sku                  *Sku           `protobuf:"bytes,69,opt,name=sku,proto3" json:"sku"`
-	SpecTypes            []*SpuSpecType `protobuf:"bytes,70,rep,name=spec_types,json=specTypes,proto3" json:"spec_types"`
-	LabelIds             []int32        `protobuf:"varint,71,rep,packed,name=label_ids,json=labelIds,proto3" json:"label_ids"`
-	GroupIds             []int64        `protobuf:"varint,72,rep,packed,name=group_ids,json=groupIds,proto3" json:"group_ids"`
+	Id                  int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                                //ID
+	Type                string         `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`                                                             //商品类型
+	ShopId              int64          `protobuf:"varint,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id"`                                          //分店ID
+	CategoryId          int64          `protobuf:"varint,4,opt,name=category_id,json=categoryId,proto3" json:"category_id"`                              //商品分类
+	TaxonomyId          int64          `protobuf:"varint,5,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id"`                              //商品类目
+	BrandId             int32          `protobuf:"varint,6,opt,name=brand_id,json=brandId,proto3" json:"brand_id"`                                       //品牌
+	SpuName             string         `protobuf:"bytes,7,opt,name=spu_name,json=spuName,proto3" json:"spu_name"`                                        //商品名称
+	Content             string         `protobuf:"bytes,8,opt,name=content,proto3" json:"content"`                                                       //商品内容
+	SellingDesc         string         `protobuf:"bytes,9,opt,name=selling_desc,json=sellingDesc,proto3" json:"selling_desc"`                            //卖点描述
+	ShareDesc           string         `protobuf:"bytes,10,opt,name=share_desc,json=shareDesc,proto3" json:"share_desc"`                                 //分享描述
+	ImageUrl            string         `protobuf:"bytes,11,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`                                    //商品主图
+	VideoUrl            string         `protobuf:"bytes,12,opt,name=video_url,json=videoUrl,proto3" json:"video_url"`                                    //主图视频
+	ExplainVideoUrl     string         `protobuf:"bytes,13,opt,name=explain_video_url,json=explainVideoUrl,proto3" json:"explain_video_url"`             //讲解视频
+	IsVirtual           string         `protobuf:"bytes,14,opt,name=is_virtual,json=isVirtual,proto3" json:"is_virtual"`                                 //虚拟商品
+	IsManySpec          string         `protobuf:"bytes,15,opt,name=is_many_spec,json=isManySpec,proto3" json:"is_many_spec"`                            //多规格商品
+	IsOpenWeigh         string         `protobuf:"bytes,16,opt,name=is_open_weigh,json=isOpenWeigh,proto3" json:"is_open_weigh"`                         //开启称重
+	Code                string         `protobuf:"bytes,17,opt,name=code,proto3" json:"code"`                                                            //SPU编码
+	IsMoreBarcode       string         `protobuf:"bytes,18,opt,name=is_more_barcode,json=isMoreBarcode,proto3" json:"is_more_barcode"`                   //一品多码
+	UnitId              int32          `protobuf:"varint,19,opt,name=unit_id,json=unitId,proto3" json:"unit_id"`                                         //计量单位ID
+	UnitName            string         `protobuf:"bytes,20,opt,name=unit_name,json=unitName,proto3" json:"unit_name"`                                    //计量单位名称
+	IsShelve            string         `protobuf:"bytes,23,opt,name=is_shelve,json=isShelve,proto3" json:"is_shelve"`                                    //是否上架
+	SellMode            string         `protobuf:"bytes,24,opt,name=sell_mode,json=sellMode,proto3" json:"sell_mode"`                                    //销售模式
+	InventoryDeductType string         `protobuf:"bytes,25,opt,name=inventory_deduct_type,json=inventoryDeductType,proto3" json:"inventory_deduct_type"` //扣减库存类型
+	IsBuyRight          string         `protobuf:"bytes,26,opt,name=is_buy_right,json=isBuyRight,proto3" json:"is_buy_right"`                            //购买权限
+	IsVipPrice          string         `protobuf:"bytes,27,opt,name=is_vip_price,json=isVipPrice,proto3" json:"is_vip_price"`                            //是否会员折扣价
+	VipProduct          string         `protobuf:"bytes,28,opt,name=vip_product,json=vipProduct,proto3" json:"vip_product"`                              //VIP专属产品
+	MinQty              int64          `protobuf:"varint,32,opt,name=min_qty,json=minQty,proto3" json:"min_qty"`                                         //起购数量
+	IsLimit             string         `protobuf:"bytes,33,opt,name=is_limit,json=isLimit,proto3" json:"is_limit"`                                       // 是否开启限购（0否, 1是）
+	LimitType           string         `protobuf:"bytes,34,opt,name=limit_type,json=limitType,proto3" json:"limit_type"`                                 //限购类型: 1单次限购2永久限购
+	LimitNum            int64          `protobuf:"varint,35,opt,name=limit_num,json=limitNum,proto3" json:"limit_num"`                                   //限购数量
+	Fictions            int64          `protobuf:"varint,37,opt,name=fictions,proto3" json:"fictions"`                                                   //虚拟销量
+	ButtonMode          string         `protobuf:"bytes,38,opt,name=button_mode,json=buttonMode,proto3" json:"button_mode"`                              //立即购买按钮
+	ButtonCustom        string         `protobuf:"bytes,39,opt,name=button_custom,json=buttonCustom,proto3" json:"button_custom"`                        //按钮自定义名称
+	Logistics           []string       `protobuf:"bytes,40,rep,name=logistics,proto3" json:"logistics"`                                                  //支持物流类型
+	FreightType         string         `protobuf:"bytes,41,opt,name=freight_type,json=freightType,proto3" json:"freight_type"`                           //运费模式
+	FreightPrice        int64          `protobuf:"varint,42,opt,name=freight_price,json=freightPrice,proto3" json:"freight_price"`                       //统一运费
+	FreightTemplateId   int64          `protobuf:"varint,43,opt,name=freight_template_id,json=freightTemplateId,proto3" json:"freight_template_id"`      //运费模板
+	ClientTypes         []string       `protobuf:"bytes,46,rep,name=client_types,json=clientTypes,proto3" json:"client_types"`                           //的客户终端
+	DetailTemplateId    int64          `protobuf:"varint,47,opt,name=detail_template_id,json=detailTemplateId,proto3" json:"detail_template_id"`         //详情模板
+	SeoTitle            string         `protobuf:"bytes,48,opt,name=seo_title,json=seoTitle,proto3" json:"seo_title"`                                    //SEO标题
+	SeoKeywords         string         `protobuf:"bytes,49,opt,name=seo_keywords,json=seoKeywords,proto3" json:"seo_keywords"`                           //SEO关键字
+	SeoDesc             string         `protobuf:"bytes,50,opt,name=seo_desc,json=seoDesc,proto3" json:"seo_desc"`                                       //SEO描述
+	Sort                int32          `protobuf:"varint,51,opt,name=sort,proto3" json:"sort"`                                                           //排序
+	IsGift              string         `protobuf:"bytes,52,opt,name=is_gift,json=isGift,proto3" json:"is_gift"`                                          //是否礼品
+	GiftPrice           int64          `protobuf:"varint,53,opt,name=gift_price,json=giftPrice,proto3" json:"gift_price"`                                //礼品附件费
+	Status              string         `protobuf:"bytes,54,opt,name=status,proto3" json:"status"`                                                        //商品状态
+	Presale             *SpuPresale    `protobuf:"bytes,66,opt,name=presale,proto3" json:"presale"`
+	Photos              []*SpuPhoto    `protobuf:"bytes,67,rep,name=photos,proto3" json:"photos"`
+	Skus                []*Sku         `protobuf:"bytes,68,rep,name=skus,proto3" json:"skus"`
+	Sku                 *Sku           `protobuf:"bytes,69,opt,name=sku,proto3" json:"sku"`
+	SpecTypes           []*SpuSpecType `protobuf:"bytes,70,rep,name=spec_types,json=specTypes,proto3" json:"spec_types"`
+	LabelIds            []int32        `protobuf:"varint,71,rep,packed,name=label_ids,json=labelIds,proto3" json:"label_ids"`
+	GroupIds            []int64        `protobuf:"varint,72,rep,packed,name=group_ids,json=groupIds,proto3" json:"group_ids"`
 }
 
 func (x *SpuEdit) Reset() {
@@ -1065,30 +1065,30 @@ func (x *SpuEdit) GetButtonCustom() string {
 	return ""
 }
 
-func (x *SpuEdit) GetLogisticsTypes() []string {
+func (x *SpuEdit) GetLogistics() []string {
 	if x != nil {
-		return x.LogisticsTypes
+		return x.Logistics
 	}
 	return nil
 }
 
-func (x *SpuEdit) GetExpressFeeType() string {
+func (x *SpuEdit) GetFreightType() string {
 	if x != nil {
-		return x.ExpressFeeType
+		return x.FreightType
 	}
 	return ""
 }
 
-func (x *SpuEdit) GetExpressFeePrice() int64 {
+func (x *SpuEdit) GetFreightPrice() int64 {
 	if x != nil {
-		return x.ExpressFeePrice
+		return x.FreightPrice
 	}
 	return 0
 }
 
-func (x *SpuEdit) GetExpressFeeTemplateId() int64 {
+func (x *SpuEdit) GetFreightTemplateId() int64 {
 	if x != nil {
-		return x.ExpressFeeTemplateId
+		return x.FreightTemplateId
 	}
 	return 0
 }
@@ -2092,7 +2092,7 @@ var file_spuService_proto_rawDesc = []byte{
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x12, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x53, 0x65, 0x72, 0x76,
 	0x69, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x17, 0x73, 0x70, 0x75, 0x50, 0x72,
 	0x65, 0x73, 0x61, 0x6c, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x22, 0xa1, 0x16, 0x0a, 0x03, 0x53, 0x70, 0x75, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
+	0x74, 0x6f, 0x22, 0x81, 0x16, 0x0a, 0x03, 0x53, 0x70, 0x75, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79,
 	0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x17,
 	0x0a, 0x07, 0x73, 0x68, 0x6f, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52,
@@ -2171,18 +2171,16 @@ var file_spuService_proto_rawDesc = []byte{
 	0x6d, 0x6f, 0x64, 0x65, 0x18, 0x27, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x62, 0x75, 0x74, 0x74,
 	0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x62, 0x75, 0x74, 0x74, 0x6f, 0x6e,
 	0x5f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x18, 0x28, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x62,
-	0x75, 0x74, 0x74, 0x6f, 0x6e, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x12, 0x27, 0x0a, 0x0f, 0x6c,
-	0x6f, 0x67, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x18, 0x29,
-	0x20, 0x03, 0x28, 0x09, 0x52, 0x0e, 0x6c, 0x6f, 0x67, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x54,
-	0x79, 0x70, 0x65, 0x73, 0x12, 0x28, 0x0a, 0x10, 0x65, 0x78, 0x70, 0x72, 0x65, 0x73, 0x73, 0x5f,
-	0x66, 0x65, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x2c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e,
-	0x65, 0x78, 0x70, 0x72, 0x65, 0x73, 0x73, 0x46, 0x65, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x2a,
-	0x0a, 0x11, 0x65, 0x78, 0x70, 0x72, 0x65, 0x73, 0x73, 0x5f, 0x66, 0x65, 0x65, 0x5f, 0x70, 0x72,
-	0x69, 0x63, 0x65, 0x18, 0x2d, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0f, 0x65, 0x78, 0x70, 0x72, 0x65,
-	0x73, 0x73, 0x46, 0x65, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x35, 0x0a, 0x17, 0x65, 0x78,
-	0x70, 0x72, 0x65, 0x73, 0x73, 0x5f, 0x66, 0x65, 0x65, 0x5f, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61,
-	0x74, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x2e, 0x20, 0x01, 0x28, 0x03, 0x52, 0x14, 0x65, 0x78, 0x70,
-	0x72, 0x65, 0x73, 0x73, 0x46, 0x65, 0x65, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x49,
+	0x75, 0x74, 0x74, 0x6f, 0x6e, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x12, 0x1c, 0x0a, 0x09, 0x6c,
+	0x6f, 0x67, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x18, 0x29, 0x20, 0x03, 0x28, 0x09, 0x52, 0x09,
+	0x6c, 0x6f, 0x67, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x66, 0x72, 0x65,
+	0x69, 0x67, 0x68, 0x74, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x2c, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0b, 0x66, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x23, 0x0a, 0x0d,
+	0x66, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x2d, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x0c, 0x66, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x72, 0x69, 0x63,
+	0x65, 0x12, 0x2e, 0x0a, 0x13, 0x66, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x5f, 0x74, 0x65, 0x6d,
+	0x70, 0x6c, 0x61, 0x74, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x2e, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11,
+	0x66, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x49,
 	0x64, 0x12, 0x21, 0x0a, 0x0c, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x74, 0x79, 0x70, 0x65,
 	0x73, 0x18, 0x2f, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54,
 	0x79, 0x70, 0x65, 0x73, 0x12, 0x2c, 0x0a, 0x12, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x5f, 0x74,
@@ -2270,7 +2268,7 @@ var file_spuService_proto_rawDesc = []byte{
 	0x6c, 0x61, 0x62, 0x65, 0x6c, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x57, 0x20, 0x03, 0x28, 0x05, 0x52,
 	0x08, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x49, 0x64, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x67, 0x72, 0x6f,
 	0x75, 0x70, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x58, 0x20, 0x03, 0x28, 0x03, 0x52, 0x08, 0x67, 0x72,
-	0x6f, 0x75, 0x70, 0x49, 0x64, 0x73, 0x22, 0xd2, 0x0d, 0x0a, 0x07, 0x53, 0x70, 0x75, 0x45, 0x64,
+	0x6f, 0x75, 0x70, 0x49, 0x64, 0x73, 0x22, 0xb2, 0x0d, 0x0a, 0x07, 0x53, 0x70, 0x75, 0x45, 0x64,
 	0x69, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02,
 	0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x17, 0x0a, 0x07, 0x73, 0x68, 0x6f, 0x70, 0x5f, 0x69,
@@ -2334,18 +2332,16 @@ var file_spuService_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x62, 0x75, 0x74, 0x74, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x65,
 	0x12, 0x23, 0x0a, 0x0d, 0x62, 0x75, 0x74, 0x74, 0x6f, 0x6e, 0x5f, 0x63, 0x75, 0x73, 0x74, 0x6f,
 	0x6d, 0x18, 0x27, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x62, 0x75, 0x74, 0x74, 0x6f, 0x6e, 0x43,
-	0x75, 0x73, 0x74, 0x6f, 0x6d, 0x12, 0x27, 0x0a, 0x0f, 0x6c, 0x6f, 0x67, 0x69, 0x73, 0x74, 0x69,
-	0x63, 0x73, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x18, 0x28, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0e,
-	0x6c, 0x6f, 0x67, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x54, 0x79, 0x70, 0x65, 0x73, 0x12, 0x28,
-	0x0a, 0x10, 0x65, 0x78, 0x70, 0x72, 0x65, 0x73, 0x73, 0x5f, 0x66, 0x65, 0x65, 0x5f, 0x74, 0x79,
-	0x70, 0x65, 0x18, 0x29, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x65, 0x78, 0x70, 0x72, 0x65, 0x73,
-	0x73, 0x46, 0x65, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x2a, 0x0a, 0x11, 0x65, 0x78, 0x70, 0x72,
-	0x65, 0x73, 0x73, 0x5f, 0x66, 0x65, 0x65, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x2a, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x0f, 0x65, 0x78, 0x70, 0x72, 0x65, 0x73, 0x73, 0x46, 0x65, 0x65, 0x50,
-	0x72, 0x69, 0x63, 0x65, 0x12, 0x35, 0x0a, 0x17, 0x65, 0x78, 0x70, 0x72, 0x65, 0x73, 0x73, 0x5f,
-	0x66, 0x65, 0x65, 0x5f, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x5f, 0x69, 0x64, 0x18,
-	0x2b, 0x20, 0x01, 0x28, 0x03, 0x52, 0x14, 0x65, 0x78, 0x70, 0x72, 0x65, 0x73, 0x73, 0x46, 0x65,
-	0x65, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x49, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x63,
+	0x75, 0x73, 0x74, 0x6f, 0x6d, 0x12, 0x1c, 0x0a, 0x09, 0x6c, 0x6f, 0x67, 0x69, 0x73, 0x74, 0x69,
+	0x63, 0x73, 0x18, 0x28, 0x20, 0x03, 0x28, 0x09, 0x52, 0x09, 0x6c, 0x6f, 0x67, 0x69, 0x73, 0x74,
+	0x69, 0x63, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x66, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x5f, 0x74,
+	0x79, 0x70, 0x65, 0x18, 0x29, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x66, 0x72, 0x65, 0x69, 0x67,
+	0x68, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x66, 0x72, 0x65, 0x69, 0x67, 0x68,
+	0x74, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x2a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x66,
+	0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x2e, 0x0a, 0x13, 0x66,
+	0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x5f, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x5f,
+	0x69, 0x64, 0x18, 0x2b, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x66, 0x72, 0x65, 0x69, 0x67, 0x68,
+	0x74, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x49, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x63,
 	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x18, 0x2e, 0x20, 0x03, 0x28,
 	0x09, 0x52, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x73, 0x12, 0x2c,
 	0x0a, 0x12, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x5f, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74,
