@@ -16,7 +16,7 @@ service ProductService {
 
 message Product {
     int64 id = 1; //ID
-    string type = 2; //商品类型
+    string type = 2; //产品类型：physical实物产品,virtual虚拟产品,grouped分组产品，bundle捆绑产品
     int64 shop_id = 3; //分店ID
     int64 category_id = 4; //商品分类
     int64 taxonomy_id = 5; //商品类目
@@ -28,13 +28,14 @@ message Product {
     string video = 11; //主图视频
     string explain_video = 12; //讲解视频
     bool is_virtual = 13; //虚拟商品
-    bool is_many_spec = 14; //多规格商品
-    bool is_open_weigh = 15; //开启称重
-    bool is_more_barcode = 16; //一品多码
-    int32 unit_id = 17; //计量单位ID
-    string unit_name = 18; //计量单位名称
-    string unit_type = 19; //计量单位类型
-    string inventory_deduct_type = 21; //库存扣减类型
+    string virtual_type = 14; //虚拟商品类型
+    bool is_many_spec = 15; //多规格商品
+    bool is_open_weigh = 16; //开启称重
+    bool is_more_barcode = 17; //一品多码
+    int32 unit_id = 18; //计量单位ID
+    string unit_name = 19; //计量单位名称
+    string unit_type = 20; //计量单位类型
+    string deduction_type = 21; //库存扣减类型
     bool is_shelve = 22; //是否上架
     bool is_buy_right = 23; //是否开启购买权限
     bool is_vip_price = 24; //是否开启会员价格
@@ -57,7 +58,7 @@ message Product {
     string freight_type = 41; //快递运费类型
     int64 freight_price = 42; //快递统一运费
     int64 freight_template_id = 43; //快递运费模板
-    repeated string client_types = 44; //的客户终端
+    bool is_oversea = 44; //是否海淘商品
     int32 sort = 49; //排序
     string ext_object_id = 50; //扩展业务主要ID
     string status = 52; //商品状态
