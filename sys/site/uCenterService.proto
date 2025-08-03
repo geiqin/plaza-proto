@@ -87,20 +87,21 @@ message UCenterIndexData{
     bool svip_open =65;
 }
 
-
 message UCenterMenuData{
-  UCenterMenuDiyData diy_data =1;
+  UCenterMenuDataDiy diy_data =1;
   string routine_contact_type =2;
   repeated PicLinkInfo routine_my_menus =3;
   repeated PicLinkInfo routine_my_banner =4;
+  repeated PicLinkInfo routine_spread_banner =5;
 }
 
-message UCenterMenuDiyData {
-  string value = 1;
-  bool my_banner_status =2;
-  string order_status =3;
+message UCenterMenuDataDiy {
+  int32 value = 1;
+  int32 order_status =2;
+  bool my_banner_status =3;
+  int32 my_menus_status =4;
+  int32 business_status =5;
 }
-
 
 //订单状态统计
 message OrderStatusNum{

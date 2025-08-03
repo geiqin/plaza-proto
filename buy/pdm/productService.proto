@@ -64,11 +64,6 @@ message Product {
     string status = 52; //商品状态
     ProductAttrInfo attrInfo =53;
     bool is_presale =54;
-
-    bool express_delivery =55; //快递发货
-    bool store_mention =56; //到店自提
-    bool local_city =57;  //同城配送
-
     //额外扩展
     string goods_url =80;//商品URL
     bool is_delete =81;//商品是否已删除（0否，1是）

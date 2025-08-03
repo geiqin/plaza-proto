@@ -22,7 +22,7 @@ message PaymentInfo {
 //产品信息
 message ProductInfo {
 	int64 id = 1; //ID
-	string type = 2; //商品类型
+	string type = 2; //产品类型：physical实物产品,virtual虚拟产品,grouped分组产品，bundle捆绑产品
 	int64 shop_id = 3; //分店ID
 	int64 category_id = 4; //商品分类
 	int64 taxonomy_id = 5; //商品类目
@@ -34,13 +34,14 @@ message ProductInfo {
 	string video = 11; //主图视频
 	string explain_video = 12; //讲解视频
 	bool is_virtual = 13; //虚拟商品
-	bool is_many_spec = 14; //多规格商品
-	bool is_open_weigh = 15; //开启称重
-	bool is_more_barcode = 16; //一品多码
-	int32 unit_id = 17; //计量单位ID
-	string unit_name = 18; //计量单位名称
-	string unit_type = 19; //计量单位类型
-	string inventory_deduct_type = 21; //库存扣减类型
+	string virtual_type = 14; //虚拟商品类型
+	bool is_many_spec = 15; //多规格商品
+	bool is_open_weigh = 16; //开启称重
+	bool is_more_barcode = 17; //一品多码
+	int32 unit_id = 18; //计量单位ID
+	string unit_name = 19; //计量单位名称
+	string unit_type = 20; //计量单位类型
+	string deduction_type = 21; //库存扣减类型
 	bool is_shelve = 22; //是否上架
 	bool is_buy_right = 23; //是否开启购买权限
 	bool is_vip_price = 24; //是否开启会员价格
@@ -57,16 +58,22 @@ message ProductInfo {
 	bool is_limit = 35; // 是否开启限购（0否, 1是）
 	string limit_type = 36; //限购类型: 1单次限购2永久限购
 	int64 limit_num = 37; //限购数量
-	repeated string logistics_types = 38; //支持物流类型
-	string express_fee_type = 41; //快递运费类型
-	int64 express_fee_price = 42; //快递统一运费
-	int64 express_fee_template_id = 43; //快递运费模板
-	repeated string client_types = 44; //的客户终端
+	bool is_gift = 38; //是否礼品
+	int64 gift_price = 39; //礼品附件费
+	repeated string logistics = 40; //支持物流类型
+	string freight_type = 41; //快递运费类型
+	int64 freight_price = 42; //快递统一运费
+	int64 freight_template_id = 43; //快递运费模板
+	bool is_oversea = 44; //是否海淘商品
 	int32 sort = 49; //排序
 	string ext_object_id = 50; //扩展业务主要ID
 	string status = 52; //商品状态
 	ProductAttrInfo attrInfo =53;
 	bool is_presale =54;
+	bool express_delivery =55; //快递发货
+	bool store_mention =56; //到店自提
+	bool local_city =57;  //同城配送
+
 	//额外扩展
 	string goods_url =80;//商品URL
 	bool is_delete =81;//商品是否已删除（0否，1是）
@@ -94,7 +101,8 @@ message ProductAttrInfo {
 	int64 created_at = 77; //创建时间
 	int64 updated_at = 78; //修改时间
 	int64 vip_price =79; //VIP价格
-	string image = 80; //商品主图
+	int64 svip_price =80; //VIP价格
+	string image = 82; //商品主图
 }
 
 //货品规格信息

@@ -43,12 +43,12 @@ func NewPublicServiceEndpoints() []*api.Endpoint {
 
 type PublicService interface {
 	WorkerManUrl(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
-	BasicConfig(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
 	SiteConfig(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
 	Copyright(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
 	GetOpenAdv(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
 	Navigation(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
 	Share(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
+	MallBasicConfig(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
 	LangVersion(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
 	GetLangJson(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error)
 }
@@ -67,16 +67,6 @@ func NewPublicService(name string, c client.Client) PublicService {
 
 func (c *publicService) WorkerManUrl(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error) {
 	req := c.c.NewRequest(c.name, "PublicService.WorkerManUrl", in)
-	out := new(PublicResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *publicService) BasicConfig(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error) {
-	req := c.c.NewRequest(c.name, "PublicService.BasicConfig", in)
 	out := new(PublicResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -135,6 +125,16 @@ func (c *publicService) Share(ctx context.Context, in *PublicRequest, opts ...cl
 	return out, nil
 }
 
+func (c *publicService) MallBasicConfig(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error) {
+	req := c.c.NewRequest(c.name, "PublicService.MallBasicConfig", in)
+	out := new(PublicResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *publicService) LangVersion(ctx context.Context, in *PublicRequest, opts ...client.CallOption) (*PublicResponse, error) {
 	req := c.c.NewRequest(c.name, "PublicService.LangVersion", in)
 	out := new(PublicResponse)
@@ -159,12 +159,12 @@ func (c *publicService) GetLangJson(ctx context.Context, in *PublicRequest, opts
 
 type PublicServiceHandler interface {
 	WorkerManUrl(context.Context, *PublicRequest, *PublicResponse) error
-	BasicConfig(context.Context, *PublicRequest, *PublicResponse) error
 	SiteConfig(context.Context, *PublicRequest, *PublicResponse) error
 	Copyright(context.Context, *PublicRequest, *PublicResponse) error
 	GetOpenAdv(context.Context, *PublicRequest, *PublicResponse) error
 	Navigation(context.Context, *PublicRequest, *PublicResponse) error
 	Share(context.Context, *PublicRequest, *PublicResponse) error
+	MallBasicConfig(context.Context, *PublicRequest, *PublicResponse) error
 	LangVersion(context.Context, *PublicRequest, *PublicResponse) error
 	GetLangJson(context.Context, *PublicRequest, *PublicResponse) error
 }
@@ -172,12 +172,12 @@ type PublicServiceHandler interface {
 func RegisterPublicServiceHandler(s server.Server, hdlr PublicServiceHandler, opts ...server.HandlerOption) error {
 	type publicService interface {
 		WorkerManUrl(ctx context.Context, in *PublicRequest, out *PublicResponse) error
-		BasicConfig(ctx context.Context, in *PublicRequest, out *PublicResponse) error
 		SiteConfig(ctx context.Context, in *PublicRequest, out *PublicResponse) error
 		Copyright(ctx context.Context, in *PublicRequest, out *PublicResponse) error
 		GetOpenAdv(ctx context.Context, in *PublicRequest, out *PublicResponse) error
 		Navigation(ctx context.Context, in *PublicRequest, out *PublicResponse) error
 		Share(ctx context.Context, in *PublicRequest, out *PublicResponse) error
+		MallBasicConfig(ctx context.Context, in *PublicRequest, out *PublicResponse) error
 		LangVersion(ctx context.Context, in *PublicRequest, out *PublicResponse) error
 		GetLangJson(ctx context.Context, in *PublicRequest, out *PublicResponse) error
 	}
@@ -194,10 +194,6 @@ type publicServiceHandler struct {
 
 func (h *publicServiceHandler) WorkerManUrl(ctx context.Context, in *PublicRequest, out *PublicResponse) error {
 	return h.PublicServiceHandler.WorkerManUrl(ctx, in, out)
-}
-
-func (h *publicServiceHandler) BasicConfig(ctx context.Context, in *PublicRequest, out *PublicResponse) error {
-	return h.PublicServiceHandler.BasicConfig(ctx, in, out)
 }
 
 func (h *publicServiceHandler) SiteConfig(ctx context.Context, in *PublicRequest, out *PublicResponse) error {
@@ -218,6 +214,10 @@ func (h *publicServiceHandler) Navigation(ctx context.Context, in *PublicRequest
 
 func (h *publicServiceHandler) Share(ctx context.Context, in *PublicRequest, out *PublicResponse) error {
 	return h.PublicServiceHandler.Share(ctx, in, out)
+}
+
+func (h *publicServiceHandler) MallBasicConfig(ctx context.Context, in *PublicRequest, out *PublicResponse) error {
+	return h.PublicServiceHandler.MallBasicConfig(ctx, in, out)
 }
 
 func (h *publicServiceHandler) LangVersion(ctx context.Context, in *PublicRequest, out *PublicResponse) error {

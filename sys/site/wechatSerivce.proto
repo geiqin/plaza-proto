@@ -1,0 +1,56 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+//微信服务
+service WechatService {
+  //获取微信sdk配置
+  rpc Config (WechatRequest) returns (WechatResponse) {}
+  //获取订阅消息id
+  rpc TempIds (WechatRequest) returns (WechatResponse) {}
+  //获取直播列表
+  rpc Live (WechatRequest) returns (WechatResponse) {}
+  //获取公众号关注
+  rpc Follow (WechatRequest) returns (WechatResponse) {}
+}
+
+message WechatConfigData {
+  string name =1;
+  string code =2;
+}
+
+message WechatTempIdsData {
+  string name =1;
+  string code =2;
+}
+
+message WechatLiveData {
+  string name =1;
+  string code =2;
+}
+
+message WechatFollowData {
+  string name =1;
+  string code =2;
+}
+
+message WechatRequest {
+  int64 paged = 1;
+  int64 page_size = 2;
+  string sorting = 3;
+  //base params
+  int64 id = 4;
+  string name = 5;
+  string status = 6;
+  int64 parent_id = 7;
+  string keywords = 8;
+  repeated int64 ids = 10;
+}
+
+message WechatResponse {
+  string msg =1;
+  WechatConfigData config =2;
+  WechatTempIdsData tempIds =3;
+  WechatLiveData live =4;
+  WechatFollowData follow =5;
+}

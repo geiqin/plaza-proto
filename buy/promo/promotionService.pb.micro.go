@@ -45,18 +45,12 @@ func NewPromotionServiceEndpoints() []*api.Endpoint {
 type PromotionService interface {
 	//创建促销活动
 	Create(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
-	// 编辑促销活动
-	Update(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
 	// 删除促销活动
 	Delete(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
-	//撤销活动
-	Cancel(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error)
 	// 获取活动详情
 	Get(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error)
 	//获取活动列表
 	List(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error)
-	//查询活动
-	Search(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error)
 }
 
 type promotionService struct {
@@ -81,28 +75,8 @@ func (c *promotionService) Create(ctx context.Context, in *Promotion, opts ...cl
 	return out, nil
 }
 
-func (c *promotionService) Update(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error) {
-	req := c.c.NewRequest(c.name, "PromotionService.Update", in)
-	out := new(PromotionResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *promotionService) Delete(ctx context.Context, in *Promotion, opts ...client.CallOption) (*PromotionResponse, error) {
 	req := c.c.NewRequest(c.name, "PromotionService.Delete", in)
-	out := new(PromotionResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *promotionService) Cancel(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error) {
-	req := c.c.NewRequest(c.name, "PromotionService.Cancel", in)
 	out := new(PromotionResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -131,44 +105,25 @@ func (c *promotionService) List(ctx context.Context, in *PromotionRequest, opts 
 	return out, nil
 }
 
-func (c *promotionService) Search(ctx context.Context, in *PromotionRequest, opts ...client.CallOption) (*PromotionResponse, error) {
-	req := c.c.NewRequest(c.name, "PromotionService.Search", in)
-	out := new(PromotionResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for PromotionService service
 
 type PromotionServiceHandler interface {
 	//创建促销活动
 	Create(context.Context, *Promotion, *PromotionResponse) error
-	// 编辑促销活动
-	Update(context.Context, *Promotion, *PromotionResponse) error
 	// 删除促销活动
 	Delete(context.Context, *Promotion, *PromotionResponse) error
-	//撤销活动
-	Cancel(context.Context, *PromotionRequest, *PromotionResponse) error
 	// 获取活动详情
 	Get(context.Context, *Promotion, *PromotionResponse) error
 	//获取活动列表
 	List(context.Context, *PromotionRequest, *PromotionResponse) error
-	//查询活动
-	Search(context.Context, *PromotionRequest, *PromotionResponse) error
 }
 
 func RegisterPromotionServiceHandler(s server.Server, hdlr PromotionServiceHandler, opts ...server.HandlerOption) error {
 	type promotionService interface {
 		Create(ctx context.Context, in *Promotion, out *PromotionResponse) error
-		Update(ctx context.Context, in *Promotion, out *PromotionResponse) error
 		Delete(ctx context.Context, in *Promotion, out *PromotionResponse) error
-		Cancel(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error
 		Get(ctx context.Context, in *Promotion, out *PromotionResponse) error
 		List(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error
-		Search(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error
 	}
 	type PromotionService struct {
 		promotionService
@@ -185,16 +140,8 @@ func (h *promotionServiceHandler) Create(ctx context.Context, in *Promotion, out
 	return h.PromotionServiceHandler.Create(ctx, in, out)
 }
 
-func (h *promotionServiceHandler) Update(ctx context.Context, in *Promotion, out *PromotionResponse) error {
-	return h.PromotionServiceHandler.Update(ctx, in, out)
-}
-
 func (h *promotionServiceHandler) Delete(ctx context.Context, in *Promotion, out *PromotionResponse) error {
 	return h.PromotionServiceHandler.Delete(ctx, in, out)
-}
-
-func (h *promotionServiceHandler) Cancel(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error {
-	return h.PromotionServiceHandler.Cancel(ctx, in, out)
 }
 
 func (h *promotionServiceHandler) Get(ctx context.Context, in *Promotion, out *PromotionResponse) error {
@@ -203,8 +150,4 @@ func (h *promotionServiceHandler) Get(ctx context.Context, in *Promotion, out *P
 
 func (h *promotionServiceHandler) List(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error {
 	return h.PromotionServiceHandler.List(ctx, in, out)
-}
-
-func (h *promotionServiceHandler) Search(ctx context.Context, in *PromotionRequest, out *PromotionResponse) error {
-	return h.PromotionServiceHandler.Search(ctx, in, out)
 }

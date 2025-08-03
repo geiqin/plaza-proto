@@ -25,8 +25,8 @@ message CartItem  {
     int64 spu_id =2;//商品spuId
     string unique =3;//商品唯一标识
     int64 unit_price =4;//商品单价
-    int64 true_price =5;//支付价格
-    int64 vip_true_price =6; //会员支付价格
+    int64 true_price =5;//实际价格
+    int64 vip_true_price =6; //会员实际价格
     int64 true_stock =7;//实际库存
     int64 cart_num =8;//购买数量
     int64 cost_price =9;//成本价
@@ -44,6 +44,10 @@ message CartItem  {
     bool is_error =22;//是否错误
     string error_msg =23;//错误信息
     bool attrStatus =24;
+    int64 total_price = 25; //合计价格
+    int64 discount_share = 26; //优惠分摊
+    int64 final_price = 27; //最终支付价格
+    int32 type =28;//购物车类型：0-普通购物车，1-秒杀，2-砍价，3-拼团
 }
 
 message CartCountData{

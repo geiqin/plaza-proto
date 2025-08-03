@@ -1,0 +1,265 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "orderAddressService.proto";
+import "baseInfoService.proto";
+import "cartService.proto";
+
+//下单结算服务
+service BuyOrderService {
+  //下单确认
+  rpc Confirm (BuyOrderRequest) returns (BuyOrderResponse) {}
+  //下单提交
+  rpc Submit (BuyOrderRequest) returns (BuyOrderResponse) {}
+  //获取确认订单页面是否展示快递配送和到店自提
+  rpc CheckShipping (BuyOrderRequest) returns (BuyOrderResponse) {}
+  //计算订单金额
+  rpc ComputedOrder (BuyOrderRequest) returns (BuyOrderResponse) {}
+  //可选优惠劵列表
+  rpc AvailableCoupons (BuyOrderRequest) returns (BuyOrderResponse) {}
+}
+
+
+message OrderPriceGroupInfo   {
+  int64 storePostage =1;
+  int64 storeFreePostage =2;
+  bool isStoreFreePostage =3;
+  int64 storePostageDiscount =4;
+  int64 sumPrice =5;//获取订单原总金额
+  int64 totalPrice =6;//获取订单svip、用户等级优惠之后总金额
+  int64 costPrice =7;//获取订单成本价
+  int64 vipPrice =8;//获取订单等级和付费会员总优惠金额
+  int64 levelPrice =9;//获取会员等级优惠
+  int64 memberPrice =10;//获取付费会员优惠
+  int64 giftPrice =11;
+}
+
+message BuyOrderConfirmData {
+  OrderAddress addressInfo =1;  //收货地址
+  OrderPriceGroupInfo priceGroup =2;//下单价格组
+  repeated  CartItem cartInfo = 3; //下单购买清单
+  MemberInfo userInfo =4; //购买用户信息
+  int64 advance_id =6;
+  int64 bargain_id =7;
+  int64 combination_id =8;
+  int64 seckill_id =9;
+  int64 usable_integral =11;
+  bool deduction =12;
+  float integral_ratio =13;
+  bool  integral_open =15;
+  bool ali_pay_status =16;
+  bool friend_pay_status =17;
+  bool yue_pay_status = 18;
+  bool offline_pay_status =19;
+  bool store_self_mention =20;
+  int64 virtual_type =21;
+  int64 valid_count =22;
+  int64  storeFreePostage =23;
+  int64 offlinePostage =24;
+  bool invoice_func =25;
+  bool special_invoice =26;
+  repeated string custom_form =28;
+  string orderKey =29;
+  int64 use_coupon_id = 30; //选择的优惠劵ID
+  repeated OrderIncrease order_increases = 31; //订单增加数据
+  repeated OrderDiscount order_discounts = 32; //订单优惠数据
+}
+
+//订单价格组
+message BuyOrderPriceGroup {
+  int64 total_amount =1; //订单总价
+  int64 final_amount =2; //订单实付金额(已减去优惠金额, 已加上增加金额)
+  int64 increase_amount =3; //增加金额
+  int64 discount_amount =4; //优惠金额
+  float buy_count =5;//购买商品总数量(总件数+总称重（千克）)
+  int64 buy_count_number =6;//购买商品总件数（非称重商品）
+  int64 buy_count_weighed =7;//购买商品总称重（称重商品.克）
+  int64 spec_total_weight =8;//规格重量合计
+  int64 spec_total_volume =9; //规格体积合计
+  int64 used_integral = 10; //使用的积分
+  int64 used_surplus = 11; //使用的余额
+  int64 member_id = 12; //会员ID
+  int64 warehouse_id = 13; //仓库ID
+
+  /*
+    costPrice: "5617.00"
+    isStoreFreePostage: false
+      levelPrice: "0.00"
+    memberPrice: 0
+    storeFreePostage: 1000000
+    storePostage: "0.00"
+    storePostageDiscount: 0
+    sumPrice: "6567.00"
+    totalPrice: "6567.00"
+    vipPrice: "0.00"
+
+   */
+}
+
+message BuyCheckShippingData {
+  int64 type =1;
+}
+
+//计算订单
+message BuyComputedOrderData {
+  int64 SurplusIntegral =1;
+  float coupon_price =2;
+  float deduction_price =3;
+  bool  isStoreFreePostage =4;
+  int64 pay_postage =5;
+  int64 pay_price =6;
+  int64 storeFreePostage =7;
+  int64 storePostageDiscount =8;
+  int64 total_price =9;
+  int64 usedIntegral =10;
+}
+
+message BuyOrderCreateResult {
+  string key =1;
+  string orderId =2;
+}
+
+//购买提交数据
+message BuyOrderSubmitData {
+  BuyOrderCreateResult result =1;
+  string status =2;
+}
+
+
+//确认信息请求参数
+message BuyOrderRequest {
+  string buy_mode = 1; //购买模式: direct-直接购买,cart-购物车下单，cashier-收银台下单
+  string address_type = 2; //收货地址类型：1-用户地址：2-自提点地址
+  int64 address_id = 3; //收货地址ID
+  string user_note = 4; //买家留言(50字以内)
+  int64 coupon_id = 6; //选中的优惠劵凭证ID
+  int64 use_integral = 7; //使用的积分
+  int64 use_surplus = 8; //使用的余额
+  int64 agent_member_id = 9; //代理的客户ID（操作员代客下单）
+  int64 realstore_id = 10; //多门店Id
+  int64 shop_id = 11; //多商户Id
+  float location_lng =12;//位置经度
+  float location_lat =13;//位置纬度
+  string location_address =14;//位置地址信息
+  string logistics_type =15;//物流类型：1-快递发货，2-同城配送，3-用户自提，4-虚拟发货(无需物流)
+  int64 choice_coupon_id  =16;//选中优惠劵
+  repeated int64 cart_ids = 17; //购物车IDS
+  int32 shipping_type =18; //发货类型：需要转换为logistics_type 可以用
+  bool new =20;
+  string cartId = 21; //购物车ids
+  string key =22;
+  bool is_gift =23;//是否为赠送礼物
+}
+
+message BuyOrderResponse {
+  BuyOrderConfirmData confirm =1;
+  BuyOrderSubmitData submit =2;
+  BuyComputedOrderData computedOrder =3;
+  BuyCheckShippingData checkShipping =4;
+  bytes availableCoupons =5;
+}
+
+/*
+message BuyGroup {
+  WarehouseInfo warehouse =1;
+  BuyOrderBase order_base =2;//订单基本信息
+  repeated BuyOrderItem order_items = 3; //订单商品列表
+  repeated OrderIncrease order_increases = 4; //订单增加数据
+  repeated OrderDiscount order_discounts = 5; //订单优惠数据
+  repeated int64 member_coupon_ids = 6; //选择的优惠劵IDS
+}
+
+message BuyOrderCart  {
+  int64 id =1;//购车ID
+  int64 spu_id =2;//商品spuId
+  string unique =3;//商品唯一标识
+  int64 unit_price =4;//商品单价
+  int64 true_price =5;//支付价格
+  int64 vip_true_price =6; //会员支付价格
+  int64 true_stock =7;//实际库存
+  int64 cart_num =8;//购买数量
+  int64 cost_price =9;//成本价
+  int64 sum_price =10;//小计金额
+  int64 min_qty =12; //最低购买数量
+  string price_type =13; //价格类型
+  int64 advance_id =14;
+  int64 bargain_id =15;
+  int64 seckill_id =16;
+  int64 discount_id =17;
+  int64 combination_id =18;
+  bool is_valid =19;
+  string status =20;
+  ProductInfo productInfo =21;
+  bool is_error =22;//是否错误
+  string error_msg =23;//错误信息
+  bool attrStatus =24;
+}
+
+//订单基础信息
+message BuyOrderBase {
+  int64 total_amount =1; //订单总价
+  int64 final_amount =2; //订单实付金额(已减去优惠金额, 已加上增加金额)
+  int64 increase_amount =3; //增加金额
+  int64 discount_amount =4; //优惠金额
+  float buy_count =5;//购买商品总数量(总件数+总称重（千克）)
+  int64 buy_count_number =6;//购买商品总件数（非称重商品）
+  int64 buy_count_weighed =7;//购买商品总称重（称重商品.克）
+  int64 spec_total_weight =8;//规格重量合计
+  int64 spec_total_volume =9; //规格体积合计
+  int64 use_integral = 10; //使用的积分
+  int64 use_surplus = 11; //使用的余额
+  int64 member_id = 12; //会员ID
+  int64 warehouse_id = 13; //仓库ID
+}
+ */
+
+/*
+//积分数据
+message IntegralData{
+    int64 actual_use_integral =1; //实际使用积分
+    int64 use_integral =2; //使用积分
+    int64 discount_price =3;//抵扣积分金额
+    int64 user_integral =4;//用户积分
+    string is_support_goods_exchange =5;//是否支持积分兑换（0否，1是）
+    string discount_type =6;//积分优惠类型（0抵现，1兑换）
+}
+
+//积分数据
+message IntegralData{
+    int64 user_integral =1;//用户积分
+    int64 use_integral =2; //使用积分
+    int64 require_integral =3; //需要积分
+    int64 discount_amount =4;//积分抵扣金额
+    bool has_open_deduction =5;//开启积分抵扣
+    bool has_open_exchange =6;//开启积分对换
+    bool is_error =7;//是否有错误
+    string error_msg =8;//错误信息
+}
+ */
+/*
+
+//积分抵现数据
+message IntegralDeductionData{
+    string is_enabled =1;//是否可用（0否，1是）
+    int64 user_integral =2;//用户积分
+    int64 use_integral =3; //使用积分
+    int64 discount_price =4;//抵扣积分金额
+    int64 actual_use_integral =5; //实际使用积分
+}
+
+//积分兑换数据
+message IntegralExchangeData {
+    string is_enabled =1;//是否可用（0否，1是）
+    string is_support_exchange =2;//是否支持兑换（0否，1是）
+    string is_not_buy =3;//是否不允许购买（0否，1是）
+    string exchange_type =4;//兑换类型：0 纯积分兑换，1-积分+金额兑换
+    int64 use_integral = 5; //使用积分
+    int64 use_price = 6; //使用金额
+    int64 discount_price =7; //优惠金额
+    string is_error =8;//是否有错误（0否，1是）
+    string error_msg =9;//错误信息
+    int64 user_integral = 10; //用户积分
+}
+ */
+
+

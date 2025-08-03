@@ -2,47 +2,27 @@ syntax = "proto3";
 package services;
 option go_package = "/.;services";
 import "common/base.proto";
-import "baseInfoService.proto";
 
 service PromotionService {
     //创建促销活动
     rpc Create (Promotion) returns (PromotionResponse) {}
-    // 编辑促销活动
-    rpc Update (Promotion) returns (PromotionResponse) {}
     // 删除促销活动
     rpc Delete (Promotion) returns (PromotionResponse) {}
-    //撤销活动
-    rpc Cancel (PromotionRequest) returns (PromotionResponse) {}
     // 获取活动详情
     rpc Get (Promotion) returns (PromotionResponse) {}
     //获取活动列表
     rpc List (PromotionRequest) returns (PromotionResponse) {}
-    //查询活动
-    rpc Search (PromotionRequest) returns (PromotionResponse) {}
 }
 
 //营销活动
 message Promotion {
     int64 id = 1; //ID
-    string type = 2; //活动类型
+    string code = 2; //活动类型
     string name = 3; //活动名称
-    string time_type = 4; //活动时间类型
-    int64 begin_date = 5; //开始日期
-    int64 end_date = 6; //结束日期
-    string period_time_type = 7; //周期类型
-    repeated int32 period_days = 8; //周期天数
-    string period_begin_time = 9; //开始时间
-    string period_end_time = 10; //结束时间
-    string spu_range_type = 12; //适用商品
-    string description = 13; //活动描述
-    string is_sync_add_tag = 14; //是否同步标签
-    string sync_add_tags = 15; //同步的标签
-    string status = 16; //状态
+    string level = 4; //活动时间类型
+    int32 priority = 5; //优先级
     int64 created_at = 18; //创建时间
     int64 updated_at = 19; //修改时间
-    repeated SpuInfo spu_ranges = 20;
-    repeated int64 spu_range_ids = 21;
-    string type_name = 22; //活动类型名称
 }
 
 
@@ -56,15 +36,9 @@ message PromotionRequest {
     repeated int64 ids = 7;
     int64 id = 8;
     //以下为自定义参数
-    string type = 10; //活动类型
-    string name = 11; //活动名称
-    string time_type = 12; //活动时间类型
-    string period_time_type = 13; //周期类型
-    string rule_type = 14; //活动类型
-    string discount_type = 15; //减免类型
-    string spu_range_type = 16; //适用商品
-    string is_sync_add_tag = 17; //是否同步标签
-    string status = 18; //状态
+    string code = 10;
+    string name = 11;
+    string level = 12;
 }
 
 message PromotionResponse {

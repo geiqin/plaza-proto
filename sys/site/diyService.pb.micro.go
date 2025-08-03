@@ -72,7 +72,7 @@ type DiyService interface {
 	//获取风格
 	ColorChange(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
 	//获取个人中心
-	GetUserCenter(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error)
+	//rpc GetUserCenter(Diy) returns (DiyResponse) {}
 	//使用模版
 	UseTemplate(ctx context.Context, in *DiyRequest, opts ...client.CallOption) (*DiyResponse, error)
 	//获取个人中心Diy
@@ -233,16 +233,6 @@ func (c *diyService) ColorChange(ctx context.Context, in *Diy, opts ...client.Ca
 	return out, nil
 }
 
-func (c *diyService) GetUserCenter(ctx context.Context, in *Diy, opts ...client.CallOption) (*DiyResponse, error) {
-	req := c.c.NewRequest(c.name, "DiyService.GetUserCenter", in)
-	out := new(DiyResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *diyService) UseTemplate(ctx context.Context, in *DiyRequest, opts ...client.CallOption) (*DiyResponse, error) {
 	req := c.c.NewRequest(c.name, "DiyService.UseTemplate", in)
 	out := new(DiyResponse)
@@ -305,7 +295,7 @@ type DiyServiceHandler interface {
 	//获取风格
 	ColorChange(context.Context, *Diy, *DiyResponse) error
 	//获取个人中心
-	GetUserCenter(context.Context, *Diy, *DiyResponse) error
+	//rpc GetUserCenter(Diy) returns (DiyResponse) {}
 	//使用模版
 	UseTemplate(context.Context, *DiyRequest, *DiyResponse) error
 	//获取个人中心Diy
@@ -330,7 +320,6 @@ func RegisterDiyServiceHandler(s server.Server, hdlr DiyServiceHandler, opts ...
 		Search(ctx context.Context, in *DiyRequest, out *DiyResponse) error
 		GetVersion(ctx context.Context, in *Diy, out *DiyResponse) error
 		ColorChange(ctx context.Context, in *Diy, out *DiyResponse) error
-		GetUserCenter(ctx context.Context, in *Diy, out *DiyResponse) error
 		UseTemplate(ctx context.Context, in *DiyRequest, out *DiyResponse) error
 		GetUserCenterDiy(ctx context.Context, in *Diy, out *DiyResponse) error
 		SaveUserCenterDiy(ctx context.Context, in *Diy, out *DiyResponse) error
@@ -400,10 +389,6 @@ func (h *diyServiceHandler) GetVersion(ctx context.Context, in *Diy, out *DiyRes
 
 func (h *diyServiceHandler) ColorChange(ctx context.Context, in *Diy, out *DiyResponse) error {
 	return h.DiyServiceHandler.ColorChange(ctx, in, out)
-}
-
-func (h *diyServiceHandler) GetUserCenter(ctx context.Context, in *Diy, out *DiyResponse) error {
-	return h.DiyServiceHandler.GetUserCenter(ctx, in, out)
 }
 
 func (h *diyServiceHandler) UseTemplate(ctx context.Context, in *DiyRequest, out *DiyResponse) error {

@@ -5,12 +5,12 @@ option go_package ="/.;services";
 //公共服务
 service PublicService {
   rpc WorkerManUrl (PublicRequest) returns (PublicResponse) {}
-  rpc BasicConfig (PublicRequest) returns (PublicResponse) {}
   rpc SiteConfig (PublicRequest) returns (PublicResponse) {}
   rpc Copyright (PublicRequest) returns (PublicResponse) {}
   rpc GetOpenAdv (PublicRequest) returns (PublicResponse) {}
   rpc Navigation (PublicRequest) returns (PublicResponse) {}
   rpc Share (PublicRequest) returns (PublicResponse) {}
+  rpc MallBasicConfig (PublicRequest) returns (PublicResponse) {}
   rpc LangVersion (PublicRequest) returns (PublicResponse) {}
   rpc GetLangJson (PublicRequest) returns (PublicResponse) {}
 }
@@ -20,36 +20,39 @@ message WorkerManUrlData {
   string chat =2;
 }
 
-message BasicConfigData {
-  string balance_func_status =1;
-  bool invoice_func_status =2;
-  string member_card_status =3;
-  string member_func_status =4;
-  string member_price_status =5;
-  string network_security =6;
-  bool offline_pay_status =7;
-  bool pay_weixin_open =8;
-  string  phone_auth_switch =9;
-  bool special_invoice_status =10;
-  string store_self_mention =11;
-  string wap_login_logo =12;
-  string wechat_auth_switch =13;
-  bool wechat_status =14;
-  bool alipay_status =15; //change
-  bool surplus_pay_status =16; //change
-  bool friend_pay_status =17;
-  string site_name =18;
-  string site_url =19;
-  repeated string site_func =20;
-  string recharge_switch =21;
-  string record_no =22;
+//商城基础配置汇总
+message MallBasicConfigData {
+  string site_name =1;//网站名称
+  string site_url =2;//网站地址
+  string wap_login_logo =3;//移动端登录logo
+  string icp_record_no =4;//备案号 record_No
+  string icp_url =5;//备案号链接
+  string network_security =6;//网安备案
+  string network_security_url =7;//网安备案链接
+  bool store_self_mention =8;//是否开启到店自提
+  bool invoice_func_status =9;//发票功能启用
+  bool special_invoice_status =10;//专用发票启用
+  bool member_func_status =11;//用户等级启用
+  bool balance_func_status =12;//余额功能启用
+  bool recharge_switch =13;//小程序充值开关
+  bool member_card_status =14;//是否开启付费会员
+  bool member_price_status =15;//商品会员折扣价展示启用
+  bool ali_pay_status =16;//支付宝是否启用
+  bool pay_weixin_open =17;//微信是否启用
+  bool yue_pay_status =18;//余额是否启用
+  bool offline_pay_status =19;//线下是否启用
+  bool friend_pay_status =20;//好友是否启用
+  bool wechat_auth_switch =21;//微信登录开关
+  bool phone_auth_switch =22;//手机号登录开关
+  bool wechat_status =23;//公众号是否配置
+  repeated string site_func =24; //功能列表 如：['seckill', 'bargain', 'combination']
 }
 
 message SiteConfigData {
   string icp_url =1;
-  string network_security =2;
-  string network_security_url =3;
-  string record_no =4; //change
+  string icp_record_no =2; //备案号 record_No
+  string network_security =3;
+  string network_security_url =4;
 }
 
 
@@ -61,11 +64,11 @@ message CopyrightData {
 }
 
 message GetOpenAdvData {
-  int32 status =1;
-  string time =2;
-  string type =3;
+  int32 status =1; //0 不显示, 1 倒计时, 2 手动关闭(预留)
+  int32 time =2; //秒
+  string type =3; //pic 图片, video 视频
   string video_link =4;
-  repeated string values =5; //change
+  repeated string value =5;
 }
 
 message ShareData {
@@ -100,12 +103,12 @@ message LangJsonData{
 message PublicResponse {
   string msg =1;
   WorkerManUrlData worker_man_url =2;
-  BasicConfigData basic_config =3;
+  MallBasicConfigData mall_basic_config =3;
   SiteConfigData site_config =4;
   CopyrightData copyright =6;
   GetOpenAdvData get_open_adv =7;
   bytes navigation =8;
   ShareData share =9;
-  LangVersionData lang_version  =10;
+  LangVersionData lang_version =10;
   LangJsonData get_lang_json =11;
 }

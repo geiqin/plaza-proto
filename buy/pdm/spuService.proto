@@ -138,9 +138,10 @@ message SpuEdit {
     string virtual_type = 15; //虚拟商品类型
     string is_many_spec = 16; //多规格商品
     string is_open_weigh = 17; //开启称重
-    string code = 18; //SPU编码
+    string spu_code = 18; //SPU编码
     string is_more_barcode = 19; //一品多码
-    string unit_name = 20; //计量单位名称
+    int32 unit_id = 20; //计量单位ID
+    string unit_name = 21; //计量单位名称
     string is_shelve = 23; //是否上架
     string sell_mode = 24; //销售模式
     string deduction_type = 25; //扣减库存类型

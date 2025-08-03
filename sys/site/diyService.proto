@@ -2,8 +2,8 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "baseInfoService.proto";
 import "templateService.proto";
-
 // DIY服务
 service DiyService {
   // DIY新增
@@ -39,7 +39,7 @@ service DiyService {
   //获取风格
   rpc ColorChange (Diy) returns (DiyResponse) {}
   //获取个人中心
-  rpc GetUserCenter(Diy) returns (DiyResponse) {}
+  //rpc GetUserCenter(Diy) returns (DiyResponse) {}
   //使用模版
   rpc UseTemplate (DiyRequest) returns (DiyResponse) {}
 
@@ -64,15 +64,13 @@ message Diy {
   string is_bg_color = 12; //颜色是否选中
   string is_bg_pic = 13; //背景图是否选中
   string is_del = 14; //是否删除
-  int32 order_status = 15; //个人中心订单样式
-  int32 my_banner_status = 16; //个人中心banner是否显示
   string is_diy = 17; //是否diy
   string title = 18; //diy顶部title
   int32 status = 19; //是否使用
   int64 created_at = 20; //创建时间
   int64 updated_at = 21; //修改时间
-  string valueJson = 22; //页面数据JSON
   int32 color_change =23; //主题色系
+  string valueJson = 24; //页面数据JSON
 }
 
 message GetVersionData {
@@ -86,13 +84,14 @@ message ColorChangeData {
   int32 status =2;
 }
 
-message UserCenterData {
-  bool is_diy =1;
-  int32 status =2;
-  int32 order_status = 3; //个人中心订单样式
-  int32 my_banner_status = 4; //个人中心banner是否显示
+message DiyUserCenterInfo {
+  int32 order_status = 1; //个人中心订单样式
+  int32 my_banner_status = 2; //个人中心banner是否显示: 0-关闭，1-开启
+  int32 my_menus_status = 3; //我的服务菜单样式
+  int32 business_status = 4; //商家服务菜单样式
+  repeated PicLinkInfo routine_my_menus =5;
+  repeated PicLinkInfo routine_my_banner =6;
 }
-
 
 // DIY请求参数
 message DiyRequest {
@@ -118,6 +117,7 @@ message DiyRequest {
   int32 status = 21; //是否使用
   int64 template_type = 22; //模版类型：1-通用模版，2-我的模版
   int64 template_id = 23; //模版ID
+  repeated string template_names = 24; //模版名称列表
 }
 // DIY响应数据
 message DiyResponse {
@@ -126,8 +126,8 @@ message DiyResponse {
   Diy entity = 3;
   repeated Diy items = 4;
   bytes bytes =5;
-  ColorChangeData color_change =6;
-  GetVersionData get_version =7;
-  UserCenterData get_user_center =8;
-  Template use_template =9;
+  ColorChangeData colorChange =6;
+  GetVersionData getVersion =7;
+  Diy getUserCenterDiy =8;
+  Template useTemplate =9;
 }
