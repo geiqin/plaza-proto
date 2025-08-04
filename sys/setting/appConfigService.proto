@@ -1,0 +1,29 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+//APP信息
+service AppConfigService {
+  //获取通用APP
+  rpc Get (AppConfigRequest) returns (AppConfigResponse) {}
+  //保存通用APP
+  rpc Save (AppConfigRequest) returns (AppConfigResponse) {}
+}
+
+//通用APP
+message AppConfig {
+  //微信开放平台
+  string wechat_app_appid =1;//微信APPID
+  string wechat_app_appsecret =2;//微信AppSecret
+
+}
+
+message AppConfigRequest{
+  string group =1;
+  AppConfig config =2;
+}
+
+message AppConfigResponse {
+  string msg = 1;
+  AppConfig appConfig = 2;
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+service PrintingConfigService {
+  //获取
+  rpc Get (PrintingConfigRequest) returns (PrintingConfigResponse) {}
+  //保存
+  rpc Save (PrintingConfigRequest) returns (PrintingConfigResponse) {}
+}
+
+//收银小票配置
+message PrintingConfig {
+  bool printing_switch =1; //小票打印开关
+  string printing_type =2; //打印平台类型: yly 易联云 fey 飞鹅云
+
+  string yly_develop_id =3; //开发者ID【易联云】
+  string yly_api_key =4; //应用密钥
+  string yly_client_id =5; //应用ID
+  string yly_terminal_number =6; //终端号
+
+  string fey_sn =7; //飞鹅云SN
+  string fey_ukey =8; //飞鹅云UKEY
+  string fey_user =9; //鹅云USER
+
+}
+
+message PrintingConfigRequest{
+  string group =1;
+  PrintingConfig config =2;
+}
+
+message PrintingConfigResponse {
+  string msg = 1;
+  PrintingConfig printingConfig = 2;
+}

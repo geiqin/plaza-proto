@@ -1,0 +1,56 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// APP版本服务
+service AppVersionService {
+  // APP版本新增
+  rpc Create (AppVersion) returns (AppVersionResponse) {}
+  // APP版本修改
+  rpc Update (AppVersion) returns (AppVersionResponse) {}
+  // APP版本删除
+  rpc Delete (AppVersion) returns (AppVersionResponse) {}
+  // APP版本获取
+  rpc Get (AppVersion) returns (AppVersionResponse) {}
+  // APP版本查询
+  rpc Search (AppVersionRequest) returns (AppVersionResponse) {}
+  // APP版本获取最新
+  rpc GetLatest (AppVersionRequest) returns (AppVersionResponse) {}
+}
+// APP版本
+message AppVersion {
+  int64 id = 1; //ID
+  string version = 2; //版本号
+  string platform = 3; //平台类型
+  string info = 4; //升级信息
+  string url = 5; //下载链接
+  string is_force = 6; //是否强制升级
+  string is_new = 7; //是否最新
+  string is_del = 8; //是否删除
+  int64 updated_at = 9; //创建时间
+  int64 created_at = 10; //修改时间
+}
+// APP版本请求参数
+message AppVersionRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  string version = 11; //版本号
+  string platform = 12; //平台类型
+  string is_force = 13; //是否强制升级
+  string is_new = 14; //是否最新
+  string is_del = 15; //是否删除
+}
+// APP版本响应数据
+message AppVersionResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  AppVersion entity = 3;
+  repeated AppVersion items = 4;
+}

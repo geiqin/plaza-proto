@@ -3,22 +3,15 @@ package services;
 option go_package ="/.;services";
 
 //系统配置信息
-service ConfigService {
+service CommonConfigService {
   //获取通用配置
-  rpc GetCommonConfig (ConfigRequest) returns (ConfigResponse) {}
+  rpc Get (CommonConfigRequest) returns (CommonConfigResponse) {}
   //保存通用配置
-  rpc SaveCommonConfig (CommonConfigData) returns (ConfigResponse) {}
-
-  //获取小票配置
-  rpc GetPrintingConfig (ConfigRequest) returns (ConfigResponse) {}
-  //保存小票配置
-  rpc SavePrintingConfig (PrintingConfig) returns (ConfigResponse) {}
-
+  rpc Save (CommonConfigRequest) returns (CommonConfigResponse) {}
 }
 
 //通用配置
 message CommonConfig {
-
  //基础设置
   string timezone =100;//默认时区默认,亚洲/上海 [标准时+8]
   string locale =101;//使用语言：默认:zh-CN
@@ -39,7 +32,6 @@ message CommonConfig {
 
   bool contact_customer_service =260; //联系客服
   bool backend_watermark_open =261; //后台水印开关
-
 
   //商品设置
   bool goods_comment_open =303;//商品评论开启
@@ -82,7 +74,6 @@ message CommonConfig {
   int64 invite_user_exp =448;  //订单赠送经验:下单赠送用户经验比例（实际支付1元赠送多少经验）
   int64 order_give_exp =449;  //邀新赠送经验
 
-
   //---售后服务----
   repeated string shipped_aftersale_apply_type =450;//发货前售后申请设置: 1仅退款 2退货退款 3退换货
   repeated string aftersale_apply_reasons =451; //售后申请原因设置
@@ -101,7 +92,6 @@ message CommonConfig {
   bool balance_pay_open =504; //余额支付开关
   bool friend_pay_open =505; //好友代付开关
 
-
   //相关设置
   string map_type =900;//地图类型
   string map_tencent_ak =901;//腾讯地图api秘钥
@@ -115,37 +105,12 @@ message CommonConfig {
 
 }
 
-message CommonConfigData {
+message CommonConfigRequest{
   string group =1;
   CommonConfig config =2;
 }
-//收银小票配置
-message PrintingConfig {
-  bool printing_switch =1; //小票打印开关
-  string printing_type =2; //打印平台类型: yly 易联云 fey 飞鹅云
 
-  string yly_develop_id =3; //开发者ID【易联云】
-  string yly_api_key =4; //应用密钥
-  string yly_client_id =5; //应用ID
-  string yly_terminal_number =6; //终端号
-
-  string fey_sn =7; //飞鹅云SN
-  string fey_ukey =8; //飞鹅云UKEY
-  string fey_user =9; //鹅云USER
-}
-
-message ConfigRequest {
-  int64 id = 1;
-  string  code =3;//名称
-  string type = 4;//类型
-  string group = 5;
-  repeated string groups = 6;
-  repeated string codes = 7;
-  repeated int64 ids = 8;
-}
-
-message ConfigResponse {
+message CommonConfigResponse {
   string msg = 1;
-  CommonConfig common = 2;
-  PrintingConfig printing = 3;
+  CommonConfig commonConfig = 2;
 }

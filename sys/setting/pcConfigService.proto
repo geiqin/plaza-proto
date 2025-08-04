@@ -1,0 +1,33 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+//PC配置信息
+service PcConfigService {
+  //获取
+  rpc Get (PcConfigRequest) returns (PcConfigResponse) {}
+  //保存
+  rpc Save (PcConfigRequest) returns (PcConfigResponse) {}
+}
+
+//PC配置
+message PcConfig {
+  string pc_logo =1;//PC端LOGO
+  string company_address =2;//公司地址
+
+  string site_name =3;//网站名称
+  string site_description =4; //网站描述
+  string site_keywords =5;//关键词:
+  string site_contact_tel =6; //联系电话
+
+}
+
+message PcConfigRequest{
+  string group =1;
+  PcConfig config =2;
+}
+
+message PcConfigResponse {
+  string msg = 1;
+  PcConfig pcConfig = 2;
+}
