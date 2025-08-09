@@ -1,0 +1,61 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+// 发票管理服务
+service MemberInvoiceService {
+  // 发票管理新增
+  rpc Create (MemberInvoice) returns (MemberInvoiceResponse) {}
+  // 发票管理修改
+  rpc Update (MemberInvoice) returns (MemberInvoiceResponse) {}
+  // 发票管理删除
+  rpc Delete (MemberInvoice) returns (MemberInvoiceResponse) {}
+  // 发票管理获取
+  rpc Get (MemberInvoice) returns (MemberInvoiceResponse) {}
+  // 发票管理查询
+  rpc Search (MemberInvoiceRequest) returns (MemberInvoiceResponse) {}
+  // 发票管理列表
+  rpc List (MemberInvoiceRequest) returns (MemberInvoiceResponse) {}
+}
+// 发票管理
+message MemberInvoice {
+  int64 id = 1; //ID
+  int64 member_id = 2; //会员id
+  string header_type = 3; //抬头类型
+  string type = 4; //发票类型
+  string name = 5; //发票抬头名称
+  string duty_number = 6; //税号
+  string drawer_phone = 7; //开票人手机号
+  string email = 8; //开票人邮箱
+  string tell = 9; //注册电话
+  string address = 10; //注册地址
+  string bank = 11; //开户行
+  string card_number = 12; //银行卡号
+  string is_default = 13; //是否默认
+  int64 updated_at = 14; //创建时间
+  int64 created_at = 15; //修改时间
+}
+// 发票管理请求参数
+message MemberInvoiceRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 member_id = 11; //会员id
+  string header_type = 12; //抬头类型
+  string type = 13; //发票类型
+  string name = 14; //发票抬头名称
+  string is_default = 15; //是否默认
+}
+// 发票管理响应数据
+message MemberInvoiceResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  MemberInvoice entity = 3;
+  repeated MemberInvoice items = 4;
+}

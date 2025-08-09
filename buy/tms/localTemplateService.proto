@@ -3,23 +3,23 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 // 同城配送模版服务
-service LocalFeeTemplateService {
+service  LocalTemplateService {
   // 同城配送模版新增
-  rpc Create (LocalFeeTemplate) returns (LocalFeeTemplateResponse) {}
+  rpc Create ( LocalTemplate) returns ( LocalTemplateResponse) {}
   // 同城配送模版修改
-  rpc Update (LocalFeeTemplate) returns (LocalFeeTemplateResponse) {}
+  rpc Update ( LocalTemplate) returns ( LocalTemplateResponse) {}
   // 同城配送模版删除
-  rpc Delete (LocalFeeTemplate) returns (LocalFeeTemplateResponse) {}
+  rpc Delete ( LocalTemplate) returns ( LocalTemplateResponse) {}
   // 同城配送模版获取
-  rpc Get (LocalFeeTemplate) returns (LocalFeeTemplateResponse) {}
+  rpc Get ( LocalTemplate) returns ( LocalTemplateResponse) {}
   // 同城配送模版查询
-  rpc Search (LocalFeeTemplateRequest) returns (LocalFeeTemplateResponse) {}
+  rpc Search ( LocalTemplateRequest) returns ( LocalTemplateResponse) {}
   // 同城配送模版列表
-  rpc List (LocalFeeTemplateRequest) returns (LocalFeeTemplateResponse) {}
+  rpc List ( LocalTemplateRequest) returns ( LocalTemplateResponse) {}
 }
 
 // 同城配送模版
-message LocalFeeTemplate {
+message  LocalTemplate {
   int64 id = 1; //ID
   string name = 2; //模板名称
   int64 first_km = 9; //首公里
@@ -37,7 +37,7 @@ message LocalFeeTemplate {
 }
 
 // 同城配送模版请求参数
-message LocalFeeTemplateRequest {
+message  LocalTemplateRequest {
   int32 top = 1;
   int64 paged = 2;
   int64 page_size = 3;
@@ -53,9 +53,9 @@ message LocalFeeTemplateRequest {
 }
 
 // 同城配送模版响应数据
-message LocalFeeTemplateResponse {
+message  LocalTemplateResponse {
   string msg = 1;
   common.Pager pager = 2;
-  LocalFeeTemplate entity = 3;
-  repeated LocalFeeTemplate items = 4;
+   LocalTemplate entity = 3;
+  repeated  LocalTemplate items = 4;
 }

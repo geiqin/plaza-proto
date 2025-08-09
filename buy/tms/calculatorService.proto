@@ -59,9 +59,9 @@ message PurchaseItem {
     int64 spec_volume = 5; //规格体积
     int64 unit_price = 6; //商品单价
     int64 total_price = 7; //合计价格
-    string express_fee_type = 8; //快递运费类型
+    string express_type = 8; //快递运费类型
     int64 express_uniform_fee = 9; //快递统一运费
-    int64 express_fee_template_id = 10; //快递运费模板
+    int64 express_template_id = 10; //快递运费模板
 }
 
 message OrderIncreaseInfo {

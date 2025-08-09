@@ -39,3 +39,49 @@ message ConstListData {
 	string name = 1;
   repeated 	ConstListInfo list = 2;
 }
+
+
+message SpuInfo {
+	int64 id = 1; //ID
+	string type = 2; //商品类型
+	string name = 3; //商品名称
+	string code = 4; //SPU编码
+	string image_url = 5; //商品主图
+	string is_virtual = 6; //虚拟商品
+	string is_many_spec = 7; //多规格商品
+	int32 unit_id = 8; //计量单位ID
+	string unit_name = 9; //计量单位名称
+	string unit_type = 10; //计量单位类型
+	int64 inventory = 11; //库存
+	string is_shelve = 12; //是否上架
+	int64 min_price = 13; //最低价格
+	int64 max_price = 14; //最高价格
+	string status = 15; //商品状态
+	repeated SkuInfo skus = 20;
+}
+
+
+message SkuInfo  {
+	int64 id =1;//ID
+	int64 spu_id =2;//SpuID
+	int64 original_price =3;//划线价
+	int64 cost_price =4;//成本价
+	int64 price =5;//销售价
+	int64 inventory =6;//库存
+	string unique =7;//唯一标识
+	string coding =8;//编号
+	string barcode =9;//条码
+	int64 weight =10;//重量：克
+	int64 volume =11;//体积
+	string spec_indexes =12;//规格索引
+	int64 created_at = 14;
+	int64 updated_at = 15;
+	repeated SkuSpecInfo spec =17; //规格信息列表
+	int64 promotion_price =18;//促销价
+	string promotion_type =19;//促销类型
+}
+
+message SkuSpecInfo{
+	string type =1;
+	string value =2;
+}

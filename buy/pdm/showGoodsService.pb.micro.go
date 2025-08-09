@@ -43,18 +43,18 @@ func NewShowGoodsServiceEndpoints() []*api.Endpoint {
 // Client API for ShowGoodsService service
 
 type ShowGoodsService interface {
-	// 商品详情
-	Detail(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error)
 	// 商品列表
 	List(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error)
+	// 商品详情
+	Detail(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error)
 	// 获取到手价
 	RealPrice(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error)
+	// 获取商品属性
+	GetAttr(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error)
 	// 商品二维码
 	Qrcode(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error)
 	// 商品海报
 	Poster(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error)
-	// 获取属性
-	GetAttr(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error)
 }
 
 type showGoodsService struct {
@@ -69,16 +69,6 @@ func NewShowGoodsService(name string, c client.Client) ShowGoodsService {
 	}
 }
 
-func (c *showGoodsService) Detail(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error) {
-	req := c.c.NewRequest(c.name, "ShowGoodsService.Detail", in)
-	out := new(ShowGoodsResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *showGoodsService) List(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error) {
 	req := c.c.NewRequest(c.name, "ShowGoodsService.List", in)
 	out := new(ShowGoodsResponse)
@@ -89,8 +79,28 @@ func (c *showGoodsService) List(ctx context.Context, in *ShowGoodsRequest, opts 
 	return out, nil
 }
 
+func (c *showGoodsService) Detail(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error) {
+	req := c.c.NewRequest(c.name, "ShowGoodsService.Detail", in)
+	out := new(ShowGoodsResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *showGoodsService) RealPrice(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error) {
 	req := c.c.NewRequest(c.name, "ShowGoodsService.RealPrice", in)
+	out := new(ShowGoodsResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *showGoodsService) GetAttr(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error) {
+	req := c.c.NewRequest(c.name, "ShowGoodsService.GetAttr", in)
 	out := new(ShowGoodsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -119,41 +129,31 @@ func (c *showGoodsService) Poster(ctx context.Context, in *ShowGoodsRequest, opt
 	return out, nil
 }
 
-func (c *showGoodsService) GetAttr(ctx context.Context, in *ShowGoodsRequest, opts ...client.CallOption) (*ShowGoodsResponse, error) {
-	req := c.c.NewRequest(c.name, "ShowGoodsService.GetAttr", in)
-	out := new(ShowGoodsResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for ShowGoodsService service
 
 type ShowGoodsServiceHandler interface {
-	// 商品详情
-	Detail(context.Context, *ShowGoodsRequest, *ShowGoodsResponse) error
 	// 商品列表
 	List(context.Context, *ShowGoodsRequest, *ShowGoodsResponse) error
+	// 商品详情
+	Detail(context.Context, *ShowGoodsRequest, *ShowGoodsResponse) error
 	// 获取到手价
 	RealPrice(context.Context, *ShowGoodsRequest, *ShowGoodsResponse) error
+	// 获取商品属性
+	GetAttr(context.Context, *ShowGoodsRequest, *ShowGoodsResponse) error
 	// 商品二维码
 	Qrcode(context.Context, *ShowGoodsRequest, *ShowGoodsResponse) error
 	// 商品海报
 	Poster(context.Context, *ShowGoodsRequest, *ShowGoodsResponse) error
-	// 获取属性
-	GetAttr(context.Context, *ShowGoodsRequest, *ShowGoodsResponse) error
 }
 
 func RegisterShowGoodsServiceHandler(s server.Server, hdlr ShowGoodsServiceHandler, opts ...server.HandlerOption) error {
 	type showGoodsService interface {
-		Detail(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error
 		List(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error
+		Detail(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error
 		RealPrice(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error
+		GetAttr(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error
 		Qrcode(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error
 		Poster(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error
-		GetAttr(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error
 	}
 	type ShowGoodsService struct {
 		showGoodsService
@@ -166,16 +166,20 @@ type showGoodsServiceHandler struct {
 	ShowGoodsServiceHandler
 }
 
-func (h *showGoodsServiceHandler) Detail(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error {
-	return h.ShowGoodsServiceHandler.Detail(ctx, in, out)
-}
-
 func (h *showGoodsServiceHandler) List(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error {
 	return h.ShowGoodsServiceHandler.List(ctx, in, out)
 }
 
+func (h *showGoodsServiceHandler) Detail(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error {
+	return h.ShowGoodsServiceHandler.Detail(ctx, in, out)
+}
+
 func (h *showGoodsServiceHandler) RealPrice(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error {
 	return h.ShowGoodsServiceHandler.RealPrice(ctx, in, out)
+}
+
+func (h *showGoodsServiceHandler) GetAttr(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error {
+	return h.ShowGoodsServiceHandler.GetAttr(ctx, in, out)
 }
 
 func (h *showGoodsServiceHandler) Qrcode(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error {
@@ -184,8 +188,4 @@ func (h *showGoodsServiceHandler) Qrcode(ctx context.Context, in *ShowGoodsReque
 
 func (h *showGoodsServiceHandler) Poster(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error {
 	return h.ShowGoodsServiceHandler.Poster(ctx, in, out)
-}
-
-func (h *showGoodsServiceHandler) GetAttr(ctx context.Context, in *ShowGoodsRequest, out *ShowGoodsResponse) error {
-	return h.ShowGoodsServiceHandler.GetAttr(ctx, in, out)
 }

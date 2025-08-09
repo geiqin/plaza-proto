@@ -82,8 +82,8 @@ message ProductAttrInfo {
     int64 original_price = 8; //划线价
     int64 cost_price = 9; //成本价
     int64 price = 10; //销售价
-    int64 vip_price =11; //VIP价格
-    int64 svip_price =12; //SVIP价格
+    int64 vip_price =11; //VIP优惠金额
+    string price_type =12; //价格类型
     int64 inventory = 13; //库存
     int64 frozen_num = 14; //冻结数量
     int64 weight = 15; //重量

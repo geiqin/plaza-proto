@@ -5,18 +5,19 @@ import "common/base.proto";
 
 // 显示商品服务
 service ShowGoodsService {
-  // 商品详情
-  rpc Detail (ShowGoodsRequest) returns (ShowGoodsResponse) {}
   // 商品列表
   rpc List (ShowGoodsRequest) returns (ShowGoodsResponse) {}
+  // 商品详情
+  rpc Detail (ShowGoodsRequest) returns (ShowGoodsResponse) {}
   // 获取到手价
   rpc RealPrice (ShowGoodsRequest) returns (ShowGoodsResponse) {}
+  // 获取商品属性
+  rpc GetAttr (ShowGoodsRequest) returns (ShowGoodsResponse) {}
   // 商品二维码
   rpc Qrcode (ShowGoodsRequest) returns (ShowGoodsResponse) {}
   // 商品海报
   rpc Poster (ShowGoodsRequest) returns (ShowGoodsResponse) {}
-  // 获取属性
-  rpc GetAttr (ShowGoodsRequest) returns (ShowGoodsResponse) {}
+
 }
 
 message ShowRealPriceData {
@@ -136,7 +137,7 @@ message ShowGoodsSpu{
   int64 cost =31; //成本价
   int64 postage =32; //运费
   bool is_vip =33;//是否会员商品
-  int64 vip_price =34; //会员价
+  int64 vip_price =34; //会员优惠金额
   bool svip_price_open =35; //开启SVIP价格
   int64 svip_economize_price =36; //SVIP节省金额
   int64 sales =39; //销量

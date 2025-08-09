@@ -47,6 +47,7 @@ type DeliveryService interface {
 	Save(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error)
 	Get(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error)
 	List(ctx context.Context, in *DeliveryRequest, opts ...client.CallOption) (*DeliveryResponse, error)
+	GetConfig(ctx context.Context, in *DeliveryRequest, opts ...client.CallOption) (*DeliveryResponse, error)
 }
 
 type deliveryService struct {
@@ -101,6 +102,16 @@ func (c *deliveryService) List(ctx context.Context, in *DeliveryRequest, opts ..
 	return out, nil
 }
 
+func (c *deliveryService) GetConfig(ctx context.Context, in *DeliveryRequest, opts ...client.CallOption) (*DeliveryResponse, error) {
+	req := c.c.NewRequest(c.name, "DeliveryService.GetConfig", in)
+	out := new(DeliveryResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for DeliveryService service
 
 type DeliveryServiceHandler interface {
@@ -108,6 +119,7 @@ type DeliveryServiceHandler interface {
 	Save(context.Context, *Delivery, *DeliveryResponse) error
 	Get(context.Context, *Delivery, *DeliveryResponse) error
 	List(context.Context, *DeliveryRequest, *DeliveryResponse) error
+	GetConfig(context.Context, *DeliveryRequest, *DeliveryResponse) error
 }
 
 func RegisterDeliveryServiceHandler(s server.Server, hdlr DeliveryServiceHandler, opts ...server.HandlerOption) error {
@@ -116,6 +128,7 @@ func RegisterDeliveryServiceHandler(s server.Server, hdlr DeliveryServiceHandler
 		Save(ctx context.Context, in *Delivery, out *DeliveryResponse) error
 		Get(ctx context.Context, in *Delivery, out *DeliveryResponse) error
 		List(ctx context.Context, in *DeliveryRequest, out *DeliveryResponse) error
+		GetConfig(ctx context.Context, in *DeliveryRequest, out *DeliveryResponse) error
 	}
 	type DeliveryService struct {
 		deliveryService
@@ -142,4 +155,8 @@ func (h *deliveryServiceHandler) Get(ctx context.Context, in *Delivery, out *Del
 
 func (h *deliveryServiceHandler) List(ctx context.Context, in *DeliveryRequest, out *DeliveryResponse) error {
 	return h.DeliveryServiceHandler.List(ctx, in, out)
+}
+
+func (h *deliveryServiceHandler) GetConfig(ctx context.Context, in *DeliveryRequest, out *DeliveryResponse) error {
+	return h.DeliveryServiceHandler.GetConfig(ctx, in, out)
 }

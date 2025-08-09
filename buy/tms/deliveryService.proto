@@ -11,6 +11,16 @@ service DeliveryService {
   rpc Save (Delivery) returns (DeliveryResponse) {}
   rpc Get (Delivery) returns (DeliveryResponse) {}
   rpc List (DeliveryRequest) returns (DeliveryResponse) {}
+  rpc GetConfig (DeliveryRequest) returns (DeliveryResponse) {}
+}
+
+message DeliveryConfig {
+  bool expressDelivery = 1; //快递配送
+  bool localDelivery = 2; //同城配送
+  bool storeMention = 3; //到店自提
+  ExpressConfig expressConfig =4;
+  LocalConfig localConfig =5;
+  MentionConfig mentionConfig =6;
 }
 
 message Delivery {
@@ -50,6 +60,7 @@ message DeliveryResponse{
   common.Pager pager =2;
   repeated Delivery items = 3;
   string msg =4;
+  DeliveryConfig getConfig =5;
 }
 
 

@@ -1,0 +1,48 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "baseInfoService.proto";
+
+//积分配置信息
+service IntegralConfigService {
+  //获取
+  rpc Get (IntegralConfig) returns (IntegralConfigResponse) {}
+  //保存
+  rpc Save (IntegralConfig) returns (IntegralConfigResponse) {}
+}
+
+//积分配置
+message IntegralConfig {
+  string name = 1; //积分名称
+  bool is_protected = 2; //开启积分保护
+  int32 protected_days = 3; //积分保护期天数
+  string giving_type = 4; //发放时机
+  bool is_daily_max_limit = 5; //开启获取上限
+  int64 daily_max_limit = 6; //消费积分获取上限
+  float deduct_ratio = 7; //抵现比例：1积分等于多少元
+  bool is_deduct_rule = 9; //开启抵现规则
+  IntegralDeductRule deduct_rule = 10; //成长规则
+  string clean_type = 11; //清零类型
+  int32 every_year_clear = 12; //每年清零
+  int32 every_month_clear = 13; //每月清零
+  int32 every_day_clear = 14; //每天清零
+  int64 total_spent_integral = 15; //累计消耗积分
+  int64 total_earned_integral = 16; //累计发放积分
+  int64 total_protected_integral = 17; //保护期内积分
+}
+
+// 抵现规则
+message IntegralDeductRule {
+  string deduct_amount_limit = 1; //抵现金额上限
+  int64 deduct_amount_limit_val = 2; //抵现金额上限值
+  string order_amount_threshold = 3; //订单金额门槛
+  int64 min_order_amount = 4; //订单金额最低为X元时可抵现
+  string spu_range_type = 5; //适用商品类型
+  repeated int64 spu_range_ids = 6; //适用商品IDS
+  repeated SpuInfo spu_ranges =7;
+}
+
+message IntegralConfigResponse {
+  string msg = 1;
+  IntegralConfig integralConfig = 2;
+}
