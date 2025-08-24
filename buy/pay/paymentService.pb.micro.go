@@ -51,6 +51,8 @@ type PaymentService interface {
 	Delete(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error)
 	// 支付方式获取
 	Get(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error)
+	// 支付关键信息
+	GetKeyInfo(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error)
 	// 支付方式查询
 	Search(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
 	// 支付方式列表
@@ -109,6 +111,16 @@ func (c *paymentService) Get(ctx context.Context, in *Payment, opts ...client.Ca
 	return out, nil
 }
 
+func (c *paymentService) GetKeyInfo(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.GetKeyInfo", in)
+	out := new(PaymentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *paymentService) Search(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
 	req := c.c.NewRequest(c.name, "PaymentService.Search", in)
 	out := new(PaymentResponse)
@@ -140,6 +152,8 @@ type PaymentServiceHandler interface {
 	Delete(context.Context, *Payment, *PaymentResponse) error
 	// 支付方式获取
 	Get(context.Context, *Payment, *PaymentResponse) error
+	// 支付关键信息
+	GetKeyInfo(context.Context, *Payment, *PaymentResponse) error
 	// 支付方式查询
 	Search(context.Context, *PaymentRequest, *PaymentResponse) error
 	// 支付方式列表
@@ -152,6 +166,7 @@ func RegisterPaymentServiceHandler(s server.Server, hdlr PaymentServiceHandler, 
 		Update(ctx context.Context, in *Payment, out *PaymentResponse) error
 		Delete(ctx context.Context, in *Payment, out *PaymentResponse) error
 		Get(ctx context.Context, in *Payment, out *PaymentResponse) error
+		GetKeyInfo(ctx context.Context, in *Payment, out *PaymentResponse) error
 		Search(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
 		List(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
 	}
@@ -180,6 +195,10 @@ func (h *paymentServiceHandler) Delete(ctx context.Context, in *Payment, out *Pa
 
 func (h *paymentServiceHandler) Get(ctx context.Context, in *Payment, out *PaymentResponse) error {
 	return h.PaymentServiceHandler.Get(ctx, in, out)
+}
+
+func (h *paymentServiceHandler) GetKeyInfo(ctx context.Context, in *Payment, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.GetKeyInfo(ctx, in, out)
 }
 
 func (h *paymentServiceHandler) Search(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {

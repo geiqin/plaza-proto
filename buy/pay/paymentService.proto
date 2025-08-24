@@ -15,6 +15,8 @@ service PaymentService {
   rpc Delete (Payment) returns (PaymentResponse) {}
   // 支付方式获取
   rpc Get (Payment) returns (PaymentResponse) {}
+  // 支付关键信息
+  rpc GetKeyInfo (Payment) returns (PaymentResponse) {}
   // 支付方式查询
   rpc Search (PaymentRequest) returns (PaymentResponse) {}
   // 支付方式列表
@@ -36,6 +38,22 @@ message Payment {
   int64 updated_at = 13; //修改时间
   PayAccount account =14;
 }
+
+//支付关键信息
+message PayKeyInfo {
+  string pay_type = 1; //支付类型
+  int32 payment_id = 2; //ID
+  int32 pay_channel_id = 3; //支付通道ID
+  string pay_channel_code = 4; //支付通道编码
+  string pay_channel_name = 5; //支付通道名称
+  int32 pay_account_id = 6; //支付账户ID
+  string pay_account_no = 7; //支付账户编号
+  string is_provider = 8; //是否服务商
+  string client_type = 9; //客户端类型
+  string client_app_id = 10; //客户端AppId
+  string user_openid = 11; //用户OpenId
+}
+
 
 // 支付方式请求参数
 message PaymentRequest {
@@ -62,4 +80,5 @@ message PaymentResponse {
   common.Pager pager = 2;
   Payment entity = 3;
   repeated Payment items = 4;
+  PayKeyInfo payKeyInfo = 5;
 }

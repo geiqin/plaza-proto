@@ -3,6 +3,7 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
+import "paymentService.proto";
 
 //支付日志
 service PayLogService {
@@ -60,22 +61,6 @@ message PayLogValue{
     int64 business_price =5;//业务单金额
     int64 created_at = 6;//创建时间
     int64 updated_at = 7;//修改时间
-}
-
-
-//支付关键信息
-message PayKeyInfo {
-    string pay_type = 1; //支付类型
-    int32 payment_id = 2; //ID
-    int32 pay_channel_id = 3; //支付通道ID
-    string pay_channel_code = 4; //支付通道编码
-    string pay_channel_name = 5; //支付通道名称
-    int32 pay_account_id = 6; //支付账户ID
-    string pay_account_no = 7; //支付账户编号
-    string is_provider = 8; //是否服务商
-    string client_type = 9; //客户端类型
-    string client_app_id = 10; //客户端AppId
-    string user_openid = 11; //用户OpenId
 }
 
 
