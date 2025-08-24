@@ -4,20 +4,20 @@ option go_package = "/.;services";
 import "common/base.proto";
 
 //支付账号
-service PaymentAccountService {
-    rpc Create (PaymentAccount) returns (PaymentAccountResponse) {}
-    rpc Update (PaymentAccount) returns (PaymentAccountResponse) {}
-    rpc Delete (PaymentAccount) returns (PaymentAccountResponse) {}
-    rpc Get (PaymentAccount) returns (PaymentAccountResponse) {}
-    rpc List (PaymentAccountRequest) returns (PaymentAccountResponse) {}
-    rpc Search (PaymentAccountRequest) returns (PaymentAccountResponse) {}
+service PayAccountService {
+    rpc Create (PayAccount) returns (PayAccountResponse) {}
+    rpc Update (PayAccount) returns (PayAccountResponse) {}
+    rpc Delete (PayAccount) returns (PayAccountResponse) {}
+    rpc Get (PayAccount) returns (PayAccountResponse) {}
+    rpc List (PayAccountRequest) returns (PayAccountResponse) {}
+    rpc Search (PayAccountRequest) returns (PayAccountResponse) {}
 }
 
-message PaymentAccount {
+message PayAccount {
     int32 id = 1; //ID
     string account_no = 2; //支付账号
     string account_name = 3; //账号名称
-    string payment_type = 4; //账户类型
+    string pay_type = 4; //账户类型
     string is_provider = 5; //是否服务商
     string status = 9; //启用状态
     int64 created_at = 10; //创建时间
@@ -54,7 +54,7 @@ message AccountAlipayConfig{
 }
 
 
-message PaymentAccountRequest{
+message PayAccountRequest{
     int32 top = 1;
     int64 paged = 2;
     int64 page_size = 3;
@@ -66,14 +66,14 @@ message PaymentAccountRequest{
     //以下为自定义参数
     string account_no = 11; //支付账号
     string account_name = 12; //账号名称
-    string payment_type = 13; //账户类型
+    string pay_type = 13; //账户类型
     string is_provider = 14; //是否服务商
     string status = 15; //启用状态
 }
 
-message PaymentAccountResponse {
-    PaymentAccount entity = 1;
+message PayAccountResponse {
+    PayAccount entity = 1;
     common.Pager pager =2;
-    repeated PaymentAccount items = 3;
+    repeated PayAccount items = 3;
     string msg =4;
 }

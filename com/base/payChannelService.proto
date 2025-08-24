@@ -3,22 +3,22 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 // 支付通道服务
-service PaymentChannelService {
+service PayChannelService {
   // 支付通道新增
-  rpc Create (PaymentChannel) returns (PaymentChannelResponse) {}
+  rpc Create (PayChannel) returns (PayChannelResponse) {}
   // 支付通道修改
-  rpc Update (PaymentChannel) returns (PaymentChannelResponse) {}
+  rpc Update (PayChannel) returns (PayChannelResponse) {}
   // 支付通道删除
-  rpc Delete (PaymentChannel) returns (PaymentChannelResponse) {}
+  rpc Delete (PayChannel) returns (PayChannelResponse) {}
   // 支付通道获取
-  rpc Get (PaymentChannel) returns (PaymentChannelResponse) {}
+  rpc Get (PayChannel) returns (PayChannelResponse) {}
   // 支付通道查询
-  rpc Search (PaymentChannelRequest) returns (PaymentChannelResponse) {}
+  rpc Search (PayChannelRequest) returns (PayChannelResponse) {}
   // 支付通道列表
-  rpc List (PaymentChannelRequest) returns (PaymentChannelResponse) {}
+  rpc List (PayChannelRequest) returns (PayChannelResponse) {}
 }
 // 支付通道
-message PaymentChannel {
+message PayChannel {
   int32 id = 1; //ID
   string channel_code = 2; //唯一标记
   string channel_name = 3; //方式名称
@@ -31,7 +31,7 @@ message PaymentChannel {
   int64 updated_at = 10; //修改时间
 }
 // 支付通道请求参数
-message PaymentChannelRequest {
+message PayChannelRequest {
   int32 top = 1;
   int64 paged = 2;
   int64 page_size = 3;
@@ -46,9 +46,9 @@ message PaymentChannelRequest {
   string payment_type = 13; //支付类型
 }
 // 支付通道响应数据
-message PaymentChannelResponse {
-  PaymentChannel entity = 1;
+message PayChannelResponse {
+  PayChannel entity = 1;
   common.Pager pager = 2;
-  repeated PaymentChannel items = 3;
+  repeated PayChannel items = 3;
   string msg = 4;
 }

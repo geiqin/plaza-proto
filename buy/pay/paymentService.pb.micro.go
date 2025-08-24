@@ -5,6 +5,7 @@ package services
 
 import (
 	fmt "fmt"
+	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -42,10 +43,18 @@ func NewPaymentServiceEndpoints() []*api.Endpoint {
 // Client API for PaymentService service
 
 type PaymentService interface {
-	//获取支付方式列表
-	GetMethodList(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
-	//获取支付方式信息
-	GetMethodInfo(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
+	// 支付方式新增
+	Create(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error)
+	// 支付方式修改
+	Update(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error)
+	// 支付方式删除
+	Delete(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error)
+	// 支付方式获取
+	Get(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error)
+	// 支付方式查询
+	Search(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
+	// 支付方式列表
+	List(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error)
 }
 
 type paymentService struct {
@@ -60,8 +69,8 @@ func NewPaymentService(name string, c client.Client) PaymentService {
 	}
 }
 
-func (c *paymentService) GetMethodList(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.GetMethodList", in)
+func (c *paymentService) Create(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.Create", in)
 	out := new(PaymentResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -70,8 +79,48 @@ func (c *paymentService) GetMethodList(ctx context.Context, in *PaymentRequest, 
 	return out, nil
 }
 
-func (c *paymentService) GetMethodInfo(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
-	req := c.c.NewRequest(c.name, "PaymentService.GetMethodInfo", in)
+func (c *paymentService) Update(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.Update", in)
+	out := new(PaymentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentService) Delete(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.Delete", in)
+	out := new(PaymentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentService) Get(ctx context.Context, in *Payment, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.Get", in)
+	out := new(PaymentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentService) Search(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.Search", in)
+	out := new(PaymentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentService) List(ctx context.Context, in *PaymentRequest, opts ...client.CallOption) (*PaymentResponse, error) {
+	req := c.c.NewRequest(c.name, "PaymentService.List", in)
 	out := new(PaymentResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -83,16 +132,28 @@ func (c *paymentService) GetMethodInfo(ctx context.Context, in *PaymentRequest, 
 // Server API for PaymentService service
 
 type PaymentServiceHandler interface {
-	//获取支付方式列表
-	GetMethodList(context.Context, *PaymentRequest, *PaymentResponse) error
-	//获取支付方式信息
-	GetMethodInfo(context.Context, *PaymentRequest, *PaymentResponse) error
+	// 支付方式新增
+	Create(context.Context, *Payment, *PaymentResponse) error
+	// 支付方式修改
+	Update(context.Context, *Payment, *PaymentResponse) error
+	// 支付方式删除
+	Delete(context.Context, *Payment, *PaymentResponse) error
+	// 支付方式获取
+	Get(context.Context, *Payment, *PaymentResponse) error
+	// 支付方式查询
+	Search(context.Context, *PaymentRequest, *PaymentResponse) error
+	// 支付方式列表
+	List(context.Context, *PaymentRequest, *PaymentResponse) error
 }
 
 func RegisterPaymentServiceHandler(s server.Server, hdlr PaymentServiceHandler, opts ...server.HandlerOption) error {
 	type paymentService interface {
-		GetMethodList(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
-		GetMethodInfo(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
+		Create(ctx context.Context, in *Payment, out *PaymentResponse) error
+		Update(ctx context.Context, in *Payment, out *PaymentResponse) error
+		Delete(ctx context.Context, in *Payment, out *PaymentResponse) error
+		Get(ctx context.Context, in *Payment, out *PaymentResponse) error
+		Search(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
+		List(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error
 	}
 	type PaymentService struct {
 		paymentService
@@ -105,10 +166,26 @@ type paymentServiceHandler struct {
 	PaymentServiceHandler
 }
 
-func (h *paymentServiceHandler) GetMethodList(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.GetMethodList(ctx, in, out)
+func (h *paymentServiceHandler) Create(ctx context.Context, in *Payment, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.Create(ctx, in, out)
 }
 
-func (h *paymentServiceHandler) GetMethodInfo(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
-	return h.PaymentServiceHandler.GetMethodInfo(ctx, in, out)
+func (h *paymentServiceHandler) Update(ctx context.Context, in *Payment, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.Update(ctx, in, out)
+}
+
+func (h *paymentServiceHandler) Delete(ctx context.Context, in *Payment, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *paymentServiceHandler) Get(ctx context.Context, in *Payment, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.Get(ctx, in, out)
+}
+
+func (h *paymentServiceHandler) Search(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.Search(ctx, in, out)
+}
+
+func (h *paymentServiceHandler) List(ctx context.Context, in *PaymentRequest, out *PaymentResponse) error {
+	return h.PaymentServiceHandler.List(ctx, in, out)
 }
