@@ -30,8 +30,9 @@ message Payment {
   string pay_channel_code = 4; //支付通道编码
   PayChannelInfo pay_channel_info = 5; //支付通道
   int32 account_id = 6; //支付账户ID
-  string client_type = 8; //客户端类型
-  string client_app_id = 9; //客户端AppId
+  string from_type = 7; //来源端类型
+  string from_routine_type = 8; //来源小程序类型
+  string from_app_id = 9; //来源端AppId
   int32 sort = 10; //排序值
   string status = 11; //启用状态
   int64 created_at = 12; //创建时间
@@ -49,9 +50,7 @@ message PayKeyInfo {
   int32 pay_account_id = 6; //支付账户ID
   string pay_account_no = 7; //支付账户编号
   string is_provider = 8; //是否服务商
-  string client_type = 9; //客户端类型
-  string client_app_id = 10; //客户端AppId
-  string user_openid = 11; //用户OpenId
+  string from_app_id = 9; //来源端AppId
 }
 
 
@@ -70,9 +69,10 @@ message PaymentRequest {
   int32 pay_channel_id = 12; //支付通道ID
   string pay_channel_code = 13; //支付通道编码
   int32 account_id = 14; //支付账户ID
-  string client_type = 17; //客户端类型
-  string client_app_id = 18; //客户端AppId
-  string status = 19; //启用状态
+  string from_type = 17; //客户端类型
+  string from_routine_type = 18; //小程序类型
+  string from_app_id = 19; //客户端AppId
+  string status = 20; //启用状态
 }
 // 支付方式响应数据
 message PaymentResponse {
