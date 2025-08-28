@@ -26,9 +26,9 @@ service PaymentService {
 message Payment {
   int32 id = 1; //ID
   string pay_type = 2; //支付类型
-  int32 pay_channel_id = 3; //支付通道ID
-  string pay_channel_code = 4; //支付通道编码
-  PayChannelInfo pay_channel_info = 5; //支付通道
+  int32 channel_id = 3; //支付通道ID
+  string channel_code = 4; //支付通道编码
+  PayChannelInfo channel_info = 5; //支付通道
   int32 account_id = 6; //支付账户ID
   string from_type = 7; //来源端类型
   string from_routine_type = 8; //来源小程序类型

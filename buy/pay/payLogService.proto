@@ -36,15 +36,11 @@ message PayLog{
     string subject = 10; //订单名称
     int64 pay_price = 12; //支付金额
     string currency = 13; //货币代码
-    string transaction_no = 14; //交易单号【线上/线下支付】
+    string transaction_no = 14; //交易单号
     string buyer_user = 15; //支付平台用户
     string from_type = 16; //来源端类型
     string from_routine_type = 17; //来源小程序类型
     string close_reason = 18; //关闭原因
-    string receipt_channel =19; //收款渠道【线下支付】
-    string receipt_man =20; //收款人【线下支付】
-    string receipt_account =21; //收款账号【线下支付】
-    string remark = 22; //备注【线下支付】
     string status = 23; //状态  （0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
     int64 paid_time = 24; //支付时间
     int64 closed_time = 25; //关闭时间
@@ -85,7 +81,6 @@ message PayLogRequest{
     string transaction_no = 17; //交易单号
     string from_type = 18; //客户端类型
     string from_routine_type = 19; //小程序类型
-    string recipient = 20; //收款人
     string status = 21; //状态
 }
 
