@@ -12,7 +12,7 @@ service MemberService {
     //用户注册
     rpc Reg (MemberRequest) returns (MemberResponse) {}
     //小程序用户授权
-    rpc AppMiniAuth (MemberRequest) returns (MemberResponse) {}
+    rpc RoutineAuth (MemberRequest) returns (MemberResponse) {}
     //通过手机号授权
     rpc MobileAuth (MemberRequest) returns (MemberResponse) {}
     //通过邮箱授权
@@ -94,7 +94,7 @@ message Member {
     int64 spread_time = 31; //推广员关联时间
     int64 spread_count = 32; //下级人数
     string is_scatter = 33; //是否散客
-    string client_type = 34; //来源终端
+    string from_type = 34; //来源终端
     string is_real = 35; //是否实名
     string real_type = 36; //实名类型
     string memo = 37; //备注
@@ -158,7 +158,7 @@ message MemberRequest {
     int32 agent_level_id = 24; //分销等级
     int64 admin_id = 25; //管理员ID
     string is_scatter = 26; //是否散客
-    string client_type = 27; //来源终端
+    string routine_type = 27; //小程序类型
     string is_real = 28; //是否实名
     string real_type = 29; //实名类型
     string out_system_id = 30; //外部系统ID
@@ -175,7 +175,7 @@ message MemberRequest {
     string code =45;
     string referrer =46;
     int32 tag_id =47;
-    string platform = 48;//来源平台
+    string from_type = 48;//来源类型
     string username = 49;
     int64 member_id = 50;
 }

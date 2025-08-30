@@ -21,7 +21,7 @@ message MemberVisit {
   int64 member_id = 2; //会员ID
   string url = 3; //访问路径
   string ip = 4; //用户IP
-  string channel_type = 5; //访问端标识
+  string from_type = 5; //访问端标识
   int64 updated_at = 6; //创建时间
   int64 created_at = 7; //修改时间
   Member member =10;
@@ -38,7 +38,7 @@ message MemberVisitRequest {
   int64 id = 8;
   //以下为自定义参数
   int64 member_id = 11; //会员ID
-  string channel_type = 12; //访问端标识
+  string from_type = 12; //访问端标识
 }
 // 会员访问响应数据
 message MemberVisitResponse {

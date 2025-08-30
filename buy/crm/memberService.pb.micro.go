@@ -46,7 +46,7 @@ type MemberService interface {
 	//用户注册
 	Reg(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//小程序用户授权
-	AppMiniAuth(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
+	RoutineAuth(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//通过手机号授权
 	MobileAuth(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	//通过邮箱授权
@@ -112,8 +112,8 @@ func (c *memberService) Reg(ctx context.Context, in *MemberRequest, opts ...clie
 	return out, nil
 }
 
-func (c *memberService) AppMiniAuth(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberService.AppMiniAuth", in)
+func (c *memberService) RoutineAuth(ctx context.Context, in *MemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberService.RoutineAuth", in)
 	out := new(MemberResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -338,7 +338,7 @@ type MemberServiceHandler interface {
 	//用户注册
 	Reg(context.Context, *MemberRequest, *MemberResponse) error
 	//小程序用户授权
-	AppMiniAuth(context.Context, *MemberRequest, *MemberResponse) error
+	RoutineAuth(context.Context, *MemberRequest, *MemberResponse) error
 	//通过手机号授权
 	MobileAuth(context.Context, *MemberRequest, *MemberResponse) error
 	//通过邮箱授权
@@ -385,7 +385,7 @@ type MemberServiceHandler interface {
 func RegisterMemberServiceHandler(s server.Server, hdlr MemberServiceHandler, opts ...server.HandlerOption) error {
 	type memberService interface {
 		Reg(ctx context.Context, in *MemberRequest, out *MemberResponse) error
-		AppMiniAuth(ctx context.Context, in *MemberRequest, out *MemberResponse) error
+		RoutineAuth(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		MobileAuth(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		EmailAuth(ctx context.Context, in *MemberRequest, out *MemberResponse) error
 		AccountAuth(ctx context.Context, in *MemberRequest, out *MemberResponse) error
@@ -423,8 +423,8 @@ func (h *memberServiceHandler) Reg(ctx context.Context, in *MemberRequest, out *
 	return h.MemberServiceHandler.Reg(ctx, in, out)
 }
 
-func (h *memberServiceHandler) AppMiniAuth(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
-	return h.MemberServiceHandler.AppMiniAuth(ctx, in, out)
+func (h *memberServiceHandler) RoutineAuth(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
+	return h.MemberServiceHandler.RoutineAuth(ctx, in, out)
 }
 
 func (h *memberServiceHandler) MobileAuth(ctx context.Context, in *MemberRequest, out *MemberResponse) error {
