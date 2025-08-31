@@ -47,8 +47,7 @@ message SpuSaleRequest {
   int64 spu_id = 11; //商品ID
   int64 order_id = 12; //订单ID
   int64 order_detail_id = 13; //订单明细ID
-  int64 warehouse_id = 14; //仓库id
-  int64 delivery_order_id = 15; //发货订单id
+  string status = 14; //状态
 }
 
 
