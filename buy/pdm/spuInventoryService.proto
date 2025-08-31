@@ -1,0 +1,71 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+// 商品库存变动服务
+service SpuInventoryService {
+  // 库存冻结
+  rpc Frozen (SpuInventory) returns (SpuInventoryResponse) {}
+  // 冻结取消
+  rpc Cancel (SpuInventory) returns (SpuInventoryResponse) {}
+  // 库存扣除
+  rpc Deduct (SpuInventory) returns (SpuInventoryResponse) {}
+  // 日志查询
+  rpc Logs (SpuInventoryRequest) returns (SpuInventoryResponse) {}
+}
+
+// 商品库存日志
+message SpuInventoryLog {
+  int64 id = 1; //ID
+  int64 spu_id = 2; //商品ID
+  string unique = 3; //唯一标识
+  int64 order_id = 4; //订单ID
+  int64 order_detail_id = 5; //订单明细ID
+  int64 frozen_num = 6; //冻结数量
+  int64 deduct_num = 7; //扣减数量
+  int64 warehouse_id = 8; //仓库id
+  int64 delivery_order_id = 9; //发货订单id
+  int64 last_deduct_time = 10; //最近扣减时间
+  int64 cancel_time = 11; //取消时间
+  string status = 12; //状态：1-已冻结,2-已扣减,3-已取消
+  int64 updated_at = 13; //创建时间
+  int64 created_at = 14; //修改时间
+}
+
+// 库存请求参数
+message SpuInventory {
+  int64 order_id = 1; //订单ID
+  repeated SpuInventoryLog items = 2;
+}
+
+// 库存扣减日志请求参数
+message SpuInventoryRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 spu_id = 11; //商品ID
+  int64 order_id = 12; //订单ID
+  int64 order_detail_id = 13; //订单明细ID
+  int64 warehouse_id = 14; //仓库id
+  int64 delivery_order_id = 15; //发货订单id
+}
+
+
+// 库存日志数据
+message SpuInventoryLogsData {
+  common.Pager pager = 1;
+  repeated SpuInventoryLog items = 2;
+}
+
+// 库存变动响应数据
+message SpuInventoryResponse {
+  string msg = 1;
+  repeated SpuInventoryLogsData Logs = 2;
+}

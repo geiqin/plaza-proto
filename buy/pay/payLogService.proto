@@ -39,7 +39,7 @@ message PayLog{
     string transaction_no = 14; //交易单号
     string buyer_user = 15; //支付平台用户
     string from_type = 16; //来源端类型
-    string from_routine_type = 17; //来源小程序类型
+    string routine_type = 17; //小程序类型
     string close_reason = 18; //关闭原因
     string status = 23; //状态  （0待支付, 1已支付, 2已关闭）正常30分钟内未支付将关闭
     int64 paid_time = 24; //支付时间
@@ -80,7 +80,7 @@ message PayLogRequest{
     string subject = 16; //订单名称
     string transaction_no = 17; //交易单号
     string from_type = 18; //客户端类型
-    string from_routine_type = 19; //小程序类型
+    string routine_type = 19; //小程序类型
     string status = 21; //状态
 }
 

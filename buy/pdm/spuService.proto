@@ -67,9 +67,9 @@ message Spu {
     string is_limit = 34; //是否开启限购
     string limit_type = 35; //扣减库存类型
     int64 limit_num = 36; //限购数量
-    int64 photo_count = 37; //图片数量
-    int64 browse_count = 38; //访问次数
-    int64 sale_count = 39; //实际销量
+    int64 comments = 37; //评论数量
+    int64 browses = 38; //访问次数
+    int64 sales = 39; //实际销量
     int64 fictions = 40; //虚拟销量
     string button_mode = 41; //立即购买按钮
     string button_custom = 42; //按钮自定义名称
