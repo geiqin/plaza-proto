@@ -61,7 +61,7 @@ message Product {
     int64 freight_template_id = 44; //快递运费模板
     bool is_oversea = 45; //是否海淘商品
     int32 sort = 49; //排序
-    string ext_object_id = 50; //扩展业务主要ID
+    int64 virtual_obj_id = 50; //虚拟对象ID
     string status = 52; //商品状态
     ProductAttrInfo attrInfo =53;
     bool is_presale =54;
@@ -91,7 +91,7 @@ message ProductAttrInfo {
     int64 volume = 16; //体积
     repeated SkuSpecInfo spec = 17; //规格信息
     string spec_desc = 18; //规格描述
-    string ext_object_child_id = 19; //扩展业务子ID
+    int64 virtual_obj_spec_id = 19; //虚拟对象规格ID
     string out_system_child_id = 20; //外部系统子ID
     int64 created_at = 21; //创建时间
     int64 updated_at = 22; //修改时间

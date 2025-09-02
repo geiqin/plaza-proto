@@ -87,7 +87,7 @@ message Spu {
     int32 sort = 54; //排序
     string is_gift = 55; //是否是礼品
     int64 gift_price = 56; //礼品附加费
-    string ext_object_id = 57; //扩展业务ID
+    int64 virtual_obj_id = 57; //虚拟对象ID
     string out_system_id = 58; //外部系统ID
     string status = 59; //商品状态
     int64 updated_at = 60; //创建时间
@@ -194,7 +194,7 @@ message Sku {
     int64 volume = 13; //体积
     repeated SkuSpecInfo spec = 14; //规格信息
     string spec_desc = 15; //规格描述
-    string ext_object_child_id = 16; //扩展业务明细ID
+    int64 virtual_obj_spec_id = 16; //虚拟对象规格ID
     string out_system_child_id = 17; //外部系统子ID
     int64 created_at = 18; //创建时间
     int64 updated_at = 19; //修改时间
@@ -228,7 +228,7 @@ message SkuRequest {
     string coding = 12; //编号
     string barcode = 13; //条码
     string unique = 14; //唯一标识
-    string ext_object_child_id =15; //扩展业务明细ID
+    int64 virtual_obj_spec_id =15; //虚拟对象规格ID
     repeated int64 spu_ids =16;
     repeated int64 sku_ids =17;
     repeated string unique_list =18;
@@ -270,8 +270,8 @@ message SpuRequest {
     string primary_label = 32; //关键标签
     int64 detail_template_id = 33; //详情模板
     string status = 34; //商品状态
-    string ext_object_id =35; //扩展业务主要ID
-    string ext_object_child_id =36; //扩展业务明细ID
+    int64 virtual_obj_id =35; //虚拟对象ID
+    int64 virtual_obj_spec_id =36; //虚拟对象规格ID
     string out_system_id =37; //外部系统ID
 }
 // 商品库响应数据
