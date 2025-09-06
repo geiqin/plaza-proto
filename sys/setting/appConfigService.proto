@@ -5,9 +5,9 @@ option go_package ="/.;services";
 //APP信息
 service AppConfigService {
   //获取通用APP
-  rpc Get (AppConfigRequest) returns (AppConfigResponse) {}
+  rpc Get (AppConfig) returns (AppConfigResponse) {}
   //保存通用APP
-  rpc Save (AppConfigRequest) returns (AppConfigResponse) {}
+  rpc Save (AppConfig) returns (AppConfigResponse) {}
 }
 
 //通用APP

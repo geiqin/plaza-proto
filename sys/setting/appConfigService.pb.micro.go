@@ -43,9 +43,9 @@ func NewAppConfigServiceEndpoints() []*api.Endpoint {
 
 type AppConfigService interface {
 	//获取通用APP
-	Get(ctx context.Context, in *AppConfigRequest, opts ...client.CallOption) (*AppConfigResponse, error)
+	Get(ctx context.Context, in *AppConfig, opts ...client.CallOption) (*AppConfigResponse, error)
 	//保存通用APP
-	Save(ctx context.Context, in *AppConfigRequest, opts ...client.CallOption) (*AppConfigResponse, error)
+	Save(ctx context.Context, in *AppConfig, opts ...client.CallOption) (*AppConfigResponse, error)
 }
 
 type appConfigService struct {
@@ -60,7 +60,7 @@ func NewAppConfigService(name string, c client.Client) AppConfigService {
 	}
 }
 
-func (c *appConfigService) Get(ctx context.Context, in *AppConfigRequest, opts ...client.CallOption) (*AppConfigResponse, error) {
+func (c *appConfigService) Get(ctx context.Context, in *AppConfig, opts ...client.CallOption) (*AppConfigResponse, error) {
 	req := c.c.NewRequest(c.name, "AppConfigService.Get", in)
 	out := new(AppConfigResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -70,7 +70,7 @@ func (c *appConfigService) Get(ctx context.Context, in *AppConfigRequest, opts .
 	return out, nil
 }
 
-func (c *appConfigService) Save(ctx context.Context, in *AppConfigRequest, opts ...client.CallOption) (*AppConfigResponse, error) {
+func (c *appConfigService) Save(ctx context.Context, in *AppConfig, opts ...client.CallOption) (*AppConfigResponse, error) {
 	req := c.c.NewRequest(c.name, "AppConfigService.Save", in)
 	out := new(AppConfigResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -84,15 +84,15 @@ func (c *appConfigService) Save(ctx context.Context, in *AppConfigRequest, opts 
 
 type AppConfigServiceHandler interface {
 	//获取通用APP
-	Get(context.Context, *AppConfigRequest, *AppConfigResponse) error
+	Get(context.Context, *AppConfig, *AppConfigResponse) error
 	//保存通用APP
-	Save(context.Context, *AppConfigRequest, *AppConfigResponse) error
+	Save(context.Context, *AppConfig, *AppConfigResponse) error
 }
 
 func RegisterAppConfigServiceHandler(s server.Server, hdlr AppConfigServiceHandler, opts ...server.HandlerOption) error {
 	type appConfigService interface {
-		Get(ctx context.Context, in *AppConfigRequest, out *AppConfigResponse) error
-		Save(ctx context.Context, in *AppConfigRequest, out *AppConfigResponse) error
+		Get(ctx context.Context, in *AppConfig, out *AppConfigResponse) error
+		Save(ctx context.Context, in *AppConfig, out *AppConfigResponse) error
 	}
 	type AppConfigService struct {
 		appConfigService
@@ -105,10 +105,10 @@ type appConfigServiceHandler struct {
 	AppConfigServiceHandler
 }
 
-func (h *appConfigServiceHandler) Get(ctx context.Context, in *AppConfigRequest, out *AppConfigResponse) error {
+func (h *appConfigServiceHandler) Get(ctx context.Context, in *AppConfig, out *AppConfigResponse) error {
 	return h.AppConfigServiceHandler.Get(ctx, in, out)
 }
 
-func (h *appConfigServiceHandler) Save(ctx context.Context, in *AppConfigRequest, out *AppConfigResponse) error {
+func (h *appConfigServiceHandler) Save(ctx context.Context, in *AppConfig, out *AppConfigResponse) error {
 	return h.AppConfigServiceHandler.Save(ctx, in, out)
 }

@@ -12,15 +12,19 @@ service CommonConfigService {
 
 //通用配置
 message CommonConfig {
+  //公共信息
+  string common_static_host =1; //公共静态服务器地址
+  string common_user_avatar =2; //公共用户默认头像
+  string common_store_avatar =3; //公共店铺默认头像
+
  //基础设置
   string timezone =100;//默认时区默认,亚洲/上海 [标准时+8]
   string locale =101;//使用语言：默认:zh-CN
 
   //店铺设置
-  string site_state =200;//站点状态（经营状态）
+  int32 site_state =200;//站点状态（经营状态）
   string site_name =201;//站点名称
-  string site_description =202; //店铺简介
-  string site_service_phone =203; //客服电话
+  string site_service_phone =202; //客服电话
   string site_logo =206;//电脑端logo支持 [jpg, png, gif]，建议220x60px
   string site_logo_wap =207;//手机端logo支持 [jpg, png, gif]，建议220x66px
   string site_logo_square =208;//正方形logo建议使用png格式，建议300x300px

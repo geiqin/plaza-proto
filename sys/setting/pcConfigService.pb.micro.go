@@ -43,9 +43,9 @@ func NewPcConfigServiceEndpoints() []*api.Endpoint {
 
 type PcConfigService interface {
 	//获取
-	Get(ctx context.Context, in *PcConfigRequest, opts ...client.CallOption) (*PcConfigResponse, error)
+	Get(ctx context.Context, in *PcConfig, opts ...client.CallOption) (*PcConfigResponse, error)
 	//保存
-	Save(ctx context.Context, in *PcConfigRequest, opts ...client.CallOption) (*PcConfigResponse, error)
+	Save(ctx context.Context, in *PcConfig, opts ...client.CallOption) (*PcConfigResponse, error)
 }
 
 type pcConfigService struct {
@@ -60,7 +60,7 @@ func NewPcConfigService(name string, c client.Client) PcConfigService {
 	}
 }
 
-func (c *pcConfigService) Get(ctx context.Context, in *PcConfigRequest, opts ...client.CallOption) (*PcConfigResponse, error) {
+func (c *pcConfigService) Get(ctx context.Context, in *PcConfig, opts ...client.CallOption) (*PcConfigResponse, error) {
 	req := c.c.NewRequest(c.name, "PcConfigService.Get", in)
 	out := new(PcConfigResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -70,7 +70,7 @@ func (c *pcConfigService) Get(ctx context.Context, in *PcConfigRequest, opts ...
 	return out, nil
 }
 
-func (c *pcConfigService) Save(ctx context.Context, in *PcConfigRequest, opts ...client.CallOption) (*PcConfigResponse, error) {
+func (c *pcConfigService) Save(ctx context.Context, in *PcConfig, opts ...client.CallOption) (*PcConfigResponse, error) {
 	req := c.c.NewRequest(c.name, "PcConfigService.Save", in)
 	out := new(PcConfigResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -84,15 +84,15 @@ func (c *pcConfigService) Save(ctx context.Context, in *PcConfigRequest, opts ..
 
 type PcConfigServiceHandler interface {
 	//获取
-	Get(context.Context, *PcConfigRequest, *PcConfigResponse) error
+	Get(context.Context, *PcConfig, *PcConfigResponse) error
 	//保存
-	Save(context.Context, *PcConfigRequest, *PcConfigResponse) error
+	Save(context.Context, *PcConfig, *PcConfigResponse) error
 }
 
 func RegisterPcConfigServiceHandler(s server.Server, hdlr PcConfigServiceHandler, opts ...server.HandlerOption) error {
 	type pcConfigService interface {
-		Get(ctx context.Context, in *PcConfigRequest, out *PcConfigResponse) error
-		Save(ctx context.Context, in *PcConfigRequest, out *PcConfigResponse) error
+		Get(ctx context.Context, in *PcConfig, out *PcConfigResponse) error
+		Save(ctx context.Context, in *PcConfig, out *PcConfigResponse) error
 	}
 	type PcConfigService struct {
 		pcConfigService
@@ -105,10 +105,10 @@ type pcConfigServiceHandler struct {
 	PcConfigServiceHandler
 }
 
-func (h *pcConfigServiceHandler) Get(ctx context.Context, in *PcConfigRequest, out *PcConfigResponse) error {
+func (h *pcConfigServiceHandler) Get(ctx context.Context, in *PcConfig, out *PcConfigResponse) error {
 	return h.PcConfigServiceHandler.Get(ctx, in, out)
 }
 
-func (h *pcConfigServiceHandler) Save(ctx context.Context, in *PcConfigRequest, out *PcConfigResponse) error {
+func (h *pcConfigServiceHandler) Save(ctx context.Context, in *PcConfig, out *PcConfigResponse) error {
 	return h.PcConfigServiceHandler.Save(ctx, in, out)
 }
