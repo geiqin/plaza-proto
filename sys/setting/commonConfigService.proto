@@ -44,8 +44,8 @@ message CommonConfig {
   bool detail_store_button =307; //详情页店铺按钮
   bool detail_sales_show  =308; //详情页销量展示
 
-  int32 pay_success_allow_comment_time =312; //交易成功后X天内，买家可发布评价
-  int32 pay_success_auto_comment_limit =313; //买家交易成功X天后买家未评论，系统将自动评论
+  int64 pay_success_allow_comment_time =312; //交易成功后X天内，买家可发布评价
+  int64 pay_success_auto_comment_limit =313; //买家交易成功X天后买家未评论，系统将自动评论
   bool auto_comment_open =315; //自动评价开关
   string auto_comment_content =316; //自动评价内容
 
@@ -83,10 +83,10 @@ message CommonConfig {
   repeated string aftersale_apply_reasons =451; //售后申请原因设置
   string pre_shipment_refund_type =452;//发货前售后申请设置: 1需要审核 2;无需审核，系统自动退款
   string shipped_freight_return_type =453;//发货后运费退还设置: 1退运费 2不退运费
-  int32 order_cancel_time =454;//订单未支付自动关闭时间（单位小时），货到付款订单不适用
-  int32 order_auto_receive_time =455; //已发货订单X天后自动确认收货
-  int32 refund_time_available =456;//已收货订单X天后关闭售后功能(最长可设置365天， 0表示确认收货后关闭售后功能)
-  int32 returned_auto_refund_time =457;//买家发起退货退款申请X天后商家未处理，系统将自动同意售后。
+  int64 order_cancel_time =454;//订单未支付自动关闭时间（单位小时），货到付款订单不适用
+  int64 order_auto_receive_time =455; //已发货订单X天后自动确认收货
+  int64 refund_time_available =456;//已收货订单X天后关闭售后功能(最长可设置365天， 0表示确认收货后关闭售后功能)
+  int64 returned_auto_refund_time =457;//买家发起退货退款申请X天后商家未处理，系统将自动同意售后。
   bool coupon_return_open =469 ;///优惠券退还状态
 
   //支付设置
