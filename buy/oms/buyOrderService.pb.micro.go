@@ -46,6 +46,8 @@ type BuyOrderService interface {
 	Confirm(ctx context.Context, in *BuyOrderRequest, opts ...client.CallOption) (*BuyOrderResponse, error)
 	//下单提交
 	Submit(ctx context.Context, in *BuyOrderRequest, opts ...client.CallOption) (*BuyOrderResponse, error)
+	//收银台结算
+	Cashier(ctx context.Context, in *BuyOrderRequest, opts ...client.CallOption) (*BuyOrderResponse, error)
 	//获取确认订单页面是否展示快递配送和到店自提
 	CheckShipping(ctx context.Context, in *BuyOrderRequest, opts ...client.CallOption) (*BuyOrderResponse, error)
 	//计算订单金额
@@ -78,6 +80,16 @@ func (c *buyOrderService) Confirm(ctx context.Context, in *BuyOrderRequest, opts
 
 func (c *buyOrderService) Submit(ctx context.Context, in *BuyOrderRequest, opts ...client.CallOption) (*BuyOrderResponse, error) {
 	req := c.c.NewRequest(c.name, "BuyOrderService.Submit", in)
+	out := new(BuyOrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *buyOrderService) Cashier(ctx context.Context, in *BuyOrderRequest, opts ...client.CallOption) (*BuyOrderResponse, error) {
+	req := c.c.NewRequest(c.name, "BuyOrderService.Cashier", in)
 	out := new(BuyOrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -123,6 +135,8 @@ type BuyOrderServiceHandler interface {
 	Confirm(context.Context, *BuyOrderRequest, *BuyOrderResponse) error
 	//下单提交
 	Submit(context.Context, *BuyOrderRequest, *BuyOrderResponse) error
+	//收银台结算
+	Cashier(context.Context, *BuyOrderRequest, *BuyOrderResponse) error
 	//获取确认订单页面是否展示快递配送和到店自提
 	CheckShipping(context.Context, *BuyOrderRequest, *BuyOrderResponse) error
 	//计算订单金额
@@ -135,6 +149,7 @@ func RegisterBuyOrderServiceHandler(s server.Server, hdlr BuyOrderServiceHandler
 	type buyOrderService interface {
 		Confirm(ctx context.Context, in *BuyOrderRequest, out *BuyOrderResponse) error
 		Submit(ctx context.Context, in *BuyOrderRequest, out *BuyOrderResponse) error
+		Cashier(ctx context.Context, in *BuyOrderRequest, out *BuyOrderResponse) error
 		CheckShipping(ctx context.Context, in *BuyOrderRequest, out *BuyOrderResponse) error
 		ComputedOrder(ctx context.Context, in *BuyOrderRequest, out *BuyOrderResponse) error
 		AvailableCoupons(ctx context.Context, in *BuyOrderRequest, out *BuyOrderResponse) error
@@ -156,6 +171,10 @@ func (h *buyOrderServiceHandler) Confirm(ctx context.Context, in *BuyOrderReques
 
 func (h *buyOrderServiceHandler) Submit(ctx context.Context, in *BuyOrderRequest, out *BuyOrderResponse) error {
 	return h.BuyOrderServiceHandler.Submit(ctx, in, out)
+}
+
+func (h *buyOrderServiceHandler) Cashier(ctx context.Context, in *BuyOrderRequest, out *BuyOrderResponse) error {
+	return h.BuyOrderServiceHandler.Cashier(ctx, in, out)
 }
 
 func (h *buyOrderServiceHandler) CheckShipping(ctx context.Context, in *BuyOrderRequest, out *BuyOrderResponse) error {

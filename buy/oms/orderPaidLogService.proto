@@ -1,0 +1,71 @@
+syntax = "proto3";
+package services;
+option go_package = "/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+//订单已支付日志
+service OrderPaidLogService {
+    rpc Get (OrderPaidLog) returns (OrderPaidLogResponse) {}
+    rpc Search (OrderPaidLogRequest) returns (OrderPaidLogResponse) {}
+}
+
+// 已支付日志
+message OrderPaidLog {
+    int64 id = 1; //ID
+    int64 order_id = 2; //订单ID
+    int64 payer_id = 3; //支付用户ID
+    string pay_type = 4; //支付类型
+    int64 pay_price = 5; //支付金额
+    string from_type = 6; //来源类型
+    string routine_type = 7; //小程序类型
+    int64 pay_log_id = 8; //平台支付日志ID
+    OfflinePayInfo offline_pay_info = 9; //下线支付信息
+    string is_refund = 10; //是否已退款（0否，1是）
+    int64 updated_at = 11; //创建时间
+    int64 created_at = 12; //修改时间
+    MemberInfo payer = 13;
+}
+
+//线下支付信息
+message OfflinePayInfo{
+    string transaction_no = 1; //交易单号
+    string channel =2; //收款渠道
+    string recipient =3; //收款人
+    string account =4; //收款账号
+    int64 date = 5; //收款日期
+    string remark = 6; //备注信息
+}
+
+
+// 已支付日志请求参数
+message OrderPaidLogRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sorts = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    int64 order_id = 11; //订单ID
+    int64 payer_id = 12; //支付用户ID
+    string pay_type = 13; //支付类型
+    string from_type = 14; //来源类型
+    string routine_type = 15; //小程序类型
+    int64 pay_log_id = 16; //平台支付日志ID
+    string is_refund = 17; //是否已退款
+}
+// 已支付日志响应数据
+message OrderPaidLogSearch {
+    common.Pager pager = 1;
+    repeated OrderPaidLog items = 2;
+}
+
+message OrderPaidLogResponse{
+    string msg =1;
+    OrderPaidLog entity = 2;
+    OrderPaidLogSearch search =3;
+}
+

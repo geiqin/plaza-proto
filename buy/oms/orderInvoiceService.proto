@@ -1,0 +1,74 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+
+// 订单发票服务
+service OrderInvoiceService {
+  // 订单发票获取
+  rpc Get (OrderInvoice) returns (OrderInvoiceResponse) {}
+  // 订单发票查询
+  rpc Search (OrderInvoiceRequest) returns (OrderInvoiceResponse) {}
+}
+// 订单发票
+message OrderInvoice {
+  int64 id = 1; //ID
+  int64 member_id = 2; //会员id
+  string category = 3; //开票分类
+  int64 order_id = 4; //订单id
+  int64 invoice_id = 5; //发票id
+  string header_type = 6; //抬头类型
+  string type = 7; //发票类型
+  string name = 8; //发票抬头名称
+  string duty_number = 9; //税号
+  string drawer_phone = 10; //开票人手机号
+  string email = 11; //开票人邮箱
+  string tell = 12; //注册电话
+  string address = 13; //注册地址
+  string bank = 14; //开户行
+  string card_number = 15; //银行卡号
+  string is_pay = 16; //是否支付
+  string is_refund = 17; //订单是否退款
+  string is_invoice = 18; //是否开票
+  string invoice_number = 19; //开票票号
+  string remark = 20; //备注
+  int64 invoice_time = 21; //开票时间
+  string unique_num = 22; //唯一号
+  string invoice_num = 23; //发票号码
+  string invoice_type = 24; //发票类型
+  string invoice_serial_number = 25; //发票流水号
+  string invoice_red_num = 26; //发票红字编码
+  string is_del = 27; //是否删除
+  int64 updated_at = 28; //创建时间
+  int64 created_at = 29; //修改时间
+}
+// 订单发票请求参数
+message OrderInvoiceRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 member_id = 11; //会员id
+  int64 order_id = 12; //订单id
+  int64 invoice_id = 13; //发票id
+  string header_type = 14; //抬头类型
+  string type = 15; //发票类型
+  string name = 16; //发票抬头名称
+  string is_pay = 17; //是否支付
+  string is_refund = 18; //订单是否退款
+  string is_invoice = 19; //是否开票
+  string invoice_type = 20; //发票类型
+  string is_del = 21; //是否删除
+}
+// 订单发票响应数据
+message OrderInvoiceResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  OrderInvoice entity = 3;
+  repeated OrderInvoice items = 4;
+}

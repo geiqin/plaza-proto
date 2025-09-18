@@ -1,0 +1,134 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+import "orderDetailService.proto";
+
+// 订单售后服务
+service OrderRefundService {
+   // 获取可以退货的订单商品列表
+  rpc Refundable (OrderRefundRequest) returns (OrderRefundResponse) {}
+  // 订单退款理由信息
+  rpc Reasons (OrderRefund) returns (OrderRefundResponse) {}
+  // 订单申请退款
+  rpc Apply (OrderRefundApplyReq) returns (OrderRefundResponse) {}
+  // 用户取消退款申请
+  rpc Cancel (OrderRefund) returns (OrderRefundResponse) {}
+  // 订单退款审核
+  rpc Verify (OrderRefund) returns (OrderRefundResponse) {}
+  //  拒绝退款
+  rpc RefuseRefund (OrderRefund) returns (OrderRefundResponse) {}
+  // 商家同意退款，等待客户退货
+  rpc AgreeRefund (OrderRefund) returns (OrderRefundResponse) {}
+  // 用户退货提交快递单号
+  rpc WriteExpress (OrderRefund) returns (OrderRefundResponse) {}
+  // 商家同意用户退货
+  rpc AgreeExpress (OrderRefund) returns (OrderRefundResponse) {}
+  // 退款订单备注
+  rpc Remark (OrderRefund) returns (OrderRefundResponse) {}
+  // 退款订单详情
+  rpc Detail (OrderRefund) returns (OrderRefundResponse) {}
+  // 删除退款订单
+  rpc Delete (OrderRefund) returns (OrderRefundResponse) {}
+  // 订单售后查询
+  rpc Search (OrderRefundRequest) returns (OrderRefundResponse) {}
+  // 订单售后列表
+  rpc List (OrderRefundRequest) returns (OrderRefundResponse) {}
+}
+// 订单售后
+message OrderRefund {
+  int64 id = 1; //ID
+  int64 order_id = 2; //订单ID
+  int64 shop_id = 3; //多商户ID
+  int64 realstore_id = 4; //多门店ID
+  int64 member_id = 5; //买家ID
+  string refund_type = 6; //退款申请类型
+  int64 refund_num = 7; //退款件数
+  int64 refund_price = 8; //退款金额
+  int64 refunded_price = 9; //已退款金额
+  string refund_phone = 10; //退款电话
+  string refund_express = 11; //退货快递单号
+  string refund_express_name = 12; //退货快递名称
+  string refund_explain = 13; //退款用户说明
+  repeated string refund_pics = 14; //退款图片
+  string refund_reason = 15; //退款理由
+  string refuse_reason = 16; //拒绝原因
+  int64 refunded_time = 17; //处理时间
+  string remark = 18; //备注
+  repeated ProductInfo cart_info = 19; //退款商品信息
+  string is_cancel = 20; //用户是否取消
+  string is_pink_cancel = 21; //是否拼团自动取消
+  string is_del = 22; //是否取消申请
+  string is_system_del = 23; //是否系统删除
+  int64 updated_at = 24; //创建时间
+  int64 created_at = 25; //修改时间
+}
+
+// 订单售后请求请求
+message OrderRefundApplyReq {
+  int64 order_id = 1; //订单ID
+  string refund_type = 2; //退款申请类型
+  int64 refund_num = 3; //退款件数
+  string refund_reason= 4; //退货原因
+  string refund_reason_explain = 5; //退货原因说明
+  repeated string refund_reason_img = 6; //退货原因图片
+  string text = 7; //退款理由
+  repeated carts cart_ids =8; //部分退款商品
+  message carts{
+    int64 cart_id =1;
+    int64 cart_num =2;
+  }
+}
+
+// 订单售后请求参数
+message OrderRefundRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 order_id = 11; //订单ID
+  int64 shop_id = 12; //多商户ID
+  int64 realstore_id = 13; //多门店ID
+  int64 member_id = 14; //买家ID
+  string refund_type = 15; //退款申请类型
+  string refund_express_name = 16; //退货快递名称
+  string is_cancel = 17; //用户是否取消
+  string is_pink_cancel = 18; //是否拼团自动取消
+  string is_del = 19; //是否取消申请
+  string is_system_del = 20; //是否系统删除
+  repeated int64 cart_ids =22;
+}
+
+// 订单售后响应数据
+message OrderRefundSearch{
+  string msg = 1;
+  common.Pager pager = 2;
+  repeated OrderRefund items = 3;
+}
+
+message OrderRefundRefundable{
+  OrderRefundRefundableStatus status = 1;
+  repeated OrderDetail cartInfo =2;
+}
+
+message OrderRefundRefundableStatus{
+  int32 type =1;
+  bool is_back =2;
+}
+
+
+// 订单售后响应数据
+message OrderRefundResponse {
+  string msg = 1;
+  OrderRefund detail = 2;
+  repeated OrderRefund list = 3;
+  OrderRefundSearch search = 4;
+  repeated string reasons =5;
+  OrderRefundRefundable refundable =6;
+}

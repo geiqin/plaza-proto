@@ -66,7 +66,7 @@ message ProductInfo {
 	int64 freight_template_id = 43; //快递运费模板
 	bool is_oversea = 44; //是否海淘商品
 	int32 sort = 49; //排序
-	string ext_object_id = 50; //扩展业务主要ID
+	int64 virtual_obj_id = 50; //虚拟对象ID
 	string status = 52; //商品状态
 	ProductAttrInfo attrInfo =53;
 	bool is_presale =54;
@@ -82,27 +82,28 @@ message ProductInfo {
 }
 
 message ProductAttrInfo {
-	int64 id = 61; //SkuID
-	int64 spu_id = 62; //商品ID
-	string unique = 63; //SKUKey
-	string coding = 64; //编号
-	string barcode = 65; //条码
-	repeated string more_barcodes = 66; //更多条码
-	int64 original_price = 67; //划线价
-	int64 cost_price = 68; //成本价
-	int64 price = 69; //销售价
-	int64 inventory = 70; //库存
-	int64 weight = 71; //重量
-	int64 volume = 72; //体积
-	repeated SkuSpecInfo spec = 73; //规格信息
-	string spec_desc = 74; //规格描述
-	string ext_object_child_id = 75; //扩展业务子ID
-	string out_system_child_id = 76; //外部系统子ID
-	int64 created_at = 77; //创建时间
-	int64 updated_at = 78; //修改时间
-	int64 vip_price =79; //VIP价格
-	int64 svip_price =80; //VIP价格
-	string image = 82; //商品主图
+	int64 id = 1; //SkuID
+	int64 spu_id = 2; //商品ID
+	string unique = 3; //SKUKey
+	string coding = 4; //编号
+	string barcode = 5; //条码
+	repeated string more_barcodes = 6; //更多条码
+	int64 original_price = 7; //划线价
+	int64 cost_price = 8; //成本价
+	int64 price = 9; //销售价
+	int64 inventory = 10; //库存
+	int64 frozen_num = 11; //库存冻结
+	int64 weight = 12; //重量
+	int64 volume = 13; //体积
+	repeated SkuSpecInfo spec = 14; //规格信息
+	string spec_desc = 15; //规格描述
+	int64 virtual_obj_spec_id = 16; //虚拟对象规格ID
+	string out_system_child_id = 17; //外部系统子ID
+	int64 created_at = 18; //创建时间
+	int64 updated_at = 19; //修改时间
+	int64 vip_price =20; //VIP价格
+	string price_type =21; //价格类型
+	string image = 22; //商品主图
 }
 
 //货品规格信息

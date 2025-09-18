@@ -14,14 +14,10 @@ service OrderStatusLogService {
 message OrderStatusLog {
     int64  id =1;//ID
     int64  order_id =2;//订单ID
-    string original_status =3;//原始状态 （0待确认, 1已确认/待支付, 2已支付/待发货, 3已发货/待收货, 4已完成, 5已取消, 6已关闭）
-    string new_status =4;//最新状态  （0待确认, 1已确认/待支付, 2已支付/待发货, 3已发货/待收货, 4已完成, 5已取消, 6已关闭）
-    string desc =5;//操作描述
-    int64  creator_id =6;//创建人id
-    string creator_type =7;//创建人类型
-    string creator_name =8;//创建人-姓名
-    int64 created_at = 9;
-    int64 updated_at = 10;
+    string change_type =3;//操作类型
+    string change_message =4;//操作描述
+    int64 created_at = 5;
+    int64 updated_at = 6;
 }
 
 //配送请求参数
@@ -35,6 +31,7 @@ message OrderStatusLogRequest {
     string name =6;
     int64 order_id =7;
     string status =8;
+    string change_type =9;//操作类型
 }
 
 message OrderStatusLogResponse{

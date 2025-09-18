@@ -1,0 +1,90 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+import "orderAddressService.proto";
+
+// 发货单服务
+service DeliveryOrderService {
+  // 订单发货获取订单信息
+ // rpc Gain (DeliveryOrder) returns (DeliveryOrderResponse) {}
+  // 发货单新增
+  rpc Create (DeliveryOrder) returns (DeliveryOrderResponse) {}
+  // 发货单修改
+  rpc Update (DeliveryOrder) returns (DeliveryOrderResponse) {}
+  // 发货单删除
+  rpc Delete (DeliveryOrder) returns (DeliveryOrderResponse) {}
+  // 发货单获取
+  rpc Get (DeliveryOrder) returns (DeliveryOrderResponse) {}
+  // 发货单查询
+  rpc Search (DeliveryOrderRequest) returns (DeliveryOrderResponse) {}
+  // 发货单列表
+  rpc List (DeliveryOrderRequest) returns (DeliveryOrderResponse) {}
+}
+// 发货单
+message DeliveryOrder {
+  int64 id = 1; //ID
+  int64 order_id = 2; //订单ID
+  int64 warehouse_id = 3; //仓库ID
+  int32 shipping_type = 4; //配送方式: 1-快递发货，2-同城配送，3-到店自提,4-虚拟发货
+  string method = 5; //发货方式
+  int64 total_weight = 6; //总重量
+  int64 total_volume = 7; //总体积
+  int32 carrier_id = 8; //配送者id
+  string carrier_code = 9; //配送者编号
+  string carrier_name = 10; //配送者名称
+  string tracking_number = 11; //货运单号
+  string verify_code = 12; //核销码
+  OrderAddress address_info = 13; //收货地址
+  string status = 14; //状态: 1已发货, 2运输中,3已签收, 4问题件
+  int64 updated_at = 15; //创建时间
+  int64 created_at = 16; //修改时间
+  repeated DeliveryOrderDetail details = 17;
+}
+
+// 发货单明细
+message DeliveryOrderDetail {
+  int64 id = 1; //ID
+  int64 delivery_order_id = 2; //发货单ID
+  int64 order_detail_id = 3; //订单明细ID
+  int64 warehouse_id = 4; //仓库ID
+  int64 spu_id = 5; //商品ID
+  string unique = 6; //唯一标识
+  int64 spec_weight = 7; //规格重量
+  int64 spec_volume = 8; //规格体积
+  int64 num = 9; //数量
+  string fictitious_value = 10; //虚拟产品值
+  ProductInfo product_info = 11; //产品信息
+  int64 updated_at = 12; //创建时间
+  int64 created_at = 13; //修改时间
+}
+
+// 发货单请求参数
+message DeliveryOrderRequest {
+  int32 top = 1;
+  int64 paged = 2;
+  int64 page_size = 3;
+  string keywords = 4;
+  repeated string sorts = 5;
+  repeated string date_range = 6;
+  repeated int64 ids = 7;
+  int64 id = 8;
+  //以下为自定义参数
+  int64 order_id = 11; //订单ID
+  int64 warehouse_id = 12; //仓库ID
+  int32 shipping_type = 13; //配送方式
+  int32 carrier_id = 14; //配送者id
+  string carrier_code = 15; //配送者编号
+  string carrier_name = 16; //配送者名称
+  string verify_code = 17; //核销码
+  string status = 18; //物流状态
+}
+
+// 发货单响应数据
+message DeliveryOrderResponse {
+  string msg = 1;
+  common.Pager pager = 2;
+  DeliveryOrder entity = 3;
+  repeated DeliveryOrder items = 4;
+}

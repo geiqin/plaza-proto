@@ -74,6 +74,7 @@ message UserOrderRequest {
   string client_type = 31; //客户端类型
   string pay_status = 32; //支付状态
   string status = 33; //订单状态
+  int32 status_type =34;//状态类型：0-全部,1-待付款，2-待发货，3-待收货，4-待评价，
 }
 
 message UserOrderResponse {

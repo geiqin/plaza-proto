@@ -11,6 +11,8 @@ service BuyOrderService {
   rpc Confirm (BuyOrderRequest) returns (BuyOrderResponse) {}
   //下单提交
   rpc Submit (BuyOrderRequest) returns (BuyOrderResponse) {}
+  //收银台结算
+  rpc Cashier (BuyOrderRequest) returns (BuyOrderResponse) {}
   //获取确认订单页面是否展示快递配送和到店自提
   rpc CheckShipping (BuyOrderRequest) returns (BuyOrderResponse) {}
   //计算订单金额
@@ -54,8 +56,8 @@ message BuyOrderConfirmData {
   bool store_self_mention =20;
   int64 virtual_type =21;
   int64 valid_count =22;
-  int64  storeFreePostage =23;
-  int64 offlinePostage =24;
+  int64  storeFreePostage =23; //满额包邮
+  bool offlinePostage =24; //线下支付是否包邮
   bool invoice_func =25;
   bool special_invoice =26;
   repeated string custom_form =28;
@@ -102,16 +104,17 @@ message BuyCheckShippingData {
 
 //计算订单
 message BuyComputedOrderData {
-  int64 SurplusIntegral =1;
-  float coupon_price =2;
-  float deduction_price =3;
-  bool  isStoreFreePostage =4;
-  int64 pay_postage =5;
-  int64 pay_price =6;
-  int64 storeFreePostage =7;
-  int64 storePostageDiscount =8;
-  int64 total_price =9;
-  int64 usedIntegral =10;
+  int64 total_price =1;
+  int64 gift_price =2;
+  int64 pay_postage =3;
+  int64 pay_price =4;
+  int64 coupon_price =5;
+  int64 deduction_price =6;
+  int64 usedIntegral =7;
+  int64 surplusIntegral =8;
+  int64 storePostageDiscount =9;
+  bool  isStoreFreePostage =10;
+  int64 storeFreePostage =11;
 }
 
 message BuyOrderCreateResult {
@@ -119,10 +122,27 @@ message BuyOrderCreateResult {
   string orderId =2;
 }
 
-//购买提交数据
+//购买订单提交数据
 message BuyOrderSubmitData {
   BuyOrderCreateResult result =1;
   string status =2;
+}
+
+//购买订单结算数据
+message BuyOrderCashierData {
+  bool ali_pay_status =1;
+  bool friend_pay_status =2;
+  int64 invalid_time =3;
+  bool is_gift =4;
+  int64 now_money =5;
+  bool offline_pay_status =6;
+  bool offline_postage =7;
+  int64 order_id =8;
+  string order_no =9;
+  int64 pay_postage =10;
+  int64 pay_price =11;
+  bool wechat_pay_status =12;
+  bool yue_pay_status =13;
 }
 
 
@@ -149,6 +169,16 @@ message BuyOrderRequest {
   string cartId = 21; //购物车ids
   string key =22;
   bool is_gift =23;//是否为赠送礼物
+
+  int64 invoice_id =24;
+
+  int64 combinationId =30;
+  int64 pinkId =31;
+  int64 seckillId =32;
+  int64 bargainId =33;
+  string pay_type =34;
+  string from_type =35;
+  string orderId =36;
 }
 
 message BuyOrderResponse {
@@ -156,7 +186,8 @@ message BuyOrderResponse {
   BuyOrderSubmitData submit =2;
   BuyComputedOrderData computedOrder =3;
   BuyCheckShippingData checkShipping =4;
-  bytes availableCoupons =5;
+  BuyOrderCashierData cashier =5;
+  bytes availableCoupons =8;
 }
 
 /*
