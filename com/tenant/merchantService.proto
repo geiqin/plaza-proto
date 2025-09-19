@@ -28,24 +28,29 @@ message Merchant {
   string industry = 7; //所属行业
   string legal_man = 8; //法定代表人
   string registered_capital = 9; //注册资本
-  string registered_date = 10; //成立日期
+  int64 registered_date = 10; //成立日期
   int64 province_id = 11; //所属省
   int64 city_id = 12; //所属市
-  int64 county_id = 13; //所属区
+  int64 district_id = 13; //所属区
   string address = 14; //详细地址
   string contact_man = 15; //联系人
   string contact_mobile = 16; //联系人电话
   string contact_email = 17; //联系人邮件
   string tel = 18; //公司电话
-  string memo = 19; //备注
-  string invoice_type = 20; //发票类型
-  string property = 21; //单位性质
-  string is_trusted = 22; //是否实名
-  int32 store_count = 23; //店铺数量
-  int64 creator_id = 24; //创建者
-  string status = 25; //状态
-  int64 created_at = 26; //
-  int64 updated_at = 27; //
+  string website =19; //公司官网
+  string memo = 20; //备注
+  string invoice_type = 21; //发票类型
+  string property = 22; //单位性质
+  string is_trusted = 23; //是否实名
+  int32 store_count = 24; //店铺数量
+  int64 creator_id = 28; //创建者
+  string status = 29; //状态
+  int64 created_at = 30; //
+  int64 updated_at = 31; //
+  string province_name = 32; //所属省名
+  string city_name = 33; //所属市名
+  string district_name = 34; //所属区名
+
 }
 // 商户请求参数
 message MerchantRequest {
@@ -67,7 +72,7 @@ message MerchantRequest {
   string legal_man = 16; //法定代表人
   int64 province_id = 17; //所属省
   int64 city_id = 18; //所属市
-  int64 county_id = 19; //所属区
+  int64 district_id = 19; //所属区
   string address = 20; //详细地址
   string contact_man = 21; //联系人
   string contact_email = 22; //联系人邮件
