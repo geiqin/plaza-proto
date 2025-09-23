@@ -3,7 +3,7 @@ package services;
 option go_package ="/.;services";
 import "common/base.proto";
 import "baseInfoService.proto";
-import "catService.proto";
+import "materialCatService.proto";
 // 素材服务
 service MaterialService {
   // 素材新增
@@ -11,7 +11,7 @@ service MaterialService {
   // 素材修改
   rpc Update (Material) returns (MaterialResponse) {}
   // 素材删除
-  rpc Delete (Material) returns (MaterialResponse) {}
+  rpc Delete (MaterialRequest) returns (MaterialResponse) {}
   // 素材获取
   rpc Get (Material) returns (MaterialResponse) {}
   // 素材查询
@@ -23,8 +23,11 @@ service MaterialService {
 
   //上传凭证生成
   rpc UploadToken (MaterialRequest) returns (MaterialResponse) {}
+
   //上传回调处理
   rpc UploadCallback (CallbackInfo) returns (MaterialResponse) {}
+  //爬虫图片
+  rpc Crawler (MaterialRequest) returns (MaterialResponse) {}
 
 }
 // 素材
@@ -55,8 +58,15 @@ message Material {
   MediaInfo media_info = 25; //媒体信息
   int64 created_at = 26; //创建时间
   int64 updated_at = 27; //修改时间
-  Cat cat =28;
+  MaterialCat cat =28;
 }
+
+ message  CrawlerPic {
+  int32 id = 1;
+  string url =2;
+  string title =3;
+  string filename =4;
+ }
 // 素材请求参数
 message MaterialRequest {
   int32 top = 1;
@@ -77,6 +87,7 @@ message MaterialRequest {
   int64 creator_id = 18; //创建者ID
   string storage = 19; //存储名
   string filename = 20; //上传专用文件名
+  string url = 21; //URL
 }
 
 message MaterialStatistics {
@@ -96,4 +107,5 @@ message MaterialResponse {
   MaterialStatistics statistics =5;
   UploadTokenInfo token =6;
   map<string,string> callback =7;
+  repeated CrawlerPic Crawler =8;
 }

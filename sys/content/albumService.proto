@@ -24,7 +24,6 @@ message Album {
   int64 id = 1; //ID
   string code = 2; //编码
   string name = 3; //名称
-  int64 cat_id = 4; //分类ID
   string content = 5; //详情
   string cover_url = 6; //封面URL
   int32 sort = 7; //排序值

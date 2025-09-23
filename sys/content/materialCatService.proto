@@ -1,0 +1,67 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+import "common/base.proto";
+import "baseInfoService.proto";
+
+// 素材分类
+service MaterialCatService {
+    // 素材分类新增
+    rpc Create (MaterialCat) returns (MaterialCatResponse) {}
+    // 素材分类修改
+    rpc Update (MaterialCat) returns (MaterialCatResponse) {}
+    // 素材分类删除
+    rpc Delete (MaterialCat) returns (MaterialCatResponse) {}
+    // 素材分类获取
+    rpc Get (MaterialCat) returns (MaterialCatResponse) {}
+    // 素材分类查询
+    rpc Search (MaterialCatRequest) returns (MaterialCatResponse) {}
+    // 素材分类列表
+    rpc List (MaterialCatRequest) returns (MaterialCatResponse) {}
+    // 素材分类列表树
+    rpc ListTree (MaterialCatRequest) returns (MaterialCatResponse) {}
+    // 素材分类选择树
+    rpc SelectTree (MaterialCatRequest) returns (MaterialCatResponse) {}
+}
+// 素材分类
+message MaterialCat {
+    int64 id = 1; //ID
+    string type = 2; //类型
+    string code = 3; //编码
+    string name = 4; //名称
+    int64 parent_id = 5; //父亲ID
+    string ancestors = 6; //祖级列表
+    string image_url = 7; //图标
+    string description = 8; //描述
+    int32 sort = 9; //排序
+    string status = 10; //状态
+    int64 created_at = 11; //创建时间
+    int64 updated_at = 12; //修改时间
+    repeated MaterialCat children =13;
+}
+// 素材分类请求参数
+message MaterialCatRequest {
+    int32 top = 1;
+    int64 paged = 2;
+    int64 page_size = 3;
+    string keywords = 4;
+    repeated string sort = 5;
+    repeated string date_range = 6;
+    repeated int64 ids = 7;
+    int64 id = 8;
+    //以下为自定义参数
+    string type = 11; //类型
+    string code = 12; //编码
+    string name = 13; //名称
+    int64 parent_id = 14; //父亲ID
+    string status = 15; //状态
+}
+
+// 素材分类响应数据
+message MaterialCatResponse {
+    string msg = 1;
+    MaterialCat entity = 2;
+    common.Pager pager = 3;
+    repeated MaterialCat items = 4;
+    repeated TreeItem tree = 5;
+}

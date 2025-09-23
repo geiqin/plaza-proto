@@ -2,7 +2,7 @@ syntax = "proto3";
 package services;
 option go_package ="/.;services";
 import "common/base.proto";
-import "catService.proto";
+import "articleCatService.proto";
 import "tagService.proto";
 import "attachmentService.proto";
 
@@ -53,9 +53,10 @@ message Article {
     string meta_json = 24; //附加数据
     int64 created_at = 25; //创建时间
     int64 updated_at = 26; //修改时间
-    repeated Cat cats =27;
+    repeated ArticleCat cats =27;
     repeated Tag tags =28;
     repeated AttachmentView attachments =29;
+    repeated int64 cat_ids = 30;
 }
 // 文章请求参数
 message ArticleRequest {

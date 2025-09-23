@@ -5,28 +5,27 @@ import "common/base.proto";
 import "baseInfoService.proto";
 
 // 分类服务
-service CatService {
+service AttachmentCatService {
     // 分类新增
-    rpc Create (Cat) returns (CatResponse) {}
+    rpc Create (AttachmentCat) returns (AttachmentCatResponse) {}
     // 分类修改
-    rpc Update (Cat) returns (CatResponse) {}
+    rpc Update (AttachmentCat) returns (AttachmentCatResponse) {}
     // 分类删除
-    rpc Delete (Cat) returns (CatResponse) {}
+    rpc Delete (AttachmentCat) returns (AttachmentCatResponse) {}
     // 分类获取
-    rpc Get (Cat) returns (CatResponse) {}
+    rpc Get (AttachmentCat) returns (AttachmentCatResponse) {}
     // 分类查询
-    rpc Search (CatRequest) returns (CatResponse) {}
+    rpc Search (AttachmentCatRequest) returns (AttachmentCatResponse) {}
     // 分类列表
-    rpc List (CatRequest) returns (CatResponse) {}
+    rpc List (AttachmentCatRequest) returns (AttachmentCatResponse) {}
     // 分类列表树
-    rpc ListTree (CatRequest) returns (CatResponse) {}
+    rpc ListTree (AttachmentCatRequest) returns (AttachmentCatResponse) {}
     // 分类选择树
-    rpc SelectTree (CatRequest) returns (CatResponse) {}
+    rpc SelectTree (AttachmentCatRequest) returns (AttachmentCatResponse) {}
 }
 // 分类
-message Cat {
+message AttachmentCat {
     int64 id = 1; //ID
-    string type = 2; //类型
     string code = 3; //编码
     string name = 4; //名称
     int64 parent_id = 5; //父亲ID
@@ -37,10 +36,10 @@ message Cat {
     string status = 10; //状态
     int64 created_at = 11; //创建时间
     int64 updated_at = 12; //修改时间
-    repeated Cat children =13;
+    repeated AttachmentCat children =13;
 }
 // 分类请求参数
-message CatRequest {
+message AttachmentCatRequest {
     int32 top = 1;
     int64 paged = 2;
     int64 page_size = 3;
@@ -57,10 +56,10 @@ message CatRequest {
     string status = 15; //状态
 }
 // 分类响应数据
-message CatResponse {
+message AttachmentCatResponse {
     string msg = 1;
-    Cat entity = 2;
+    AttachmentCat entity = 2;
     common.Pager pager = 3;
-    repeated Cat items = 4;
+    repeated AttachmentCat items = 4;
     repeated TreeItem tree = 5;
 }

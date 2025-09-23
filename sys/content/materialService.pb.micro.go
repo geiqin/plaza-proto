@@ -48,7 +48,7 @@ type MaterialService interface {
 	// 素材修改
 	Update(ctx context.Context, in *Material, opts ...client.CallOption) (*MaterialResponse, error)
 	// 素材删除
-	Delete(ctx context.Context, in *Material, opts ...client.CallOption) (*MaterialResponse, error)
+	Delete(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
 	// 素材获取
 	Get(ctx context.Context, in *Material, opts ...client.CallOption) (*MaterialResponse, error)
 	// 素材查询
@@ -61,6 +61,8 @@ type MaterialService interface {
 	UploadToken(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
 	//上传回调处理
 	UploadCallback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*MaterialResponse, error)
+	//爬虫图片
+	Crawler(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
 }
 
 type materialService struct {
@@ -95,7 +97,7 @@ func (c *materialService) Update(ctx context.Context, in *Material, opts ...clie
 	return out, nil
 }
 
-func (c *materialService) Delete(ctx context.Context, in *Material, opts ...client.CallOption) (*MaterialResponse, error) {
+func (c *materialService) Delete(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error) {
 	req := c.c.NewRequest(c.name, "MaterialService.Delete", in)
 	out := new(MaterialResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -165,6 +167,16 @@ func (c *materialService) UploadCallback(ctx context.Context, in *CallbackInfo, 
 	return out, nil
 }
 
+func (c *materialService) Crawler(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error) {
+	req := c.c.NewRequest(c.name, "MaterialService.Crawler", in)
+	out := new(MaterialResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for MaterialService service
 
 type MaterialServiceHandler interface {
@@ -173,7 +185,7 @@ type MaterialServiceHandler interface {
 	// 素材修改
 	Update(context.Context, *Material, *MaterialResponse) error
 	// 素材删除
-	Delete(context.Context, *Material, *MaterialResponse) error
+	Delete(context.Context, *MaterialRequest, *MaterialResponse) error
 	// 素材获取
 	Get(context.Context, *Material, *MaterialResponse) error
 	// 素材查询
@@ -186,19 +198,22 @@ type MaterialServiceHandler interface {
 	UploadToken(context.Context, *MaterialRequest, *MaterialResponse) error
 	//上传回调处理
 	UploadCallback(context.Context, *CallbackInfo, *MaterialResponse) error
+	//爬虫图片
+	Crawler(context.Context, *MaterialRequest, *MaterialResponse) error
 }
 
 func RegisterMaterialServiceHandler(s server.Server, hdlr MaterialServiceHandler, opts ...server.HandlerOption) error {
 	type materialService interface {
 		Create(ctx context.Context, in *Material, out *MaterialResponse) error
 		Update(ctx context.Context, in *Material, out *MaterialResponse) error
-		Delete(ctx context.Context, in *Material, out *MaterialResponse) error
+		Delete(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		Get(ctx context.Context, in *Material, out *MaterialResponse) error
 		Search(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		List(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		Statistics(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		UploadToken(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		UploadCallback(ctx context.Context, in *CallbackInfo, out *MaterialResponse) error
+		Crawler(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 	}
 	type MaterialService struct {
 		materialService
@@ -219,7 +234,7 @@ func (h *materialServiceHandler) Update(ctx context.Context, in *Material, out *
 	return h.MaterialServiceHandler.Update(ctx, in, out)
 }
 
-func (h *materialServiceHandler) Delete(ctx context.Context, in *Material, out *MaterialResponse) error {
+func (h *materialServiceHandler) Delete(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error {
 	return h.MaterialServiceHandler.Delete(ctx, in, out)
 }
 
@@ -245,4 +260,8 @@ func (h *materialServiceHandler) UploadToken(ctx context.Context, in *MaterialRe
 
 func (h *materialServiceHandler) UploadCallback(ctx context.Context, in *CallbackInfo, out *MaterialResponse) error {
 	return h.MaterialServiceHandler.UploadCallback(ctx, in, out)
+}
+
+func (h *materialServiceHandler) Crawler(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error {
+	return h.MaterialServiceHandler.Crawler(ctx, in, out)
 }
