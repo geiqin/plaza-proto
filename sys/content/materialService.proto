@@ -18,9 +18,10 @@ service MaterialService {
   rpc Search (MaterialRequest) returns (MaterialResponse) {}
   // 素材列表
   rpc List (MaterialRequest) returns (MaterialResponse) {}
+  //设置分类
+  rpc SetCat (MaterialRequest) returns (MaterialResponse) {}
   //素材统计
   rpc Statistics (MaterialRequest) returns (MaterialResponse) {}
-
   //上传凭证生成
   rpc UploadToken (MaterialRequest) returns (MaterialResponse) {}
 
@@ -35,7 +36,7 @@ message Material {
   int64 id = 1; //ID
   string hash = 2; //Hash值
   string code = 3; //编码
-  string title = 4; //标题
+  string name = 4; //名称
   string type = 5; //类型
   string storage = 6; //存储名
   int64 cat_id = 8; //分类
@@ -50,7 +51,7 @@ message Material {
   int64 height = 17; //高
   int64 length = 18; //时长
   int32 pixel = 19; //视频分辨率
-  string thumbnail_url = 20; //缩略图
+  string thumbnail  = 20; //缩略图
   string description = 21; //描述
   int32 sort = 22; //排序值
   string creator_type = 23; //创建者类型
@@ -80,7 +81,7 @@ message MaterialRequest {
   //以下为自定义参数
   string code = 11; //编码
   int64 cat_id = 13; //分类
-  string title = 14; //标题
+  string name = 14; //名称
   string type = 15; //类型
   string mime_type = 16; //文件类型
   string creator_type = 17; //创建者类型

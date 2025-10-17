@@ -28,35 +28,40 @@ service ArticleService {
 // 文章
 message Article {
     int64 id = 1; //ID
-    string title = 2; //标题
-    string title_color = 3; //标题颜色
-    string cover_type = 4; //发布方式
-    string cover_url = 5; //封面图
-    string content = 6; //文章内容
-    string publish_type = 7; //发布方式
-    int64 publish_time = 8; //发布时间
-    int64 shop_id = 9; //分店ID
-    int64 realstore_id = 10; //门店ID
-    string source = 11; //来源
-    string author = 12; //作者
-    string website = 13; //网址
-    string excerpt = 14; //文章摘要
-    string seo_title = 15; //SEO标题
-    string seo_keywords = 16; //SEO关键字
-    string seo_desc = 17; //SEO描述
-    int32 comment_count = 18; //评论数量
-    int32 access_count = 19; //访问次数
-    string creator_type = 20; //发布者类型
-    int64 creator_id = 21; //发布者ID
-    int32 sort = 22; //排序值
-    string status = 23; //状态
-    string meta_json = 24; //附加数据
-    int64 created_at = 25; //创建时间
-    int64 updated_at = 26; //修改时间
-    repeated ArticleCat cats =27;
-    repeated Tag tags =28;
-    repeated AttachmentView attachments =29;
-    repeated int64 cat_ids = 30;
+    string type =2; //类型
+    string code =3; //编码
+    string title = 4; //标题
+    string title_color = 5; //标题颜色
+    string cover_type = 6; //发布方式
+    string cover_url = 7; //封面图
+    string content = 8; //文章内容
+    string explain = 9; //简短描述
+    int64 publish_time = 10; //发布时间
+    int64 shop_id = 11; //分店ID
+    int64 realstore_id = 12; //门店ID
+    string source = 13; //来源
+    string author = 14; //作者
+    string website = 15; //网址
+    string place = 16; //地点
+    float amount = 17; //涉及金额（元）
+    int64 happen_time = 18; //发生时间
+    string seo_title = 19; //SEO标题
+    string seo_keywords = 20; //SEO关键字
+    string seo_desc = 21; //SEO描述
+    int32 comment_count = 22; //评论数量
+    int32 access_count = 23; //访问次数
+    string creator_type = 24; //发布者类型
+    int64 creator_id = 25; //发布者ID
+    int32 sort = 26; //排序值
+    string status = 27; //状态
+    bytes metadata = 28; //附加数据
+    int64 created_at = 30; //创建时间
+    int64 updated_at = 31; //修改时间
+    repeated ArticleCat cats =35;
+    repeated Tag tags =36;
+    repeated AttachmentView attachments =37;
+    repeated int64 cat_ids = 38;
+    string url =39;
 }
 // 文章请求参数
 message ArticleRequest {
@@ -76,13 +81,18 @@ message ArticleRequest {
     string source = 15; //来源
     string author = 16; //作者
     string creator_type = 17; //发布者类型
-    int64 creator_id = 18; //发布者ID
     string status = 19; //状态
+    int64 cat_id = 20; //分类ID
+    string cat_code = 21; //分类编码
+    repeated int64 cat_ids = 22; //分类IDs
+    string type =23;
+    string code =24;
 }
 // 文章响应数据
 message ArticleResponse {
     string msg = 1;
     common.Pager pager = 2;
-    Article entity = 3;
+    Article article = 3;
     repeated Article items = 4;
+    ArticleCat cat = 5;
 }

@@ -55,6 +55,8 @@ type MaterialService interface {
 	Search(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
 	// 素材列表
 	List(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
+	//设置分类
+	SetCat(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
 	//素材统计
 	Statistics(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
 	//上传凭证生成
@@ -137,6 +139,16 @@ func (c *materialService) List(ctx context.Context, in *MaterialRequest, opts ..
 	return out, nil
 }
 
+func (c *materialService) SetCat(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error) {
+	req := c.c.NewRequest(c.name, "MaterialService.SetCat", in)
+	out := new(MaterialResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *materialService) Statistics(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error) {
 	req := c.c.NewRequest(c.name, "MaterialService.Statistics", in)
 	out := new(MaterialResponse)
@@ -192,6 +204,8 @@ type MaterialServiceHandler interface {
 	Search(context.Context, *MaterialRequest, *MaterialResponse) error
 	// 素材列表
 	List(context.Context, *MaterialRequest, *MaterialResponse) error
+	//设置分类
+	SetCat(context.Context, *MaterialRequest, *MaterialResponse) error
 	//素材统计
 	Statistics(context.Context, *MaterialRequest, *MaterialResponse) error
 	//上传凭证生成
@@ -210,6 +224,7 @@ func RegisterMaterialServiceHandler(s server.Server, hdlr MaterialServiceHandler
 		Get(ctx context.Context, in *Material, out *MaterialResponse) error
 		Search(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		List(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
+		SetCat(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		Statistics(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		UploadToken(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		UploadCallback(ctx context.Context, in *CallbackInfo, out *MaterialResponse) error
@@ -248,6 +263,10 @@ func (h *materialServiceHandler) Search(ctx context.Context, in *MaterialRequest
 
 func (h *materialServiceHandler) List(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error {
 	return h.MaterialServiceHandler.List(ctx, in, out)
+}
+
+func (h *materialServiceHandler) SetCat(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error {
+	return h.MaterialServiceHandler.SetCat(ctx, in, out)
 }
 
 func (h *materialServiceHandler) Statistics(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error {

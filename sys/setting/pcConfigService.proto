@@ -15,17 +15,17 @@ message PcConfig {
   int32 pc_state =1;//网站状态
   string pc_name =2;//网站名称
   string pc_logo =3;//PC端LOGO
+  string company_name =6;//公司名称
+  string company_address =7;//公司地址
   string contact_tel =4; //联系电话
-  string company_address =5;//公司地址
-  string copyright_info =6;//版权信息
-
+  string contact_email =5; //联系邮箱
   string beian_icp_no =10; //备案号
   string beian_icp_url =11; //ICP备案链接
   string beian_network_security =12; //网安备案
   string beian_network_security_url =13; //网安备案链接
-
   string seo_keywords =15;//关键词
   string seo_description =16; //网站描述
+  string copyright_info =20;//版权信息
 }
 
 message PcConfigRequest{

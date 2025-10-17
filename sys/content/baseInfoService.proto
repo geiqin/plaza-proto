@@ -32,7 +32,7 @@ message CallbackInfo {
   string mimeType =9;
   string persistentId =10;
   string uuid =12;
-  string catId =14;
+  int64 catId =14;
   string channel =15;
   string userType =16;
   int64 userId =17;
