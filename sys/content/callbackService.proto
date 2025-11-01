@@ -4,8 +4,10 @@ option go_package ="/.;services";
 
 // 回调服务
 service CallbackService {
-  // 上传通知
-  rpc UploadNotify (CallbackReq) returns (CallbackResponse) {}
+  // 素材上传通知
+  rpc MaterialUploadNotify (CallbackReq) returns (CallbackResponse) {}
+  // 附件上传通知
+  rpc AttachmentUploadNotify (CallbackReq) returns (CallbackResponse) {}
 }
 
 // 回调信息

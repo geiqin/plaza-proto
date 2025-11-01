@@ -42,8 +42,10 @@ func NewCallbackServiceEndpoints() []*api.Endpoint {
 // Client API for CallbackService service
 
 type CallbackService interface {
-	// 上传通知
-	UploadNotify(ctx context.Context, in *CallbackReq, opts ...client.CallOption) (*CallbackResponse, error)
+	// 素材上传通知
+	MaterialUploadNotify(ctx context.Context, in *CallbackReq, opts ...client.CallOption) (*CallbackResponse, error)
+	// 附件上传通知
+	AttachmentUploadNotify(ctx context.Context, in *CallbackReq, opts ...client.CallOption) (*CallbackResponse, error)
 }
 
 type callbackService struct {
@@ -58,8 +60,18 @@ func NewCallbackService(name string, c client.Client) CallbackService {
 	}
 }
 
-func (c *callbackService) UploadNotify(ctx context.Context, in *CallbackReq, opts ...client.CallOption) (*CallbackResponse, error) {
-	req := c.c.NewRequest(c.name, "CallbackService.UploadNotify", in)
+func (c *callbackService) MaterialUploadNotify(ctx context.Context, in *CallbackReq, opts ...client.CallOption) (*CallbackResponse, error) {
+	req := c.c.NewRequest(c.name, "CallbackService.MaterialUploadNotify", in)
+	out := new(CallbackResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *callbackService) AttachmentUploadNotify(ctx context.Context, in *CallbackReq, opts ...client.CallOption) (*CallbackResponse, error) {
+	req := c.c.NewRequest(c.name, "CallbackService.AttachmentUploadNotify", in)
 	out := new(CallbackResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -71,13 +83,16 @@ func (c *callbackService) UploadNotify(ctx context.Context, in *CallbackReq, opt
 // Server API for CallbackService service
 
 type CallbackServiceHandler interface {
-	// 上传通知
-	UploadNotify(context.Context, *CallbackReq, *CallbackResponse) error
+	// 素材上传通知
+	MaterialUploadNotify(context.Context, *CallbackReq, *CallbackResponse) error
+	// 附件上传通知
+	AttachmentUploadNotify(context.Context, *CallbackReq, *CallbackResponse) error
 }
 
 func RegisterCallbackServiceHandler(s server.Server, hdlr CallbackServiceHandler, opts ...server.HandlerOption) error {
 	type callbackService interface {
-		UploadNotify(ctx context.Context, in *CallbackReq, out *CallbackResponse) error
+		MaterialUploadNotify(ctx context.Context, in *CallbackReq, out *CallbackResponse) error
+		AttachmentUploadNotify(ctx context.Context, in *CallbackReq, out *CallbackResponse) error
 	}
 	type CallbackService struct {
 		callbackService
@@ -90,6 +105,10 @@ type callbackServiceHandler struct {
 	CallbackServiceHandler
 }
 
-func (h *callbackServiceHandler) UploadNotify(ctx context.Context, in *CallbackReq, out *CallbackResponse) error {
-	return h.CallbackServiceHandler.UploadNotify(ctx, in, out)
+func (h *callbackServiceHandler) MaterialUploadNotify(ctx context.Context, in *CallbackReq, out *CallbackResponse) error {
+	return h.CallbackServiceHandler.MaterialUploadNotify(ctx, in, out)
+}
+
+func (h *callbackServiceHandler) AttachmentUploadNotify(ctx context.Context, in *CallbackReq, out *CallbackResponse) error {
+	return h.CallbackServiceHandler.AttachmentUploadNotify(ctx, in, out)
 }
