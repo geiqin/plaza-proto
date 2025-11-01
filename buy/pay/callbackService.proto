@@ -1,0 +1,24 @@
+syntax = "proto3";
+package services;
+option go_package ="/.;services";
+
+// 回调服务
+service CallbackService {
+  // 支付通知
+  rpc ChargeNotify (CallbackReq) returns (CallbackResponse) {}
+  // 退款通知
+  rpc RefundNotify (CallbackReq) returns (CallbackResponse) {}
+}
+
+// 回调信息
+message CallbackReq  {
+  map<string,string> params = 1; //参数
+  bytes httpRequest = 2; //请求数据
+}
+
+
+// 回调响应数据
+message CallbackResponse {
+  string msg = 1;
+  bytes response =2;
+}
