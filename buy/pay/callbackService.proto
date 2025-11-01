@@ -12,8 +12,12 @@ service CallbackService {
 
 // 回调信息
 message CallbackReq  {
-  map<string,string> params = 1; //参数
-  bytes httpRequest = 2; //请求数据
+  string method =1;
+  string url =2;
+  string requestURI =3;
+  bytes header = 4; //头部
+  bytes body = 5; //请求数据
+  map<string,string> params = 6; //参数
 }
 
 
