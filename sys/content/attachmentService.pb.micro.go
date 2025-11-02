@@ -57,8 +57,6 @@ type AttachmentService interface {
 	List(ctx context.Context, in *AttachmentRequest, opts ...client.CallOption) (*AttachmentResponse, error)
 	//上传凭证生成
 	UploadToken(ctx context.Context, in *AttachmentRequest, opts ...client.CallOption) (*AttachmentResponse, error)
-	//上传回调处理
-	UploadCallback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*AttachmentResponse, error)
 }
 
 type attachmentService struct {
@@ -143,16 +141,6 @@ func (c *attachmentService) UploadToken(ctx context.Context, in *AttachmentReque
 	return out, nil
 }
 
-func (c *attachmentService) UploadCallback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*AttachmentResponse, error) {
-	req := c.c.NewRequest(c.name, "AttachmentService.UploadCallback", in)
-	out := new(AttachmentResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for AttachmentService service
 
 type AttachmentServiceHandler interface {
@@ -170,8 +158,6 @@ type AttachmentServiceHandler interface {
 	List(context.Context, *AttachmentRequest, *AttachmentResponse) error
 	//上传凭证生成
 	UploadToken(context.Context, *AttachmentRequest, *AttachmentResponse) error
-	//上传回调处理
-	UploadCallback(context.Context, *CallbackInfo, *AttachmentResponse) error
 }
 
 func RegisterAttachmentServiceHandler(s server.Server, hdlr AttachmentServiceHandler, opts ...server.HandlerOption) error {
@@ -183,7 +169,6 @@ func RegisterAttachmentServiceHandler(s server.Server, hdlr AttachmentServiceHan
 		Search(ctx context.Context, in *AttachmentRequest, out *AttachmentResponse) error
 		List(ctx context.Context, in *AttachmentRequest, out *AttachmentResponse) error
 		UploadToken(ctx context.Context, in *AttachmentRequest, out *AttachmentResponse) error
-		UploadCallback(ctx context.Context, in *CallbackInfo, out *AttachmentResponse) error
 	}
 	type AttachmentService struct {
 		attachmentService
@@ -222,8 +207,4 @@ func (h *attachmentServiceHandler) List(ctx context.Context, in *AttachmentReque
 
 func (h *attachmentServiceHandler) UploadToken(ctx context.Context, in *AttachmentRequest, out *AttachmentResponse) error {
 	return h.AttachmentServiceHandler.UploadToken(ctx, in, out)
-}
-
-func (h *attachmentServiceHandler) UploadCallback(ctx context.Context, in *CallbackInfo, out *AttachmentResponse) error {
-	return h.AttachmentServiceHandler.UploadCallback(ctx, in, out)
 }

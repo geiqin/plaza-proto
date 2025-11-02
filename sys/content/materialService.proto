@@ -24,10 +24,7 @@ service MaterialService {
   rpc Statistics (MaterialRequest) returns (MaterialResponse) {}
   //上传凭证生成
   rpc UploadToken (MaterialRequest) returns (MaterialResponse) {}
-
-  //上传回调处理
-  rpc UploadCallback (CallbackInfo) returns (MaterialResponse) {}
-  //爬虫图片
+   //爬虫图片
   rpc Crawler (MaterialRequest) returns (MaterialResponse) {}
 
 }
@@ -107,6 +104,5 @@ message MaterialResponse {
   repeated Material items = 4;
   MaterialStatistics statistics =5;
   UploadTokenInfo token =6;
-  map<string,string> callback =7;
   repeated CrawlerPic Crawler =8;
 }

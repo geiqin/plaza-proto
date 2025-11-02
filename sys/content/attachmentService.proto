@@ -20,8 +20,6 @@ service AttachmentService {
   rpc List (AttachmentRequest) returns (AttachmentResponse) {}
   //上传凭证生成
   rpc UploadToken (AttachmentRequest) returns (AttachmentResponse) {}
-  //上传回调处理
-  rpc UploadCallback (CallbackInfo) returns (AttachmentResponse) {}
 }
 // 附件
 message Attachment {
@@ -89,5 +87,4 @@ message AttachmentResponse {
   Attachment entity = 3;
   repeated Attachment items = 4;
   UploadTokenInfo token =6;
-  map<string,string> callback =7;
 }

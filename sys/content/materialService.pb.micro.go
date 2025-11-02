@@ -61,8 +61,6 @@ type MaterialService interface {
 	Statistics(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
 	//上传凭证生成
 	UploadToken(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
-	//上传回调处理
-	UploadCallback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*MaterialResponse, error)
 	//爬虫图片
 	Crawler(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error)
 }
@@ -169,16 +167,6 @@ func (c *materialService) UploadToken(ctx context.Context, in *MaterialRequest, 
 	return out, nil
 }
 
-func (c *materialService) UploadCallback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*MaterialResponse, error) {
-	req := c.c.NewRequest(c.name, "MaterialService.UploadCallback", in)
-	out := new(MaterialResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *materialService) Crawler(ctx context.Context, in *MaterialRequest, opts ...client.CallOption) (*MaterialResponse, error) {
 	req := c.c.NewRequest(c.name, "MaterialService.Crawler", in)
 	out := new(MaterialResponse)
@@ -210,8 +198,6 @@ type MaterialServiceHandler interface {
 	Statistics(context.Context, *MaterialRequest, *MaterialResponse) error
 	//上传凭证生成
 	UploadToken(context.Context, *MaterialRequest, *MaterialResponse) error
-	//上传回调处理
-	UploadCallback(context.Context, *CallbackInfo, *MaterialResponse) error
 	//爬虫图片
 	Crawler(context.Context, *MaterialRequest, *MaterialResponse) error
 }
@@ -227,7 +213,6 @@ func RegisterMaterialServiceHandler(s server.Server, hdlr MaterialServiceHandler
 		SetCat(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		Statistics(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 		UploadToken(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
-		UploadCallback(ctx context.Context, in *CallbackInfo, out *MaterialResponse) error
 		Crawler(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error
 	}
 	type MaterialService struct {
@@ -275,10 +260,6 @@ func (h *materialServiceHandler) Statistics(ctx context.Context, in *MaterialReq
 
 func (h *materialServiceHandler) UploadToken(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error {
 	return h.MaterialServiceHandler.UploadToken(ctx, in, out)
-}
-
-func (h *materialServiceHandler) UploadCallback(ctx context.Context, in *CallbackInfo, out *MaterialResponse) error {
-	return h.MaterialServiceHandler.UploadCallback(ctx, in, out)
 }
 
 func (h *materialServiceHandler) Crawler(ctx context.Context, in *MaterialRequest, out *MaterialResponse) error {
