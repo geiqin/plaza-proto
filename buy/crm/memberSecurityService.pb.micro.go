@@ -5,7 +5,6 @@ package services
 
 import (
 	fmt "fmt"
-	_ "github.com/geiqin/micro-kit/protobuf/common"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -47,8 +46,8 @@ type MemberSecurityService interface {
 	Display(ctx context.Context, in *MemberSecurityRequest, opts ...client.CallOption) (*MemberSecurityResponse, error)
 	//判断有无密码保护
 	HasPwd(ctx context.Context, in *MemberSecurityRequest, opts ...client.CallOption) (*MemberSecurityResponse, error)
-	//创建密码(未设置密码前可用)
-	CreatePwd(ctx context.Context, in *MemberSecurityRequest, opts ...client.CallOption) (*MemberSecurityResponse, error)
+	//重置密码(未设置密码直接创建)
+	ResetPwd(ctx context.Context, in *MemberSecurityRequest, opts ...client.CallOption) (*MemberSecurityResponse, error)
 	//修改密码
 	ModifyPwd(ctx context.Context, in *MemberSecurityRequest, opts ...client.CallOption) (*MemberSecurityResponse, error)
 	//注销账户
@@ -87,8 +86,8 @@ func (c *memberSecurityService) HasPwd(ctx context.Context, in *MemberSecurityRe
 	return out, nil
 }
 
-func (c *memberSecurityService) CreatePwd(ctx context.Context, in *MemberSecurityRequest, opts ...client.CallOption) (*MemberSecurityResponse, error) {
-	req := c.c.NewRequest(c.name, "MemberSecurityService.CreatePwd", in)
+func (c *memberSecurityService) ResetPwd(ctx context.Context, in *MemberSecurityRequest, opts ...client.CallOption) (*MemberSecurityResponse, error) {
+	req := c.c.NewRequest(c.name, "MemberSecurityService.ResetPwd", in)
 	out := new(MemberSecurityResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -124,8 +123,8 @@ type MemberSecurityServiceHandler interface {
 	Display(context.Context, *MemberSecurityRequest, *MemberSecurityResponse) error
 	//判断有无密码保护
 	HasPwd(context.Context, *MemberSecurityRequest, *MemberSecurityResponse) error
-	//创建密码(未设置密码前可用)
-	CreatePwd(context.Context, *MemberSecurityRequest, *MemberSecurityResponse) error
+	//重置密码(未设置密码直接创建)
+	ResetPwd(context.Context, *MemberSecurityRequest, *MemberSecurityResponse) error
 	//修改密码
 	ModifyPwd(context.Context, *MemberSecurityRequest, *MemberSecurityResponse) error
 	//注销账户
@@ -136,7 +135,7 @@ func RegisterMemberSecurityServiceHandler(s server.Server, hdlr MemberSecuritySe
 	type memberSecurityService interface {
 		Display(ctx context.Context, in *MemberSecurityRequest, out *MemberSecurityResponse) error
 		HasPwd(ctx context.Context, in *MemberSecurityRequest, out *MemberSecurityResponse) error
-		CreatePwd(ctx context.Context, in *MemberSecurityRequest, out *MemberSecurityResponse) error
+		ResetPwd(ctx context.Context, in *MemberSecurityRequest, out *MemberSecurityResponse) error
 		ModifyPwd(ctx context.Context, in *MemberSecurityRequest, out *MemberSecurityResponse) error
 		Destroy(ctx context.Context, in *MemberSecurityRequest, out *MemberSecurityResponse) error
 	}
@@ -159,8 +158,8 @@ func (h *memberSecurityServiceHandler) HasPwd(ctx context.Context, in *MemberSec
 	return h.MemberSecurityServiceHandler.HasPwd(ctx, in, out)
 }
 
-func (h *memberSecurityServiceHandler) CreatePwd(ctx context.Context, in *MemberSecurityRequest, out *MemberSecurityResponse) error {
-	return h.MemberSecurityServiceHandler.CreatePwd(ctx, in, out)
+func (h *memberSecurityServiceHandler) ResetPwd(ctx context.Context, in *MemberSecurityRequest, out *MemberSecurityResponse) error {
+	return h.MemberSecurityServiceHandler.ResetPwd(ctx, in, out)
 }
 
 func (h *memberSecurityServiceHandler) ModifyPwd(ctx context.Context, in *MemberSecurityRequest, out *MemberSecurityResponse) error {
