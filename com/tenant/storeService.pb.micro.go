@@ -55,6 +55,8 @@ type StoreService interface {
 	Detail(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺信息
 	Get(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//获取店铺信息
+	GetWithSecurity(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 	//查询店铺
 	Search(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error)
 	//获取店铺列表
@@ -133,6 +135,16 @@ func (c *storeService) Get(ctx context.Context, in *Store, opts ...client.CallOp
 	return out, nil
 }
 
+func (c *storeService) GetWithSecurity(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.GetWithSecurity", in)
+	out := new(StoreResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *storeService) Search(ctx context.Context, in *StoreRequest, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.Search", in)
 	out := new(StoreResponse)
@@ -168,6 +180,8 @@ type StoreServiceHandler interface {
 	Detail(context.Context, *Store, *StoreResponse) error
 	//获取店铺信息
 	Get(context.Context, *Store, *StoreResponse) error
+	//获取店铺信息
+	GetWithSecurity(context.Context, *StoreRequest, *StoreResponse) error
 	//查询店铺
 	Search(context.Context, *StoreRequest, *StoreResponse) error
 	//获取店铺列表
@@ -182,6 +196,7 @@ func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts
 		Delete(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 		Detail(ctx context.Context, in *Store, out *StoreResponse) error
 		Get(ctx context.Context, in *Store, out *StoreResponse) error
+		GetWithSecurity(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 		Search(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 		List(ctx context.Context, in *StoreRequest, out *StoreResponse) error
 	}
@@ -218,6 +233,10 @@ func (h *storeServiceHandler) Detail(ctx context.Context, in *Store, out *StoreR
 
 func (h *storeServiceHandler) Get(ctx context.Context, in *Store, out *StoreResponse) error {
 	return h.StoreServiceHandler.Get(ctx, in, out)
+}
+
+func (h *storeServiceHandler) GetWithSecurity(ctx context.Context, in *StoreRequest, out *StoreResponse) error {
+	return h.StoreServiceHandler.GetWithSecurity(ctx, in, out)
 }
 
 func (h *storeServiceHandler) Search(ctx context.Context, in *StoreRequest, out *StoreResponse) error {

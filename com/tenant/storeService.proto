@@ -6,6 +6,7 @@ import "applicationService.proto";
 import "applicationVersionService.proto";
 import "merchantService.proto";
 import "storeOperatorService.proto";
+import "storeSecurityService.proto";
 
 service StoreService {
     //创建店铺
@@ -23,7 +24,10 @@ service StoreService {
     //获取店铺信息
     rpc Get (Store) returns (StoreResponse) {}
 
-    //查询店铺
+    //获取店铺信息
+    rpc GetWithSecurity (StoreRequest) returns (StoreResponse) {}
+
+  //查询店铺
     rpc Search (StoreRequest) returns (StoreResponse) {}
     //获取店铺列表
     rpc List (StoreRequest) returns (StoreResponse) {}
@@ -49,6 +53,7 @@ message Store {
     Merchant merchant =17;
     StoreOperator operator =18;
     int64 remaining_days =19;
+    StoreSecurity security =20;
 }
 
 message StoreRequest{
