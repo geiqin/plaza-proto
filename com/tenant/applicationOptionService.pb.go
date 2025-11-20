@@ -26,11 +26,11 @@ type ApplicationOption struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                 //ID
-	ApplicationId   int32                 `protobuf:"varint,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`      //所属应用
-	ApplicationCode string                `protobuf:"bytes,3,opt,name=application_code,json=applicationCode,proto3" json:"application_code,omitempty"` //版本编码
-	BaseConfig      *OptionBaseConfig     `protobuf:"bytes,4,opt,name=base_config,json=baseConfig,proto3" json:"base_config,omitempty"`                //使用配置
-	SecurityConfig  *OptionSecurityConfig `protobuf:"bytes,5,opt,name=security_config,json=securityConfig,proto3" json:"security_config,omitempty"`    //安全配置
+	Id              int32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                                 //ID
+	ApplicationId   int32                 `protobuf:"varint,2,opt,name=application_id,json=applicationId,proto3" json:"application_id"`      //所属应用
+	ApplicationCode string                `protobuf:"bytes,3,opt,name=application_code,json=applicationCode,proto3" json:"application_code"` //版本编码
+	BaseConfig      *OptionBaseConfig     `protobuf:"bytes,4,opt,name=base_config,json=baseConfig,proto3" json:"base_config"`                //使用配置
+	SecurityConfig  *OptionSecurityConfig `protobuf:"bytes,5,opt,name=security_config,json=securityConfig,proto3" json:"security_config"`    //安全配置
 }
 
 func (x *ApplicationOption) Reset() {
@@ -106,15 +106,15 @@ type OptionBaseConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SITE_TITLE       string   `protobuf:"bytes,1,opt,name=SITE_TITLE,json=SITETITLE,proto3" json:"SITE_TITLE,omitempty"`                   //系统标题
-	SITE_DESCRIPTION string   `protobuf:"bytes,2,opt,name=SITE_DESCRIPTION,json=SITEDESCRIPTION,proto3" json:"SITE_DESCRIPTION,omitempty"` //系统描述
-	SITE_COPYRIGHT   string   `protobuf:"bytes,3,opt,name=SITE_COPYRIGHT,json=SITECOPYRIGHT,proto3" json:"SITE_COPYRIGHT,omitempty"`       //版权信息
-	SITE_BEIAN       string   `protobuf:"bytes,4,opt,name=SITE_BEIAN,json=SITEBEIAN,proto3" json:"SITE_BEIAN,omitempty"`                   //备案号
-	SITE_FAVICON     string   `protobuf:"bytes,5,opt,name=SITE_FAVICON,json=SITEFAVICON,proto3" json:"SITE_FAVICON,omitempty"`             //favicon
-	SITE_LOGO        string   `protobuf:"bytes,6,opt,name=SITE_LOGO,json=SITELOGO,proto3" json:"SITE_LOGO,omitempty"`                      //系统LOGO
-	SITE_AD_TYPE     string   `protobuf:"bytes,7,opt,name=SITE_AD_TYPE,json=SITEADTYPE,proto3" json:"SITE_AD_TYPE,omitempty"`              //系统广告类型 1-封面，2-幻灯片
-	SITE_AD_COVER    string   `protobuf:"bytes,8,opt,name=SITE_AD_COVER,json=SITEADCOVER,proto3" json:"SITE_AD_COVER,omitempty"`           //系统广告封面
-	SITE_AD_SLIDES   []string `protobuf:"bytes,9,rep,name=SITE_AD_SLIDES,json=SITEADSLIDES,proto3" json:"SITE_AD_SLIDES,omitempty"`        //系统广告幻灯片
+	SITE_TITLE       string   `protobuf:"bytes,1,opt,name=SITE_TITLE,json=SITETITLE,proto3" json:"SITE_TITLE"`                   //系统标题
+	SITE_DESCRIPTION string   `protobuf:"bytes,2,opt,name=SITE_DESCRIPTION,json=SITEDESCRIPTION,proto3" json:"SITE_DESCRIPTION"` //系统描述
+	SITE_COPYRIGHT   string   `protobuf:"bytes,3,opt,name=SITE_COPYRIGHT,json=SITECOPYRIGHT,proto3" json:"SITE_COPYRIGHT"`       //版权信息
+	SITE_BEIAN       string   `protobuf:"bytes,4,opt,name=SITE_BEIAN,json=SITEBEIAN,proto3" json:"SITE_BEIAN"`                   //备案号
+	SITE_FAVICON     string   `protobuf:"bytes,5,opt,name=SITE_FAVICON,json=SITEFAVICON,proto3" json:"SITE_FAVICON"`             //favicon
+	SITE_LOGO        string   `protobuf:"bytes,6,opt,name=SITE_LOGO,json=SITELOGO,proto3" json:"SITE_LOGO"`                      //系统LOGO
+	SITE_AD_TYPE     string   `protobuf:"bytes,7,opt,name=SITE_AD_TYPE,json=SITEADTYPE,proto3" json:"SITE_AD_TYPE"`              //系统广告类型 1-封面，2-幻灯片
+	SITE_AD_COVER    string   `protobuf:"bytes,8,opt,name=SITE_AD_COVER,json=SITEADCOVER,proto3" json:"SITE_AD_COVER"`           //系统广告封面
+	SITE_AD_SLIDES   []string `protobuf:"bytes,9,rep,name=SITE_AD_SLIDES,json=SITEADSLIDES,proto3" json:"SITE_AD_SLIDES"`        //系统广告幻灯片
 }
 
 func (x *OptionBaseConfig) Reset() {
@@ -218,12 +218,12 @@ type OptionSecurityConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PASSWORD_ERROR_LOCK_COUNT        int32 `protobuf:"varint,1,opt,name=PASSWORD_ERROR_LOCK_COUNT,json=PASSWORDERRORLOCKCOUNT,proto3" json:"PASSWORD_ERROR_LOCK_COUNT,omitempty"`                      //登录密码错误锁定账号的次数
-	PASSWORD_ERROR_LOCK_MINUTES      int32 `protobuf:"varint,2,opt,name=PASSWORD_ERROR_LOCK_MINUTES,json=PASSWORDERRORLOCKMINUTES,proto3" json:"PASSWORD_ERROR_LOCK_MINUTES,omitempty"`                //登录密码错误锁定账号的时间（min）
-	PASSWORD_EXPIRATION_DAYS         int32 `protobuf:"varint,3,opt,name=PASSWORD_EXPIRATION_DAYS,json=PASSWORDEXPIRATIONDAYS,proto3" json:"PASSWORD_EXPIRATION_DAYS,omitempty"`                        //密码有效期（天）
-	PASSWORD_EXPIRATION_WARNING_DAYS int32 `protobuf:"varint,4,opt,name=PASSWORD_EXPIRATION_WARNING_DAYS,json=PASSWORDEXPIRATIONWARNINGDAYS,proto3" json:"PASSWORD_EXPIRATION_WARNING_DAYS,omitempty"` //密码到期提前提示（天）
-	PASSWORD_REPETITION_TIMES        int32 `protobuf:"varint,5,opt,name=PASSWORD_REPETITION_TIMES,json=PASSWORDREPETITIONTIMES,proto3" json:"PASSWORD_REPETITION_TIMES,omitempty"`                     //密码重复使用次数
-	PASSWORD_MIN_LENGTH              int32 `protobuf:"varint,6,opt,name=PASSWORD_MIN_LENGTH,json=PASSWORDMINLENGTH,proto3" json:"PASSWORD_MIN_LENGTH,omitempty"`                                       //密码最小长度
+	PASSWORD_ERROR_LOCK_COUNT        int32 `protobuf:"varint,1,opt,name=PASSWORD_ERROR_LOCK_COUNT,json=PASSWORDERRORLOCKCOUNT,proto3" json:"PASSWORD_ERROR_LOCK_COUNT"`                      //登录密码错误锁定账号的次数
+	PASSWORD_ERROR_LOCK_MINUTES      int32 `protobuf:"varint,2,opt,name=PASSWORD_ERROR_LOCK_MINUTES,json=PASSWORDERRORLOCKMINUTES,proto3" json:"PASSWORD_ERROR_LOCK_MINUTES"`                //登录密码错误锁定账号的时间（min）
+	PASSWORD_EXPIRATION_DAYS         int32 `protobuf:"varint,3,opt,name=PASSWORD_EXPIRATION_DAYS,json=PASSWORDEXPIRATIONDAYS,proto3" json:"PASSWORD_EXPIRATION_DAYS"`                        //密码有效期（天）
+	PASSWORD_EXPIRATION_WARNING_DAYS int32 `protobuf:"varint,4,opt,name=PASSWORD_EXPIRATION_WARNING_DAYS,json=PASSWORDEXPIRATIONWARNINGDAYS,proto3" json:"PASSWORD_EXPIRATION_WARNING_DAYS"` //密码到期提前提示（天）
+	PASSWORD_REPETITION_TIMES        int32 `protobuf:"varint,5,opt,name=PASSWORD_REPETITION_TIMES,json=PASSWORDREPETITIONTIMES,proto3" json:"PASSWORD_REPETITION_TIMES"`                     //密码重复使用次数
+	PASSWORD_MIN_LENGTH              int32 `protobuf:"varint,6,opt,name=PASSWORD_MIN_LENGTH,json=PASSWORDMINLENGTH,proto3" json:"PASSWORD_MIN_LENGTH"`                                       //密码最小长度
 }
 
 func (x *OptionSecurityConfig) Reset() {
@@ -306,11 +306,11 @@ type ApplicationOptionRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ApplicationId   int32                 `protobuf:"varint,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`      //所属应用
-	ApplicationCode string                `protobuf:"bytes,2,opt,name=application_code,json=applicationCode,proto3" json:"application_code,omitempty"` //版本编码
-	Type            string                `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`                                              //类型
-	BaseConfig      *OptionBaseConfig     `protobuf:"bytes,4,opt,name=base_config,json=baseConfig,proto3" json:"base_config,omitempty"`                //使用配置
-	SecurityConfig  *OptionSecurityConfig `protobuf:"bytes,5,opt,name=security_config,json=securityConfig,proto3" json:"security_config,omitempty"`    //安全配置
+	ApplicationId   int32                 `protobuf:"varint,1,opt,name=application_id,json=applicationId,proto3" json:"application_id"`      //所属应用
+	ApplicationCode string                `protobuf:"bytes,2,opt,name=application_code,json=applicationCode,proto3" json:"application_code"` //版本编码
+	Type            string                `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`                                              //类型
+	BaseConfig      *OptionBaseConfig     `protobuf:"bytes,4,opt,name=base_config,json=baseConfig,proto3" json:"base_config"`                //使用配置
+	SecurityConfig  *OptionSecurityConfig `protobuf:"bytes,5,opt,name=security_config,json=securityConfig,proto3" json:"security_config"`    //安全配置
 }
 
 func (x *ApplicationOptionRequest) Reset() {
@@ -386,9 +386,9 @@ type ApplicationOptionResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *ApplicationOption `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Type   string             `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` //类型
-	Msg    string             `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
+	Entity *ApplicationOption `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Type   string             `protobuf:"bytes,2,opt,name=type,proto3" json:"type"` //类型
+	Msg    string             `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg"`
 }
 
 func (x *ApplicationOptionResponse) Reset() {

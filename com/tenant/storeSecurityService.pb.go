@@ -27,13 +27,13 @@ type StoreSecurity struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                     //ID
-	StoreId     int64  `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`            //店铺ID
-	StoreKey    string `protobuf:"bytes,3,opt,name=store_key,json=storeKey,proto3" json:"store_key,omitempty"`          //店铺KEY
-	StoreSecret string `protobuf:"bytes,4,opt,name=store_secret,json=storeSecret,proto3" json:"store_secret,omitempty"` //店铺Secret
-	CreatedAt   string `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`       //
-	UpdatedAt   int64  `protobuf:"varint,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`      //
-	DeletedAt   int64  `protobuf:"varint,7,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`      //
+	Id          int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                     //ID
+	StoreId     int64  `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id"`            //店铺ID
+	StoreKey    string `protobuf:"bytes,3,opt,name=store_key,json=storeKey,proto3" json:"store_key"`          //店铺KEY
+	StoreSecret string `protobuf:"bytes,4,opt,name=store_secret,json=storeSecret,proto3" json:"store_secret"` //店铺Secret
+	CreatedAt   string `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at"`       //
+	UpdatedAt   int64  `protobuf:"varint,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`      //
+	DeletedAt   int64  `protobuf:"varint,7,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at"`      //
 }
 
 func (x *StoreSecurity) Reset() {
@@ -123,16 +123,16 @@ type StoreSecurityRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top,omitempty"`
-	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort,omitempty"`
-	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range,omitempty"`
-	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id,omitempty"`
+	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top"`
+	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged"`
+	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
+	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort"`
+	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range"`
+	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids"`
+	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id"`
 	// 以下为自定义参数
-	StoreId int64 `protobuf:"varint,11,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"` //店铺ID
+	StoreId int64 `protobuf:"varint,11,opt,name=store_id,json=storeId,proto3" json:"store_id"` //店铺ID
 }
 
 func (x *StoreSecurityRequest) Reset() {
@@ -236,10 +236,10 @@ type StoreSecurityResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *StoreSecurity   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*StoreSecurity `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Msg    string           `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg,omitempty"`
+	Entity *StoreSecurity   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*StoreSecurity `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Msg    string           `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg"`
 }
 
 func (x *StoreSecurityResponse) Reset() {

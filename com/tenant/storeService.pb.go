@@ -26,26 +26,26 @@ type Store struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            int64               `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                            //ID
-	Code          string              `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`                                         //店铺编码
-	Name          string              `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                         //店铺名称
-	MerchantId    int64               `protobuf:"varint,4,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`          //商户ID
-	ApplicationId int32               `protobuf:"varint,5,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"` //所属应用
-	VersionId     int32               `protobuf:"varint,6,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`             //应用版本
-	LogoUrl       string              `protobuf:"bytes,7,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`                    //logo图标
-	Nation        string              `protobuf:"bytes,8,opt,name=nation,proto3" json:"nation,omitempty"`                                     //国家
-	Language      string              `protobuf:"bytes,9,opt,name=language,proto3" json:"language,omitempty"`                                 //语言
-	Industry      string              `protobuf:"bytes,10,opt,name=industry,proto3" json:"industry,omitempty"`                                //行业
-	ExpiryDate    int64               `protobuf:"varint,11,opt,name=expiry_date,json=expiryDate,proto3" json:"expiry_date,omitempty"`         //到期日期
-	Status        string              `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"`                                    //状态
-	CreatedAt     int64               `protobuf:"varint,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`            //创建时间
-	UpdatedAt     int64               `protobuf:"varint,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`            //修改时间
-	Application   *Application        `protobuf:"bytes,15,opt,name=application,proto3" json:"application,omitempty"`
-	Version       *ApplicationVersion `protobuf:"bytes,16,opt,name=version,proto3" json:"version,omitempty"`
-	Merchant      *Merchant           `protobuf:"bytes,17,opt,name=merchant,proto3" json:"merchant,omitempty"`
-	Operator      *StoreOperator      `protobuf:"bytes,18,opt,name=operator,proto3" json:"operator,omitempty"`
-	RemainingDays int64               `protobuf:"varint,19,opt,name=remaining_days,json=remainingDays,proto3" json:"remaining_days,omitempty"`
-	Security      *StoreSecurity      `protobuf:"bytes,20,opt,name=security,proto3" json:"security,omitempty"`
+	Id            int64               `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                            //ID
+	Code          string              `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`                                         //店铺编码
+	Name          string              `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`                                         //店铺名称
+	MerchantId    int64               `protobuf:"varint,4,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id"`          //商户ID
+	ApplicationId int32               `protobuf:"varint,5,opt,name=application_id,json=applicationId,proto3" json:"application_id"` //所属应用
+	VersionId     int32               `protobuf:"varint,6,opt,name=version_id,json=versionId,proto3" json:"version_id"`             //应用版本
+	LogoUrl       string              `protobuf:"bytes,7,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url"`                    //logo图标
+	Nation        string              `protobuf:"bytes,8,opt,name=nation,proto3" json:"nation"`                                     //国家
+	Language      string              `protobuf:"bytes,9,opt,name=language,proto3" json:"language"`                                 //语言
+	Industry      string              `protobuf:"bytes,10,opt,name=industry,proto3" json:"industry"`                                //行业
+	ExpiryDate    int64               `protobuf:"varint,11,opt,name=expiry_date,json=expiryDate,proto3" json:"expiry_date"`         //到期日期
+	Status        string              `protobuf:"bytes,12,opt,name=status,proto3" json:"status"`                                    //状态
+	CreatedAt     int64               `protobuf:"varint,13,opt,name=created_at,json=createdAt,proto3" json:"created_at"`            //创建时间
+	UpdatedAt     int64               `protobuf:"varint,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`            //修改时间
+	Application   *Application        `protobuf:"bytes,15,opt,name=application,proto3" json:"application"`
+	Version       *ApplicationVersion `protobuf:"bytes,16,opt,name=version,proto3" json:"version"`
+	Merchant      *Merchant           `protobuf:"bytes,17,opt,name=merchant,proto3" json:"merchant"`
+	Operator      *StoreOperator      `protobuf:"bytes,18,opt,name=operator,proto3" json:"operator"`
+	RemainingDays int64               `protobuf:"varint,19,opt,name=remaining_days,json=remainingDays,proto3" json:"remaining_days"`
+	Security      *StoreSecurity      `protobuf:"bytes,20,opt,name=security,proto3" json:"security"`
 }
 
 func (x *Store) Reset() {
@@ -225,26 +225,26 @@ type StoreRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top,omitempty"`
-	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort,omitempty"`
-	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range,omitempty"`
-	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id,omitempty"`
+	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top"`
+	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged"`
+	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
+	Sort      []string `protobuf:"bytes,5,rep,name=sort,proto3" json:"sort"`
+	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range"`
+	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids"`
+	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id"`
 	// 以下为自定义参数
-	Code          string `protobuf:"bytes,11,opt,name=code,proto3" json:"code,omitempty"`                                         //店铺编码
-	Name          string `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`                                         //店铺名称
-	MerchantId    int64  `protobuf:"varint,13,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`          //商户ID
-	ApplicationId int32  `protobuf:"varint,14,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"` //所属应用
-	VersionId     int32  `protobuf:"varint,15,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`             //应用版本
-	Nation        string `protobuf:"bytes,16,opt,name=nation,proto3" json:"nation,omitempty"`                                     //国家
-	Language      string `protobuf:"bytes,17,opt,name=language,proto3" json:"language,omitempty"`                                 //语言
-	Industry      string `protobuf:"bytes,18,opt,name=industry,proto3" json:"industry,omitempty"`                                 //行业
-	Status        string `protobuf:"bytes,19,opt,name=status,proto3" json:"status,omitempty"`                                     //状态
-	StoreKey      string `protobuf:"bytes,20,opt,name=store_key,json=storeKey,proto3" json:"store_key,omitempty"`
-	StoreSecret   string `protobuf:"bytes,21,opt,name=store_secret,json=storeSecret,proto3" json:"store_secret,omitempty"`
+	Code          string `protobuf:"bytes,11,opt,name=code,proto3" json:"code"`                                         //店铺编码
+	Name          string `protobuf:"bytes,12,opt,name=name,proto3" json:"name"`                                         //店铺名称
+	MerchantId    int64  `protobuf:"varint,13,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id"`          //商户ID
+	ApplicationId int32  `protobuf:"varint,14,opt,name=application_id,json=applicationId,proto3" json:"application_id"` //所属应用
+	VersionId     int32  `protobuf:"varint,15,opt,name=version_id,json=versionId,proto3" json:"version_id"`             //应用版本
+	Nation        string `protobuf:"bytes,16,opt,name=nation,proto3" json:"nation"`                                     //国家
+	Language      string `protobuf:"bytes,17,opt,name=language,proto3" json:"language"`                                 //语言
+	Industry      string `protobuf:"bytes,18,opt,name=industry,proto3" json:"industry"`                                 //行业
+	Status        string `protobuf:"bytes,19,opt,name=status,proto3" json:"status"`                                     //状态
+	StoreKey      string `protobuf:"bytes,20,opt,name=store_key,json=storeKey,proto3" json:"store_key"`
+	StoreSecret   string `protobuf:"bytes,21,opt,name=store_secret,json=storeSecret,proto3" json:"store_secret"`
 }
 
 func (x *StoreRequest) Reset() {
@@ -417,10 +417,10 @@ type StoreResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Entity *Store        `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items  []*Store      `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Msg    string        `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg,omitempty"`
+	Entity *Store        `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager  *common.Pager `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items  []*Store      `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Msg    string        `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg"`
 }
 
 func (x *StoreResponse) Reset() {

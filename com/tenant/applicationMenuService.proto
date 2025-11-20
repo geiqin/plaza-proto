@@ -33,8 +33,9 @@ message ApplicationMenu {
     string is_external =15;//是否外链: 1是 0否
     string is_plugin =16;//是否属于插件: 1是 0否
     int32  plugin_id =17;//插件ID
-    int32  sort =18;//排序值
-    string status =19;//状态: （1：启用；2：禁用）
+    string is_divider =18;//是否分割线: 1是 0否
+    int32  sort =19;//排序值
+    string status =20;//状态: （1：启用；2：禁用）
     int64 created_at =23;
     int64 updated_at =24;
     ApplicationMenu parent = 25;

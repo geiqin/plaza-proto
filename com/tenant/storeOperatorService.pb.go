@@ -27,15 +27,15 @@ type StoreOperator struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                //ID
-	StoreId   int64  `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`       //店铺ID
-	RealName  string `protobuf:"bytes,3,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`     //姓名
-	Mobile    string `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile,omitempty"`                         //手机号码
-	Wechat    string `protobuf:"bytes,5,opt,name=wechat,proto3" json:"wechat,omitempty"`                         //微信账号
-	Email     string `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`                           //邮件
-	GeiqinId  int64  `protobuf:"varint,7,opt,name=geiqin_id,json=geiqinId,proto3" json:"geiqin_id,omitempty"`    //给亲账号
-	UpdatedAt int64  `protobuf:"varint,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"` //创建时间
-	CreatedAt int64  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"` //修改时间
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`                                //ID
+	StoreId   int64  `protobuf:"varint,2,opt,name=store_id,json=storeId,proto3" json:"store_id"`       //店铺ID
+	RealName  string `protobuf:"bytes,3,opt,name=real_name,json=realName,proto3" json:"real_name"`     //姓名
+	Mobile    string `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile"`                         //手机号码
+	Wechat    string `protobuf:"bytes,5,opt,name=wechat,proto3" json:"wechat"`                         //微信账号
+	Email     string `protobuf:"bytes,6,opt,name=email,proto3" json:"email"`                           //邮件
+	GeiqinId  int64  `protobuf:"varint,7,opt,name=geiqin_id,json=geiqinId,proto3" json:"geiqin_id"`    //给亲账号
+	UpdatedAt int64  `protobuf:"varint,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"` //创建时间
+	CreatedAt int64  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"` //修改时间
 }
 
 func (x *StoreOperator) Reset() {
@@ -139,20 +139,20 @@ type StoreOperatorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top,omitempty"`
-	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Sorts     []string `protobuf:"bytes,5,rep,name=sorts,proto3" json:"sorts,omitempty"`
-	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range,omitempty"`
-	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id,omitempty"`
+	Top       int32    `protobuf:"varint,1,opt,name=top,proto3" json:"top"`
+	Paged     int64    `protobuf:"varint,2,opt,name=paged,proto3" json:"paged"`
+	PageSize  int64    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Keywords  string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
+	Sorts     []string `protobuf:"bytes,5,rep,name=sorts,proto3" json:"sorts"`
+	DateRange []string `protobuf:"bytes,6,rep,name=date_range,json=dateRange,proto3" json:"date_range"`
+	Ids       []int64  `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids"`
+	Id        int64    `protobuf:"varint,8,opt,name=id,proto3" json:"id"`
 	// 以下为自定义参数
-	StoreId  int64  `protobuf:"varint,11,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`    //店铺ID
-	RealName string `protobuf:"bytes,12,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`  //姓名
-	Mobile   string `protobuf:"bytes,13,opt,name=mobile,proto3" json:"mobile,omitempty"`                      //手机号码
-	Wechat   string `protobuf:"bytes,14,opt,name=wechat,proto3" json:"wechat,omitempty"`                      //微信账号
-	GeiqinId int64  `protobuf:"varint,15,opt,name=geiqin_id,json=geiqinId,proto3" json:"geiqin_id,omitempty"` //给亲账号
+	StoreId  int64  `protobuf:"varint,11,opt,name=store_id,json=storeId,proto3" json:"store_id"`    //店铺ID
+	RealName string `protobuf:"bytes,12,opt,name=real_name,json=realName,proto3" json:"real_name"`  //姓名
+	Mobile   string `protobuf:"bytes,13,opt,name=mobile,proto3" json:"mobile"`                      //手机号码
+	Wechat   string `protobuf:"bytes,14,opt,name=wechat,proto3" json:"wechat"`                      //微信账号
+	GeiqinId int64  `protobuf:"varint,15,opt,name=geiqin_id,json=geiqinId,proto3" json:"geiqin_id"` //给亲账号
 }
 
 func (x *StoreOperatorRequest) Reset() {
@@ -284,10 +284,10 @@ type StoreOperatorResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Msg    string           `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
-	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Entity *StoreOperator   `protobuf:"bytes,3,opt,name=entity,proto3" json:"entity,omitempty"`
-	Items  []*StoreOperator `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
+	Msg    string           `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg"`
+	Pager  *common.Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Entity *StoreOperator   `protobuf:"bytes,3,opt,name=entity,proto3" json:"entity"`
+	Items  []*StoreOperator `protobuf:"bytes,4,rep,name=items,proto3" json:"items"`
 }
 
 func (x *StoreOperatorResponse) Reset() {

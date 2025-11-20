@@ -25,13 +25,13 @@ type UpgradeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Paged     int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize  int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting   string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	StoreId   int64   `protobuf:"varint,4,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
-	Type      string  `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
-	Overwrite bool    `protobuf:"varint,6,opt,name=overwrite,proto3" json:"overwrite,omitempty"`
-	Ids       []int64 `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Paged     int64   `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize  int64   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting   string  `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	StoreId   int64   `protobuf:"varint,4,opt,name=store_id,json=storeId,proto3" json:"store_id"`
+	Type      string  `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`
+	Overwrite bool    `protobuf:"varint,6,opt,name=overwrite,proto3" json:"overwrite"`
+	Ids       []int64 `protobuf:"varint,7,rep,packed,name=ids,proto3" json:"ids"`
 }
 
 func (x *UpgradeRequest) Reset() {
@@ -120,7 +120,7 @@ type UpgradeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
+	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg"`
 }
 
 func (x *UpgradeResponse) Reset() {

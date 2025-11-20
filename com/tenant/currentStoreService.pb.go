@@ -25,7 +25,7 @@ type CurrentStoreRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	StoreId string `protobuf:"bytes,1,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	StoreId string `protobuf:"bytes,1,opt,name=store_id,json=storeId,proto3" json:"store_id"`
 }
 
 func (x *CurrentStoreRequest) Reset() {
@@ -72,9 +72,9 @@ type CurrentStoreResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Store   *Store   `protobuf:"bytes,1,opt,name=store,proto3" json:"store,omitempty"`
-	Msg     string   `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg,omitempty"`
-	Modules []string `protobuf:"bytes,5,rep,name=Modules,proto3" json:"Modules,omitempty"`
+	Store   *Store   `protobuf:"bytes,1,opt,name=store,proto3" json:"store"`
+	Msg     string   `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg"`
+	Modules []string `protobuf:"bytes,5,rep,name=Modules,proto3" json:"Modules"`
 }
 
 func (x *CurrentStoreResponse) Reset() {
