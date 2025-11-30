@@ -59,8 +59,6 @@ type MediaService interface {
 	Statistics(ctx context.Context, in *MediaRequest, opts ...client.CallOption) (*MediaResponse, error)
 	//上传凭证生成
 	UploadToken(ctx context.Context, in *MediaRequest, opts ...client.CallOption) (*MediaResponse, error)
-	//上传回调处理
-	UploadCallback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*MediaResponse, error)
 }
 
 type mediaService struct {
@@ -155,16 +153,6 @@ func (c *mediaService) UploadToken(ctx context.Context, in *MediaRequest, opts .
 	return out, nil
 }
 
-func (c *mediaService) UploadCallback(ctx context.Context, in *CallbackInfo, opts ...client.CallOption) (*MediaResponse, error) {
-	req := c.c.NewRequest(c.name, "MediaService.UploadCallback", in)
-	out := new(MediaResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for MediaService service
 
 type MediaServiceHandler interface {
@@ -184,8 +172,6 @@ type MediaServiceHandler interface {
 	Statistics(context.Context, *MediaRequest, *MediaResponse) error
 	//上传凭证生成
 	UploadToken(context.Context, *MediaRequest, *MediaResponse) error
-	//上传回调处理
-	UploadCallback(context.Context, *CallbackInfo, *MediaResponse) error
 }
 
 func RegisterMediaServiceHandler(s server.Server, hdlr MediaServiceHandler, opts ...server.HandlerOption) error {
@@ -198,7 +184,6 @@ func RegisterMediaServiceHandler(s server.Server, hdlr MediaServiceHandler, opts
 		List(ctx context.Context, in *MediaRequest, out *MediaResponse) error
 		Statistics(ctx context.Context, in *MediaRequest, out *MediaResponse) error
 		UploadToken(ctx context.Context, in *MediaRequest, out *MediaResponse) error
-		UploadCallback(ctx context.Context, in *CallbackInfo, out *MediaResponse) error
 	}
 	type MediaService struct {
 		mediaService
@@ -241,8 +226,4 @@ func (h *mediaServiceHandler) Statistics(ctx context.Context, in *MediaRequest, 
 
 func (h *mediaServiceHandler) UploadToken(ctx context.Context, in *MediaRequest, out *MediaResponse) error {
 	return h.MediaServiceHandler.UploadToken(ctx, in, out)
-}
-
-func (h *mediaServiceHandler) UploadCallback(ctx context.Context, in *CallbackInfo, out *MediaResponse) error {
-	return h.MediaServiceHandler.UploadCallback(ctx, in, out)
 }
