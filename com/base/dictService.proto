@@ -20,10 +20,11 @@ message Dict {
     int64 id = 1; //ID
     string code = 2; //编码
     string name = 3; //名称
-    string is_system = 4; //系统创建
-    string description = 5; //描述
-    int64 created_at = 6; //创建时间
-    int64 updated_at = 7; //修改时间
+    string type = 4; //类型：1-字符型，2-数字型，3-布尔型
+    string is_system = 5; //系统创建
+    string description = 6; //描述
+    int64 created_at = 7; //创建时间
+    int64 updated_at = 8; //修改时间
     repeated DictItem items =9;
 }
 
@@ -38,6 +39,7 @@ message DictRequest {
     repeated int64 ids = 7;
     int64 id = 8;
     //以下为自定义参数
+    string type = 10; //编码
     string code = 11; //编码
     string name = 12; //名称
     string is_system = 13; //系统创建
