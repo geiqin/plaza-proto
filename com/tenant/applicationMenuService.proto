@@ -31,8 +31,8 @@ message ApplicationMenu {
     string is_cache =13;//是否缓存: 1是 0否
     string is_hidden =14;//是否隐藏: 1是 0否
     string is_external =15;//是否外链: 1是 0否
-    string is_plugin =16;//是否属于插件: 1是 0否
-    int32  plugin_id =17;//插件ID
+    int32 plugin_id =16;//插件ID
+    repeated int64 ancestors = 17; //祖级列表
     string is_divider =18;//是否分割线: 1是 0否
     int32  sort =19;//排序值
     string status =20;//状态: （1：启用；2：禁用）
@@ -58,6 +58,7 @@ message ApplicationMenuRequest {
     string is_plugin =12;
     int32  plugin_id =13;
     repeated int64 ids = 16;
+    repeated int32 plugin_ids =17;//插件IDs
 }
 
 //
